@@ -1,5 +1,25 @@
 {
-    "name": "dhl/module-shipping-core",
-    "version": "0.1.0",
-    "type": "magento2-module"
+  "name": "dhl/module-shipping-core",
+  "version": "0.1.0",
+  "type": "magento2-module",
+  "description": "DHL component providing utilities and frameworks for advanced shipping features",
+  "license": "OSL-3.0",
+  "authors": [
+    {
+      "email": "paul.siedler@netresearch.de",
+      "name": "Paul Siedler"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Dhl\\ShippingCore\\": ""
+    },
+    "files": [
+      "registration.php"
+    ]
+  },
+  "require": {
+    "magento/module-shipping": "^100.3.0"
+  }
 }
