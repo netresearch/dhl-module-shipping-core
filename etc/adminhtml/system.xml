@@ -6,7 +6,7 @@
                 <label>DHL Global Webservices configuration</label>
                 <!-- Cash On Delivery Payment Methods for DHL Express -->
                 <field id="shipment_dhlcodmethods" translate="label tooltip" type="multiselect" sortOrder="210" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Cash On Delivery Payment Methods for DHL Express</label>
+                    <label>Cash On Delivery Payment Methods</label>
                     <comment>Selected payment methods will be treated as CoD methods during shipment order creation.</comment>
                     <source_model>Dhl\ShippingCore\Model\Payment\Config\Source\Allmethods</source_model>
                 </field>
