@@ -43,10 +43,10 @@ class OfflineCarriers implements ArrayInterface
                     return !array_key_exists('is_online', $carrier) || (bool)$carrier['is_online'] === false;
                 }
             );
-            foreach ($carriers as $carrierCode => $carrier) {
+            foreach (array_keys($carriers) as $carrierCode) {
                 $result[] = [
                     'value' => $carrierCode,
-                    'label' => $carrier['title'] . ' - ' . $carrier['name'],
+                    'label' => ucfirst($carrierCode),
                 ];
             }
         }
