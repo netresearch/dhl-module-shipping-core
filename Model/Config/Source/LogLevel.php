@@ -1,10 +1,11 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * See LICENSE.md for license details.
  */
 
 namespace Dhl\ShippingCore\Model\Config\Source;
+
+use Magento\Framework\Logger\Monolog;
 
 /**
  * Class DebugLog
@@ -22,9 +23,9 @@ class LogLevel implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return [
-            ['value' => 'ERROR', 'label' =>  'Error'],
-            ['value' => 'INFO', 'label' =>  'Info'],
-            ['value' => 'DEBUG', 'label' =>  'Debug']
+            ['value' => Monolog::ERROR, 'label' => 'Error'],
+            ['value' => Monolog::INFO, 'label' => 'Info'],
+            ['value' => Monolog::DEBUG, 'label' => 'Debug'],
         ];
     }
 }
