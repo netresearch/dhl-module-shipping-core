@@ -24,7 +24,7 @@ class Heading extends Field
      *
      * @return string
      */
-    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element): string
     {
         $comment = $element->getData('comment');
         if ($comment) {
@@ -47,5 +47,4 @@ class Heading extends Field
     {
         return '<tr class="system-fieldset-sub-head" id="row_' . $element->getHtmlId() . '">' . $html . '</tr>';
     }
-
 }

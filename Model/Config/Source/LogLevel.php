@@ -20,7 +20,7 @@ class LogLevel implements \Magento\Framework\Option\ArrayInterface
     /**
      * {@inheritdoc}
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         return [
             ['value' => Monolog::ERROR, 'label' => 'Error'],
