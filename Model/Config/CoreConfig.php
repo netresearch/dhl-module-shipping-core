@@ -27,29 +27,21 @@ namespace Dhl\ShippingCore\Model\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Class CoreConfig
- *
- * @package Dhl\ShippingCore\Model
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
- * @link http://www.netresearch.de/
- */
 class CoreConfig implements CoreConfigInterface
 {
     /**
      * @var ScopeConfigInterface
      */
-    private $scopeConfig;
+    private $scopeConfigInterface;
 
     /**
      * CoreConfig constructor.
      *
-     * @param ScopeConfigInterface $scopeConfig
+     * @param ScopeConfigInterface $scopeConfigInterface
      */
-    public function __construct(ScopeConfigInterface $scopeConfig)
+    public function __construct(ScopeConfigInterface $scopeConfigInterface)
     {
-        $this->scopeConfig = $scopeConfig;
+        $this->scopeConfigInterface = $scopeConfigInterface;
     }
 
     /**
@@ -62,7 +54,7 @@ class CoreConfig implements CoreConfigInterface
     {
         return explode(
             ',',
-            $this->scopeConfig->getValue(
+            $this->scopeConfigInterface->getValue(
                 self::CONFIG_XML_PATH_COD_METHODS,
                 ScopeInterface::SCOPE_WEBSITE,
                 $store
@@ -83,6 +75,23 @@ class CoreConfig implements CoreConfigInterface
     }
 
     /**
+     * Get COD payment methods.
+     *
+     * @param null $store
+     * @return string[]
+     */
+    public function getPaymentMethods($store = null): array
+    {
+        $paymentMethods =  $this->scopeConfigInterface->getValue(
+            self::CONFIG_XML_PATH_PAYMENT_METHODS,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+
+        return explode(',', $paymentMethods);
+    }
+
+    /**
      * Get terms of trade.
      *
      * @param null $store
@@ -90,7 +99,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getTermsOfTrade($store = null): string
     {
-        return $this->scopeConfig->getValue(
+        return $this->scopeConfigInterface->getValue(
             self::CONFIG_XML_PATH_TERMS_OF_TRADE,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -105,8 +114,23 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getCutOffTime($store = null): string
     {
-        return $this->scopeConfig->getValue(
+        return $this->scopeConfigInterface->getValue(
             self::CONFIG_XML_PATH_CUT_OFF_TIME,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * Get the general weight unit.
+     *
+     * @param null $store
+     * @return string
+     */
+    public function getWeightUnit($store = null): string
+    {
+        return $this->scopeConfigInterface->getValue(
+            self::CONFIG_XML_PATH_WEIGHT_UNIT,
             ScopeInterface::SCOPE_STORE,
             $store
         );
