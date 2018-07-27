@@ -74,4 +74,11 @@ interface CoreConfigInterface
      * @return string
      */
     public function getWeightUnit($store = null): string;
+
+    /**
+     * Get the general dimensions unit.
+     *
+     * @return string
+     */
+    public function getDimensionsUOM(): string;
 }

@@ -29,10 +29,22 @@ use Magento\Store\Model\ScopeInterface;
 
 class CoreConfig implements CoreConfigInterface
 {
+    public const DEFAULT_DIMENSION_UNIT = 'in';
+
     /**
      * @var ScopeConfigInterface
      */
     private $scopeConfigInterface;
+
+    private $weightUnitMap = [
+        'kgs' => 'kg',
+        'lbs' => 'lb',
+    ];
+
+    private $weightUnitToDimensionUnitMap = [
+        'kg' => 'cm',
+        'lb' => 'in',
+    ];
 
     /**
      * CoreConfig constructor.
@@ -129,10 +141,52 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getWeightUnit($store = null): string
     {
-        return $this->scopeConfigInterface->getValue(
+        $weightUOM =  $this->scopeConfigInterface->getValue(
             self::CONFIG_XML_PATH_WEIGHT_UNIT,
             ScopeInterface::SCOPE_STORE,
             $store
         );
+
+        return $this->normalizeWeightUOM($weightUOM);
+    }
+
+    /**
+     * Get the general dimensions unit.
+     *
+     * @return string
+     */
+    public function getDimensionsUOM(): string
+    {
+        return $this->getDimensionsUOMfromWeightUOM(
+            $this->getWeightUnit()
+        );
+    }
+
+    /**
+     * Maps Magento's internal unit names to SDKs unit names
+     *
+     * @param $unit
+     * @return string
+     */
+    private function normalizeWeightUOM($unit): string
+    {
+        if (array_key_exists($unit, $this->weightUnitMap)) {
+            return $this->weightUnitMap[$unit];
+        }
+        return $unit;
+    }
+
+    /**
+     * Derives the current dimensions UOM from weight UOM (so both UOMs are in SU or SI format, but always consistent)
+     *
+     * @param $unit
+     * @return string
+     */
+    private function getDimensionsUOMfromWeightUOM($unit): string
+    {
+        if (array_key_exists($unit, $this->weightUnitToDimensionUnitMap)) {
+            return $this->weightUnitToDimensionUnitMap[$unit];
+        }
+        return self::DEFAULT_DIMENSION_UNIT;
     }
 }
