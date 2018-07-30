@@ -25,6 +25,8 @@
 namespace Dhl\ShippingCore\Model\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Shipping\Helper\Carrier;
+use Magento\Shipping\Model\Config;
 use Magento\Store\Model\ScopeInterface;
 
 class CoreConfig implements CoreConfigInterface
@@ -94,7 +96,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getPaymentMethods($store = null): array
     {
-        $paymentMethods =  $this->scopeConfigInterface->getValue(
+        $paymentMethods = $this->scopeConfigInterface->getValue(
             self::CONFIG_XML_PATH_PAYMENT_METHODS,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -111,7 +113,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getTermsOfTrade($store = null): string
     {
-        return $this->scopeConfigInterface->getValue(
+        return (string)$this->scopeConfigInterface->getValue(
             self::CONFIG_XML_PATH_TERMS_OF_TRADE,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -126,7 +128,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getCutOffTime($store = null): string
     {
-        return $this->scopeConfigInterface->getValue(
+        return (string)$this->scopeConfigInterface->getValue(
             self::CONFIG_XML_PATH_CUT_OFF_TIME,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -141,7 +143,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getWeightUnit($store = null): string
     {
-        $weightUOM =  $this->scopeConfigInterface->getValue(
+        $weightUOM = $this->scopeConfigInterface->getValue(
             self::CONFIG_XML_PATH_WEIGHT_UNIT,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -173,6 +175,7 @@ class CoreConfig implements CoreConfigInterface
         if (array_key_exists($unit, $this->weightUnitMap)) {
             return $this->weightUnitMap[$unit];
         }
+
         return $unit;
     }
 
@@ -187,6 +190,57 @@ class CoreConfig implements CoreConfigInterface
         if (array_key_exists($unit, $this->weightUnitToDimensionUnitMap)) {
             return $this->weightUnitToDimensionUnitMap[$unit];
         }
+
         return self::DEFAULT_DIMENSION_UNIT;
+    }
+
+    /**
+     * Checks if route is dutiable by stores origin country and eu country list
+     *
+     * @param string $receiverCountry
+     * @param mixed $store
+     * @return bool
+     *
+     */
+    public function isDutiableRoute(string $receiverCountry, $store = null): bool
+    {
+        $originCountry = $this->getOriginCountry($store);
+        $euCountries = $this->getEuCountries($store);
+
+        $bothEU = \in_array($originCountry, $euCountries, true) && \in_array($receiverCountry, $euCountries, true);
+
+        return $receiverCountry !== $originCountry && !$bothEU;
+    }
+
+    /**
+     * Returns countries that are marked as EU-Countries
+     *
+     * @param mixed $store
+     * @return string[]
+     */
+    public function getEuCountries($store = null): array
+    {
+        return $this->scopeConfigInterface->getValue(
+            Carrier::XML_PATH_EU_COUNTRIES_LIST,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * Returns the shipping origin country
+     *
+     * @see Config
+     *
+     * @param mixed $store
+     * @return string
+     */
+    public function getOriginCountry($store = null): string
+    {
+        return (string)$this->scopeConfigInterface->getValue(
+            Config::XML_PATH_ORIGIN_COUNTRY_ID,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
     }
 }

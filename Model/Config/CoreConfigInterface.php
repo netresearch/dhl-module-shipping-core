@@ -5,6 +5,8 @@
 
 namespace Dhl\ShippingCore\Model\Config;
 
+use Magento\Shipping\Model\Config;
+
 /**
  * Interface CoreConfigInterface
  *
@@ -23,8 +25,6 @@ interface CoreConfigInterface
     const CONFIG_XML_PATH_CUT_OFF_TIME = self::CONFIG_ROOT . 'cut_off_time';
 
     const CONFIG_XML_PATH_WEIGHT_UNIT = 'general/locale/weight_unit';
-
-
 
     /**
      * Get payment methods that were marked as cash on delivery methods in configuration
@@ -81,4 +81,32 @@ interface CoreConfigInterface
      * @return string
      */
     public function getDimensionsUOM(): string;
+
+    /**
+     * Checks if route is dutiable by stores origin country and eu country list
+     *
+     * @param string $receiverCountry
+     * @param mixed $store
+     * @return bool
+     *
+     */
+    public function isDutiableRoute(string $receiverCountry, $store = null): bool;
+
+    /**
+     * Returns countries that are marked as EU-Countries
+     *
+     * @param mixed $store
+     * @return string[]
+     */
+    public function getEuCountries($store = null): array;
+
+    /**
+     * Returns the shipping origin country
+     *
+     * @see Config
+     *
+     * @param mixed $store
+     * @return string
+     */
+    public function getOriginCountry($store = null): string;
 }
