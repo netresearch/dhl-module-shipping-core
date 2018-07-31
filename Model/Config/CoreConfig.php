@@ -220,11 +220,13 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getEuCountries($store = null): array
     {
-        return $this->scopeConfigInterface->getValue(
+        $euCountries = $this->scopeConfigInterface->getValue(
             Carrier::XML_PATH_EU_COUNTRIES_LIST,
             ScopeInterface::SCOPE_STORE,
             $store
         );
+
+        return explode(',', $euCountries);
     }
 
     /**
