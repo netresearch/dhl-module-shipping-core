@@ -2,6 +2,7 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Emulation;
 
@@ -44,6 +45,8 @@ class ProxyCarrierFactory
     }
 
     /**
+     * Creates a carrier model with a partially overwritten config (enforce carrier to be active)
+     *
      * @param string $carrierCode Carrier model for which the config should be mocked
      * @return AbstractCarrierInterface
      */

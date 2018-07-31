@@ -2,6 +2,7 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Emulation;
 
@@ -39,9 +40,7 @@ class RateRequestService implements \Dhl\ShippingCore\Api\RateRequestEmulationIn
     }
 
     /**
-     * @param string $carrierCode
-     * @param RateRequest $request
-     * @return bool|\Magento\Framework\DataObject|null
+     * @inheritdoc
      */
     public function emulateRateRequest(string $carrierCode, RateRequest $request)
     {
