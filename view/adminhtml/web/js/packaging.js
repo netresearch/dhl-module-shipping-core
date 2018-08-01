@@ -1,19 +1,27 @@
 define([
-    'Magento_Ui/js/modal/modal-component'
-], function (Modal) {
-    'use strict';
+        "uiComponent", "jquery", "Magento_Ui/js/modal/modal"
+    ], function (Component, $) {
+        let packaging = Component.extend({
+            defaults: {
+                target: '',
+                modal: false,
+                options: {}
+            },
+            initialize: function () {
+                this._super();
+                this.modal = $(this.target);
+                this.initModal();
+            }
+            ,
+            initModal: function () {
+                this.modal.modal(this.options);
+                window.packaging = this;
+            },
+            showWindow: function () {
+                this.modal.modal('openModal');
+            }
+        });
 
-    return Modal.extend({
-        initialize: function () {
-            window.packaging = this;
-            this._super();
-            console.log(this);
-        },
-
-        showWindow: function () {
-            debugger;
-            this.initModal();
-            this.openModal();
-        }
-    })
-});
+        return packaging;
+    }
+);
