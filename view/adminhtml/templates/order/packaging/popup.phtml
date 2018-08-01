@@ -6,9 +6,6 @@ declare(strict_types=1);
 
 /** @var $block Magento\Shipping\Block\Adminhtml\Order\Packaging */
 ?>
-<div id="packaging-window" data-mage-init='{"Dhl_ShippingCore/js/packaging-controller": {}}'>
-<!--  @TODO render component content here  -->
-</div>
 <script type="text/x-magento-init">
     {
         "*": {
@@ -23,3 +20,6 @@ declare(strict_types=1);
         }
     }
 </script>
+<div id="packaging-window">
+    <?= $block->getChildHtml(); ?>
+</div>

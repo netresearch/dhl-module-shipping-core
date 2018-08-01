@@ -1,5 +1,5 @@
 define([
-        "uiComponent"
+        "Magento_Ui/js/form/components/fieldset"
     ], function (Component) {
         return Component.extend({
             defaults: {

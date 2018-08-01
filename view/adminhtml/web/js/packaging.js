@@ -1,7 +1,7 @@
 define([
         "uiComponent", "jquery", "Magento_Ui/js/modal/modal"
     ], function (Component, $) {
-        let packaging = Component.extend({
+        return Component.extend({
             defaults: {
                 target: '',
                 modal: false,
@@ -21,7 +21,5 @@ define([
                 this.modal.modal('openModal');
             }
         });
-
-        return packaging;
     }
 );
