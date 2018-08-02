@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd" component="Dhl_ShippingCore/js/packaging-controller">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">dhl_packaging_popup.dhl_packaging_popup_data_source</item>
             <item name="deps" xsi:type="string">dhl_packaging_popup.dhl_packaging_popup_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">Sample Form</item>
-        <item name="layout" xsi:type="array">
-            <item name="type" xsi:type="string">tabs</item>
-        </item>
     </argument>
 
 
@@ -26,24 +23,16 @@
         </argument>
     </dataSource>
 
-    <fieldset name="sample_fieldset" component="Dhl_ShippingCore/js/packaging-controller">
+    <fieldset name="items" component="Dhl_ShippingCore/js/service-fieldset">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string" translate="true">Sample Fieldset</item>
+                <item name="label" xsi:type="string" translate="true">Items</item>
             </item>
         </argument>
-
-        <!-- This field represents form id and is hidden -->
-        <field name="entity_id">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="visible" xsi:type="boolean">false</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">sampleform</item>
-                </item>
-            </argument>
-        </field>
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+        </settings>
 
         <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
         <field name="title">
@@ -53,9 +42,59 @@
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">sampleform</item>
+                    <item name="source" xsi:type="string">items</item>
                 </item>
             </argument>
         </field>
     </fieldset>
-</form>
+
+    <fieldset name="package" component="Dhl_ShippingCore/js/service-fieldset">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Package</item>
+            </item>
+        </argument>
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Some text</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">package</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+
+    <fieldset name="service" component="Dhl_ShippingCore/js/service-fieldset">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Services</item>
+            </item>
+        </argument>
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Some text</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">service</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</listing>
