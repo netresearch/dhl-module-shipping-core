@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
-<!--
--->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Dhl\ShippingCore\Api\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Emulation\RateRequestService"/>
     <preference for="Dhl\ShippingCore\Model\Config\CoreConfigInterface" type="Dhl\ShippingCore\Model\Config\CoreConfig"/>
+
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin" sortOrder="1"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\Rate">
+        <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin" sortOrder="1"/>
+    </type>
 </config>
