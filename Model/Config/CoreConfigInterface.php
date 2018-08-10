@@ -110,4 +110,20 @@ interface CoreConfigInterface
      * @return string
      */
     public function getOriginCountry($store = null): string;
+
+    /**
+     * Maps Magento's internal unit names to SDKs unit names
+     *
+     * @param string $unit
+     * @return string
+     */
+    public function normalizeDimensionUOM(string $unit): string;
+
+    /**
+     * Maps Magento's internal unit names to SDKs unit names
+     *
+     * @param string $unit
+     * @return string
+     */
+    public function normalizeWeightUOM(string $unit): string;
 }

@@ -11,6 +11,11 @@ use Magento\Shipping\Helper\Carrier;
 use Magento\Shipping\Model\Config;
 use Magento\Store\Model\ScopeInterface;
 
+/**
+ * Class CoreConfig
+ *
+ * @package Dhl\ShippingCore\Model\Config
+ */
 class CoreConfig implements CoreConfigInterface
 {
     public const DEFAULT_DIMENSION_UNIT = 'in';
@@ -20,11 +25,27 @@ class CoreConfig implements CoreConfigInterface
      */
     private $scopeConfigInterface;
 
+    /**
+     * @var string[]
+     */
     private $weightUnitMap = [
         'kgs' => 'kg',
         'lbs' => 'lb',
+        'POUND' => 'lb',
+        'KILOGRAM' => 'kg',
     ];
 
+    /**
+     * @var string[]
+     */
+    private $dimensionUnitMap = [
+        'INCH' => 'in',
+        'CENTIMETER' => 'cm',
+    ];
+
+    /**
+     * @var string[]
+     */
     private $weightUnitToDimensionUnitMap = [
         'kg' => 'cm',
         'lb' => 'in',
@@ -149,10 +170,25 @@ class CoreConfig implements CoreConfigInterface
     /**
      * Maps Magento's internal unit names to SDKs unit names
      *
-     * @param $unit
+     * @param string $unit
      * @return string
      */
-    private function normalizeWeightUOM($unit): string
+    public function normalizeDimensionUOM(string $unit): string
+    {
+        if (array_key_exists($unit, $this->dimensionUnitMap)) {
+            return $this->dimensionUnitMap[$unit];
+        }
+
+        return $unit;
+    }
+
+    /**
+     * Maps Magento's internal unit names to SDKs unit names
+     *
+     * @param string $unit
+     * @return string
+     */
+    public function normalizeWeightUOM(string $unit): string
     {
         if (array_key_exists($unit, $this->weightUnitMap)) {
             return $this->weightUnitMap[$unit];
