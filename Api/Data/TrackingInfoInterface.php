@@ -6,6 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api\Data;
 
+use Magento\Framework\Exception\LocalizedException;
+
 /**
  * Class TrackingInfoInterface.
  *
@@ -72,6 +74,8 @@ interface TrackingInfoInterface
      * Sets the pickup date.
      *
      * @param int|string|\DateTime $pickupDate The pickup date
+     *
+     * @throws LocalizedException
      *
      * @return TrackingInfoInterface
      */
