@@ -57,6 +57,9 @@ interface TrackingInfoRepositoryInterface
      * @param string $trackingNumber The tracking number
      *
      * @return bool
+     *
+     * @throws CouldNotDeleteException
+     * @throws NoSuchEntityException
      */
     public function deleteByTrackingNumber(string $trackingNumber): bool;
 }
