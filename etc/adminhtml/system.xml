@@ -24,6 +24,12 @@
                     <source_model>Dhl\ShippingCore\Model\Config\Source\TermsOfTrade</source_model>
                     <tooltip>Select the terms of trade.</tooltip>
                 </field>
+
+                <field id="package_dimension" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label" type="select">
+                    <label>My Own Packages</label>
+                    <frontend_model>Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field\Package</frontend_model>
+                    <backend_model>Dhl\ShippingCore\Model\Config\Source\Packages</backend_model>
+                </field>
             </group>
         </section>
     </system>

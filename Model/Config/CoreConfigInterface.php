@@ -26,6 +26,7 @@ interface CoreConfigInterface
     const CONFIG_XML_PATH_CUT_OFF_TIME = self::CONFIG_ROOT . 'cut_off_time';
 
     const CONFIG_XML_PATH_WEIGHT_UNIT = 'general/locale/weight_unit';
+    const CONFIG_XML_PATH_OWN_PACKAGES = 'package_dimension';
 
     /**
      * Get payment methods that were marked as cash on delivery methods in configuration
@@ -126,4 +127,16 @@ interface CoreConfigInterface
      * @return string
      */
     public function normalizeWeightUOM(string $unit): string;
+
+    /**
+     * @param null|string $store
+     * @return string
+     */
+    public function getOwnPackages(?string $store = null): string;
+
+    /**
+     * @param null|string $store
+     * @return string
+     */
+    public function getOwnPackagesDefault(?string $store = null): string;
 }

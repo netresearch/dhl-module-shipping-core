@@ -263,4 +263,18 @@ class CoreConfig implements CoreConfigInterface
             $store
         );
     }
+
+    public function getOwnPackages(?string $store = null): string
+    {
+        return (string)$this->scopeConfigInterface->getValue(
+            self::CONFIG_XML_PATH_OWN_PACKAGES,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    public function getOwnPackagesDefault(?string $store = null): string
+    {
+        // TODO: Implement getOwnPackagesDefault() method.
+    }
 }
