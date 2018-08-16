@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config\Source;
 
+use Dhl\ShippingCore\Model\Package;
 use Magento\Config\Model\Config\Backend\Serialized\ArraySerialized;
 
 /**
@@ -19,17 +20,16 @@ use Magento\Config\Model\Config\Backend\Serialized\ArraySerialized;
 class Packages extends ArraySerialized
 {
     /**
-     * Use json encoding instead of serialisation
-     *
-     * @override
-     * @return void
+     * @return ArraySerialized
      */
-    protected function _afterLoad(): void
+    public function beforeSave()
     {
-        if (!is_array($this->getValue())) {
-            $value = $this->getValue();
-            $this->setValue(empty($value) ? '' : json_decode($value, true));
+        $value = $this->getValue();
+        if (is_array($value) && !array_key_exists(Package::KEY_IS_DEFAULT, $value) && count($value) > 1) {
+            $value[Package::KEY_IS_DEFAULT] = '';
+            $this->setValue($value);
         }
+        return parent::beforeSave();
     }
 
 }

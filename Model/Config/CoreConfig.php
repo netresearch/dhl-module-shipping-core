@@ -6,7 +6,10 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config;
 
+use Dhl\ShippingCore\Model\Package;
+use Dhl\ShippingCore\Model\PackageCollection;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Shipping\Helper\Carrier;
 use Magento\Shipping\Model\Config;
 use Magento\Store\Model\ScopeInterface;
@@ -52,13 +55,29 @@ class CoreConfig implements CoreConfigInterface
     ];
 
     /**
-     * CoreConfig constructor.
-     *
-     * @param ScopeConfigInterface $scopeConfigInterface
+     * @var SerializerInterface
      */
-    public function __construct(ScopeConfigInterface $scopeConfigInterface)
-    {
+    private $serializer;
+
+    /**
+     * @var \Dhl\ShippingCore\Model\PackageCollectionFactory
+     */
+    private $packageCollectionFactory;
+
+    /**
+     * CoreConfig constructor.
+     * @param ScopeConfigInterface $scopeConfigInterface
+     * @param SerializerInterface $serializer
+     * @param \Dhl\ShippingCore\Model\PackageCollectionFactory
+     */
+    public function __construct(
+        ScopeConfigInterface $scopeConfigInterface,
+        SerializerInterface $serializer,
+        \Dhl\ShippingCore\Model\PackageCollectionFactory $collectionFactory
+    ) {
         $this->scopeConfigInterface = $scopeConfigInterface;
+        $this->serializer = $serializer;
+        $this->packageCollectionFactory = $collectionFactory;
     }
 
     /**
@@ -264,17 +283,41 @@ class CoreConfig implements CoreConfigInterface
         );
     }
 
-    public function getOwnPackages(?string $store = null): string
+    /**
+     * Get PackageCollection of My Own Packages
+     *
+     * @param null|string $store
+     * @return PackageCollection
+     */
+    public function getOwnPackages(?string $store = null): PackageCollection
     {
-        return (string)$this->scopeConfigInterface->getValue(
+
+        $configValue = $this->serializer->unserialize($this->scopeConfigInterface->getValue(
             self::CONFIG_XML_PATH_OWN_PACKAGES,
             ScopeInterface::SCOPE_STORE,
             $store
-        );
+        ));
+
+        ksort($configValue);
+        $default = array_pop($configValue);
+        /** @var PackageCollection $collection */
+        $collection = $this->packageCollectionFactory->create();
+        foreach ($configValue as $key => $packageData){
+            $packageData[Package::KEY_IS_DEFAULT] = $key === $default;
+            $packageData[Package::KEY_ID] = $key;
+            $collection->addPackageAsArray($packageData);
+        }
+
+        return $collection;
     }
 
-    public function getOwnPackagesDefault(?string $store = null): string
+    /**
+     * @param null|string $store
+     * @return Package|null
+     */
+    public function getOwnPackagesDefault(?string $store = null): ?Package
     {
-        // TODO: Implement getOwnPackagesDefault() method.
+        $collection = $this->getOwnPackages($store);
+        return $collection->getDefaultPackage();
     }
 }

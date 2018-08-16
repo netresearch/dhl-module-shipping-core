@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field;
 
 use Dhl\ShippingCore\Model\Config\CoreConfigInterface;
 use Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field\PackageDefault;
+use Dhl\ShippingCore\Model\Package as PackageModel;
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 
@@ -21,6 +22,8 @@ use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
  */
 class Package extends AbstractFieldArray
 {
+    const PACKAGE_DEFAULT = 'packageDefault';
+
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
@@ -58,40 +61,41 @@ class Package extends AbstractFieldArray
      */
     protected function _prepareToRender()
     {
-        $this->addColumn('title', [
+        $this->addColumn(PackageModel::KEY_TITLE, [
             'label' => __('Title'),
             'style' => 'width:100px',
             'class' => 'required'
         ]);
-        $this->addColumn('length', [
+        $this->addColumn(PackageModel::KEY_LENGTH, [
             'label' => __('Length <span>'.$this->getMeasureLengthUnit().'</span>'),
             'style' => 'width:40px',
             'class' => 'validate-digits required'
         ]);
-        $this->addColumn('width', [
+        $this->addColumn(PackageModel::KEY_WIDTH, [
             'label' => __('Width <span>'.$this->getMeasureLengthUnit().'</span>'),
             'style' => 'width:40px',
             'class' => 'validate-digits required'
         ]);
-        $this->addColumn('height', [
+        $this->addColumn(PackageModel::KEY_HEIGHT, [
             'label' => __('Height <span>'.$this->getMeasureLengthUnit().'</span>'),
             'style' => 'width:40px',
             'class' => 'validate-number required'
         ]);
 
-        $this->addColumn('weight', [
+        $this->addColumn(PackageModel::KEY_WEIGHT, [
             'label' => __('Weight <span>'.$this->getWeightUnit().'</span>'),
             'style' => 'width:40px',
             'class' => 'validate-number required'
         ]);
 
-        $this->addColumn('sortOrder', [
+        $this->addColumn(PackageModel::KEY_SORT_ORDER, [
             'label' => __('Sort Order'),
             'style' => 'width:40px',
             'class' => 'validate-digits required'
         ]);
 
-        $this->addColumn('packageDefault', [
+        $this->addColumn(
+            PackageModel::KEY_IS_DEFAULT, [
             'label' => __('Set Default'),
             'renderer' => $this->getTemplateRenderer()
         ]);
@@ -154,12 +158,13 @@ class Package extends AbstractFieldArray
 
         if ($element->getValue() && is_array($element->getValue())) {
             $elementValue = $element->getValue();
-            $packageDefault = $elementValue['packageDefault'];
-            if ($packageDefault) {
-                unset($elementValue['packageDefault']);
-            }
+            $packageDefaultKey = PackageModel::KEY_IS_DEFAULT;
+            $packageDefault = $elementValue[$packageDefaultKey];
+            unset($elementValue[$packageDefaultKey]);
 
-            $elementValue[$packageDefault]['packageDefault'] = $packageDefault ? true : false ;
+            if ($packageDefault !== '') {
+                $elementValue[$packageDefault][$packageDefaultKey] = $packageDefault ? true : false ;
+            }
 
             foreach ($elementValue as $rowId => $row) {
                 $rowColumnValues = [];

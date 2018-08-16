@@ -6,6 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config;
 
+use Dhl\ShippingCore\Model\Package;
+use Dhl\ShippingCore\Model\PackageCollection;
 use Magento\Shipping\Model\Config;
 
 /**
@@ -26,7 +28,7 @@ interface CoreConfigInterface
     const CONFIG_XML_PATH_CUT_OFF_TIME = self::CONFIG_ROOT . 'cut_off_time';
 
     const CONFIG_XML_PATH_WEIGHT_UNIT = 'general/locale/weight_unit';
-    const CONFIG_XML_PATH_OWN_PACKAGES = 'package_dimension';
+    const CONFIG_XML_PATH_OWN_PACKAGES = self::CONFIG_ROOT . 'package_dimension';
 
     /**
      * Get payment methods that were marked as cash on delivery methods in configuration
@@ -130,13 +132,13 @@ interface CoreConfigInterface
 
     /**
      * @param null|string $store
-     * @return string
+     * @return PackageCollection
      */
-    public function getOwnPackages(?string $store = null): string;
+    public function getOwnPackages(?string $store = null): PackageCollection;
 
     /**
      * @param null|string $store
-     * @return string
+     * @return Package|null
      */
-    public function getOwnPackagesDefault(?string $store = null): string;
+    public function getOwnPackagesDefault(?string $store = null): ?Package;
 }

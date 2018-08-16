@@ -1,16 +1,21 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: andreas
- * Date: 14.08.18
- * Time: 13:47
+ * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field;
 
-use Magento\Framework\Data\Form\Element\Radio;
 use Magento\Framework\View\Element\AbstractBlock;
 
+/**
+ * Class PackageDefault
+ *
+ * @package Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field
+ * @author  Andreas Müller <andreas.mueller@netresearch.de>
+ * @license https://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link    https://www.netresearch.de/
+ */
 class PackageDefault extends AbstractBlock
 {
     /**
@@ -27,6 +32,6 @@ class PackageDefault extends AbstractBlock
         $style = ($column['style'] ? ' style="' . $column['style'] . '"' : '');
         $class = ' class="'.($column['class'] ?? 'input-radio').'"';
 
-        return '<input type="radio" value="<%-_id %>" id="' . $elId . '"' . $name . $class . $style . $size . '/>';
+        return '<input type="radio" value="<%-_id %>" id="' . $elId . '"' . $name . $class . $style . $size . ' />';
     }
 }
