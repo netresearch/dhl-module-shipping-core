@@ -1,34 +1,35 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="shipping" showInDefault="1" showInStore="1" showInWebsite="1" translate="label">
-            <group id="dhlglobalwebservices" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="200" translate="label">
-                <label>DHL Global Webservices configuration</label>
+        <section id="shipping" showInDefault="1" showInStore="1" showInWebsite="1" translate="label tooltip comment">
+            <group id="dhlglobalwebservices" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="200" translate="label tooltip comment">
+                <label><![CDATA[DHL Global Webservices configuration]]></label>
                 <!-- Cash On Delivery Payment Methods -->
                 <field id="cod_methods" translate="label tooltip" type="multiselect" sortOrder="210" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Cash On Delivery Payment Methods</label>
-                    <comment>Selected payment methods will be treated as CoD methods during shipment order creation.</comment>
+                    <label><![CDATA[Cash On Delivery Payment Methods]]></label>
+                    <comment><![CDATA[Selected payment methods will be treated as CoD methods during shipment order creation.]]></comment>
                     <source_model>Dhl\ShippingCore\Model\Config\Source\AllPaymentMethods</source_model>
-                    <tooltip>Select delivery payment methods.</tooltip>
+                    <tooltip><![CDATA[Select delivery payment methods.]]></tooltip>
                 </field>
                 <!-- Cut-off Time -->
                 <field id="cut_off_time" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="220"
-                       translate="label" type="time">
-                    <label>Order Cut-off Time</label>
+                       translate="label tooltip comment" type="time">
+                    <label><![CDATA[Order Cut-off Time]]></label>
                     <source_model>Magento\Config\Model\Config\Source\Date\Short</source_model>
-                    <tooltip>All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.</tooltip>
+                    <tooltip><![CDATA[All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day.
+                    All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.]]></tooltip>
                 </field>
                 <!-- Terms of trade -->
-                <field id="terms_of_trade" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label" type="select">
-                    <label>Terms of trade</label>
+                <field id="terms_of_trade" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label tooltip comment" type="select">
+                    <label><![CDATA[Terms of trade]]></label>
                     <source_model>Dhl\ShippingCore\Model\Config\Source\TermsOfTrade</source_model>
-                    <tooltip>Select the terms of trade.</tooltip>
+                    <tooltip><![CDATA[Select the terms of trade.]]></tooltip>
                 </field>
 
-                <field id="package_dimension" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label" type="select">
-                    <label>My Own Packages</label>
+                <field id="package_dimension" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label tooltip comment" type="select">
+                    <label><![CDATA[My Own Packages]]></label>
                     <frontend_model>Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field\Package</frontend_model>
-                    <backend_model>Dhl\ShippingCore\Model\Config\Source\Packages</backend_model>
+                    <backend_model>Dhl\ShippingCore\Model\Config\Backend\Packages</backend_model>
                 </field>
             </group>
         </section>

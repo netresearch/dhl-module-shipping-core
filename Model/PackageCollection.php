@@ -1,9 +1,9 @@
 <?php
+
 namespace Dhl\ShippingCore\Model;
 
-use IteratorAggregate;
 use Countable;
-use Traversable;
+use IteratorAggregate;
 
 /**
  * Class PackageCollection
@@ -27,6 +27,7 @@ class PackageCollection implements IteratorAggregate, Countable
 
     /**
      * PackageCollection constructor.
+     *
      * @param Package[] $items
      * @param \Dhl\ShippingCore\Model\PackageFactory $packageFactory
      */
@@ -36,14 +37,14 @@ class PackageCollection implements IteratorAggregate, Countable
         $this->packageFactory = $packageFactory;
     }
 
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->items);
     }
 
-    public function count()
+    public function count(): int
     {
-        // TODO: Implement count() method.
+        return count($this->items);
     }
 
     /**
@@ -83,7 +84,7 @@ class PackageCollection implements IteratorAggregate, Countable
                 return $package->isDefault();
             }
         );
+
         return array_shift($packages);
     }
-
 }

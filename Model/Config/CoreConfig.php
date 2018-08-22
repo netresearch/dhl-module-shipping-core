@@ -66,6 +66,7 @@ class CoreConfig implements CoreConfigInterface
 
     /**
      * CoreConfig constructor.
+     *
      * @param ScopeConfigInterface $scopeConfigInterface
      * @param SerializerInterface $serializer
      * @param \Dhl\ShippingCore\Model\PackageCollectionFactory
@@ -292,17 +293,19 @@ class CoreConfig implements CoreConfigInterface
     public function getOwnPackages(?string $store = null): PackageCollection
     {
 
-        $configValue = $this->serializer->unserialize($this->scopeConfigInterface->getValue(
-            self::CONFIG_XML_PATH_OWN_PACKAGES,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        ));
+        $configValue = $this->serializer->unserialize(
+            $this->scopeConfigInterface->getValue(
+                self::CONFIG_XML_PATH_OWN_PACKAGES,
+                ScopeInterface::SCOPE_STORE,
+                $store
+            )
+        );
 
         ksort($configValue);
         $default = array_pop($configValue);
         /** @var PackageCollection $collection */
         $collection = $this->packageCollectionFactory->create();
-        foreach ($configValue as $key => $packageData){
+        foreach ($configValue as $key => $packageData) {
             $packageData[Package::KEY_IS_DEFAULT] = $key === $default;
             $packageData[Package::KEY_ID] = $key;
             $collection->addPackageAsArray($packageData);
@@ -318,6 +321,7 @@ class CoreConfig implements CoreConfigInterface
     public function getOwnPackagesDefault(?string $store = null): ?Package
     {
         $collection = $this->getOwnPackages($store);
+
         return $collection->getDefaultPackage();
     }
 }
