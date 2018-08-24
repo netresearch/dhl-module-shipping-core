@@ -54,9 +54,14 @@ class Checkbox extends CoreCheckbox
                 /** Make the hidden input the submitted one. **/
                 hidden.name = checkbox.name;
                 checkbox.name = "";
-                /** keep the hidden input value in sync with the checkbox. **/
+                /**
+                 * keep the hidden input value in sync with the checkbox. We also update the checkbox value because
+                 * it may be needed by the core.
+                 * 
+                 * @see module-backend/view/adminhtml/templates/system/shipping/applicable_country.phtml
+                 **/
                 checkbox.addEventListener("change", function (event) {
-                    hidden.value = event.target.checked ? "1" : "0";
+                    checkbox.value = hidden.value = event.target.checked ? "1" : "0";
                 });    
             })();   
         </script>';
@@ -75,9 +80,7 @@ class Checkbox extends CoreCheckbox
      */
     protected function getSecondaryLabelHtml(): string
     {
-        $html = '<label for="%s">
-            <span>%s</span>
-        </label>';
+        $html = '<label for="%s" class="admin__field-label">%s</label>';
 
         return sprintf(
             $html,

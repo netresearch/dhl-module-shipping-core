@@ -24,9 +24,9 @@ class LogLevel implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => Monolog::ERROR, 'label' => 'Error'],
-            ['value' => Monolog::INFO, 'label' => 'Info'],
-            ['value' => Monolog::DEBUG, 'label' => 'Debug'],
+            ['value' => (string)Monolog::ERROR, 'label' => 'Error'],
+            ['value' => (string)Monolog::INFO, 'label' => 'Info'],
+            ['value' => (string)Monolog::DEBUG, 'label' => 'Debug'],
         ];
     }
 }
