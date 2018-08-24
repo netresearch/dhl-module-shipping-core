@@ -26,9 +26,17 @@ class Checkbox extends CoreCheckbox
     public function getElementHtml(): string
     {
         $this->setIsChecked((bool)$this->getData('value'));
-        $this->setData('after_element_js', $this->getJsHtml());
+        $this->setData('after_element_js', $this->getSecondaryLabelHtml() . $this->getJsHtml());
 
         return parent::getElementHtml();
+    }
+
+    /**
+     * @return string
+     */
+    public function getButtonLabel(): string
+    {
+        return $this->getData('field_config')['button_label'] ?? '';
     }
 
     /**
@@ -59,6 +67,22 @@ class Checkbox extends CoreCheckbox
             $this->getIsChecked() ? '1' : '0',
             $this->getHtmlId(),
             $this->getHtmlId() . self::PSEUDO_POSTFIX
+        );
+    }
+
+    /**
+     * @return string
+     */
+    protected function getSecondaryLabelHtml(): string
+    {
+        $html = '<label for="%s">
+            <span>%s</span>
+        </label>';
+
+        return sprintf(
+            $html,
+            $this->getHtmlId(),
+            $this->getButtonLabel()
         );
     }
 }

@@ -30,19 +30,9 @@ class Toggle extends Checkbox
     }
 
     /**
-     * Add the switch label after the input.
-     *
      * @return string
      */
-    protected function getJsHtml(): string
-    {
-        return $this->getSwitchLabel() . parent::getJsHtml();
-    }
-
-    /**
-     * @return string
-     */
-    private function getSwitchLabel(): string
+    protected function getSecondaryLabelHtml(): string
     {
         $html = '<label for="%s" class="admin__actions-switch-label">
             <span class="admin__actions-switch-text" data-text-on="%s" data-text-off="%s"></span>
@@ -51,8 +41,8 @@ class Toggle extends Checkbox
         return sprintf(
             $html,
             $this->getHtmlId(),
-            __('Yes'),
-            __('No')
+            $this->getButtonLabel() ?: __('Yes'),
+            $this->getButtonLabel()?: __('No')
         );
     }
 }
