@@ -27,7 +27,7 @@ class PackagingPopup
      *
      * @param string[] $supportMap
      */
-    public function __construct(array $supportMap)
+    public function __construct($supportMap = [])
     {
         $this->supportMap = $supportMap;
     }
