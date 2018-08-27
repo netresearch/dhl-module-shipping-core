@@ -1,0 +1,66 @@
+<?php
+/**
+ * See LICENSE.md for license details.
+ *
+ * customInformation template
+ *
+ * @package Dhl\ShippingCore\view\adminhtml
+ * @author Ronny Gertler <ronny.gertler@netresearch.de>
+ * @copyright 2018 Netresearch GmbH & Co. KG
+ * @link http://www.netresearch.de/
+ */
+
+/** var \Magento\Backend\Block\Template $block */
+?>
+<div class="dhl-express-custom-info">
+    <header>
+        <?php /* @noEscape */ echo $block->getTest(); ?>
+        <img src="<?php /* @noEscape */ echo $block->getLogo(); ?>">
+        <p class="info">Version <?php /* @noEscape */ echo $block->getModuleVerion(); ?></p>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col col-l-7 col-xl-8 content">
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat</p>
+                <p>Sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+                <a href="#">No sea takimata sanctus est Lorem ipsum dolor sit amet.</a>
+            </div>
+            <div class="col col-l-5 col-xl-4">
+                <aside>
+                    <div class="section">
+                        <h3>
+                            Setting Up Your DHL Shipping Options
+                        </h3>
+                        <ul>
+                            <li>
+                                <a href="#">Find my account number</a>
+                            </li>
+                            <li>
+                                <a href="#">Understanding divided weight with Express</a>
+                            </li>
+                            <li>
+                                <a href="#">Configuring a custom rate table</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="section">
+                        <h3>
+                            Creating an Managing my Shipments
+                        </h3>
+                        <ul>
+                            <li>
+                                <a href="#">Change default shipping option</a>
+                            </li>
+                            <li>
+                                <a href="#">Upgrade an order to express</a>
+                            </li>
+                            <li>
+                                <a href="#">Reprint a label</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
