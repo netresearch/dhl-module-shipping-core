@@ -59,7 +59,7 @@ class CustomInformation extends Field
 
         $html = $this->getLayout()
             ->createBlock(\Magento\Framework\View\Element\Template::class)
-            ->setModuleVerion($moduleVersion)
+            ->setModuleVersion($moduleVersion)
             ->setLogo($logo)
             ->setTemplate('Dhl_ShippingCore::system/config/customInformation.phtml')
             ->toHtml();

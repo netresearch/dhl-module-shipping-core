@@ -20,7 +20,7 @@
                     All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.]]></tooltip>
                 </field>
                 <!-- Terms of trade -->
-                <field id="terms_of_trade" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label tooltip comment" type="select">
+                <field id="terms_of_trade" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label tooltip comment" type="Dhl\ShippingCore\Model\Data\Form\Element\Radioset">
                     <label><![CDATA[Terms of trade]]></label>
                     <source_model>Dhl\ShippingCore\Model\Config\Source\TermsOfTrade</source_model>
                     <tooltip><![CDATA[Select the terms of trade.]]></tooltip>
