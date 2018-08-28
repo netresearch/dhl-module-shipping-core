@@ -30,8 +30,8 @@ class RoundedPricesFormat implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => self::FULL_PRICE, 'label' => 'Full price (XX.00)'],
-            ['value' => self::STATIC_DECIMAL, 'label' => 'Static decimal (XX.YY)'],
+            ['value' => self::FULL_PRICE, 'label' => 'Round to integer'],
+            ['value' => self::STATIC_DECIMAL, 'label' => 'Round to specific decimal value'],
         ];
     }
 }
