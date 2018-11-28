@@ -290,7 +290,7 @@ class CoreConfig implements CoreConfigInterface
      * @param null|string $store
      * @return PackageCollection
      */
-    public function getOwnPackages(?string $store = null): PackageCollection
+    public function getOwnPackages(string $store = null): PackageCollection
     {
 
         $configValue = $this->serializer->unserialize(
@@ -318,7 +318,7 @@ class CoreConfig implements CoreConfigInterface
      * @param null|string $store
      * @return Package|null
      */
-    public function getOwnPackagesDefault(?string $store = null): ?Package
+    public function getOwnPackagesDefault(string $store = null)
     {
         $collection = $this->getOwnPackages($store);
 

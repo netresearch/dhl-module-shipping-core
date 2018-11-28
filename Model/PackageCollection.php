@@ -76,7 +76,7 @@ class PackageCollection implements IteratorAggregate, Countable
     /**
      * @return Package|null
      */
-    public function getDefaultPackage(): ?Package
+    public function getDefaultPackage()
     {
         $packages = array_filter(
             $this->items,

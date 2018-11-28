@@ -36,7 +36,7 @@ interface TrackingInfoInterface
      *
      * @return null|string
      */
-    public function getTrackingNumber(): ?string;
+    public function getTrackingNumber();
 
     /**
      * Sets the tracking number.
@@ -52,7 +52,7 @@ interface TrackingInfoInterface
      *
      * @return null|string
      */
-    public function getPickupCountry(): ?string;
+    public function getPickupCountry();
 
     /**
      * Sets the pickup country code.
@@ -68,7 +68,7 @@ interface TrackingInfoInterface
      *
      * @return null|string
      */
-    public function getPickupDate(): ?string;
+    public function getPickupDate();
 
     /**
      * Sets the pickup date.
@@ -86,7 +86,7 @@ interface TrackingInfoInterface
      *
      * @return null|string
      */
-    public function getDispatchConfirmationNumber(): ?string;
+    public function getDispatchConfirmationNumber();
 
     /**
      * Sets the dispatch confirmation number.
