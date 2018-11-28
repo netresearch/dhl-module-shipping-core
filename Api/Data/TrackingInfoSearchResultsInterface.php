@@ -23,7 +23,7 @@ interface TrackingInfoSearchResultsInterface extends SearchResultsInterface
      *
      * @return TrackingInfoInterface[]
      */
-    public function getItems();
+    public function getItems(): array;
 
     /**
      * Set tracking info item list.
@@ -32,5 +32,5 @@ interface TrackingInfoSearchResultsInterface extends SearchResultsInterface
      *
      * @return $this
      */
-    public function setItems(array $items);
+    public function setItems(array $items): self;
 }

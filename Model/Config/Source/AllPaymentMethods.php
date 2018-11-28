@@ -43,7 +43,7 @@ class AllPaymentMethods implements OptionSourceInterface
     /**
      * @return string[][]
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         return $this->paymentData->getPaymentMethodList(true, true, false);
     }

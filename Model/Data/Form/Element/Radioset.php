@@ -25,7 +25,7 @@ class Radioset extends Radios
      * @param mixed $value
      * @return string
      */
-    public function getStyle($value)
+    public function getStyle($value): string
     {
         return 'display:none';
     }

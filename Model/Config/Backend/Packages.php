@@ -22,7 +22,7 @@ class Packages extends ArraySerialized
     /**
      * @return ArraySerialized
      */
-    public function beforeSave()
+    public function beforeSave(): ArraySerialized
     {
         $value = $this->getValue();
         if (is_array($value) && !array_key_exists(Package::KEY_IS_DEFAULT, $value) && count($value) > 1) {

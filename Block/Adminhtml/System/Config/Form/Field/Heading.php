@@ -44,7 +44,7 @@ class Heading extends Field
      *
      * @return string
      */
-    protected function _decorateRowHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element, $html)
+    protected function _decorateRowHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element, $html): string
     {
         return '<tr class="system-fieldset-sub-head" id="row_' . $element->getHtmlId() . '">' . $html . '</tr>';
     }
