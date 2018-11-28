@@ -21,15 +21,15 @@ interface TrackingInfoInterface
     /**
      * Field names used to store the data.
      */
-    public const DATA_TRACKING_NUMBER              = 'tracking_number';
-    public const DATA_PICKUP_COUNTRY               = 'pickup_country';
-    public const DATA_PICKUP_DATE                  = 'pickup_date';
-    public const DATA_DISPATCH_CONFIRMATION_NUMBER = 'dispatch_confirmation_number';
+    const DATA_TRACKING_NUMBER              = 'tracking_number';
+    const DATA_PICKUP_COUNTRY               = 'pickup_country';
+    const DATA_PICKUP_DATE                  = 'pickup_date';
+    const DATA_DISPATCH_CONFIRMATION_NUMBER = 'dispatch_confirmation_number';
 
     /**
      * Pickup date format.
      */
-    public const PICKUP_DATE_FORMAT = 'Y-m-d';
+    const PICKUP_DATE_FORMAT = 'Y-m-d';
 
     /**
      * Returns the tracking number.

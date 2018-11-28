@@ -18,7 +18,7 @@ use Magento\Framework\Data\Form\Element\Checkbox as CoreCheckbox;
  */
 class Checkbox extends CoreCheckbox
 {
-    private const PSEUDO_POSTFIX = '_pseudo'; // used to create the hidden input id.
+    const PSEUDO_POSTFIX = '_pseudo'; // used to create the hidden input id.
 
     /**
      * @return string

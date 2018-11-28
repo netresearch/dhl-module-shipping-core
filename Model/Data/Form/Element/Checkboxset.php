@@ -19,7 +19,7 @@ use Magento\Framework\Data\Form\Element\Checkboxes;
  */
 class Checkboxset extends Checkboxes
 {
-    private const PSEUDO_POSTFIX = '_hidden'; // used to create the hidden input id.
+    const PSEUDO_POSTFIX = '_hidden'; // used to create the hidden input id.
 
     /**
      * @return string
