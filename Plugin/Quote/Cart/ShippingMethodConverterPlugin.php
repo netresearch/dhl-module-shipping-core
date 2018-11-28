@@ -80,7 +80,7 @@ class ShippingMethodConverterPlugin
      *
      * @return void
      */
-    public function beforeImportShippingRate(Rate $subject, AbstractResult $result): void
+    public function beforeImportShippingRate(Rate $subject, AbstractResult $result)
     {
         // Store additional info to append in later on to the extension attributes
         if ($result->hasData(MethodAdditionalInfoInterface::ATTRIBUTE_KEY)) {

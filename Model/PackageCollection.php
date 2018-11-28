@@ -50,7 +50,7 @@ class PackageCollection implements IteratorAggregate, Countable
     /**
      * @param Package $package
      */
-    public function addPackage(Package $package): void
+    public function addPackage(Package $package)
     {
         $this->items[] = $package;
     }

@@ -29,7 +29,7 @@ interface MethodAdditionalInfoInterface
      * @param string $deliveryDate
      * @return void
      */
-    public function setDeliveryDate(string $deliveryDate): void;
+    public function setDeliveryDate(string $deliveryDate);
 
     /**
      * @return string
@@ -40,6 +40,6 @@ interface MethodAdditionalInfoInterface
      * @param string $carrierLogoUrl
      * @return void
      */
-    public function setCarrierLogoUrl(string $carrierLogoUrl): void;
+    public function setCarrierLogoUrl(string $carrierLogoUrl);
 
 }
