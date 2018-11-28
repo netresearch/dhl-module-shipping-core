@@ -2,8 +2,11 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config\Source;
+
+use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class Rounded prices type
@@ -13,8 +16,13 @@ namespace Dhl\ShippingCore\Model\Config\Source;
  * @copyright 2018 Netresearch GmbH & Co. KG
  * @link http://www.netresearch.de/
  */
-class RoundedPricesFormat implements \Magento\Framework\Option\ArrayInterface
+class RoundedPricesFormat implements ArrayInterface
 {
+    /**
+     * No rounding key.
+     */
+    const DO_NOT_ROUND = 'no_rounding';
+
     /**
      * Full price key.
      */
@@ -30,8 +38,10 @@ class RoundedPricesFormat implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => self::FULL_PRICE, 'label' => 'Round to integer'],
-            ['value' => self::STATIC_DECIMAL, 'label' => 'Round to specific decimal value'],
+
+            ['value' => self::DO_NOT_ROUND,   'label' => __('Don\'t round prices')],
+            ['value' => self::FULL_PRICE,     'label' => __('Round to a whole number (ex. 1 or 37)')],
+            ['value' => self::STATIC_DECIMAL, 'label' => __('Round to a specific decimal value (ex. 99 cents)')],
         ];
     }
 }

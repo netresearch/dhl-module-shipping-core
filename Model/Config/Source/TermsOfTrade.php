@@ -6,14 +6,17 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config\Source;
 
+use Magento\Framework\Option\ArrayInterface;
+
 /**
  * Class TermsOfTrade
  *
- * @package Dhl\Shipping\Model
+ * @author    Rico Sonntag <rico.sonntag@netresearch.de>
+ * @copyright 2018 Netresearch GmbH & Co. KG
+ * @link      http://www.netresearch.de/
  */
-class TermsOfTrade
+class TermsOfTrade implements ArrayInterface
 {
-
     const TOD_DDP = 'DDP';
     const TOD_DDU = 'DDU';
 
@@ -42,8 +45,8 @@ class TermsOfTrade
     public function toArray(): array
     {
         return [
-            self::TOD_DDP => 'DDP',
-            self::TOD_DDU => 'DDU',
+            self::TOD_DDU => __('Customer pays duties and taxes (DDU)'),
+            self::TOD_DDP => __('I will pay duties and taxes (DTP)'),
         ];
     }
 }
