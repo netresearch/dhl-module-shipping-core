@@ -19,7 +19,7 @@
     ]
   },
   "require": {
-    "magento/module-shipping": "^100.3.0"
+    "magento/module-shipping": "^100.2.0"
   },
   "extra": {
     "branch-alias": {
