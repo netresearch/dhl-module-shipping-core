@@ -29,4 +29,70 @@ class Radioset extends Radios
     {
         return 'display:none';
     }
+
+    /**
+     * @return string
+     */
+    public function getElementHtml()
+    {
+        $this->setData('after_element_html', $this->getSecondaryLabelHtml() . $this->getJsHtml());
+
+        return parent::getElementHtml();
+    }
+
+    /**
+     * Add a hidden input whose value is kept in sync with the checked status of the checkbox.
+     *
+     * @return string
+     */
+    private function getJsHtml()
+    {
+        return <<<HTML
+<input type="hidden"
+       id="{$this->getHtmlId()}"
+       class="{$this->getData('class')}"
+       name="{$this->getName()}"
+       value="{$this->getValue()}"/>
+<script>
+    (function() {
+        let radios = document.querySelectorAll("input[type='radio'][name='{$this->getName()}']");
+        let hidden = document.getElementById("{$this->getId()}");
+
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].type === "radio") {
+                radios[i].name += "[pseudo]";
+
+                // Keep the hidden input value in sync with the radio inputs. We also create a change event for the
+                // hidden input because core functionality might listen for it (and the original radio inputs will not
+                // report the correct ID).
+                //
+                // @see module-backend/view/adminhtml/templates/system/shipping/applicable_country.phtml
+                radios[i].addEventListener("change", function (event) {
+                    event.stopPropagation();
+                    hidden.value = event.target.value;
+
+                    let newEvent = document.createEvent("HTMLEvents");
+                    newEvent.initEvent("change", false, true);
+                    hidden.dispatchEvent(newEvent);
+                });
+            }
+        }
+    })();
+</script>
+HTML;
+    }
+
+    /**
+     * @return string
+     */
+    private function getSecondaryLabelHtml()
+    {
+        $html = '<label for="%s" class="admin__field-label">%s</label>';
+
+        return sprintf(
+            $html,
+            $this->getHtmlId(),
+            $this->getButtonLabel()
+        );
+    }
 }

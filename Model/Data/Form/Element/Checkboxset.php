@@ -26,6 +26,7 @@ class Checkboxset extends Checkboxes
      */
     public function getElementHtml(): string
     {
+        $this->setData('value', $this->filterUnavailableValues());
         $this->setData('after_element_html', $this->getAfterHtml());
 
         return parent::getElementHtml();
@@ -45,24 +46,26 @@ class Checkboxset extends Checkboxes
                 let hidden = document.getElementById("%s");
                 /** Make the hidden input the submitted one. **/
                 hidden.name = checkboxes.item(0).name;
-                checkboxes.forEach(function(checkbox) {
-                    checkbox.name = "";
+
+                for (let i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].name = "";
                     let values = hidden.value.split(",");
-                    if (values.includes(checkbox.value)) {
-                        checkbox.checked = true;
+                    if (values.indexOf(checkboxes[i].value) !== -1) {
+                        checkboxes[i].checked = true;
                     }
                     /** keep the hidden input value in sync with the checkboxes. **/
-                    checkbox.addEventListener("change", function (event) {
+                    checkboxes[i].addEventListener("change", function (event) {
                         let checkbox = event.target;
                         let values = hidden.value.split(",");
-                        if (checkbox.checked && !values.includes(checkbox.value)) {
+                        var valueAlreadyIncluded = values.indexOf(checkbox.value) !== -1; 
+                        if (checkbox.checked && !valueAlreadyIncluded) {
                             values.push(checkbox.value);
-                        } else if (!checkbox.checked && values.includes(checkbox.value)) {
+                        } else if (!checkbox.checked && valueAlreadyIncluded) {
                             values.splice(values.indexOf(checkbox.value), 1)
                         }
                         hidden.value = values.filter(Boolean).join();
                     });
-                });
+                };
             })();
         </script>';
 
@@ -73,5 +76,25 @@ class Checkboxset extends Checkboxes
             $this->getName(),
             $this->getHtmlId() . self::PSEUDO_POSTFIX
         );
+    }
+
+    /**
+     * Remove previously selected values whose option is not available any more.
+     *
+     * @return string
+     */
+    private function filterUnavailableValues(): string
+    {
+        $value  = $this->getData('value');
+        $values = $value ? explode(',', $value) : [];
+
+        $availableValues = array_map(
+            function ($value) {
+                return $value['value'];
+            },
+            $this->getData('values')
+        );
+
+        return implode(',', array_intersect($values, $availableValues));
     }
 }
