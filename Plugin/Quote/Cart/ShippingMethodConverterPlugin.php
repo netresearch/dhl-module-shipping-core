@@ -60,10 +60,10 @@ class ShippingMethodConverterPlugin
         ShippingMethodInterface $result
     ): ShippingMethodInterface {
         $carrierMethod = $this->getCarrierMethod($result);
-        if (array_key_exists($carrierMethod, $this->methodAdditionalInfo)) {
-            /** @var  $extensibleAttribute ShippingMethodExtensionInterface */
-            $extensibleAttribute = $result->getExtensionAttributes() ?? $this->extensionFactory->create();
 
+        if (array_key_exists($carrierMethod, $this->methodAdditionalInfo)) {
+            /** @var ShippingMethodExtensionInterface $extensibleAttribute */
+            $extensibleAttribute = $result->getExtensionAttributes() ?? $this->extensionFactory->create();
             $extensibleAttribute->setAdditionalInfo($this->methodAdditionalInfo[$carrierMethod]);
 
             $result->setExtensionAttributes($extensibleAttribute);
@@ -84,7 +84,7 @@ class ShippingMethodConverterPlugin
     {
         // Store additional info to append in later on to the extension attributes
         if ($result->hasData(MethodAdditionalInfoInterface::ATTRIBUTE_KEY)) {
-            /** @var $result Method */
+            /** @var Method $result */
             $carrierMethod = $result->getData('carrier') . '_' . $result->getData('method');
             $this->methodAdditionalInfo[$carrierMethod] = $result->getData(
                 MethodAdditionalInfoInterface::ATTRIBUTE_KEY
