@@ -3,7 +3,7 @@
  * See LICENSE.md for license details.
  */
 
-/** @var \Magento\Backend\Block\Template $block */
+/** @var \Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field\CustomInformation $block */
 ?>
 <div class="dhl-shipping-custom-info">
     <header>
@@ -13,7 +13,7 @@
     </header>
     <div class="container">
         <div class="row">
-            <?php /* @noEscape */ echo $block->getBlockHtml('adminhtml\system\config\form\field\custominformation_0.custom_information_copy'); ?>
+            <?php /* @noEscape */echo $block->getChildHtml(); ?>
         </div>
     </div>
 </div>

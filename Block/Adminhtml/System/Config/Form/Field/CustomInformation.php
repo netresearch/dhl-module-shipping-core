@@ -9,7 +9,6 @@ namespace Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Backend\Block\Template\Context;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Asset\Repository;
 use Magento\Framework\Module\ModuleList;
 use Magento\Framework\View\Element\Template;
@@ -53,7 +52,6 @@ class CustomInformation extends Field
      * @param AbstractElement $element
      *
      * @return string
-     * @throws LocalizedException
      */
     public function render(AbstractElement $element): string
     {
@@ -65,16 +63,30 @@ class CustomInformation extends Field
             ]
         );
 
-        $moduleVersion = $this->moduleList->getOne('Dhl_Express')['setup_version'];
-        $logo          = $this->repository->getUrl('Dhl_Express::images/logo.svg');
+        return $this->toHtml();
+    }
 
-        $html = $this->getLayout()
-            ->createBlock(Template::class)
-            ->setModuleVersion($moduleVersion)
-            ->setLogo($logo)
-            ->setTemplate('Dhl_ShippingCore::system/config/customInformation.phtml')
-            ->toHtml();
+    /**
+     * @return string
+     */
+    public function getTemplate(): string
+    {
+        return 'Dhl_ShippingCore::system/config/customInformation.phtml';
+    }
 
-        return $html;
+    /**
+     * @return string
+     */
+    public function getLogo(): string
+    {
+        return $this->repository->getUrl('Dhl_Express::images/logo.svg');
+    }
+
+    /**
+     * @return string
+     */
+    public function getModuleVevrsion(): string
+    {
+        return $this->moduleList->getOne('Dhl_Express')['setup_version'];
     }
 }
