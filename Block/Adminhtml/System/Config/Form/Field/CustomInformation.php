@@ -8,16 +8,19 @@ namespace Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field;
 
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Backend\Block\Template\Context;
+use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Asset\Repository;
 use Magento\Framework\Module\ModuleList;
+use Magento\Framework\View\Element\Template;
 
 /**
  * Class CustomInformation
  *
- * @package Dhl\ShippingCore\Block\Adminhtml
- * @author Ronny Gertler <ronny.gertler@netresearch.de>
+ * @package   Dhl\ShippingCore\Block\Adminhtml
+ * @author    Ronny Gertler <ronny.gertler@netresearch.de>
  * @copyright 2018 Netresearch GmbH & Co. KG
- * @link http://www.netresearch.de/
+ * @link      http://www.netresearch.de/
  */
 class CustomInformation extends Field
 {
@@ -47,18 +50,26 @@ class CustomInformation extends Field
     }
 
     /**
-     * @param \Magento\Framework\Data\Form\Element\AbstractElement $element
+     * @param AbstractElement $element
      *
      * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
-    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element): string
+    public function render(AbstractElement $element): string
     {
+        $this->addChild(
+            'custom_information_copy',
+            Template::class,
+            [
+                'template' => $element->getData('field_config')['copy_template'],
+            ]
+        );
+
         $moduleVersion = $this->moduleList->getOne('Dhl_Express')['setup_version'];
         $logo          = $this->repository->getUrl('Dhl_Express::images/logo.svg');
 
         $html = $this->getLayout()
-            ->createBlock(\Magento\Framework\View\Element\Template::class)
+            ->createBlock(Template::class)
             ->setModuleVersion($moduleVersion)
             ->setLogo($logo)
             ->setTemplate('Dhl_ShippingCore::system/config/customInformation.phtml')

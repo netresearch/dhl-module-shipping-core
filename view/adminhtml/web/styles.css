@@ -1,0 +1,77 @@
+.dhl-shipping-custom-info {
+    background: #FEFCEE;
+    border: 1px solid #f3f1e4;
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 1.5;
+}
+
+.dhl-shipping-custom-info a {
+    color: #529dd6;
+}
+
+.dhl-shipping-custom-info a:hover {
+    color: #4088bf;
+}
+
+.dhl-shipping-custom-info .col{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 20px 25px;
+}
+
+.dhl-shipping-custom-info .content p {
+    margin: 0 0 1.5em;
+}
+
+.dhl-shipping-custom-info .content ul,
+.dhl-shipping-custom-info .content ol
+{
+    margin-left: 1.5em;
+}
+
+.dhl-shipping-custom-info header {
+    background: #FFCC01;
+    padding: 15px 25px 10px;
+    position: relative;
+}
+
+.dhl-shipping-custom-info header .info {
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dhl-shipping-custom-info header img {
+    width: 150px;
+}
+
+.dhl-shipping-custom-info aside {
+    background: #FFFFFF;
+    border: 1px solid #f3f1e4;
+    border-top: none;
+}
+
+.dhl-shipping-custom-info aside ul{
+    padding-left: 15px;
+}
+
+.dhl-shipping-custom-info aside li{
+    list-style-position: inside;
+}
+
+.dhl-shipping-custom-info aside h3{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.dhl-shipping-custom-info aside .section{
+    padding: 15px;
+    border-top: 1px solid #f3f1e4;
+}
+
+.config .system-fieldset-sub-head p.comment {
+    padding-left: 2.8rem;
+}

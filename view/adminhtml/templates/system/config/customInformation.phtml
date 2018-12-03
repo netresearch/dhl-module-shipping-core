@@ -1,18 +1,11 @@
 <?php
 /**
  * See LICENSE.md for license details.
- *
- * customInformation template
- *
- * @package   Dhl\ShippingCore\view\adminhtml
- * @author    Ronny Gertler <ronny.gertler@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
- * @link      http://www.netresearch.de/
  */
 
 /** @var \Magento\Backend\Block\Template $block */
 ?>
-<div class="dhl-express-custom-info">
+<div class="dhl-shipping-custom-info">
     <header>
         <?php /* @noEscape */ echo $block->getTest(); ?>
         <img src="<?php /* @noEscape */ echo $block->getLogo(); ?>">
@@ -20,38 +13,7 @@
     </header>
     <div class="container">
         <div class="row">
-            <div class="col col-l-7 col-xl-8 content">
-                <p>Nam quis condimentum velit, ut sodales lorem. Vivamus sit amet odio a leo lobortis mattis. Aliquam
-                    tempus augue sed ante elementum, vitae pharetra orci tincidunt. Praesent et est sit amet ligula
-                    tristique vehicula in eu arcu.</p>
-                <p>To get started:</p>
-                <ol>
-                    <li>
-                        You must have a valid DHL Express business account<br/>
-                        <small>If you don’t have an account or your account is with another DHL division,
-                            <a href="https://mydhl.express.dhl/index/en.html" target="_blank">please contact DHL Express</a> to establish or expand your
-                            relationship
-                        </small>
-                    </li>
-                    <li>
-                        Your DHL Express business account must be configured for API access<br/>
-                        <small>If you didn’t discuss this with your account representative when you set up your account, please
-                            consult them to enable your API access</small>
-                    </li>
-                </ol>
-                <p>Vestibulum tellus ante, sodales id nibh in, faucibus porttitor purus. Class aptent taciti sociosqu ad
-                    litora torquent per conubia nostra, per inceptos himenaeos. Nullam in vestibulum eros. Nunc neque
-                    dui, facilisis sit amet efficitur sit.</p>
-            </div>
-            <div class="col col-l-5 col-xl-4">
-                <aside>
-                    <div class="section">
-                        <h3>DHL & Magento</h3>
-                        <p>Having issues configuring the extension? Contact your DHL Express account
-                            representative who will facilitate technical assistance.</p>
-                    </div>
-                </aside>
-            </div>
+            <?php /* @noEscape */ echo $block->getBlockHtml('adminhtml\system\config\form\field\custominformation_0.custom_information_copy'); ?>
         </div>
     </div>
 </div>
