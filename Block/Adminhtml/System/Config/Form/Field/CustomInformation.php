@@ -6,11 +6,10 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field;
 
-use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Backend\Block\Template\Context;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\View\Asset\Repository;
-use Magento\Framework\Module\ModuleList;
+use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\View\Element\Template;
 
 /**
@@ -29,21 +28,14 @@ class CustomInformation extends Field
     private $repository;
 
     /**
-     * @var ModuleList
-     */
-    private $moduleList;
-
-    /**
      * CustomInformation constructor.
      *
      * @param Context    $context
      * @param Repository $repository
-     * @param ModuleList $moduleList
      */
-    public function __construct(Context $context, Repository $repository, ModuleList $moduleList)
+    public function __construct(Context $context, Repository $repository)
     {
         $this->repository = $repository;
-        $this->moduleList = $moduleList;
 
         parent::__construct($context);
     }
@@ -79,14 +71,6 @@ class CustomInformation extends Field
      */
     public function getLogo(): string
     {
-        return $this->repository->getUrl('Dhl_Express::images/logo.svg');
-    }
-
-    /**
-     * @return string
-     */
-    public function getModuleVevrsion(): string
-    {
-        return $this->moduleList->getOne('Dhl_Express')['setup_version'];
+        return $this->repository->getUrl('Dhl_ShippingCore::images/logo.svg');
     }
 }
