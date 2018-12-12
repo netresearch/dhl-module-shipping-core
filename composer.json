@@ -20,7 +20,7 @@
   },
   "require": {
     "magento/module-shipping": "^100.2.0",
-    "kriswallsmith/buzz": "*"
+    "kriswallsmith/buzz": "^0.16.1"
   },
   "extra": {
     "branch-alias": {
