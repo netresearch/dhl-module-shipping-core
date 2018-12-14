@@ -24,8 +24,9 @@ interface RateProcessorInterface
      *
      * @param Method[]         $methods List of rate methods
      * @param RateRequest|null $request The rate request
+     * @param string           $carrierCode
      *
      * @return Method[]
      */
-    public function processMethods(array $methods, RateRequest $request = null): array;
+    public function processMethods(array $methods, RateRequest $request = null, $carrierCode = null): array;
 }

@@ -42,25 +42,24 @@ class FreeShipping implements RateProcessorInterface
     /**
      * @inheritdoc
      */
-    public function processMethods(array $methods, RateRequest $request = null): array
+    public function processMethods(array $methods, RateRequest $request = null, $carrierCode = null): array
     {
         if ($request === null) {
             return $methods;
         }
-        //todo(nr) use carrierCode from where ?
-        $productsSubTotal          = $this->getBaseSubTotalInclTax($request);
-        $domesticBaseSubTotal      = $this->rateConfig->getDomesticFreeShippingSubTotal();
-        $internationalBaseSubTotal = $this->rateConfig->getInternationalFreeShippingSubTotal();
+        $productsSubTotal          = $this->getBaseSubTotalInclTax($carrierCode, $request);
+        $domesticBaseSubTotal      = $this->rateConfig->getDomesticFreeShippingSubTotal($carrierCode);
+        $internationalBaseSubTotal = $this->rateConfig->getInternationalFreeShippingSubTotal($carrierCode);
 
         /** @var Method $method */
         foreach ($methods as $method) {
             if ($this->isDomesticShipping($method)
-                && $this->rateConfig->isDomesticFreeShippingEnabled()
+                && $this->rateConfig->isDomesticFreeShippingEnabled($carrierCode)
                 && $this->isEnabledDomesticProduct($method)
             ) {
                 $configuredSubTotal = $domesticBaseSubTotal;
             } elseif (!$this->isDomesticShipping($method)
-                && $this->rateConfig->isInternationalFreeShippingEnabled()
+                && $this->rateConfig->isInternationalFreeShippingEnabled($carrierCode)
                 && $this->isEnabledInternationalProduct($method)
             ) {
                 $configuredSubTotal = $internationalBaseSubTotal;
@@ -81,13 +80,14 @@ class FreeShipping implements RateProcessorInterface
      * Returns the base sub total value including tax. Checks if the value of virtual products should
      * be included in the sum.
      *
+     * @param string $carrierCode
      * @param RateRequest $request The rate request
      *
      * @return float
      */
-    private function getBaseSubTotalInclTax(RateRequest $request): float
+    private function getBaseSubTotalInclTax($carrierCode, RateRequest $request): float
     {
-        if ($this->rateConfig->isFreeShippingVirtualProductsIncluded()) {
+        if ($this->rateConfig->isFreeShippingVirtualProductsIncluded($carrierCode)) {
             return $request->getBaseSubtotalInclTax();
         }
 
@@ -128,7 +128,7 @@ class FreeShipping implements RateProcessorInterface
     {
         return \in_array(
             $method->getData('method'),
-            $this->rateConfig->getDomesticFreeShippingProducts(),
+            $this->rateConfig->getDomesticFreeShippingProducts($method->getData('carrier')),
             true
         );
     }
@@ -144,7 +144,7 @@ class FreeShipping implements RateProcessorInterface
     {
         return \in_array(
             $method->getData('method'),
-            $this->rateConfig->getInternationalFreeShippingProducts(),
+            $this->rateConfig->getInternationalFreeShippingProducts($method->getData('carrier')),
             true
         );
     }

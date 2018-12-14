@@ -37,11 +37,11 @@ class RoundedPrices implements RateProcessorInterface
     /**
      * @inheritdoc
      */
-    public function processMethods(array $methods, RateRequest $request = null): array
+    public function processMethods(array $methods, RateRequest $request = null, $carrierCode = null): array
     {
         foreach ($methods as $method) {
             $method->setPrice(
-                $this->roundPrice($method->getPrice())
+                $this->roundPrice($carrierCode, $method->getPrice())
             );
         }
 
@@ -51,13 +51,13 @@ class RoundedPrices implements RateProcessorInterface
     /**
      * Round a given price on the basis of the internal module configuration.
      *
+     * @param string $carrierCode
      * @param float $price
      * @return float
      */
-    private function roundPrice(float $price): float
+    private function roundPrice($carrierCode, float $price): float
     {
-        //todo(nr) use carrierCode from where ?
-        $format = $this->rateConfig->getRoundedPricesFormat();
+        $format = $this->rateConfig->getRoundedPricesFormat($carrierCode);
 
         // Do not round
         if ($format === RoundedPricesFormat::DO_NOT_ROUND) {
@@ -66,28 +66,28 @@ class RoundedPrices implements RateProcessorInterface
 
         // Price should be rounded to a given decimal value
         if ($format === RoundedPricesFormat::STATIC_DECIMAL) {
-            if ($this->rateConfig->roundUp()) {
-                $roundedPrice = $this->roundUpToStaticDecimal($price);
+            if ($this->rateConfig->roundUp($carrierCode)) {
+                $roundedPrice = $this->roundUpToStaticDecimal($carrierCode, $price);
             } else {
-                $roundedPrice = $this->roundOffToStaticDecimal($price);
+                $roundedPrice = $this->roundOffToStaticDecimal($carrierCode, $price);
             }
             return $roundedPrice;
         }
 
         // Price should be rounded to the next integral number.
-        return $this->rateConfig->roundUp() ? ceil($price) : floor($price);
+        return $this->rateConfig->roundUp($carrierCode) ? ceil($price) : floor($price);
     }
 
     /**
      * Round given price down to a configured decimal value.
      *
+     * @param string $carrierCode
      * @param float $price
      * @return float
      */
-    private function roundOffToStaticDecimal(float $price): float
+    private function roundOffToStaticDecimal($carrierCode, float $price): float
     {
-        //todo(nr) use carrierCode from where ?
-        $roundedDecimal = $this->rateConfig->getRoundedPricesStaticDecimal();
+        $roundedDecimal = $this->rateConfig->getRoundedPricesStaticDecimal($carrierCode);
         $decimal = $price - floor($price);
 
         if ($decimal === $roundedDecimal) {
@@ -105,13 +105,14 @@ class RoundedPrices implements RateProcessorInterface
     /**
      * Round given price up to a configured decimal value.
      *
+     * @param string $carrierCode
      * @param float $price
      * @return float
      */
-    private function roundUpToStaticDecimal(float $price): float
+    private function roundUpToStaticDecimal($carrierCode, float $price): float
     {
-        //todo(nr) use carrierCode from where ?
-        $roundedDecimal = $this->rateConfig->getRoundedPricesStaticDecimal();
+
+        $roundedDecimal = $this->rateConfig->getRoundedPricesStaticDecimal($carrierCode);
         $decimal = $price - floor($price);
 
         if ($decimal === $roundedDecimal) {
