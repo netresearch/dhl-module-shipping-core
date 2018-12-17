@@ -3,6 +3,7 @@
     <preference for="Dhl\ShippingCore\Api\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Emulation\RateRequestService"/>
     <preference for="Dhl\ShippingCore\Model\Config\CoreConfigInterface" type="Dhl\ShippingCore\Model\Config\CoreConfig"/>
     <preference for="Dhl\ShippingCore\Model\Config\RateConfigInterface" type="Dhl\ShippingCore\Model\Config\RateConfig"/>
+    <preference for="Dhl\ShippingCore\Util\StreetSplitterInterface" type="Dhl\ShippingCore\Util\StreetSplitter"/>
 
     <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
         <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin" sortOrder="1"/>
