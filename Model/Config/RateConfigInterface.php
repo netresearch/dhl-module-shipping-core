@@ -6,10 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config;
 
-use Dhl\ShippingCore\Model\Package;
-use Dhl\ShippingCore\Model\PackageCollection;
-use Magento\Shipping\Model\Config;
-
 /**
  * Interface RateConfigInterface
  *

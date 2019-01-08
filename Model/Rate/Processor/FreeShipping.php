@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Rate\Processor;
 
-use Dhl\Express\Api\Data\ShippingProductsInterface;
 use Dhl\ShippingCore\Model\Config\RateConfigInterface;
 use Dhl\ShippingCore\Model\Rate\RateProcessorInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
@@ -47,20 +46,18 @@ class FreeShipping implements RateProcessorInterface
         if ($request === null) {
             return $methods;
         }
-        $productsSubTotal          = $this->getBaseSubTotalInclTax($carrierCode, $request);
-        $domesticBaseSubTotal      = $this->rateConfig->getDomesticFreeShippingSubTotal($carrierCode);
+        $productsSubTotal = $this->getBaseSubTotalInclTax($carrierCode, $request);
+        $domesticBaseSubTotal = $this->rateConfig->getDomesticFreeShippingSubTotal($carrierCode);
         $internationalBaseSubTotal = $this->rateConfig->getInternationalFreeShippingSubTotal($carrierCode);
 
         /** @var Method $method */
         foreach ($methods as $method) {
-            if ($this->isDomesticShipping($method)
-                && $this->rateConfig->isDomesticFreeShippingEnabled($carrierCode)
+            if ($this->rateConfig->isDomesticFreeShippingEnabled($carrierCode)
                 && $this->isEnabledDomesticProduct($method)
             ) {
                 $configuredSubTotal = $domesticBaseSubTotal;
-            } elseif (!$this->isDomesticShipping($method)
-                && $this->rateConfig->isInternationalFreeShippingEnabled($carrierCode)
-                && $this->isEnabledInternationalProduct($method)
+            } elseif ($this->rateConfig->isInternationalFreeShippingEnabled($carrierCode)
+                      && $this->isEnabledInternationalProduct($method)
             ) {
                 $configuredSubTotal = $internationalBaseSubTotal;
             } else {
@@ -103,18 +100,6 @@ class FreeShipping implements RateProcessorInterface
         }
 
         return $baseSubTotal;
-    }
-
-    /**
-     * Returns whether the given method applies to domestic shipping or not.
-     *
-     * @param Method $method The rate method
-     *
-     * @return bool
-     */
-    private function isDomesticShipping(Method $method): bool
-    {
-        return \in_array($method->getMethod(), ShippingProductsInterface::PRODUCTS_DOMESTIC, true);
     }
 
     /**

@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Rate\Processor;
 
-use Dhl\Express\Api\Data\ShippingProductsInterface;
 use Dhl\ShippingCore\Model\Config\RateConfigInterface;
 use Dhl\ShippingCore\Model\Rate\RateProcessorInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
@@ -16,7 +15,6 @@ use Magento\Shipping\Model\Carrier\AbstractCarrier;
 /**
  * A rate processor to append the handling fee based on handling type to the shipping price.
  *
- * @package  Dhl\Express\Model
  * @author   Rico Sonntag <rico.sonntag@netresearch.de>
  * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link     http://www.netresearch.de/
@@ -60,6 +58,26 @@ class HandlingFee implements RateProcessorInterface
     }
 
     /**
+     * Calculates the shipping price altered by the handling type aqnd fee.
+     *
+     * @param float $amount The total price of the rated shipment for the product
+     * @param string $handlingType The handling type determining the type of calculation to do
+     * @param float $handlingFee The handling fee to apply to the amount
+     *
+     * @return float
+     */
+    private function calculatePrice(float $amount, string $handlingType, float $handlingFee): float
+    {
+        if ($handlingType === AbstractCarrier::HANDLING_TYPE_PERCENT) {
+            $amount += $amount * $handlingFee / 100.0;
+        } else {
+            $amount += $handlingFee;
+        }
+
+        return max(0.0, $amount);
+    }
+
+    /**
      * Returns the configured handling type depending on the shipping type.
      *
      * @param string $carrierCode
@@ -87,43 +105,46 @@ class HandlingFee implements RateProcessorInterface
      */
     private function getHandlingFee($carrierCode, Method $method): float
     {
+        $handlingFee = 0.0;
         // Calculate fee depending on shipping type
-        if ($this->isDomesticShipping($method)) {
-            return $this->rateConfig->getDomesticHandlingFee($carrierCode);
+        if ($this->isEnabledDomesticProduct($method)) {
+            $handlingFee = $this->rateConfig->getDomesticHandlingFee($carrierCode);
+        } elseif ($this->isEnabledInternationalProduct($method)) {
+            $handlingFee = $this->rateConfig->getInternationalHandlingFee($carrierCode);
         }
 
-        return $this->rateConfig->getInternationalHandlingFee($carrierCode);
+        return $handlingFee;
     }
 
     /**
-     * Returns whether the given method applies to domestic shipping or not.
+     * Returns whether the product is enabled in the configuration or not.
      *
      * @param Method $method The rate method
      *
      * @return bool
      */
-    private function isDomesticShipping(Method $method): bool
+    private function isEnabledDomesticProduct(Method $method): bool
     {
-        return \in_array($method->getMethod(), ShippingProductsInterface::PRODUCTS_DOMESTIC, true);
+        return \in_array(
+            $method->getData('method'),
+            $this->rateConfig->getAllowedDomesticProducts($method->getData('carrier')),
+            true
+        );
     }
 
     /**
-     * Calculates the shipping price altered by the handling type aqnd fee.
+     * Returns whether the product is enabled in the configuration or not.
      *
-     * @param float  $amount       The total price of the rated shipment for the product
-     * @param string $handlingType The handling type determining the type of calculation to do
-     * @param float  $handlingFee  The handling fee to apply to the amount
+     * @param Method $method The rate method
      *
-     * @return float
+     * @return bool
      */
-    private function calculatePrice(float $amount, string $handlingType, float $handlingFee): float
+    private function isEnabledInternationalProduct(Method $method): bool
     {
-        if ($handlingType === AbstractCarrier::HANDLING_TYPE_PERCENT) {
-            $amount += $amount * $handlingFee / 100.0;
-        } else {
-            $amount += $handlingFee;
-        }
-
-        return $amount < 0.0 ? 0.0 : $amount;
+        return \in_array(
+            $method->getData('method'),
+            $this->rateConfig->getAllowedInternationalProducts($method->getData('carrier')),
+            true
+        );
     }
 }
