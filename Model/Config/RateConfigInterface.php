@@ -28,14 +28,14 @@ interface RateConfigInterface
     const CONFIG_XML_PATH_ROUNDED_PRICES_MODE = self::CONFIG_ROOT . 'checkout_settings/round_prices_mode';
 
     // 500_shipping_markup.xml
-    const CONFIG_XML_PATH_INTERNATIONAL_HANDLING_TYPE = self::CONFIG_ROOT . 'shipping_settings/international_handling_type';
-    const CONFIG_XML_PATH_INTERNATIONAL_HANDLING_FEE = self::CONFIG_ROOT . 'shipping_settings/international_handling_fee';
-    const CONFIG_XML_PATH_DOMESTIC_HANDLING_TYPE = self::CONFIG_ROOT . 'shipping_settings/domestic_handling_type';
-    const CONFIG_XML_PATH_DOMESTIC_HANDLING_FEE = self::CONFIG_ROOT . 'shipping_settings/domestic_handling_fee';
+    const CONFIG_XML_PATH_INTERNATIONAL_HANDLING_TYPE = self::CONFIG_ROOT . 'shipping_markup/international_handling_type';
+    const CONFIG_XML_PATH_INTERNATIONAL_HANDLING_FEE = self::CONFIG_ROOT . 'shipping_markup/international_handling_fee';
+    const CONFIG_XML_PATH_DOMESTIC_HANDLING_TYPE = self::CONFIG_ROOT . 'shipping_markup/domestic_handling_type';
+    const CONFIG_XML_PATH_DOMESTIC_HANDLING_FEE = self::CONFIG_ROOT . 'shipping_markup/domestic_handling_fee';
     const CONFIG_XML_SUFFIX_FIXED = '_fixed';
     const CONFIG_XML_SUFFIX_PERCENTAGE = '_percentage';
-    const CONFIG_XML_PATH_DOMESTIC_AFFECT_RATES = self::CONFIG_ROOT . 'shipping_settings/domestic_affect_rates';
-    const CONFIG_XML_PATH_INTERNATIONAL_AFFECT_RATES = self::CONFIG_ROOT . 'shipping_settings/international_affect_rates';
+    const CONFIG_XML_PATH_DOMESTIC_AFFECT_RATES = self::CONFIG_ROOT . 'shipping_markup/domestic_affect_rates';
+    const CONFIG_XML_PATH_INTERNATIONAL_AFFECT_RATES = self::CONFIG_ROOT . 'shipping_markup/international_affect_rates';
 
     // 600_free_shipping.xml
     const CONFIG_XML_PATH_FREE_SHIPPING_VIRTUAL_ENABLED = self::CONFIG_ROOT . 'free_shipping_settings/free_shipping_virtual_products_enable';
