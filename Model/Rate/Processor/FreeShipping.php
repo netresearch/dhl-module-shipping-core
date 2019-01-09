@@ -41,22 +41,24 @@ class FreeShipping implements RateProcessorInterface
     /**
      * @inheritdoc
      */
-    public function processMethods(array $methods, RateRequest $request = null, $carrierCode = null): array
+    public function processMethods(array $methods, RateRequest $request = null): array
     {
         if ($request === null) {
             return $methods;
         }
-        $productsSubTotal = $this->getBaseSubTotalInclTax($carrierCode, $request);
-        $domesticBaseSubTotal = $this->rateConfig->getDomesticFreeShippingSubTotal($carrierCode);
-        $internationalBaseSubTotal = $this->rateConfig->getInternationalFreeShippingSubTotal($carrierCode);
 
         /** @var Method $method */
         foreach ($methods as $method) {
-            if ($this->rateConfig->isDomesticFreeShippingEnabled($carrierCode)
+            $methodCarrier = $method->getData('carrier');
+            $productsSubTotal = $this->getBaseSubTotalInclTax($methodCarrier, $request);
+            $domesticBaseSubTotal = $this->rateConfig->getDomesticFreeShippingSubTotal($methodCarrier);
+            $internationalBaseSubTotal = $this->rateConfig->getInternationalFreeShippingSubTotal($methodCarrier);
+
+            if ($this->rateConfig->isDomesticFreeShippingEnabled($methodCarrier)
                 && $this->isEnabledDomesticProduct($method)
             ) {
                 $configuredSubTotal = $domesticBaseSubTotal;
-            } elseif ($this->rateConfig->isInternationalFreeShippingEnabled($carrierCode)
+            } elseif ($this->rateConfig->isInternationalFreeShippingEnabled($methodCarrier)
                       && $this->isEnabledInternationalProduct($method)
             ) {
                 $configuredSubTotal = $internationalBaseSubTotal;

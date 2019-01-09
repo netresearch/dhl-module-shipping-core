@@ -37,11 +37,11 @@ class RoundedPrices implements RateProcessorInterface
     /**
      * @inheritdoc
      */
-    public function processMethods(array $methods, RateRequest $request = null, $carrierCode = null): array
+    public function processMethods(array $methods, RateRequest $request = null): array
     {
         foreach ($methods as $method) {
             $method->setPrice(
-                $this->roundPrice($carrierCode, $method->getPrice())
+                $this->roundPrice($method->getData('carrier'), $method->getPrice())
             );
         }
 

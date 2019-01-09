@@ -89,14 +89,13 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getCodMethods($store = null): array
     {
-        return explode(
-            ',',
-            $this->scopeConfigInterface->getValue(
-                self::CONFIG_XML_PATH_COD_METHODS,
-                ScopeInterface::SCOPE_WEBSITE,
-                $store
-            )
+        $paymentMethods = $this->scopeConfigInterface->getValue(
+            self::CONFIG_XML_PATH_COD_METHODS,
+            ScopeInterface::SCOPE_STORE,
+            $store
         );
+
+        return explode(',', $paymentMethods);
     }
 
     /**
@@ -109,23 +108,6 @@ class CoreConfig implements CoreConfigInterface
     public function isCodPaymentMethod(string $methodCode, $store = null): bool
     {
         return \in_array($methodCode, $this->getCodMethods($store), true);
-    }
-
-    /**
-     * Get COD payment methods.
-     *
-     * @param null $store
-     * @return string[]
-     */
-    public function getPaymentMethods($store = null): array
-    {
-        $paymentMethods = $this->scopeConfigInterface->getValue(
-            self::CONFIG_XML_PATH_PAYMENT_METHODS,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-
-        return explode(',', $paymentMethods);
     }
 
     /**

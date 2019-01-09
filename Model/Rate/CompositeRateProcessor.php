@@ -41,14 +41,13 @@ class CompositeRateProcessor implements RateProcessorInterface
 
     /**
      * @param array $methods
-     * @param string $carrierCode
      * @param RateRequest|null $request
      * @return array
      */
-    public function processMethods(array $methods, RateRequest $request = null, $carrierCode = null): array
+    public function processMethods(array $methods, RateRequest $request = null): array
     {
         foreach ($this->processors as $processor) {
-            $methods = $processor->processMethods($methods, $request, $carrierCode);
+            $methods = $processor->processMethods($methods, $request);
         }
 
         return $methods;

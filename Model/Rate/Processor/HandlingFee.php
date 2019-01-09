@@ -39,15 +39,15 @@ class HandlingFee implements RateProcessorInterface
     /**
      * @inheritdoc
      */
-    public function processMethods(array $methods, RateRequest $request = null, $carrierCode = null): array
+    public function processMethods(array $methods, RateRequest $request = null): array
     {
         /** @var Method $method */
         foreach ($methods as $method) {
             // Calculate fee depending on shipping type
             $price = $this->calculatePrice(
                 $method->getPrice(),
-                $this->getHandlingType($carrierCode, $method),
-                $this->getHandlingFee($carrierCode, $method)
+                $this->getHandlingType($method),
+                $this->getHandlingFee($method)
             );
 
             $method->setPrice($price);
@@ -70,7 +70,7 @@ class HandlingFee implements RateProcessorInterface
     {
         if ($handlingType === AbstractCarrier::HANDLING_TYPE_PERCENT) {
             $amount += $amount * $handlingFee / 100.0;
-        } else {
+        } elseif ($handlingType === AbstractCarrier::HANDLING_TYPE_FIXED) {
             $amount += $handlingFee;
         }
 
@@ -80,40 +80,22 @@ class HandlingFee implements RateProcessorInterface
     /**
      * Returns the configured handling type depending on the shipping type.
      *
-     * @param string $carrierCode
      * @param Method $method The rate method
      *
      * @return string
      */
-    private function getHandlingType($carrierCode, Method $method): string
+    private function getHandlingType(Method $method): string
     {
-        // Calculate fee depending on shipping type
-        if ($this->isDomesticShipping($method)) {
-            return $this->rateConfig->getDomesticHandlingType($carrierCode);
-        }
-
-        return $this->rateConfig->getInternationalHandlingType($carrierCode);
-    }
-
-    /**
-     * Returns the configured handling fee depending on the shipping type.
-     *
-     * @param string $carrierCode
-     * @param Method $method The rate method
-     *
-     * @return float
-     */
-    private function getHandlingFee($carrierCode, Method $method): float
-    {
-        $handlingFee = 0.0;
         // Calculate fee depending on shipping type
         if ($this->isEnabledDomesticProduct($method)) {
-            $handlingFee = $this->rateConfig->getDomesticHandlingFee($carrierCode);
-        } elseif ($this->isEnabledInternationalProduct($method)) {
-            $handlingFee = $this->rateConfig->getInternationalHandlingFee($carrierCode);
+            return $this->rateConfig->getDomesticHandlingType($method->getData('carrier'));
         }
 
-        return $handlingFee;
+        if ($this->isEnabledInternationalProduct($method)) {
+            return $this->rateConfig->getInternationalHandlingType($method->getData('carrier'));
+        }
+
+        return '';
     }
 
     /**
@@ -146,5 +128,25 @@ class HandlingFee implements RateProcessorInterface
             $this->rateConfig->getAllowedInternationalProducts($method->getData('carrier')),
             true
         );
+    }
+
+    /**
+     * Returns the configured handling fee depending on the shipping type.
+     *
+     * @param Method $method The rate method
+     *
+     * @return float
+     */
+    private function getHandlingFee(Method $method): float
+    {
+        $handlingFee = 0.0;
+        // Calculate fee depending on shipping type
+        if ($this->isEnabledDomesticProduct($method)) {
+            $handlingFee = $this->rateConfig->getDomesticHandlingFee($method->getData('carrier'));
+        } elseif ($this->isEnabledInternationalProduct($method)) {
+            $handlingFee = $this->rateConfig->getInternationalHandlingFee($method->getData('carrier'));
+        }
+
+        return $handlingFee;
     }
 }

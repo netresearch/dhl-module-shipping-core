@@ -49,6 +49,7 @@ interface RateConfigInterface
     /**
      * Get the allowed domestic products.
      *
+     * @param string $carrierCode
      * @param string|null $store
      * @return string[]
      */

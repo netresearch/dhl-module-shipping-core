@@ -27,34 +27,52 @@ class Package extends DataObject
     const KEY_IS_DEFAULT = 'is_default';
     const KEY_ID = 'id';
 
+    /**
+     * @return float
+     */
     public function getWeight(): float
     {
-        return (float)$this->getData(self::KEY_WEIGHT);
+        return (float) $this->getData(self::KEY_WEIGHT);
     }
 
+    /**
+     * @return string
+     */
     public function getTitle(): string
     {
-        return (string)$this->getData(self::KEY_TITLE);
+        return (string) $this->getData(self::KEY_TITLE);
     }
 
+    /**
+     * @return float
+     */
     public function getLength(): float
     {
-        return (float)$this->getData(self::KEY_LENGTH);
+        return (float) $this->getData(self::KEY_LENGTH);
     }
 
+    /**
+     * @return float
+     */
     public function getHeight(): float
     {
-        return (float)$this->getData(self::KEY_HEIGHT);
+        return (float) $this->getData(self::KEY_HEIGHT);
     }
 
+    /**
+     * @return int
+     */
     public function getSortOrder(): int
     {
-        return (int)$this->getData(self::KEY_SORT_ORDER);
+        return (int) $this->getData(self::KEY_SORT_ORDER);
     }
 
+    /**
+     * @return bool
+     */
     public function isDefault(): bool
     {
-        return (bool)$this->getData(self::KEY_IS_DEFAULT);
+        return (bool) $this->getData(self::KEY_IS_DEFAULT);
     }
 
 }

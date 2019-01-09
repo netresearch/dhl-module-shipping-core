@@ -23,7 +23,6 @@ interface CoreConfigInterface
     const CONFIG_ROOT = 'shipping/dhlglobalwebservices/';
 
     const CONFIG_XML_PATH_COD_METHODS = self::CONFIG_ROOT . 'cod_methods';
-    const CONFIG_XML_PATH_PAYMENT_METHODS = self::CONFIG_ROOT . 'shipment_dhlcodmethods';
     const CONFIG_XML_PATH_TERMS_OF_TRADE = self::CONFIG_ROOT . 'terms_of_trade';
     const CONFIG_XML_PATH_CUT_OFF_TIME = self::CONFIG_ROOT . 'cut_off_time';
 
@@ -46,14 +45,6 @@ interface CoreConfigInterface
      * @return bool
      */
     public function isCodPaymentMethod(string $methodCode, $store = null): bool;
-
-    /**
-     * Get COD payment methods.
-     *
-     * @param null $store
-     * @return string[]
-     */
-    public function getPaymentMethods($store = null): array;
 
     /**
      * Get terms of trade.

@@ -59,20 +59,11 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
         parent::tearDownAfterClass();
     }
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->objectManager = ObjectManager::getInstance();
-
-        $this->config = $this->objectManager->create(CoreConfig::class);
-    }
-
     /**
      * @test
-     * @magentoConfigFixture fixturestore_store shipping/dhlglobalwebservices/shipment_dhlcodmethods payflow_advanced,payflow_link,payflowpro
+     * @magentoConfigFixture current_store shipping/dhlglobalwebservices/cod_methods payflow_advanced,payflow_link,payflowpro
      */
-    public function getSpecificCountries()
+    public function getCodMethods()
     {
         $paymentMethods = $this->config->getCodMethods();
         $this->assertInternalType('array', $paymentMethods);
@@ -104,5 +95,14 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals('00,00,00', $this->config->getCutOffTime());
         $this->assertEquals('12,07,10', $this->config->getCutOffTime('fixturestore'));
+    }
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->objectManager = ObjectManager::getInstance();
+
+        $this->config = $this->objectManager->create(CoreConfig::class);
     }
 }

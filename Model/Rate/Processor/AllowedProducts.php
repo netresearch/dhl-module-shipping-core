@@ -36,11 +36,11 @@ class AllowedProducts implements RateProcessorInterface
     /**
      * @inheritdoc
      */
-    public function processMethods(array $methods, RateRequest $request = null, $carrierCode = null): array
+    public function processMethods(array $methods, RateRequest $request = null): array
     {
         $result = [];
         foreach ($methods as $method) {
-            if ($this->isEnabledProduct($method, $carrierCode)) {
+            if ($this->isEnabledProduct($method)) {
                 $result[] = $method;
             }
         }
@@ -55,10 +55,10 @@ class AllowedProducts implements RateProcessorInterface
      *
      * @return bool
      */
-    private function isEnabledProduct(Method $method, $carrierCode): bool
+    private function isEnabledProduct(Method $method): bool
     {
-        $allowedDomestic      = $this->rateConfig->getAllowedDomesticProducts($carrierCode);
-        $allowedInternational = $this->rateConfig->getAllowedInternationalProducts($carrierCode);
+        $allowedDomestic      = $this->rateConfig->getAllowedDomesticProducts($method->getData('carrier'));
+        $allowedInternational = $this->rateConfig->getAllowedInternationalProducts($method->getData('carrier'));
         $allowedProducts      = array_merge($allowedDomestic, $allowedInternational);
 
         return \in_array($method->getData('method'), $allowedProducts, true);
