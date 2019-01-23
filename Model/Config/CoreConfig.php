@@ -254,14 +254,16 @@ class CoreConfig implements CoreConfigInterface
      *
      * @see Config
      *
-     * @param mixed $store
+     * @param mixed  $store
+     * @param string $scope
+     *
      * @return string
      */
-    public function getOriginCountry($store = null): string
+    public function getOriginCountry($store = null, $scope = ScopeInterface::SCOPE_STORE): string
     {
         return (string)$this->scopeConfigInterface->getValue(
             Config::XML_PATH_ORIGIN_COUNTRY_ID,
-            ScopeInterface::SCOPE_STORE,
+            $scope,
             $store
         );
     }

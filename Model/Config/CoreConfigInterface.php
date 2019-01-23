@@ -9,6 +9,7 @@ namespace Dhl\ShippingCore\Model\Config;
 use Dhl\ShippingCore\Model\Package;
 use Dhl\ShippingCore\Model\PackageCollection;
 use Magento\Shipping\Model\Config;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Interface CoreConfigInterface
@@ -100,10 +101,12 @@ interface CoreConfigInterface
      *
      * @see Config
      *
-     * @param mixed $store
+     * @param mixed  $store
+     * @param string $scope
+     *
      * @return string
      */
-    public function getOriginCountry($store = null): string;
+    public function getOriginCountry($store = null, $scope = ScopeInterface::SCOPE_STORE): string;
 
     /**
      * Maps Magento's internal unit names to SDKs unit names
