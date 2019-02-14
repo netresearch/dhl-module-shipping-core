@@ -16,6 +16,19 @@
     <preference for="Dhl\ShippingCore\Model\Config\CoreConfigInterface" type="Dhl\ShippingCore\Model\Config\CoreConfig"/>
     <preference for="Dhl\ShippingCore\Model\Config\RateConfigInterface" type="Dhl\ShippingCore\Model\Config\RateConfig"/>
 
+    <preference for="Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface" type="Dhl\ShippingCore\Model\Rest\CheckoutDataManagement"/>
+    <preference for="Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface" type="Dhl\ShippingCore\Model\Rest\GuestCheckoutDataManagement"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface" type="Dhl\ShippingCore\Model\Checkout\CheckoutData"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Checkout\ServiceCompatibilityInterface" type="Dhl\ShippingCore\Model\Checkout\ServiceCompatibility"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterface" type="Dhl\ShippingCore\Model\Checkout\ServiceMetadata"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Service\InfoTextInterface" type="Dhl\ShippingCore\Model\Service\InfoText"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Service\InputInterface" type="Dhl\ShippingCore\Model\Service\Input"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Service\ServiceInterface" type="Dhl\ShippingCore\Model\Service\Service"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Service\OptionInterface" type="Dhl\ShippingCore\Model\Service\Option"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Service\CommentInterface" type="Dhl\ShippingCore\Model\Service\Comment"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Service\ValidationRuleInterface" type="Dhl\ShippingCore\Model\Service\ValidationRule"/>
+
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\Virtual\SalesTableNameIterator" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>
