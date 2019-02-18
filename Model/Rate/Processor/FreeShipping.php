@@ -26,7 +26,7 @@ class FreeShipping implements RateProcessorInterface
      *
      * @var RateConfigInterface
      */
-    private $rateConfig;
+    protected $rateConfig;
 
     /**
      * Constructor.
@@ -49,19 +49,13 @@ class FreeShipping implements RateProcessorInterface
 
         /** @var Method $method */
         foreach ($methods as $method) {
-            $methodCarrier = $method->getData('carrier');
+            $methodCarrier    = $method->getData('carrier');
             $productsSubTotal = $this->getBaseSubTotalInclTax($methodCarrier, $request);
-            $domesticBaseSubTotal = $this->rateConfig->getDomesticFreeShippingSubTotal($methodCarrier);
-            $internationalBaseSubTotal = $this->rateConfig->getInternationalFreeShippingSubTotal($methodCarrier);
 
-            if ($this->rateConfig->isDomesticFreeShippingEnabled($methodCarrier)
-                && $this->isEnabledDomesticProduct($method)
-            ) {
-                $configuredSubTotal = $domesticBaseSubTotal;
-            } elseif ($this->rateConfig->isInternationalFreeShippingEnabled($methodCarrier)
-                      && $this->isEnabledInternationalProduct($method)
-            ) {
-                $configuredSubTotal = $internationalBaseSubTotal;
+            if ($this->isEnabledDomesticProduct($method)) {
+                $configuredSubTotal = $this->rateConfig->getDomesticFreeShippingSubTotal($methodCarrier);;
+            } elseif ($this->isEnabledInternationalProduct($method)) {
+                $configuredSubTotal = $this->rateConfig->getInternationalFreeShippingSubTotal($methodCarrier);
             } else {
                 continue;
             }
@@ -111,8 +105,12 @@ class FreeShipping implements RateProcessorInterface
      *
      * @return bool
      */
-    private function isEnabledDomesticProduct(Method $method): bool
+    protected function isEnabledDomesticProduct(Method $method): bool
     {
+        if (!$this->rateConfig->isDomesticFreeShippingEnabled($method->getData('carrier'))) {
+            return false;
+        }
+
         return \in_array(
             $method->getData('method'),
             $this->rateConfig->getDomesticFreeShippingProducts($method->getData('carrier')),
@@ -127,8 +125,12 @@ class FreeShipping implements RateProcessorInterface
      *
      * @return bool
      */
-    private function isEnabledInternationalProduct(Method $method): bool
+    protected function isEnabledInternationalProduct(Method $method): bool
     {
+        if (!$this->rateConfig->isInternationalFreeShippingEnabled($method->getData('carrier'))) {
+            return false;
+        }
+
         return \in_array(
             $method->getData('method'),
             $this->rateConfig->getInternationalFreeShippingProducts($method->getData('carrier')),

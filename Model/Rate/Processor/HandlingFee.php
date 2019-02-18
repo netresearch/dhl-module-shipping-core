@@ -105,7 +105,7 @@ class HandlingFee implements RateProcessorInterface
      *
      * @return bool
      */
-    private function isEnabledDomesticProduct(Method $method): bool
+    protected function isEnabledDomesticProduct(Method $method): bool
     {
         return \in_array(
             $method->getData('method'),
@@ -121,7 +121,7 @@ class HandlingFee implements RateProcessorInterface
      *
      * @return bool
      */
-    private function isEnabledInternationalProduct(Method $method): bool
+    protected function isEnabledInternationalProduct(Method $method): bool
     {
         return \in_array(
             $method->getData('method'),
