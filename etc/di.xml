@@ -11,8 +11,4 @@
     <type name="Magento\Quote\Model\Quote\Address\Rate">
         <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin" sortOrder="1"/>
     </type>
-    <!-- ShippingCore -->
-    <type name="Dhl\ShippingCore\Model\Logger\ApiLogger"> <!-- extends Magento\Framework\Logger\Monolog -->
-        <plugin name="configureApiLogging" type="Dhl\ShippingCore\Plugin\Log\ConfigurableLoggerPlugin" />
-    </type>
 </config>

@@ -6,10 +6,19 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Log;
 
-use Magento\Framework\Logger\Monolog;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Filesystem\DriverInterface;
+use Magento\Framework\Logger\Handler\Base;
 
-class ApiLogger extends Monolog
+/**
+ * Class ApiLogHandler
+ *
+ * @package Dhl\ShippingCore\Model
+ * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @license https://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link    https://www.netresearch.de/
+ */
+class ApiLogHandler extends Base
 {
     /**
      * @var string
@@ -27,23 +36,23 @@ class ApiLogger extends Monolog
     private $scopeConfig;
 
     /**
-     * ApiLogger constructor.
+     * ApiLogHandler constructor.
+     * @param DriverInterface $filesystem
      * @param string $logEnabledConfigPath
      * @param string $logLevelConfigPath
      * @param ScopeConfigInterface $scopeConfig
-     * @param $name
-     * @param array $handlers
-     * @param array $processors
+     * @param string|null $filePath
+     * @param string|null $fileName
      */
     public function __construct(
-        $name,
+        DriverInterface $filesystem,
         string $logEnabledConfigPath,
         string $logLevelConfigPath,
         ScopeConfigInterface $scopeConfig,
-        array $handlers = [],
-        array $processors = []
+        string $filePath = null,
+        string $fileName = null
     ) {
-        parent::__construct($name, $handlers, $processors);
+        parent::__construct($filesystem, $filePath, $fileName);
 
         $this->logEnabledConfigPath = $logEnabledConfigPath;
         $this->logLevelConfigPath = $logLevelConfigPath;
@@ -51,20 +60,13 @@ class ApiLogger extends Monolog
     }
 
     /**
-     * @param mixed $level
-     * @param string $message
-     * @param mixed[] $context
-     * @return bool
+     * @inheritdoc
      */
-    public function log($level, $message, array $context = []): bool
+    public function isHandling(array $record): bool
     {
         $loggingEnabled = (bool) $this->scopeConfig->getValue($this->logEnabledConfigPath);
         $logLevel = (int) $this->scopeConfig->getValue($this->logLevelConfigPath);
 
-        if ($loggingEnabled && $logLevel === $level) {
-            return parent::log($level, $message, $context);
-        }
-
-        return false;
+        return $loggingEnabled && $record['level'] >= $logLevel && parent::isHandling($record);
     }
 }
