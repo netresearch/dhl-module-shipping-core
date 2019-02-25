@@ -6,8 +6,8 @@
 namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface;
-use Dhl\ShippingCore\Api\Data\Checkout\ServiceCompatibilityInterface;
 use Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterface;
+use Dhl\ShippingCore\Api\Data\Service\CompatibilityInterface;
 use Dhl\ShippingCore\Api\Data\Service\ServiceInterface;
 
 /**
@@ -36,7 +36,7 @@ class CarrierData implements CarrierDataInterface
     private $serviceMetadata;
 
     /**
-     * @var ServiceCompatibilityInterface[]
+     * @var CompatibilityInterface[]
      */
     private $serviceCompatibilityData;
 
@@ -46,7 +46,7 @@ class CarrierData implements CarrierDataInterface
      * @param string $carrierCode
      * @param ServiceInterface[] $serviceData
      * @param ServiceMetadataInterface $serviceMetadata
-     * @param ServiceCompatibilityInterface[] $serviceCompatibilityData
+     * @param CompatibilityInterface[] $serviceCompatibilityData
      */
     public function __construct(
         string $carrierCode,
@@ -85,7 +85,7 @@ class CarrierData implements CarrierDataInterface
     }
 
     /**
-     * @return ServiceCompatibilityInterface[]
+     * @return CompatibilityInterface[]
      */
     public function getServiceCompatibilityData(): array
     {

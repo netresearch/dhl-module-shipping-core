@@ -20,7 +20,7 @@
     <preference for="Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface" type="Dhl\ShippingCore\Model\Rest\GuestCheckoutDataManagement"/>
     <preference for="Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
     <preference for="Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface" type="Dhl\ShippingCore\Model\Checkout\CheckoutData"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Checkout\ServiceCompatibilityInterface" type="Dhl\ShippingCore\Model\Checkout\ServiceCompatibility"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Service\CompatibilityInterface" type="Dhl\ShippingCore\Model\Service\Compatibility"/>
     <preference for="Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterface" type="Dhl\ShippingCore\Model\Checkout\ServiceMetadata"/>
     <preference for="Dhl\ShippingCore\Api\Data\Service\InfoTextInterface" type="Dhl\ShippingCore\Model\Service\InfoText"/>
     <preference for="Dhl\ShippingCore\Api\Data\Service\InputInterface" type="Dhl\ShippingCore\Model\Service\Input"/>

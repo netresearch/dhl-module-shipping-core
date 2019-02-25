@@ -10,6 +10,7 @@ use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Service\CommentInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\Service\CompatibilityInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Service\InputInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Service\OptionInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Service\ServiceInterfaceFactory;
@@ -72,6 +73,11 @@ class CheckoutDataProvider
     private $attributeValueFactory;
 
     /**
+     * @var CompatibilityInterfaceFactory
+     */
+    private $compatibilityFactory;
+
+    /**
      * CheckoutDataProvider constructor.
      *
      * @param CheckoutDataInterfaceFactory $checkoutDataFactory
@@ -83,6 +89,7 @@ class CheckoutDataProvider
      * @param CommentInterfaceFactory $commentFactory
      * @param ValidationRuleInterfaceFactory $validationRuleFactory
      * @param AttributeInterfaceFactory $attributeValueFactory
+     * @param CompatibilityInterfaceFactory $compatibilityFactory
      */
     public function __construct(
         CheckoutDataInterfaceFactory $checkoutDataFactory,
@@ -93,7 +100,8 @@ class CheckoutDataProvider
         OptionInterfaceFactory $optionFactory,
         CommentInterfaceFactory $commentFactory,
         ValidationRuleInterfaceFactory $validationRuleFactory,
-        AttributeInterfaceFactory $attributeValueFactory
+        AttributeInterfaceFactory $attributeValueFactory,
+        CompatibilityInterfaceFactory $compatibilityFactory
     ) {
         $this->checkoutDataFactory = $checkoutDataFactory;
         $this->carrierDataFactory = $carrierDataFactory;
@@ -104,6 +112,7 @@ class CheckoutDataProvider
         $this->commentFactory = $commentFactory;
         $this->validationRuleFactory = $validationRuleFactory;
         $this->attributeValueFactory = $attributeValueFactory;
+        $this->compatibilityFactory = $compatibilityFactory;
     }
 
     /**
@@ -373,7 +382,29 @@ class CheckoutDataProvider
                                     ],
                                 ]
                             ),
-                            'serviceCompatibilityData' => [],
+                            'serviceCompatibilityData' => [
+                                $this->compatibilityFactory->create(
+                                    [
+                                        'incompatibilityRule' => true,
+                                        'subjects' => ['preferredLocation', 'preferredNeighbour'],
+                                        'errorMessage' => 'Please choose only one of %1.'
+                                    ]
+                                ),
+                                $this->compatibilityFactory->create(
+                                    [
+                                        'incompatibilityRule' => false,
+                                        'subjects' => ['preferredNeighbour.name', 'preferredNeighbour.address'],
+                                        'errorMessage' => 'Some values for Preferred Neighbour service are missing.'
+                                    ]
+                                ),
+                                $this->compatibilityFactory->create(
+                                    [
+                                        'incompatibilityRule' => false,
+                                        'subjects' => ['preferredDay', 'parcelAnnouncement'],
+                                        'errorMessage' => 'Services %1 require each other.'
+                                    ]
+                                ),
+                            ],
                         ]
                     )
                 ]

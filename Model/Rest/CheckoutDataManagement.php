@@ -9,7 +9,6 @@ namespace Dhl\ShippingCore\Model\Rest;
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
-use Magento\Framework\Escaper;
 use Magento\Quote\Model\QuoteRepository;
 
 /**
@@ -28,11 +27,6 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
     private $quoteRepository;
 
     /**
-     * @var Escaper
-     */
-    private $escaper;
-
-    /**
      * @var CheckoutDataProvider
      */
     private $checkoutDataProvider;
@@ -41,16 +35,13 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
      * CheckoutDataManagement constructor.
      *
      * @param QuoteRepository $quoteRepository
-     * @param Escaper $escaper
      * @param CheckoutDataProvider $checkoutDataProvider
      */
     public function __construct(
         QuoteRepository $quoteRepository,
-        Escaper $escaper,
         CheckoutDataProvider $checkoutDataProvider
     ) {
         $this->quoteRepository = $quoteRepository;
-        $this->escaper = $escaper;
         $this->checkoutDataProvider = $checkoutDataProvider;
     }
 
@@ -73,7 +64,7 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
     /**
      * Persist service selection with reference to a Quote Address ID.
      *
-     * @param int $cartId
+     * @param int $quoteId
      * @param \Magento\Framework\Api\AttributeInterface[] $serviceSelection
      * @throws \Magento\Framework\Exception\NoSuchEntityException;
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
@@ -81,26 +72,8 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
      */
     public function setData(int $quoteId, array $serviceSelection)
     {
-        $quote = $this->quoteRepository->get($cartId);
-        $quoteAddressId = $quote->getShippingAddress()->getId();
+        // @TODO Persist service selection to DB (@see DHLGW-202)
 
-        $this->serviceSelectionRepository->deleteByQuoteAddressId($quoteAddressId);
-
-        foreach ($serviceSelection as $service) {
-            $model = $this->serviceSelectionFactory->create();
-            $model->setData(
-                [
-                    'parent_id' => $quoteAddressId,
-                    'service_code' => $service->getAttributeCode(),
-                    'service_value' => array_map(
-                        function ($value) {
-                            return $this->escaper->escapeHtml($value);
-                        },
-                        $service->getValue()
-                    ),
-                ]
-            );
-            $this->serviceSelectionRepository->save($model);
-        }
+        return true;
     }
 }

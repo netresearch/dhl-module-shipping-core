@@ -29,7 +29,7 @@ interface CarrierDataInterface
     public function getServiceMetadata(): ServiceMetadataInterface;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Checkout\ServiceCompatibilityInterface[];
+     * @return \Dhl\ShippingCore\Api\Data\Service\CompatibilityInterface[];
      */
     public function getServiceCompatibilityData(): array;
 }
