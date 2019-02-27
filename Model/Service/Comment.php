@@ -23,20 +23,20 @@ class Comment implements CommentInterface
     private $content;
 
     /**
-     * @var bool
+     * @var string|null
      */
-    private $hasFootnote;
+    private $footnoteId;
 
     /**
      * Comment constructor.
      *
      * @param string $content
-     * @param bool $hasFootnote
+     * @param string|null $footnoteId
      */
-    public function __construct(string $content, bool $hasFootnote)
+    public function __construct(string $content, $footnoteId = null)
     {
         $this->content = $content;
-        $this->hasFootnote = $hasFootnote;
+        $this->footnoteId = $footnoteId;
     }
 
     /**
@@ -48,10 +48,10 @@ class Comment implements CommentInterface
     }
 
     /**
-     * @return bool
+     * @return string|null
      */
-    public function hasFootnote(): bool
+    public function getFootnoteId()
     {
-        return $this->hasFootnote;
+        return $this->footnoteId;
     }
 }

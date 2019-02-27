@@ -49,6 +49,11 @@ interface InputInterface
     public function getLabel(): string;
 
     /**
+     * @return bool
+     */
+    public function hasLabelVisible(): bool;
+
+    /**
      * Obtain a pre-defined set of allowed values.
      *
      * @return \Dhl\ShippingCore\Api\Data\Service\OptionInterface[]

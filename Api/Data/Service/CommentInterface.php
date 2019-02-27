@@ -18,7 +18,7 @@ interface CommentInterface
     public function getContent(): string;
 
     /**
-     * @return bool
+     * @return string|null
      */
-    public function hasFootnote(): bool;
+    public function getFootnoteId();
 }

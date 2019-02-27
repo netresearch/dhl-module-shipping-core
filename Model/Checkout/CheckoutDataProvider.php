@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Model\Checkout;
 use Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Service\CommentInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Service\CompatibilityInterfaceFactory;
@@ -78,6 +79,11 @@ class CheckoutDataProvider
     private $compatibilityFactory;
 
     /**
+     * @var FootnoteInterfaceFactory
+     */
+    private $footnoteFactory;
+
+    /**
      * CheckoutDataProvider constructor.
      *
      * @param CheckoutDataInterfaceFactory $checkoutDataFactory
@@ -90,6 +96,7 @@ class CheckoutDataProvider
      * @param ValidationRuleInterfaceFactory $validationRuleFactory
      * @param AttributeInterfaceFactory $attributeValueFactory
      * @param CompatibilityInterfaceFactory $compatibilityFactory
+     * @param FootnoteInterfaceFactory $footnoteFactory
      */
     public function __construct(
         CheckoutDataInterfaceFactory $checkoutDataFactory,
@@ -101,7 +108,8 @@ class CheckoutDataProvider
         CommentInterfaceFactory $commentFactory,
         ValidationRuleInterfaceFactory $validationRuleFactory,
         AttributeInterfaceFactory $attributeValueFactory,
-        CompatibilityInterfaceFactory $compatibilityFactory
+        CompatibilityInterfaceFactory $compatibilityFactory,
+        FootnoteInterfaceFactory $footnoteFactory
     ) {
         $this->checkoutDataFactory = $checkoutDataFactory;
         $this->carrierDataFactory = $carrierDataFactory;
@@ -113,6 +121,7 @@ class CheckoutDataProvider
         $this->validationRuleFactory = $validationRuleFactory;
         $this->attributeValueFactory = $attributeValueFactory;
         $this->compatibilityFactory = $compatibilityFactory;
+        $this->footnoteFactory = $footnoteFactory;
     }
 
     /**
@@ -133,7 +142,7 @@ class CheckoutDataProvider
                                 $this->serviceDataFactory->create(
                                     [
                                         'code' => 'preferredDay',
-                                        'label' => 'Wunschtag',
+                                        'label' => 'Wunschtag: Lieferung zum gewüschten Tag',
                                         'enabledForCheckout' => true,
                                         'enabledForAutocreate' => true,
                                         'enabledForPackaging' => true,
@@ -145,7 +154,8 @@ class CheckoutDataProvider
                                             $this->inputFactory->create(
                                                 [
                                                     'code' => 'date',
-                                                    'label' => 'Wunschtag: Lieferung zum gewüschten Tag',
+                                                    'label' => 'Wunschtag',
+                                                    'labelVisible' => false,
                                                     'options' => [
                                                         $this->optionFactory->create(
                                                             [
@@ -190,8 +200,65 @@ class CheckoutDataProvider
                                                     'defaultValue' => null,
                                                     'comment' => $this->commentFactory->create(
                                                         [
-                                                            'content' => 'Für diesen Service fallen zusätzliche Versandkosten in Höhe von <b>3,00 €</b> inkl. MwSt. an.',
-                                                            'hasFootnote' => true,
+                                                            'content' => 'Für diesen Service fallen zusätzliche Versandkosten in Höhe von <strong>3,00 €</strong> inkl. MwSt. an.',
+                                                            'footnoteId' => 'footnote-combined-cost',
+                                                        ]
+                                                    )
+                                                ]
+                                            )
+                                        ]
+                                    ]
+                                ),
+                                $this->serviceDataFactory->create(
+                                    [
+                                        'code' => 'preferredTime',
+                                        'label' => 'Wunschzeit: Lieferung im gewüschten Zeitfenster',
+                                        'enabledForCheckout' => true,
+                                        'enabledForAutocreate' => true,
+                                        'enabledForPackaging' => true,
+                                        'availableAtPostalFacility' => true,
+                                        'packagingReadonly' => true,
+                                        'sortOrder' => 15,
+                                        'routes' => [],
+                                        'inputs' => [
+                                            $this->inputFactory->create(
+                                                [
+                                                    'code' => 'time',
+                                                    'label' => 'Wunschzeit',
+                                                    'labelVisible' => false,
+                                                    'options' => [
+                                                        $this->optionFactory->create(
+                                                            [
+                                                                'label' => 'keine',
+                                                                'value' => '',
+                                                                'disabled' => false,
+                                                            ]
+                                                        ),
+                                                        $this->optionFactory->create(
+                                                            [
+                                                                'label' => '10:00-12:00',
+                                                                'value' => '10001200',
+                                                                'disabled' => false,
+                                                            ]
+                                                        ),
+                                                        $this->optionFactory->create(
+                                                            [
+                                                                'label' => '12:00-14:00',
+                                                                'value' => '12001400',
+                                                                'disabled' => true,
+                                                            ]
+                                                        ),
+                                                    ],
+                                                    'tooltip' => 'Damit Sie besser planen können, haben Sie die Möglichkeit eine Wunschzeit für die Lieferung auszuwählen. Sie können eine der dargestellten Zeiten für die Lieferung auswählen.',
+                                                    'placeholder' => '',
+                                                    'sortOrder' => 0,
+                                                    'validationRules' => [],
+                                                    'inputType' => 'time',
+                                                    'defaultValue' => null,
+                                                    'comment' => $this->commentFactory->create(
+                                                        [
+                                                            'content' => 'Für diesen Service fallen zusätzliche Versandkosten in Höhe von <strong>4,00 €</strong> inkl. MwSt. an',
+                                                            'footnoteId' => 'footnote-combined-cost',
                                                         ]
                                                     )
                                                 ]
@@ -215,6 +282,7 @@ class CheckoutDataProvider
                                                 [
                                                     'code' => 'enabled',
                                                     'label' => 'Paketankündigung aktivieren',
+                                                    'labelVisible' => true,
                                                     'options' => [],
                                                     'tooltip' => 'Ihre E-Mail-Adresse wird bei Aktivierung an DHL übermittelt, worauf DHL eine Paketankündigung zu Ihrer Sendung auslöst. Die E-Mail-Adresse wird ausschließlich für die Ankündigung zu dieser Sendung verwendet.',
                                                     'placeholder' => '',
@@ -225,7 +293,6 @@ class CheckoutDataProvider
                                                     'comment' => $this->commentFactory->create(
                                                         [
                                                             'content' => 'Mit der Aktivierung der Paketankündigung informiert Sie DHL per E-Mail über die geplante Lieferung Ihrer Sendung.',
-                                                            'hasFootnote' => false,
                                                         ]
                                                     )
                                                 ]
@@ -249,6 +316,7 @@ class CheckoutDataProvider
                                                 [
                                                     'code' => 'details',
                                                     'label' => 'Wunschort',
+                                                    'labelVisible' => false,
                                                     'options' => [],
                                                     'tooltip' => 'Bestimmen Sie einen wettergeschützten und nicht einsehbaren Platz auf Ihrem Grundstück, an dem wir das Paket während Ihrer Abwesenheit hinterlegen dürfen.',
                                                     'placeholder' => 'z.B. Garage, Terrasse',
@@ -294,6 +362,7 @@ class CheckoutDataProvider
                                                 [
                                                     'code' => 'name',
                                                     'label' => 'Name des Nachbarn',
+                                                    'labelVisible' => true,
                                                     'options' => [],
                                                     'tooltip' => 'Bestimmen Sie eine Person in Ihrer unmittelbaren Nachbarschaft, bei der wir Ihr Paket abgeben dürfen. Diese sollte im gleichen Haus, direkt gegenüber oder nebenan wohnen.',
                                                     'placeholder' => 'Vorname, Nachname des Nachbarn',
@@ -324,6 +393,7 @@ class CheckoutDataProvider
                                                 [
                                                     'code' => 'address',
                                                     'label' => 'Adresse des Nachbarn',
+                                                    'labelVisible' => true,
                                                     'options' => [],
                                                     'tooltip' => 'Test tooltip',
                                                     'placeholder' => 'Strasse, Hausnummer, PLZ, Ort',
@@ -362,23 +432,31 @@ class CheckoutDataProvider
                                         $this->commentFactory->create(
                                             [
                                                 'content' => 'DHL Preferred Delivery. Delivered just the way you want.',
-                                                'hasFootnote' => false,
                                             ]
                                         ),
                                         $this->commentFactory->create(
                                             [
                                                 'content' => 'Kurze Anleitung wie das ganze funktioniert. Ut a lorem vel quam finibus venenatis. Phasellus urna libero, sollicitudin id leo nec.',
-                                                'hasFootnote' => false,
                                             ]
                                         )
                                     ],
                                     'commentsAfter' => [
                                         $this->commentFactory->create(
                                             [
-                                                'content' => 'Gemeinsame kosten sind blubb.',
-                                                'hasFootnote' => true,
+                                                'content' => 'A test comment below the service selection.',
                                             ]
-                                        ),
+                                        )
+                                    ],
+                                    'footnotes' => [
+                                        $this->footnoteFactory->create(
+                                            [
+                                                'content' => 'When booked together, the price of Preferred Day and Preferred Time is <strong>11 €</strong>.',
+                                                'footnoteId' => 'footnote-combined-cost',
+                                                'subjects' => ['preferredTime', 'preferredDay'],
+                                                'subjectsMustBeSelected' => true,
+                                                'subjectsMustBeAvailable' => true,
+                                            ]
+                                        )
                                     ],
                                 ]
                             ),
@@ -400,7 +478,7 @@ class CheckoutDataProvider
                                 $this->compatibilityFactory->create(
                                     [
                                         'incompatibilityRule' => false,
-                                        'subjects' => ['preferredDay', 'parcelAnnouncement'],
+                                        'subjects' => ['preferredDay', 'preferredTime'],
                                         'errorMessage' => 'Services %1 require each other.'
                                     ]
                                 ),

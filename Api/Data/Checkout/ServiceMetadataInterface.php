@@ -32,4 +32,9 @@ interface ServiceMetadataInterface
      * @return \Dhl\ShippingCore\Api\Data\Service\CommentInterface[]
      */
     public function getCommentsAfter(): array;
+
+    /**
+     * @return \Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface[]
+     */
+    public function getFootnotes(): array;
 }

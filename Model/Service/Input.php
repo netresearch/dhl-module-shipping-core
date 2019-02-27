@@ -41,6 +41,11 @@ class Input implements InputInterface
     private $label;
 
     /**
+     * @var bool
+     */
+    private $labelVisible;
+
+    /**
      * @var OptionInterface[]
      */
     private $options;
@@ -77,6 +82,7 @@ class Input implements InputInterface
      * @param string $code
      * @param mixed $defaultValue
      * @param string $label
+     * @param bool $labelVisible
      * @param OptionInterface[] $options
      * @param string $tooltip
      * @param string $placeholder
@@ -89,6 +95,7 @@ class Input implements InputInterface
         string $code,
         $defaultValue,
         string $label,
+        bool $labelVisible,
         array $options,
         string $tooltip,
         string $placeholder,
@@ -100,6 +107,7 @@ class Input implements InputInterface
         $this->code = $code;
         $this->defaultValue = $defaultValue;
         $this->label = $label;
+        $this->labelVisible = $labelVisible;
         $this->options = $options;
         $this->tooltip = $tooltip;
         $this->placeholder = $placeholder;
@@ -138,6 +146,14 @@ class Input implements InputInterface
     public function getLabel(): string
     {
         return $this->label;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasLabelVisible(): bool
+    {
+        return $this->labelVisible;
     }
 
     /**

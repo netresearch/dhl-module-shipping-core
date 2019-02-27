@@ -5,6 +5,7 @@
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
+use Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface;
 use Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterface;
 use Dhl\ShippingCore\Api\Data\Service\CommentInterface;
 use Dhl\ShippingCore\Model\Service\Comment;
@@ -41,19 +42,31 @@ class ServiceMetadata implements ServiceMetadataInterface
     private $commentsAfter;
 
     /**
+     * @var FootnoteInterface[]
+     */
+    private $footnotes;
+
+    /**
      * ServiceMetadata constructor.
      *
      * @param string $imageUrl
      * @param string $title
      * @param CommentInterface[] $commentsBefore
      * @param CommentInterface[] $commentsAfter
+     * @param FootnoteInterface[] $footnotes
      */
-    public function __construct(string $imageUrl, string $title, array $commentsBefore, array $commentsAfter)
-    {
+    public function __construct(
+        string $imageUrl,
+        string $title,
+        array $commentsBefore,
+        array $commentsAfter,
+        array $footnotes
+    ) {
         $this->imageUrl = $imageUrl;
         $this->title = $title;
         $this->commentsBefore = $commentsBefore;
         $this->commentsAfter = $commentsAfter;
+        $this->footnotes = $footnotes;
     }
 
     /**
@@ -86,5 +99,13 @@ class ServiceMetadata implements ServiceMetadataInterface
     public function getCommentsAfter(): array
     {
         return $this->commentsAfter;
+    }
+
+    /**
+     * @return FootnoteInterface[]
+     */
+    public function getFootnotes(): array
+    {
+        return $this->footnotes;
     }
 }
