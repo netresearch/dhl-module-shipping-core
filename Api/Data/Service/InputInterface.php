@@ -37,9 +37,9 @@ interface InputInterface
      * Obtain the value of a service input.
      * May be boolean true or a date or a monetary value, whatever the service offers.
      *
-     * @return string|bool|int|float
+     * @return string
      */
-    public function getDefaultValue();
+    public function getDefaultValue(): string;
 
     /**
      * Obtain the label corresponding to the input

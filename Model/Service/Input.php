@@ -31,7 +31,7 @@ class Input implements InputInterface
     private $code;
 
     /**
-     * @var mixed
+     * @var string
      */
     private $defaultValue;
 
@@ -80,7 +80,7 @@ class Input implements InputInterface
      *
      * @param string $inputType
      * @param string $code
-     * @param mixed $defaultValue
+     * @param string $defaultValue
      * @param string $label
      * @param bool $labelVisible
      * @param OptionInterface[] $options
@@ -93,7 +93,7 @@ class Input implements InputInterface
     public function __construct(
         string $inputType,
         string $code,
-        $defaultValue,
+        string $defaultValue,
         string $label,
         bool $labelVisible,
         array $options,
@@ -133,9 +133,9 @@ class Input implements InputInterface
     }
 
     /**
-     * @return bool|float|int|string
+     * @return string
      */
-    public function getDefaultValue()
+    public function getDefaultValue(): string
     {
         return $this->defaultValue;
     }

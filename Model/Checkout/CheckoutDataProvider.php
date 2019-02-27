@@ -197,7 +197,7 @@ class CheckoutDataProvider
                                                         ),
                                                     ],
                                                     'inputType' => 'date',
-                                                    'defaultValue' => null,
+                                                    'defaultValue' => '',
                                                     'comment' => $this->commentFactory->create(
                                                         [
                                                             'content' => 'Für diesen Service fallen zusätzliche Versandkosten in Höhe von <strong>3,00 €</strong> inkl. MwSt. an.',
@@ -254,7 +254,7 @@ class CheckoutDataProvider
                                                     'sortOrder' => 0,
                                                     'validationRules' => [],
                                                     'inputType' => 'time',
-                                                    'defaultValue' => null,
+                                                    'defaultValue' => '',
                                                     'comment' => $this->commentFactory->create(
                                                         [
                                                             'content' => 'Für diesen Service fallen zusätzliche Versandkosten in Höhe von <strong>4,00 €</strong> inkl. MwSt. an',
@@ -289,7 +289,7 @@ class CheckoutDataProvider
                                                     'sortOrder' => 0,
                                                     'validationRules' => [],
                                                     'inputType' => 'checkbox',
-                                                    'defaultValue' => false,
+                                                    'defaultValue' => '',
                                                     'comment' => $this->commentFactory->create(
                                                         [
                                                             'content' => 'Mit der Aktivierung der Paketankündigung informiert Sie DHL per E-Mail über die geplante Lieferung Ihrer Sendung.',
@@ -426,7 +426,7 @@ class CheckoutDataProvider
                             ],
                             'serviceMetadata' => $this->serviceMetadataFactory->create(
                                 [
-                                    'title' => 'DHL Shipping: Wunschpaket',
+                                    'title' => 'DHL Preferred Delivery. Delivered just the way you want.',
                                     'imageUrl' => '',
                                     'commentsBefore' => [
                                         $this->commentFactory->create(
