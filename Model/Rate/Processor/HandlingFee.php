@@ -87,12 +87,8 @@ class HandlingFee implements RateProcessorInterface
     private function getHandlingType(Method $method): string
     {
         // Calculate fee depending on shipping type
-        if ($this->isEnabledDomesticProduct($method)) {
-            return $this->rateConfig->getDomesticHandlingType($method->getData('carrier'));
-        }
-
-        if ($this->isEnabledInternationalProduct($method)) {
-            return $this->rateConfig->getInternationalHandlingType($method->getData('carrier'));
+        if ($this->isEnabledProduct($method)) {
+            return $this->rateConfig->getHandlingType($method->getData('carrier'));
         }
 
         return '';
@@ -105,27 +101,11 @@ class HandlingFee implements RateProcessorInterface
      *
      * @return bool
      */
-    protected function isEnabledDomesticProduct(Method $method): bool
+    protected function isEnabledProduct(Method $method): bool
     {
         return \in_array(
             $method->getData('method'),
-            $this->rateConfig->getAllowedDomesticProducts($method->getData('carrier')),
-            true
-        );
-    }
-
-    /**
-     * Returns whether the product is enabled in the configuration or not.
-     *
-     * @param Method $method The rate method
-     *
-     * @return bool
-     */
-    protected function isEnabledInternationalProduct(Method $method): bool
-    {
-        return \in_array(
-            $method->getData('method'),
-            $this->rateConfig->getAllowedInternationalProducts($method->getData('carrier')),
+            $this->rateConfig->getAllowedProducts($method->getData('carrier')),
             true
         );
     }
@@ -140,11 +120,10 @@ class HandlingFee implements RateProcessorInterface
     private function getHandlingFee(Method $method): float
     {
         $handlingFee = 0.0;
+
         // Calculate fee depending on shipping type
-        if ($this->isEnabledDomesticProduct($method)) {
-            $handlingFee = $this->rateConfig->getDomesticHandlingFee($method->getData('carrier'));
-        } elseif ($this->isEnabledInternationalProduct($method)) {
-            $handlingFee = $this->rateConfig->getInternationalHandlingFee($method->getData('carrier'));
+        if ($this->isEnabledProduct($method)) {
+            $handlingFee = $this->rateConfig->getHandlingFee($method->getData('carrier'));
         }
 
         return $handlingFee;

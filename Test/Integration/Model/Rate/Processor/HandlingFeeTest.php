@@ -69,16 +69,16 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Test handling domestic fee calculation with fixed handling fee.
+     * Test handling fee calculation with fixed handling fee.
      *
      * @test
      *
-     * @magentoConfigFixture current_store carriers/foo/shipment_settings/alloweddomesticproducts N
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_affect_rates 1
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_type F
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_fee_fixed 3
+     * @magentoConfigFixture current_store carriers/foo/shipment_settings/allowedproducts N
+     * @magentoConfigFixture current_store carriers/foo/shipping_markup/affect_rates 1
+     * @magentoConfigFixture current_store carriers/foo/shipping_markup/handling_type F
+     * @magentoConfigFixture current_store carriers/foo/shipping_markup/handling_fee_fixed 3
      */
-    public function processMethodsWithFixedDomesticHandlingFee()
+    public function processMethodsWithFixedHandlingFee()
     {
         $method = $this->methodFactory->create(
             [
@@ -101,46 +101,14 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Test handling international fee calculation with fixed handling fee.
-     *
-     * @test
-     *
-     * @magentoConfigFixture current_store carriers/foo/shipment_settings/allowedinternationalproducts X
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/international_affect_rates 1
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/international_handling_type F
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/international_handling_fee_fixed 3
-     */
-    public function processMethodsWithFixedInternationalHandlingFee()
-    {
-        $method = $this->methodFactory->create(
-            [
-                'data' => [
-                    'carrier' => 'foo',
-                    'carrier_title' => 'TEST',
-                    'method' => 'X',
-                    'method_title' => 'LABEL',
-                    'price' => 6.0,
-                    'cost' => 6.0,
-                ],
-            ]
-        );
-
-        $handlingFee = new HandlingFee($this->config);
-        $methods = $handlingFee->processMethods([$method]);
-
-        self::assertSame(9.0, $methods[0]->getPrice());
-        self::assertSame(9.0, $methods[0]->getCost());
-    }
-
-    /**
      * Test handling fee calculation with percent handling fee.
      *
      * @test
      *
-     * @magentoConfigFixture current_store carriers/foo/shipment_settings/alloweddomesticproducts N
-     * * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_affect_rates 1
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_type P
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_fee_percentage 50
+     * @magentoConfigFixture current_store carriers/foo/shipment_settings/allowedproducts N
+     * @magentoConfigFixture current_store carriers/foo/shipping_markup/affect_rates 1
+     * @magentoConfigFixture current_store carriers/foo/shipping_markup/handling_type P
+     * @magentoConfigFixture current_store carriers/foo/shipping_markup/handling_fee_percentage 50
      */
     public function processMethodsWithPercentHandlingFee()
     {
@@ -169,10 +137,10 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      *
-     * @magentoConfigFixture current_store carriers/foo/shipment_settings/alloweddomesticproducts N
-     * * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_affect_rates 1
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_type F
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_fee_fixed -10
+     * @magentoConfigFixture current_store carriers/foo/shipment_settings/allowedproducts N
+     * @magentoConfigFixture current_store carriers/foo/shipping_markup/affect_rates 1
+     * @magentoConfigFixture current_store carriers/foo/shipping_markup/handling_type F
+     * @magentoConfigFixture current_store carriers/foo/shipping_markup/handling_fee_fixed -10
      */
     public function processMethodsWithFixedNegativeHandlingFee()
     {
