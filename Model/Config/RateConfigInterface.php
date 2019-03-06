@@ -17,18 +17,18 @@ interface RateConfigInterface
 {
     const CONFIG_ROOT = 'carriers/%s/';
 
-    // 300_shipping_preferences.xml
-    const CONFIG_XML_PATH_ALLOWED_PRODUCTS = self::CONFIG_ROOT . 'shipment_settings/allowedproducts';
-
     // 400_checkout_presentation.xml
     const CONFIG_XML_PATH_ROUNDED_PRICES_FORMAT = self::CONFIG_ROOT . 'checkout_settings/round_prices_format';
     const CONFIG_XML_PATH_ROUNDED_PRICES_STATIC_DECIMAL = self::CONFIG_ROOT . 'checkout_settings/round_prices_static_decimal';
     const CONFIG_XML_PATH_ROUNDED_PRICES_MODE = self::CONFIG_ROOT . 'checkout_settings/round_prices_mode';
 
     // 500_shipping_markup.xml
-    const CONFIG_XML_PATH_HANDLING_TYPE = self::CONFIG_ROOT . 'shipping_markup/handling_type';
-    const CONFIG_XML_PATH_HANDLING_FEE = self::CONFIG_ROOT . 'shipping_markup/handling_fee';
-    const CONFIG_XML_PATH_AFFECT_RATES = self::CONFIG_ROOT . 'shipping_markup/affect_rates';
+    const CONFIG_XML_PATH_INTERNATIONAL_HANDLING_TYPE = self::CONFIG_ROOT . 'shipping_markup/international_handling_type';
+    const CONFIG_XML_PATH_INTERNATIONAL_HANDLING_FEE = self::CONFIG_ROOT . 'shipping_markup/international_handling_fee';
+    const CONFIG_XML_PATH_DOMESTIC_HANDLING_TYPE = self::CONFIG_ROOT . 'shipping_markup/domestic_handling_type';
+    const CONFIG_XML_PATH_DOMESTIC_HANDLING_FEE = self::CONFIG_ROOT . 'shipping_markup/domestic_handling_fee';
+    const CONFIG_XML_PATH_DOMESTIC_AFFECT_RATES = self::CONFIG_ROOT . 'shipping_markup/domestic_affect_rates';
+    const CONFIG_XML_PATH_INTERNATIONAL_AFFECT_RATES = self::CONFIG_ROOT . 'shipping_markup/international_affect_rates';
     const CONFIG_XML_SUFFIX_FIXED = '_fixed';
     const CONFIG_XML_SUFFIX_PERCENTAGE = '_percentage';
 
@@ -83,42 +83,42 @@ interface RateConfigInterface
     public function roundOff(string $carrierCode, $store = null): bool;
 
     /**
-     * Get the allowed products.
+     * Get the domestic handling type.
      *
-     * @param string $carrierCode
-     * @param string|null $store
-     *
-     * @return string[]
-     */
-    public function getAllowedProducts(string $carrierCode, $store = null): array;
-
-    /**
-     * Check if international rates configuration is enabled.
-     *
-     * @param string $carrierCode
-     * @param string|null $store
-     *
-     * @return bool
-     */
-    public function isRatesConfigurationEnabled(string $carrierCode, $store = null): bool;
-
-    /**
-     * Get the handling type.
-     *
-     * @param string $carrierCode
+     * @param string      $carrierCode The carrier code
      * @param string|null $store
      *
      * @return string
      */
-    public function getHandlingType(string $carrierCode, $store = null): string;
+    public function getDomesticHandlingType(string $carrierCode, $store = null): string;
 
     /**
-     * Get the handling fee.
+     * Get the domestic handling fee.
      *
-     * @param string $carrierCode
+     * @param string      $carrierCode The carrier code
      * @param string|null $store
      *
      * @return float
      */
-    public function getHandlingFee(string $carrierCode, $store = null): float;
+    public function getDomesticHandlingFee(string $carrierCode, $store = null): float;
+
+    /**
+     * Get the international handling type.
+     *
+     * @param string      $carrierCode The carrier code
+     * @param string|null $store
+     *
+     * @return string
+     */
+    public function getInternationalHandlingType(string $carrierCode, $store = null): string;
+
+    /**
+     * Get the international handling fee.
+     *
+     * @param string      $carrierCode The carrier code
+     * @param string|null $store
+     *
+     * @return float
+     */
+    public function getInternationalHandlingFee(string $carrierCode, $store = null): float;
 }

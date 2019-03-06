@@ -23,7 +23,7 @@ interface RateProcessorInterface
      * Performs arbitrary updates on the rate method array and returns an array with updated methods
      *
      * @param Method[]         $methods List of rate methods
-     * @param RateRequest|null $request The rate request
+     * @param null|RateRequest $request The rate request
      *
      * @return Method[]
      */

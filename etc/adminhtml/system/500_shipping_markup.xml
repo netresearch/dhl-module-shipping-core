@@ -2,42 +2,77 @@
 <!-- This is a template for configurations used in the Rate processors, see Dhl\ShippingCore\Model\Config\RateConfigInterface and usages
  you can either directly include this file or copy it into your module for adjustments -->
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
-    <group id="shipping_settings" translate="label" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+    <group id="shipping_markup" translate="label" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
         <label><![CDATA[Shipping Markup]]></label>
         <attribute type="expanded">1</attribute>
 
-        <!-- Rates calculation config fields -->
-        <field id="affect_rates" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
+        <!-- International rates calculation config fields -->
+        <field id="international_affect_rates" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
                translate="label tooltip" type="Dhl\ShippingCore\Model\Data\Form\Element\Checkbox">
             <label><![CDATA[International Shipping]]></label>
             <button_label><![CDATA[Add markup to shipping price]]></button_label>
         </field>
-        <field id="handling_type" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20"
+        <field id="international_handling_type" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20"
                translate="tooltip label comment" type="Dhl\ShippingCore\Model\Data\Form\Element\Radioset">
             <label><![CDATA[Calculate Markup]]></label>
             <source_model>Magento\Shipping\Model\Source\HandlingType</source_model>
             <depends>
-                <field id="affect_rates">1</field>
+                <field id="international_affect_rates">1</field>
             </depends>
         </field>
-        <field id="handling_fee_fixed" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="30"
+        <field id="international_handling_fee_fixed" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="30"
                translate="tooltip label comment" type="text">
             <label><![CDATA[Fixed amount]]></label>
             <validate>validate-number</validate>
             <comment><![CDATA[Enter the markup amount in the currency of your store. Enter a negative to apply a discount]]></comment>
             <depends>
-                <field id="affect_rates">1</field>
-                <field id="handling_type">F</field>
+                <field id="international_affect_rates">1</field>
+                <field id="international_handling_type">F</field>
             </depends>
         </field>
-        <field id="handling_fee_percentage" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="40"
+        <field id="international_handling_fee_percentage" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="40"
                translate="tooltip label comment" type="text">
             <label><![CDATA[Percentage]]></label>
             <validate>validate-number</validate>
             <comment><![CDATA[For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount]]></comment>
             <depends>
-                <field id="affect_rates">1</field>
-                <field id="handling_type">P</field>
+                <field id="international_affect_rates">1</field>
+                <field id="international_handling_type">P</field>
+            </depends>
+        </field>
+
+        <!-- Domestic rates calculation config fields -->
+        <field id="domestic_affect_rates" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="50"
+               translate="comment label tooltip" type="Dhl\ShippingCore\Model\Data\Form\Element\Checkbox">
+            <label><![CDATA[Domestic Shipping]]></label>
+            <button_label><![CDATA[Add markup to shipping price]]></button_label>
+        </field>
+        <field id="domestic_handling_type" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="60"
+               translate="tooltip label comment" type="Dhl\ShippingCore\Model\Data\Form\Element\Radioset">
+            <label><![CDATA[Calculate Markup]]></label>
+            <source_model>Magento\Shipping\Model\Source\HandlingType</source_model>
+            <depends>
+                <field id="domestic_affect_rates">1</field>
+            </depends>
+        </field>
+        <field id="domestic_handling_fee_fixed" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="70"
+               translate="tooltip label comment" type="text">
+            <label><![CDATA[Fixed amount]]></label>
+            <validate>validate-number</validate>
+            <comment><![CDATA[Enter the markup amount in the currency of your store. Enter a negative to apply a discount]]></comment>
+            <depends>
+                <field id="domestic_affect_rates">1</field>
+                <field id="domestic_handling_type">F</field>
+            </depends>
+        </field>
+        <field id="domestic_handling_fee_percentage" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="80"
+               translate="tooltip label comment" type="text">
+            <label><![CDATA[Percentage]]></label>
+            <validate>validate-number</validate>
+            <comment><![CDATA[For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount]]></comment>
+            <depends>
+                <field id="domestic_affect_rates">1</field>
+                <field id="domestic_handling_type">P</field>
             </depends>
         </field>
     </group>

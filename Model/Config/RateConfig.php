@@ -104,53 +104,17 @@ class RateConfig implements RateConfigInterface
     }
 
     /**
-     * Resolves and flattens product codes separated by ";".
+     * Check if domestic rates configuration is enabled.
      *
-     * @param string $allowedProductsValue The ";" separated list of product codes
+     * @param string      $carrierCode The carrier code
+     * @param string|null $store
      *
-     * @return string[]
-     *
-     * @see InternationalProducts
+     * @return bool
      */
-    private function normalizeAllowedProducts(string $allowedProductsValue): array
-    {
-        $combinedKeys = explode(',', $allowedProductsValue) ?: [];
-
-        return array_reduce(
-            $combinedKeys,
-            function ($carry, $item) {
-                $singleKeys = explode(';', $item);
-                if ($singleKeys !== false) {
-                    $carry = array_merge($carry, $singleKeys);
-                }
-
-                return $carry;
-            },
-            []
-        );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getAllowedProducts(string $carrierCode, $store = null): array
-    {
-        $allowedProducts = $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_ALLOWED_PRODUCTS),
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-
-        return $this->normalizeAllowedProducts((string) $allowedProducts);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isRatesConfigurationEnabled(string $carrierCode, $store = null): bool
+    private function isDomesticRatesConfigurationEnabled(string $carrierCode, $store = null): bool
     {
         $value = $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_AFFECT_RATES),
+            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_DOMESTIC_AFFECT_RATES),
             ScopeInterface::SCOPE_STORE,
             $store
         );
@@ -161,18 +125,14 @@ class RateConfig implements RateConfigInterface
     /**
      * @inheritDoc
      */
-    public function getHandlingFee(string $carrierCode, $store = null): float
+    public function getDomesticHandlingType(string $carrierCode, $store = null): string
     {
-        if (!$this->isRatesConfigurationEnabled($carrierCode, $store)) {
-            return 0;
+        if (!$this->isDomesticRatesConfigurationEnabled($carrierCode, $store)) {
+            return '';
         }
 
-        $type = $this->getHandlingType($carrierCode, $store) === AbstractCarrier::HANDLING_TYPE_FIXED
-            ? self::CONFIG_XML_SUFFIX_FIXED
-            : self::CONFIG_XML_SUFFIX_PERCENTAGE;
-
-        return (float) $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_HANDLING_FEE) . $type,
+        return (string) $this->scopeConfig->getValue(
+            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_DOMESTIC_HANDLING_TYPE),
             ScopeInterface::SCOPE_STORE,
             $store
         );
@@ -181,14 +141,73 @@ class RateConfig implements RateConfigInterface
     /**
      * @inheritDoc
      */
-    public function getHandlingType(string $carrierCode, $store = null): string
+    public function getDomesticHandlingFee(string $carrierCode, $store = null): float
     {
-        if (!$this->isRatesConfigurationEnabled($carrierCode, $store)) {
+        if (!$this->isDomesticRatesConfigurationEnabled($carrierCode, $store)) {
+            return 0;
+        }
+
+        $type = $this->getDomesticHandlingType($carrierCode, $store) === AbstractCarrier::HANDLING_TYPE_FIXED
+            ? self::CONFIG_XML_SUFFIX_FIXED
+            : self::CONFIG_XML_SUFFIX_PERCENTAGE;
+
+        return (float) $this->scopeConfig->getValue(
+            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_DOMESTIC_HANDLING_FEE) . $type,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * Check if international rates configuration is enabled.
+     *
+     * @param string      $carrierCode The carrier code
+     * @param string|null $store
+     *
+     * @return bool
+     */
+    private function isInternationalRatesConfigurationEnabled(string $carrierCode, $store = null): bool
+    {
+        $value = $this->scopeConfig->getValue(
+            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_INTERNATIONAL_AFFECT_RATES),
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+
+        return $value === '1';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getInternationalHandlingType(string $carrierCode, $store = null): string
+    {
+        if (!$this->isInternationalRatesConfigurationEnabled($carrierCode, $store)) {
             return '';
         }
 
         return (string) $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_HANDLING_TYPE),
+            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_INTERNATIONAL_HANDLING_TYPE),
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getInternationalHandlingFee(string $carrierCode, $store = null): float
+    {
+        if (!$this->isInternationalRatesConfigurationEnabled($carrierCode, $store)) {
+            return 0;
+        }
+
+        $type = $this->getInternationalHandlingType($carrierCode, $store) === AbstractCarrier::HANDLING_TYPE_FIXED
+            ? self::CONFIG_XML_SUFFIX_FIXED
+            : self::CONFIG_XML_SUFFIX_PERCENTAGE;
+
+        return (float) $this->scopeConfig->getValue(
+            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_INTERNATIONAL_HANDLING_FEE) . $type,
             ScopeInterface::SCOPE_STORE,
             $store
         );

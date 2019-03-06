@@ -10,7 +10,7 @@ use Magento\TestFramework\ObjectManager;
 /**
  * ModuleConfigTest
  *
- * @package Dhl\Express\Test\Integration
+ * @package Dhl\ShippingCore\Test\Integration
  * @author  Ronny Gertler <ronny.gertler@netresearch.de>
  * @license https://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link    https://www.netresearch.de/
@@ -66,13 +66,13 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
     public function getCodMethods()
     {
         $paymentMethods = $this->config->getCodMethods();
-        $this->assertInternalType('array', $paymentMethods);
-        $this->assertNotEmpty($paymentMethods);
-        $this->assertContainsOnly('string', $paymentMethods);
-        $this->assertCount(3, $paymentMethods);
-        $this->assertContains('payflow_advanced', $paymentMethods);
-        $this->assertContains('payflow_link', $paymentMethods);
-        $this->assertContains('payflowpro', $paymentMethods);
+        self::assertInternalType('array', $paymentMethods);
+        self::assertNotEmpty($paymentMethods);
+        self::assertContainsOnly('string', $paymentMethods);
+        self::assertCount(3, $paymentMethods);
+        self::assertContains('payflow_advanced', $paymentMethods);
+        self::assertContains('payflow_link', $paymentMethods);
+        self::assertContains('payflowpro', $paymentMethods);
     }
 
     /**
@@ -82,8 +82,8 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
      */
     public function getTermsOfTrade()
     {
-        $this->assertEquals('DTP/DDP', $this->config->getTermsOfTrade());
-        $this->assertEquals('DDU/DAP', $this->config->getTermsOfTrade('fixturestore'));
+        self::assertEquals('DTP/DDP', $this->config->getTermsOfTrade());
+        self::assertEquals('DDU/DAP', $this->config->getTermsOfTrade('fixturestore'));
     }
 
     /**
@@ -93,8 +93,8 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
      */
     public function getCutOffTime()
     {
-        $this->assertEquals('00,00,00', $this->config->getCutOffTime());
-        $this->assertEquals('12,07,10', $this->config->getCutOffTime('fixturestore'));
+        self::assertEquals('00,00,00', $this->config->getCutOffTime());
+        self::assertEquals('12,07,10', $this->config->getCutOffTime('fixturestore'));
     }
 
     protected function setUp()

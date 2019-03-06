@@ -43,11 +43,13 @@ class HandlingFee implements RateProcessorInterface
     {
         /** @var Method $method */
         foreach ($methods as $method) {
+            $carrierCode = $method->getData('carrier');
+
             // Calculate fee depending on shipping type
             $price = $this->calculatePrice(
                 $method->getPrice(),
-                $this->getHandlingType($method),
-                $this->getHandlingFee($method)
+                $this->getHandlingType($carrierCode, $request),
+                $this->getHandlingFee($carrierCode, $request)
             );
 
             $method->setPrice($price);
@@ -78,54 +80,48 @@ class HandlingFee implements RateProcessorInterface
     }
 
     /**
-     * Returns the configured handling type depending on the shipping type.
+     * Returns TRUE, if the current rate request is determined for a cross border route.
      *
-     * @param Method $method The rate method
-     *
-     * @return string
-     */
-    private function getHandlingType(Method $method): string
-    {
-        // Calculate fee depending on shipping type
-        if ($this->isEnabledProduct($method)) {
-            return $this->rateConfig->getHandlingType($method->getData('carrier'));
-        }
-
-        return '';
-    }
-
-    /**
-     * Returns whether the product is enabled in the configuration or not.
-     *
-     * @param Method $method The rate method
+     * @param null|RateRequest $request The rate request
      *
      * @return bool
      */
-    protected function isEnabledProduct(Method $method): bool
+    private function isCrossBorderRoute(RateRequest $request = null): bool
     {
-        return \in_array(
-            $method->getData('method'),
-            $this->rateConfig->getAllowedProducts($method->getData('carrier')),
-            true
-        );
+        return $request ? ($request->getDestCountryId() !== $request->getOrigCountryId()) : false;
+    }
+
+    /**
+     * Returns the configured handling type depending on the shipping type.
+     *
+     * @param string           $carrierCode The carrier code
+     * @param null|RateRequest $request     The rate request
+     *
+     * @return string
+     */
+    private function getHandlingType(string $carrierCode, RateRequest $request = null): string
+    {
+        if ($this->isCrossBorderRoute($request)){
+            return $this->rateConfig->getInternationalHandlingType($carrierCode);
+        }
+
+        return $this->rateConfig->getDomesticHandlingType($carrierCode);
     }
 
     /**
      * Returns the configured handling fee depending on the shipping type.
      *
-     * @param Method $method The rate method
+     * @param string           $carrierCode The carrier code
+     * @param null|RateRequest $request     The rate request
      *
      * @return float
      */
-    private function getHandlingFee(Method $method): float
+    private function getHandlingFee(string $carrierCode, RateRequest $request = null): float
     {
-        $handlingFee = 0.0;
-
-        // Calculate fee depending on shipping type
-        if ($this->isEnabledProduct($method)) {
-            $handlingFee = $this->rateConfig->getHandlingFee($method->getData('carrier'));
+        if ($this->isCrossBorderRoute($request)){
+            return $this->rateConfig->getInternationalHandlingFee($carrierCode);
         }
 
-        return $handlingFee;
+        return $this->rateConfig->getDomesticHandlingFee($carrierCode);
     }
 }
