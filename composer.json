@@ -20,7 +20,8 @@
   },
   "require": {
     "magento/module-shipping": "^100.2.0",
-    "php-http/curl-client": "^1.7.0"
+    "php-http/curl-client": "^1.7.0",
+    "netresearch/config-fields-m2": "^1.0.0"
   },
   "extra": {
     "branch-alias": {

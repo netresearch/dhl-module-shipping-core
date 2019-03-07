@@ -8,12 +8,12 @@
 
         <!-- Round prices -->
         <field id="round_prices_format" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="70"
-               translate="tooltip label comment" type="Dhl\ShippingCore\Model\Data\Form\Element\Radioset">
+               translate="tooltip label comment" type="Netresearch\ConfigFields\Model\Type\Radioset">
             <label><![CDATA[Round Prices]]></label>
             <source_model>Dhl\ShippingCore\Model\Config\Source\RoundedPricesFormat</source_model>
         </field>
         <field id="round_prices_mode" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="80"
-               translate="tooltip label comment" type="Dhl\ShippingCore\Model\Data\Form\Element\Radioset">
+               translate="tooltip label comment" type="Netresearch\ConfigFields\Model\Type\Radioset">
             <label><![CDATA[Rounding Direction]]></label>
             <source_model>Dhl\ShippingCore\Model\Config\Source\RoundedPricesMode</source_model>
             <depends>
