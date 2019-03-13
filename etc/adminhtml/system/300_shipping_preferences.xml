@@ -8,11 +8,11 @@
 
         <!-- Products -->
         <field id="allowedinternationalproducts" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
-               translate="tooltip label comment" type="Netresearch\ConfigFields\Model\Type\Checkboxset">
+               translate="label" type="Netresearch\ConfigFields\Model\Type\Checkboxset">
             <label><![CDATA[Allowed International Products]]></label>
         </field>
         <field id="alloweddomesticproducts" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20"
-               translate="tooltip label comment" type="Netresearch\ConfigFields\Model\Type\Checkboxset">
+               translate="label" type="Netresearch\ConfigFields\Model\Type\Checkboxset">
             <label><![CDATA[Allowed Domestic Products]]></label>
         </field>
     </group>

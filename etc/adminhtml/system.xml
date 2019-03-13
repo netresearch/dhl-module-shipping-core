@@ -16,8 +16,7 @@
                        translate="label tooltip comment" type="time">
                     <label><![CDATA[Order Cut-off Time]]></label>
                     <source_model>Magento\Config\Model\Config\Source\Date\Short</source_model>
-                    <tooltip><![CDATA[All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day.
-                    All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.]]></tooltip>
+                    <tooltip><![CDATA[All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.]]></tooltip>
                 </field>
                 <!-- Terms of trade -->
                 <field id="terms_of_trade" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label tooltip comment" type="Netresearch\ConfigFields\Model\Type\Radioset">

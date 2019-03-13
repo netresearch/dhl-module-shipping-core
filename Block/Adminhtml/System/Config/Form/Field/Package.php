@@ -69,7 +69,7 @@ class Package extends AbstractFieldArray
         $this->addColumn(
             PackageModel::KEY_LENGTH,
             [
-                'label' => __('Length <span>' . $this->getMeasureLengthUnit() . '</span>'),
+                'label' => __('Length %1', '<span>' . $this->getMeasureLengthUnit() . '</span>'),
                 'style' => 'width:40px',
                 'class' => 'validate-digits required',
             ]
@@ -77,7 +77,7 @@ class Package extends AbstractFieldArray
         $this->addColumn(
             PackageModel::KEY_WIDTH,
             [
-                'label' => __('Width <span>' . $this->getMeasureLengthUnit() . '</span>'),
+                'label' => __('Width %1', '<span>' . $this->getMeasureLengthUnit() . '</span>'),
                 'style' => 'width:40px',
                 'class' => 'validate-digits required',
             ]
@@ -85,7 +85,7 @@ class Package extends AbstractFieldArray
         $this->addColumn(
             PackageModel::KEY_HEIGHT,
             [
-                'label' => __('Height <span>' . $this->getMeasureLengthUnit() . '</span>'),
+                'label' => __('Height %1', '<span>' . $this->getMeasureLengthUnit() . '</span>'),
                 'style' => 'width:40px',
                 'class' => 'validate-number required',
             ]
@@ -94,7 +94,7 @@ class Package extends AbstractFieldArray
         $this->addColumn(
             PackageModel::KEY_WEIGHT,
             [
-                'label' => __('Weight <span>' . $this->getWeightUnit() . '</span>'),
+                'label' => __('Weight %1', '<span>' . $this->getWeightUnit() . '</span>'),
                 'style' => 'width:40px',
                 'class' => 'validate-number required',
             ]

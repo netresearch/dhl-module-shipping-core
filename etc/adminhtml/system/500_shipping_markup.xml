@@ -8,12 +8,12 @@
 
         <!-- International rates calculation config fields -->
         <field id="international_affect_rates" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
-               translate="label tooltip" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+               translate="label button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
             <label><![CDATA[International Shipping]]></label>
             <button_label><![CDATA[Add markup to shipping price]]></button_label>
         </field>
         <field id="international_handling_type" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20"
-               translate="tooltip label comment" type="Netresearch\ConfigFields\Model\Type\Radioset">
+               translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
             <label><![CDATA[Calculate Markup]]></label>
             <source_model>Magento\Shipping\Model\Source\HandlingType</source_model>
             <depends>
@@ -21,7 +21,7 @@
             </depends>
         </field>
         <field id="international_handling_fee_fixed" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="30"
-               translate="tooltip label comment" type="text">
+               translate="label comment" type="text">
             <label><![CDATA[Fixed amount]]></label>
             <validate>validate-number</validate>
             <comment><![CDATA[Enter the markup amount in the currency of your store. Enter a negative to apply a discount]]></comment>
@@ -31,7 +31,7 @@
             </depends>
         </field>
         <field id="international_handling_fee_percentage" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="40"
-               translate="tooltip label comment" type="text">
+               translate="label comment" type="text">
             <label><![CDATA[Percentage]]></label>
             <validate>validate-number</validate>
             <comment><![CDATA[For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount]]></comment>
@@ -43,12 +43,12 @@
 
         <!-- Domestic rates calculation config fields -->
         <field id="domestic_affect_rates" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="50"
-               translate="comment label tooltip" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+               translate="label button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
             <label><![CDATA[Domestic Shipping]]></label>
             <button_label><![CDATA[Add markup to shipping price]]></button_label>
         </field>
         <field id="domestic_handling_type" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="60"
-               translate="tooltip label comment" type="Netresearch\ConfigFields\Model\Type\Radioset">
+               translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
             <label><![CDATA[Calculate Markup]]></label>
             <source_model>Magento\Shipping\Model\Source\HandlingType</source_model>
             <depends>
@@ -56,7 +56,7 @@
             </depends>
         </field>
         <field id="domestic_handling_fee_fixed" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="70"
-               translate="tooltip label comment" type="text">
+               translate="label comment" type="text">
             <label><![CDATA[Fixed amount]]></label>
             <validate>validate-number</validate>
             <comment><![CDATA[Enter the markup amount in the currency of your store. Enter a negative to apply a discount]]></comment>
@@ -66,7 +66,7 @@
             </depends>
         </field>
         <field id="domestic_handling_fee_percentage" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="80"
-               translate="tooltip label comment" type="text">
+               translate="label comment" type="text">
             <label><![CDATA[Percentage]]></label>
             <validate>validate-number</validate>
             <comment><![CDATA[For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount]]></comment>
