@@ -2,7 +2,6 @@
 /**
  * See LICENSE.md for license details.
  */
-
 namespace Dhl\ShippingCore\Model\Config;
 
 use Magento\TestFramework\ObjectManager;

@@ -4,6 +4,7 @@
     <preference for="Dhl\ShippingCore\Model\Config\CoreConfigInterface" type="Dhl\ShippingCore\Model\Config\CoreConfig"/>
     <preference for="Dhl\ShippingCore\Model\Config\RateConfigInterface" type="Dhl\ShippingCore\Model\Config\RateConfig"/>
     <preference for="Dhl\ShippingCore\Util\StreetSplitterInterface" type="Dhl\ShippingCore\Util\StreetSplitter"/>
+    <preference for="Dhl\ShippingCore\Util\UnitConverterInterface" type="Dhl\ShippingCore\Util\UnitConverter"/>
 
     <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
         <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin" sortOrder="1"/>
