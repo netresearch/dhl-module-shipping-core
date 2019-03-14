@@ -50,3 +50,5 @@
 "Tariff Number (hs Code)","Tariff Number (hs Code)"
 "DHL Item Description","DHL Item Description"
 "Package #%1 not found in shipment request.","Package #%1 not found in shipment request."
+"Not Available","Not Available"
+"DHL Label Status","DHL Label Status"
