@@ -66,7 +66,7 @@ class Input implements InputInterface
     private $sortOrder;
 
     /**
-     * @var string[][]
+     * @var ValidationRuleInterface[]
      */
     private $validationRules;
 
@@ -87,7 +87,7 @@ class Input implements InputInterface
      * @param string $tooltip
      * @param string $placeholder
      * @param int $sortOrder
-     * @param \string[][] $validationRules
+     * @param ValidationRuleInterface[] $validationRules
      * @param CommentInterface|null $comment
      */
     public function __construct(

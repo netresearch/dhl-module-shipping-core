@@ -35,5 +35,5 @@ interface GuestCheckoutDataManagementInterface
      * @param \Magento\Framework\Api\AttributeInterface[] $serviceSelection
      * @return void
      */
-    public function setData(string $cartId, array $serviceSelection);
+    public function setServiceSelection(string $cartId, array $serviceSelection);
 }

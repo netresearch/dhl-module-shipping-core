@@ -19,8 +19,8 @@
         </resources>
     </route>
 
-    <route url="/V1/carts/mine/dhl/services/save" method="POST">
-        <service class="Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface" method="setData"/>
+    <route url="/V1/carts/mine/dhl/services/set-selection" method="POST">
+        <service class="Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface" method="setServiceSelection"/>
         <resources>
             <resource ref="self" />
         </resources>
@@ -29,8 +29,8 @@
         </data>
     </route>
 
-    <route url="/V1/guest-carts/:cartId/dhl/services/save" method="POST">
-        <service class="Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface" method="setData"/>
+    <route url="/V1/guest-carts/:cartId/dhl/services/set-selection" method="POST">
+        <service class="Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface" method="setServiceSelection"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>

@@ -35,5 +35,5 @@ interface CheckoutDataManagementInterface
      * @param \Magento\Framework\Api\AttributeInterface[] $serviceSelection
      * @return void
      */
-    public function setData(int $quoteId, array $serviceSelection);
+    public function setServiceSelection(int $quoteId, array $serviceSelection);
 }

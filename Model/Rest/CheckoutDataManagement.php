@@ -51,11 +51,11 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
      * @param string $postalCode
      * @return \Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\InputException
      */
     public function getData(int $quoteId, string $countryId, string $postalCode): CheckoutDataInterface
     {
         $quote = $this->quoteRepository->get($quoteId);
-
         $data = $this->checkoutDataProvider->getData($countryId, $quote->getStoreId(), $postalCode);
 
         return $data;
@@ -66,14 +66,11 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
      *
      * @param int $quoteId
      * @param \Magento\Framework\Api\AttributeInterface[] $serviceSelection
-     * @throws \Magento\Framework\Exception\NoSuchEntityException;
-     * @throws \Magento\Framework\Exception\CouldNotDeleteException
-     * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
-    public function setData(int $quoteId, array $serviceSelection)
+    public function setServiceSelection(int $quoteId, array $serviceSelection)
     {
         // @TODO Persist service selection to DB (@see DHLGW-202)
 
-        return true;
+        return;
     }
 }

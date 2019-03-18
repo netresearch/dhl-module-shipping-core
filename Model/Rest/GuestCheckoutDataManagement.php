@@ -51,7 +51,6 @@ class GuestCheckoutDataManagement implements GuestCheckoutDataManagementInterfac
      * @param string $countryId
      * @param string $postalCode
      * @return \Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getData(string $cartId, string $countryId, string $postalCode): CheckoutDataInterface
     {
@@ -60,11 +59,11 @@ class GuestCheckoutDataManagement implements GuestCheckoutDataManagementInterfac
 
     /**
      * @param string $cartId
-     * @param \Magento\Framework\Api\AttributeInterface[] $serviceSelection
+     * @param array $serviceSelection
      */
-    public function setData(string $cartId, array $serviceSelection)
+    public function setServiceSelection(string $cartId, array $serviceSelection)
     {
-        $this->cartServiceManagement->setData($this->getQuoteId($cartId), $serviceSelection);
+        $this->cartServiceManagement->setServiceSelection($this->getQuoteId($cartId), $serviceSelection);
     }
 
     /**
