@@ -11,6 +11,7 @@
     <preference for="Dhl\ShippingCore\Model\Config\RateConfigInterface" type="Dhl\ShippingCore\Model\Config\RateConfig"/>
     <preference for="Dhl\ShippingCore\Util\StreetSplitterInterface" type="Dhl\ShippingCore\Util\StreetSplitter"/>
     <preference for="Dhl\ShippingCore\Util\UnitConverterInterface" type="Dhl\ShippingCore\Util\UnitConverter"/>
+    <preference for="Dhl\ShippingCore\Api\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
 
     <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
         <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin" sortOrder="1"/>
@@ -18,4 +19,24 @@
     <type name="Magento\Quote\Model\Quote\Address\Rate">
         <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin" sortOrder="1"/>
     </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="Dhl_ShippingCore_SetLabelStatus" type="Dhl\ShippingCore\Plugin\LabelStatus\SetLabelStatusPlugin"/>
+    </type>
+
+    <type name="Magento\ScalableOms\Console\Command\SplitSales">
+        <arguments>
+            <argument name="tableIterators" xsi:type="array">
+                <item name="dhlSalesTableNameIterator" xsi:type="object">Dhl\ShippingCore\Virtual\SalesTableNameIterator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Dhl\ShippingCore\Virtual\SalesTableNameIterator" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
+        <arguments>
+            <argument name="tableNames" xsi:type="array">
+                <item name="dhl_label_status" xsi:type="const">Dhl\ShippingCore\Setup\Setup::TABLE_LABEL_STATUS</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
 </config>
