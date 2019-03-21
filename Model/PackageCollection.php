@@ -1,4 +1,7 @@
 <?php
+/**
+ * See LICENSE.md for license details.
+ */
 
 namespace Dhl\ShippingCore\Model;
 
