@@ -10,6 +10,7 @@ use Dhl\ShippingCore\Api\CodSupportInterface;
 use Dhl\ShippingCore\Model\Config\CoreConfigInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
 
@@ -18,17 +19,19 @@ use Magento\Quote\Model\Quote;
  *
  * @package Dhl\ShippingCore\Model\Observer
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
-class DisableCodObserver
+class DisableCodObserver implements ObserverInterface
 {
-    /** @var CodSupportInterface[] */
-    private $codSupportMap;
-
     /**
      * @var CoreConfigInterface
      */
     private $config;
+
+    /**
+     * @var CodSupportInterface[]
+     */
+    private $codSupportMap;
 
     /**
      * DisableCodObserver constructor.
@@ -38,8 +41,8 @@ class DisableCodObserver
      */
     public function __construct(CoreConfigInterface $config, array $codSupportMap = [])
     {
-        $this->codSupportMap = $codSupportMap;
         $this->config = $config;
+        $this->codSupportMap = $codSupportMap;
     }
 
     /**

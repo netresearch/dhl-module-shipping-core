@@ -4,20 +4,20 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Plugin\LabelStatus;
+namespace Dhl\ShippingCore\Observer;
 
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
-use Magento\Sales\Api\Data\OrderInterface;
-use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
 
 /**
- * Class SetLabelStatusPlugin
+ * Class SetLabelStatusObserver
  *
  * @package Dhl\ShippingCore\Plugin
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */
-class SetLabelStatusPlugin
+class SetLabelStatusObserver implements ObserverInterface
 {
     /**
      * @var LabelStatusManagementInterface
@@ -25,7 +25,7 @@ class SetLabelStatusPlugin
     private $labelStatusManagement;
 
     /**
-     * SetLabelStatusPlugin constructor.
+     * SetLabelStatusObserver constructor.
      * @param LabelStatusManagementInterface $labelStatusManagement
      */
     public function __construct(LabelStatusManagementInterface $labelStatusManagement)
@@ -34,15 +34,13 @@ class SetLabelStatusPlugin
     }
 
     /**
-     * Set label status after order save since we need a persisted order for it.
+     * Trigger setting of initial label status.
      *
-     * @param OrderRepositoryInterface $subject
-     * @param OrderInterface $resultOrder
-     * @return OrderInterface
+     * @param Observer $observer
      */
-    public function afterSave(OrderRepositoryInterface $subject, OrderInterface $resultOrder)
+    public function execute(Observer $observer)
     {
-        $this->labelStatusManagement->setInitialStatus($resultOrder);
-        return $resultOrder;
+        $order = $observer->getData('order');
+        $this->labelStatusManagement->setInitialStatus($order);
     }
 }

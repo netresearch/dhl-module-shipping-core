@@ -26,11 +26,6 @@ use Psr\Log\LoggerInterface;
 class LabelStatusManagement implements LabelStatusManagementInterface
 {
     /**
-     * @var string[]
-     */
-    private $carrierCodes;
-
-    /**
      * @var CollectionFactory
      */
     private $labelStatusCollectionFactory;
@@ -49,6 +44,11 @@ class LabelStatusManagement implements LabelStatusManagementInterface
      * @var LoggerInterface
      */
     private $logger;
+
+    /**
+     * @var string[]
+     */
+    private $carrierCodes;
 
     /**
      * LabelStatusManagement constructor.
@@ -73,7 +73,7 @@ class LabelStatusManagement implements LabelStatusManagementInterface
     }
 
     /**
-     * Set initial label status, order comes in via plugin.
+     * Set initial label status.
      *
      * @param OrderInterface|Order $order
      * @return bool
@@ -111,7 +111,7 @@ class LabelStatusManagement implements LabelStatusManagementInterface
         try {
             $this->labelStatusRepository->save($labelStatus);
         } catch (CouldNotSaveException $e) {
-            $this->logger->error(__($e->getMessage()));
+            $this->logger->error($e->getLogMessage(), ['exception' => $e]);
             return false;
         }
 

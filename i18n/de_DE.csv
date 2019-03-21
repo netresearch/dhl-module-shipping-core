@@ -52,3 +52,6 @@
 "Package #%1 not found in shipment request.","Paket #%1 konnte nicht gefunden werden."
 "Not Available","Nicht Verfügbar"
 "DHL Label Status","DHL Label Status"
+"Pending","Austehend"
+"Processed","Verarbeitet"
+"Failed","Fehlgeschlagen"
