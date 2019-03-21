@@ -6,6 +6,10 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Setup;
 
+use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
+use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
+use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
+use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
@@ -21,6 +25,20 @@ use Magento\Framework\Setup\UninstallInterface;
 class Uninstall implements UninstallInterface
 {
     /**
+     * @var EavSetup
+     */
+    private $eavSetup;
+
+    /**
+     * Uninstall constructor.
+     * @param EavSetup $eavSetup
+     */
+    public function __construct(EavSetup $eavSetup)
+    {
+        $this->eavSetup = $eavSetup;
+    }
+
+    /**
      * Remove data that was created during module installation.
      *
      * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $setup
@@ -33,5 +51,26 @@ class Uninstall implements UninstallInterface
         $defaultConnection = $setup->getConnection(ResourceConnection::DEFAULT_CONNECTION);
         $configTable = $setup->getTable('core_config_data');
         $defaultConnection->delete($configTable, "`path` LIKE 'shipping/dhlglobalwebservices/%'");
+        $this->deleteAttributes($this->eavSetup);
+    }
+
+    /**
+     * @param EavSetup $uninstaller
+     * @return void
+     */
+    private function deleteAttributes(EavSetup $uninstaller)
+    {
+        $uninstaller->removeAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            DGCategory::CODE
+        );
+        $uninstaller->removeAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            TariffNumber::CODE
+        );
+        $uninstaller->removeAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            ExportDescription::CODE
+        );
     }
 }
