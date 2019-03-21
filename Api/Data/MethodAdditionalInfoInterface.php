@@ -11,7 +11,6 @@ namespace Dhl\ShippingCore\Api\Data;
  *
  * @package Dhl\ShippingCore\Api\Data
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
  * @link http://www.netresearch.de/
  */
 interface MethodAdditionalInfoInterface

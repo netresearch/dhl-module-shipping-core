@@ -12,7 +12,6 @@ use Magento\Framework\Option\ArrayInterface;
  * Class TermsOfTrade
  *
  * @author    Rico Sonntag <rico.sonntag@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
  * @link      http://www.netresearch.de/
  */
 class TermsOfTrade implements ArrayInterface

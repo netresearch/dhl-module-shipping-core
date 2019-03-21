@@ -13,7 +13,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
  *
  * @package Dhl\ShippingCore\Model\Emulation
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
  * @link http://www.netresearch.de/
  */
 class ProxyScopeConfig implements ScopeConfigInterface

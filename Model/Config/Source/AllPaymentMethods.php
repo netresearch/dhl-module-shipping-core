@@ -22,7 +22,6 @@ use Magento\Payment\Helper\Data as PaymentHelper;
  *
  * @package  Dhl\ShippingCore\Model\Config\Source
  * @author   Ronny gertler <ronny.gertler@netresearch.de>
- * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link     http://www.netresearch.de/
  */
 class AllPaymentMethods implements OptionSourceInterface

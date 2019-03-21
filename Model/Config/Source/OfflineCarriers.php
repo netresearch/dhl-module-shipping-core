@@ -14,7 +14,6 @@ use Magento\Framework\Option\ArrayInterface;
  *
  * @package Dhl\ShippingCore\Model\Backend\Config\Source
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
  * @link http://www.netresearch.de/
  */
 class OfflineCarriers implements ArrayInterface

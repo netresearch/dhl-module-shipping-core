@@ -13,7 +13,6 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
  *
  * @package     Dhl\ShippingCore\Model\Rate
  * @author      Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @copyright   2018 Netresearch GmbH & Co. KG
  * @link        http://www.netresearch.de/
  */
 class CompositeRateProcessor implements RateProcessorInterface

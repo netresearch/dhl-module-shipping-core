@@ -14,7 +14,6 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
  *
  * @package  Dhl\ShippingCore\Model
  * @author   Ronny Gertler <ronny.gertler@netresearch.de>
- * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link     http://www.netresearch.de/
  */
 class RoundedPrices implements RateProcessorInterface

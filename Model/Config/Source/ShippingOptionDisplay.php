@@ -12,7 +12,6 @@ use Magento\Framework\Option\ArrayInterface;
  * Class ShippingOptionDisplay
  *
  * @author    Max Melzer <max.melzer@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
  * @link      http://www.netresearch.de/
  */
 class ShippingOptionDisplay implements ArrayInterface

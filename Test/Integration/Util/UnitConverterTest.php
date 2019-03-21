@@ -12,7 +12,6 @@ use Magento\Directory\Model\CurrencyFactory;
  *
  * @package Dhl\ShippingCore\Test\Integration
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @license https://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link    https://www.netresearch.de/
  */
 class UnitConverterTest extends \PHPUnit\Framework\TestCase

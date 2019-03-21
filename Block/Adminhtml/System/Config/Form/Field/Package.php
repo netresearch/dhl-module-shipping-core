@@ -19,7 +19,6 @@ use Magento\Framework\View\Element\BlockInterface;
  *
  * @package Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @license https://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link    https://www.netresearch.de/
  */
 class Package extends AbstractFieldArray

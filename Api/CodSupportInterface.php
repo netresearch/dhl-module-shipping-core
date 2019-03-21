@@ -14,7 +14,6 @@ use Magento\Quote\Model\Quote;
  *
  * @package Dhl\ShippingCore\Api
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
  * @link http://www.netresearch.de/
  */
 interface CodSupportInterface

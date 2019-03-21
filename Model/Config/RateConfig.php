@@ -16,7 +16,6 @@ use Magento\Store\Model\ScopeInterface;
  * Class RateConfig
  *
  * @author    Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
  * @link      http://www.netresearch.de/
  */
 class RateConfig implements RateConfigInterface

@@ -11,7 +11,6 @@ namespace Dhl\ShippingCore\Util;
  *
  * @package Dhl\ShippingCore\Util
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @copyright 2019 Netresearch DTT GmbH
  * @link http://www.netresearch.de/
  */
 interface UnitConverterInterface

@@ -13,7 +13,6 @@ use Magento\Framework\Option\ArrayInterface;
  *
  * @package Dhl\ShippingCore\Model\Backend\Config\Source
  * @author Ronny Gertler <ronny.gertler@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
  * @link http://www.netresearch.de/
  */
 class RoundedPricesFormat implements ArrayInterface

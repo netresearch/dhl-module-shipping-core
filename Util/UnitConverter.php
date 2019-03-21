@@ -11,7 +11,6 @@ namespace Dhl\ShippingCore\Util;
  *
  * @package  Dhl\ShippingCore\Util
  * @author   Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link     http://www.netresearch.de/
  */
 class UnitConverter implements UnitConverterInterface

@@ -14,7 +14,6 @@ use Magento\Quote\Model\Quote\Address\RateResult\Method;
  *
  * @package Dhl\ShippingCore\Model\Rate
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
  * @link http://www.netresearch.de/
  */
 interface RateProcessorInterface

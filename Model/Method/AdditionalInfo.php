@@ -14,7 +14,6 @@ use Magento\Framework\DataObject;
  *
  * @package Dhl\ShippingCore\Model\Method
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
  * @link http://www.netresearch.de/
  */
 final class AdditionalInfo extends DataObject implements MethodAdditionalInfoInterface

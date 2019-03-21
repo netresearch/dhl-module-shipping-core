@@ -15,7 +15,6 @@ use Magento\Framework\Logger\Handler\Base;
  *
  * @package Dhl\ShippingCore\Model
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @license https://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link    https://www.netresearch.de/
  */
 class ApiLogHandler extends Base
