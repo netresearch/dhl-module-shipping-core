@@ -50,7 +50,7 @@ class ShippingSetup
             [
                 'group' => '',
                 'type' => 'varchar',
-                'label' => 'Tariff Number (hsCode)',
+                'label' => 'Tariff Number (hs Code)',
                 'input' => 'text',
                 'required' => false,
                 'sort_order' => 50,

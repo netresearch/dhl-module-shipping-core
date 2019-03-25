@@ -46,3 +46,6 @@
 "Percentage","Percentage"
 "For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount","For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount"
 "Domestic Shipping","Domestic Shipping"
+"Dangerous Goods Category","Dangerous Goods Category"
+"Tariff Number (hs Code)","Tariff Number (hs Code)"
+"DHL Item Description","DHL Item Description"
