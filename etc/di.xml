@@ -29,6 +29,7 @@
     <preference for="Dhl\ShippingCore\Api\Data\Service\OptionInterface" type="Dhl\ShippingCore\Model\Service\Option"/>
     <preference for="Dhl\ShippingCore\Api\Data\Service\CommentInterface" type="Dhl\ShippingCore\Model\Service\Comment"/>
     <preference for="Dhl\ShippingCore\Api\Data\Service\ValidationRuleInterface" type="Dhl\ShippingCore\Model\Service\ValidationRule"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface" type="Dhl\ShippingCore\Model\Service\ServiceSelection"/>
 
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\Virtual\SalesTableNameIterator" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">

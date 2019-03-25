@@ -32,7 +32,7 @@ interface CheckoutDataManagementInterface
 
     /**
      * @param int $quoteId
-     * @param \Magento\Framework\Api\AttributeInterface[] $serviceSelection
+     * @param \Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface[] $serviceSelection
      * @return void
      */
     public function setServiceSelection(int $quoteId, array $serviceSelection);

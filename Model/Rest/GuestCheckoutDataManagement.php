@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Rest;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
+use Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
 use Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface;
 use Magento\Quote\Model\QuoteIdMask;
@@ -59,7 +60,7 @@ class GuestCheckoutDataManagement implements GuestCheckoutDataManagementInterfac
 
     /**
      * @param string $cartId
-     * @param array $serviceSelection
+     * @param ServiceSelectionInterface[] $serviceSelection
      */
     public function setServiceSelection(string $cartId, array $serviceSelection)
     {

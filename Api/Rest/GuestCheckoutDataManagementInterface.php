@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api\Rest;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
+use Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface;
 
 /**
  * Interface GuestCartServiceManagementInterface
@@ -32,7 +33,7 @@ interface GuestCheckoutDataManagementInterface
 
     /**
      * @param string $cartId
-     * @param \Magento\Framework\Api\AttributeInterface[] $serviceSelection
+     * @param \Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface[] $serviceSelection
      * @return void
      */
     public function setServiceSelection(string $cartId, array $serviceSelection);

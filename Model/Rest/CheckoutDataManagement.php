@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Rest;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
+use Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataHydrator;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
@@ -74,7 +75,7 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
      * Persist service selection with reference to a Quote Address ID.
      *
      * @param int $quoteId
-     * @param \Magento\Framework\Api\AttributeInterface[] $serviceSelection
+     * @param ServiceSelectionInterface[] $serviceSelection
      */
     public function setServiceSelection(int $quoteId, array $serviceSelection)
     {
