@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Model\Rest;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
+use Dhl\ShippingCore\Model\Checkout\CheckoutDataHydrator;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
 use Magento\Quote\Model\QuoteRepository;
 
@@ -32,17 +33,25 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
     private $checkoutDataProvider;
 
     /**
+     * @var CheckoutDataHydrator
+     */
+    private $checkoutDataHydrator;
+
+    /**
      * CheckoutDataManagement constructor.
      *
      * @param QuoteRepository $quoteRepository
      * @param CheckoutDataProvider $checkoutDataProvider
+     * @param CheckoutDataHydrator $checkoutDataHydrator
      */
     public function __construct(
         QuoteRepository $quoteRepository,
-        CheckoutDataProvider $checkoutDataProvider
+        CheckoutDataProvider $checkoutDataProvider,
+        CheckoutDataHydrator $checkoutDataHydrator
     ) {
         $this->quoteRepository = $quoteRepository;
         $this->checkoutDataProvider = $checkoutDataProvider;
+        $this->checkoutDataHydrator = $checkoutDataHydrator;
     }
 
     /**
@@ -58,7 +67,7 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
         $quote = $this->quoteRepository->get($quoteId);
         $data = $this->checkoutDataProvider->getData($countryId, $quote->getStoreId(), $postalCode);
 
-        return $data;
+        return $this->checkoutDataHydrator->toObject($data);
     }
 
     /**

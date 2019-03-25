@@ -20,57 +20,17 @@ use Magento\Framework\Webapi\ServiceInputProcessor;
 class CheckoutDataProvider
 {
     /**
-     * @var ServiceInputProcessor
-     */
-    private $inputProcessor;
-
-    /**
-     * @var CheckoutDataFactory
-     */
-    private $checkoutDataFactory;
-
-    /**
-     * CheckoutDataProvider constructor.
      *
-     * @param ServiceInputProcessor $inputProcessor
-     * @param CheckoutDataFactory $checkoutDataFactory
-     */
-    public function __construct(
-        ServiceInputProcessor $inputProcessor,
-        CheckoutDataFactory $checkoutDataFactory
-    ) {
-        $this->inputProcessor = $inputProcessor;
-        $this->checkoutDataFactory = $checkoutDataFactory;
-    }
-
-    /**
-     * Uses the functionality of the Magento 2 REST API to convert a plain nested
-     * array of scalar types into a CheckoutDataInterface object.
      *
      * @param string $countryCode
      * @param int $storeId
      * @param string $postalCode
-     * @return CheckoutDataInterface
-     * @throws \Magento\Framework\Exception\InputException
+     * @return array
      */
-    public function getData(string $countryCode, int $storeId, string $postalCode) : CheckoutDataInterface
+    public function getData(string $countryCode, int $storeId, string $postalCode): array
     {
         /** @TODO replace with actual checkout data. */
-        $data = $this->getMockData();
-
-        try {
-            $carrierData = $this->inputProcessor->process(
-                CheckoutDataFactory::class,
-                'create',
-                ['carrierData' => $data]
-            );
-            /** Unwrap uneccessarily nested array. */
-            $carrierData = $carrierData[0];
-
-            return $this->checkoutDataFactory->create($carrierData);
-        } catch (\Exception $exception) {
-            throw new InputException(__('Error: Invalid checkout data input array given.'), $exception);
-        }
+        return $this->getMockData();
     }
 
     /**
