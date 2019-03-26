@@ -52,7 +52,7 @@ class CarrierData implements CarrierDataInterface
         string $carrierCode,
         array $serviceData,
         ServiceMetadataInterface $serviceMetadata,
-        array $serviceCompatibilityData
+        array $serviceCompatibilityData = []
     ) {
         $this->carrierCode = $carrierCode;
         $this->serviceData = $serviceData;

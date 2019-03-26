@@ -28,7 +28,7 @@ class CheckoutData implements CheckoutDataInterface
      *
      * @param CarrierDataInterface[] $carriers
      */
-    public function __construct(array $carriers)
+    public function __construct(array $carriers = [])
     {
         $this->carriers = $carriers;
     }

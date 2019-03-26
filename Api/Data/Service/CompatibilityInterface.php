@@ -21,6 +21,13 @@ interface CompatibilityInterface
     public function isIncompatibilityRule(): bool;
 
     /**
+     * Return true to enforce this rule by hiding instead of just disabling items.
+     *
+     * @return bool
+     */
+    public function isHideSubjects(): bool;
+
+    /**
      * @return string[]
      */
     public function getSubjects(): array;

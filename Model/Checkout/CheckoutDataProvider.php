@@ -20,8 +20,6 @@ use Magento\Framework\Webapi\ServiceInputProcessor;
 class CheckoutDataProvider
 {
     /**
-     *
-     *
      * @param string $countryCode
      * @param int $storeId
      * @param string $postalCode
@@ -53,6 +51,18 @@ class CheckoutDataProvider
                         'sortOrder' => 0,
                         'routes' => [],
                         'inputs' => [
+                            [
+                                'code' => 'testinput1',
+                                'label' => 'Test input 1',
+                                'labelVisible' => true,
+                                'options' => [],
+                                'tooltip' => '',
+                                'placeholder' => '123',
+                                'sortOrder' => 0,
+                                'validationRules' => [],
+                                'inputType' => 'text',
+                                'defaultValue' => '',
+                            ],
                             [
                                 'code' => 'testinput',
                                 'label' => 'Test input',
@@ -92,17 +102,16 @@ class CheckoutDataProvider
                             'content' => 'An eCommerce test comment below the service selection.',
                         ],
                     ],
-                    'footnotes' => [
-                        [
-                            'content' => 'What a footnote',
-                            'footnoteId' => 'footnote-combined-cost',
-                            'subjects' => [],
-                            'subjectsMustBeSelected' => false,
-                            'subjectsMustBeAvailable' => false,
-                        ],
-                    ],
+                    'footnotes' => [],
                 ],
-                'serviceCompatibilityData' => [],
+                'serviceCompatibilityData' => [
+                    [
+                        'incompatibilityRule' => true,
+                        'hideSubjects' => true,
+                        'subjects' => ['testService.testinput1', 'testService.testinput'],
+                        'errorMessage' => 'Compatibility of %1 violated',
+                    ]
+                ],
             ],
             [
                 'carrierCode' => 'dhlpaket',

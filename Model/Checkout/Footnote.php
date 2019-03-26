@@ -55,8 +55,8 @@ class Footnote implements FootnoteInterface
         string $footnoteId,
         string $content,
         array $subjects,
-        bool $subjectsMustBeSelected,
-        bool $subjectsMustBeAvailable
+        bool $subjectsMustBeSelected = false,
+        bool $subjectsMustBeAvailable = false
     ) {
         $this->footnoteId = $footnoteId;
         $this->content = $content;

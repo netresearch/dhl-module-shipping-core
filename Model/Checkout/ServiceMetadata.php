@@ -49,21 +49,21 @@ class ServiceMetadata implements ServiceMetadataInterface
     /**
      * ServiceMetadata constructor.
      *
-     * @param string $imageUrl
      * @param string $title
+     * @param string $imageUrl
      * @param CommentInterface[] $commentsBefore
      * @param CommentInterface[] $commentsAfter
      * @param FootnoteInterface[] $footnotes
      */
     public function __construct(
-        string $imageUrl,
         string $title,
-        array $commentsBefore,
-        array $commentsAfter,
-        array $footnotes
+        string $imageUrl = '',
+        array $commentsBefore = [],
+        array $commentsAfter = [],
+        array $footnotes = []
     ) {
-        $this->imageUrl = $imageUrl;
         $this->title = $title;
+        $this->imageUrl = $imageUrl;
         $this->commentsBefore = $commentsBefore;
         $this->commentsAfter = $commentsAfter;
         $this->footnotes = $footnotes;

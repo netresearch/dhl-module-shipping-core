@@ -23,6 +23,11 @@ class Compatibility implements CompatibilityInterface
     private $incompatibilityRule;
 
     /**
+     * @var bool
+     */
+    private $hideSubjects;
+
+    /**
      * @var string[]
      */
     private $subjects;
@@ -35,15 +40,21 @@ class Compatibility implements CompatibilityInterface
     /**
      * Compatibility constructor.
      *
-     * @param bool $incompatibilityRule
      * @param string[] $subjects
      * @param string $errorMessage
+     * @param bool $incompatibilityRule
+     * @param bool $hideSubjects
      */
-    public function __construct(bool $incompatibilityRule, array $subjects, string $errorMessage)
-    {
-        $this->incompatibilityRule = $incompatibilityRule;
+    public function __construct(
+        array $subjects,
+        string $errorMessage,
+        bool $incompatibilityRule = false,
+        bool $hideSubjects = false
+    ) {
         $this->subjects = $subjects;
         $this->errorMessage = $errorMessage;
+        $this->incompatibilityRule = $incompatibilityRule;
+        $this->hideSubjects = $hideSubjects;
     }
 
     /**
@@ -52,6 +63,14 @@ class Compatibility implements CompatibilityInterface
     public function isIncompatibilityRule(): bool
     {
         return $this->incompatibilityRule;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHideSubjects(): bool
+    {
+        return $this->hideSubjects;
     }
 
     /**

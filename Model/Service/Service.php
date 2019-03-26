@@ -73,34 +73,34 @@ class Service implements ServiceInterface
      *
      * @param string $code
      * @param string $label
+     * @param InputInterface[] $inputs
      * @param bool $enabledForCheckout
      * @param bool $enabledForPackaging
      * @param bool $enabledForAutocreate
      * @param bool $packagingReadonly
-     * @param InputInterface[] $inputs
      * @param bool $availableAtPostalFacility
-     * @param \string[][] $routes
+     * @param string[] $routes
      * @param int $sortOrder
      */
     public function __construct(
         string $code,
         string $label,
-        bool $enabledForCheckout,
-        bool $enabledForPackaging,
-        bool $enabledForAutocreate,
-        bool $packagingReadonly,
         array $inputs,
-        bool $availableAtPostalFacility,
-        array $routes,
-        int $sortOrder
+        bool $enabledForCheckout = true,
+        bool $enabledForPackaging = true,
+        bool $enabledForAutocreate = true,
+        bool $packagingReadonly = false,
+        bool $availableAtPostalFacility = true,
+        array $routes = [],
+        int $sortOrder = 0
     ) {
         $this->code = $code;
         $this->label = $label;
+        $this->inputs = $inputs;
         $this->enabledForCheckout = $enabledForCheckout;
         $this->enabledForPackaging = $enabledForPackaging;
         $this->enabledForAutocreate = $enabledForAutocreate;
         $this->packagingReadonly = $packagingReadonly;
-        $this->inputs = $inputs;
         $this->availableAtPostalFacility = $availableAtPostalFacility;
         $this->routes = $routes;
         $this->sortOrder = $sortOrder;

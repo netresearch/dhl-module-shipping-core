@@ -80,8 +80,8 @@ class Input implements InputInterface
      *
      * @param string $inputType
      * @param string $code
-     * @param string $defaultValue
      * @param string $label
+     * @param string $defaultValue
      * @param bool $labelVisible
      * @param OptionInterface[] $options
      * @param string $tooltip
@@ -93,20 +93,20 @@ class Input implements InputInterface
     public function __construct(
         string $inputType,
         string $code,
-        string $defaultValue,
         string $label,
-        bool $labelVisible,
-        array $options,
-        string $tooltip,
-        string $placeholder,
-        int $sortOrder,
-        array $validationRules,
+        string $defaultValue = '',
+        bool $labelVisible = true,
+        array $options = [],
+        string $tooltip = '',
+        string $placeholder = '',
+        int $sortOrder = 0,
+        array $validationRules = [],
         $comment = null
     ) {
         $this->inputType = $inputType;
         $this->code = $code;
-        $this->defaultValue = $defaultValue;
         $this->label = $label;
+        $this->defaultValue = $defaultValue;
         $this->labelVisible = $labelVisible;
         $this->options = $options;
         $this->tooltip = $tooltip;
