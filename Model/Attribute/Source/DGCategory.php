@@ -19,7 +19,7 @@ class DGCategory extends AbstractSource
     /**
      * @return string[][]
      */
-    public function getAllOptions()
+    public function getAllOptions(): array
     {
         if (!$this->_options) {
             $this->_options = [

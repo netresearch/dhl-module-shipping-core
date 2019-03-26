@@ -21,11 +21,11 @@ class TariffNumber extends AbstractBackend
      * @inheritdoc
      * @param \Magento\Framework\DataObject $object
      */
-    public function validate($object)
+    public function validate($object): bool
     {
         $value = $object->getData(self::CODE);
         $frontendLabel = $this->getAttribute()->getData('frontend_label');
-        if ($value != '' && !is_numeric($value)) {
+        if ($value !== '' && !is_numeric($value)) {
             throw new LocalizedException(
                 __(
                     'The value of attribute "%1" must be numeric',

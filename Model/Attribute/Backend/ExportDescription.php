@@ -23,14 +23,14 @@ class ExportDescription extends AbstractBackend
      * @return bool
      * @throws LocalizedException
      */
-    public function validate($object)
+    public function validate($object): bool
     {
         $value = $object->getData(self::CODE);
         $frontendLabel = $this->getAttribute()->getData('frontend_label');
         if (strlen((string)$value) > static::MAX_LENGTH) {
             throw new LocalizedException(
                 __(
-                    'The value of attribute "%1" must be not be longer than %2 characters',
+                    'The value of attribute "%1" must not be longer than %2 characters',
                     $frontendLabel,
                     static::MAX_LENGTH
                 )
