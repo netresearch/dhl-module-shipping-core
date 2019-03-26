@@ -49,3 +49,4 @@
 "Dangerous Goods Category","Gefahrgutklasse"
 "Tariff Number (hs Code)","Zolltarifnummer (hs Code)"
 "DHL Item Description","DHL Artikelbeschreibung"
+"Package #%1 not found in shipment request.","Paket #%1 konnte nicht gefunden werden."

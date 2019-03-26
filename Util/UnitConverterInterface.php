@@ -18,7 +18,9 @@ interface UnitConverterInterface
     const CONVERSION_PRECISION = 3;
 
     /**
-     * @param float  $value
+     * Convert dimension from one unit of measurement into another.
+     *
+     * @param float $value
      * @param string $unitIn
      * @param string $unitOut
      *
@@ -27,7 +29,9 @@ interface UnitConverterInterface
     public function convertDimension(float $value, string $unitIn, string $unitOut): float;
 
     /**
-     * @param float  $value
+     * Convert monetary value from one currency into another.
+     *
+     * @param float $value
      * @param string $unitIn
      * @param string $unitOut
      *
@@ -36,7 +40,9 @@ interface UnitConverterInterface
     public function convertMonetaryValue(float $value, string $unitIn, string $unitOut): float;
 
     /**
-     * @param float  $value
+     * Convert weight from one unit of measurement into another.
+     *
+     * @param float $value
      * @param string $unitIn
      * @param string $unitOut
      *

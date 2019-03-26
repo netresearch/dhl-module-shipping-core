@@ -47,6 +47,8 @@ class UnitConverter implements UnitConverterInterface
     }
 
     /**
+     * Convert dimension from one unit of measurement into another.
+     *
      * @param float $value
      * @param string $unitIn
      * @param string $unitOut
@@ -61,6 +63,8 @@ class UnitConverter implements UnitConverterInterface
     }
 
     /**
+     * Convert monetary value from one currency into another.
+     *
      * @param float $value
      * @param string $unitIn
      * @param string $unitOut
@@ -73,6 +77,8 @@ class UnitConverter implements UnitConverterInterface
     }
 
     /**
+     * Convert weight from one unit of measurement into another.
+     *
      * @param float $value
      * @param string $unitIn
      * @param string $unitOut

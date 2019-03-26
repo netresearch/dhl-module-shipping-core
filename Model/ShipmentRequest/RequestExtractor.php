@@ -15,6 +15,7 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\RecipientInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterfaceFactory;
 use Dhl\ShippingCore\Api\RequestExtractorInterface;
+use Dhl\ShippingCore\Model\Config\CoreConfigInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Shipment;
@@ -35,6 +36,11 @@ class RequestExtractor implements RequestExtractorInterface
      * @var Request
      */
     private $shipmentRequest;
+
+    /**
+     * @var CoreConfigInterface
+     */
+    private $config;
 
     /**
      * @var ShipperInterfaceFactory
@@ -80,6 +86,7 @@ class RequestExtractor implements RequestExtractorInterface
      * RequestExtractor constructor.
      *
      * @param Request $shipmentRequest
+     * @param CoreConfigInterface $config
      * @param ShipperInterfaceFactory $shipperFactory
      * @param RecipientInterfaceFactory $recipientFactory
      * @param PackageInterfaceFactory $packageFactory
@@ -87,12 +94,14 @@ class RequestExtractor implements RequestExtractorInterface
      */
     public function __construct(
         Request $shipmentRequest,
+        CoreConfigInterface $config,
         ShipperInterfaceFactory $shipperFactory,
         RecipientInterfaceFactory $recipientFactory,
         PackageInterfaceFactory $packageFactory,
         PackageItemInterfaceFactory $packageItemFactory
     ) {
         $this->shipmentRequest = $shipmentRequest;
+        $this->config = $config;
         $this->shipperFactory = $shipperFactory;
         $this->recipientFactory = $recipientFactory;
         $this->packageFactory = $packageFactory;
@@ -240,7 +249,7 @@ class RequestExtractor implements RequestExtractorInterface
         if (empty($this->packages)) {
             $this->packages = array_map(function (array $packageData) {
                 $params = $packageData['params'];
-                $this->packageFactory->create([
+                $package = $this->packageFactory->create([
                     //todo(nr): use dedicated property for product code once it's available
                     'productCode' => $params['container'],
                     'containerType' => $params['container'] ?? '',
@@ -254,6 +263,8 @@ class RequestExtractor implements RequestExtractorInterface
                     'contentType' => $params['content_type'] ?? '',
                     'contentDescription' => $params['content_type_other'] ?? '',
                 ]);
+
+                return $package;
             }, $this->shipmentRequest->getData('packages'));
         }
 
@@ -272,8 +283,8 @@ class RequestExtractor implements RequestExtractorInterface
         $packages = $this->getAllPackages();
 
         if (!isset($packages[$packageId])) {
-            throw new LocalizedException(__('Package #$1 not found in shipment request', $packageId));
-        };
+            throw new LocalizedException(__('Package #%1 not found in shipment request.', $packageId));
+        }
 
         return $packages[$packageId];
     }
@@ -325,5 +336,18 @@ class RequestExtractor implements RequestExtractorInterface
         });
 
         return $items;
+    }
+
+    /**
+     * Check if "cash on delivery" was chosen for the current shipment request.
+     *
+     * @return bool
+     */
+    public function isCashOnDelivery(): bool
+    {
+        $storeId = $this->getStoreId();
+        $order = $this->getOrder();
+
+        return $this->config->isCodPaymentMethod($order->getPayment()->getMethod(), $storeId);
     }
 }

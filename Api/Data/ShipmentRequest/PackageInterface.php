@@ -16,8 +16,6 @@ interface PackageInterface
     /**
      * Obtain product to be used for the package.
      *
-     * @todo(nr): define
-     *
      * @return string
      */
     public function getProductCode(): string;

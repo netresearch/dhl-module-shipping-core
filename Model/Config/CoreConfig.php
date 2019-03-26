@@ -160,6 +160,8 @@ class CoreConfig implements CoreConfigInterface
     /**
      * Get the general dimensions unit.
      *
+     * @fixme(nr): not in use, remove?
+     *
      * @return string
      */
     public function getDimensionsUOM(): string
