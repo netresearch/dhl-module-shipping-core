@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Model\Config;
 
 use Dhl\ShippingCore\Model\Package;
 use Dhl\ShippingCore\Model\PackageCollection;
+use Dhl\ShippingCore\Model\PackageCollectionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Shipping\Helper\Carrier;
@@ -60,7 +61,7 @@ class CoreConfig implements CoreConfigInterface
     private $serializer;
 
     /**
-     * @var \Dhl\ShippingCore\Model\PackageCollectionFactory
+     * @var PackageCollectionFactory
      */
     private $packageCollectionFactory;
 
@@ -69,12 +70,12 @@ class CoreConfig implements CoreConfigInterface
      *
      * @param ScopeConfigInterface $scopeConfigInterface
      * @param SerializerInterface $serializer
-     * @param \Dhl\ShippingCore\Model\PackageCollectionFactory
+     * @param PackageCollectionFactory $collectionFactory
      */
     public function __construct(
         ScopeConfigInterface $scopeConfigInterface,
         SerializerInterface $serializer,
-        \Dhl\ShippingCore\Model\PackageCollectionFactory $collectionFactory
+        PackageCollectionFactory $collectionFactory
     ) {
         $this->scopeConfigInterface = $scopeConfigInterface;
         $this->serializer = $serializer;
@@ -94,6 +95,10 @@ class CoreConfig implements CoreConfigInterface
             ScopeInterface::SCOPE_STORE,
             $store
         );
+
+        if (empty($paymentMethods)) {
+            return [];
+        }
 
         return explode(',', $paymentMethods);
     }
@@ -204,7 +209,7 @@ class CoreConfig implements CoreConfigInterface
     /**
      * Derives the current dimensions UOM from weight UOM (so both UOMs are in SU or SI format, but always consistent)
      *
-     * @param $unit
+     * @param string $unit
      * @return string
      */
     private function getDimensionsUOMfromWeightUOM($unit): string
@@ -222,7 +227,6 @@ class CoreConfig implements CoreConfigInterface
      * @param string $receiverCountry
      * @param mixed $store
      * @return bool
-     *
      */
     public function isDutiableRoute(string $receiverCountry, $store = null): bool
     {
@@ -278,7 +282,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getOwnPackages(string $store = null): PackageCollection
     {
-
+        /** @var mixed[] $configValue */
         $configValue = $this->serializer->unserialize(
             $this->scopeConfigInterface->getValue(
                 self::CONFIG_XML_PATH_OWN_PACKAGES,

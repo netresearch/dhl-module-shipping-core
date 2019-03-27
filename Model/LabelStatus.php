@@ -37,7 +37,7 @@ class LabelStatus extends AbstractModel
      */
     public function getOrderId(): int
     {
-        return $this->getData(self::ORDER_ID);
+        return (int) $this->getData(self::ORDER_ID);
     }
 
     /**
@@ -47,6 +47,6 @@ class LabelStatus extends AbstractModel
      */
     public function getStatusCode(): string
     {
-        return $this->getData(self::STATUS_CODE);
+        return (string) $this->getData(self::STATUS_CODE);
     }
 }

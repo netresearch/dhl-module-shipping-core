@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model;
 
-use Dhl\ShippingCore\Model\ResourceModel\LabelStatus as Resource;
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * LabelStatusRepository
@@ -19,16 +19,16 @@ use Magento\Framework\Exception\CouldNotSaveException;
 class LabelStatusRepository
 {
     /**
-     * @var Resource
+     * @var \Dhl\ShippingCore\Model\ResourceModel\LabelStatus
      */
     private $resource;
 
     /**
      * LabelStatusRepository constructor.
      *
-     * @param Resource $resource
+     * @param \Dhl\ShippingCore\Model\ResourceModel\LabelStatus $resource
      */
-    public function __construct(Resource $resource)
+    public function __construct(\Dhl\ShippingCore\Model\ResourceModel\LabelStatus $resource)
     {
         $this->resource = $resource;
     }
@@ -45,7 +45,11 @@ class LabelStatusRepository
         try {
             $this->resource->save($labelStatus);
         } catch (\Exception $exception) {
-            throw new CouldNotSaveException(__($exception->getMessage()));
+            if ($exception instanceof LocalizedException) {
+                throw new CouldNotSaveException(__($exception->getMessage()));
+            }
+
+            throw new CouldNotSaveException(__('Unable to save label status'), $exception);
         }
 
         return $labelStatus;

@@ -10,7 +10,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Option\ArrayInterface;
 
 /**
- * Class Carriers
+ * Class OfflineCarriers
  *
  * @package Dhl\ShippingCore\Model\Backend\Config\Source
  * @author Paul Siedler <paul.siedler@netresearch.de>
@@ -18,7 +18,9 @@ use Magento\Framework\Option\ArrayInterface;
  */
 class OfflineCarriers implements ArrayInterface
 {
-    /** @var ScopeConfigInterface */
+    /**
+     * @var ScopeConfigInterface
+     */
     private $scopeConfig;
 
     /**
@@ -46,7 +48,7 @@ class OfflineCarriers implements ArrayInterface
             foreach (array_keys($carriers) as $carrierCode) {
                 $result[] = [
                     'value' => $carrierCode,
-                    'label' => ucfirst($carrierCode),
+                    'label' => ucfirst((string)$carrierCode),
                 ];
             }
         }

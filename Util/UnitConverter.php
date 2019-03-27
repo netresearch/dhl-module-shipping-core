@@ -56,7 +56,7 @@ class UnitConverter implements UnitConverterInterface
      */
     public function convertDimension(float $value, string $unitIn, string $unitOut): float
     {
-        $localFormatValue = $this->localeFormat->getNumber($value);
+        $localFormatValue = (float) $this->localeFormat->getNumber($value);
         $converted = (float) $this->unitConverter->convertMeasureDimension($localFormatValue, $unitIn, $unitOut);
 
         return round($converted, self::CONVERSION_PRECISION);
@@ -87,12 +87,11 @@ class UnitConverter implements UnitConverterInterface
     public function convertWeight(float $value, string $unitIn, string $unitOut): float
     {
         $value = (float) $this->localeFormat->getNumber($value);
-
         if ($value === 0.0) {
             return $value;
         }
-        $converted = (float) $this->unitConverter->convertMeasureWeight($value, $unitIn, $unitOut);
 
+        $converted = (float) $this->unitConverter->convertMeasureWeight($value, $unitIn, $unitOut);
         return round($converted, self::CONVERSION_PRECISION);
     }
 }

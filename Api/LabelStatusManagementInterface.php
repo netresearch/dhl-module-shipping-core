@@ -13,7 +13,6 @@ use Magento\Sales\Api\Data\OrderInterface;
  *
  * @package Dhl\ShippingCore\API
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @copyright 2019 Netresearch GmbH
  * @link https://www.netresearch.de/
  *
  * @api
@@ -41,4 +40,20 @@ interface LabelStatusManagementInterface
      * @return bool
      */
     public function setLabelStatusPending(OrderInterface $order): bool;
+
+    /**
+     * Set label status processed.
+     *
+     * @param OrderInterface $order
+     * @return bool
+     */
+    public function setLabelStatusProcessed(OrderInterface $order): bool;
+
+    /**
+     * Set label status failed.
+     *
+     * @param OrderInterface $order
+     * @return bool
+     */
+    public function setLabelStatusFailed(OrderInterface $order): bool;
 }

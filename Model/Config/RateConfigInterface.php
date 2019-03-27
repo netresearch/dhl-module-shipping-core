@@ -67,7 +67,7 @@ interface RateConfigInterface
      * @param string $carrierCode
      * @param string|null $store
      *
-     * @return string|null
+     * @return string
      */
     public function getRoundedPricesMode(string $carrierCode, $store = null): string;
 

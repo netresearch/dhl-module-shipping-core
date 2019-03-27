@@ -46,13 +46,13 @@ class HandlingFee implements RateProcessorInterface
 
             // Calculate fee depending on shipping type
             $price = $this->calculatePrice(
-                $method->getPrice(),
+                $method->getData('price'),
                 $this->getHandlingType($carrierCode, $request),
                 $this->getHandlingFee($carrierCode, $request)
             );
 
             $method->setPrice($price);
-            $method->setCost($price);
+            $method->setData('cost', $price);
         }
 
         return $methods;
@@ -100,7 +100,7 @@ class HandlingFee implements RateProcessorInterface
      */
     private function getHandlingType(string $carrierCode, RateRequest $request = null): string
     {
-        if ($this->isCrossBorderRoute($request)){
+        if ($this->isCrossBorderRoute($request)) {
             return $this->rateConfig->getInternationalHandlingType($carrierCode);
         }
 
@@ -117,7 +117,7 @@ class HandlingFee implements RateProcessorInterface
      */
     private function getHandlingFee(string $carrierCode, RateRequest $request = null): float
     {
-        if ($this->isCrossBorderRoute($request)){
+        if ($this->isCrossBorderRoute($request)) {
             return $this->rateConfig->getInternationalHandlingFee($carrierCode);
         }
 

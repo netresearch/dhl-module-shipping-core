@@ -12,7 +12,6 @@ use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
 use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Setup\SchemaSetupInterface;
 
@@ -32,9 +31,10 @@ class Setup
     const LABEL_STATUS_COLUMN_NAME = 'dhl_label_status';
 
     /**
-     * Add Label Status Column to Order Grid.
+     * Add label status column to orders grid.
      *
      * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @return void
      */
     public static function addLabelStatusColumn(SchemaSetupInterface $schemaSetup)
     {
@@ -50,42 +50,34 @@ class Setup
     }
 
     /**
-     * Create table dhl_label_status
+     * Create label status table.
      *
      * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @return void
      * @throws \Zend_Db_Exception
      */
     public static function createLabelStatusTable(SchemaSetupInterface $schemaSetup)
     {
         $table = $schemaSetup->getConnection(self::SALES_CONNECTION_NAME)
-                             ->newTable($schemaSetup->getTable(self::TABLE_LABEL_STATUS, self::SALES_CONNECTION_NAME));
+            ->newTable($schemaSetup->getTable(self::TABLE_LABEL_STATUS, self::SALES_CONNECTION_NAME));
+
         $table->addColumn(
-            'entity_id',
-            Table::TYPE_INTEGER,
-            null,
-            ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
-            'Entity Id'
-        )->addColumn(
             'order_id',
             Table::TYPE_INTEGER,
             null,
-            ['identity' => false, 'unsigned' => true, 'nullable' => false],
-            'Order Id'
-        )->addColumn(
+            ['unsigned' => true, 'nullable' => false, 'primary' => true],
+            'Entity Id'
+        );
+
+        $table->addColumn(
             'status_code',
             Table::TYPE_TEXT,
             10,
             ['default' => LabelStatusManagementInterface::LABEL_STATUS_PENDING, 'nullable' => false],
             'Status Code'
-        )->addIndex(
-            $schemaSetup->getIdxName(
-                $schemaSetup->getTable(self::TABLE_LABEL_STATUS, self::SALES_CONNECTION_NAME),
-                'order_id',
-                AdapterInterface::INDEX_TYPE_UNIQUE
-            ),
-            'order_id',
-            ['type' => AdapterInterface::INDEX_TYPE_UNIQUE]
-        )->addForeignKey(
+        );
+
+        $table->addForeignKey(
             $schemaSetup->getFkName(
                 $schemaSetup->getTable(self::TABLE_LABEL_STATUS, self::SALES_CONNECTION_NAME),
                 'order_id',
@@ -102,9 +94,10 @@ class Setup
     }
 
     /**
-     * Delete module settings from config.
+     * Delete all config data related to Dhl_ShippingCore.
      *
      * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @return void
      */
     public static function deleteConfig(SchemaSetupInterface $schemaSetup)
     {
@@ -117,6 +110,7 @@ class Setup
      * Remove EAV product attributes.
      *
      * @param EavSetup $uninstaller
+     * @return void
      */
     public static function removeProductAttributes(EavSetup $uninstaller)
     {
@@ -135,7 +129,7 @@ class Setup
     }
 
     /**
-     * Delete label status column from order grid.
+     * Remove label status column from orders grid.
      *
      * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
      * @return void
@@ -150,7 +144,7 @@ class Setup
     }
 
     /**
-     * Drop table dhl_label_status
+     * Drop label status table.
      *
      * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
      * @return void

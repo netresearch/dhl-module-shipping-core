@@ -1,40 +1,22 @@
 <?php
 /**
- * Dhl Shipping
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade this extension to
- * newer versions in the future.
- *
- * PHP version 7
- *
- * @category  Dhl
- * @package   Dhl\Shipping
- * @author    Benjamin Heuer <benjamin.heuer@netresearch.de>
- * @link      http://www.netresearch.de/
+ * See LICENSE.md for license details.
  */
+declare(strict_types=1);
+
 namespace Dhl\ShippingCore\Util;
 
 /**
  * Utility for splitting single address line into name, number, supplement
  *
- * @category Dhl
- * @package  Dhl\ShippingCore
+ * @package  Dhl\ShippingCore\Util
  * @author   Benjamin Heuer <benjamin.heuer@netresearch.de>
  * @link     http://www.netresearch.de/
  */
 class StreetSplitter implements StreetSplitterInterface
 {
     /**
-     * split street into street name, number and additional street information
+     * Split street into street name, number and additional street information.
      *
      * @param string $street
      * @return string[]

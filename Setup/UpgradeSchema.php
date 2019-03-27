@@ -20,6 +20,8 @@ use Magento\Framework\Setup\UpgradeSchemaInterface;
 class UpgradeSchema implements UpgradeSchemaInterface
 {
     /**
+     * Upgrade DB schema for Dhl_ShippingCore.
+     *
      * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
      * @param ModuleContextInterface $context
      * @throws \Zend_Db_Exception

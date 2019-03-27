@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- # interface preferences -->
     <preference for="Dhl\ShippingCore\Api\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Emulation\RateRequestService"/>
     <preference for="Dhl\ShippingCore\Api\RequestExtractorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestExtractor"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Package"/>
@@ -13,28 +14,7 @@
     <preference for="Dhl\ShippingCore\Util\UnitConverterInterface" type="Dhl\ShippingCore\Util\UnitConverter"/>
     <preference for="Dhl\ShippingCore\Api\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
 
-    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
-        <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin" sortOrder="1"/>
-    </type>
-    <type name="Magento\Quote\Model\Quote\Address\Rate">
-        <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin" sortOrder="1"/>
-    </type>
-
-
-    <type name="Dhl\ShippingCore\Model\ResourceModel\LabelStatus">
-        <arguments>
-            <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Setup::SALES_CONNECTION_NAME</argument>
-        </arguments>
-    </type>
-
-    <type name="Magento\ScalableOms\Console\Command\SplitSales">
-        <arguments>
-            <argument name="tableIterators" xsi:type="array">
-                <item name="dhlSalesTableNameIterator" xsi:type="object">Dhl\ShippingCore\Virtual\SalesTableNameIterator</item>
-            </argument>
-        </arguments>
-    </type>
-
+    <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\Virtual\SalesTableNameIterator" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>
             <argument name="tableNames" xsi:type="array">
@@ -42,7 +22,6 @@
             </argument>
         </arguments>
     </virtualType>
-
     <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid">
         <arguments>
             <argument name="joins" xsi:type="array">
@@ -57,4 +36,38 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="Magento\Sales\Model\ResourceModel\Provider\NotSyncedOrderDataProvider">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="dhl_label_status" xsi:type="string">Dhl\ShippingCore\Model\ResourceModel\Provider\UpdatedStatusIdListProvider</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- # argument di overrides -->
+    <type name="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement">
+        <arguments>
+            <argument name="orderGrid" xsi:type="object">Magento\Sales\Model\ResourceModel\Order\Grid</argument>
+        </arguments>
+    </type>
+    <type name="Dhl\ShippingCore\Model\ResourceModel\LabelStatus">
+        <arguments>
+            <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Setup::SALES_CONNECTION_NAME</argument>
+        </arguments>
+    </type>
+    <type name="Magento\ScalableOms\Console\Command\SplitSales">
+        <arguments>
+            <argument name="tableIterators" xsi:type="array">
+                <item name="dhlSalesTableNameIterator" xsi:type="object">Dhl\ShippingCore\Virtual\SalesTableNameIterator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- # interceptor plugins -->
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\Rate">
+        <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
+    </type>
 </config>
