@@ -52,20 +52,14 @@ class CheckoutDataProvider
                         'routes' => [],
                         'inputs' => [
                             [
-                                'code' => 'testinput1',
-                                'label' => 'Test input 1',
+                                'code' => 'testinput0',
+                                'label' => 'Test input 0',
                                 'labelVisible' => true,
-                                'options' => [],
-                                'tooltip' => '',
-                                'placeholder' => '123',
-                                'sortOrder' => 0,
-                                'validationRules' => [],
                                 'inputType' => 'text',
-                                'defaultValue' => '',
                             ],
                             [
-                                'code' => 'testinput',
-                                'label' => 'Test input',
+                                'code' => 'testinput1',
+                                'label' => 'Test input 1',
                                 'labelVisible' => true,
                                 'options' => [
                                     [
@@ -80,11 +74,13 @@ class CheckoutDataProvider
                                     ],
                                 ],
                                 'tooltip' => 'Test Tooltip.',
-                                'placeholder' => '',
-                                'sortOrder' => 0,
-                                'validationRules' => [],
                                 'inputType' => 'radioset',
-                                'defaultValue' => '',
+                            ],
+                            [
+                                'code' => 'testinput2',
+                                'label' => 'Test input 2',
+                                'labelVisible' => true,
+                                'inputType' => 'text',
                             ],
                         ],
                     ],
@@ -106,9 +102,17 @@ class CheckoutDataProvider
                 ],
                 'serviceCompatibilityData' => [
                     [
-                        'incompatibilityRule' => true,
+                        'incompatibilityRule' => false,
+                        'hideSubjects' => false,
+                        'masters' => ['testService.testinput0'],
+                        'subjects' => ['testService.testinput1'],
+                        'errorMessage' => 'Compatibility of %1 violated',
+                    ],
+                    [
+                        'incompatibilityRule' => false,
                         'hideSubjects' => true,
-                        'subjects' => ['testService.testinput1', 'testService.testinput'],
+                        'masters' => ['testService.testinput1'],
+                        'subjects' => ['testService.testinput2'],
                         'errorMessage' => 'Compatibility of %1 violated',
                     ]
                 ],
@@ -360,7 +364,7 @@ class CheckoutDataProvider
                             'content' => 'When booked together, the price of Preferred Day and Preferred Time is <strong>11 €</strong>.',
                             'footnoteId' => 'footnote-combined-cost',
                             'subjects' => ['preferredTime', 'preferredDay'],
-                            'subjectsMustBeSelected' => true,
+                            'subjectsMustBeSelected' => false,
                             'subjectsMustBeAvailable' => true,
                         ],
                     ],

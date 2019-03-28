@@ -18,16 +18,6 @@ use Dhl\ShippingCore\Api\Data\Service\CompatibilityInterface;
 class Compatibility implements CompatibilityInterface
 {
     /**
-     * @var bool
-     */
-    private $incompatibilityRule;
-
-    /**
-     * @var bool
-     */
-    private $hideSubjects;
-
-    /**
      * @var string[]
      */
     private $subjects;
@@ -38,39 +28,41 @@ class Compatibility implements CompatibilityInterface
     private $errorMessage;
 
     /**
+     * @var string[]
+     */
+    private $masters;
+
+    /**
+     * @var bool
+     */
+    private $incompatibilityRule;
+
+    /**
+     * @var bool
+     */
+    private $hideSubjects;
+
+    /**
      * Compatibility constructor.
      *
      * @param string[] $subjects
      * @param string $errorMessage
+     * @param string[] $masters
      * @param bool $incompatibilityRule
      * @param bool $hideSubjects
      */
     public function __construct(
         array $subjects,
         string $errorMessage,
+        array $masters = [],
         bool $incompatibilityRule = false,
         bool $hideSubjects = false
     ) {
         $this->subjects = $subjects;
         $this->errorMessage = $errorMessage;
+        $this->masters = $masters;
         $this->incompatibilityRule = $incompatibilityRule;
         $this->hideSubjects = $hideSubjects;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isIncompatibilityRule(): bool
-    {
-        return $this->incompatibilityRule;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isHideSubjects(): bool
-    {
-        return $this->hideSubjects;
     }
 
     /**
@@ -87,5 +79,29 @@ class Compatibility implements CompatibilityInterface
     public function getErrorMessage(): string
     {
         return $this->errorMessage;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getMasters(): array
+    {
+        return $this->masters;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIncompatibilityRule(): bool
+    {
+        return $this->incompatibilityRule;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHideSubjects(): bool
+    {
+        return $this->hideSubjects;
     }
 }
