@@ -11,11 +11,10 @@ use Magento\Sales\Api\Data\OrderInterface;
 /**
  * Interface LabelStatusManagementInterface
  *
- * @package Dhl\ShippingCore\API
+ * @api
+ * @package Dhl\ShippingCore\Api
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
- *
- * @api
  */
 interface LabelStatusManagementInterface
 {

@@ -20,7 +20,7 @@ use Magento\Quote\Model\Quote;
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */
-class DisableCodObserver implements ObserverInterface
+class DisableCodPaymentMethods implements ObserverInterface
 {
     /**
      * @var CoreConfigInterface

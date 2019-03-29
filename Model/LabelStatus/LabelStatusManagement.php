@@ -121,7 +121,7 @@ class LabelStatusManagement implements LabelStatusManagementInterface
      * then the order's label status is set to an initial value ("pending").
      * The status will only be set if the order has no label status assigned yet.
      *
-     * @see \Dhl\ShippingCore\Observer\SetLabelStatusObserver::execute
+     * @see \Dhl\ShippingCore\Observer\SetInitialLabelStatus::execute
      *
      * @param OrderInterface|Order $order
      * @return bool

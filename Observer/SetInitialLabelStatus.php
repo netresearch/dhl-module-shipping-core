@@ -13,11 +13,11 @@ use Magento\Framework\Event\ObserverInterface;
 /**
  * Class SetLabelStatusObserver
  *
- * @package Dhl\ShippingCore\Plugin
+ * @package Dhl\ShippingCore\Observer
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */
-class SetLabelStatusObserver implements ObserverInterface
+class SetInitialLabelStatus implements ObserverInterface
 {
     /**
      * @var LabelStatusManagementInterface

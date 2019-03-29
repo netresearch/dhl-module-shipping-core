@@ -13,9 +13,9 @@ use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 /**
  * Collection
  *
- * @package  Dhl\LabelStatus\Model\ResourceModel
- * @author   Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link     https://www.netresearch.de/
+ * @package Dhl\LabelStatus\Model\ResourceModel
+ * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @link https://www.netresearch.de/
  */
 class Collection extends AbstractCollection
 {

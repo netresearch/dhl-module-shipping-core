@@ -6,14 +6,13 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model;
 
-use Dhl\ShippingCore\Model\ResourceModel\LabelStatus as LabelStatusResource;
 use Magento\Framework\Model\AbstractModel;
 
 /**
  * LabelStatus
  *
  * @package Dhl\ShippingCore\Model
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */
 class LabelStatus extends AbstractModel
@@ -26,7 +25,7 @@ class LabelStatus extends AbstractModel
      */
     protected function _construct()
     {
-        $this->_init(LabelStatusResource::class);
+        $this->_init(ResourceModel\LabelStatus::class);
         parent::_construct();
     }
 

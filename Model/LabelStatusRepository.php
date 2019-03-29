@@ -13,22 +13,22 @@ use Magento\Framework\Exception\LocalizedException;
  * LabelStatusRepository
  *
  * @package Dhl\ShippingCore\Model
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */
 class LabelStatusRepository
 {
     /**
-     * @var \Dhl\ShippingCore\Model\ResourceModel\LabelStatus
+     * @var ResourceModel\LabelStatus
      */
     private $resource;
 
     /**
      * LabelStatusRepository constructor.
      *
-     * @param \Dhl\ShippingCore\Model\ResourceModel\LabelStatus $resource
+     * @param ResourceModel\LabelStatus $resource
      */
-    public function __construct(\Dhl\ShippingCore\Model\ResourceModel\LabelStatus $resource)
+    public function __construct(ResourceModel\LabelStatus $resource)
     {
         $this->resource = $resource;
     }
@@ -45,10 +45,6 @@ class LabelStatusRepository
         try {
             $this->resource->save($labelStatus);
         } catch (\Exception $exception) {
-            if ($exception instanceof LocalizedException) {
-                throw new CouldNotSaveException(__($exception->getMessage()));
-            }
-
             throw new CouldNotSaveException(__('Unable to save label status'), $exception);
         }
 
