@@ -35,40 +35,6 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
     private $methodFactory;
 
     /**
-     * Config fixtures are loaded before data fixtures. Config fixtures for
-     * non-existent stores will fail. We need to set the stores up first manually.
-     *
-     * @link http://magento.stackexchange.com/a/93961
-     */
-    public static function setUpBeforeClass()
-    {
-        require realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_fixturestore_rollback.php');
-        require realpath(
-            TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_second_third_fixturestore_rollback.php'
-        );
-
-        require realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_fixturestore.php');
-        require realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_second_third_fixturestore.php');
-
-        parent::setUpBeforeClass();
-    }
-
-    /**
-     * Delete manually added stores.
-     *
-     * @see setUpBeforeClass()
-     */
-    public static function tearDownAfterClass()
-    {
-        require realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_fixturestore_rollback.php');
-        require realpath(
-            TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_second_third_fixturestore_rollback.php'
-        );
-
-        parent::tearDownAfterClass();
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      */

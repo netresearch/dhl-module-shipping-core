@@ -26,38 +26,6 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
     private $config;
 
     /**
-     * Config fixtures are loaded before data fixtures. Config fixtures for
-     * non-existent stores will fail. We need to set the stores up first manually.
-     *
-     * @link http://magento.stackexchange.com/a/93961
-     */
-    public static function setUpBeforeClass()
-    {
-        require realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_fixturestore_rollback.php');
-        require realpath(
-            TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_second_third_fixturestore_rollback.php'
-        );
-
-        require realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_fixturestore.php');
-        require realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_second_third_fixturestore.php');
-        parent::setUpBeforeClass();
-    }
-
-    /**
-     * Delete manually added stores.
-     *
-     * @see setUpBeforeClass()
-     */
-    public static function tearDownAfterClass()
-    {
-        require realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_fixturestore_rollback.php');
-        require realpath(
-            TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files/core_second_third_fixturestore_rollback.php'
-        );
-        parent::tearDownAfterClass();
-    }
-
-    /**
      * @test
      * @magentoConfigFixture current_store shipping/dhlglobalwebservices/cod_methods payflow_advanced,payflow_link,payflowpro
      */
@@ -75,6 +43,9 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
+     *
+     * @magentoDataFixture Magento/Store/_files/core_fixturestore.php
+     * @magentoDataFixture Magento/Store/_files/core_second_third_fixturestore.php
      * @magentoConfigFixture current_store shipping/dhlglobalwebservices/terms_of_trade DTP/DDP
      * @magentoConfigFixture fixturestore_store shipping/dhlglobalwebservices/terms_of_trade DDU/DAP
      */
@@ -86,6 +57,9 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
+     *
+     * @magentoDataFixture Magento/Store/_files/core_fixturestore.php
+     * @magentoDataFixture Magento/Store/_files/core_second_third_fixturestore.php
      * @magentoConfigFixture current_store shipping/dhlglobalwebservices/cut_off_time 00,00,00
      * @magentoConfigFixture fixturestore_store shipping/dhlglobalwebservices/cut_off_time 12,07,10
      */
