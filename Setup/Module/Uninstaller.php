@@ -87,4 +87,19 @@ class Uninstaller
         $salesConnection = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME);
         $salesConnection->dropTable(Constants::TABLE_DHLGW_RECIPIENT_STREET);
     }
+
+    /**
+     * Drop dhlgw_quote_address_service_selection table
+     *
+     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @return void
+     */
+    public static function dropServiceSelectionTables(SchemaSetupInterface $schemaSetup)
+    {
+        $checkoutConnection = $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME);
+        $checkoutConnection->dropTable(Constants::TABLE_QUOTE_SERVICE_SELECTION);
+
+        $salesConnection = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME);
+        $salesConnection->dropTable(Constants::TABLE_ORDER_SERVICE_SELECTION);
+    }
 }

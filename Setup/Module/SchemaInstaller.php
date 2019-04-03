@@ -139,4 +139,85 @@ class SchemaInstaller
 
         $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->createTable($table);
     }
+
+    /**
+     * Create service selection tables.
+     *
+     * - dhl_quote_address_service_selection
+     * - dhl_order_address_service_selection
+     *
+     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @throws \Zend_Db_Exception
+     */
+    public static function createServiceSelectionTables(SchemaSetupInterface $schemaSetup)
+    {
+        $quoteTable = $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)->newTable(
+            $schemaSetup->getTable(Constants::TABLE_QUOTE_SERVICE_SELECTION, Constants::CHECKOUT_CONNECTION_NAME)
+        );
+        $orderTable = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->newTable(
+            $schemaSetup->getTable(Constants::TABLE_ORDER_SERVICE_SELECTION, Constants::SALES_CONNECTION_NAME)
+        );
+
+        foreach ([$quoteTable, $orderTable] as $table) {
+            $table->addColumn(
+                'entity_id',
+                Table::TYPE_INTEGER,
+                null,
+                ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true]
+            );
+            $table->addColumn(
+                'parent_id',
+                Table::TYPE_INTEGER,
+                null,
+                ['unsigned' => true, 'nullable' => false]
+            );
+            $table->addColumn(
+                'service_code',
+                Table::TYPE_TEXT,
+                null,
+                ['nullable' => false]
+            );
+            $table->addColumn(
+                'service_input',
+                Table::TYPE_TEXT,
+                null,
+                ['nullable' => false]
+            );
+            $table->addColumn(
+                'service_value',
+                Table::TYPE_TEXT,
+                null,
+                ['nullable' => false]
+            );
+        }
+
+        $quoteTable->addForeignKey(
+            $schemaSetup->getFkName(
+                $schemaSetup->getTable(Constants::TABLE_QUOTE_SERVICE_SELECTION, Constants::CHECKOUT_CONNECTION_NAME),
+                'parent_id',
+                $schemaSetup->getTable('quote_address', Constants::CHECKOUT_CONNECTION_NAME),
+                'address_id'
+            ),
+            'parent_id',
+            $schemaSetup->getTable('quote_address'),
+            'address_id',
+            Table::ACTION_CASCADE
+        );
+
+        $orderTable->addForeignKey(
+            $schemaSetup->getFkName(
+                $schemaSetup->getTable(Constants::TABLE_ORDER_SERVICE_SELECTION, Constants::SALES_CONNECTION_NAME),
+                'parent_id',
+                $schemaSetup->getTable('sales_order_address', Constants::SALES_CONNECTION_NAME),
+                'entity_id'
+            ),
+            'parent_id',
+            $schemaSetup->getTable('sales_order_address', Constants::SALES_CONNECTION_NAME),
+            'entity_id',
+            Table::ACTION_CASCADE
+        );
+
+        $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)->createTable($quoteTable);
+        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->createTable($orderTable);
+    }
 }

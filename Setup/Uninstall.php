@@ -49,5 +49,6 @@ class Uninstall implements UninstallInterface
         Uninstaller::dropLabelStatusTable($schemaSetup);
         Uninstaller::deleteAttributes($this->eavSetup);
         Uninstaller::dropDhlRecipientStreetTable($schemaSetup);
+        Uninstaller::dropServiceSelectionTables($schemaSetup);
     }
 }
