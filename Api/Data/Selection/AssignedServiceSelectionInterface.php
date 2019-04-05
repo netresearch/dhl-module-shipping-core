@@ -9,11 +9,16 @@ namespace Dhl\ShippingCore\Api\Data\Selection;
 /**
  * Interface AssignedServiceSelectionInterface
  *
- * @package Dhl\ShippingCore\Api
+ * @api
+ * @package Dhl\ShippingCore\Api\Data
  */
 interface AssignedServiceSelectionInterface extends ServiceSelectionInterface
 {
+    const PARENT_ID = 'parent_id';
+
     /**
+     * Get the parent id, i.e. quote/order address id
+     *
      * @return int
      */
     public function getParentId(): int;

@@ -28,43 +28,34 @@ class OrderServiceSelection extends AbstractModel implements AssignedServiceSele
     }
 
     /**
-     * Get the parent id.
-     *
-     * @return int
+     * @inheritDoc
      */
     public function getParentId(): int
     {
-        return (int) $this->getData(Setup::SERVICE_SELECTION_PARENT_ID);
+        return (int) $this->getData(self::PARENT_ID);
     }
 
     /**
-     * Get the service code.
-     *
-     * @return string
+     * @inheritDoc
      */
     public function getServiceCode(): string
     {
-        return (string) $this->getData(Setup::SERVICE_SELECTION_SERVICE_CODE);
+        return (string) $this->getData(self::SERVICE_CODE);
     }
 
     /**
-     * Get the input code.
-     *
-     * @return string
+     * @inheritDoc
      */
     public function getInputCode(): string
     {
-        return (string) $this->getData(Setup::SERVICE_SELECTION_INPUT_CODE);
+        return (string) $this->getData(self::INPUT_CODE);
     }
 
     /**
-     * Get the service value
-     *
-     * @return string
+     * @inheritDoc
      */
     public function getValue(): string
     {
-        return (string) $this->getData(Setup::SERVICE_SELECTION_VALUE);
+        return (string) $this->getData(self::VALUE);
     }
-
 }

@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Setup\Module;
 
+use Dhl\ShippingCore\Api\Data\Selection\AssignedServiceSelectionInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Api\RecipientStreetInterface;
 use Magento\Framework\DB\Ddl\Table;
@@ -143,8 +144,8 @@ class SchemaInstaller
     /**
      * Create service selection tables.
      *
-     * - dhl_quote_address_service_selection
-     * - dhl_order_address_service_selection
+     * - dhlgw_quote_address_service_selection
+     * - dhlgw_order_address_service_selection
      *
      * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
      * @throws \Zend_Db_Exception
@@ -158,36 +159,42 @@ class SchemaInstaller
             $schemaSetup->getTable(Constants::TABLE_ORDER_SERVICE_SELECTION, Constants::SALES_CONNECTION_NAME)
         );
 
+        /** @var \Magento\Framework\DB\Ddl\Table $table */
         foreach ([$quoteTable, $orderTable] as $table) {
             $table->addColumn(
                 'entity_id',
                 Table::TYPE_INTEGER,
                 null,
-                ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true]
+                ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
+                'Entity ID'
             );
             $table->addColumn(
-                'parent_id',
+                AssignedServiceSelectionInterface::PARENT_ID,
                 Table::TYPE_INTEGER,
                 null,
-                ['unsigned' => true, 'nullable' => false]
+                ['unsigned' => true, 'nullable' => false],
+                'Parent ID'
             );
             $table->addColumn(
-                'service_code',
+                AssignedServiceSelectionInterface::SERVICE_CODE,
                 Table::TYPE_TEXT,
                 null,
-                ['nullable' => false]
+                ['nullable' => false],
+                'Service Code'
             );
             $table->addColumn(
-                'service_input',
+                AssignedServiceSelectionInterface::INPUT_CODE,
                 Table::TYPE_TEXT,
                 null,
-                ['nullable' => false]
+                ['nullable' => false],
+                'Service Input'
             );
             $table->addColumn(
-                'service_value',
+                AssignedServiceSelectionInterface::VALUE,
                 Table::TYPE_TEXT,
                 null,
-                ['nullable' => false]
+                ['nullable' => false],
+                'Service Value'
             );
         }
 

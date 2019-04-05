@@ -6,19 +6,17 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Rest;
 
+use Dhl\ShippingCore\Api\Data\Selection\AssignedServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
-use Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
-use Dhl\ShippingCore\Model\QuoteServiceSelection;
-use Dhl\ShippingCore\Model\QuoteServiceSelectionFactory;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataHydrator;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
+use Dhl\ShippingCore\Model\QuoteServiceSelectionFactory;
 use Dhl\ShippingCore\Model\ServiceSelectionRepository;
 use Dhl\ShippingCore\Setup\Setup;
 use Magento\Config\Model\Config\Source\YesnoFactory;
 use Magento\Quote\Model\QuoteRepository;
 use Magento\Store\Model\StoreManagerInterface;
-
 
 /**
  * Class CheckoutDataManagement
@@ -117,10 +115,10 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
             $model = $this->serviceSelectionFactory->create();
             $model->setData(
                 [
-                    Setup::SERVICE_SELECTION_PARENT_ID => $addressId,
-                    Setup::SERVICE_SELECTION_SERVICE_CODE => $service->getServiceCode(),
-                    Setup::SERVICE_SELECTION_INPUT_CODE => $service->getInputCode(),
-                    Setup::SERVICE_SELECTION_VALUE => $service->getValue()
+                    AssignedServiceSelectionInterface::PARENT_ID => $addressId,
+                    AssignedServiceSelectionInterface::SERVICE_CODE => $service->getServiceCode(),
+                    AssignedServiceSelectionInterface::INPUT_CODE => $service->getInputCode(),
+                    AssignedServiceSelectionInterface::VALUE => $service->getValue()
                 ]
             );
             $this->serviceSelectionRepository->save($model);
