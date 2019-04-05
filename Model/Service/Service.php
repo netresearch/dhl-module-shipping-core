@@ -5,8 +5,8 @@
 
 namespace Dhl\ShippingCore\Model\Service;
 
-use Dhl\ShippingCore\Api\Data\Service\InputInterface;
-use Dhl\ShippingCore\Api\Data\Service\ServiceInterface;
+use Dhl\ShippingCore\Api\Data\Selection\InputInterface;
+use Dhl\ShippingCore\Api\Data\Selection\ServiceInterface;
 
 /**
  * Class Service
@@ -155,7 +155,7 @@ class Service implements ServiceInterface
     }
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Service\InputInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\Selection\InputInterface[]
      */
     public function getInputs(): array
     {

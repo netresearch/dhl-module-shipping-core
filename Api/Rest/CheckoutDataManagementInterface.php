@@ -31,7 +31,7 @@ interface CheckoutDataManagementInterface
 
     /**
      * @param int $quoteId
-     * @param \Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface[] $serviceSelection
+     * @param \Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface[] $serviceSelection
      * @return void
      */
     public function setServiceSelection(int $quoteId, array $serviceSelection);

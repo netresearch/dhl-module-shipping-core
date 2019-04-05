@@ -5,7 +5,7 @@
 
 namespace Dhl\ShippingCore\Model\Service;
 
-use Dhl\ShippingCore\Api\Data\Service\OptionInterface;
+use Dhl\ShippingCore\Api\Data\Selection\OptionInterface;
 
 /**
  * Class Option

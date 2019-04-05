@@ -19,7 +19,7 @@ interface CarrierDataInterface
     public function getCarrierCode(): string;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Service\ServiceInterface[];
+     * @return \Dhl\ShippingCore\Api\Data\Selection\ServiceInterface[];
      */
     public function getServiceData(): array;
 
@@ -29,7 +29,7 @@ interface CarrierDataInterface
     public function getServiceMetadata(): ServiceMetadataInterface;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Service\CompatibilityInterface[];
+     * @return \Dhl\ShippingCore\Api\Data\Selection\CompatibilityInterface[];
      */
     public function getServiceCompatibilityData(): array;
 }

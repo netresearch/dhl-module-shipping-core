@@ -7,8 +7,8 @@ namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface;
 use Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterface;
-use Dhl\ShippingCore\Api\Data\Service\CompatibilityInterface;
-use Dhl\ShippingCore\Api\Data\Service\ServiceInterface;
+use Dhl\ShippingCore\Api\Data\Selection\CompatibilityInterface;
+use Dhl\ShippingCore\Api\Data\Selection\ServiceInterface;
 
 /**
  * Class CarrierData
@@ -69,7 +69,7 @@ class CarrierData implements CarrierDataInterface
     }
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Service\ServiceInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\Selection\ServiceInterface[]
      */
     public function getServiceData(): array
     {

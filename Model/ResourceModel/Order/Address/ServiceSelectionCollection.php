@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ResourceModel\Order\Address;
 
-use Dhl\ShippingCore\Model\Service\ServiceSelection as ServiceSelectionModel;
+use Dhl\ShippingCore\Model\OrderServiceSelection;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelection as ServiceSelectionResource;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
@@ -22,6 +22,6 @@ class ServiceSelectionCollection extends AbstractCollection
      */
    protected function _construct()
     {
-        $this->_init(ServiceSelectionModel::class, ServiceSelectionResource::class);
+        $this->_init(OrderServiceSelection::class, ServiceSelectionResource::class);
     }
 }

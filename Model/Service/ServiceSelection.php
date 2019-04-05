@@ -6,12 +6,12 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Service;
 
-use Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface;
+use Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface;
 
 /**
  * Class ServiceSelection
  *
- * @package Dhl\ShippingCore\Api\Data\Service
+ * @package Dhl\ShippingCore\Api\Data
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class ServiceSelection implements ServiceSelectionInterface

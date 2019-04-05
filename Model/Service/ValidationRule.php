@@ -5,7 +5,7 @@
 
 namespace Dhl\ShippingCore\Model\Service;
 
-use Dhl\ShippingCore\Api\Data\Service\ValidationRuleInterface;
+use Dhl\ShippingCore\Api\Data\Selection\ValidationRuleInterface;
 use Magento\Framework\Api\AttributeInterface;
 
 /**

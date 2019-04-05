@@ -7,7 +7,7 @@ namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface;
 use Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterface;
-use Dhl\ShippingCore\Api\Data\Service\CommentInterface;
+use Dhl\ShippingCore\Api\Data\Selection\CommentInterface;
 
 /**
  * Class ServiceMetadata

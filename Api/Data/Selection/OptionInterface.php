@@ -3,7 +3,7 @@
  * See LICENSE.md for license details.
  */
 
-namespace Dhl\ShippingCore\Api\Data\Service;
+namespace Dhl\ShippingCore\Api\Data\Selection;
 
 /**
  * Interface OptionInterface

@@ -5,10 +5,10 @@
 
 namespace Dhl\ShippingCore\Model\Service;
 
-use Dhl\ShippingCore\Api\Data\Service\CommentInterface;
-use Dhl\ShippingCore\Api\Data\Service\InputInterface;
-use Dhl\ShippingCore\Api\Data\Service\OptionInterface;
-use Dhl\ShippingCore\Api\Data\Service\ValidationRuleInterface;
+use Dhl\ShippingCore\Api\Data\Selection\CommentInterface;
+use Dhl\ShippingCore\Api\Data\Selection\InputInterface;
+use Dhl\ShippingCore\Api\Data\Selection\OptionInterface;
+use Dhl\ShippingCore\Api\Data\Selection\ValidationRuleInterface;
 
 /**
  * Class Input

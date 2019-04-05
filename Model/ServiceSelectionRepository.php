@@ -6,13 +6,15 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model;
 
-use Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface;
+use Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface;
 use Dhl\ShippingCore\Api\ServiceSelectionRepositoryInterface;
-use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelection as OrderServiceSelection;
+use Dhl\ShippingCore\Model\OrderServiceSelection;
+use Dhl\ShippingCore\Model\QuoteServiceSelection;
+use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelection as OrderResource;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelectionCollection as OrderServiceSeletionCollection;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelectionCollectionFactory
-    as OrderServiceSeletionCollectionFactory;
-use Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ServiceSelection as QuoteServiceSelection;
+    as OrderServiceSelectionCollectionFactory;
+use Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ServiceSelection as QuoteResource;
 use Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ServiceSelectionCollection as QuoteServiceSelectionCollection;
 use Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ServiceSelectionCollectionFactory
     as QuoteServiceSelectionCollectionFactory;
@@ -27,43 +29,43 @@ use Magento\Framework\Model\AbstractModel;
 class ServiceSelectionRepository implements ServiceSelectionRepositoryInterface
 {
     /**
+     * @var OrderResource
+     */
+    private $orderResource;
+    /**
+     * @var OrderServiceSelectionCollectionFactory
+     */
+    private $orderCollectionFactory;
+
+    /**
+     * @var QuoteResource
+     */
+    private $quoteRessource;
+
+    /**
      * @var QuoteServiceSelectionCollectionFactory
      */
     private $quoteCollectionFactory;
 
     /**
-     * @var QuoteServiceSelection
-     */
-    private $quoteRessource;
-
-    /**
-     * @var OrderServiceSeletionCollectionFactory
-     */
-    private $orderCollectionFactory;
-
-    /**
-     * @var OrderServiceSelection
-     */
-    private $orderResource;
-
-    /**
      * ServiceSelectionRepository constructor.
      *
+     * @param OrderResource $orderResource
+     * @param OrderServiceSelectionCollectionFactory $orderCollectionFactory
+     * @param QuoteResource $quoteResource
      * @param QuoteServiceSelectionCollectionFactory $quoteCollectionFactory
-     * @param QuoteServiceSelection $quoteRessource
-     * @param OrderServiceSeletionCollectionFactory $orderCollectionFactory
-     * @param OrderServiceSelection $orderResource
+
      */
     public function __construct(
-        QuoteServiceSelectionCollectionFactory $quoteCollectionFactory,
-        QuoteServiceSelection $quoteRessource,
-        OrderServiceSeletionCollectionFactory $orderCollectionFactory,
-        OrderServiceSelection $orderResource
+        OrderResource $orderResource,
+        OrderServiceSelectionCollectionFactory $orderCollectionFactory,
+        QuoteResource $quoteResource,
+        QuoteServiceSelectionCollectionFactory $quoteCollectionFactory
     ) {
-        $this->quoteCollectionFactory = $quoteCollectionFactory;
-        $this->quoteRessource = $quoteRessource;
-        $this->orderCollectionFactory = $orderCollectionFactory;
         $this->orderResource = $orderResource;
+        $this->orderCollectionFactory = $orderCollectionFactory;
+        $this->quoteRessource = $quoteResource;
+        $this->quoteCollectionFactory = $quoteCollectionFactory;
     }
 
     /**

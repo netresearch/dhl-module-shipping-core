@@ -24,12 +24,12 @@ interface ServiceMetadataInterface
     public function getTitle(): string;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Service\CommentInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\Selection\CommentInterface[]
      */
     public function getCommentsBefore(): array;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Service\CommentInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\Selection\CommentInterface[]
      */
     public function getCommentsAfter(): array;
 

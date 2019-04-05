@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api\Data\Service;
+namespace Dhl\ShippingCore\Api\Data\Selection;
 
 /**
  * Interface ServiceSelectionInterface

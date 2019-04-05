@@ -5,7 +5,7 @@
 
 namespace Dhl\ShippingCore\Model\Service;
 
-use Dhl\ShippingCore\Api\Data\Service\CommentInterface;
+use Dhl\ShippingCore\Api\Data\Selection\CommentInterface;
 
 /**
  * Class Comment

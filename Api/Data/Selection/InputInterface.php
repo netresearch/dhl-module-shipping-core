@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api\Data\Service;
+namespace Dhl\ShippingCore\Api\Data\Selection;
 
 /**
  * Interface InputInterface
@@ -56,7 +56,7 @@ interface InputInterface
     /**
      * Obtain a pre-defined set of allowed values.
      *
-     * @return \Dhl\ShippingCore\Api\Data\Service\OptionInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\Selection\OptionInterface[]
      */
     public function getOptions(): array;
 
@@ -86,12 +86,12 @@ interface InputInterface
      *
      * @file view/frontend/web/js/model/service-validation-map.js
      *
-     * @return \Dhl\ShippingCore\Api\Data\Service\ValidationRuleInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\Selection\ValidationRuleInterface[]
      */
     public function getValidationRules(): array;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Service\CommentInterface|null
+     * @return \Dhl\ShippingCore\Api\Data\Selection\CommentInterface|null
      */
     public function getComment();
 }

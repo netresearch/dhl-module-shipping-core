@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api\Data\Service;
+namespace Dhl\ShippingCore\Api\Data\Selection;
 
 /**
  * Interface ServiceInterface
@@ -58,7 +58,7 @@ interface ServiceInterface
     /**
      * Obtain a list of inputs for displaying the service and it's values
      *
-     * @return \Dhl\ShippingCore\Api\Data\Service\InputInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\Selection\InputInterface[]
      */
     public function getInputs(): array;
 

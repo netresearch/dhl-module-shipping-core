@@ -12,7 +12,7 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 /**
  * Class ServiceSelection
  *
- * @package Dhl\ShippingCore\Model\ResourceModel\Order\Address
+ * @package Dhl\ShippingCore\Model\ResourceModel
  */
 class ServiceSelection extends AbstractDb
 {

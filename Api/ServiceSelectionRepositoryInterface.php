@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api;
 
-use Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface;
+use Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface;
 use Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ServiceSelectionCollection as QuoteServiceSelectionCollection;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelectionCollection as OrderServiceSelectionCollection;
 use Magento\Framework\Exception\CouldNotDeleteException;

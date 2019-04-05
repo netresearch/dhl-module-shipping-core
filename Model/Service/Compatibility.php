@@ -5,7 +5,7 @@
 
 namespace Dhl\ShippingCore\Model\Service;
 
-use Dhl\ShippingCore\Api\Data\Service\CompatibilityInterface;
+use Dhl\ShippingCore\Api\Data\Selection\CompatibilityInterface;
 
 /**
  * Class ServiceCompatibility

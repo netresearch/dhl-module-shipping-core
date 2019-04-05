@@ -22,14 +22,15 @@
     <preference for="Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface" type="Dhl\ShippingCore\Model\Checkout\CheckoutData"/>
     <preference for="Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterface" type="Dhl\ShippingCore\Model\Checkout\ServiceMetadata"/>
     <preference for="Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface" type="Dhl\ShippingCore\Model\Checkout\Footnote"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Service\CompatibilityInterface" type="Dhl\ShippingCore\Model\Service\Compatibility"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Service\InfoTextInterface" type="Dhl\ShippingCore\Model\Service\InfoText"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Service\InputInterface" type="Dhl\ShippingCore\Model\Service\Input"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Service\ServiceInterface" type="Dhl\ShippingCore\Model\Service\Service"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Service\OptionInterface" type="Dhl\ShippingCore\Model\Service\Option"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Service\CommentInterface" type="Dhl\ShippingCore\Model\Service\Comment"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Service\ValidationRuleInterface" type="Dhl\ShippingCore\Model\Service\ValidationRule"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface" type="Dhl\ShippingCore\Model\Service\ServiceSelection"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Selection\CompatibilityInterface" type="Dhl\ShippingCore\Model\Service\Compatibility"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Selection\InfoTextInterface" type="Dhl\ShippingCore\Model\Service\InfoText"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Selection\InputInterface" type="Dhl\ShippingCore\Model\Service\Input"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Selection\ServiceInterface" type="Dhl\ShippingCore\Model\Service\Service"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Selection\OptionInterface" type="Dhl\ShippingCore\Model\Service\Option"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Selection\CommentInterface" type="Dhl\ShippingCore\Model\Service\Comment"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Selection\ValidationRuleInterface" type="Dhl\ShippingCore\Model\Service\ValidationRule"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface" type="Dhl\ShippingCore\Model\Service\ServiceSelection"/>
+    <preference for="DHl\ShippingCore\Api\ServiceSelectionRepositoryInterface" type="\Dhl\ShippingCore\Model\ServiceSelectionRepository" />
 
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\Virtual\SalesTableNameIterator" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">

@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\ResourceModel\Quote\Address;
 
 use Dhl\ShippingCore\Setup\Setup;
-use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
 
 /**
  * Class ServiceSelection
@@ -15,6 +15,7 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
  */
 class ServiceSelection extends AbstractDb
 {
+
     /**
      * Resource initialization
      */
