@@ -39,6 +39,7 @@ class Uninstall implements UninstallInterface
      *
      * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
      * @param ModuleContextInterface $context
+     * @throws \Zend_Db_Exception
      *
      * @return void
      */
@@ -48,5 +49,7 @@ class Uninstall implements UninstallInterface
         Setup::removeProductAttributes($this->eavSetup);
         Setup::deleteLabelStatusColumn($schemaSetup);
         Setup::dropLabelStatusTable($schemaSetup);
+        SetupData::deleteAttributes($this->eavSetup);
+        Setup::dropDhlRecipientStreetTable($schemaSetup);
     }
 }

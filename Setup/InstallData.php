@@ -24,6 +24,7 @@ class InstallData implements InstallDataInterface
 
     /**
      * InstallData constructor.
+     *
      * @param EavSetupFactory $eavSetupFactory
      */
     public function __construct(EavSetupFactory $eavSetupFactory)
@@ -35,13 +36,11 @@ class InstallData implements InstallDataInterface
      * @param ModuleDataSetupInterface $setup
      * @param ModuleContextInterface $context
      */
-    public function install(
-        ModuleDataSetupInterface $setup,
-        ModuleContextInterface $context
-    ) {
+    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    {
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-        ShippingSetup::addDangerousGoodsCategoryAttribute($eavSetup);
-        ShippingSetup::addExportDescriptionAttribute($eavSetup);
-        ShippingSetup::addTariffNumberAttribute($eavSetup);
+        SetupData::addDangerousGoodsCategoryAttribute($eavSetup);
+        SetupData::addExportDescriptionAttribute($eavSetup);
+        SetupData::addTariffNumberAttribute($eavSetup);
     }
 }

@@ -13,12 +13,16 @@
     <preference for="Dhl\ShippingCore\Util\StreetSplitterInterface" type="Dhl\ShippingCore\Util\StreetSplitter"/>
     <preference for="Dhl\ShippingCore\Util\UnitConverterInterface" type="Dhl\ShippingCore\Util\UnitConverter"/>
     <preference for="Dhl\ShippingCore\Api\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
+    <preference for="Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface" type="Dhl\ShippingCore\Model\RecipientStreetRepository"/>
+    <preference for="Dhl\ShippingCore\Api\RecipientStreetInterface" type="Dhl\ShippingCore\Model\RecipientStreet"/>
 
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\Virtual\SalesTableNameIterator" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>
             <argument name="tableNames" xsi:type="array">
                 <item name="dhl_label_status" xsi:type="const">Dhl\ShippingCore\Setup\Setup::TABLE_LABEL_STATUS</item>
+                <item name="dhl_recipient_street" xsi:type="const">Dhl\ShippingCore\Setup\Setup::DHL_RECIPIENT_STREET_TABLE_NAME</item>
+
             </argument>
         </arguments>
     </virtualType>
@@ -55,6 +59,11 @@
             <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Setup::SALES_CONNECTION_NAME</argument>
         </arguments>
     </type>
+    <type name="Magento\Sales\Model\Order\AddressRepository">
+        <plugin name="Dhl_ShippingCore_Address_Extension" type="Dhl\ShippingCore\Plugin\Order\Address\AddressRepositoryPlugin" sortOrder="1"/>
+    </type>
+
+    <!--needed to support split db feature of EE edition-->
     <type name="Magento\ScalableOms\Console\Command\SplitSales">
         <arguments>
             <argument name="tableIterators" xsi:type="array">

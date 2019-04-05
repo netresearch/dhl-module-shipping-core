@@ -14,7 +14,7 @@ use Magento\Framework\Setup\UpgradeSchemaInterface;
  * UpgradeSchema
  *
  * @package Dhl\ShippingCore\Setup
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */
 class UpgradeSchema implements UpgradeSchemaInterface
@@ -31,6 +31,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         if (version_compare($context->getVersion(), '0.1.0', '<')) {
             Setup::addLabelStatusColumn($schemaSetup);
             Setup::createLabelStatusTable($schemaSetup);
+            Setup::createDhlRecipientStreetTable($schemaSetup);
         }
     }
 }

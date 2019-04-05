@@ -9,4 +9,7 @@ See LICENSE.md for license details.
     <event name="payment_method_is_active">
         <observer name="disable_cod" instance="Dhl\ShippingCore\Observer\DisableCodPaymentMethods" />
     </event>
+    <event name="sales_order_address_save_after">
+        <observer name="split_address" instance="Dhl\ShippingCore\Observer\SplitAddress"/>
+    </event>
 </config>

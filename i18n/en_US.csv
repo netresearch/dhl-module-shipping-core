@@ -51,3 +51,8 @@
 "DHL Item Description","DHL Item Description"
 "Package #%1 not found in shipment request.","Package #%1 not found in shipment request."
 "Unable to save label status","Unable to save label status"
+"Recipient street was successfully updated.","Recipient street was successfully updated."
+"An error occurred while updating the recipient street.","An error occurred while updating the recipient street."
+"Unable to save dhl recipient street.","Unable to save dhl recipient street."
+"Unable to load recipient street with id %1 .","Empfängerstraße mit id %1 kann nicht geladen werden."
+"Recipient street with id "%1" does not exist.","Recipient street with id "%1" does not exist."

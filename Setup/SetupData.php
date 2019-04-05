@@ -13,9 +13,10 @@ use Magento\Eav\Setup\EavSetup;
 
 /**
  * Class ShippingSetup
+ *
  * @package Dhl\ShippingCore\Setup
  */
-class ShippingSetup
+class SetupData
 {
     /**
      * @param EavSetup $eavSetup
@@ -80,6 +81,26 @@ class ShippingSetup
                 'backend' => ExportDescription::class,
                 'visible' => true,
             ]
+        );
+    }
+
+    /**
+     * @param EavSetup $eavSetup
+     * @return void
+     */
+    public static function deleteAttributes(EavSetup $eavSetup)
+    {
+        $eavSetup->removeAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            DGCategory::CODE
+        );
+        $eavSetup->removeAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            TariffNumber::CODE
+        );
+        $eavSetup->removeAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            ExportDescription::CODE
         );
     }
 }
