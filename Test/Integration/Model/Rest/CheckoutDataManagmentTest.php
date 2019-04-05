@@ -6,7 +6,7 @@
 namespace Dhl\ShippingCore\Test\Integration\Model\Rest;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
-use Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface;
+use Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
 use Dhl\ShippingCore\Api\ServiceSelectionRepositoryInterface;
 use Dhl\ShippingCore\Model\Checkout\CheckoutData;
