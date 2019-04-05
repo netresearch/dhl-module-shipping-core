@@ -6,7 +6,10 @@
 namespace Dhl\ShippingCore\Test\Integration\Model\Rest;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
+use Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
+use Dhl\ShippingCore\Api\ServiceSelectionRepositoryInterface;
+use Dhl\ShippingCore\Model\Checkout\CheckoutData;
 use Dhl\ShippingCore\Model\Rest\CheckoutDataManagement;
 use Magento\TestFramework\ObjectManager;
 
@@ -36,8 +39,36 @@ class CheckoutDataManagmentTest extends \PHPUnit\Framework\TestCase
     {
         /** @var CheckoutDataManagementInterface $subject */
         $subject = $this->objectManager->create(CheckoutDataManagement::class);
-        $result = $subject->getData('0', 'DE', '04229');
+        $result = $subject->getData('DE', '04229');
 
-        self::assertInstanceOf(CheckoutDataInterface::class, $result);
+        self::assertInstanceOf(CheckoutData::class, $result);
+    }
+
+    public function testSetServiceSelection()
+    {
+        /** @var CheckoutDataManagementInterface $subject */
+        $subject = $this->objectManager->create(CheckoutDataManagement::class);
+        /** @var ServiceSelectionInterface $serviceSelection */
+        $serviceSelection = $this->objectManager->create(
+            ServiceSelectionInterface::class,
+            [
+                'serviceCode' => 'testServiceCode',
+                'inputCode' => 'testInputCode',
+                'value' => 'testValue',
+            ]
+        );
+        $subject->setServiceSelection(12, [$serviceSelection]);
+
+        /** @var ServiceSelectionRepositoryInterface $serviceSelectionRepo */
+        $serviceSelectionRepo = $this->objectManager->get(ServiceSelectionRepositoryInterface::class);
+
+        $this::markTestIncomplete(
+            'Todo: Make sure there is a real quote with a quote address id.'
+        );
+        /** @var ServiceSelectionInterface $storedServiceSelection */
+        $storedServiceSelection = $serviceSelectionRepo->getByQuoteAddressId(123)->getFirstItem();
+        $this->assertEquals($storedServiceSelection->getValue(), $serviceSelection->getValue());
+        $this->assertEquals($storedServiceSelection->getInputCode(), $serviceSelection->getInputCode());
+        $this->assertEquals($storedServiceSelection->getServiceCode(), $serviceSelection->getServiceCode());
     }
 }
