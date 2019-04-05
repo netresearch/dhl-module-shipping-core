@@ -12,6 +12,7 @@ use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataHydrator;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
 use Magento\Quote\Model\QuoteRepository;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class CheckoutDataManagement
@@ -39,34 +40,41 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
     private $checkoutDataHydrator;
 
     /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
+
+    /**
      * CheckoutDataManagement constructor.
      *
      * @param QuoteRepository $quoteRepository
      * @param CheckoutDataProvider $checkoutDataProvider
      * @param CheckoutDataHydrator $checkoutDataHydrator
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         QuoteRepository $quoteRepository,
         CheckoutDataProvider $checkoutDataProvider,
-        CheckoutDataHydrator $checkoutDataHydrator
+        CheckoutDataHydrator $checkoutDataHydrator,
+        StoreManagerInterface $storeManager
     ) {
         $this->quoteRepository = $quoteRepository;
         $this->checkoutDataProvider = $checkoutDataProvider;
         $this->checkoutDataHydrator = $checkoutDataHydrator;
+        $this->storeManager = $storeManager;
     }
 
     /**
-     * @param int $quoteId
      * @param string $countryId
      * @param string $postalCode
      * @return \Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\InputException
      */
-    public function getData(int $quoteId, string $countryId, string $postalCode): CheckoutDataInterface
+    public function getData(string $countryId, string $postalCode): CheckoutDataInterface
     {
-        $quote = $this->quoteRepository->get($quoteId);
-        $data = $this->checkoutDataProvider->getData($countryId, $quote->getStoreId(), $postalCode);
+        $storeId = (int)$this->storeManager->getStore()->getId();
+        $data = $this->checkoutDataProvider->getData($countryId, $storeId, $postalCode);
 
         return $this->checkoutDataHydrator->toObject($data);
     }

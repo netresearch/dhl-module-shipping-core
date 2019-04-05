@@ -5,7 +5,6 @@
 
 namespace Dhl\ShippingCore\Api\Data\Service;
 
-
 /**
  * Interface ValidationRuleInterface
  *

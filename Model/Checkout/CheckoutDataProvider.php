@@ -5,10 +5,6 @@
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
-use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
-use Magento\Framework\Exception\InputException;
-use Magento\Framework\Webapi\ServiceInputProcessor;
-
 /**
  * Class CheckoutDataProvider
  *

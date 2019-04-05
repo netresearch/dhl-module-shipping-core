@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Rest;
 
-use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
 use Dhl\ShippingCore\Api\Data\Service\ServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
 use Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface;
@@ -45,17 +44,6 @@ class GuestCheckoutDataManagement implements GuestCheckoutDataManagementInterfac
     ) {
         $this->quoteIdMaskFactory = $quoteIdMaskFactory;
         $this->cartServiceManagement = $cartServiceMngmt;
-    }
-
-    /**
-     * @param string $cartId
-     * @param string $countryId
-     * @param string $postalCode
-     * @return \Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface
-     */
-    public function getData(string $cartId, string $countryId, string $postalCode): CheckoutDataInterface
-    {
-        return $this->cartServiceManagement->getData($this->getQuoteId($cartId), $countryId, $postalCode);
     }
 
     /**

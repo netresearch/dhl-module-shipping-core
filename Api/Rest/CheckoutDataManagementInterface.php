@@ -23,12 +23,11 @@ use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
 interface CheckoutDataManagementInterface
 {
     /**
-     * @param int $quoteId
      * @param string $countryId
      * @param string $postalCode
      * @return \Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface
      */
-    public function getData(int $quoteId, string $countryId, string $postalCode): CheckoutDataInterface;
+    public function getData(string $countryId, string $postalCode): CheckoutDataInterface;
 
     /**
      * @param int $quoteId
