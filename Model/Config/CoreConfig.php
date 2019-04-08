@@ -91,7 +91,7 @@ class CoreConfig implements CoreConfigInterface
     public function getCodMethods($store = null): array
     {
         $paymentMethods = $this->scopeConfigInterface->getValue(
-            self::CONFIG_XML_PATH_COD_METHODS,
+            self::CONFIG_PATH_COD_METHODS,
             ScopeInterface::SCOPE_STORE,
             $store
         );
@@ -124,7 +124,7 @@ class CoreConfig implements CoreConfigInterface
     public function getTermsOfTrade($store = null): string
     {
         return (string)$this->scopeConfigInterface->getValue(
-            self::CONFIG_XML_PATH_TERMS_OF_TRADE,
+            self::CONFIG_PATH_TERMS_OF_TRADE,
             ScopeInterface::SCOPE_STORE,
             $store
         );
@@ -139,7 +139,7 @@ class CoreConfig implements CoreConfigInterface
     public function getCutOffTime($store = null): string
     {
         return (string)$this->scopeConfigInterface->getValue(
-            self::CONFIG_XML_PATH_CUT_OFF_TIME,
+            self::CONFIG_PATH_CUT_OFF_TIME,
             ScopeInterface::SCOPE_STORE,
             $store
         );
@@ -154,7 +154,7 @@ class CoreConfig implements CoreConfigInterface
     public function getWeightUnit($store = null): string
     {
         $weightUOM = $this->scopeConfigInterface->getValue(
-            self::CONFIG_XML_PATH_WEIGHT_UNIT,
+            self::CONFIG_PATH_WEIGHT_UNIT,
             ScopeInterface::SCOPE_STORE,
             $store
         );
@@ -285,7 +285,7 @@ class CoreConfig implements CoreConfigInterface
         /** @var mixed[] $configValue */
         $configValue = $this->serializer->unserialize(
             $this->scopeConfigInterface->getValue(
-                self::CONFIG_XML_PATH_OWN_PACKAGES,
+                self::CONFIG_PATH_OWN_PACKAGES,
                 ScopeInterface::SCOPE_STORE,
                 $store
             )

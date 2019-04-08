@@ -14,7 +14,7 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Quote\Model\Quote;
 
 /**
- * Class DisableCodObserver
+ * Class DisableCodPaymentMethods
  *
  * @package Dhl\ShippingCore\Model\Observer
  * @author Paul Siedler <paul.siedler@netresearch.de>
@@ -33,7 +33,7 @@ class DisableCodPaymentMethods implements ObserverInterface
     private $codSupportMap;
 
     /**
-     * DisableCodObserver constructor.
+     * DisableCodPaymentMethods constructor.
      *
      * @param CoreConfigInterface $config
      * @param CodSupportInterface[] $codSupportMap

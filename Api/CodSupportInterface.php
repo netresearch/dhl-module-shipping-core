@@ -6,12 +6,12 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api;
 
-use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
 
 /**
  * Interface CodSupportInterface
  *
+ * @api
  * @package Dhl\ShippingCore\Api
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link http://www.netresearch.de/
@@ -19,10 +19,10 @@ use Magento\Quote\Model\Quote;
 interface CodSupportInterface
 {
     /**
-     * Determines if a Carrier has support for Cash on Delivery payment methods
+     * Determines if a carrier has support for Cash on Delivery payment methods.
      *
-     * @param CartInterface|Quote $quote
+     * @param Quote $quote
      * @return bool
      */
-    public function hasCodSupport(CartInterface $quote): bool;
+    public function hasCodSupport(Quote $quote): bool;
 }
