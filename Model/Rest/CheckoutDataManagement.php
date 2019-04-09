@@ -6,16 +6,15 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Rest;
 
-use Dhl\ShippingCore\Api\Data\Selection\AssignedServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
+use Dhl\ShippingCore\Api\Data\Selection\AssignedServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataHydrator;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
 use Dhl\ShippingCore\Model\QuoteServiceSelectionFactory;
-use Dhl\ShippingCore\Model\ServiceSelectionRepository;
-use Dhl\ShippingCore\Setup\Setup;
-use Magento\Config\Model\Config\Source\YesnoFactory;
+use Dhl\ShippingCore\Model\QuoteServiceSelectionRepository;
 use Magento\Quote\Model\QuoteRepository;
+use Magento\Quote\Model\ShippingAddressManagementInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
 /**
@@ -54,9 +53,14 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
     private $serviceSelectionFactory;
 
     /**
-     * @var ServiceSelectionRepository
+     * @var QuoteServiceSelectionRepository
      */
-    private $serviceSelectionRepository;
+    private $quoteServiceSelectionRepository;
+
+    /**
+     * @var ShippingAddressManagementInterface
+     */
+    private $shippingAdressManagement;
 
     /**
      * CheckoutDataManagement constructor.
@@ -65,7 +69,8 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
      * @param CheckoutDataHydrator $checkoutDataHydrator
      * @param StoreManagerInterface $storeManager
      * @param QuoteServiceSelectionFactory $serviceSelectionFactory
-     * @param ServiceSelectionRepository $serviceSelectionRepository
+     * @param QuoteServiceSelectionRepository $quoteSelectionRepository
+     * @param ShippingAddressManagementInterface $shippingAddressManagement
      */
     public function __construct(
         QuoteRepository $quoteRepository,
@@ -73,14 +78,16 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
         CheckoutDataHydrator $checkoutDataHydrator,
         StoreManagerInterface $storeManager,
         QuoteServiceSelectionFactory $serviceSelectionFactory,
-        ServiceSelectionRepository $serviceSelectionRepository
+        QuoteServiceSelectionRepository $quoteSelectionRepository,
+        ShippingAddressManagementInterface $shippingAddressManagement
     ) {
         $this->quoteRepository = $quoteRepository;
         $this->checkoutDataProvider = $checkoutDataProvider;
         $this->checkoutDataHydrator = $checkoutDataHydrator;
         $this->storeManager = $storeManager;
         $this->serviceSelectionFactory = $serviceSelectionFactory;
-        $this->serviceSelectionRepository = $serviceSelectionRepository;
+        $this->quoteServiceSelectionRepository = $quoteSelectionRepository;
+        $this->shippingAdressManagement = $shippingAddressManagement;
     }
 
     /**
@@ -101,15 +108,17 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
     /**
      * Persist service selection with reference to a Quote Address ID.
      *
-     * @param int $quoteId
+     * @param string $quoteId
      * @param array $serviceSelection
+     *
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function setServiceSelection(int $quoteId, array $serviceSelection)
+    public function setServiceSelection(string $quoteId, array $serviceSelection)
     {
-        $quote = $this->quoteRepository->get($quoteId);
-        $addressId = $quote->getShippingAddress()->getId();
+        $addressId = (string)$this->shippingAdressManagement->get((int)$quoteId)->getId();
+        $this->quoteServiceSelectionRepository->deleteByQuoteAddressId($addressId);
 
         foreach ($serviceSelection as $service) {
             $model = $this->serviceSelectionFactory->create();
@@ -121,7 +130,7 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
                     AssignedServiceSelectionInterface::VALUE => $service->getValue()
                 ]
             );
-            $this->serviceSelectionRepository->save($model);
+            $this->quoteServiceSelectionRepository->save($model);
         }
     }
 }

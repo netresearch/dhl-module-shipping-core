@@ -18,7 +18,7 @@ interface ServiceSelectionInterface
 
     const INPUT_CODE = 'input_code';
 
-    const VALUE = 'value';
+    const VALUE = 'service_value';
 
     /**
      * Get the service code, e.g. "packstation".

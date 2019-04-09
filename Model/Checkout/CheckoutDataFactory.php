@@ -6,7 +6,7 @@ namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface;
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
-use Magento\Framework\App\ObjectManager;
+use Magento\Framework\ObjectManagerInterface;
 
 /**
  * Class CheckoutDataFactory
@@ -17,16 +17,16 @@ use Magento\Framework\App\ObjectManager;
 class CheckoutDataFactory
 {
     /**
-     * @var ObjectManager
+     * @var ObjectManagerInterface
      */
     private $objectManager;
 
     /**
      * CheckoutDataFactory constructor.
      *
-     * @param ObjectManager $objectManager
+     * @param ObjectManagerInterface $objectManager
      */
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }

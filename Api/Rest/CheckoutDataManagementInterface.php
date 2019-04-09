@@ -30,9 +30,9 @@ interface CheckoutDataManagementInterface
     public function getData(string $countryId, string $postalCode): CheckoutDataInterface;
 
     /**
-     * @param int $quoteId
+     * @param string $quoteId
      * @param \Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface[] $serviceSelection
      * @return void
      */
-    public function setServiceSelection(int $quoteId, array $serviceSelection);
+    public function setServiceSelection(string $quoteId, array $serviceSelection);
 }

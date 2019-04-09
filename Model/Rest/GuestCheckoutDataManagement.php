@@ -59,7 +59,7 @@ class GuestCheckoutDataManagement implements GuestCheckoutDataManagementInterfac
      * @param $cartId
      * @return int
      */
-    private function getQuoteId($cartId): int
+    private function getQuoteId($cartId): string
     {
         /** @var QuoteIdMask $quoteIdMask */
         $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
