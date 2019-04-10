@@ -117,6 +117,9 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
      */
     public function setServiceSelection(string $quoteId, array $serviceSelection)
     {
+        if (empty($serviceSelection)) {
+            return;
+        }
         $addressId = (string)$this->shippingAdressManagement->get((int)$quoteId)->getId();
         $this->quoteServiceSelectionRepository->deleteByQuoteAddressId($addressId);
 

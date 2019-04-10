@@ -6,10 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Observer;
 
-
 use Dhl\ShippingCore\Api\Data\Selection\AssignedServiceSelectionInterface;
-use Dhl\ShippingCore\Model\Config\CoreConfigInterface;
-use Dhl\ShippingCore\Model\OrderServiceSelection;
 use Dhl\ShippingCore\Model\OrderServiceSelectionFactory;
 use Dhl\ShippingCore\Model\OrderServiceSelectionRepository;
 use Dhl\ShippingCore\Model\QuoteServiceSelectionRepository;
@@ -18,6 +15,10 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Sales\Model\Order;
 
+/**
+ * Class PersistServiceSelectionObserver
+ * @package Dhl\ShippingCore\Observer
+ */
 class PersistServiceSelectionObserver implements ObserverInterface
 {
     /**
@@ -36,27 +37,19 @@ class PersistServiceSelectionObserver implements ObserverInterface
     private $orderSelectionServiceFactory;
 
     /**
-     * @var CoreConfigInterface
-     */
-    private $coreConfig;
-
-    /**
      * PersistServiceSelectionObserver constructor.
      * @param QuoteServiceSelectionRepository $quoteServiceSelectionRepository
      * @param OrderServiceSelectionRepository $orderServiceSelectionReposotory
      * @param OrderServiceSelectionFactory $orderSelectionServiceFactory
-     * @param CoreConfigInterface $coreConfig
      */
     public function __construct(
         QuoteServiceSelectionRepository $quoteServiceSelectionRepository,
         OrderServiceSelectionRepository $orderServiceSelectionReposotory,
-        OrderServiceSelectionFactory $orderSelectionServiceFactory,
-        CoreConfigInterface $coreConfig
+        OrderServiceSelectionFactory $orderSelectionServiceFactory
     ) {
         $this->quoteServiceSelectionRepository = $quoteServiceSelectionRepository;
         $this->orderServiceSelectionRepository = $orderServiceSelectionReposotory;
         $this->orderSelectionServiceFactory = $orderSelectionServiceFactory;
-        $this->coreConfig = $coreConfig;
     }
 
     /**
@@ -75,11 +68,16 @@ class PersistServiceSelectionObserver implements ObserverInterface
         $quote = $observer->getDataByKey('quote');
 
         if ($order->getIsVirtual()) {
-            return;
+            return $this;
         }
 
         $quoteAddressId = (string)$quote->getShippingAddress()->getId();
-        $serviceSelection = $this->quoteServiceSelectionRepository->getByQuoteAddressId($quoteAddressId);
+        try {
+            $serviceSelection = $this->quoteServiceSelectionRepository->getByQuoteAddressId($quoteAddressId);
+        } catch (\Exception $exception) {
+            return $this;
+        }
+
         foreach ($serviceSelection as $selection) {
             $model = $this->orderSelectionServiceFactory->create();
             $model->setData(
@@ -95,5 +93,4 @@ class PersistServiceSelectionObserver implements ObserverInterface
 
         return $this;
     }
-
 }
