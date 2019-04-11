@@ -42,6 +42,7 @@ class ApiLogHandler extends Base
      * @param ScopeConfigInterface $scopeConfig
      * @param string|null $filePath
      * @param string|null $fileName
+     * @throws \Exception
      */
     public function __construct(
         DriverInterface $filesystem,
@@ -59,7 +60,7 @@ class ApiLogHandler extends Base
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function isHandling(array $record): bool
     {

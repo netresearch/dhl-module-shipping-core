@@ -17,7 +17,7 @@ use Magento\Framework\Option\ArrayInterface;
 class PickupType implements ArrayInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function toOptionArray(): array
     {

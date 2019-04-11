@@ -3,7 +3,7 @@
     <system>
         <section id="shipping" showInDefault="1" showInStore="1" showInWebsite="1" translate="label tooltip comment">
             <group id="dhlglobalwebservices" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="200" translate="label tooltip comment">
-                <label><![CDATA[DHL Global Webservices configuration]]></label>
+                <label><![CDATA[DHL Global Webservices Configuration]]></label>
                 <!-- Cash On Delivery Payment Methods -->
                 <field id="cod_methods" translate="label tooltip" type="multiselect" sortOrder="210" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label><![CDATA[Cash On Delivery Payment Methods]]></label>
@@ -18,9 +18,9 @@
                     <source_model>Magento\Config\Model\Config\Source\Date\Short</source_model>
                     <tooltip><![CDATA[All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.]]></tooltip>
                 </field>
-                <!-- Terms of trade -->
+                <!-- Terms of Trade -->
                 <field id="terms_of_trade" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label tooltip comment" type="Netresearch\ConfigFields\Model\Type\Radioset">
-                    <label><![CDATA[Terms of trade]]></label>
+                    <label><![CDATA[Terms of Trade]]></label>
                     <source_model>Dhl\ShippingCore\Model\Config\Source\TermsOfTrade</source_model>
                     <tooltip><![CDATA[Select the terms of trade.]]></tooltip>
                 </field>

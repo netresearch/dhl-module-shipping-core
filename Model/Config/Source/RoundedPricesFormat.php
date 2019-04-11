@@ -31,8 +31,9 @@ class RoundedPricesFormat implements ArrayInterface
      * Static decimal key.
      */
     const STATIC_DECIMAL = 'static_decimal';
+
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function toOptionArray(): array
     {

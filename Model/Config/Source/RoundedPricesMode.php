@@ -27,7 +27,7 @@ class RoundedPricesMode implements ArrayInterface
     const ROUND_OFF = 'round_off';
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function toOptionArray(): array
     {

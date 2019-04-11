@@ -17,7 +17,7 @@ use Magento\Framework\Option\ArrayInterface;
 class ShowIfNotApplicable implements ArrayInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function toOptionArray(): array
     {
