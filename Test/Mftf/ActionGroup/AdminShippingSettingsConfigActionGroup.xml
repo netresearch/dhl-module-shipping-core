@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="NavigateToShippingSettings">
+        <amOnPage url="{{AdminShippingSettingsConfigPage.url}}" stepKey="navigateToShippingSettingsConfig"/>
+        <waitForPageLoad stepKey="waitForPageLoad"/>
+        <conditionalClick stepKey="expandDhlgwConfiguration" selector="{{AdminShippingSettingsConfigSection.shippingCoreGroup}}" dependentSelector="{{AdminShippingSettingsConfigSection.checkIfGroupExpanded}}" visible="true"/>
+    </actionGroup>
+    <actionGroup name="SelectCashOnDeliveryPaymentMethods">
+
+    </actionGroup>
+</actionGroups>

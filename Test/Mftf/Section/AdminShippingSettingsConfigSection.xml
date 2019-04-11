@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <section name="AdminShippingSettingsConfigSection">
+        <element name="shippingCoreGroup" type="button" selector="#shipping_dhlglobalwebservices-head"/>
+        <element name="checkIfGroupExpanded" type="button" selector="#shipping_dhlglobalwebservices-head:not(.open)"/>
+        <element name="codPaymentMethodSelection" type="multiselect" selector="#shipping_dhlglobalwebservices_cod_methods"/>
+        <element name="codPaymentMethodActiveSelection" type="multiselect" selector="#shipping_dhlglobalwebservices_cod_methods option[selected=selected]"/>
+    </section>
+</sections>

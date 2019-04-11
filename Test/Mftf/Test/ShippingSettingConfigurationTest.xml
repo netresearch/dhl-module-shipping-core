@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="DhlShippingCoreConfigureCodMethods">
+        <annotations>
+            <features value="Configuration"/>
+            <stories value="CoD Payment method configuration"/>
+            <title value="CoD Payment method configuration"/>
+            <description value="Verify that cash on delivery payment methods can be configured"/>
+            <severity value="CRITICAL"/>
+            <group value="dhlgw-configuration"/>
+        </annotations>
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+        </before>
+        <after>
+            <actionGroup ref="logout" stepKey="logout"/>
+        </after>
+        <actionGroup ref="NavigateToShippingSettings" stepKey="navigateToShippingSettingsConfiginTest"/>
+        <!-- Select payment methods and save -->
+        <selectOption selector="{{AdminShippingSettingsConfigSection.codPaymentMethodSelection}}" parameterArray="['Cash On Delivery', 'Check / Money order']" stepKey="selectCodPaymentMethods"/>
+        <click selector="{{AdminConfigSection.saveButton}}" stepKey="saveShippingSettingsConfig"/>
+        <waitForPageLoad stepKey="waitForSavedConfig"/>
+        <seeElement selector="{{AdminConfigSection.saveSuccessMessage}}" stepKey="seeSaveSuccessMessage"/>
+
+        <!-- Confirm selection is persisted -->
+        <grabMultiple stepKey="fetchPaymentMethods" selector="{{AdminShippingSettingsConfigSection.codPaymentMethodActiveSelection}}"/>
+        <assertCount stepKey="validateSavedPaymentMethodsCount">
+            <actualResult type="variable">fetchPaymentMethods</actualResult>
+            <expectedResult type="const">2</expectedResult>
+        </assertCount>
+        <assertContains stepKey="validateSavedPaymentMethodsA">
+            <actualResult type="variable">fetchPaymentMethods</actualResult>
+            <expectedResult type="const">"Check / Money order"</expectedResult>
+        </assertContains>
+        <assertContains stepKey="validateSavedPaymentMethodsB">
+            <actualResult type="variable">fetchPaymentMethods</actualResult>
+            <expectedResult type="const">"Cash On Delivery"</expectedResult>
+        </assertContains>
+    </test>
+</tests>
