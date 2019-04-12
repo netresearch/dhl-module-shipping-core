@@ -9,9 +9,15 @@
     <actionGroup name="NavigateToShippingSettings">
         <amOnPage url="{{AdminShippingSettingsConfigPage.url}}" stepKey="navigateToShippingSettingsConfig"/>
         <waitForPageLoad stepKey="waitForPageLoad"/>
+        <seeElement selector="{{AdminShippingSettingsConfigSection.shippingCoreGroup}}" stepKey="seeShippingCoreConfigGroup"/>
         <conditionalClick stepKey="expandDhlgwConfiguration" selector="{{AdminShippingSettingsConfigSection.shippingCoreGroup}}" dependentSelector="{{AdminShippingSettingsConfigSection.checkIfGroupExpanded}}" visible="true"/>
     </actionGroup>
-    <actionGroup name="SelectCashOnDeliveryPaymentMethods">
+    <actionGroup name="SaveAdminConfigSection">
+        <click selector="{{AdminConfigSection.saveButton}}" stepKey="saveShippingSettingsConfig"/>
+        <waitForPageLoad stepKey="waitForSavedConfig"/>
+        <seeElement selector="{{AdminConfigSection.saveSuccessMessage}}" stepKey="seeSaveSuccessMessage"/>
+    </actionGroup>
 
+    <actionGroup name="SelectCashOnDeliveryPaymentMethods">
     </actionGroup>
 </actionGroups>

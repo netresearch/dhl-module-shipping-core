@@ -21,26 +21,72 @@
         <after>
             <actionGroup ref="logout" stepKey="logout"/>
         </after>
-        <actionGroup ref="NavigateToShippingSettings" stepKey="navigateToShippingSettingsConfiginTest"/>
+        <actionGroup ref="NavigateToShippingSettings" stepKey="navigateToShippingSettingsConfigInTest"/>
+
         <!-- Select payment methods and save -->
-        <selectOption selector="{{AdminShippingSettingsConfigSection.codPaymentMethodSelection}}" parameterArray="['Cash On Delivery', 'Check / Money order']" stepKey="selectCodPaymentMethods"/>
-        <click selector="{{AdminConfigSection.saveButton}}" stepKey="saveShippingSettingsConfig"/>
-        <waitForPageLoad stepKey="waitForSavedConfig"/>
-        <seeElement selector="{{AdminConfigSection.saveSuccessMessage}}" stepKey="seeSaveSuccessMessage"/>
+        <selectOption selector="{{AdminShippingSettingsConfigSection.codPaymentMethodSelection}}"
+                      parameterArray="[{{ShippingSettingsCodData.cashOnDelivery}}, {{ShippingSettingsCodData.checkMoneyOrder}}]"
+                      stepKey="selectCodPaymentMethods"/>
+
+        <actionGroup ref="SaveAdminConfigSection" stepKey="saveAdminConfigSection"/>
 
         <!-- Confirm selection is persisted -->
         <grabMultiple stepKey="fetchPaymentMethods" selector="{{AdminShippingSettingsConfigSection.codPaymentMethodActiveSelection}}"/>
         <assertCount stepKey="validateSavedPaymentMethodsCount">
-            <actualResult type="variable">fetchPaymentMethods</actualResult>
             <expectedResult type="const">2</expectedResult>
+            <actualResult type="variable">fetchPaymentMethods</actualResult>
         </assertCount>
         <assertContains stepKey="validateSavedPaymentMethodsA">
+            <expectedResult type="string">{{ShippingSettingsCodData.checkMoneyOrder}}</expectedResult>
             <actualResult type="variable">fetchPaymentMethods</actualResult>
-            <expectedResult type="const">"Check / Money order"</expectedResult>
         </assertContains>
         <assertContains stepKey="validateSavedPaymentMethodsB">
+            <expectedResult type="string">{{ShippingSettingsCodData.cashOnDelivery}}</expectedResult>
             <actualResult type="variable">fetchPaymentMethods</actualResult>
-            <expectedResult type="const">"Cash On Delivery"</expectedResult>
         </assertContains>
+    </test>
+
+    <test name="DhlShippingCoreConfigureCutOffTime">
+        <annotations>
+            <features value="Configuration"/>
+            <stories value="Cut-off time configuration"/>
+            <title value="Cut-off time configuration"/>
+            <description value="Verify that cut-off time can be configured"/>
+            <severity value="CRITICAL"/>
+            <group value="dhlgw-configuration"/>
+        </annotations>
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+        </before>
+        <after>
+            <actionGroup ref="logout" stepKey="logout"/>
+        </after>
+        <actionGroup ref="NavigateToShippingSettings" stepKey="navigateToShippingSettingsConfigInTest"/>
+
+        <!-- Configure a cut-off time and save -->
+        <seeElement selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroup}}" stepKey="seeCutOffTimeConfigGroup"/>
+
+        <selectOption selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupHoursSelect}}"
+                      userInput="{{ShippingSettingsCutOffTimeData.hours}}"
+                      stepKey="selectCutOffTimeHour"/>
+        <selectOption selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupMinutesSelect}}"
+                      userInput="{{ShippingSettingsCutOffTimeData.minutes}}"
+                      stepKey="selectCutOffTimeMinute"/>
+        <selectOption selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupSecondsSelect}}"
+                      userInput="{{ShippingSettingsCutOffTimeData.seconds}}"
+                      stepKey="selectCutOffTimeSecond"/>
+
+        <actionGroup ref="SaveAdminConfigSection" stepKey="saveAdminConfigSection"/>
+
+        <!-- Confirm selection is persisted -->
+        <seeOptionIsSelected selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupHoursSelect}}"
+                             userInput="{{ShippingSettingsCutOffTimeData.hours}}"
+                             stepKey="validateCutOffTimeConfigGroupHoursSelect"/>
+        <seeOptionIsSelected selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupMinutesSelect}}"
+                             userInput="{{ShippingSettingsCutOffTimeData.minutes}}"
+                             stepKey="validateCutOffTimeConfigGroupMinutesSelect"/>
+        <seeOptionIsSelected selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupSecondsSelect}}"
+                             userInput="{{ShippingSettingsCutOffTimeData.seconds}}"
+                             stepKey="validateCutOffTimeConfigGroupSecondsSelect"/>
     </test>
 </tests>

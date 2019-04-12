@@ -10,5 +10,10 @@
         <element name="checkIfGroupExpanded" type="button" selector="#shipping_dhlglobalwebservices-head:not(.open)"/>
         <element name="codPaymentMethodSelection" type="multiselect" selector="#shipping_dhlglobalwebservices_cod_methods"/>
         <element name="codPaymentMethodActiveSelection" type="multiselect" selector="#shipping_dhlglobalwebservices_cod_methods option[selected=selected]"/>
+
+        <element name="cutOffTimeConfigGroup" type="text" selector="#row_shipping_dhlglobalwebservices_cut_off_time"/>
+        <element name="cutOffTimeConfigGroupHoursSelect" type="select" selector="#row_shipping_dhlglobalwebservices_cut_off_time select:nth-of-type(1)"/>
+        <element name="cutOffTimeConfigGroupMinutesSelect" type="select" selector="#row_shipping_dhlglobalwebservices_cut_off_time select:nth-of-type(2)"/>
+        <element name="cutOffTimeConfigGroupSecondsSelect" type="select" selector="#row_shipping_dhlglobalwebservices_cut_off_time select:nth-of-type(3)"/>
     </section>
 </sections>

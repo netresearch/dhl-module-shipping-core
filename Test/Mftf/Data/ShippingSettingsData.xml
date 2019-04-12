@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/dataProfileSchema.xsd">
+    <entity name="ShippingSettingsCodData" type="cod">
+        <data key="cashOnDelivery">Cash On Delivery</data>
+        <data key="checkMoneyOrder">Check / Money order</data>
+    </entity>
+    <entity name="ShippingSettingsCutOffTimeData" type="cutOffTime">
+        <data key="hours">15</data>
+        <data key="minutes">59</data>
+        <data key="seconds">59</data>
+    </entity>
+</entities>
