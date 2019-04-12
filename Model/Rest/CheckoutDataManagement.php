@@ -13,7 +13,10 @@ use Dhl\ShippingCore\Model\Checkout\CheckoutDataHydrator;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
 use Dhl\ShippingCore\Model\QuoteServiceSelectionFactory;
 use Dhl\ShippingCore\Model\QuoteServiceSelectionRepository;
-use Magento\Quote\Model\QuoteRepository;
+use Magento\Framework\Exception\CouldNotDeleteException;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\InputException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\ShippingAddressManagementInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -27,11 +30,6 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class CheckoutDataManagement implements CheckoutDataManagementInterface
 {
-    /**
-     * @var QuoteRepository
-     */
-    private $quoteRepository;
-
     /**
      * @var CheckoutDataProvider
      */
@@ -60,11 +58,11 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
     /**
      * @var ShippingAddressManagementInterface
      */
-    private $shippingAdressManagement;
+    private $shippingAddressManagement;
 
     /**
      * CheckoutDataManagement constructor.
-     * @param QuoteRepository $quoteRepository
+     *
      * @param CheckoutDataProvider $checkoutDataProvider
      * @param CheckoutDataHydrator $checkoutDataHydrator
      * @param StoreManagerInterface $storeManager
@@ -73,7 +71,6 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
      * @param ShippingAddressManagementInterface $shippingAddressManagement
      */
     public function __construct(
-        QuoteRepository $quoteRepository,
         CheckoutDataProvider $checkoutDataProvider,
         CheckoutDataHydrator $checkoutDataHydrator,
         StoreManagerInterface $storeManager,
@@ -81,21 +78,20 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
         QuoteServiceSelectionRepository $quoteSelectionRepository,
         ShippingAddressManagementInterface $shippingAddressManagement
     ) {
-        $this->quoteRepository = $quoteRepository;
         $this->checkoutDataProvider = $checkoutDataProvider;
         $this->checkoutDataHydrator = $checkoutDataHydrator;
         $this->storeManager = $storeManager;
         $this->serviceSelectionFactory = $serviceSelectionFactory;
         $this->quoteServiceSelectionRepository = $quoteSelectionRepository;
-        $this->shippingAdressManagement = $shippingAddressManagement;
+        $this->shippingAddressManagement = $shippingAddressManagement;
     }
 
     /**
      * @param string $countryId
      * @param string $postalCode
-     * @return \Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     * @throws \Magento\Framework\Exception\InputException
+     * @return CheckoutDataInterface
+     * @throws NoSuchEntityException
+     * @throws InputException
      */
     public function getData(string $countryId, string $postalCode): CheckoutDataInterface
     {
@@ -110,17 +106,16 @@ class CheckoutDataManagement implements CheckoutDataManagementInterface
      *
      * @param string $quoteId
      * @param array $serviceSelection
-     *
-     * @throws \Magento\Framework\Exception\CouldNotDeleteException
-     * @throws \Magento\Framework\Exception\CouldNotSaveException
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws CouldNotDeleteException
+     * @throws CouldNotSaveException
+     * @throws NoSuchEntityException
      */
     public function setServiceSelection(string $quoteId, array $serviceSelection)
     {
         if (empty($serviceSelection)) {
             return;
         }
-        $addressId = (string)$this->shippingAdressManagement->get((int)$quoteId)->getId();
+        $addressId = (string)$this->shippingAddressManagement->get((int)$quoteId)->getId();
         $this->quoteServiceSelectionRepository->deleteByQuoteAddressId($addressId);
 
         foreach ($serviceSelection as $service) {

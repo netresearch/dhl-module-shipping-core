@@ -12,15 +12,14 @@ use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 /**
  * Class ServiceSelectionCollection
- *
- * @package Dhl\ShippingCore\Model\ResourceModel\Order\Address
+ * @package Dhl\ShippingCore\Model\ResourceModel
  */
 class ServiceSelectionCollection extends AbstractCollection
 {
     /**
      * @inheritDoc
      */
-   protected function _construct()
+    protected function _construct()
     {
         $this->_init(OrderServiceSelection::class, ServiceSelectionResource::class);
     }

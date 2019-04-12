@@ -10,7 +10,6 @@ use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
 
 /**
  * Interface CartServiceManagementInterface
- *
  * Get Checkout Services
  *
  * @api

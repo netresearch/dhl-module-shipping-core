@@ -8,7 +8,6 @@ namespace Dhl\ShippingCore\Model;
 
 use Dhl\ShippingCore\Api\Data\Selection\AssignedServiceSelectionInterface;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelection;
-use Dhl\ShippingCore\Setup\Setup;
 use Magento\Framework\Model\AbstractModel;
 
 /**

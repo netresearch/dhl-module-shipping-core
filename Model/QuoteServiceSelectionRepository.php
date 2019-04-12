@@ -33,6 +33,7 @@ class QuoteServiceSelectionRepository
      * QuoteServiceSelectionRepository constructor.
      *
      * @param ServiceSelection $resource
+     * @param ServiceSelectionCollectionFactory $collectionFactory
      */
     public function __construct(
         ServiceSelection $resource,
@@ -47,7 +48,7 @@ class QuoteServiceSelectionRepository
      * @return QuoteServiceSelection
      * @throws CouldNotSaveException
      */
-    public function save(QuoteServiceSelection $serviceSelection)
+    public function save(QuoteServiceSelection $serviceSelection): QuoteServiceSelection
     {
         try {
             $this->resource->save($serviceSelection);
@@ -94,7 +95,7 @@ class QuoteServiceSelectionRepository
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
      */
-    public function deleteByQuoteAddressId(string $addressId): void
+    public function deleteByQuoteAddressId(string $addressId)
     {
         try {
             $items = $this->getByQuoteAddressId($addressId);
@@ -104,6 +105,5 @@ class QuoteServiceSelectionRepository
         } catch (NoSuchEntityException $e) {
             // fail silently
         }
-
     }
 }

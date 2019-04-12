@@ -12,6 +12,8 @@ use Dhl\ShippingCore\Model\OrderServiceSelectionRepository;
 use Dhl\ShippingCore\Model\QuoteServiceSelectionRepository;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\Quote;
 use Magento\Sales\Model\Order;
 
@@ -34,22 +36,22 @@ class PersistServiceSelectionObserver implements ObserverInterface
     /**
      * @var OrderServiceSelectionFactory
      */
-    private $orderSelectionServiceFactory;
+    private $orderServiceSelectionFactory;
 
     /**
      * PersistServiceSelectionObserver constructor.
      * @param QuoteServiceSelectionRepository $quoteServiceSelectionRepository
      * @param OrderServiceSelectionRepository $orderServiceSelectionReposotory
-     * @param OrderServiceSelectionFactory $orderSelectionServiceFactory
+     * @param OrderServiceSelectionFactory $orderServiceSelectionFactory
      */
     public function __construct(
         QuoteServiceSelectionRepository $quoteServiceSelectionRepository,
         OrderServiceSelectionRepository $orderServiceSelectionReposotory,
-        OrderServiceSelectionFactory $orderSelectionServiceFactory
+        OrderServiceSelectionFactory $orderServiceSelectionFactory
     ) {
         $this->quoteServiceSelectionRepository = $quoteServiceSelectionRepository;
         $this->orderServiceSelectionRepository = $orderServiceSelectionReposotory;
-        $this->orderSelectionServiceFactory = $orderSelectionServiceFactory;
+        $this->orderServiceSelectionFactory = $orderServiceSelectionFactory;
     }
 
     /**
@@ -57,8 +59,8 @@ class PersistServiceSelectionObserver implements ObserverInterface
      *
      * @param Observer $observer
      * @return $this|void
-     * @throws \Magento\Framework\Exception\CouldNotSaveException
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws CouldNotSaveException
+     * @throws NoSuchEntityException
      */
     public function execute(Observer $observer)
     {
@@ -68,18 +70,18 @@ class PersistServiceSelectionObserver implements ObserverInterface
         $quote = $observer->getDataByKey('quote');
 
         if ($order->getIsVirtual()) {
-            return $this;
+            return;
         }
 
         $quoteAddressId = (string)$quote->getShippingAddress()->getId();
         try {
             $serviceSelection = $this->quoteServiceSelectionRepository->getByQuoteAddressId($quoteAddressId);
         } catch (\Exception $exception) {
-            return $this;
+            return;
         }
 
         foreach ($serviceSelection as $selection) {
-            $model = $this->orderSelectionServiceFactory->create();
+            $model = $this->orderServiceSelectionFactory->create();
             $model->setData(
                 [
                     AssignedServiceSelectionInterface::PARENT_ID => $order->getShippingAddress()->getId(),
@@ -90,7 +92,5 @@ class PersistServiceSelectionObserver implements ObserverInterface
             );
             $this->orderServiceSelectionRepository->save($model);
         }
-
-        return $this;
     }
 }

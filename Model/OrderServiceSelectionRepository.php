@@ -33,6 +33,7 @@ class OrderServiceSelectionRepository
      * QuoteServiceSelectionRepository constructor.
      *
      * @param ServiceSelection $resource
+     * @param ServiceSelectionCollectionFactory $collectionFactory
      */
     public function __construct(
         ServiceSelection $resource,
@@ -91,9 +92,9 @@ class OrderServiceSelectionRepository
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
      */
-    public function deleteByOrderAddressId(string $addressId): void
+    public function deleteByOrderAddressId(string $addressId)
     {
-        $items = $this->getByQuoteAddressId($addressId);
+        $items = $this->getByOrderAddressId($addressId);
         foreach ($items as $item) {
             $this->delete($item);
         }

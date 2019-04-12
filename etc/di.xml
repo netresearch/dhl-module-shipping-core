@@ -13,9 +13,6 @@
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\RecipientInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Recipient"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Shipper"/>
 
-    <preference for="Dhl\ShippingCore\Model\Config\CoreConfigInterface" type="Dhl\ShippingCore\Model\Config\CoreConfig"/>
-    <preference for="Dhl\ShippingCore\Model\Config\RateConfigInterface" type="Dhl\ShippingCore\Model\Config\RateConfig"/>
-
     <preference for="Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface" type="Dhl\ShippingCore\Model\Rest\CheckoutDataManagement"/>
     <preference for="Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface" type="Dhl\ShippingCore\Model\Rest\GuestCheckoutDataManagement"/>
     <preference for="Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
@@ -30,7 +27,9 @@
     <preference for="Dhl\ShippingCore\Api\Data\Selection\CommentInterface" type="Dhl\ShippingCore\Model\Service\Comment"/>
     <preference for="Dhl\ShippingCore\Api\Data\Selection\ValidationRuleInterface" type="Dhl\ShippingCore\Model\Service\ValidationRule"/>
     <preference for="Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface" type="Dhl\ShippingCore\Model\Service\ServiceSelection"/>
-    <preference for="DHl\ShippingCore\Api\ServiceSelectionRepositoryInterface" type="\Dhl\ShippingCore\Model\ServiceSelectionRepository" />
+
+    <preference for="Dhl\ShippingCore\Model\Config\CoreConfigInterface" type="Dhl\ShippingCore\Model\Config\CoreConfig"/>
+    <preference for="Dhl\ShippingCore\Model\Config\RateConfigInterface" type="Dhl\ShippingCore\Model\Config\RateConfig"/>
 
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\Virtual\SalesTableNameIterator" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
