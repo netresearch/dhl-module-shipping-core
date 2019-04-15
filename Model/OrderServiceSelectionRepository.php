@@ -68,35 +68,4 @@ class OrderServiceSelectionRepository
             throw new CouldNotDeleteException(__('Could not delete ServiceSelection: %1', $exception->getMessage()));
         }
     }
-
-    /**
-     * @param string $addressId
-     * @return ServiceSelectionCollection
-     * @throws NoSuchEntityException
-     */
-    public function getByOrderAddressId(string $addressId): ServiceSelectionCollection
-    {
-        $collection = $this->collectionFactory->create();
-        $collection->addFilter('parent_id', $addressId);
-        if ($collection->getSize() === 0) {
-            throw new NoSuchEntityException(
-                __('ServiceSelection for quote address id "%1" does not exist.', $addressId)
-            );
-        }
-
-        return $collection;
-    }
-
-    /**
-     * @param string $addressId
-     * @throws CouldNotDeleteException
-     * @throws NoSuchEntityException
-     */
-    public function deleteByOrderAddressId(string $addressId)
-    {
-        $items = $this->getByOrderAddressId($addressId);
-        foreach ($items as $item) {
-            $this->delete($item);
-        }
-    }
 }

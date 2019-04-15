@@ -93,7 +93,6 @@ class QuoteServiceSelectionRepository
     /**
      * @param string $addressId
      * @throws CouldNotDeleteException
-     * @throws NoSuchEntityException
      */
     public function deleteByQuoteAddressId(string $addressId)
     {

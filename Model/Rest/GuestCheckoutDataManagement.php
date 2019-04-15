@@ -36,14 +36,14 @@ class GuestCheckoutDataManagement implements GuestCheckoutDataManagementInterfac
      * GuestCartServiceManagement constructor.
      *
      * @param QuoteIdMaskFactory $quoteIdMaskFactory
-     * @param CheckoutDataManagementInterface $cartServiceMngmt
+     * @param CheckoutDataManagementInterface $cartServiceManagement
      */
     public function __construct(
         QuoteIdMaskFactory $quoteIdMaskFactory,
-        CheckoutDataManagementInterface $cartServiceMngmt
+        CheckoutDataManagementInterface $cartServiceManagement
     ) {
         $this->quoteIdMaskFactory = $quoteIdMaskFactory;
-        $this->cartServiceManagement = $cartServiceMngmt;
+        $this->cartServiceManagement = $cartServiceManagement;
     }
 
     /**

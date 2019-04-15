@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ResourceModel\Order\Address;
 
-use Dhl\ShippingCore\Setup\Setup;
+use Dhl\ShippingCore\Setup\SetupSchema;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 /**
@@ -20,6 +20,6 @@ class ServiceSelection extends AbstractDb
      */
     protected function _construct()
     {
-        $this->_init(Setup::TABLE_ORDER_SERVICE_SELECTION, 'entity_id');
+        $this->_init(SetupSchema::TABLE_ORDER_SERVICE_SELECTION, 'entity_id');
     }
 }
