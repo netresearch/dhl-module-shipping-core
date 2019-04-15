@@ -163,6 +163,21 @@ class CoreConfig implements CoreConfigInterface
     }
 
     /**
+     * Maps Magento's internal unit names to SDKs unit names
+     *
+     * @param string $unit
+     * @return string
+     */
+    public function normalizeWeightUOM(string $unit): string
+    {
+        if (array_key_exists($unit, $this->weightUnitMap)) {
+            return $this->weightUnitMap[$unit];
+        }
+
+        return $unit;
+    }
+
+    /**
      * Get the general dimensions unit.
      *
      * @fixme(nr): not in use, remove?
@@ -179,6 +194,8 @@ class CoreConfig implements CoreConfigInterface
     /**
      * Maps Magento's internal unit names to SDKs unit names
      *
+     * @fixme(nr): not in use, remove?
+     *
      * @param string $unit
      * @return string
      */
@@ -192,22 +209,9 @@ class CoreConfig implements CoreConfigInterface
     }
 
     /**
-     * Maps Magento's internal unit names to SDKs unit names
-     *
-     * @param string $unit
-     * @return string
-     */
-    public function normalizeWeightUOM(string $unit): string
-    {
-        if (array_key_exists($unit, $this->weightUnitMap)) {
-            return $this->weightUnitMap[$unit];
-        }
-
-        return $unit;
-    }
-
-    /**
      * Derives the current dimensions UOM from weight UOM (so both UOMs are in SU or SI format, but always consistent)
+     *
+     * @fixme(nr): not in use, remove?
      *
      * @param string $unit
      * @return string

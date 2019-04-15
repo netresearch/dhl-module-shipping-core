@@ -22,7 +22,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase
     private $objectManager;
 
     /**
-     * @var UnitConverterInterface
+     * @var UnitConverter
      */
     private $unitConverter;
 

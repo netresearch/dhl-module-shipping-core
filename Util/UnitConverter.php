@@ -6,40 +6,45 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Util;
 
+use Dhl\ShippingCore\Api\UnitConverterInterface;
+use Magento\Directory\Helper\Data;
+use Magento\Framework\Locale\FormatInterface;
+use Magento\Shipping\Helper\Carrier;
+
 /**
  * UnitConverter
  *
  * @package  Dhl\ShippingCore\Util
  * @author   Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link     http://www.netresearch.de/
+ * @link     https://www.netresearch.de/
  */
 class UnitConverter implements UnitConverterInterface
 {
     /**
-     * @var \Magento\Framework\Locale\FormatInterface
+     * @var FormatInterface
      */
     private $localeFormat;
 
     /**
-     * @var \Magento\Directory\Helper\Data
+     * @var Data
      */
     private $currencyConverter;
 
     /**
-     * @var \Magento\Shipping\Helper\Carrier
+     * @var Carrier
      */
     private $unitConverter;
 
     /**
      * UnitConverter constructor.
-     * @param \Magento\Framework\Locale\FormatInterface $localeFormat
-     * @param \Magento\Directory\Helper\Data $currencyConverter
-     * @param \Magento\Shipping\Helper\Carrier $unitConverter
+     * @param FormatInterface $localeFormat
+     * @param Data $currencyConverter
+     * @param Carrier $unitConverter
      */
     public function __construct(
-        \Magento\Framework\Locale\FormatInterface $localeFormat,
-        \Magento\Directory\Helper\Data $currencyConverter,
-        \Magento\Shipping\Helper\Carrier $unitConverter
+        FormatInterface $localeFormat,
+        Data $currencyConverter,
+        Carrier $unitConverter
     ) {
         $this->localeFormat = $localeFormat;
         $this->currencyConverter = $currencyConverter;

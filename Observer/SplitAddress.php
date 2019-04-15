@@ -9,7 +9,7 @@ namespace Dhl\ShippingCore\Observer;
 use Dhl\ShippingCore\Api\RecipientStreetInterface;
 use Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface;
 use Dhl\ShippingCore\Model\RecipientStreetFactory;
-use Dhl\ShippingCore\Util\StreetSplitterInterface;
+use Dhl\ShippingCore\Util\StreetSplitter;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -35,7 +35,7 @@ class SplitAddress implements ObserverInterface
     private $recipientStreetRepository;
 
     /**
-     * @var StreetSplitterInterface
+     * @var StreetSplitter
      */
     private $streetSplitter;
 
@@ -48,13 +48,13 @@ class SplitAddress implements ObserverInterface
      * SplitAddress constructor.
      * @param RecipientStreetFactory $recipientStreetFactory
      * @param RecipientStreetRepositoryInterface $recipientStreetRepository
-     * @param StreetSplitterInterface $streetSplitter
+     * @param StreetSplitter $streetSplitter
      * @param string[] $carrierCodes
      */
     public function __construct(
         RecipientStreetFactory $recipientStreetFactory,
         RecipientStreetRepositoryInterface $recipientStreetRepository,
-        StreetSplitterInterface $streetSplitter,
+        StreetSplitter $streetSplitter,
         array $carrierCodes = []
     ) {
         $this->recipientStreetFactory = $recipientStreetFactory;
@@ -73,15 +73,14 @@ class SplitAddress implements ObserverInterface
     {
         /** @var Address $address */
         $address = $observer->getData('address');
-        $order = $address->getOrder();
-
-        $shippingMethod = strtok((string)$order->getShippingMethod(), '_');
-        if (!in_array($shippingMethod, $this->carrierCodes, true)) {
-            // carrier does not support split street
+        if ($address->getAddressType() !== Address::TYPE_SHIPPING) {
             return;
         }
 
-        if ($address->getAddressType() !== Address::TYPE_SHIPPING) {
+        $order = $address->getOrder();
+        $shippingMethod = strtok((string)$order->getShippingMethod(), '_');
+        if (!in_array($shippingMethod, $this->carrierCodes, true)) {
+            // carrier does not support split street
             return;
         }
 

@@ -138,6 +138,8 @@ class Package implements PackageInterface
     /**
      * Obtain weight unit of measurement.
      *
+     * Note: Shipment request passes them in as \Zend_Measure values.
+     *
      * @return string
      */
     public function getWeightUom(): string
@@ -147,6 +149,8 @@ class Package implements PackageInterface
 
     /**
      * Obtain dimensions unit of measurement.
+     *
+     * Note: Shipment request passes them in as \Zend_Measure values.
      *
      * @return string
      */

@@ -76,6 +76,21 @@ class Recipient implements RecipientInterface
     private $regionCode;
 
     /**
+     * @var string
+     */
+    private $streetName;
+
+    /**
+     * @var string
+     */
+    private $streetNumber;
+
+    /**
+     * @var string
+     */
+    private $addressAddition;
+
+    /**
      * Recipient constructor.
      * @param string $contactPersonName
      * @param string $contactPersonFirstName
@@ -89,6 +104,9 @@ class Recipient implements RecipientInterface
      * @param string $postalCode
      * @param string $countryCode
      * @param string $regionCode
+     * @param string $streetName
+     * @param string $streetNumber
+     * @param string $addressAddition
      */
     public function __construct(
         string $contactPersonName,
@@ -102,7 +120,10 @@ class Recipient implements RecipientInterface
         string $state,
         string $postalCode,
         string $countryCode,
-        string $regionCode
+        string $regionCode,
+        string $streetName,
+        string $streetNumber,
+        string $addressAddition
     ) {
         $this->contactPersonName = $contactPersonName;
         $this->contactPersonFirstName = $contactPersonFirstName;
@@ -116,6 +137,9 @@ class Recipient implements RecipientInterface
         $this->postalCode = $postalCode;
         $this->countryCode = $countryCode;
         $this->regionCode = $regionCode;
+        $this->streetName = $streetName;
+        $this->streetNumber = $streetNumber;
+        $this->addressAddition = $addressAddition;
     }
 
     /**
@@ -236,5 +260,35 @@ class Recipient implements RecipientInterface
     public function getRegionCode(): string
     {
         return $this->regionCode;
+    }
+
+    /**
+     * Obtain street name split from street.
+     *
+     * @return string
+     */
+    public function getStreetName(): string
+    {
+        return $this->streetName;
+    }
+
+    /**
+     * Obtain street number split from street.
+     *
+     * @return string
+     */
+    public function getStreetNumber(): string
+    {
+        return $this->streetNumber;
+    }
+
+    /**
+     * Obtain address addition.
+     *
+     * @return string
+     */
+    public function getAddressAddition(): string
+    {
+        return $this->addressAddition;
     }
 }

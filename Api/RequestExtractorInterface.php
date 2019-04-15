@@ -10,7 +10,6 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\RecipientInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Shipment;
 
@@ -90,19 +89,12 @@ interface RequestExtractorInterface
     public function getPackageWeight(): float;
 
     /**
-     * Extract all packages from shipment request.
+     * Extract packages from shipment request.
      *
      * @return PackageInterface[]
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getAllPackages(): array;
-
-    /**
-     * Extract current package from shipment request.
-     *
-     * @return PackageInterface
-     * @throws LocalizedException
-     */
-    public function getPackage(): PackageInterface;
+    public function getPackages(): array;
 
     /**
      * Obtain all items from all packages.

@@ -16,7 +16,10 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterfaceFactory;
 use Dhl\ShippingCore\Api\RequestExtractorInterface;
 use Dhl\ShippingCore\Model\Config\CoreConfigInterface;
+use Dhl\ShippingCore\Model\RecipientStreetRepository;
+use Dhl\ShippingCore\Util\StreetSplitter;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Model\Shipment\Request;
@@ -36,6 +39,16 @@ class RequestExtractor implements RequestExtractorInterface
      * @var Request
      */
     private $shipmentRequest;
+
+    /**
+     * @var StreetSplitter
+     */
+    private $streetSplitter;
+
+    /**
+     * @var RecipientStreetRepository
+     */
+    private $recipientStreetRepository;
 
     /**
      * @var CoreConfigInterface
@@ -86,26 +99,32 @@ class RequestExtractor implements RequestExtractorInterface
      * RequestExtractor constructor.
      *
      * @param Request $shipmentRequest
-     * @param CoreConfigInterface $config
+     * @param StreetSplitter $streetSplitter
+     * @param RecipientStreetRepository $recipientStreetRepository
      * @param ShipperInterfaceFactory $shipperFactory
      * @param RecipientInterfaceFactory $recipientFactory
      * @param PackageInterfaceFactory $packageFactory
      * @param PackageItemInterfaceFactory $packageItemFactory
+     * @param CoreConfigInterface $config
      */
     public function __construct(
         Request $shipmentRequest,
-        CoreConfigInterface $config,
+        StreetSplitter $streetSplitter,
+        RecipientStreetRepository $recipientStreetRepository,
         ShipperInterfaceFactory $shipperFactory,
         RecipientInterfaceFactory $recipientFactory,
         PackageInterfaceFactory $packageFactory,
-        PackageItemInterfaceFactory $packageItemFactory
+        PackageItemInterfaceFactory $packageItemFactory,
+        CoreConfigInterface $config
     ) {
         $this->shipmentRequest = $shipmentRequest;
-        $this->config = $config;
+        $this->streetSplitter = $streetSplitter;
+        $this->recipientStreetRepository = $recipientStreetRepository;
         $this->shipperFactory = $shipperFactory;
         $this->recipientFactory = $recipientFactory;
         $this->packageFactory = $packageFactory;
         $this->packageItemFactory = $packageItemFactory;
+        $this->config = $config;
     }
 
     /**
@@ -166,23 +185,33 @@ class RequestExtractor implements RequestExtractorInterface
     public function getShipper(): ShipperInterface
     {
         if (empty($this->shipper)) {
-            $this->shipper = $this->shipperFactory->create([
-                'contactPersonName' => (string) $this->shipmentRequest->getShipperContactPersonName(),
-                'contactPersonFirstName' => (string) $this->shipmentRequest->getShipperContactPersonFirstName(),
-                'contactPersonLastName' => (string) $this->shipmentRequest->getShipperContactPersonLastName(),
-                'contactCompanyName' => (string) $this->shipmentRequest->getShipperContactCompanyName(),
-                'contactEmail' => (string) $this->shipmentRequest->getData('shipper_email'),
-                'contactPhoneNumber' => (string) $this->shipmentRequest->getShipperContactPhoneNumber(),
+            $street = (string)$this->shipmentRequest->getShipperAddressStreet();
+            $streetParts = $this->streetSplitter->splitStreet($street);
+            $streetData = [
+                'streetName' => $streetParts['street_name'],
+                'streetNumber' => $streetParts['street_number'],
+                'addressAddition' => $streetParts['supplement'],
+            ];
+
+            $shipperData = [
+                'contactPersonName' => (string)$this->shipmentRequest->getShipperContactPersonName(),
+                'contactPersonFirstName' => (string)$this->shipmentRequest->getShipperContactPersonFirstName(),
+                'contactPersonLastName' => (string)$this->shipmentRequest->getShipperContactPersonLastName(),
+                'contactCompanyName' => (string)$this->shipmentRequest->getShipperContactCompanyName(),
+                'contactEmail' => (string)$this->shipmentRequest->getData('shipper_email'),
+                'contactPhoneNumber' => (string)$this->shipmentRequest->getShipperContactPhoneNumber(),
                 'street' => [
-                    (string) $this->shipmentRequest->getShipperAddressStreet(),
-                    (string) $this->shipmentRequest->getShipperAddressStreet1(),
-                    (string) $this->shipmentRequest->getShipperAddressStreet2(),
+                    $this->shipmentRequest->getShipperAddressStreet1(),
+                    $this->shipmentRequest->getShipperAddressStreet2(),
                 ],
                 'city' => (string) $this->shipmentRequest->getShipperAddressCity(),
                 'state' => (string) $this->shipmentRequest->getShipperAddressStateOrProvinceCode(),
                 'postalCode' => (string) $this->shipmentRequest->getShipperAddressPostalCode(),
                 'countryCode' => (string) $this->shipmentRequest->getShipperAddressCountryCode(),
-            ]);
+            ];
+
+            $shipperData = array_merge($shipperData, $streetData);
+            $this->shipper = $this->shipperFactory->create($shipperData);
         }
 
         return $this->shipper;
@@ -196,24 +225,42 @@ class RequestExtractor implements RequestExtractorInterface
     public function getRecipient(): RecipientInterface
     {
         if (empty($this->recipient)) {
-            $this->recipient = $this->recipientFactory->create([
-                'contactPersonName' => (string) $this->shipmentRequest->getRecipientContactPersonName(),
-                'contactPersonFirstName' => (string) $this->shipmentRequest->getRecipientContactPersonFirstName(),
-                'contactPersonLastName' => (string) $this->shipmentRequest->getRecipientContactPersonLastName(),
-                'contactCompanyName' => (string) $this->shipmentRequest->getRecipientContactCompanyName(),
-                'contactEmail' => (string) $this->shipmentRequest->getData('recipient_email'),
-                'contactPhoneNumber' => (string) $this->shipmentRequest->getRecipientContactPhoneNumber(),
+            try {
+                $shippingAddressId = (int) $this->getOrder()->getData('shipping_address_id');
+                $recipientStreet = $this->recipientStreetRepository->get($shippingAddressId);
+                $streetData = [
+                    'streetName' => $recipientStreet->getName(),
+                    'streetNumber' => $recipientStreet->getNumber(),
+                    'addressAddition' => $recipientStreet->getSupplement(),
+                ];
+            } catch (NoSuchEntityException $exception) {
+                $streetData = [
+                    'streetName' => '',
+                    'streetNumber' => '',
+                    'addressAddition' => '',
+                ];
+            }
+
+            $recipientData = [
+                'contactPersonName' => (string)$this->shipmentRequest->getRecipientContactPersonName(),
+                'contactPersonFirstName' => (string)$this->shipmentRequest->getRecipientContactPersonFirstName(),
+                'contactPersonLastName' => (string)$this->shipmentRequest->getRecipientContactPersonLastName(),
+                'contactCompanyName' => (string)$this->shipmentRequest->getRecipientContactCompanyName(),
+                'contactEmail' => (string)$this->shipmentRequest->getData('recipient_email'),
+                'contactPhoneNumber' => (string)$this->shipmentRequest->getRecipientContactPhoneNumber(),
                 'street' => [
-                    (string) $this->shipmentRequest->getRecipientAddressStreet(),
-                    (string) $this->shipmentRequest->getRecipientAddressStreet1(),
-                    (string) $this->shipmentRequest->getRecipientAddressStreet2(),
+                    $this->shipmentRequest->getRecipientAddressStreet1(),
+                    $this->shipmentRequest->getRecipientAddressStreet2(),
                 ],
                 'city' => (string) $this->shipmentRequest->getRecipientAddressCity(),
                 'state' => (string) $this->shipmentRequest->getRecipientAddressStateOrProvinceCode(),
                 'postalCode' => (string) $this->shipmentRequest->getRecipientAddressPostalCode(),
                 'countryCode' => (string) $this->shipmentRequest->getRecipientAddressCountryCode(),
                 'regionCode' => (string) $this->shipmentRequest->getData('address_region_code'),
-            ]);
+            ];
+
+            $recipientData = array_merge($recipientData, $streetData);
+            $this->recipient = $this->recipientFactory->create($recipientData);
         }
 
         return $this->recipient;
@@ -240,11 +287,12 @@ class RequestExtractor implements RequestExtractorInterface
     }
 
     /**
-     * Extract all packages from shipment request.
+     * Extract packages from shipment request.
      *
      * @return PackageInterface[]
+     * @throws LocalizedException
      */
-    public function getAllPackages(): array
+    public function getPackages(): array
     {
         if (empty($this->packages)) {
             $this->packages = array_map(function (array $packageData) {
@@ -268,25 +316,18 @@ class RequestExtractor implements RequestExtractorInterface
             }, $this->shipmentRequest->getData('packages'));
         }
 
-        return $this->packages;
-    }
-
-    /**
-     * Extract current package from shipment request.
-     *
-     * @return PackageInterface
-     * @throws LocalizedException
-     */
-    public function getPackage(): PackageInterface
-    {
         $packageId = $this->shipmentRequest->getData('package_id');
-        $packages = $this->getAllPackages();
+        if ($packageId === null) {
+            // no dedicated package requested, return all packages
+            return $this->packages;
+        }
 
-        if (!isset($packages[$packageId])) {
+        if (!isset($this->packages[$packageId])) {
+            // requested package not found
             throw new LocalizedException(__('Package #%1 not found in shipment request.', $packageId));
         }
 
-        return $packages[$packageId];
+        return [$packageId => $this->packages[$packageId]];
     }
 
     /**

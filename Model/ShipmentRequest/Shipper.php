@@ -71,6 +71,21 @@ class Shipper implements ShipperInterface
     private $countryCode;
 
     /**
+     * @var string
+     */
+    private $streetName;
+
+    /**
+     * @var string
+     */
+    private $streetNumber;
+
+    /**
+     * @var string
+     */
+    private $addressAddition;
+
+    /**
      * Shipper constructor.
      * @param string $contactPersonName
      * @param string $contactPersonFirstName
@@ -83,6 +98,9 @@ class Shipper implements ShipperInterface
      * @param string $state
      * @param string $postalCode
      * @param string $countryCode
+     * @param string $streetName
+     * @param string $streetNumber
+     * @param string $addressAddition
      */
     public function __construct(
         string $contactPersonName,
@@ -95,7 +113,10 @@ class Shipper implements ShipperInterface
         string $city,
         string $state,
         string $postalCode,
-        string $countryCode
+        string $countryCode,
+        string $streetName,
+        string $streetNumber,
+        string $addressAddition
     ) {
         $this->contactPersonName = $contactPersonName;
         $this->contactPersonFirstName = $contactPersonFirstName;
@@ -108,6 +129,9 @@ class Shipper implements ShipperInterface
         $this->state = $state;
         $this->postalCode = $postalCode;
         $this->countryCode = $countryCode;
+        $this->streetName = $streetName;
+        $this->streetNumber = $streetNumber;
+        $this->addressAddition = $addressAddition;
     }
 
     /**
@@ -218,5 +242,35 @@ class Shipper implements ShipperInterface
     public function getCountryCode(): string
     {
         return $this->countryCode;
+    }
+
+    /**
+     * Obtain shipper street name.
+     *
+     * @return string
+     */
+    public function getStreetName(): string
+    {
+        return $this->streetName;
+    }
+
+    /**
+     * Obtain shipper street number.
+     *
+     * @return string
+     */
+    public function getStreetNumber(): string
+    {
+        return $this->streetNumber;
+    }
+
+    /**
+     * Obtain shipper address addition.
+     *
+     * @return string
+     */
+    public function getAddressAddition(): string
+    {
+        return $this->addressAddition;
     }
 }

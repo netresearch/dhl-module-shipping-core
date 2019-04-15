@@ -64,6 +64,27 @@ interface RecipientInterface
     public function getStreet(): array;
 
     /**
+     * Obtain shipper street name.
+     *
+     * @return string
+     */
+    public function getStreetName(): string;
+
+    /**
+     * Obtain shipper street number.
+     *
+     * @return string
+     */
+    public function getStreetNumber(): string;
+
+    /**
+     * Obtain shipper address addition.
+     *
+     * @return string
+     */
+    public function getAddressAddition(): string;
+
+    /**
      * Obtain recipient city.
      *
      * @return string

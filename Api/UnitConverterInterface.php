@@ -4,14 +4,15 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Util;
+namespace Dhl\ShippingCore\Api;
 
 /**
  * Interface UnitConverterInterface
  *
- * @package Dhl\ShippingCore\Util
+ * @api
+ * @package Dhl\ShippingCore\Api
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
 interface UnitConverterInterface
 {
