@@ -7,11 +7,9 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model;
 
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelection;
-use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelectionCollection;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelectionCollectionFactory;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\NoSuchEntityException;
 
 /**
  * Class OrderServiceSelectionRepository
@@ -45,6 +43,7 @@ class OrderServiceSelectionRepository
 
     /**
      * @param OrderServiceSelection $serviceSelection
+     * @return OrderServiceSelection
      * @throws CouldNotSaveException
      */
     public function save(OrderServiceSelection $serviceSelection)
@@ -52,8 +51,10 @@ class OrderServiceSelectionRepository
         try {
             $this->resource->save($serviceSelection);
         } catch (\Exception $exception) {
-            throw new CouldNotSaveException(__('Could not save: %1', $exception->getMessage()));
+            throw new CouldNotSaveException(__('Could not save service selection.'), $exception);
         }
+
+        return $serviceSelection;
     }
 
     /**
@@ -65,7 +66,7 @@ class OrderServiceSelectionRepository
         try {
             $this->resource->delete($serviceSelection);
         } catch (\Exception $exception) {
-            throw new CouldNotDeleteException(__('Could not delete ServiceSelection: %1', $exception->getMessage()));
+            throw new CouldNotDeleteException(__('Could not delete service selection.'), $exception);
         }
     }
 }

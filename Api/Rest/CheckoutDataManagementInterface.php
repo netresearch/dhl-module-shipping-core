@@ -13,11 +13,10 @@ use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
  * Get Checkout Services
  *
  * @api
- * @package  Dhl\Shipping\Api
- * @author   Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @author   Max Melzer <max.melzer@netresearch.de>
- * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link     http://www.netresearch.de/
+ * @package Dhl\Shipping\Api
+ * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @author  Max Melzer <max.melzer@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 interface CheckoutDataManagementInterface
 {
@@ -29,9 +28,9 @@ interface CheckoutDataManagementInterface
     public function getData(string $countryId, string $postalCode): CheckoutDataInterface;
 
     /**
-     * @param string $quoteId
+     * @param int $cartId
      * @param \Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface[] $serviceSelection
      * @return void
      */
-    public function setServiceSelection(string $quoteId, array $serviceSelection);
+    public function updateServiceSelection(int $cartId, array $serviceSelection);
 }

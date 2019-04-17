@@ -13,8 +13,8 @@ use Magento\Quote\Model\Quote;
  *
  * @api
  * @package Dhl\ShippingCore\Api
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @author  Paul Siedler <paul.siedler@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 interface CodSupportInterface
 {

@@ -14,7 +14,7 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
  *
  * @package Dhl\ShippingCore\Model\Emulation
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
 class RateRequestService implements \Dhl\ShippingCore\Api\RateRequestEmulationInterface
 {

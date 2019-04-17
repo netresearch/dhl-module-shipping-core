@@ -8,7 +8,8 @@ namespace Dhl\ShippingCore\Api\Data\Selection;
 /**
  * Interface ValidationRuleInterface
  *
- * @package Dhl\ShippingCore\Api
+ * @api
+ * @package Dhl\ShippingCore\Api\Data
  */
 interface ValidationRuleInterface
 {

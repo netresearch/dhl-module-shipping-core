@@ -15,7 +15,6 @@ use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
  */
 class ServiceSelection extends AbstractDb
 {
-
     /**
      * Resource initialization
      */

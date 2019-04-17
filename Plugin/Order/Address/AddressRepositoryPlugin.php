@@ -19,7 +19,7 @@ use Magento\Sales\Model\ResourceModel\Order\Address\Collection;
  *
  * @package Dhl\ShippingCore\Plugin\Order\Address
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
 class AddressRepositoryPlugin
 {

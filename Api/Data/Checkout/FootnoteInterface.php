@@ -9,7 +9,8 @@ namespace Dhl\ShippingCore\Api\Data\Checkout;
 /**
  * Interface FootnoteInterface
  *
- * @package Dhl\ShippingCore\Api
+ * @api
+ * @package Dhl\ShippingCore\Api\Data
  */
 interface FootnoteInterface
 {

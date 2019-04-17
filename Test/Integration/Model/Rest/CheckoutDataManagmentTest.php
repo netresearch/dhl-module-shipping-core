@@ -5,12 +5,15 @@
 
 namespace Dhl\ShippingCore\Test\Integration\Model\Rest;
 
+use Dhl\ShippingCore\Api\Data\Selection\AssignedServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
 use Dhl\ShippingCore\Model\Checkout\CheckoutData;
 use Dhl\ShippingCore\Model\QuoteServiceSelectionRepository;
 use Dhl\ShippingCore\Model\Rest\CheckoutDataManagement;
 use Dhl\ShippingCore\Test\Integration\Fixture\QuoteFixture;
+use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\ShippingAddressManagementInterface;
 use Magento\TestFramework\Helper\Bootstrap;
@@ -19,9 +22,8 @@ use Magento\TestFramework\Helper\Bootstrap;
  * Class CheckoutDataManagmentTest
  *
  * @package Dhl\ShippingCore\Test\Model\Rest
- * @author    Max Melzer <max.melzer@netresearch.de>
- * @copyright 2019 Netresearch DTT GmbH
- * @link      http://www.netresearch.de/
+ * @author  Max Melzer <max.melzer@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 class CheckoutDataManagmentTest extends \PHPUnit\Framework\TestCase
 {
@@ -73,16 +75,26 @@ class CheckoutDataManagmentTest extends \PHPUnit\Framework\TestCase
         $quote->load('test01', 'reserved_order_id');
 
         $quoteId = (string)$quote->getId();
-        $subject->setServiceSelection($quoteId, [$serviceSelection]);
+        $subject->updateServiceSelection($quoteId, [$serviceSelection]);
 
         $addressMngt = $this->objectManager->create(ShippingAddressManagementInterface::class);
         $addressId = $addressMngt->get($quoteId)->getId();
+
         /** @var QuoteServiceSelectionRepository $serviceSelectionRepo */
         $serviceSelectionRepo = $this->objectManager->get(QuoteServiceSelectionRepository::class);
+        $filterBuilder = $this->objectManager->create(FilterBuilder::class);
+        $searchCriteriaBuilder = $this->objectManager->create(SearchCriteriaBuilder::class);
 
         /** @var ServiceSelectionInterface $storedServiceSelection */
-        $storedServiceSelection = $serviceSelectionRepo->getByQuoteAddressId($addressId)->getFirstItem();
-        $this->assertEquals($storedServiceSelection->getValue(), $serviceSelection->getValue());
+        $addressFilter = $filterBuilder
+            ->setField(AssignedServiceSelectionInterface::PARENT_ID)
+            ->setValue($quote->getShippingAddress()->getId())
+            ->setConditionType('eq')
+            ->create();
+
+        $searchCriteria = $searchCriteriaBuilder->addFilter($addressFilter)->create();
+        $storedServiceSelection = $serviceSelectionRepo->getList($searchCriteria)->fetchItem();
+        $this->assertEquals($storedServiceSelection->getInputValue(), $serviceSelection->getInputValue());
         $this->assertEquals($storedServiceSelection->getInputCode(), $serviceSelection->getInputCode());
         $this->assertEquals($storedServiceSelection->getServiceCode(), $serviceSelection->getServiceCode());
     }

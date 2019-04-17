@@ -83,7 +83,18 @@
             <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\ResourceModel\RecipientStreet">
+
+    <type name="\Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelection">
+        <arguments>
+            <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\SetupSchema::SALES_CONNECTION_NAME</argument>
+        </arguments>
+    </type>
+    <type name="Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ServiceSelection">
+        <arguments>
+            <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\SetupSchema::CHECKOUT_CONNECTION_NAME</argument>
+        </arguments>
+    </type>
+    <type name="\Dhl\ShippingCore\Model\ResourceModel\RecipientStreet">
         <arguments>
             <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
         </arguments>

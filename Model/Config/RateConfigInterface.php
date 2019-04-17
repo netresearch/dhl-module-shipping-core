@@ -10,7 +10,7 @@ namespace Dhl\ShippingCore\Model\Config;
  * Interface RateConfigInterface
  *
  * @author    Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link      http://www.netresearch.de/
+ * @link      https://www.netresearch.de/
  */
 interface RateConfigInterface
 {

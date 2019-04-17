@@ -16,7 +16,7 @@ use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetup;
 
 /**
- * Class ShippingSetup
+ * Class SetupData
  *
  * @package Dhl\ShippingCore\Setup
  */

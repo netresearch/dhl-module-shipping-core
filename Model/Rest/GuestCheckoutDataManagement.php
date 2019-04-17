@@ -9,61 +9,63 @@ namespace Dhl\ShippingCore\Model\Rest;
 use Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface;
 use Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface;
-use Magento\Quote\Model\QuoteIdMask;
-use Magento\Quote\Model\QuoteIdMaskFactory;
+use Magento\Framework\Exception\CouldNotDeleteException;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Quote\Model\GuestCart\GuestShippingAddressManagementInterface;
 
 /**
  * Class GuestCheckoutDataManagement
  *
  * @package Dhl\ShippingCore\Model\Rest
- * @author    Max Melzer <max.melzer@netresearch.de>
- * @copyright 2019 Netresearch DTT GmbH
- * @link      http://www.netresearch.de/
+ * @author  Max Melzer <max.melzer@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 class GuestCheckoutDataManagement implements GuestCheckoutDataManagementInterface
 {
     /**
-     * @var QuoteIdMaskFactory
+     * @var GuestShippingAddressManagementInterface
      */
-    private $quoteIdMaskFactory;
+    private $addressManagement;
 
     /**
-     * @var CheckoutDataManagementInterface
+     * @var CheckoutDataManagementInterface|CheckoutDataManagement
      */
-    private $cartServiceManagement;
+    private $serviceManagement;
 
     /**
      * GuestCartServiceManagement constructor.
      *
-     * @param QuoteIdMaskFactory $quoteIdMaskFactory
-     * @param CheckoutDataManagementInterface $cartServiceManagement
+     * @param GuestShippingAddressManagementInterface $addressManagement
+     * @param CheckoutDataManagementInterface $serviceManagement
      */
     public function __construct(
-        QuoteIdMaskFactory $quoteIdMaskFactory,
-        CheckoutDataManagementInterface $cartServiceManagement
+        GuestShippingAddressManagementInterface $addressManagement,
+        CheckoutDataManagementInterface $serviceManagement
     ) {
-        $this->quoteIdMaskFactory = $quoteIdMaskFactory;
-        $this->cartServiceManagement = $cartServiceManagement;
+        $this->addressManagement = $addressManagement;
+        $this->serviceManagement = $serviceManagement;
     }
 
     /**
+     * Persist service selection.
+     *
+     * @fixme(nr): are webapi exceptions handled properly?
+     *
      * @param string $cartId
      * @param ServiceSelectionInterface[] $serviceSelection
+     * @throws CouldNotDeleteException
+     * @throws CouldNotSaveException
+     * @throws NoSuchEntityException
      */
-    public function setServiceSelection(string $cartId, array $serviceSelection)
+    public function updateServiceSelection(string $cartId, array $serviceSelection)
     {
-        $this->cartServiceManagement->setServiceSelection($this->getQuoteId($cartId), $serviceSelection);
-    }
+        if (empty($serviceSelection)) {
+            return;
+        }
 
-    /**
-     * @param $cartId
-     * @return int
-     */
-    private function getQuoteId($cartId): string
-    {
-        /** @var QuoteIdMask $quoteIdMask */
-        $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
-
-        return $quoteIdMask->getData('quote_id');
+        $shippingAddressId = (int) $this->addressManagement->get($cartId)->getId();
+        $this->serviceManagement->deleteServiceValues($shippingAddressId);
+        $this->serviceManagement->saveServiceValues($shippingAddressId, $serviceSelection);
     }
 }

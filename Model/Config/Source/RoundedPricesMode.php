@@ -12,7 +12,7 @@ use Magento\Framework\Option\ArrayInterface;
  * Class Rounded prices
  *
  * @author    Ronny Gertler <ronny.gertler@netresearch.de>
- * @link      http://www.netresearch.de/
+ * @link      https://www.netresearch.de/
  */
 class RoundedPricesMode implements ArrayInterface
 {

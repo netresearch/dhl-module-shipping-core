@@ -12,8 +12,8 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
  * Class RateRequestService
  *
  * @package Dhl\ShippingCore\Model\Emulation
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @author  Paul Siedler <paul.siedler@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 interface RateRequestEmulationInterface
 {

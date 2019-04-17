@@ -53,8 +53,8 @@ class OrderServiceSelection extends AbstractModel implements AssignedServiceSele
     /**
      * @inheritDoc
      */
-    public function getValue(): string
+    public function getInputValue(): string
     {
-        return (string) $this->getData(self::VALUE);
+        return (string) $this->getData(self::INPUT_VALUE);
     }
 }

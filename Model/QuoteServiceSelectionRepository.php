@@ -9,9 +9,10 @@ namespace Dhl\ShippingCore\Model;
 use Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ServiceSelection;
 use Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ServiceSelectionCollection;
 use Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ServiceSelectionCollectionFactory;
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\NoSuchEntityException;
 
 /**
  * Class QuoteServiceSelectionRepository
@@ -20,27 +21,47 @@ use Magento\Framework\Exception\NoSuchEntityException;
 class QuoteServiceSelectionRepository
 {
     /**
-     * @var ServiceSelection
-     */
-    private $resource;
-
-    /**
      * @var ServiceSelectionCollectionFactory
      */
     private $collectionFactory;
 
     /**
+     * @var CollectionProcessorInterface
+     */
+    private $collectionProcessor;
+
+    /**
+     * @var ServiceSelection
+     */
+    private $resource;
+
+    /**
      * QuoteServiceSelectionRepository constructor.
      *
-     * @param ServiceSelection $resource
      * @param ServiceSelectionCollectionFactory $collectionFactory
+     * @param CollectionProcessorInterface $collectionProcessor
+     * @param ServiceSelection $resource
      */
     public function __construct(
-        ServiceSelection $resource,
-        ServiceSelectionCollectionFactory $collectionFactory
+        ServiceSelectionCollectionFactory $collectionFactory,
+        CollectionProcessorInterface $collectionProcessor,
+        ServiceSelection $resource
     ) {
-        $this->resource = $resource;
         $this->collectionFactory = $collectionFactory;
+        $this->collectionProcessor = $collectionProcessor;
+        $this->resource = $resource;
+    }
+
+    /**
+     * @param SearchCriteriaInterface $searchCriteria
+     * @return ServiceSelectionCollection
+     */
+    public function getList(SearchCriteriaInterface $searchCriteria)
+    {
+        $searchResult = $this->collectionFactory->create();
+        $this->collectionProcessor->process($searchCriteria, $searchResult);
+
+        return $searchResult;
     }
 
     /**
@@ -53,7 +74,7 @@ class QuoteServiceSelectionRepository
         try {
             $this->resource->save($serviceSelection);
         } catch (\Exception $exception) {
-            throw new CouldNotSaveException(__('Could not save: %1', $exception->getMessage()));
+            throw new CouldNotSaveException(__('Could not save service selection.'), $exception);
         }
 
         return $serviceSelection;
@@ -68,41 +89,7 @@ class QuoteServiceSelectionRepository
         try {
             $this->resource->delete($serviceSelection);
         } catch (\Exception $exception) {
-            throw new CouldNotDeleteException(__('Could not delete ServiceSelection: %1', $exception->getMessage()));
-        }
-    }
-
-    /**
-     * @param string $addressId
-     * @return ServiceSelectionCollection
-     * @throws NoSuchEntityException
-     */
-    public function getByQuoteAddressId(string $addressId): ServiceSelectionCollection
-    {
-        $collection = $this->collectionFactory->create();
-        $collection->addFilter('parent_id', $addressId);
-        if ($collection->getSize() === 0) {
-            throw new NoSuchEntityException(
-                __('ServiceSelection for quote address id "%1" does not exist.', $addressId)
-            );
-        }
-
-        return $collection;
-    }
-
-    /**
-     * @param string $addressId
-     * @throws CouldNotDeleteException
-     */
-    public function deleteByQuoteAddressId(string $addressId)
-    {
-        try {
-            $items = $this->getByQuoteAddressId($addressId);
-            foreach ($items as $item) {
-                $this->delete($item);
-            }
-        } catch (NoSuchEntityException $e) {
-            // fail silently
+            throw new CouldNotDeleteException(__('Could not delete service selection.'), $exception);
         }
     }
 }

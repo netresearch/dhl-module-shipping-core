@@ -8,7 +8,8 @@ namespace Dhl\ShippingCore\Api\Data\Selection;
 /**
  * Interface CommentInterface
  *
- * @package Dhl\ShippingCore\Api
+ * @api
+ * @package Dhl\ShippingCore\Api\Data
  */
 interface CommentInterface
 {

@@ -29,20 +29,20 @@ class ServiceSelection implements ServiceSelectionInterface
     /**
      * @var string
      */
-    private $value;
+    private $inputValue;
 
     /**
      * ServiceSelection constructor.
      *
      * @param string $serviceCode
      * @param string $inputCode
-     * @param string $value
+     * @param string $inputValue
      */
-    public function __construct(string $serviceCode, string $inputCode, string $value)
+    public function __construct(string $serviceCode, string $inputCode, string $inputValue)
     {
         $this->serviceCode = $serviceCode;
         $this->inputCode = $inputCode;
-        $this->value = $value;
+        $this->inputValue = $inputValue;
     }
 
     /**
@@ -64,8 +64,8 @@ class ServiceSelection implements ServiceSelectionInterface
     /**
      * @return string
      */
-    public function getValue(): string
+    public function getInputValue(): string
     {
-        return $this->value;
+        return $this->inputValue;
     }
 }

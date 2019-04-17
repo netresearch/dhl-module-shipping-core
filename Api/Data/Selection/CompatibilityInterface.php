@@ -8,12 +8,13 @@ namespace Dhl\ShippingCore\Api\Data\Selection;
 /**
  * Interface CompatibilityInterface
  *
- * @package Dhl\ShippingCore\Api
+ * @api
+ * @package Dhl\ShippingCore\Api\Data
  */
 interface CompatibilityInterface
 {
     /**
-     * Returns a list of service codes or compund codes ({serviceCode}.{inputCode})
+     * Returns a list of service codes or compound codes ({serviceCode}.{inputCode})
      * that should be affected by this rule.
      *
      * When not using a compound code to target a specific input, all inputs of the service will be treated as

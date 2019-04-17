@@ -18,7 +18,7 @@ interface ServiceSelectionInterface
 
     const INPUT_CODE = 'input_code';
 
-    const VALUE = 'service_value';
+    const INPUT_VALUE = 'input_value';
 
     /**
      * Get the service code, e.g. "packstation".
@@ -35,9 +35,9 @@ interface ServiceSelectionInterface
     public function getInputCode(): string;
 
     /**
-     * Get the service value, e.g. 520 (packstationNumber) or 12345678 (postNumber).
+     * Get the input value, e.g. 520 (packstationNumber) or 12345678 (postNumber).
      *
      * @return string
      */
-    public function getValue(): string;
+    public function getInputValue(): string;
 }

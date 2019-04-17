@@ -12,9 +12,8 @@ use Dhl\ShippingCore\Api\Data\Selection\ServiceInterface;
  * Class Service
  *
  * @package Dhl\ShippingCore\Model\Service
- * @author    Max Melzer <max.melzer@netresearch.de>
- * @copyright 2019 Netresearch DTT GmbH
- * @link      http://www.netresearch.de/
+ * @author  Max Melzer <max.melzer@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 class Service implements ServiceInterface
 {
@@ -155,7 +154,7 @@ class Service implements ServiceInterface
     }
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Selection\InputInterface[]
+     * @return InputInterface[]
      */
     public function getInputs(): array
     {

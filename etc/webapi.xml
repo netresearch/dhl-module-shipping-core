@@ -10,17 +10,17 @@
     </route>
 
     <route url="/V1/carts/mine/dhl/services/set-selection" method="POST">
-        <service class="Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface" method="setServiceSelection"/>
+        <service class="Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface" method="updateServiceSelection"/>
         <resources>
             <resource ref="self" />
         </resources>
         <data>
-            <parameter name="quoteId" force="true">%cart_id%</parameter>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
         </data>
     </route>
 
     <route url="/V1/guest-carts/:cartId/dhl/services/set-selection" method="POST">
-        <service class="Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface" method="setServiceSelection"/>
+        <service class="Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface" method="updateServiceSelection"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>

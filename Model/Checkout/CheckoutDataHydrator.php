@@ -56,7 +56,7 @@ class CheckoutDataHydrator
                 'create',
                 ['carrierData' => $data]
             );
-            /** Unwrap uneccessarily nested array. */
+            /** Unwrap unnecessarily nested array. */
             $carrierData = array_shift($carrierData);
 
             return $this->checkoutDataFactory->create($carrierData);

@@ -10,8 +10,8 @@ namespace Dhl\ShippingCore\Api\Data;
  * Interface MethodAdditionalInfoInterface
  *
  * @package Dhl\ShippingCore\Api\Data
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @author  Paul Siedler <paul.siedler@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 interface MethodAdditionalInfoInterface
 {

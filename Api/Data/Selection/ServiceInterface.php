@@ -9,7 +9,8 @@ namespace Dhl\ShippingCore\Api\Data\Selection;
 /**
  * Interface ServiceInterface
  *
- * @package Dhl\ShippingCore\Api
+ * @api
+ * @package Dhl\ShippingCore\Api\Data
  */
 interface ServiceInterface
 {

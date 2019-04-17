@@ -12,7 +12,7 @@ use Magento\Framework\Option\ArrayInterface;
  * Class PickupType
  *
  * @author    Max Melzer <max.melzer@netresearch.de>
- * @link      http://www.netresearch.de/
+ * @link      https://www.netresearch.de/
  */
 class PickupType implements ArrayInterface
 {

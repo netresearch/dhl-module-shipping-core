@@ -11,9 +11,8 @@ use Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface;
  * Class Footnote
  *
  * @package Dhl\ShippingCore\Model\Checkout
- * @author    Max Melzer <max.melzer@netresearch.de>
- * @copyright 2019 Netresearch DTT GmbH
- * @link      http://www.netresearch.de/
+ * @author  Max Melzer <max.melzer@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 class Footnote implements FootnoteInterface
 {

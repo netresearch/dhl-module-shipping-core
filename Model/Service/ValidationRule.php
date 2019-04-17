@@ -6,15 +6,13 @@
 namespace Dhl\ShippingCore\Model\Service;
 
 use Dhl\ShippingCore\Api\Data\Selection\ValidationRuleInterface;
-use Magento\Framework\Api\AttributeInterface;
 
 /**
  * Class ValidationRule
  *
  * @package Dhl\ShippingCore\Model\Service
- * @author    Max Melzer <max.melzer@netresearch.de>
- * @copyright 2019 Netresearch DTT GmbH
- * @link      http://www.netresearch.de/
+ * @author  Max Melzer <max.melzer@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 class ValidationRule implements ValidationRuleInterface
 {
@@ -24,7 +22,7 @@ class ValidationRule implements ValidationRuleInterface
     private $name;
 
     /**
-     * @var mixed|mixed[];
+     * @var mixed|mixed[]
      */
     private $params;
 

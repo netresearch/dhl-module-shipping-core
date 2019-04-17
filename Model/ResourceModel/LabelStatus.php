@@ -11,7 +11,7 @@ use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
 
 /**
- * LabelStatus ResourceModel
+ * Label Status Resource Model
  *
  * @package Dhl\ShippingCore\Model\ResourceModel
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>

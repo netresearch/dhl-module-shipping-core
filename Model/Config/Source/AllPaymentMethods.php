@@ -29,7 +29,7 @@ use Dhl\ShippingCore\Model\Payment\PaymentData;
  *
  * @package  Dhl\ShippingCore\Model\Config\Source
  * @author   Ronny gertler <ronny.gertler@netresearch.de>
- * @link     http://www.netresearch.de/
+ * @link     https://www.netresearch.de/
  */
 class AllPaymentMethods implements OptionSourceInterface
 {

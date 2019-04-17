@@ -20,7 +20,7 @@ use Magento\Quote\Model\Quote\Address\RateResult\Method;
  *
  * @package Dhl\ShippingCore\Plugin\Quote\Cart
  * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link http://www.netresearch.de/
+ * @link https://www.netresearch.de/
  */
 class ShippingMethodConverterPlugin
 {
