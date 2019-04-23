@@ -23,7 +23,7 @@ class Constants
 
     const COLUMN_DHLGW_LABEL_STATUS = 'dhlgw_label_status';
 
-    const TABLE_QUOTE_SERVICE_SELECTION = 'dhlgw_quote_address_service_selection';
+    const TABLE_QUOTE_SHIPPING_OPTION_SELECTION = 'dhlgw_quote_address_shipping_option_selection';
 
-    const TABLE_ORDER_SERVICE_SELECTION = 'dhlgw_order_address_service_selection';
+    const TABLE_ORDER_SHIPPING_OPTION_SELECTION = 'dhlgw_order_address_shipping_option_selection';
 }

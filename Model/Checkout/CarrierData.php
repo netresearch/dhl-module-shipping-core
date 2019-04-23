@@ -2,13 +2,14 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface;
-use Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterface;
-use Dhl\ShippingCore\Api\Data\Selection\CompatibilityInterface;
-use Dhl\ShippingCore\Api\Data\Selection\ServiceInterface;
+use Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 
 /**
  * Class CarrierData
@@ -25,38 +26,38 @@ class CarrierData implements CarrierDataInterface
     private $carrierCode;
 
     /**
-     * @var ServiceInterface[]
+     * @var ShippingOptionInterface[]
      */
-    private $serviceData;
+    private $shippingOptions;
 
     /**
-     * @var ServiceMetadataInterface
+     * @var MetadataInterface
      */
-    private $serviceMetadata;
+    private $metadata;
 
     /**
      * @var CompatibilityInterface[]
      */
-    private $serviceCompatibilityData;
+    private $compatibilityData;
 
     /**
      * CarrierData constructor.
      *
      * @param string $carrierCode
-     * @param ServiceInterface[] $serviceData
-     * @param ServiceMetadataInterface $serviceMetadata
-     * @param CompatibilityInterface[] $serviceCompatibilityData
+     * @param ShippingOptionInterface[] $shippingOptions
+     * @param MetadataInterface $metadata
+     * @param CompatibilityInterface[] $compatibilityData
      */
     public function __construct(
         string $carrierCode,
-        array $serviceData,
-        ServiceMetadataInterface $serviceMetadata,
-        array $serviceCompatibilityData = []
+        array $shippingOptions,
+        MetadataInterface $metadata,
+        array $compatibilityData = []
     ) {
         $this->carrierCode = $carrierCode;
-        $this->serviceData = $serviceData;
-        $this->serviceMetadata = $serviceMetadata;
-        $this->serviceCompatibilityData = $serviceCompatibilityData;
+        $this->shippingOptions = $shippingOptions;
+        $this->metadata = $metadata;
+        $this->compatibilityData = $compatibilityData;
     }
 
     /**
@@ -68,26 +69,26 @@ class CarrierData implements CarrierDataInterface
     }
 
     /**
-     * @return ServiceInterface[]
+     * @return ShippingOptionInterface[]
      */
-    public function getServiceData(): array
+    public function getShippingOptions(): array
     {
-        return $this->serviceData;
+        return $this->shippingOptions;
     }
 
     /**
-     * @return ServiceMetadataInterface
+     * @return MetadataInterface
      */
-    public function getServiceMetadata(): ServiceMetadataInterface
+    public function getMetadata(): MetadataInterface
     {
-        return $this->serviceMetadata;
+        return $this->metadata;
     }
 
     /**
      * @return CompatibilityInterface[]
      */
-    public function getServiceCompatibilityData(): array
+    public function getCompatibilityData(): array
     {
-        return $this->serviceCompatibilityData;
+        return $this->compatibilityData;
     }
 }

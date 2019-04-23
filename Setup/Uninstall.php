@@ -45,11 +45,10 @@ class Uninstall implements UninstallInterface
     public function uninstall(SchemaSetupInterface $schemaSetup, ModuleContextInterface $context)
     {
         Uninstaller::deleteConfig($schemaSetup);
-        Uninstaller::removeProductAttributes($this->eavSetup);
+        Uninstaller::deleteAttributes($this->eavSetup);
         Uninstaller::deleteLabelStatusColumn($schemaSetup);
         Uninstaller::dropLabelStatusTable($schemaSetup);
-        Uninstaller::deleteAttributes($this->eavSetup);
         Uninstaller::dropDhlRecipientStreetTable($schemaSetup);
-        Uninstaller::dropServiceSelectionTables($schemaSetup);
+        Uninstaller::dropShippingOptionSelectionTables($schemaSetup);
     }
 }

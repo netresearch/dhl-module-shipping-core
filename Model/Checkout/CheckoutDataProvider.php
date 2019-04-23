@@ -34,7 +34,7 @@ class CheckoutDataProvider
         return [
             [
                 'carrierCode' => 'flatrate',
-                'serviceData' => [
+                'shippingOptions' => [
                     [
                         'code' => 'testService',
                         'label' => 'Testservice',
@@ -80,7 +80,7 @@ class CheckoutDataProvider
                         ],
                     ],
                 ],
-                'serviceMetadata' => [
+                'metadata' => [
                     'title' => 'DHL eCommerce Shipping Settings.',
                     'imageUrl' => '',
                     'commentsBefore' => [
@@ -95,7 +95,7 @@ class CheckoutDataProvider
                     ],
                     'footnotes' => [],
                 ],
-                'serviceCompatibilityData' => [
+                'compatibilityData' => [
                     [
                         'incompatibilityRule' => false,
                         'hideSubjects' => false,
@@ -114,7 +114,7 @@ class CheckoutDataProvider
             ],
             [
                 'carrierCode' => 'dhlpaket',
-                'serviceData' => [
+                'shippingOptions' => [
                     [
                         'code' => 'preferredDay',
                         'label' => 'Wunschtag: Lieferung zum gewüschten Tag',
@@ -163,7 +163,7 @@ class CheckoutDataProvider
                                 'inputType' => 'date',
                                 'defaultValue' => '',
                                 'comment' => [
-                                    'content' => 'Für diesen Service fallen zusätzliche Versandkosten in Höhe von <strong>3,00 €</strong> inkl. MwSt. an.',
+                                    'content' => 'Für diesen ShippingOption fallen zusätzliche Versandkosten in Höhe von <strong>3,00 €</strong> inkl. MwSt. an.',
                                     'footnoteId' => 'footnote-combined-cost',
                                 ],
                             ],
@@ -208,7 +208,7 @@ class CheckoutDataProvider
                                 'inputType' => 'time',
                                 'defaultValue' => '',
                                 'comment' => [
-                                    'content' => 'Für diesen Service fallen zusätzliche Versandkosten in Höhe von <strong>4,00 €</strong> inkl. MwSt. an',
+                                    'content' => 'Für diesen ShippingOption fallen zusätzliche Versandkosten in Höhe von <strong>4,00 €</strong> inkl. MwSt. an',
                                     'footnoteId' => 'footnote-combined-cost',
                                 ],
                             ],
@@ -338,7 +338,7 @@ class CheckoutDataProvider
                         ],
                     ],
                 ],
-                'serviceMetadata' => [
+                'metadata' => [
                     'title' => 'DHL Preferred Delivery. Delivered just the way you want.',
                     'imageUrl' => '',
                     'commentsBefore' => [
@@ -359,12 +359,12 @@ class CheckoutDataProvider
                             'content' => 'When booked together, the price of Preferred Day and Preferred Time is <strong>11 €</strong>.',
                             'footnoteId' => 'footnote-combined-cost',
                             'subjects' => ['preferredTime', 'preferredDay'],
-                            'subjectsMustBeSelected' => false,
+                            'subjectsMustBeSelected' => true,
                             'subjectsMustBeAvailable' => true,
                         ],
                     ],
                 ],
-                'serviceCompatibilityData' => [
+                'compatibilityData' => [
                     [
                         'incompatibilityRule' => true,
                         'subjects' => ['preferredLocation', 'preferredNeighbour'],

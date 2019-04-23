@@ -9,28 +9,38 @@ namespace Dhl\ShippingCore\Api\Data\Checkout;
 /**
  * Interface CarrierDataInterface
  *
+ * A DTO for carrier-specific data for rendering additional shipping options.
+ *
  * @api
  * @package Dhl\ShippingCore\Api\Data
  */
 interface CarrierDataInterface
 {
     /**
+     * The code of the carrier this set of data concerns
+     *
      * @return string
      */
     public function getCarrierCode(): string;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterface
+     * Retrieve rendering information about the shipping options the carrier offers.
+     *
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
-    public function getServiceMetadata(): ServiceMetadataInterface;
+    public function getShippingOptions(): array;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Selection\ServiceInterface[]
+     * Retrieve compatibility data to handle user input into the shipping options at runtime.
+     *
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface[]
      */
-    public function getServiceData(): array;
+    public function getCompatibilityData(): array;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\Selection\CompatibilityInterface[]
+     * Retrieve additional information to render the shipping options area.
+     *
+     * @return \Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface
      */
-    public function getServiceCompatibilityData(): array;
+    public function getMetadata(): MetadataInterface;
 }

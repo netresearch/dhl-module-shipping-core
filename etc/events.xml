@@ -13,6 +13,6 @@ See LICENSE.md for license details.
         <observer name="dhlgw_split_shipping_address" instance="Dhl\ShippingCore\Observer\SplitAddress"/>
     </event>
     <event name="sales_model_service_quote_submit_success">
-        <observer name="dhlgw_persist_service_selection" instance="Dhl\ShippingCore\Observer\PersistServiceSelectionObserver" />
+        <observer name="dhlgw_persist_service_selection" instance="Dhl\ShippingCore\Observer\PersistShippingOptionSelectionObserver" />
     </event>
 </config>

@@ -13,20 +13,19 @@
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\RecipientInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Recipient"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Shipper"/>
 
-    <preference for="Dhl\ShippingCore\Api\Rest\CheckoutDataManagementInterface" type="Dhl\ShippingCore\Model\Rest\CheckoutDataManagement"/>
-    <preference for="Dhl\ShippingCore\Api\Rest\GuestCheckoutDataManagementInterface" type="Dhl\ShippingCore\Model\Rest\GuestCheckoutDataManagement"/>
+    <preference for="Dhl\ShippingCore\Api\CheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\CheckoutManagement"/>
+    <preference for="Dhl\ShippingCore\Api\GuestCheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\GuestCheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
     <preference for="Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface" type="Dhl\ShippingCore\Model\Checkout\CheckoutData"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Checkout\ServiceMetadataInterface" type="Dhl\ShippingCore\Model\Checkout\ServiceMetadata"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface" type="Dhl\ShippingCore\Model\Checkout\Metadata"/>
     <preference for="Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface" type="Dhl\ShippingCore\Model\Checkout\Footnote"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Selection\CompatibilityInterface" type="Dhl\ShippingCore\Model\Service\Compatibility"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Selection\InfoTextInterface" type="Dhl\ShippingCore\Model\Service\InfoText"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Selection\InputInterface" type="Dhl\ShippingCore\Model\Service\Input"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Selection\ServiceInterface" type="Dhl\ShippingCore\Model\Service\Service"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Selection\OptionInterface" type="Dhl\ShippingCore\Model\Service\Option"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Selection\CommentInterface" type="Dhl\ShippingCore\Model\Service\Comment"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Selection\ValidationRuleInterface" type="Dhl\ShippingCore\Model\Service\ValidationRule"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Selection\ServiceSelectionInterface" type="Dhl\ShippingCore\Model\Service\ServiceSelection"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface" type="Dhl\ShippingCore\Model\ShippingOption\Compatibility"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface" type="Dhl\ShippingCore\Model\ShippingOption\ShippingOption"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface" type="Dhl\ShippingCore\Model\ShippingOption\Option"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface" type="Dhl\ShippingCore\Model\ShippingOption\Comment"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValidationRuleInterface" type="Dhl\ShippingCore\Model\ShippingOption\ValidationRule"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\Selection\SelectionInterface" type="Dhl\ShippingCore\Model\ShippingOption\Selection\Selection"/>
 
     <preference for="Dhl\ShippingCore\Model\Config\CoreConfigInterface" type="Dhl\ShippingCore\Model\Config\CoreConfig"/>
     <preference for="Dhl\ShippingCore\Model\Config\RateConfigInterface" type="Dhl\ShippingCore\Model\Config\RateConfig"/>
@@ -37,14 +36,14 @@
             <argument name="tableNames" xsi:type="array">
                 <item name="dhlgw_label_status" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_DHLGW_LABEL_STATUS</item>
                 <item name="dhlgw_recipient_street" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_DHLGW_RECIPIENT_STREET</item>
-                <item name="dhlgw_order_address_service_selection" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_ORDER_SERVICE_SELECTION</item>
+                <item name="dhlgw_order_address_shipping_option_selection" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_ORDER_SHIPPING_OPTION_SELECTION</item>
             </argument>
         </arguments>
     </virtualType>
     <virtualType name="Dhl\ShippingCore\Virtual\QuoteTableNameIterator" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>
             <argument name="tableNames" xsi:type="array">
-                <item name="dhlgw_quote_address_service_selection" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_QUOTE_SERVICE_SELECTION</item>
+                <item name="dhlgw_quote_address_shipping_option_selection" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_QUOTE_SHIPPING_OPTION_SELECTION</item>
             </argument>
         </arguments>
     </virtualType>
@@ -84,12 +83,12 @@
         </arguments>
     </type>
 
-    <type name="\Dhl\ShippingCore\Model\ResourceModel\Order\Address\ServiceSelection">
+    <type name="\Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelection">
         <arguments>
             <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\SetupSchema::SALES_CONNECTION_NAME</argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ServiceSelection">
+    <type name="Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ShippingOptionSelection">
         <arguments>
             <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\SetupSchema::CHECKOUT_CONNECTION_NAME</argument>
         </arguments>

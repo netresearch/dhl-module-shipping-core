@@ -40,5 +40,4 @@ interface MethodAdditionalInfoInterface
      * @return void
      */
     public function setCarrierLogoUrl(string $carrierLogoUrl);
-
 }

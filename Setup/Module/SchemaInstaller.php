@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Setup\Module;
 
 use Dhl\ShippingCore\Api\Data\Selection\AssignedServiceSelectionInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Api\RecipientStreetInterface;
 use Magento\Framework\DB\Ddl\Table;
@@ -142,21 +143,18 @@ class SchemaInstaller
     }
 
     /**
-     * Create service selection tables.
-     *
-     * - dhlgw_quote_address_service_selection
-     * - dhlgw_order_address_service_selection
+     * Create Shipping Option selection tables.
      *
      * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
      * @throws \Zend_Db_Exception
      */
-    public static function createServiceSelectionTables(SchemaSetupInterface $schemaSetup)
+    public static function createShippingOptionSelectionTables(SchemaSetupInterface $schemaSetup)
     {
         $quoteTable = $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)->newTable(
-            $schemaSetup->getTable(Constants::TABLE_QUOTE_SERVICE_SELECTION, Constants::CHECKOUT_CONNECTION_NAME)
+            $schemaSetup->getTable(Constants::TABLE_QUOTE_SHIPPING_OPTION_SELECTION, Constants::CHECKOUT_CONNECTION_NAME)
         );
         $orderTable = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->newTable(
-            $schemaSetup->getTable(Constants::TABLE_ORDER_SERVICE_SELECTION, Constants::SALES_CONNECTION_NAME)
+            $schemaSetup->getTable(Constants::TABLE_ORDER_SHIPPING_OPTION_SELECTION, Constants::SALES_CONNECTION_NAME)
         );
 
         /** @var \Magento\Framework\DB\Ddl\Table $table */
@@ -169,28 +167,28 @@ class SchemaInstaller
                 'Entity ID'
             );
             $table->addColumn(
-                AssignedServiceSelectionInterface::PARENT_ID,
+                AssignedSelectionInterface::PARENT_ID,
                 Table::TYPE_INTEGER,
                 null,
                 ['unsigned' => true, 'nullable' => false],
                 'Parent ID'
             );
             $table->addColumn(
-                AssignedServiceSelectionInterface::SERVICE_CODE,
+                AssignedSelectionInterface::SHIPPING_OPTION_CODE,
                 Table::TYPE_TEXT,
                 null,
                 ['nullable' => false],
                 'Service Code'
             );
             $table->addColumn(
-                AssignedServiceSelectionInterface::INPUT_CODE,
+                AssignedSelectionInterface::INPUT_CODE,
                 Table::TYPE_TEXT,
                 null,
                 ['nullable' => false],
                 'Service Input'
             );
             $table->addColumn(
-                AssignedServiceSelectionInterface::VALUE,
+                AssignedSelectionInterface::INPUT_VALUE,
                 Table::TYPE_TEXT,
                 null,
                 ['nullable' => false],
@@ -200,7 +198,7 @@ class SchemaInstaller
 
         $quoteTable->addForeignKey(
             $schemaSetup->getFkName(
-                $schemaSetup->getTable(Constants::TABLE_QUOTE_SERVICE_SELECTION, Constants::CHECKOUT_CONNECTION_NAME),
+                $schemaSetup->getTable(Constants::TABLE_QUOTE_SHIPPING_OPTION_SELECTION, Constants::CHECKOUT_CONNECTION_NAME),
                 'parent_id',
                 $schemaSetup->getTable('quote_address', Constants::CHECKOUT_CONNECTION_NAME),
                 'address_id'
@@ -213,7 +211,7 @@ class SchemaInstaller
 
         $orderTable->addForeignKey(
             $schemaSetup->getFkName(
-                $schemaSetup->getTable(Constants::TABLE_ORDER_SERVICE_SELECTION, Constants::SALES_CONNECTION_NAME),
+                $schemaSetup->getTable(Constants::TABLE_ORDER_SHIPPING_OPTION_SELECTION, Constants::SALES_CONNECTION_NAME),
                 'parent_id',
                 $schemaSetup->getTable('sales_order_address', Constants::SALES_CONNECTION_NAME),
                 'entity_id'
