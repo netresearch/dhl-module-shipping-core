@@ -13,7 +13,7 @@ use Dhl\ShippingCore\Model\QuoteServiceSelectionRepository;
 use Dhl\ShippingCore\Model\Rest\CheckoutDataManagement;
 use Dhl\ShippingCore\Test\Integration\Fixture\QuoteFixture;
 use Magento\Framework\Api\FilterBuilder;
-use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Framework\Api\Search\SearchCriteriaBuilder;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\ShippingAddressManagementInterface;
 use Magento\TestFramework\Helper\Bootstrap;
@@ -67,7 +67,7 @@ class CheckoutDataManagmentTest extends \PHPUnit\Framework\TestCase
             [
                 'serviceCode' => 'testServiceCode',
                 'inputCode' => 'testInputCode',
-                'value' => 'testValue',
+                'inputValue' => 'testValue',
             ]
         );
 
