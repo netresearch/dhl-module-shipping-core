@@ -4,7 +4,6 @@
  */
 namespace Dhl\ShippingCore\Model\Checkout;
 
-use Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface;
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
 use Magento\Framework\ObjectManagerInterface;
 
@@ -37,8 +36,8 @@ class CheckoutDataFactory
      * This method is also indirectly inspected using Reflection
      * by \Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider.
      *
-     * @param CarrierDataInterface[] $carrierData
-     * @return CheckoutDataInterface
+     * @param \Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface[] $carrierData
+     * @return \Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface
      */
     public function create(array $carrierData): CheckoutDataInterface
     {
