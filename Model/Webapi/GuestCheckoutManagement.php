@@ -6,9 +6,9 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Webapi;
 
-use Dhl\ShippingCore\Api\CheckoutManagementInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\SelectionInterface;
 use Dhl\ShippingCore\Api\GuestCheckoutManagementInterface;
+use Dhl\ShippingCore\Model\ShippingOption\Selection\QuoteSelectionManager;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -29,28 +29,26 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
     private $addressManagement;
 
     /**
-     * @var CheckoutManagementInterface|CheckoutManagement
+     * @var QuoteSelectionManager
      */
-    private $serviceManagement;
+    private $selectionManager;
 
     /**
      * GuestCartServiceManagement constructor.
      *
      * @param GuestShippingAddressManagementInterface $addressManagement
-     * @param CheckoutManagementInterface $serviceManagement
+     * @param QuoteSelectionManager $selectionManager
      */
     public function __construct(
         GuestShippingAddressManagementInterface $addressManagement,
-        CheckoutManagementInterface $serviceManagement
+        QuoteSelectionManager $selectionManager
     ) {
         $this->addressManagement = $addressManagement;
-        $this->serviceManagement = $serviceManagement;
+        $this->selectionManager = $selectionManager;
     }
 
     /**
      * Persist service selection.
-     *
-     * @fixme(nr): are webapi exceptions handled properly?
      *
      * @param string $cartId
      * @param SelectionInterface[] $shippingOptionSelections
@@ -60,12 +58,7 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
      */
     public function updateShippingOptionSelections(string $cartId, array $shippingOptionSelections)
     {
-        if (empty($shippingOptionSelections)) {
-            return;
-        }
-
         $shippingAddressId = (int) $this->addressManagement->get($cartId)->getId();
-        $this->serviceManagement->deleteServiceValues($shippingAddressId);
-        $this->serviceManagement->saveServiceValues($shippingAddressId, $shippingOptionSelections);
+        $this->selectionManager->updateSelections($shippingAddressId, $shippingOptionSelections);
     }
 }
