@@ -7,12 +7,12 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Plugin\Order\Address;
 
 use Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface;
+use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 use Magento\Sales\Api\Data\OrderAddressExtensionFactory;
 use Magento\Sales\Api\Data\OrderAddressInterface;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\AddressRepository;
 use Magento\Sales\Model\ResourceModel\Order\Address\Collection;
-use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 
 /**
  * Class AddressRepositoryPlugin
@@ -47,7 +47,6 @@ class AddressRepositoryPlugin
     public function __construct(
         OrderAddressExtensionFactory $orderAddressExtensionFactory,
         RecipientStreetRepositoryInterface $recipientStreetRepository,
-        AddressRepository $addressRespository,
         JoinProcessorInterface $extensionAttributesJoinProcessor
     ) {
         $this->orderAddressExtensionFactory = $orderAddressExtensionFactory;

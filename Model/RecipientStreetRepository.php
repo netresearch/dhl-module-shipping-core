@@ -63,7 +63,7 @@ class RecipientStreetRepository implements RecipientStreetRepositoryInterface
                 throw new CouldNotSaveException(__($exception->getMessage()));
             }
 
-            throw new CouldNotSaveException(__('Unable to save dhl recipient street.'), $exception);
+            throw new CouldNotSaveException(__('Unable to save recipient street.'), $exception);
         }
 
         return $recipientStreet;
@@ -83,11 +83,11 @@ class RecipientStreetRepository implements RecipientStreetRepositoryInterface
         try {
             $this->resource->load($recipientStreet, $orderAddressId);
         } catch (\Exception $exception) {
-            throw new NoSuchEntityException(__('Unable to load recipient street with id "%1".', $orderAddressId));
+            throw new NoSuchEntityException(__('Unable to load recipient street with ID "%1".', $orderAddressId));
         }
 
         if (!$recipientStreet->getId()) {
-            throw new NoSuchEntityException(__('Recipient street with id "%1" does not exist.', $orderAddressId));
+            throw new NoSuchEntityException(__('Recipient street with ID "%1" does not exist.', $orderAddressId));
         }
 
         return $recipientStreet;
