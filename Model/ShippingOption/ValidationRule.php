@@ -22,9 +22,9 @@ class ValidationRule implements ValidationRuleInterface
     private $name;
 
     /**
-     * @var mixed|mixed[]
+     * @var mixed
      */
-    private $params;
+    private $params = [];
 
     /**
      * ValidationRule constructor.
@@ -47,7 +47,7 @@ class ValidationRule implements ValidationRuleInterface
     }
 
     /**
-     * @return mixed|mixed[]
+     * @return mixed
      */
     public function getParams()
     {

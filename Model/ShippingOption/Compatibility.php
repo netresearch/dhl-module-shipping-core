@@ -29,17 +29,17 @@ class Compatibility implements CompatibilityInterface
     /**
      * @var string[]
      */
-    private $masters;
+    private $masters = [];
 
     /**
      * @var bool
      */
-    private $incompatibilityRule;
+    private $incompatibilityRule = false;
 
     /**
      * @var bool
      */
-    private $hideSubjects;
+    private $hideSubjects = false;
 
     /**
      * Compatibility constructor.

@@ -26,27 +26,27 @@ class CarrierData implements CarrierDataInterface
     private $carrierCode;
 
     /**
-     * @var ShippingOptionInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
     private $shippingOptions;
 
     /**
-     * @var MetadataInterface
+     * @var \Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface
      */
     private $metadata;
 
     /**
-     * @var CompatibilityInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface[]
      */
-    private $compatibilityData;
+    private $compatibilityData = [];
 
     /**
      * CarrierData constructor.
      *
      * @param string $carrierCode
-     * @param ShippingOptionInterface[] $shippingOptions
-     * @param MetadataInterface $metadata
-     * @param CompatibilityInterface[] $compatibilityData
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[] $shippingOptions
+     * @param \Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface $metadata
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface[] $compatibilityData
      */
     public function __construct(
         string $carrierCode,

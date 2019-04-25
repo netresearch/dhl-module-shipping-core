@@ -30,49 +30,49 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @var bool
      */
-    private $enabledForCheckout;
+    private $enabledForCheckout = true;
 
     /**
      * @var bool
      */
-    private $enabledForPackaging;
+    private $enabledForPackaging = true;
 
     /**
      * @var bool
      */
-    private $enabledForAutocreate;
+    private $enabledForAutocreate = true;
 
     /**
      * @var bool
      */
-    private $packagingReadonly;
+    private $packagingReadonly = false;
 
     /**
-     * @var InputInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface[]
      */
     private $inputs;
 
     /**
      * @var bool
      */
-    private $availableAtPostalFacility;
+    private $availableAtPostalFacility = true;
 
     /**
      * @var string[][]
      */
-    private $routes;
+    private $routes = [];
 
     /**
      * @var int
      */
-    private $sortOrder;
+    private $sortOrder = 0;
 
     /**
      * ShippingOption constructor.
      *
      * @param string $code
      * @param string $label
-     * @param InputInterface[] $inputs
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface[] $inputs
      * @param bool $enabledForCheckout
      * @param bool $enabledForPackaging
      * @param bool $enabledForAutocreate

@@ -18,14 +18,14 @@ use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
 class CheckoutData implements CheckoutDataInterface
 {
     /**
-     * @var CarrierDataInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface[]
      */
-    private $carriers;
+    private $carriers = [];
 
     /**
      * CheckoutData constructor.
      *
-     * @param CarrierDataInterface[] $carriers
+     * @param \Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface[] $carriers
      */
     public function __construct(array $carriers = [])
     {

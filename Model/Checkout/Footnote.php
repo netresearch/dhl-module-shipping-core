@@ -34,12 +34,12 @@ class Footnote implements FootnoteInterface
     /**
      * @var bool
      */
-    private $subjectsMustBeSelected;
+    private $subjectsMustBeSelected = false;
 
     /**
      * @var bool
      */
-    private $subjectsMustBeAvailable;
+    private $subjectsMustBeAvailable = false;
 
     /**
      * Footnote constructor.

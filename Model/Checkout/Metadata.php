@@ -27,31 +27,31 @@ class Metadata implements MetadataInterface
     /**
      * @var string
      */
-    private $title;
+    private $title = '';
 
     /**
-     * @var CommentInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[]
      */
-    private $commentsBefore;
+    private $commentsBefore = [];
 
     /**
-     * @var CommentInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[]
      */
-    private $commentsAfter;
+    private $commentsAfter = [];
 
     /**
-     * @var FootnoteInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface[]
      */
-    private $footnotes;
+    private $footnotes = [];
 
     /**
      * Metadata constructor.
      *
      * @param string $title
      * @param string $imageUrl
-     * @param CommentInterface[] $commentsBefore
-     * @param CommentInterface[] $commentsAfter
-     * @param FootnoteInterface[] $footnotes
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[] $commentsBefore
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[] $commentsAfter
+     * @param \Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface[] $footnotes
      */
     public function __construct(
         string $title,

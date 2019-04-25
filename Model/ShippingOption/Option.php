@@ -29,7 +29,7 @@ class Option implements OptionInterface
     /**
      * @var bool
      */
-    private $disabled;
+    private $disabled = false;
 
     /**
      * Option constructor.

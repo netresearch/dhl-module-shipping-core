@@ -33,7 +33,7 @@ class Input implements InputInterface
     /**
      * @var string
      */
-    private $defaultValue;
+    private $defaultValue = '';
 
     /**
      * @var string
@@ -43,35 +43,35 @@ class Input implements InputInterface
     /**
      * @var bool
      */
-    private $labelVisible;
+    private $labelVisible = true;
 
     /**
-     * @var OptionInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface[]
      */
-    private $options;
+    private $options = [];
 
     /**
      * @var string
      */
-    private $tooltip;
+    private $tooltip = '';
 
     /**
      * @var string
      */
-    private $placeholder;
+    private $placeholder = '';
 
     /**
-     * @var int;
+     * @var int
      */
-    private $sortOrder;
+    private $sortOrder = 0;
 
     /**
-     * @var ValidationRuleInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ValidationRuleInterface[]
      */
-    private $validationRules;
+    private $validationRules = [];
 
     /**
-     * @var CommentInterface|null
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface|null
      */
     private $comment;
 
@@ -83,12 +83,12 @@ class Input implements InputInterface
      * @param string $label
      * @param string $defaultValue
      * @param bool $labelVisible
-     * @param OptionInterface[] $options
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface[] $options
      * @param string $tooltip
      * @param string $placeholder
      * @param int $sortOrder
-     * @param ValidationRuleInterface[] $validationRules
-     * @param CommentInterface|null $comment
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ValidationRuleInterface[] $validationRules
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface|null $comment
      */
     public function __construct(
         string $inputType,

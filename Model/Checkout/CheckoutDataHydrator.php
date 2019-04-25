@@ -5,8 +5,9 @@
 namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
+use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterfaceFactory;
 use Magento\Framework\Exception\InputException;
-use Magento\Framework\Webapi\ServiceInputProcessor;
+use Magento\Framework\ObjectManager\ConfigInterface;
 
 /**
  * Class CheckoutDataHydrator
@@ -17,32 +18,39 @@ use Magento\Framework\Webapi\ServiceInputProcessor;
 class CheckoutDataHydrator
 {
     /**
-     * @var ServiceInputProcessor
-     */
-    private $inputProcessor;
-
-    /**
-     * @var CheckoutDataFactory
+     * @var CheckoutDataInterfaceFactory
      */
     private $checkoutDataFactory;
 
     /**
-     * CheckoutDataProvider constructor.
+     * @var \JsonMapper
+     */
+    private $jsonMapper;
+
+    /**
+     * @var ConfigInterface
+     */
+    private $diConfig;
+
+    /**
+     * CheckoutDataHydrator constructor.
      *
-     * @param ServiceInputProcessor $inputProcessor
-     * @param CheckoutDataFactory $checkoutDataFactory
+     * @param CheckoutDataInterfaceFactory $checkoutDataFactory
+     * @param \JsonMapper $jsonMapper
+     * @param ConfigInterface $diConfig
      */
     public function __construct(
-        ServiceInputProcessor $inputProcessor,
-        CheckoutDataFactory $checkoutDataFactory
+        CheckoutDataInterfaceFactory $checkoutDataFactory,
+        \JsonMapper $jsonMapper,
+        ConfigInterface $diConfig
     ) {
-        $this->inputProcessor = $inputProcessor;
         $this->checkoutDataFactory = $checkoutDataFactory;
+        $this->jsonMapper = $jsonMapper;
+        $this->diConfig = $diConfig;
     }
 
     /**
-     * Uses the functionality of the Magento 2 REST API to convert a plain nested
-     * array of scalar types into a CheckoutDataInterface object.
+     * Convert a plain nested array of scalar types into a CheckoutDataInterface object.
      *
      * @param array $data
      * @return CheckoutDataInterface
@@ -50,18 +58,29 @@ class CheckoutDataHydrator
      */
     public function toObject(array $data): CheckoutDataInterface
     {
+        $this->configureJsonMapper();
         try {
-            $carrierData = $this->inputProcessor->process(
-                CheckoutDataFactory::class,
-                'create',
-                ['carrierData' => $data]
-            );
-            /** Unwrap unnecessarily nested array. */
-            $carrierData = array_shift($carrierData);
+            /** @var CheckoutDataInterface $checkoutData */
+            $checkoutData = $this->jsonMapper->map($data, $this->checkoutDataFactory->create());
 
-            return $this->checkoutDataFactory->create($carrierData);
+            return $checkoutData;
         } catch (\Exception $exception) {
             throw new InputException(__('Error: Invalid checkout data input array given.'), $exception);
         }
+    }
+
+    private function configureJsonMapper()
+    {
+        $this->jsonMapper->bExceptionOnUndefinedProperty = true;
+        $this->jsonMapper->bEnforceMapType = false;
+        $this->jsonMapper->bIgnoreVisibility = true;
+        $this->jsonMapper->bStrictObjectTypeChecking = true;
+        $this->jsonMapper->bStrictNullTypes = true;
+        $preferencesWithLeadingBackslash = [];
+        foreach ($this->diConfig->getPreferences() as $interface => $class) {
+            /** @see https://github.com/cweiske/jsonmapper/issues/111 */
+            $preferencesWithLeadingBackslash['\\' . $interface] = '\\' . $class;
+        }
+        $this->jsonMapper->classMap = $preferencesWithLeadingBackslash;
     }
 }
