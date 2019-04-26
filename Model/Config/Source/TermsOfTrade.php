@@ -45,7 +45,7 @@ class TermsOfTrade implements ArrayInterface
     {
         return [
             self::TOD_DDU => __('Customer pays duties and taxes (DDU)'),
-            self::TOD_DDP => __('I will pay duties and taxes (DTP)'),
+            self::TOD_DDP => __('I will pay duties and taxes (DDP)'),
         ];
     }
 }

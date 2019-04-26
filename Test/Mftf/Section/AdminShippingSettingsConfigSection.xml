@@ -15,5 +15,9 @@
         <element name="cutOffTimeConfigGroupHoursSelect" type="select" selector="#row_shipping_dhlglobalwebservices_cut_off_time select:nth-of-type(1)"/>
         <element name="cutOffTimeConfigGroupMinutesSelect" type="select" selector="#row_shipping_dhlglobalwebservices_cut_off_time select:nth-of-type(2)"/>
         <element name="cutOffTimeConfigGroupSecondsSelect" type="select" selector="#row_shipping_dhlglobalwebservices_cut_off_time select:nth-of-type(3)"/>
+
+        <element name="termsOfTradeConfigGroup" type="text" selector="#row_shipping_dhlglobalwebservices_terms_of_trade"/>
+        <element name="termsOfTradeConfigGroupOptionDDU" type="radio" selector="#shipping_dhlglobalwebservices_terms_of_tradeDDU"/>
+        <element name="termsOfTradeConfigGroupOptionDDP" type="radio" selector="#shipping_dhlglobalwebservices_terms_of_tradeDDP"/>
     </section>
 </sections>

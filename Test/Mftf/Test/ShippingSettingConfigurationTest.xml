@@ -89,4 +89,44 @@
                              userInput="{{ShippingSettingsCutOffTimeData.seconds}}"
                              stepKey="validateCutOffTimeConfigGroupSecondsSelect"/>
     </test>
+
+    <test name="DhlShippingCoreConfigureTermsOfTrade">
+        <annotations>
+            <features value="Configuration"/>
+            <stories value="Terms of trade configuration"/>
+            <title value="Terms of trade configuration"/>
+            <description value="Verify that terms of trade can be configured"/>
+            <severity value="CRITICAL"/>
+            <group value="dhlgw-configuration"/>
+        </annotations>
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+        </before>
+        <after>
+            <actionGroup ref="logout" stepKey="logout"/>
+        </after>
+        <actionGroup ref="NavigateToShippingSettings" stepKey="navigateToShippingSettingsConfigInTest"/>
+
+        <!-- Configure a terms of trade and save -->
+        <seeElement selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroup}}" stepKey="seeTermsOfTradeConfigGroup"/>
+
+        <see selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDU}} + label span"
+             userInput="{{ShippingSettingsTermsOfTradeData.DDU}}" stepKey="seeTermsOfTradeConfigGroupLabelDDU"/>
+        <see selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDP}} + label span"
+             userInput="{{ShippingSettingsTermsOfTradeData.DDP}}" stepKey="seeTermsOfTradeConfigGroupLabelDDP"/>
+
+        <seeCheckboxIsChecked selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDU}}"
+                              stepKey="termsOfTradeConfigGroupOptionCheckedDDU"/>
+
+        <click selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDP}} + label"
+               stepKey="termsOfTradeConfigGroupOptionClickDDP"/>
+
+        <actionGroup ref="SaveAdminConfigSection" stepKey="saveAdminConfigSection"/>
+
+        <!-- Confirm selection is persisted -->
+        <seeCheckboxIsChecked selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDP}}"
+                              stepKey="termsOfTradeConfigGroupOptionCheckedDDP"/>
+        <dontSeeCheckboxIsChecked selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDU}}"
+                                  stepKey="termsOfTradeConfigGroupOptionNotCheckedDDU"/>
+    </test>
 </tests>
