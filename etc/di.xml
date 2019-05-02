@@ -51,9 +51,7 @@
         <arguments>
             <argument name="joins" xsi:type="array">
                 <item name="dhlgw_label_status" xsi:type="array">
-                    <item name="table" xsi:type="const">
-                        Dhl\ShippingCore\Setup\Module\Constants::TABLE_DHLGW_LABEL_STATUS
-                    </item>
+                    <item name="table" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_DHLGW_LABEL_STATUS</item>
                     <item name="origin_column" xsi:type="string">entity_id</item>
                     <item name="target_column" xsi:type="string">order_id</item>
                 </item>
