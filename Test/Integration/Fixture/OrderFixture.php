@@ -45,9 +45,10 @@ class OrderFixture
      * @return OrderInterface
      * @throws \Exception
      */
-    public static function createPaketOrder(
+    public static function createOrder(
         AddressInterface $recipientData,
-        ProductInterface $productData
+        ProductInterface $productData,
+        string $carrierCode
     ) {
         if ($productData->getType() === Type::TYPE_SIMPLE) {
             // set up product
@@ -97,7 +98,7 @@ class OrderFixture
         $checkout = CustomerCheckout::fromCart($cart);
 
         $order = $checkout
-            ->withShippingMethodCode('dhlpaket_flatrate')
+            ->withShippingMethodCode($carrierCode)
             ->placeOrder();
         self::$createdEntities['orders'][] = $order;
 
