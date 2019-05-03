@@ -68,6 +68,11 @@ class ShippingOption implements ShippingOptionInterface
     private $sortOrder = 0;
 
     /**
+     * @var int[]
+     */
+    private $requiredItemIds;
+
+    /**
      * ShippingOption constructor.
      *
      * @param string $code
@@ -80,6 +85,7 @@ class ShippingOption implements ShippingOptionInterface
      * @param bool $availableAtPostalFacility
      * @param string[] $routes
      * @param int $sortOrder
+     * @param int[] $requiredItemIds
      */
     public function __construct(
         string $code,
@@ -91,7 +97,8 @@ class ShippingOption implements ShippingOptionInterface
         bool $packagingReadonly = false,
         bool $availableAtPostalFacility = true,
         array $routes = [],
-        int $sortOrder = 0
+        int $sortOrder = 0,
+        array $requiredItemIds = []
     ) {
         $this->code = $code;
         $this->label = $label;
@@ -103,6 +110,7 @@ class ShippingOption implements ShippingOptionInterface
         $this->availableAtPostalFacility = $availableAtPostalFacility;
         $this->routes = $routes;
         $this->sortOrder = $sortOrder;
+        $this->requiredItemIds = $requiredItemIds;
     }
 
     /**
@@ -184,4 +192,13 @@ class ShippingOption implements ShippingOptionInterface
     {
         return $this->sortOrder;
     }
+
+    /**
+     * @return int[]
+     */
+    public function getRequiredItemIds(): array
+    {
+        return $this->requiredItemIds;
+    }
+
 }

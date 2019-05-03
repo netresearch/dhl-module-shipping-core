@@ -85,4 +85,11 @@ interface ShippingOptionInterface
      * @return int
      */
     public function getSortOrder(): int;
+
+    /**
+     * Returns an array of item ids (order/quote/shipment) that result in the current shipping option being available.
+     *
+     * @return int[]
+     */
+    public function getRequiredItemIds(): array;
 }
