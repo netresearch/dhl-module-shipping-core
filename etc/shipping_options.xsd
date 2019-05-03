@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="options" type="shippingOptions"/>
+    <xs:complexType name="shippingOptions" mixed="true">
+        <xs:choice minOccurs="0">
+            <xs:element name="package" type="shippingOptionList"/>
+            <xs:element name="item" type="shippingOptionList"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="shippingOptionList">
+        <xs:sequence maxOccurs="unbounded">
+            <xs:element name="shippingOption" type="shippingOption"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="shippingOption">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="label" type="xs:string"/>
+            <xs:element name="inputs" type="inputConfigList"/>
+            <xs:element name="enabledForCheckout" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="enabledForAutocreate" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="enabledForPackaging" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="availableAtPostalFacility" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="packagingReadonly" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="sortOrder" type="xs:integer" minOccurs="0"/>
+            <xs:element name="routes" type="routeConfig" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="inputConfigList">
+        <xs:sequence>
+            <xs:element name="input" type="inputConfig"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="inputOptionList">
+        <xs:sequence>
+            <xs:element name="option" type="inputOption"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="inputOption">
+        <xs:sequence>
+            <xs:element name="label" type="xs:string"/>
+            <xs:element name="value" type="xs:string"/>
+            <xs:element name="disabled" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="inputConfig">
+        <xs:sequence>
+            <xs:element name="inputType" type="xs:string"/>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="label" type="xs:string"/>
+            <xs:element name="labelVisible" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="options" type="inputOptionList" minOccurs="0"/>
+            <xs:element name="tooltip" type="xs:string" minOccurs="0"/>
+            <xs:element name="sortOrder" type="xs:integer" minOccurs="0"/>
+            <xs:element name="validationRules" type="validationRules" minOccurs="0"/>
+            <xs:element name="comment" type="commentConfig" minOccurs="0"/>
+            <!-- @TODO might be dynamic provider here, so additional implementation necessary -->
+            <xs:element name="defaultValue" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="routeConfig">
+        <!-- @TODO find nice implementatio here -->
+        <xs:sequence>
+            <xs:element name="origin" type="xs:string">
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="validationRules">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <!-- @TODO find nice implementatio here -->
+            <xs:element name="params" type="xs:all" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="commentConfig">
+        <xs:sequence>
+            <xs:element name="content" type="xs:string"/>
+            <xs:element name="footnoteId" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

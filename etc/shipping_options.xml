@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<options xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Dhl_ShippingCore/etc/shipping_options.xsd">
+    <item>
+      <shippingOption>
+          <code>abv</code>
+          <label></label>
+          <inputs>
+              <input>
+                  <inputType></inputType>
+                  <code></code>
+                  <label></label>
+                  <options>
+                      <option>
+                          <label>123</label>
+                          <value></value>
+                          <disabled>warum</disabled>
+                      </option>
+                  </options>
+              </input>
+          </inputs>
+      </shippingOption>
+        <shippingOption>
+            <code>abc</code>
+            <code>adas</code>
+            <label></label>
+            <inputs>
+                <input>
+                    <inputType></inputType>
+                    <code></code>
+                    <label></label>
+                    <options>
+                        <option>
+                            <label>123</label>
+                            <value></value>
+                            <disabled>warum</disabled>
+                        </option>
+                    </options>
+                </input>
+            </inputs>
+        </shippingOption>
+    </item>
+</options>
