@@ -96,7 +96,9 @@ class CheckoutDataManagmentTest extends \PHPUnit\Framework\TestCase
         $storedServiceSelection = $shippingOptionSelectionRepo->getList($searchCriteria)->fetchItem();
         $this->assertEquals($storedServiceSelection->getInputValue(), $shippingOptionSelection->getInputValue());
         $this->assertEquals($storedServiceSelection->getInputCode(), $shippingOptionSelection->getInputCode());
-        $this->assertEquals($storedServiceSelection->getShippingOptionCode(),
-                            $shippingOptionSelection->getShippingOptionCode());
+        $this->assertEquals(
+            $storedServiceSelection->getShippingOptionCode(),
+            $shippingOptionSelection->getShippingOptionCode()
+        );
     }
 }

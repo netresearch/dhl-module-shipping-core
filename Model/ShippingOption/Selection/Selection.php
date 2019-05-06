@@ -38,8 +38,11 @@ class Selection implements SelectionInterface
      * @param string $inputCode
      * @param string $inputValue
      */
-    public function __construct(string $shippingOptionCode, string $inputCode, string $inputValue)
-    {
+    public function __construct(
+        string $shippingOptionCode = null,
+        string $inputCode = null,
+        string $inputValue = null
+    ) {
         $this->shippingOptionCode = $shippingOptionCode;
         $this->inputCode = $inputCode;
         $this->inputValue = $inputValue;
@@ -54,6 +57,17 @@ class Selection implements SelectionInterface
     }
 
     /**
+     * @param string $shippingOptionCode
+     *
+     * @return SelectionInterface
+     */
+    public function setShippingOptionCode(string $shippingOptionCode): SelectionInterface
+    {
+        $this->shippingOptionCode = $shippingOptionCode;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getInputCode(): string
@@ -62,10 +76,32 @@ class Selection implements SelectionInterface
     }
 
     /**
+     * @param string $inputCode
+     *
+     * @return SelectionInterface
+     */
+    public function setInputCode(string $inputCode): SelectionInterface
+    {
+        $this->inputCode = $inputCode;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getInputValue(): string
     {
         return $this->inputValue;
+    }
+
+    /**
+     * @param string $inputValue
+     *
+     * @return SelectionInterface
+     */
+    public function setInputValue(string $inputValue): SelectionInterface
+    {
+        $this->inputValue = $inputValue;
+        return $this;
     }
 }

@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\ShippingOption\Selection;
 
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\SelectionInterface;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelection;
 use Magento\Framework\Model\AbstractModel;
 
@@ -43,6 +44,17 @@ class OrderSelection extends AbstractModel implements AssignedSelectionInterface
     }
 
     /**
+     * @param string $shippingOptionCode
+     *
+     * @return SelectionInterface
+     */
+    public function setShippingOptionCode(string $shippingOptionCode): SelectionInterface
+    {
+        $this->setData(self::SHIPPING_OPTION_CODE, $shippingOptionCode);
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function getInputCode(): string
@@ -51,10 +63,32 @@ class OrderSelection extends AbstractModel implements AssignedSelectionInterface
     }
 
     /**
+     * @param string $inputCode
+     *
+     * @return SelectionInterface
+     */
+    public function setInputCode(string $inputCode): SelectionInterface
+    {
+        $this->setData(self::INPUT_CODE, $inputCode);
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function getInputValue(): string
     {
         return (string) $this->getData(self::INPUT_VALUE);
+    }
+
+    /**
+     * @param string $inputValue
+     *
+     * @return SelectionInterface
+     */
+    public function setInputValue(string $inputValue): SelectionInterface
+    {
+        $this->setData(self::INPUT_VALUE, $inputValue);
+        return $this;
     }
 }
