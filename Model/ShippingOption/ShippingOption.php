@@ -70,7 +70,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @var int[]
      */
-    private $requiredItemIds;
+    private $requiredItemIds = [];
 
     /**
      * ShippingOption constructor.
