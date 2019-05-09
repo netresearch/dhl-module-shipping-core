@@ -4,22 +4,22 @@
         <attribute code="additional_info" type="Dhl\ShippingCore\Api\Data\MethodAdditionalInfoInterface" />
     </extension_attributes>
     <extension_attributes for="Magento\Sales\Api\Data\OrderAddressInterface">
-        <attribute code="dhl_street_name" type="string" >
-            <join reference_table="dhl_recipient_street"
+        <attribute code="dhlgw_street_name" type="string" >
+            <join reference_table="dhlgw_recipient_street"
                   reference_field="order_address_id"
                   join_on_field="entity_id">
                 <field>name</field>
             </join>
         </attribute>
-        <attribute code="dhl_street_number" type="string">
-            <join reference_table="dhl_recipient_street"
+        <attribute code="dhlgw_street_number" type="string">
+            <join reference_table="dhlgw_recipient_street"
                   reference_field="order_address_id"
                   join_on_field="entity_id">
                 <field>number</field>
             </join>
         </attribute>
-        <attribute code="dhl_street_supplement" type="string">
-            <join reference_table="dhl_recipient_street"
+        <attribute code="dhlgw_street_supplement" type="string">
+            <join reference_table="dhlgw_recipient_street"
                   reference_field="order_address_id"
                   join_on_field="entity_id">
                 <field>supplement</field>

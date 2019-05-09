@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Setup;
 
+use Dhl\ShippingCore\Setup\Module\Uninstaller;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
@@ -37,19 +38,16 @@ class Uninstall implements UninstallInterface
     /**
      * Remove data that was created during module installation.
      *
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface $schemaSetup
      * @param ModuleContextInterface $context
-     * @throws \Zend_Db_Exception
      *
-     * @return void
      */
     public function uninstall(SchemaSetupInterface $schemaSetup, ModuleContextInterface $context)
     {
-        Setup::deleteConfig($schemaSetup);
-        Setup::removeProductAttributes($this->eavSetup);
-        Setup::deleteLabelStatusColumn($schemaSetup);
-        Setup::dropLabelStatusTable($schemaSetup);
-        SetupData::deleteAttributes($this->eavSetup);
-        Setup::dropDhlRecipientStreetTable($schemaSetup);
+        Uninstaller::deleteConfig($schemaSetup);
+        Uninstaller::deleteLabelStatusColumn($schemaSetup);
+        Uninstaller::dropLabelStatusTable($schemaSetup);
+        Uninstaller::deleteAttributes($this->eavSetup);
+        Uninstaller::dropDhlRecipientStreetTable($schemaSetup);
     }
 }

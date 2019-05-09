@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\ResourceModel;
 
 use Dhl\ShippingCore\Api\RecipientStreetInterface;
-use Dhl\ShippingCore\Setup\Setup;
+use Dhl\ShippingCore\Setup\Module\Constants;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
 
@@ -46,7 +46,7 @@ class RecipientStreet extends AbstractDb
     protected function _construct()
     {
         $this->_init(
-            Setup::DHL_RECIPIENT_STREET_TABLE_NAME,
+            Constants::TABLE_DHLGW_RECIPIENT_STREET,
             RecipientStreetInterface::ORDER_ADDRESS_ID
         );
     }

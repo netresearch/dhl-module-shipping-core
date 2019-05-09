@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ResourceModel;
 
-use Dhl\ShippingCore\Setup\Setup;
+use Dhl\ShippingCore\Setup\Module\Constants;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
 
@@ -44,7 +44,7 @@ class LabelStatus extends AbstractDb
      */
     protected function _construct()
     {
-        $this->_init(Setup::TABLE_LABEL_STATUS, 'order_id');
+        $this->_init(Constants::TABLE_DHLGW_LABEL_STATUS, 'order_id');
     }
 
     /**

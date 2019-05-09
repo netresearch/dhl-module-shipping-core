@@ -9,6 +9,10 @@ namespace Dhl\ShippingCore\Setup;
 use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
 use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
 use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
+use Magento\Catalog\Model\Product;
+use Magento\Catalog\Model\Product\Type;
+use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
+use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetup;
 
 /**
@@ -16,7 +20,7 @@ use Magento\Eav\Setup\EavSetup;
  *
  * @package Dhl\ShippingCore\Setup
  */
-class SetupData
+class DataInstaller
 {
     /**
      * @param EavSetup $eavSetup
@@ -24,18 +28,19 @@ class SetupData
     public static function addDangerousGoodsCategoryAttribute(EavSetup $eavSetup)
     {
         $eavSetup->addAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
+            Product::ENTITY,
             DGCategory::CODE,
             [
                 'group' => '',
                 'type' => 'varchar',
-                'label' => 'Dangerous Goods Category',
+                'label' => 'DHL Dangerous Goods Category',
                 'input' => 'select',
                 'required' => false,
                 'source' => DGCategory::class,
                 'sort_order' => 50,
-                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_WEBSITE,
+                'global' => ScopedAttributeInterface::SCOPE_WEBSITE,
                 'visible' => true,
+                'apply_to' => implode(',', [Type::TYPE_SIMPLE, Type::TYPE_BUNDLE, Configurable::TYPE_CODE]),
             ]
         );
     }
@@ -46,18 +51,19 @@ class SetupData
     public static function addTariffNumberAttribute(EavSetup $eavSetup)
     {
         $eavSetup->addAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
+            Product::ENTITY,
             TariffNumber::CODE,
             [
                 'group' => '',
                 'type' => 'varchar',
-                'label' => 'Tariff Number (hs Code)',
+                'label' => 'DHL Tariff Number (HS Code)',
                 'input' => 'text',
                 'required' => false,
-                'sort_order' => 50,
-                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_WEBSITE,
+                'sort_order' => 51,
+                'global' => ScopedAttributeInterface::SCOPE_WEBSITE,
                 'backend' => TariffNumber::class,
                 'visible' => true,
+                'apply_to' => implode(',', [Type::TYPE_SIMPLE, Type::TYPE_BUNDLE, Configurable::TYPE_CODE]),
             ]
         );
     }
@@ -68,7 +74,7 @@ class SetupData
     public static function addExportDescriptionAttribute(EavSetup $eavSetup)
     {
         $eavSetup->addAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
+            Product::ENTITY,
             ExportDescription::CODE,
             [
                 'group' => '',
@@ -76,31 +82,12 @@ class SetupData
                 'label' => 'DHL Item Description',
                 'input' => 'text',
                 'required' => false,
-                'sort_order' => 50,
-                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_WEBSITE,
+                'sort_order' => 52,
+                'global' => ScopedAttributeInterface::SCOPE_WEBSITE,
                 'backend' => ExportDescription::class,
                 'visible' => true,
+                'apply_to' => implode(',', [Type::TYPE_SIMPLE, Type::TYPE_BUNDLE, Configurable::TYPE_CODE]),
             ]
-        );
-    }
-
-    /**
-     * @param EavSetup $eavSetup
-     * @return void
-     */
-    public static function deleteAttributes(EavSetup $eavSetup)
-    {
-        $eavSetup->removeAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            DGCategory::CODE
-        );
-        $eavSetup->removeAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            TariffNumber::CODE
-        );
-        $eavSetup->removeAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            ExportDescription::CODE
         );
     }
 }

@@ -10,34 +10,33 @@ use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
 
 /**
  * Class DGCategory
- * @package Dhl\ShippingCore\Model\Attribute\Source
+ *
+ * @package Dhl\ShippingCore\Model
  */
 class DGCategory extends AbstractSource
 {
-    const CODE = 'dhl_dangerous_goods_category';
+    const CODE = 'dhlgw_dangerous_goods_category';
 
     /**
      * @return string[][]
      */
     public function getAllOptions(): array
     {
-        if (!$this->_options) {
-            $this->_options = [
-                [
-                    'label' => 'none',
-                    'value' => ''
-                ],
-                [
-                    'label' => '01 - Lithium Metal Contained in Equipment',
-                    'value' => '01'
-                ],
-                [
-                    'label' => '04 - Lithium-Ion Contained in Equipment',
-                    'value' => '04'
-                ]
-            ];
-        }
+        $options = [
+            [
+                'label' => 'none',
+                'value' => ''
+            ],
+            [
+                'label' => '01 - Lithium Metal Contained in Equipment',
+                'value' => '01'
+            ],
+            [
+                'label' => '04 - Lithium-Ion Contained in Equipment',
+                'value' => '04'
+            ]
+        ];
 
-        return $this->_options;
+        return $options;
     }
 }

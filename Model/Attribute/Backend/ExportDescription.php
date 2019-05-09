@@ -7,19 +7,23 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Attribute\Backend;
 
 use Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend;
+use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Class ExportDescription
- * @package Dhl\ShippingCore\Model\Attribute\Backend
+ *
+ * @package Dhl\ShippingCore\Model
  */
 class ExportDescription extends AbstractBackend
 {
-    const CODE = 'dhl_export_description';
+    const CODE = 'dhlgw_export_description';
     const MAX_LENGTH = 50;
 
     /**
-     * @param \Magento\Framework\DataObject $object
+     * Validate export description input.
+     *
+     * @param DataObject $object
      * @return bool
      * @throws LocalizedException
      */
@@ -27,10 +31,11 @@ class ExportDescription extends AbstractBackend
     {
         $value = $object->getData(self::CODE);
         $frontendLabel = $this->getAttribute()->getData('frontend_label');
-        if (strlen((string)$value) > static::MAX_LENGTH) {
+
+        if (strlen((string) $value) > static::MAX_LENGTH) {
             throw new LocalizedException(
                 __(
-                    'The value of attribute "%1" must not be longer than %2 characters',
+                    'The value of attribute %1 must not be longer than %2 characters.',
                     $frontendLabel,
                     static::MAX_LENGTH
                 )
