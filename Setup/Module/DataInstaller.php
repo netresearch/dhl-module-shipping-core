@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Setup;
+namespace Dhl\ShippingCore\Setup\Module;
 
 use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
 use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;

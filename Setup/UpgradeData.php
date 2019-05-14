@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Setup\Module;
+namespace Dhl\ShippingCore\Setup;
 
 use Dhl\ShippingCore\Model\Attribute\Migrate;
-use Dhl\ShippingCore\Setup\DataInstaller;
+use Dhl\ShippingCore\Setup\Module\DataInstaller;
 use Magento\Catalog\Model\Product;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\ModuleContextInterface;
