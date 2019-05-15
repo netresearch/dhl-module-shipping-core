@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/PageObject.xsd">
+    <!-- Shipping configuration page -->
+    <page name="AdminSystemConfigShippingSectionPage" url="admin/system_config/edit/section/shipping" area="admin" module="Magento_Config">
+        <section name="AdminSystemConfigShippingOriginSection"/>
+        <section name="AdminSystemConfigShippingCoreSection"/>
+    </page>
+
+    <!-- Carriers configuration page -->
+    <page name="AdminSystemConfigSectionCarriersPage" url="admin/system_config/edit/section/carriers" area="admin" module="Magento_Config">
+        <section name="AdminSystemConfigCarriersSection"/>
+    </page>
+</pages>

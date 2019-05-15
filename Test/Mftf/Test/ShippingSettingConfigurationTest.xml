@@ -21,27 +21,28 @@
         <after>
             <actionGroup ref="logout" stepKey="logout"/>
         </after>
-        <actionGroup ref="NavigateToShippingSettings" stepKey="navigateToShippingSettingsConfigInTest"/>
+
+        <actionGroup ref="NavigateToShippingCoreSection" stepKey="navigateToShippingSettingsConfigInTest"/>
 
         <!-- Select payment methods and save -->
-        <selectOption selector="{{AdminShippingSettingsConfigSection.codPaymentMethodSelection}}"
-                      parameterArray="[{{ShippingSettingsCodData.cashOnDelivery}}, {{ShippingSettingsCodData.checkMoneyOrder}}]"
+        <selectOption selector="{{AdminSystemConfigShippingCoreSection.codPaymentMethodSelection}}"
+                      parameterArray="[{{ShippingCorePaymentMethods.cashOnDelivery}}, {{ShippingCorePaymentMethods.checkMoneyOrder}}]"
                       stepKey="selectCodPaymentMethods"/>
 
-        <actionGroup ref="SaveAdminConfigSection" stepKey="saveAdminConfigSection"/>
+        <actionGroup ref="SaveAdminSystemConfigSection" stepKey="saveAdminConfigSection"/>
 
         <!-- Confirm selection is persisted -->
-        <grabMultiple stepKey="fetchPaymentMethods" selector="{{AdminShippingSettingsConfigSection.codPaymentMethodActiveSelection}}"/>
+        <grabMultiple stepKey="fetchPaymentMethods" selector="{{AdminSystemConfigShippingCoreSection.codPaymentMethodActiveSelection}}"/>
         <assertCount stepKey="validateSavedPaymentMethodsCount">
             <expectedResult type="const">2</expectedResult>
             <actualResult type="variable">fetchPaymentMethods</actualResult>
         </assertCount>
         <assertContains stepKey="validateSavedPaymentMethodsA">
-            <expectedResult type="string">{{ShippingSettingsCodData.checkMoneyOrder}}</expectedResult>
+            <expectedResult type="string">{{ShippingCorePaymentMethods.checkMoneyOrder}}</expectedResult>
             <actualResult type="variable">fetchPaymentMethods</actualResult>
         </assertContains>
         <assertContains stepKey="validateSavedPaymentMethodsB">
-            <expectedResult type="string">{{ShippingSettingsCodData.cashOnDelivery}}</expectedResult>
+            <expectedResult type="string">{{ShippingCorePaymentMethods.cashOnDelivery}}</expectedResult>
             <actualResult type="variable">fetchPaymentMethods</actualResult>
         </assertContains>
     </test>
@@ -61,32 +62,33 @@
         <after>
             <actionGroup ref="logout" stepKey="logout"/>
         </after>
-        <actionGroup ref="NavigateToShippingSettings" stepKey="navigateToShippingSettingsConfigInTest"/>
+
+        <actionGroup ref="NavigateToShippingCoreSection" stepKey="navigateToShippingSettingsConfigInTest"/>
 
         <!-- Configure a cut-off time and save -->
-        <seeElement selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroup}}" stepKey="seeCutOffTimeConfigGroup"/>
+        <seeElement selector="{{AdminSystemConfigShippingCoreSection.cutOffTimeConfigGroup}}" stepKey="seeCutOffTimeConfigGroup"/>
 
-        <selectOption selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupHoursSelect}}"
-                      userInput="{{ShippingSettingsCutOffTimeData.hours}}"
+        <selectOption selector="{{AdminSystemConfigShippingCoreSection.cutOffTimeConfigGroupHoursSelect}}"
+                      userInput="{{ShippingCoreCutOffTime.hours}}"
                       stepKey="selectCutOffTimeHour"/>
-        <selectOption selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupMinutesSelect}}"
-                      userInput="{{ShippingSettingsCutOffTimeData.minutes}}"
+        <selectOption selector="{{AdminSystemConfigShippingCoreSection.cutOffTimeConfigGroupMinutesSelect}}"
+                      userInput="{{ShippingCoreCutOffTime.minutes}}"
                       stepKey="selectCutOffTimeMinute"/>
-        <selectOption selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupSecondsSelect}}"
-                      userInput="{{ShippingSettingsCutOffTimeData.seconds}}"
+        <selectOption selector="{{AdminSystemConfigShippingCoreSection.cutOffTimeConfigGroupSecondsSelect}}"
+                      userInput="{{ShippingCoreCutOffTime.seconds}}"
                       stepKey="selectCutOffTimeSecond"/>
 
-        <actionGroup ref="SaveAdminConfigSection" stepKey="saveAdminConfigSection"/>
+        <actionGroup ref="SaveAdminSystemConfigSection" stepKey="saveAdminConfigSection"/>
 
         <!-- Confirm selection is persisted -->
-        <seeOptionIsSelected selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupHoursSelect}}"
-                             userInput="{{ShippingSettingsCutOffTimeData.hours}}"
+        <seeOptionIsSelected selector="{{AdminSystemConfigShippingCoreSection.cutOffTimeConfigGroupHoursSelect}}"
+                             userInput="{{ShippingCoreCutOffTime.hours}}"
                              stepKey="validateCutOffTimeConfigGroupHoursSelect"/>
-        <seeOptionIsSelected selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupMinutesSelect}}"
-                             userInput="{{ShippingSettingsCutOffTimeData.minutes}}"
+        <seeOptionIsSelected selector="{{AdminSystemConfigShippingCoreSection.cutOffTimeConfigGroupMinutesSelect}}"
+                             userInput="{{ShippingCoreCutOffTime.minutes}}"
                              stepKey="validateCutOffTimeConfigGroupMinutesSelect"/>
-        <seeOptionIsSelected selector="{{AdminShippingSettingsConfigSection.cutOffTimeConfigGroupSecondsSelect}}"
-                             userInput="{{ShippingSettingsCutOffTimeData.seconds}}"
+        <seeOptionIsSelected selector="{{AdminSystemConfigShippingCoreSection.cutOffTimeConfigGroupSecondsSelect}}"
+                             userInput="{{ShippingCoreCutOffTime.seconds}}"
                              stepKey="validateCutOffTimeConfigGroupSecondsSelect"/>
     </test>
 
@@ -105,28 +107,29 @@
         <after>
             <actionGroup ref="logout" stepKey="logout"/>
         </after>
-        <actionGroup ref="NavigateToShippingSettings" stepKey="navigateToShippingSettingsConfigInTest"/>
+
+        <actionGroup ref="NavigateToShippingCoreSection" stepKey="navigateToShippingSettingsConfigInTest"/>
 
         <!-- Configure a terms of trade and save -->
-        <seeElement selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroup}}" stepKey="seeTermsOfTradeConfigGroup"/>
+        <seeElement selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroup}}" stepKey="seeTermsOfTradeConfigGroup"/>
 
-        <see selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDU}} + label span"
-             userInput="{{ShippingSettingsTermsOfTradeData.DDU}}" stepKey="seeTermsOfTradeConfigGroupLabelDDU"/>
-        <see selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDP}} + label span"
-             userInput="{{ShippingSettingsTermsOfTradeData.DDP}}" stepKey="seeTermsOfTradeConfigGroupLabelDDP"/>
+        <see selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDULabel}}"
+             userInput="{{ShippingCoreTermsOfTrade.DDU}}" stepKey="seeTermsOfTradeConfigGroupLabelDDU"/>
+        <see selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDPLabel}}"
+             userInput="{{ShippingCoreTermsOfTrade.DDP}}" stepKey="seeTermsOfTradeConfigGroupLabelDDP"/>
 
-        <seeCheckboxIsChecked selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDU}}"
+        <seeCheckboxIsChecked selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDU}}"
                               stepKey="termsOfTradeConfigGroupOptionCheckedDDU"/>
 
-        <click selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDP}} + label"
+        <click selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDPLabel}}"
                stepKey="termsOfTradeConfigGroupOptionClickDDP"/>
 
-        <actionGroup ref="SaveAdminConfigSection" stepKey="saveAdminConfigSection"/>
+        <actionGroup ref="SaveAdminSystemConfigSection" stepKey="saveAdminConfigSection"/>
 
         <!-- Confirm selection is persisted -->
-        <seeCheckboxIsChecked selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDP}}"
+        <seeCheckboxIsChecked selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDP}}"
                               stepKey="termsOfTradeConfigGroupOptionCheckedDDP"/>
-        <dontSeeCheckboxIsChecked selector="{{AdminShippingSettingsConfigSection.termsOfTradeConfigGroupOptionDDU}}"
+        <dontSeeCheckboxIsChecked selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDU}}"
                                   stepKey="termsOfTradeConfigGroupOptionNotCheckedDDU"/>
     </test>
 </tests>

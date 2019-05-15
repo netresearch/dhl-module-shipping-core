@@ -5,7 +5,7 @@
   */
 -->
 <sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
-    <section name="AdminConfigSection">
-        <element name="saveSuccessMessage" type="text" selector="#messages .messages .message-success"/>
+    <section name="AdminSystemConfigSection">
+        <element name="saveSuccessMessage" type="text" selector="[data-ui-id='messages-message-success']"/>
     </section>
 </sections>

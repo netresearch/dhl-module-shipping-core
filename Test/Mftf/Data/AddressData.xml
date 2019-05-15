@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="CustomerAddress_DE" type="address">
+        <data key="id">0</data>
+        <data key="customer_id">99</data>
+        <requiredEntity type="region">CustomerRegion_SAS</requiredEntity>
+        <data key="country_id">DE</data>
+        <data key="region_id">91</data>
+        <array key="street">
+            <item>Nonnenstraße 11d</item>
+        </array>
+        <data key="company">Netresearch</data>
+        <data key="telephone">000</data>
+        <data key="fax">000</data>
+        <data key="postcode">04229</data>
+        <data key="city">Leipzig</data>
+        <data key="state">Sachsen</data>
+        <data key="firstname">Max</data>
+        <data key="lastname">Mustermann</data>
+        <data key="middlename">string</data>
+        <data key="prefix">string</data>
+        <data key="suffix">string</data>
+        <data key="vat_id">vatData</data>
+        <data key="default_shipping">true</data>
+        <data key="default_billing">true</data>
+        <data key="region_qty">66</data>
+    </entity>
+</entities>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <!-- Open carrier settings group -->
+    <actionGroup name="FlatRateOpenCarrierSettings">
+        <scrollTo selector="{{AdminSystemConfigCarriersFlatRateSection.carrierGroup}}" stepKey="scrollToCarrierGroup1" x="0" y="-85"/>
+        <seeElement selector="{{AdminSystemConfigCarriersFlatRateSection.carrierGroup}}" stepKey="seeCarrierConfigGroup"/>
+        <conditionalClick stepKey="expandCarrierConfiguration"
+                          selector="{{AdminSystemConfigCarriersFlatRateSection.carrierGroup}}"
+                          dependentSelector="{{AdminSystemConfigCarriersFlatRateSection.carrierGroupExpanded}}"
+                          visible="true"/>
+    </actionGroup>
+
+    <!-- Close carrier settings group -->
+    <actionGroup name="FlatRateCloseCarrierSettings">
+        <scrollTo selector="{{AdminSystemConfigCarriersFlatRateSection.carrierGroup}}" stepKey="scrollToCarrierGroup2" x="0" y="-85"/>
+        <conditionalClick stepKey="expandCarrierConfiguration"
+                          selector="{{AdminSystemConfigCarriersFlatRateSection.carrierGroup}}"
+                          dependentSelector="{{AdminSystemConfigCarriersFlatRateSection.carrierGroupExpanded}}"
+                          visible="false"/>
+    </actionGroup>
+
+    <!-- Uncheck carrier configuration options -->
+    <actionGroup name="FlatRateCarrierSettingsUncheckOptions">
+        <uncheckOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierActiveInherit}}"
+                       stepKey="uncheckInheritedCarrierActive"/>
+        <uncheckOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierTypeInherit}}"
+                       stepKey="uncheckInheritedCarrierTyp"/>
+        <uncheckOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierPriceInherit}}"
+                       stepKey="uncheckInheritedCarrierPrice"/>
+        <uncheckOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierCalculateHandlingFeeInherit}}"
+                       stepKey="uncheckInheritedCarrierCalculateHandlingFee"/>
+    </actionGroup>
+
+    <!-- Configure carrier -->
+    <actionGroup name="FlatRateConfigureCarrierSettings">
+        <arguments>
+            <argument name="CarriersFlatRateSettings" defaultValue="CarriersFlatRateSettings_Default"/>
+        </arguments>
+
+        <scrollTo selector="{{AdminSystemConfigCarriersFlatRateSection.carrierGroup}}" stepKey="scrollToCarrierGroup2" x="0" y="-85"/>
+
+        <seeElement selector="{{AdminSystemConfigCarriersFlatRateSection.carrierActive}}"
+                    stepKey="seeCarrierActive"/>
+        <selectOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierActive}}"
+                      userInput="{{CarriersFlatRateSettings.carriers_flatrate_active}}"
+                      stepKey="selectCarrierActive"/>
+
+        <seeElement selector="{{AdminSystemConfigCarriersFlatRateSection.carrierType}}"
+                    stepKey="seeCarrierType"/>
+        <selectOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierType}}"
+                      userInput="{{CarriersFlatRateSettings.carriers_flatrate_type}}"
+                      stepKey="selectCarrierType"/>
+
+        <seeElement selector="{{AdminSystemConfigCarriersFlatRateSection.carrierPrice}}"
+                    stepKey="seeCarrierPrice"/>
+        <fillField selector="{{AdminSystemConfigCarriersFlatRateSection.carrierPrice}}"
+                   userInput="{{CarriersFlatRateSettings.carriers_flatrate_price}}"
+                   stepKey="selectCarrierPrice"/>
+
+        <seeElement selector="{{AdminSystemConfigCarriersFlatRateSection.carrierCalculateHandlingFee}}"
+                    stepKey="seeCarrierCalculateHandlingFee"/>
+        <selectOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierCalculateHandlingFee}}"
+                      userInput="{{CarriersFlatRateSettings.carriers_flatrate_handling_type}}"
+                      stepKey="selectCarrierCalculateHandlingFee"/>
+    </actionGroup>
+
+    <!-- Unset carrier configuration to restore initial state -->
+    <actionGroup name="FlatRateResetCarrierSettings" extends="FlatRateConfigureCarrierSettings" >
+        <checkOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierActiveInherit}}"
+                     stepKey="checkInheritedCarrierActive"/>
+        <checkOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierTypeInherit}}"
+                     stepKey="checkInheritedCarrierTyp"/>
+        <checkOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierPriceInherit}}"
+                     stepKey="checkInheritedCarrierPrice"/>
+        <checkOption selector="{{AdminSystemConfigCarriersFlatRateSection.carrierCalculateHandlingFeeInherit}}"
+                     stepKey="checkInheritedCarrierCalculateHandlingFee"/>
+    </actionGroup>
+</actionGroups>

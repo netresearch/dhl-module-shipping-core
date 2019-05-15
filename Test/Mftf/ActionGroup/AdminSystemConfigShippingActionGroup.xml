@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <!-- Navigate to the shipping origin configuration page -->
+    <actionGroup name="NavigateToShippingOriginSection">
+        <amOnPage url="{{AdminSystemConfigShippingSectionPage.url}}" stepKey="navigateToShippingSettingsConfigPage"/>
+        <waitForPageLoad stepKey="waitForShippingSettingsConfigPageLoad"/>
+
+        <scrollTo selector="{{AdminSystemConfigShippingOriginSection.shippingOriginGroup}}" stepKey="scrollToShippingOriginGroup" x="0" y="-85"/>
+        <seeElement selector="{{AdminSystemConfigShippingOriginSection.shippingOriginGroup}}" stepKey="seeShippingOriginGroup"/>
+        <conditionalClick stepKey="expandShippingOriginGroup"
+                          selector="{{AdminSystemConfigShippingOriginSection.shippingOriginGroup}}"
+                          dependentSelector="{{AdminSystemConfigShippingOriginSection.shippingOriginGroupExpanded}}"
+                          visible="true"/>
+    </actionGroup>
+
+    <!-- Set shipping origin address (default: DE) -->
+    <actionGroup name="ConfigureShippingOrigin">
+        <arguments>
+            <argument name="ShippingOriginData" defaultValue="ShippingOrigin_DE"/>
+        </arguments>
+
+        <!-- Uncheck inherited options -->
+        <uncheckOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginCountryIdInherit}}"
+                       stepKey="uncheckInheritedShippingOriginCountryId"/>
+        <uncheckOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginRegionIdInherit}}"
+                       stepKey="uncheckInheritedShippingOriginRegionId"/>
+        <uncheckOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginPostalCodeInherit}}"
+                       stepKey="uncheckInheritedShippingOriginPostalCode"/>
+
+        <!-- Configure shipping origin address -->
+        <selectOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginCountryId}}"
+                      userInput="{{ShippingOriginData.countryId}}"
+                      stepKey="selectShippingOriginCountryId"/>
+        <waitForLoadingMaskToDisappear stepKey="waitForCountrySelectUpdate"/>
+
+        <selectOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginRegionId}}"
+                      userInput="{{ShippingOriginData.regionId}}"
+                      stepKey="selectShippingOriginRegionId"/>
+        <fillField selector="{{AdminSystemConfigShippingOriginSection.shippingOriginPostalCode}}"
+                   userInput="{{ShippingOriginData.postalCode}}"
+                   stepKey="selectShippingOriginPostalCode"/>
+        <fillField selector="{{AdminSystemConfigShippingOriginSection.shippingOriginCity}}"
+                   userInput="{{ShippingOriginData.city}}"
+                   stepKey="selectShippingOriginCity"/>
+    </actionGroup>
+
+    <!-- Navigate to the DHLGW configuration page -->
+    <actionGroup name="NavigateToShippingCoreSection">
+        <amOnPage url="{{AdminSystemConfigShippingSectionPage.url}}" stepKey="navigateToShippingSettingsConfigPage"/>
+        <waitForPageLoad stepKey="waitForShippingSettingsConfigPageLoad"/>
+
+        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}" stepKey="scrollToShippingCoreGroup" x="0" y="-85"/>
+        <seeElement selector="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}" stepKey="seeShippingCoreGroup"/>
+        <conditionalClick stepKey="expandShippingCoreGroup"
+                          selector="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}"
+                          dependentSelector="{{AdminSystemConfigShippingCoreSection.shippingCoreGroupExpanded}}"
+                          visible="true"/>
+    </actionGroup>
+</actionGroups>

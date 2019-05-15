@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <!-- Go to carrier settings page -->
+    <actionGroup name="NavigateToCarrierSettingsDefault">
+        <amOnPage url="{{AdminSystemConfigSectionCarriersPage.url}}" stepKey="navigateToCarrierSettingsConfigPage"/>
+        <waitForPageLoad stepKey="waitForCarrierSettingsConfigPageLoad"/>
+    </actionGroup>
+</actionGroups>

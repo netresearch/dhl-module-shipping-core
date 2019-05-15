@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <!-- Flat Rate -->
+    <section name="AdminSystemConfigCarriersFlatRateSection">
+        <!-- Carrier config group selectors -->
+        <element name="carrierGroup" type="button" selector="#carriers_flatrate-head"/>
+        <element name="carrierGroupExpanded" type="button" selector="#carriers_flatrate-head:not(.open)"/>
+
+        <element name="carrierActiveInherit" type="checkbox" selector="#carriers_flatrate_active_inherit"/>
+        <element name="carrierTypeInherit" type="checkbox" selector="#carriers_flatrate_type_inherit"/>
+        <element name="carrierPriceInherit" type="checkbox" selector="#carriers_flatrate_price_inherit"/>
+        <element name="carrierCalculateHandlingFeeInherit" type="checkbox" selector="#carriers_flatrate_handling_type_inherit"/>
+
+        <!-- Settings selectors -->
+        <element name="carrierActive" type="select" selector="[data-ui-id='select-groups-flatrate-fields-active-value']"/>
+        <element name="carrierType" type="select" selector="[data-ui-id='select-groups-flatrate-fields-type-value']"/>
+        <element name="carrierPrice" type="input" selector="[data-ui-id='text-groups-flatrate-fields-price-value']"/>
+        <element name="carrierCalculateHandlingFee" type="select" selector="[data-ui-id='select-groups-flatrate-fields-handling-type-value']"/>
+    </section>
+</sections>
