@@ -1,81 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="options" type="shippingOptions"/>
-    <xs:complexType name="shippingOptions" mixed="true">
-        <xs:choice minOccurs="0">
-            <xs:element name="package" type="shippingOptionList"/>
-            <xs:element name="item" type="shippingOptionList"/>
-        </xs:choice>
-    </xs:complexType>
+    <xs:element name="carriers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="carrier">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element name="carrierCode" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="packageLevelOptions" type="shippingOptionList" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="itemLevelOptions" type="shippingOptionList" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="metaData" minOccurs="1" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element name="title" type="xs:string"/>
+                                        <xs:element name="imageUrl" type="xs:string" minOccurs="0"/>
+                                        <xs:element name="commentsBefore" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence maxOccurs="unbounded">
+                                                    <xs:element name="comment" type="commentConfig"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="commentsAfter" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence maxOccurs="unbounded">
+                                                    <xs:element name="comment" type="commentConfig"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="footnotes" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence maxOccurs="unbounded">
+                                                    <xs:element name="footnote">
+                                                        <xs:complexType>
+                                                            <xs:all>
+                                                                <xs:element name="content" type="xs:string"/>
+                                                                <xs:element name="footnoteId" type="xs:string"/>
+                                                                <xs:element name="subjects" type="subjectsList" minOccurs="0"/>
+                                                                <xs:element name="subjectsMustBeSelected" type="xs:boolean" minOccurs="0"/>
+                                                                <xs:element name="subjectsMustBeAvailable" type="xs:boolean" minOccurs="0"/>
+                                                            </xs:all>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:all>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="compatibilityData" minOccurs="0" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:sequence maxOccurs="unbounded">
+                                        <xs:element name="rule">
+                                            <xs:complexType>
+                                                <xs:all>
+                                                    <xs:element name="incompatibilityRule" type="xs:boolean"/>
+                                                    <xs:element name="subjects" type="subjectsList"/>
+                                                    <xs:element name="errorMessage" type="xs:string"/>
+                                                </xs:all>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="shippingOptionList">
         <xs:sequence maxOccurs="unbounded">
-            <xs:element name="shippingOption" type="shippingOption"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="shippingOption">
-        <xs:sequence>
-            <xs:element name="code" type="xs:string"/>
-            <xs:element name="label" type="xs:string"/>
-            <xs:element name="inputs" type="inputConfigList"/>
-            <xs:element name="enabledForCheckout" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="enabledForAutocreate" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="enabledForPackaging" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="availableAtPostalFacility" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="packagingReadonly" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="sortOrder" type="xs:integer" minOccurs="0"/>
-            <xs:element name="routes" type="routeConfig" minOccurs="0"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="inputConfigList">
-        <xs:sequence>
-            <xs:element name="input" type="inputConfig"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="inputOptionList">
-        <xs:sequence>
-            <xs:element name="option" type="inputOption"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="inputOption">
-        <xs:sequence>
-            <xs:element name="label" type="xs:string"/>
-            <xs:element name="value" type="xs:string"/>
-            <xs:element name="disabled" type="xs:boolean" minOccurs="0"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="inputConfig">
-        <xs:sequence>
-            <xs:element name="inputType" type="xs:string"/>
-            <xs:element name="code" type="xs:string"/>
-            <xs:element name="label" type="xs:string"/>
-            <xs:element name="labelVisible" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="options" type="inputOptionList" minOccurs="0"/>
-            <xs:element name="tooltip" type="xs:string" minOccurs="0"/>
-            <xs:element name="sortOrder" type="xs:integer" minOccurs="0"/>
-            <xs:element name="validationRules" type="validationRules" minOccurs="0"/>
-            <xs:element name="comment" type="commentConfig" minOccurs="0"/>
-            <!-- @TODO might be dynamic provider here, so additional implementation necessary -->
-            <xs:element name="defaultValue" type="xs:string" minOccurs="0"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="routeConfig">
-        <!-- @TODO find nice implementatio here -->
-        <xs:sequence>
-            <xs:element name="origin" type="xs:string">
+            <xs:element name="shippingOption">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="code" type="xs:string"/>
+                        <xs:element name="label" type="xs:string"/>
+                        <xs:element name="inputs">
+                            <xs:complexType>
+                                <xs:sequence maxOccurs="unbounded">
+                                    <xs:element name="input">
+                                        <xs:complexType>
+                                            <xs:all>
+                                                <xs:element name="code" type="xs:string"/>
+                                                <xs:element name="label" type="xs:string"/>
+                                                <xs:element name="labelVisible" type="xs:boolean" minOccurs="0"/>
+                                                <xs:element name="inputType" type="xs:string"/>
+                                                <xs:element name="options" minOccurs="0">
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="option" maxOccurs="unbounded">
+                                                                <xs:complexType>
+                                                                    <xs:all>
+                                                                        <xs:element name="label" type="xs:string"/>
+                                                                        <xs:element name="value" type="xs:string" minOccurs="0"/>
+                                                                        <xs:element name="disabled" type="xs:boolean" minOccurs="0"/>
+                                                                    </xs:all>
+                                                                </xs:complexType>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="tooltip" type="xs:string" minOccurs="0"/>
+                                                <xs:element name="placeholder" type="xs:string" minOccurs="0"/>
+                                                <xs:element name="sortOrder" type="xs:integer" minOccurs="0"/>
+                                                <xs:element name="validationRules" minOccurs="0">
+                                                    <xs:complexType>
+                                                        <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                                                            <xs:element name="rule">
+                                                                <xs:complexType>
+                                                                    <xs:sequence>
+                                                                        <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                                                        <xs:element name="param" minOccurs="0" maxOccurs="unbounded"/>
+                                                                    </xs:sequence>
+                                                                </xs:complexType>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="comment" type="commentConfig" minOccurs="0"/>
+                                                <xs:element name="defaultValue" type="xs:string" minOccurs="0"/>
+                                            </xs:all>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="enabledForCheckout" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="enabledForAutocreate" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="enabledForPackaging" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="availableAtPostalFacility" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="packagingReadonly" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="sortOrder" type="xs:integer" minOccurs="0"/>
+                        <xs:element name="routes" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="route" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="origin" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                                <xs:element name="destinations" minOccurs="1">
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="destination" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:all>
+                </xs:complexType>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="validationRules">
+
+    <xs:complexType name="subjectsList">
         <xs:sequence>
-            <xs:element name="name" type="xs:string"/>
-            <!-- @TODO find nice implementatio here -->
-            <xs:element name="params" type="xs:all" minOccurs="0"/>
+            <xs:element name="subject" minOccurs="1" maxOccurs="unbounded" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
+
     <xs:complexType name="commentConfig">
-        <xs:sequence>
+        <xs:all>
             <xs:element name="content" type="xs:string"/>
             <xs:element name="footnoteId" type="xs:string" minOccurs="0"/>
-        </xs:sequence>
+        </xs:all>
     </xs:complexType>
 </xs:schema>
