@@ -7,8 +7,8 @@
 <actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
     <!-- Go to carrier settings page -->
-    <actionGroup name="NavigateToCarrierSettingsDefault">
-        <amOnPage url="{{AdminSystemConfigSectionCarriersPage.url}}" stepKey="navigateToCarrierSettingsConfigPage"/>
+    <actionGroup name="NavigateToCarrierSettingsPageActionGroup">
+        <amOnPage url="{{AdminSystemConfigSectionCarriersPage.url}}" stepKey="openCarrierSettingsConfigPage"/>
         <waitForPageLoad stepKey="waitForCarrierSettingsConfigPageLoad"/>
     </actionGroup>
 </actionGroups>

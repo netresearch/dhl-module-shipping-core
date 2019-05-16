@@ -7,7 +7,7 @@
 <actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
     <!-- Navigate to the shipping origin configuration page -->
-    <actionGroup name="NavigateToShippingOriginSection">
+    <actionGroup name="NavigateToShippingOriginSectionActionGroup">
         <amOnPage url="{{AdminSystemConfigShippingSectionPage.url}}" stepKey="navigateToShippingSettingsConfigPage"/>
         <waitForPageLoad stepKey="waitForShippingSettingsConfigPageLoad"/>
 
@@ -19,8 +19,11 @@
                           visible="true"/>
     </actionGroup>
 
-    <!-- Set shipping origin address (default: DE) -->
-    <actionGroup name="ConfigureShippingOrigin">
+    <!-- Set shipping origin address (default: DE)
+
+         Region is sometimes a select and sometimes a input field, so use either the
+         actionGroup "ConfigureShippingOriginRegionSelectActionGroup" or "ConfigureShippingOriginRegionInputActionGroup" -->
+    <actionGroup name="ConfigureShippingOriginActionGroup">
         <arguments>
             <argument name="ShippingOriginData" defaultValue="ShippingOrigin_DE"/>
         </arguments>
@@ -39,19 +42,35 @@
                       stepKey="selectShippingOriginCountryId"/>
         <waitForLoadingMaskToDisappear stepKey="waitForCountrySelectUpdate"/>
 
-        <selectOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginRegionId}}"
-                      userInput="{{ShippingOriginData.regionId}}"
-                      stepKey="selectShippingOriginRegionId"/>
         <fillField selector="{{AdminSystemConfigShippingOriginSection.shippingOriginPostalCode}}"
                    userInput="{{ShippingOriginData.postalCode}}"
-                   stepKey="selectShippingOriginPostalCode"/>
+                   stepKey="fillShippingOriginPostalCode"/>
         <fillField selector="{{AdminSystemConfigShippingOriginSection.shippingOriginCity}}"
                    userInput="{{ShippingOriginData.city}}"
-                   stepKey="selectShippingOriginCity"/>
+                   stepKey="fillShippingOriginCity"/>
+        <fillField selector="{{AdminSystemConfigShippingOriginSection.shippingOriginStreet1}}"
+                   userInput="{{ShippingOriginData.street1}}"
+                   stepKey="fillShippingOriginStreet1"/>
+    </actionGroup>
+
+    <!-- Set shipping origin address with region selection -->
+    <actionGroup name="ConfigureShippingOriginRegionSelectActionGroup" extends="ConfigureShippingOriginActionGroup">
+        <selectOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginRegionId}}"
+                      userInput="{{ShippingOriginData.regionId}}"
+                      stepKey="selectShippingOriginRegionId"
+                      before="fillShippingOriginPostalCode"/>
+    </actionGroup>
+
+    <!-- Set shipping origin address with region input -->
+    <actionGroup name="ConfigureShippingOriginRegionInputActionGroup" extends="ConfigureShippingOriginActionGroup">
+        <fillField selector="{{AdminSystemConfigShippingOriginSection.shippingOriginRegionInputId}}"
+                   userInput="{{ShippingOriginData.regionId}}"
+                   stepKey="fillShippingOriginRegionInputId"
+                   before="fillShippingOriginPostalCode"/>
     </actionGroup>
 
     <!-- Navigate to the DHLGW configuration page -->
-    <actionGroup name="NavigateToShippingCoreSection">
+    <actionGroup name="NavigateToShippingCoreSectionActionGroup">
         <amOnPage url="{{AdminSystemConfigShippingSectionPage.url}}" stepKey="navigateToShippingSettingsConfigPage"/>
         <waitForPageLoad stepKey="waitForShippingSettingsConfigPageLoad"/>
 

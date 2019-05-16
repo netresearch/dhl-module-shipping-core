@@ -15,9 +15,12 @@
         <element name="shippingOriginPostalCodeInherit" type="checkbox" selector="#shipping_origin_postcode_inherit"/>
 
         <element name="shippingOriginCountryId" type="select" selector="[data-ui-id='select-groups-origin-fields-country-id-value']"/>
+        <!-- The region input is either a select or and input field, depending on the selected country -->
         <element name="shippingOriginRegionId" type="select" selector="#shipping_origin_region_id"/>
+        <element name="shippingOriginRegionInputId" type="input" selector="#shipping_origin_region_id"/>
         <element name="shippingOriginPostalCode" type="input" selector="[data-ui-id='text-groups-origin-fields-postcode-value']"/>
         <element name="shippingOriginCity" type="input" selector="[data-ui-id='text-groups-origin-fields-city-value']"/>
+        <element name="shippingOriginStreet1" type="input" selector="[data-ui-id='text-groups-origin-fields-street-line1-value']"/>
     </section>
 
     <!-- DHLGW -->

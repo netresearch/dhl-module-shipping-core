@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <!-- Checkout -->
+    <section name="StorefrontCheckoutSection">
+        <element name="checkoutShippingMethod" type="text" selector="div[id='checkout-step-shipping_method'] td[id^='label_carrier_'][id$='_{{arg1}}']" parameterized="true"/>
+        <element name="checkoutShippingLabelJQuery" type="text" selector="div[id=\'checkout-step-shipping_method\'] td[id^=\'label_method_\'][id$=\'_{{arg1}}\']" parameterized="true"/>
+
+        <element name="miniCartCheckoutButton" type="button" selector="#top-cart-btn-checkout" timeout="300"/>
+        <element name="miniCartEmptyCartQuantityCounter" type="text" selector=".counter.qty.empty"/>
+    </section>
+</sections>

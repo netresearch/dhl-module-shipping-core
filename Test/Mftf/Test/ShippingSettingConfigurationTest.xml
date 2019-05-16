@@ -22,14 +22,14 @@
             <actionGroup ref="logout" stepKey="logout"/>
         </after>
 
-        <actionGroup ref="NavigateToShippingCoreSection" stepKey="navigateToShippingSettingsConfigInTest"/>
+        <actionGroup ref="NavigateToShippingCoreSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
 
         <!-- Select payment methods and save -->
         <selectOption selector="{{AdminSystemConfigShippingCoreSection.codPaymentMethodSelection}}"
                       parameterArray="[{{ShippingCorePaymentMethods.cashOnDelivery}}, {{ShippingCorePaymentMethods.checkMoneyOrder}}]"
                       stepKey="selectCodPaymentMethods"/>
 
-        <actionGroup ref="SaveAdminSystemConfigSection" stepKey="saveAdminConfigSection"/>
+        <actionGroup ref="SaveAdminSystemConfigSectionActionGroup" stepKey="saveAdminConfigSection"/>
 
         <!-- Confirm selection is persisted -->
         <grabMultiple stepKey="fetchPaymentMethods" selector="{{AdminSystemConfigShippingCoreSection.codPaymentMethodActiveSelection}}"/>
@@ -63,7 +63,7 @@
             <actionGroup ref="logout" stepKey="logout"/>
         </after>
 
-        <actionGroup ref="NavigateToShippingCoreSection" stepKey="navigateToShippingSettingsConfigInTest"/>
+        <actionGroup ref="NavigateToShippingCoreSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
 
         <!-- Configure a cut-off time and save -->
         <seeElement selector="{{AdminSystemConfigShippingCoreSection.cutOffTimeConfigGroup}}" stepKey="seeCutOffTimeConfigGroup"/>
@@ -78,7 +78,7 @@
                       userInput="{{ShippingCoreCutOffTime.seconds}}"
                       stepKey="selectCutOffTimeSecond"/>
 
-        <actionGroup ref="SaveAdminSystemConfigSection" stepKey="saveAdminConfigSection"/>
+        <actionGroup ref="SaveAdminSystemConfigSectionActionGroup" stepKey="saveAdminConfigSection"/>
 
         <!-- Confirm selection is persisted -->
         <seeOptionIsSelected selector="{{AdminSystemConfigShippingCoreSection.cutOffTimeConfigGroupHoursSelect}}"
@@ -108,7 +108,7 @@
             <actionGroup ref="logout" stepKey="logout"/>
         </after>
 
-        <actionGroup ref="NavigateToShippingCoreSection" stepKey="navigateToShippingSettingsConfigInTest"/>
+        <actionGroup ref="NavigateToShippingCoreSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
 
         <!-- Configure a terms of trade and save -->
         <seeElement selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroup}}" stepKey="seeTermsOfTradeConfigGroup"/>
@@ -124,7 +124,7 @@
         <click selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDPLabel}}"
                stepKey="termsOfTradeConfigGroupOptionClickDDP"/>
 
-        <actionGroup ref="SaveAdminSystemConfigSection" stepKey="saveAdminConfigSection"/>
+        <actionGroup ref="SaveAdminSystemConfigSectionActionGroup" stepKey="saveAdminConfigSection"/>
 
         <!-- Confirm selection is persisted -->
         <seeCheckboxIsChecked selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDP}}"

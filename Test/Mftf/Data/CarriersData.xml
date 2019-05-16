@@ -14,13 +14,13 @@
         <data key="carriers_flatrate_handling_type">F</data>
     </entity>
 
-    <entity name="CarriersFlatRateSettings_TestSingleItem" type="carrier">
+    <entity name="CarriersFlatRateSettings_TestPerOrder" type="carrier">
         <data key="carriers_flatrate_active">0</data>
         <data key="carriers_flatrate_type">O</data>
         <data key="carriers_flatrate_price">5.00</data>
         <data key="carriers_flatrate_handling_type">F</data>
     </entity>
-    <entity name="CarriersFlatRateSettings_TestMultipleItems" type="carrier">
+    <entity name="CarriersFlatRateSettings_TestPerItem" type="carrier">
         <data key="carriers_flatrate_active">0</data>
         <data key="carriers_flatrate_type">I</data>
         <data key="carriers_flatrate_price">5.00</data>

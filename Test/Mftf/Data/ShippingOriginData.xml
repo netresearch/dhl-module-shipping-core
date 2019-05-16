@@ -6,16 +6,30 @@
 -->
 <entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/dataProfileSchema.xsd">
+    <!-- Deutschland -->
     <entity name="ShippingOrigin_DE" type="carrier">
         <data key="countryId">DE</data>
         <data key="regionId">91</data>
         <data key="postalCode">04229</data>
         <data key="city">Leipzig</data>
+        <data key="street1"/>
     </entity>
+
+    <!-- Österreich -->
     <entity name="ShippingOrigin_AT" type="carrier">
         <data key="countryId">AT</data>
         <data key="regionId">95</data>
         <data key="postalCode">1010</data>
         <data key="city">Wien</data>
+        <data key="street1"/>
+    </entity>
+
+    <!-- Hong Kong -->
+    <entity name="ShippingOrigin_HK" type="carrier">
+        <data key="countryId">HK</data>
+        <data key="regionId">N.T.</data>
+        <data key="postalCode">53113</data>
+        <data key="city">Kwai Chung</data>
+        <data key="street1">No 31-39 Wo Tong Tsui St</data>
     </entity>
 </entities>
