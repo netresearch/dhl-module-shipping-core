@@ -12,7 +12,7 @@ use Magento\Framework\Config\ConverterInterface;
  */
 class Converter implements ConverterInterface
 {
-    private const ARRAY_NODES = [
+    const ARRAY_NODES = [
         'carriers',
         'packageLevelOptions',
         'itemLevelOptions',

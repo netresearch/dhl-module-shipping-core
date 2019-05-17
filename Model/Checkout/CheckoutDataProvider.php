@@ -22,13 +22,20 @@ class CheckoutDataProvider
     private $reader;
 
     /**
+     * @var CheckoutDataCompositeProcessor
+     */
+    private $compositeProcessor;
+
+    /**
      * CheckoutDataProvider constructor.
      *
      * @param ReaderInterface $reader
+     * @param CheckoutDataCompositeProcessor $compositeProcessor
      */
-    public function __construct(ReaderInterface $reader)
+    public function __construct(ReaderInterface $reader, CheckoutDataCompositeProcessor $compositeProcessor)
     {
         $this->reader = $reader;
+        $this->compositeProcessor = $compositeProcessor;
     }
 
     /**
@@ -39,8 +46,9 @@ class CheckoutDataProvider
      */
     public function getData(string $countryCode, int $storeId, string $postalCode): array
     {
-        $data = $this->reader->read();
+        $checkoutData = $this->reader->read();
+        $checkoutData = $this->compositeProcessor->process($checkoutData, $countryCode, $postalCode);
 
-        return $data;
+        return $checkoutData;
     }
 }

@@ -150,4 +150,13 @@
             <argument xsi:type="object" name="reader">DhlVirtualReader</argument>
         </arguments>
     </type>
+
+    <!-- internal shipping option config processors -->
+    <type name="\Dhl\ShippingCore\Model\Checkout\CheckoutDataCompositeProcessor">
+        <arguments>
+            <argument name="internalProcessors" xsi:type="array">
+                <item name="dhlRouteProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor\RouteProcessor</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

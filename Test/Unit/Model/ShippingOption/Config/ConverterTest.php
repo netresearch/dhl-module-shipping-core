@@ -26,7 +26,7 @@ class ConverterTest extends TestCase
     /**
      * @dataProvider xmlDataProvider
      */
-    public function testConvert(\DOMDocument $xml): void
+    public function testConvert(\DOMDocument $xml)
     {
         $subject = new Converter();
 
