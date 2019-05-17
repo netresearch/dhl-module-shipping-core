@@ -40,5 +40,5 @@ interface CheckoutManagementInterface
      * @param \Dhl\ShippingCore\Api\Data\ShippingOption\Selection\SelectionInterface[] $shippingOptionSelections
      * @return void
      */
-    public function updateShippingOptionSelections(int $cartId, array $shippingOptionSelections);
+    public function updateShippingOptionSelections(int $cartId, array $shippingOptionSelections): void;
 }

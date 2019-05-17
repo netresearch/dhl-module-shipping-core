@@ -135,4 +135,19 @@
             </argument>
         </arguments>
     </type>
+
+    <!-- shipping option config xml reader -->
+    <virtualType name="DhlVirtualReader" type="\Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument xsi:type="object" name="fileResolver">Dhl\ShippingCore\Model\ShippingOption\Config\FileResolver</argument>
+            <argument xsi:type="object" name="schemaLocator">Dhl\ShippingCore\Model\ShippingOption\Config\SchemaLocator</argument>
+            <argument xsi:type="object" name="converter">Dhl\ShippingCore\Model\ShippingOption\Config\Converter</argument>
+            <argument xsi:type="string" name="fileName">shipping_options.xml</argument>
+        </arguments>
+    </virtualType>
+    <type name="Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider">
+        <arguments>
+            <argument xsi:type="object" name="reader">DhlVirtualReader</argument>
+        </arguments>
+    </type>
 </config>
