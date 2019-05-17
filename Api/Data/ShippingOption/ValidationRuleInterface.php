@@ -25,9 +25,9 @@ interface ValidationRuleInterface
     public function getName(): string;
 
     /**
-     * Parameters available to the validation rule (eg max number of characters)
+     * Parameter available to the validation rule (eg max number of characters)
      *
-     * @return mixed
+     * @return mixed|null
      */
-    public function getParams();
+    public function getParam();
 }

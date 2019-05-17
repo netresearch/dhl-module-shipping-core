@@ -28,7 +28,12 @@ class CarrierData implements CarrierDataInterface
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
-    private $shippingOptions;
+    private $packageLevelOptions = [];
+
+    /**
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
+     */
+    private $itemLevelOptions = [];
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface
@@ -44,18 +49,21 @@ class CarrierData implements CarrierDataInterface
      * CarrierData constructor.
      *
      * @param string $carrierCode
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[] $shippingOptions
-     * @param \Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface $metadata
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface[] $compatibilityData
+     * @param ShippingOptionInterface[] $packageLevelOptions
+     * @param ShippingOptionInterface[] $itemLevelOptions
+     * @param MetadataInterface $metadata
+     * @param CompatibilityInterface[] $compatibilityData
      */
     public function __construct(
         string $carrierCode,
-        array $shippingOptions,
         MetadataInterface $metadata,
+        array $packageLevelOptions = [],
+        array $itemLevelOptions = [],
         array $compatibilityData = []
     ) {
         $this->carrierCode = $carrierCode;
-        $this->shippingOptions = $shippingOptions;
+        $this->packageLevelOptions = $packageLevelOptions;
+        $this->itemLevelOptions = $itemLevelOptions;
         $this->metadata = $metadata;
         $this->compatibilityData = $compatibilityData;
     }
@@ -71,9 +79,17 @@ class CarrierData implements CarrierDataInterface
     /**
      * @return ShippingOptionInterface[]
      */
-    public function getShippingOptions(): array
+    public function getPackageLevelOptions(): array
     {
-        return $this->shippingOptions;
+        return $this->packageLevelOptions;
+    }
+
+    /**
+     * @return ShippingOptionInterface[]
+     */
+    public function getItemLevelOptions(): array
+    {
+        return $this->itemLevelOptions;
     }
 
     /**

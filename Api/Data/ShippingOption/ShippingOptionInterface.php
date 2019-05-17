@@ -75,7 +75,7 @@ interface ShippingOptionInterface
     /**
      * Obtain routes the shipping option can be booked with.
      *
-     * @return string[][]
+     * @return mixed
      */
     public function getRoutes(): array;
 

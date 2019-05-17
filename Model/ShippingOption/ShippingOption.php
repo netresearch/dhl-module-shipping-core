@@ -58,7 +58,7 @@ class ShippingOption implements ShippingOptionInterface
     private $availableAtPostalFacility = true;
 
     /**
-     * @var string[][]
+     * @var mixed
      */
     private $routes = [];
 
@@ -178,7 +178,7 @@ class ShippingOption implements ShippingOptionInterface
     }
 
     /**
-     * @return string[][]
+     * @return mixed
      */
     public function getRoutes(): array
     {

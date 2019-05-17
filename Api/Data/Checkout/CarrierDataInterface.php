@@ -24,11 +24,18 @@ interface CarrierDataInterface
     public function getCarrierCode(): string;
 
     /**
-     * Retrieve rendering information about the shipping options the carrier offers.
+     * Retrieve rendering information about the shipping options the carrier offers on package level.
      *
      * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
-    public function getShippingOptions(): array;
+    public function getPackageLevelOptions(): array;
+
+    /**
+     * Retrieve rendering information about the shipping options the carrier offers on item level.
+     *
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
+     */
+    public function getItemLevelOptions(): array;
 
     /**
      * Retrieve compatibility data to handle user input into the shipping options at runtime.
