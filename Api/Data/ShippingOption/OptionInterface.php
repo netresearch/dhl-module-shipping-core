@@ -17,6 +17,14 @@ namespace Dhl\ShippingCore\Api\Data\ShippingOption;
 interface OptionInterface
 {
     /**
+     * May return the unique ID of the option rule.
+     * If the option does not have a unique id, it will return ''.
+     *
+     * @return string
+     */
+    public function getId(): string;
+
+    /**
      * Retrieve the human-readable name of the option
      *
      * @return string

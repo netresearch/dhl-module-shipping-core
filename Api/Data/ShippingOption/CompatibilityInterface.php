@@ -15,6 +15,14 @@ namespace Dhl\ShippingCore\Api\Data\ShippingOption;
 interface CompatibilityInterface
 {
     /**
+     * May return the unique ID of the compatibility rule.
+     * If the rule does not have a unique id, it will return ''.
+     *
+     * @return string
+     */
+    public function getId(): string;
+
+    /**
      * Returns a list of shipping option codes or compound codes ({shippingOptionCode}.{inputCode})
      * that should be affected by this rule.
      *

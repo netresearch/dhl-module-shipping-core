@@ -19,7 +19,7 @@ class Footnote implements FootnoteInterface
     /**
      * @var string
      */
-    private $footnoteId;
+    private $id;
 
     /**
      * @var string
@@ -44,20 +44,20 @@ class Footnote implements FootnoteInterface
     /**
      * Footnote constructor.
      *
-     * @param string $footnoteId
+     * @param string $id
      * @param string $content
      * @param string[] $subjects
      * @param bool $subjectsMustBeSelected
      * @param bool $subjectsMustBeAvailable
      */
     public function __construct(
-        string $footnoteId,
+        string $id,
         string $content,
         array $subjects,
         bool $subjectsMustBeSelected = false,
         bool $subjectsMustBeAvailable = false
     ) {
-        $this->footnoteId = $footnoteId;
+        $this->id = $id;
         $this->content = $content;
         $this->subjects = $subjects;
         $this->subjectsMustBeSelected = $subjectsMustBeSelected;
@@ -69,7 +69,7 @@ class Footnote implements FootnoteInterface
      */
     public function getId(): string
     {
-        return $this->footnoteId;
+        return $this->id;
     }
 
     /**

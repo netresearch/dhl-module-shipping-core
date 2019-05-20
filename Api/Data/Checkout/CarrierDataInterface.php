@@ -21,7 +21,7 @@ interface CarrierDataInterface
      *
      * @return string
      */
-    public function getCarrierCode(): string;
+    public function getCode(): string;
 
     /**
      * Retrieve rendering information about the shipping options the carrier offers on package level.

@@ -22,12 +22,12 @@ class Metadata implements MetadataInterface
     /**
      * @var string
      */
-    private $imageUrl;
+    private $imageUrl = '';
 
     /**
      * @var string
      */
-    private $title = '';
+    private $title;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[]

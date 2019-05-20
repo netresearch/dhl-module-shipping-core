@@ -17,6 +17,11 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface;
 class Compatibility implements CompatibilityInterface
 {
     /**
+     * @var string
+     */
+    private $id = '';
+
+    /**
      * @var string[]
      */
     private $subjects;
@@ -46,6 +51,7 @@ class Compatibility implements CompatibilityInterface
      *
      * @param string[] $subjects
      * @param string $errorMessage
+     * @param string $id
      * @param string[] $masters
      * @param bool $incompatibilityRule
      * @param bool $hideSubjects
@@ -53,15 +59,25 @@ class Compatibility implements CompatibilityInterface
     public function __construct(
         array $subjects,
         string $errorMessage,
+        string $id = '',
         array $masters = [],
         bool $incompatibilityRule = false,
         bool $hideSubjects = false
     ) {
         $this->subjects = $subjects;
         $this->errorMessage = $errorMessage;
+        $this->id = $id;
         $this->masters = $masters;
         $this->incompatibilityRule = $incompatibilityRule;
         $this->hideSubjects = $hideSubjects;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     /**

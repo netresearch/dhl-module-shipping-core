@@ -3,10 +3,9 @@
     <xs:element name="carriers">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="carrier">
+                <xs:element name="carrier" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:all>
-                            <xs:element name="carrierCode" type="xs:string" minOccurs="1" maxOccurs="1"/>
                             <xs:element name="packageLevelOptions" type="shippingOptionList" minOccurs="0" maxOccurs="1"/>
                             <xs:element name="itemLevelOptions" type="shippingOptionList" minOccurs="0" maxOccurs="1"/>
                             <xs:element name="metaData" minOccurs="1" maxOccurs="1">
@@ -35,11 +34,11 @@
                                                         <xs:complexType>
                                                             <xs:all>
                                                                 <xs:element name="content" type="xs:string"/>
-                                                                <xs:element name="footnoteId" type="xs:string"/>
                                                                 <xs:element name="subjects" type="subjectsList" minOccurs="0"/>
                                                                 <xs:element name="subjectsMustBeSelected" type="xs:boolean" minOccurs="0"/>
                                                                 <xs:element name="subjectsMustBeAvailable" type="xs:boolean" minOccurs="0"/>
                                                             </xs:all>
+                                                            <xs:attribute type="xs:string" name="id" use="required"/>
                                                         </xs:complexType>
                                                     </xs:element>
                                                 </xs:sequence>
@@ -58,12 +57,14 @@
                                                     <xs:element name="subjects" type="subjectsList"/>
                                                     <xs:element name="errorMessage" type="xs:string"/>
                                                 </xs:all>
+                                                <xs:attribute type="xs:string" name="id"/>
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
                         </xs:all>
+                        <xs:attribute type="xs:string" name="code" use="required"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
@@ -75,7 +76,6 @@
             <xs:element name="shippingOption">
                 <xs:complexType>
                     <xs:all>
-                        <xs:element name="code" type="xs:string"/>
                         <xs:element name="label" type="xs:string"/>
                         <xs:element name="inputs">
                             <xs:complexType>
@@ -83,7 +83,6 @@
                                     <xs:element name="input">
                                         <xs:complexType>
                                             <xs:all>
-                                                <xs:element name="code" type="xs:string"/>
                                                 <xs:element name="label" type="xs:string"/>
                                                 <xs:element name="labelVisible" type="xs:boolean" minOccurs="0"/>
                                                 <xs:element name="inputType" type="xs:string"/>
@@ -97,6 +96,7 @@
                                                                         <xs:element name="value" type="xs:string" minOccurs="0"/>
                                                                         <xs:element name="disabled" type="xs:boolean" minOccurs="0"/>
                                                                     </xs:all>
+                                                                    <xs:attribute type="xs:string" name="id"/>
                                                                 </xs:complexType>
                                                             </xs:element>
                                                         </xs:sequence>
@@ -111,9 +111,9 @@
                                                             <xs:element name="rule">
                                                                 <xs:complexType>
                                                                     <xs:sequence>
-                                                                        <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1"/>
                                                                         <xs:element name="param" minOccurs="0" maxOccurs="unbounded"/>
                                                                     </xs:sequence>
+                                                                    <xs:attribute type="xs:string" name="name" use="required"/>
                                                                 </xs:complexType>
                                                             </xs:element>
                                                         </xs:sequence>
@@ -122,6 +122,7 @@
                                                 <xs:element name="comment" type="commentConfig" minOccurs="0"/>
                                                 <xs:element name="defaultValue" type="xs:string" minOccurs="0"/>
                                             </xs:all>
+                                            <xs:attribute type="xs:string" name="code" use="required"/>
                                         </xs:complexType>
                                     </xs:element>
                                 </xs:sequence>
@@ -154,6 +155,7 @@
                             </xs:complexType>
                         </xs:element>
                     </xs:all>
+                    <xs:attribute type="xs:string" name="code" use="required"/>
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
