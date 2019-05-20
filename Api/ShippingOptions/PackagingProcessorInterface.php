@@ -16,18 +16,48 @@ use Magento\Sales\Api\Data\OrderInterface;
 interface PackagingProcessorInterface
 {
     /**
-     * Get the carrier code the processor can handle
+     * Receive an array of shipping option items,
+     * modify them according to business logic
+     * and return the modified array.
      *
-     * @return string
-     */
-    public function getCarrier(): string;
-
-    /**
-     * Receive $carrierData, modify it according to business logic and return the modified array.
-     *
-     * @param mixed[] $carrierData
+     * @param mixed[] $optionsData
      * @param OrderInterface $order
+     * @param int|null $scopeId
      * @return mixed[]
      */
-    public function process(array $carrierData, OrderInterface $order): array;
+    public function processShippingOptions(
+        array $optionsData,
+        OrderInterface $order,
+        int $scopeId = null
+    ): array;
+
+    /**
+     * Receive shipping option metadata, modify it according to business logic and return the modified array.
+     *
+     * @param array $metadata
+     * @param OrderInterface $order
+     * @param int|null $scopeId
+     * @return array
+     */
+    public function processMetadata(
+        array $metadata,
+        OrderInterface $order,
+        int $scopeId = null
+    ): array;
+
+    /**
+     * Receive an array of compatibility rule data items,
+     * modify them according to business logic
+     * and return the modified array.
+     *
+     * @param array $compatibilityData
+     * @param OrderInterface $order
+     * @param int|null $scopeId
+     * @return array
+     */
+    public function processCompatibilityData(
+        array $compatibilityData,
+        OrderInterface $order,
+        int $scopeId = null
+    ): array;
 }
