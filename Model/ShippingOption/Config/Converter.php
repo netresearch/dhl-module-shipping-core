@@ -12,6 +12,9 @@ use Magento\Framework\Config\ConverterInterface;
  */
 class Converter implements ConverterInterface
 {
+    /**
+     * A list of xml node names whose children should be treated as plain arrays
+     */
     const ARRAY_NODES = [
         'carriers',
         'packageLevelOptions',
@@ -54,29 +57,30 @@ class Converter implements ConverterInterface
      */
     private function toArray(\DOMNode $node)
     {
-        // process scalar types
-        if (count($node->childNodes === 1)
-            && !$node->firstChild->hasChildNodes()
-            && trim($node->firstChild->textContent)
-        ) {
+        if ($this->containsScalar($node)) {
             return $this->toScalar($node);
         }
-
-        $result = [];
-
-        // process flat arrays
-        if (in_array($node->localName, self::ARRAY_NODES, true)) {
+        if ($this->containsArray($node)) {
+            $result = [];
             foreach ($node->childNodes as $childNode) {
-                if (trim($childNode->textContent)) {
-                    $result[] = $this->toArray($childNode);
+                /** @var \DomNode $childNode */
+                if (trim($childNode->textContent) && in_array($childNode->nodeType, [1, 3], true)) {
+                    if ($childNode->hasAttributes()) {
+                        $key = $childNode->attributes->item(0)->localName;
+                        $value = $childNode->attributes->item(0)->textContent;
+                        $result[$value] = $this->toArray($childNode);
+                        $result[$value][$key] = $value;
+                    } else {
+                        $result[] = $this->toArray($childNode);
+                    }
                 }
             }
             return $result;
         }
 
-        // process nested objects
+        $result = [];
         foreach ($node->childNodes as $childNode) {
-            if (trim($childNode->textContent)) {
+            if (trim($childNode->textContent) && in_array($childNode->nodeType, [1, 3], true)) {
                 $result[$childNode->localName] = $this->toArray($childNode);
             }
         }
@@ -100,5 +104,31 @@ class Converter implements ConverterInterface
         }
 
         return $value;
+    }
+
+    /**
+     * @param \DomNode $node
+     * @return bool
+     */
+    private function containsScalar(\DomNode $node): bool
+    {
+        $hasOneChild = count($node->childNodes === 1);
+        if (!$hasOneChild || !$node->hasChildNodes()) {
+            return false;
+        }
+
+        $hasNoGrandchild = !$node->firstChild->hasChildNodes();
+        $isNotEmpty = trim($node->firstChild->textContent);
+
+        return $hasNoGrandchild && $isNotEmpty;
+    }
+
+    /**
+     * @param \DOMNode $node
+     * @return bool
+     */
+    private function containsArray(\DOMNode $node): bool
+    {
+        return in_array($node->localName, self::ARRAY_NODES, true);
     }
 }

@@ -143,6 +143,18 @@
             <argument xsi:type="object" name="schemaLocator">Dhl\ShippingCore\Model\ShippingOption\Config\SchemaLocator</argument>
             <argument xsi:type="object" name="converter">Dhl\ShippingCore\Model\ShippingOption\Config\Converter</argument>
             <argument xsi:type="string" name="fileName">shipping_options.xml</argument>
+            <argument xsi:type="array" name="idAttributes">
+                <item xsi:type="string" name="/carriers/carrier">code</item>
+                <item xsi:type="string" name="/carriers/carrier/packageLevelOptions/shippingOption">code</item>
+                <item xsi:type="string" name="/carriers/carrier/packageLevelOptions/shippingOption/inputs/input">code</item>
+                <item xsi:type="string" name="/carriers/carrier/itemLevelOptions/shippingOption">code</item>
+                <item xsi:type="string" name="/carriers/carrier/itemLevelOptions/shippingOption/inputs/input">code</item>
+                <item xsi:type="string" name="/carriers/carrier/packageLevelOptions/shippingOption/inputs/input/options/option">id</item>
+                <item xsi:type="string" name="/carriers/carrier/itemLevelOptions/shippingOption/inputs/input/options/option">id</item>
+                <item xsi:type="string" name="/carriers/carrier/itemLevelOptions/shippingOption/inputs/input/validationRules/rule">name</item>
+                <item xsi:type="string" name="/carriers/carrier/metaData/footnotes/footnote">id</item>
+                <item xsi:type="string" name="/carriers/carrier/compatibilityData/rule">id</item>
+            </argument>
         </arguments>
     </virtualType>
     <type name="Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider">
@@ -150,11 +162,10 @@
             <argument xsi:type="object" name="reader">DhlVirtualReader</argument>
         </arguments>
     </type>
-
     <!-- internal shipping option config processors -->
     <type name="\Dhl\ShippingCore\Model\Checkout\CheckoutDataCompositeProcessor">
         <arguments>
-            <argument name="internalProcessors" xsi:type="array">
+            <argument name="processors" xsi:type="array">
                 <item name="dhlRouteProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor\RouteProcessor</item>
             </argument>
         </arguments>
