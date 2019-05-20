@@ -5,9 +5,8 @@
 
 namespace Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor;
 
-use Dhl\ShippingCore\Model\Checkout\InternalProcessorInterface;
+use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Mtf\Config\FileResolver\ScopeConfig;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -16,7 +15,7 @@ use Magento\Sales\Model\Order\Shipment;
  * @package Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  */
-class RouteProcessor implements InternalProcessorInterface
+class RouteProcessor extends AbstractProcessor
 {
     /**
      * @var ScopeConfigInterface
@@ -36,36 +35,33 @@ class RouteProcessor implements InternalProcessorInterface
     /**
      * Remove all shipping options that do not match the route (origin and destination) of the current checkout.
      *
-     * @param array $checkoutData
+     * @param array optionsData
      * @param string $countryId     Destination country code
      * @param string $postalCode    Destination postal code
      * @param int|null $scopeId
      * @return array
      */
-    public function process(array $checkoutData, string $countryId, string $postalCode, int $scopeId = null): array
-    {
-        $shippingOrigin = strtolower($this->scopeConfig->getValue(Shipment::XML_PATH_STORE_COUNTRY_ID));
+    public function processShippingOptions(
+        array $optionsData,
+        string $countryId,
+        string $postalCode,
+        int $scopeId = null
+    ): array {
+        $shippingOrigin = strtolower($this->scopeConfig->getValue(
+            Shipment::XML_PATH_STORE_COUNTRY_ID,
+            'website',
+            $scopeId
+        ));
         $countryId = strtolower($countryId);
 
-        foreach ($checkoutData['carriers'] as $carrierIndex => $carrierData) {
-            $optionGroups = [
-                'packageLevelOptions',
-                'itemLevelOptions',
-            ];
-            foreach ($optionGroups as $group) {
-                if (!isset($carrierData[$group])) {
-                    continue;
-                }
-                foreach ($carrierData[$group] as $optionIndex => $shippingOption) {
-                    $matchesRoute = $this->checkIfOptionMatchesRoute($shippingOption, $shippingOrigin, $countryId);
-                    if (!$matchesRoute) {
-                        unset($checkoutData['carriers'][$carrierIndex][$group][$optionIndex]);
-                    }
-                }
+        foreach ($optionsData as $optionCode => $shippingOption) {
+            $matchesRoute = $this->checkIfOptionMatchesRoute($shippingOption, $shippingOrigin, $countryId);
+            if (!$matchesRoute) {
+                unset($optionsData[$optionCode]);
             }
         }
 
-        return $checkoutData;
+        return $optionsData;
     }
 
     /**

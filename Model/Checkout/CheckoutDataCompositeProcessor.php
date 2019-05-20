@@ -13,7 +13,7 @@ use Dhl\ShippingCore\Api\ShippingOptions\CheckoutProcessorInterface;
  * @package Dhl\ShippingCore\Model\Checkout
  * @author Max Melzer <max.melzer@netresearch.de>
  */
-class CheckoutDataCompositeProcessor implements InternalProcessorInterface
+class CheckoutDataCompositeProcessor implements CheckoutProcessorInterface
 {
     /**
      * @var CheckoutProcessorInterface[]
@@ -21,54 +21,69 @@ class CheckoutDataCompositeProcessor implements InternalProcessorInterface
     private $processors;
 
     /**
-     * @var InternalProcessorInterface[]
-     */
-    private $internalProcessors;
-
-    /**
      * CheckoutDataCompositeProcessor constructor.
      *
      * @param CheckoutProcessorInterface[] $processors
-     * @param InternalProcessorInterface[] $internalProcessors
      */
-    public function __construct(array $processors = [], array $internalProcessors = [])
+    public function __construct(array $processors = [])
     {
         $this->processors = $processors;
-        $this->internalProcessors = $internalProcessors;
     }
 
-    /**
-     * Process $checkoutData according to internal Processors (applied automatically across all carriers) and
-     * carrier-specific Processors (applied only to the carrier specified by the processor).
-     *
-     * @param array $checkoutData
-     * @param string $countryId
-     * @param string $postalCode
-     * @param int|null $scopeId
-     * @return array
-     */
-    public function process(array $checkoutData, string $countryId, string $postalCode, int $scopeId = null): array
-    {
-        foreach ($this->internalProcessors as $processor) {
-            $checkoutData = $processor->process($checkoutData, $countryId, $postalCode, $scopeId);
-        }
-
+    public function processShippingOptions(
+        array $optionsData,
+        string $countryId,
+        string $postalCode,
+        int $scopeId = null
+    ): array {
+        $result = $optionsData;
         foreach ($this->processors as $processor) {
-            $carrierCode = $processor->getCarrier();
-            array_map(static function ($carrierData) use ($processor, $carrierCode, $countryId, $postalCode, $scopeId) {
-                if ($carrierData['carrierCode'] === $carrierCode) {
-                    $carrierData = $processor->process(
-                        $carrierData,
-                        $countryId,
-                        $postalCode,
-                        $scopeId
-                    );
-                }
-
-                return $carrierData;
-            }, $checkoutData);
+            $result = $processor->processShippingOptions(
+                $optionsData,
+                $countryId,
+                $postalCode,
+                $scopeId
+            );
         }
 
-        return $checkoutData;
+        return $result;
+    }
+
+    public function processMetadata(
+        array $metadata,
+        string $countryId,
+        string $postalCode,
+        int $scopeId = null
+    ): array {
+        $result = $metadata;
+        foreach ($this->processors as $processor) {
+            $result = $processor->processMetadata(
+                $metadata,
+                $countryId,
+                $postalCode,
+                $scopeId
+            );
+        }
+
+        return $result;
+    }
+
+    public function processCompatibilityData(
+        array $compatibilityData,
+        string $countryId,
+        string $postalCode,
+        int $scopeId = null
+    ): array {
+        $result = $compatibilityData;
+        foreach ($this->processors as $processor) {
+            $result = $processor->processCompatibilityData(
+                $compatibilityData,
+                $countryId,
+                $postalCode,
+                $scopeId
+            );
+        }
+
+        return $result;
     }
 }
