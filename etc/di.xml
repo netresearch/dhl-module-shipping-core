@@ -168,6 +168,7 @@
             <argument name="processors" xsi:type="array">
                 <item name="dhlRouteProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor\RouteProcessor</item>
                 <item name="dhlSortOrderProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor\SortOrderProcessor</item>
+                <item name="dhlImageUrlProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor\ImageUrlProcessor</item>
             </argument>
         </arguments>
     </type>
