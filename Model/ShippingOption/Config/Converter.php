@@ -64,7 +64,7 @@ class Converter implements ConverterInterface
             $result = [];
             foreach ($node->childNodes as $childNode) {
                 /** @var \DomNode $childNode */
-                if (trim($childNode->textContent) && in_array($childNode->nodeType, [1, 3], true)) {
+                if ($this->isNodeApplicable($childNode)) {
                     if ($childNode->hasAttributes()) {
                         $key = $childNode->attributes->item(0)->localName;
                         $value = $childNode->attributes->item(0)->textContent;
@@ -80,7 +80,7 @@ class Converter implements ConverterInterface
 
         $result = [];
         foreach ($node->childNodes as $childNode) {
-            if (trim($childNode->textContent) && in_array($childNode->nodeType, [1, 3], true)) {
+            if ($this->isNodeApplicable($childNode)) {
                 $result[$childNode->localName] = $this->toArray($childNode);
             }
         }
@@ -117,10 +117,9 @@ class Converter implements ConverterInterface
             return false;
         }
 
-        $hasNoGrandchild = !$node->firstChild->hasChildNodes();
-        $isNotEmpty = trim($node->firstChild->textContent);
+        $hasGrandchild = $node->firstChild->hasChildNodes();
 
-        return $hasNoGrandchild && $isNotEmpty;
+        return !$hasGrandchild && $this->isNodeApplicable($node->firstChild);
     }
 
     /**
@@ -130,5 +129,17 @@ class Converter implements ConverterInterface
     private function containsArray(\DOMNode $node): bool
     {
         return in_array($node->localName, self::ARRAY_NODES, true);
+    }
+
+    /**
+     * @param \DOMNode $node
+     * @return bool
+     */
+    private function isNodeApplicable(\DOMNode $node): bool
+    {
+        $isEmpty = trim($node->textContent) === '';
+        $isValidType = in_array($node->nodeType, [1, 3, 4], true);
+
+        return (!$isEmpty && $isValidType);
     }
 }

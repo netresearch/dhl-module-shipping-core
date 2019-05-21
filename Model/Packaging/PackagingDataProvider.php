@@ -50,22 +50,19 @@ class PackagingDataProvider
 
         foreach ($packagingData['carriers'] as $carrierCode => $carrierData) {
             foreach (['packageLevelOptions', 'itemLevelOptions'] as $group) {
-                if (!isset($carrierData[$group])) {
-                    continue;
-                }
                 $carrierData[$group] = $this->compositeProcessor->processShippingOptions(
-                    $carrierData[$group],
+                    $carrierData[$group] ?? [],
                     $order,
                     $storeId
                 );
             }
             $carrierData['metaData'] = $this->compositeProcessor->processMetadata(
-                $carrierData['metaData'],
+                $carrierData['metaData'] ?? [],
                 $order,
                 $storeId
             );
             $carrierData['compatibilityData'] = $this->compositeProcessor->processCompatibilityData(
-                $carrierData['compatibilityData'],
+                $carrierData['compatibilityData'] ?? [],
                 $order,
                 $storeId
             );

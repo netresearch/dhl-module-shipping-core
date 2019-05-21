@@ -50,24 +50,21 @@ class CheckoutDataProvider
 
         foreach ($checkoutData['carriers'] as $carrierCode => $carrierData) {
             foreach (['packageLevelOptions', 'itemLevelOptions'] as $group) {
-                if (!isset($carrierData[$group])) {
-                    continue;
-                }
                 $carrierData[$group] = $this->compositeProcessor->processShippingOptions(
-                    $carrierData[$group],
+                    $carrierData[$group] ?? [],
                     $countryCode,
                     $postalCode,
                     $storeId
                 );
             }
             $carrierData['metaData'] = $this->compositeProcessor->processMetadata(
-                $carrierData['metaData'],
+                $carrierData['metaData'] ?? [],
                 $countryCode,
                 $postalCode,
                 $storeId
             );
             $carrierData['compatibilityData'] = $this->compositeProcessor->processCompatibilityData(
-                $carrierData['compatibilityData'],
+                $carrierData['compatibilityData'] ?? [],
                 $countryCode,
                 $postalCode,
                 $storeId
