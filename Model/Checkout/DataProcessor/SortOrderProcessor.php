@@ -30,10 +30,10 @@ class SortOrderProcessor extends AbstractProcessor
         string $postalCode,
         int $scopeId = null
     ): array {
-        usort($optionsData, [$this, 'sortItems']);
+        uasort($optionsData, [$this, 'sortItems']);
 
         foreach (array_keys($optionsData) as $optionsIndex) {
-            usort($optionsData[$optionsIndex]['inputs'], [$this, 'sortItems']);
+            uasort($optionsData[$optionsIndex]['inputs'], [$this, 'sortItems']);
         }
 
         return $optionsData;

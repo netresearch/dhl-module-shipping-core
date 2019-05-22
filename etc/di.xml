@@ -166,20 +166,20 @@
     <type name="\Dhl\ShippingCore\Model\Checkout\CheckoutDataCompositeProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="dhlRouteProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor</item>
-                <item name="dhlImageUrlProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ImageUrlProcessor</item>
-                <item name="dhlTranslationProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\TranslationProcessor</item>
-                <item name="zzz_dhlSortOrderProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\SortOrderProcessor</item>
+                <item name="dhlRouteProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor</item>
+                <item name="dhlImageUrlProcessor" sortOrder="970" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ImageUrlProcessor</item>
+                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\TranslationProcessor</item>
+                <item name="dhlSortOrderProcessor" sortOrder="990" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\SortOrderProcessor</item>
             </argument>
         </arguments>
     </type>
     <type name="\Dhl\ShippingCore\Model\Packaging\PackagingDataCompositeProcessor">
         <arguments>
             <argument name="checkoutProcessors" xsi:type="array">
-                <item name="dhlRouteProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor</item>
-                <item name="dhlImageUrlProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ImageUrlProcessor</item>
-                <item name="dhlTranslationProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\TranslationProcessor</item>
-                <item name="zzz_dhlSortOrderProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\SortOrderProcessor</item>
+                <item name="dhlRouteProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor</item>
+                <item name="dhlImageUrlProcessor" sortOrder="970" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ImageUrlProcessor</item>
+                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\TranslationProcessor</item>
+                <item name="dhlSortOrderProcessor" sortOrder="990" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\SortOrderProcessor</item>
             </argument>
             <argument name="processors" xsi:type="array">
             </argument>
