@@ -7,7 +7,7 @@ namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Model\Packaging\PackagingDataCompositeProcessor;
 use Magento\Framework\Config\ReaderInterface;
-use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Model\Order;
 
 /**
  * Class PackagingDataProvider
@@ -41,11 +41,11 @@ class PackagingDataProvider
     }
 
     /**
-     * @param OrderInterface $order
+     * @param Order $order
      * @param int $storeId
      * @return mixed[]
      */
-    public function getData(OrderInterface $order, int $storeId = null): array
+    public function getData(Order $order, int $storeId = null): array
     {
         $packagingData = $this->reader->read('adminhtml');
 

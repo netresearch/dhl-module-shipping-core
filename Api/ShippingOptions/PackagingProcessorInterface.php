@@ -5,7 +5,7 @@
 
 namespace Dhl\ShippingCore\Api\ShippingOptions;
 
-use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Model\Order;
 
 /**
  * Interface PackagingProcessorInterface
@@ -21,13 +21,13 @@ interface PackagingProcessorInterface
      * and return the modified array.
      *
      * @param mixed[] $optionsData
-     * @param OrderInterface $order
+     * @param Order $order
      * @param int|null $scopeId
      * @return mixed[]
      */
     public function processShippingOptions(
         array $optionsData,
-        OrderInterface $order,
+        Order $order,
         int $scopeId = null
     ): array;
 
@@ -35,13 +35,13 @@ interface PackagingProcessorInterface
      * Receive shipping option metadata, modify it according to business logic and return the modified array.
      *
      * @param array $metadata
-     * @param OrderInterface $order
+     * @param Order $order
      * @param int|null $scopeId
      * @return array
      */
     public function processMetadata(
         array $metadata,
-        OrderInterface $order,
+        Order $order,
         int $scopeId = null
     ): array;
 
@@ -51,13 +51,13 @@ interface PackagingProcessorInterface
      * and return the modified array.
      *
      * @param array $compatibilityData
-     * @param OrderInterface $order
+     * @param Order $order
      * @param int|null $scopeId
      * @return array
      */
     public function processCompatibilityData(
         array $compatibilityData,
-        OrderInterface $order,
+        Order $order,
         int $scopeId = null
     ): array;
 }

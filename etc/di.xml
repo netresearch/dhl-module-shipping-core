@@ -175,8 +175,13 @@
     </type>
     <type name="\Dhl\ShippingCore\Model\Packaging\PackagingDataCompositeProcessor">
         <arguments>
+            <argument name="checkoutProcessors" xsi:type="array">
+                <item name="dhlRouteProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor</item>
+                <item name="dhlImageUrlProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ImageUrlProcessor</item>
+                <item name="dhlTranslationProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\TranslationProcessor</item>
+                <item name="zzz_dhlSortOrderProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\SortOrderProcessor</item>
+            </argument>
             <argument name="processors" xsi:type="array">
-                <item name="dhlDisableForPackagingProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\DisableForPackagingProcessor</item>
             </argument>
         </arguments>
     </type>

@@ -5,8 +5,9 @@
 
 namespace Dhl\ShippingCore\Model\Packaging;
 
+use Dhl\ShippingCore\Api\ShippingOptions\CheckoutProcessorInterface;
 use Dhl\ShippingCore\Api\ShippingOptions\PackagingProcessorInterface;
-use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Model\Order;
 
 /**
  * Class PackagingDataCompositeProcessor
@@ -22,21 +23,40 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
     private $processors;
 
     /**
+     * @var CheckoutProcessorInterface[]
+     */
+    private $checkoutProcessors;
+
+    /**
      * PackagingDataCompositeProcessor constructor.
      *
      * @param PackagingProcessorInterface[] $processors
+     * @param CheckoutProcessorInterface[] $checkoutProcessors
      */
-    public function __construct(array $processors = [])
+    public function __construct(array $processors = [], array $checkoutProcessors = [])
     {
         $this->processors = $processors;
+        $this->checkoutProcessors = $checkoutProcessors;
     }
 
     public function processShippingOptions(
         array $optionsData,
-        OrderInterface $order,
+        Order $order,
         int $scopeId = null
     ): array {
         $result = $optionsData;
+
+        if ($order->getShippingAddress()) {
+            foreach ($this->checkoutProcessors as $processor) {
+                $result = $processor->processShippingOptions(
+                    $result,
+                    $order->getShippingAddress()->getCountryId(),
+                    $order->getShippingAddress()->getPostcode(),
+                    $scopeId
+                );
+            }
+        }
+
         foreach ($this->processors as $processor) {
             $result = $processor->processShippingOptions(
                 $result,
@@ -50,10 +70,22 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
 
     public function processMetadata(
         array $metadata,
-        OrderInterface $order,
+        Order $order,
         int $scopeId = null
     ): array {
         $result = $metadata;
+
+        if ($order->getShippingAddress()) {
+            foreach ($this->checkoutProcessors as $processor) {
+                $result = $processor->processMetadata(
+                    $result,
+                    $order->getShippingAddress()->getCountryId(),
+                    $order->getShippingAddress()->getPostcode(),
+                    $scopeId
+                );
+            }
+        }
+
         foreach ($this->processors as $processor) {
             $result = $processor->processMetadata(
                 $result,
@@ -67,10 +99,22 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
 
     public function processCompatibilityData(
         array $compatibilityData,
-        OrderInterface $order,
+        Order $order,
         int $scopeId = null
     ): array {
         $result = $compatibilityData;
+
+        if ($order->getShippingAddress()) {
+            foreach ($this->checkoutProcessors as $processor) {
+                $result = $processor->processCompatibilityData(
+                    $result,
+                    $order->getShippingAddress()->getCountryId(),
+                    $order->getShippingAddress()->getPostcode(),
+                    $scopeId
+                );
+            }
+        }
+
         foreach ($this->processors as $processor) {
             $result = $processor->processCompatibilityData(
                 $result,
