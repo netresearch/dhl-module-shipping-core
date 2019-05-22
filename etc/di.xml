@@ -162,13 +162,21 @@
             <argument xsi:type="object" name="reader">DhlVirtualReader</argument>
         </arguments>
     </type>
-    <!-- internal shipping option config processors -->
+    <!-- shipping option config processors -->
     <type name="\Dhl\ShippingCore\Model\Checkout\CheckoutDataCompositeProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="dhlRouteProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor\RouteProcessor</item>
-                <item name="dhlSortOrderProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor\SortOrderProcessor</item>
-                <item name="dhlImageUrlProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor\ImageUrlProcessor</item>
+                <item name="dhlRouteProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor</item>
+                <item name="dhlImageUrlProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ImageUrlProcessor</item>
+                <item name="dhlTranslationProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\TranslationProcessor</item>
+                <item name="zzz_dhlSortOrderProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\SortOrderProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="\Dhl\ShippingCore\Model\Packaging\PackagingDataCompositeProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="dhlDisableForPackagingProcessor" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\DisableForPackagingProcessor</item>
             </argument>
         </arguments>
     </type>

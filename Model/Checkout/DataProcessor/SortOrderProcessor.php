@@ -3,7 +3,7 @@
  * See LICENSE.md for license details.
  */
 
-namespace Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor;
+namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
 
 use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
 

@@ -6,93 +6,106 @@
                 <xs:element name="carrier" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:all>
-                            <xs:element name="packageLevelOptions" type="shippingOptionList" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="itemLevelOptions" type="shippingOptionList" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="metaData" minOccurs="1" maxOccurs="1">
-                                <xs:complexType>
-                                    <xs:all>
-                                        <xs:element name="title" type="xs:string"/>
-                                        <xs:element name="imageUrl" type="xs:string" minOccurs="0"/>
-                                        <xs:element name="commentsBefore" minOccurs="0">
-                                            <xs:complexType>
-                                                <xs:sequence maxOccurs="unbounded">
-                                                    <xs:element name="comment" type="commentConfig"/>
-                                                </xs:sequence>
-                                            </xs:complexType>
-                                        </xs:element>
-                                        <xs:element name="commentsAfter" minOccurs="0">
-                                            <xs:complexType>
-                                                <xs:sequence maxOccurs="unbounded">
-                                                    <xs:element name="comment" type="commentConfig"/>
-                                                </xs:sequence>
-                                            </xs:complexType>
-                                        </xs:element>
-                                        <xs:element name="footnotes" minOccurs="0">
-                                            <xs:complexType>
-                                                <xs:sequence maxOccurs="unbounded">
-                                                    <xs:element name="footnote">
-                                                        <xs:complexType>
-                                                            <xs:all>
-                                                                <xs:element name="content" type="xs:string"/>
-                                                                <xs:element name="subjects" type="subjectsList" minOccurs="0"/>
-                                                                <xs:element name="subjectsMustBeSelected" type="xs:boolean" minOccurs="0"/>
-                                                                <xs:element name="subjectsMustBeAvailable" type="xs:boolean" minOccurs="0"/>
-                                                            </xs:all>
-                                                            <xs:attribute type="xs:string" name="id" use="required"/>
-                                                        </xs:complexType>
-                                                    </xs:element>
-                                                </xs:sequence>
-                                            </xs:complexType>
-                                        </xs:element>
-                                    </xs:all>
-                                </xs:complexType>
-                            </xs:element>
-                            <xs:element name="compatibilityData" minOccurs="0" maxOccurs="1">
-                                <xs:complexType>
-                                    <xs:sequence maxOccurs="unbounded">
-                                        <xs:element name="rule">
-                                            <xs:complexType>
-                                                <xs:all>
-                                                    <xs:element name="incompatibilityRule" type="xs:boolean"/>
-                                                    <xs:element name="subjects" type="subjectsList"/>
-                                                    <xs:element name="errorMessage" type="xs:string"/>
-                                                </xs:all>
-                                                <xs:attribute type="xs:string" name="id"/>
-                                            </xs:complexType>
-                                        </xs:element>
-                                    </xs:sequence>
-                                </xs:complexType>
-                            </xs:element>
+                            <xs:element name="packageLevelOptions" type="shippingOptionList" minOccurs="0"/>
+                            <xs:element name="itemLevelOptions" type="shippingOptionList" minOccurs="0"/>
+                            <xs:element name="metaData" minOccurs="0" type="metaData"/>
+                            <xs:element name="compatibilityData" minOccurs="0" type="compatibilityData"/>
                         </xs:all>
                         <xs:attribute type="xs:string" name="code" use="required"/>
                     </xs:complexType>
+                    <xs:unique name="uniqueOptionCode">
+                        <xs:selector xpath="*/shippingOption"/>
+                        <xs:field xpath="@code"/>
+                    </xs:unique>
+                    <xs:unique name="uniqueRuleId">
+                        <xs:selector xpath="*/rule"/>
+                        <xs:field xpath="@id"/>
+                    </xs:unique>
                 </xs:element>
             </xs:sequence>
         </xs:complexType>
+        <xs:unique name="uniqueCarrierCode">
+            <xs:selector xpath="carrier"/>
+            <xs:field xpath="@code"/>
+        </xs:unique>
     </xs:element>
+
+    <xs:complexType name="metaData">
+        <xs:all>
+            <xs:element name="title" minOccurs="0" type="string_translatable"/>
+            <xs:element name="imageUrl" type="xs:string" minOccurs="0"/>
+            <xs:element name="commentsBefore" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element name="comment" type="commentConfig"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="commentsAfter" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element name="comment" type="commentConfig"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="footnotes" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element name="footnote">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="content" type="string_translatable" minOccurs="0"/>
+                                    <xs:element name="subjects" type="subjectsList" minOccurs="0"/>
+                                    <xs:element name="subjectsMustBeSelected" type="xs:boolean" minOccurs="0"/>
+                                    <xs:element name="subjectsMustBeAvailable" type="xs:boolean" minOccurs="0"/>
+                                </xs:all>
+                                <xs:attribute type="xs:string" name="id" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="compatibilityData">
+        <xs:sequence maxOccurs="unbounded">
+            <xs:element name="rule">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="incompatibilityRule" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="subjects" type="subjectsList" minOccurs="0"/>
+                        <xs:element name="errorMessage" type="string_translatable" minOccurs="0"/>
+                    </xs:all>
+                    <xs:attribute type="xs:string" name="id"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
 
     <xs:complexType name="shippingOptionList">
         <xs:sequence maxOccurs="unbounded">
             <xs:element name="shippingOption">
                 <xs:complexType>
                     <xs:all>
-                        <xs:element name="label" type="xs:string"/>
-                        <xs:element name="inputs">
+                        <xs:element name="label" type="string_translatable" minOccurs="0"/>
+                        <xs:element name="inputs" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence maxOccurs="unbounded">
                                     <xs:element name="input">
                                         <xs:complexType>
                                             <xs:all>
-                                                <xs:element name="label" type="xs:string"/>
+                                                <xs:element name="label" type="string_translatable" minOccurs="0"/>
                                                 <xs:element name="labelVisible" type="xs:boolean" minOccurs="0"/>
-                                                <xs:element name="inputType" type="xs:string"/>
+                                                <xs:element name="inputType" type="xs:string" minOccurs="0"/>
+                                                <xs:element name="disabled" type="xs:boolean" minOccurs="0"/>
                                                 <xs:element name="options" minOccurs="0">
                                                     <xs:complexType>
                                                         <xs:sequence>
                                                             <xs:element name="option" maxOccurs="unbounded">
                                                                 <xs:complexType>
                                                                     <xs:all>
-                                                                        <xs:element name="label" type="xs:string"/>
+                                                                        <xs:element name="label" type="string_translatable" minOccurs="0"/>
                                                                         <xs:element name="value" type="xs:string" minOccurs="0"/>
                                                                         <xs:element name="disabled" type="xs:boolean" minOccurs="0"/>
                                                                     </xs:all>
@@ -102,12 +115,12 @@
                                                         </xs:sequence>
                                                     </xs:complexType>
                                                 </xs:element>
-                                                <xs:element name="tooltip" type="xs:string" minOccurs="0"/>
-                                                <xs:element name="placeholder" type="xs:string" minOccurs="0"/>
+                                                <xs:element name="tooltip" type="string_translatable" minOccurs="0"/>
+                                                <xs:element name="placeholder" type="string_translatable" minOccurs="0"/>
                                                 <xs:element name="sortOrder" type="xs:integer" minOccurs="0"/>
                                                 <xs:element name="validationRules" minOccurs="0">
                                                     <xs:complexType>
-                                                        <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                                                        <xs:sequence maxOccurs="unbounded" minOccurs="0">
                                                             <xs:element name="rule">
                                                                 <xs:complexType>
                                                                     <xs:sequence>
@@ -127,12 +140,11 @@
                                     </xs:element>
                                 </xs:sequence>
                             </xs:complexType>
+                            <xs:unique name="uniqueOptionInputCode">
+                                <xs:selector xpath="input"/>
+                                <xs:field xpath="@code"/>
+                            </xs:unique>
                         </xs:element>
-                        <xs:element name="enabledForCheckout" type="xs:boolean" minOccurs="0"/>
-                        <xs:element name="enabledForAutocreate" type="xs:boolean" minOccurs="0"/>
-                        <xs:element name="enabledForPackaging" type="xs:boolean" minOccurs="0"/>
-                        <xs:element name="availableAtPostalFacility" type="xs:boolean" minOccurs="0"/>
-                        <xs:element name="packagingReadonly" type="xs:boolean" minOccurs="0"/>
                         <xs:element name="sortOrder" type="xs:integer" minOccurs="0"/>
                         <xs:element name="routes" minOccurs="0">
                             <xs:complexType>
@@ -140,11 +152,11 @@
                                     <xs:element name="route" maxOccurs="unbounded">
                                         <xs:complexType>
                                             <xs:sequence>
-                                                <xs:element name="origin" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                                                <xs:element name="destinations" minOccurs="1">
+                                                <xs:element name="origin" type="xs:string" minOccurs="0"/>
+                                                <xs:element name="destinations" minOccurs="0">
                                                     <xs:complexType>
                                                         <xs:sequence>
-                                                            <xs:element name="destination" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+                                                            <xs:element name="destination" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
                                                         </xs:sequence>
                                                     </xs:complexType>
                                                 </xs:element>
@@ -163,14 +175,22 @@
 
     <xs:complexType name="subjectsList">
         <xs:sequence>
-            <xs:element name="subject" minOccurs="1" maxOccurs="unbounded" type="xs:string"/>
+            <xs:element name="subject" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="commentConfig">
         <xs:all>
-            <xs:element name="content" type="xs:string"/>
+            <xs:element name="content" type="string_translatable" minOccurs="0"/>
             <xs:element name="footnoteId" type="xs:string" minOccurs="0"/>
         </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="string_translatable">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:boolean" name="translate" fixed="true"/>
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
 </xs:schema>

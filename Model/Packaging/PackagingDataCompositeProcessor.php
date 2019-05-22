@@ -3,7 +3,7 @@
  * See LICENSE.md for license details.
  */
 
-namespace Dhl\ShippingCore\Model\Checkout;
+namespace Dhl\ShippingCore\Model\Packaging;
 
 use Dhl\ShippingCore\Api\ShippingOptions\PackagingProcessorInterface;
 use Magento\Sales\Api\Data\OrderInterface;
@@ -39,7 +39,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         $result = $optionsData;
         foreach ($this->processors as $processor) {
             $result = $processor->processShippingOptions(
-                $optionsData,
+                $result,
                 $order,
                 $scopeId
             );
@@ -56,7 +56,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         $result = $metadata;
         foreach ($this->processors as $processor) {
             $result = $processor->processMetadata(
-                $metadata,
+                $result,
                 $order,
                 $scopeId
             );
@@ -73,7 +73,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         $result = $compatibilityData;
         foreach ($this->processors as $processor) {
             $result = $processor->processCompatibilityData(
-                $compatibilityData,
+                $result,
                 $order,
                 $scopeId
             );

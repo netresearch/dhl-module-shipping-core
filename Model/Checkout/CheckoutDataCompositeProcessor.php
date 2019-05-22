@@ -39,7 +39,7 @@ class CheckoutDataCompositeProcessor implements CheckoutProcessorInterface
         $result = $optionsData;
         foreach ($this->processors as $processor) {
             $result = $processor->processShippingOptions(
-                $optionsData,
+                $result,
                 $countryId,
                 $postalCode,
                 $scopeId
@@ -58,7 +58,7 @@ class CheckoutDataCompositeProcessor implements CheckoutProcessorInterface
         $result = $metadata;
         foreach ($this->processors as $processor) {
             $result = $processor->processMetadata(
-                $metadata,
+                $result,
                 $countryId,
                 $postalCode,
                 $scopeId
@@ -77,7 +77,7 @@ class CheckoutDataCompositeProcessor implements CheckoutProcessorInterface
         $result = $compatibilityData;
         foreach ($this->processors as $processor) {
             $result = $processor->processCompatibilityData(
-                $compatibilityData,
+                $result,
                 $countryId,
                 $postalCode,
                 $scopeId

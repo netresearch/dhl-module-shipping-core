@@ -36,6 +36,11 @@ class Input implements InputInterface
     private $defaultValue = '';
 
     /**
+     * @var bool
+     */
+    private $disabled = false;
+
+    /**
      * @var string
      */
     private $label;
@@ -82,6 +87,7 @@ class Input implements InputInterface
      * @param string $code
      * @param string $label
      * @param string $defaultValue
+     * @param bool $disabled
      * @param bool $labelVisible
      * @param \Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface[] $options
      * @param string $tooltip
@@ -95,6 +101,7 @@ class Input implements InputInterface
         string $code,
         string $label,
         string $defaultValue = '',
+        bool $disabled = false,
         bool $labelVisible = true,
         array $options = [],
         string $tooltip = '',
@@ -107,6 +114,7 @@ class Input implements InputInterface
         $this->code = $code;
         $this->label = $label;
         $this->defaultValue = $defaultValue;
+        $this->disabled = $disabled;
         $this->labelVisible = $labelVisible;
         $this->options = $options;
         $this->tooltip = $tooltip;
@@ -138,6 +146,14 @@ class Input implements InputInterface
     public function getDefaultValue(): string
     {
         return $this->defaultValue;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDisabled(): bool
+    {
+        return $this->disabled;
     }
 
     /**

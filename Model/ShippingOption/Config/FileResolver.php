@@ -22,13 +22,22 @@ class FileResolver implements FileResolverInterface
     private $moduleReader;
 
     /**
-     * Constructor
+     * File iterator factory
+     *
+     * @var \Magento\Framework\Config\FileIteratorFactory
+     */
+    private $iteratorFactory;
+
+    /**
+     * FileResolver constructor.
      *
      * @param DirReader $moduleReader
+     * @param \Magento\Framework\Config\FileIteratorFactory $iteratorFactory
      */
-    public function __construct(DirReader $moduleReader)
+    public function __construct(DirReader $moduleReader, \Magento\Framework\Config\FileIteratorFactory $iteratorFactory)
     {
         $this->moduleReader = $moduleReader;
+        $this->iteratorFactory = $iteratorFactory;
     }
 
     /**
@@ -40,6 +49,11 @@ class FileResolver implements FileResolverInterface
      */
     public function get($filename, $scope): FileIterator
     {
-        return $this->moduleReader->getConfigurationFiles($filename);
+        $paths = $this->moduleReader->getConfigurationFiles($filename)->toArray();
+        if ($scope !== 'global') {
+            $paths += $this->moduleReader->getConfigurationFiles($scope . '/' . $filename)->toArray();
+        }
+
+        return $this->iteratorFactory->create(array_keys($paths));
     }
 }

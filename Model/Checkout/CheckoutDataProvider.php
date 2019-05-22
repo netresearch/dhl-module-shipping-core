@@ -46,7 +46,7 @@ class CheckoutDataProvider
      */
     public function getData(string $countryCode, int $storeId, string $postalCode): array
     {
-        $checkoutData = $this->reader->read();
+        $checkoutData = $this->reader->read('frontend');
 
         foreach ($checkoutData['carriers'] as $carrierCode => $carrierData) {
             foreach (['packageLevelOptions', 'itemLevelOptions'] as $group) {

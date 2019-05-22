@@ -48,6 +48,13 @@ interface InputInterface
     public function getDefaultValue(): string;
 
     /**
+     * Declare if the input should be presented as read-only.
+     *
+     * @return bool
+     */
+    public function isDisabled(): bool;
+
+    /**
      * Obtain the human-readable label corresponding to the input.
      *
      * @return string
