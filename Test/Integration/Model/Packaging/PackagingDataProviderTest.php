@@ -18,7 +18,7 @@ class PackagingDataProviderTest extends TestCase
     public function dataProvider(): array
     {
         return [
-            'order 1' => ['order' => OrderFixture::createPaketOrder(new AddressDe(), new SimpleProduct())]
+            'order 1' => ['order' => OrderFixture::createOrder(new AddressDe(), new SimpleProduct(), 'dhlpaket')]
         ];
     }
 
@@ -35,6 +35,4 @@ class PackagingDataProviderTest extends TestCase
 
         self::assertInternalType('array', $packagingData);
     }
-
-
 }

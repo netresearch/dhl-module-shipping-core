@@ -42,6 +42,7 @@ class OrderFixture
     /**
      * @param AddressInterface $recipientData
      * @param ProductInterface $productData
+     * @param string $carrierCode
      * @return OrderInterface
      * @throws \Exception
      */
@@ -49,7 +50,7 @@ class OrderFixture
         AddressInterface $recipientData,
         ProductInterface $productData,
         string $carrierCode
-    ) {
+    ): OrderInterface {
         if ($productData->getType() === Type::TYPE_SIMPLE) {
             // set up product
             $productBuilder = ProductBuilder::aSimpleProduct();
