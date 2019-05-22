@@ -5,7 +5,7 @@
 
 namespace Dhl\ShippingCore\Test\Unit\Model\Checkout\CheckoutDataProcessor;
 
-use Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor\RouteProcessor;
+use Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -21,7 +21,7 @@ class RouteProcessorTest extends TestCase
     /**
      * @var string This data has two shipping options - one only for DE routes and one only for US routes
      */
-    private $checkoutData = '{"carriers":[{"carrierCode":"testCarrier","packageLevelOptions":[{"code":"deOption","routes":[{"origin":"de","destinations":["de","at"]}],"inputs":[{"code":"deTest","label":"DETest","inputType":"text"}]},{"code":"usOption","routes":[{"origin":"us"}],"inputs":[{"inputType":"text","code":"usTest","label":"USTEST"}]}]}]}';
+    private $checkoutData = '[{"code":"deOption","routes":[{"origin":"de","destinations":["de","at"]}],"inputs":[{"code":"deTest","label":"DETest","inputType":"text"}]},{"code":"usOption","routes":[{"origin":"us"}],"inputs":[{"inputType":"text","code":"usTest","label":"USTEST"}]}]';
 
     /**
      * @var ScopeConfigInterface|MockObject
@@ -69,16 +69,14 @@ class RouteProcessorTest extends TestCase
 
         $subject = new RouteProcessor($this->scopeConfig);
 
-        $result = $subject->process($checkoutData, $countryId, $postalCode);
+        $result = $subject->processShippingOptions($checkoutData, $countryId, $postalCode);
 
-        $options = $result['carriers'][0]['packageLevelOptions'];
-
-        self::assertCount(1, $options);
+        self::assertCount(1, $result);
         if ($countryId === 'US') {
-            self::assertSame('usOption', $options[0]['code']);
+            self::assertSame('usOption', $result[0]['code']);
         }
         if ($countryId === 'DE') {
-            self::assertSame('deOption', $options[0]['code']);
+            self::assertSame('deOption', $result[0]['code']);
         }
     }
 }

@@ -14,7 +14,7 @@ class ConverterTest extends TestCase
     {
         $dom = new \DOMDocument();
         $dom->loadXML(
-            file_get_contents(getcwd() . '/../../../Fixture/shipping_options.xml')
+            file_get_contents(__DIR__ . '/../../../Fixture/shipping_options.xml')
         );
         return [
             'test case 1' => [

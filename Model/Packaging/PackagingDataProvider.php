@@ -3,9 +3,8 @@
  * See LICENSE.md for license details.
  */
 
-namespace Dhl\ShippingCore\Model\Checkout;
+namespace Dhl\ShippingCore\Model\Packaging;
 
-use Dhl\ShippingCore\Model\Packaging\PackagingDataCompositeProcessor;
 use Magento\Framework\Config\ReaderInterface;
 use Magento\Sales\Model\Order;
 
@@ -48,6 +47,10 @@ class PackagingDataProvider
     public function getData(Order $order, int $storeId = null): array
     {
         $packagingData = $this->reader->read('adminhtml');
+
+        if (!isset($packagingData['carriers'])) {
+            $packagingData['carriers'] = [];
+        }
 
         foreach ($packagingData['carriers'] as $carrierCode => $carrierData) {
             foreach (['packageLevelOptions', 'itemLevelOptions'] as $group) {

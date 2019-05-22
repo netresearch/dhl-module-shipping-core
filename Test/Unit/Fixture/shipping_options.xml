@@ -4,11 +4,6 @@
         <packageLevelOptions>
             <shippingOption code="preferredDay">
                 <label>Wunschtag: Lieferung zum gewüschten Tag</label>
-                <enabledForCheckout>true</enabledForCheckout>
-                <enabledForAutocreate>true</enabledForAutocreate>
-                <enabledForPackaging>true</enabledForPackaging>
-                <availableAtPostalFacility>true</availableAtPostalFacility>
-                <packagingReadonly>true</packagingReadonly>
                 <sortOrder>10</sortOrder>
                 <routes>
                     <route>
@@ -48,11 +43,6 @@
             </shippingOption>
             <shippingOption code="preferredTime">
                 <label>Wunschzeit: Lieferung im gewüschten Zeitfenster</label>
-                <enabledForCheckout>true</enabledForCheckout>
-                <enabledForAutocreate>true</enabledForAutocreate>
-                <enabledForPackaging>true</enabledForPackaging>
-                <availableAtPostalFacility>true</availableAtPostalFacility>
-                <packagingReadonly>true</packagingReadonly>
                 <sortOrder>20</sortOrder>
                 <inputs>
                     <input code="time">
@@ -97,10 +87,6 @@
             </shippingOption>
             <shippingOption code="preferredLocation">
                 <label>Wunschort: Lieferung an den gewüschten Ablageort</label>
-                <enabledForAutocreate>false</enabledForAutocreate>
-                <enabledForPackaging>false</enabledForPackaging>
-                <availableAtPostalFacility>false</availableAtPostalFacility>
-                <packagingReadonly>true</packagingReadonly>
                 <sortOrder>40</sortOrder>
                 <inputs>
                     <input code="details">
@@ -121,7 +107,6 @@
             </shippingOption>
             <shippingOption code="preferredNeighbour">
                 <label>Wunschnachbar: Lieferung an den Nachbar Ihrer Wahl</label>
-                <packagingReadonly>true</packagingReadonly>
                 <sortOrder>50</sortOrder>
                 <inputs>
                     <input code="name">

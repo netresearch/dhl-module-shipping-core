@@ -48,6 +48,10 @@ class CheckoutDataProvider
     {
         $checkoutData = $this->reader->read('frontend');
 
+        if (!isset($checkoutData['carriers'])) {
+            $checkoutData['carriers'] = [];
+        }
+
         foreach ($checkoutData['carriers'] as $carrierCode => $carrierData) {
             foreach (['packageLevelOptions', 'itemLevelOptions'] as $group) {
                 $carrierData[$group] = $this->compositeProcessor->processShippingOptions(

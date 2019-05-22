@@ -112,7 +112,7 @@ class Converter implements ConverterInterface
      */
     private function containsScalar(\DomNode $node): bool
     {
-        $hasOneChild = count($node->childNodes === 1);
+        $hasOneChild = count($node->childNodes) === 1;
         if (!$hasOneChild || !$node->hasChildNodes()) {
             return false;
         }
