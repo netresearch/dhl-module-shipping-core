@@ -7,6 +7,10 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\ShippingOption\Selection;
 
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelection;
+use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelectionCollection;
+use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelectionCollectionFactory;
+use Magento\Framework\Api\Search\SearchCriteriaInterface;
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 
@@ -18,18 +22,47 @@ use Magento\Framework\Exception\CouldNotSaveException;
 class OrderSelectionRepository
 {
     /**
+     * @var ShippingOptionSelectionCollectionFactory
+     */
+    private $collectionFactory;
+
+    /**
+     * @var CollectionProcessorInterface
+     */
+    private $collectionProcessor;
+
+    /**
      * @var ShippingOptionSelection
      */
     private $resource;
 
     /**
-     * QuoteServiceSelectionRepository constructor.
+     * OrderSelectionRepository constructor.
      *
+     * @param ShippingOptionSelectionCollectionFactory $collectionFactory
+     * @param CollectionProcessorInterface $collectionProcessor
      * @param ShippingOptionSelection $resource
      */
-    public function __construct(ShippingOptionSelection $resource)
-    {
+    public function __construct(
+        ShippingOptionSelectionCollectionFactory $collectionFactory,
+        CollectionProcessorInterface $collectionProcessor,
+        ShippingOptionSelection $resource
+    ) {
+        $this->collectionFactory = $collectionFactory;
+        $this->collectionProcessor = $collectionProcessor;
         $this->resource = $resource;
+    }
+
+    /**
+     * @param SearchCriteriaInterface $searchCriteria
+     * @return ShippingOptionSelectionCollection
+     */
+    public function getList(SearchCriteriaInterface $searchCriteria): ShippingOptionSelectionCollection
+    {
+        $searchResult = $this->collectionFactory->create();
+        $this->collectionProcessor->process($searchCriteria, $searchResult);
+
+        return $searchResult;
     }
 
     /**

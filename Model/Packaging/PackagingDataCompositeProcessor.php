@@ -41,8 +41,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
 
     public function processShippingOptions(
         array $optionsData,
-        Order $order,
-        int $scopeId = null
+        Order $order
     ): array {
         $result = $optionsData;
 
@@ -60,8 +59,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         foreach ($this->processors as $processor) {
             $result = $processor->processShippingOptions(
                 $result,
-                $order,
-                $scopeId
+                $order
             );
         }
 
@@ -70,8 +68,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
 
     public function processMetadata(
         array $metadata,
-        Order $order,
-        int $scopeId = null
+        Order $order
     ): array {
         $result = $metadata;
 
@@ -89,8 +86,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         foreach ($this->processors as $processor) {
             $result = $processor->processMetadata(
                 $result,
-                $order,
-                $scopeId
+                $order
             );
         }
 
@@ -99,8 +95,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
 
     public function processCompatibilityData(
         array $compatibilityData,
-        Order $order,
-        int $scopeId = null
+        Order $order
     ): array {
         $result = $compatibilityData;
 
@@ -118,8 +113,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         foreach ($this->processors as $processor) {
             $result = $processor->processCompatibilityData(
                 $result,
-                $order,
-                $scopeId
+                $order
             );
         }
 

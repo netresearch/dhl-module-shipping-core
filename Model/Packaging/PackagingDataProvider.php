@@ -41,10 +41,9 @@ class PackagingDataProvider
 
     /**
      * @param Order $order
-     * @param int $storeId
      * @return mixed[]
      */
-    public function getData(Order $order, int $storeId = null): array
+    public function getData(Order $order): array
     {
         $packagingData = $this->reader->read('adminhtml');
 
@@ -56,19 +55,16 @@ class PackagingDataProvider
             foreach (['packageLevelOptions', 'itemLevelOptions'] as $group) {
                 $carrierData[$group] = $this->compositeProcessor->processShippingOptions(
                     $carrierData[$group] ?? [],
-                    $order,
-                    $storeId
+                    $order
                 );
             }
             $carrierData['metaData'] = $this->compositeProcessor->processMetadata(
                 $carrierData['metaData'] ?? [],
-                $order,
-                $storeId
+                $order
             );
             $carrierData['compatibilityData'] = $this->compositeProcessor->processCompatibilityData(
                 $carrierData['compatibilityData'] ?? [],
-                $order,
-                $storeId
+                $order
             );
 
             $packagingData['carriers'][$carrierCode] = $carrierData;

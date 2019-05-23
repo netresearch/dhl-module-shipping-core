@@ -22,13 +22,11 @@ interface PackagingProcessorInterface
      *
      * @param mixed[] $optionsData
      * @param Order $order
-     * @param int|null $scopeId
      * @return mixed[]
      */
     public function processShippingOptions(
         array $optionsData,
-        Order $order,
-        int $scopeId = null
+        Order $order
     ): array;
 
     /**
@@ -36,13 +34,11 @@ interface PackagingProcessorInterface
      *
      * @param array $metadata
      * @param Order $order
-     * @param int|null $scopeId
      * @return array
      */
     public function processMetadata(
         array $metadata,
-        Order $order,
-        int $scopeId = null
+        Order $order
     ): array;
 
     /**
@@ -52,12 +48,10 @@ interface PackagingProcessorInterface
      *
      * @param array $compatibilityData
      * @param Order $order
-     * @param int|null $scopeId
      * @return array
      */
     public function processCompatibilityData(
         array $compatibilityData,
-        Order $order,
-        int $scopeId = null
+        Order $order
     ): array;
 }
