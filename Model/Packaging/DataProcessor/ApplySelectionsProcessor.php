@@ -6,6 +6,7 @@
 namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
 
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
+use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
 use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelectionCollection;
 use Dhl\ShippingCore\Model\ShippingOption\Selection\OrderSelectionRepository;
@@ -64,6 +65,10 @@ class ApplySelectionsProcessor extends AbstractProcessor
 
     public function processShippingOptions(array $optionsData, Order\Shipment $shipment, string $optionGroupName): array
     {
+        if ($optionGroupName !== CheckoutDataProvider::GROUPNAME) {
+            return $optionsData;
+        }
+
         $orderAddressId = $shipment->getShippingAddressId();
         $selections = $this->loadSelections($orderAddressId);
 
