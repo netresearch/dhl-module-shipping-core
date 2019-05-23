@@ -51,8 +51,9 @@ class PackagingDataProvider
             $packagingData['carriers'] = [];
         }
 
+        $orderCarrier = strtok((string) $order->getShippingMethod(), '_');
         foreach ($packagingData['carriers'] as $carrierCode => $carrierData) {
-            if (strtok((string) $order->getShippingMethod(), '_') === $carrierCode) {
+            if ($orderCarrier !== $carrierCode) {
                 unset($packagingData['carriers'][$carrierCode]);
                 continue;
             }
