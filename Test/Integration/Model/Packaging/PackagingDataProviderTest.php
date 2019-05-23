@@ -9,6 +9,7 @@ use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct;
 use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
+use Dhl\ShippingCore\Test\Integration\Fixture\ShipmentFixture;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +19,7 @@ class PackagingDataProviderTest extends TestCase
     public function dataProvider(): array
     {
         return [
-            'order 1' => ['order' => OrderFixture::createOrder(
+            'shipment 1' => ['shipment' => ShipmentFixture::createShipment(
                 new AddressDe(),
                 new SimpleProduct(),
                 'flatrate_flatrate'
@@ -27,15 +28,15 @@ class PackagingDataProviderTest extends TestCase
     }
 
     /**
-     * @param Order $order
+     * @param Order\Shipment $shipment
      * @dataProvider dataProvider
      */
-    public function testGetData(Order $order)
+    public function testGetData(Order\Shipment $shipment)
     {
         $objectManager = ObjectManager::getInstance();
         /** @var PackagingDataProvider $subject */
         $subject = $objectManager->create(PackagingDataProvider::class);
-        $packagingData = $subject->getData($order);
+        $packagingData = $subject->getData($shipment);
 
         self::assertInternalType('array', $packagingData);
     }
