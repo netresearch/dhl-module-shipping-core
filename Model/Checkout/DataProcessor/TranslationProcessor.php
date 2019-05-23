@@ -37,7 +37,7 @@ class TranslationProcessor extends AbstractProcessor
                     $this->translate($input, ['placeholder']);
                     $this->translate($input, ['comment', 'content']);
                     if (isset($input['options'])) {
-                        foreach ($input['options'] as $inputOptionIndex => $inputOption) {
+                        foreach (array_keys($input['options']) as $inputOptionIndex) {
                             $this->translate($input, ['options', $inputOptionIndex, 'label']);
                         }
                     }
@@ -74,7 +74,7 @@ class TranslationProcessor extends AbstractProcessor
         }
         $this->translate($metadata, ['title']);
         if (isset($metadata['footnotes'])) {
-            foreach ($metadata['footnotes'] as $footnoteIndex => $footnote) {
+            foreach (array_keys($metadata['footnotes']) as $footnoteIndex) {
                 $this->translate($metadata, ['footnotes', $footnoteIndex, 'content']);
             }
         }
@@ -95,7 +95,7 @@ class TranslationProcessor extends AbstractProcessor
         string $postalCode,
         int $scopeId = null
     ): array {
-        foreach ($compatibilityData as $ruleIndex => $rule) {
+        foreach (array_keys($compatibilityData) as $ruleIndex) {
             $this->translate($compatibilityData, [$ruleIndex, 'errorMessage']);
         }
 

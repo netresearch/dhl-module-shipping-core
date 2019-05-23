@@ -50,8 +50,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
                 $result = $processor->processShippingOptions(
                     $result,
                     $order->getShippingAddress()->getCountryId(),
-                    $order->getShippingAddress()->getPostcode(),
-                    $scopeId
+                    $order->getShippingAddress()->getPostcode()
                 );
             }
         }
@@ -77,8 +76,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
                 $result = $processor->processMetadata(
                     $result,
                     $order->getShippingAddress()->getCountryId(),
-                    $order->getShippingAddress()->getPostcode(),
-                    $scopeId
+                    $order->getShippingAddress()->getPostcode()
                 );
             }
         }
@@ -104,8 +102,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
                 $result = $processor->processCompatibilityData(
                     $result,
                     $order->getShippingAddress()->getCountryId(),
-                    $order->getShippingAddress()->getPostcode(),
-                    $scopeId
+                    $order->getShippingAddress()->getPostcode()
                 );
             }
         }

@@ -52,6 +52,10 @@ class PackagingDataProvider
         }
 
         foreach ($packagingData['carriers'] as $carrierCode => $carrierData) {
+            if (strtok((string) $order->getShippingMethod(), '_') === $carrierCode) {
+                unset($packagingData['carriers'][$carrierCode]);
+                continue;
+            }
             foreach (['packageLevelOptions', 'itemLevelOptions'] as $group) {
                 $carrierData[$group] = $this->compositeProcessor->processShippingOptions(
                     $carrierData[$group] ?? [],
