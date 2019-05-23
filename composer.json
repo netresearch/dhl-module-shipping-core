@@ -43,8 +43,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-develop": "0.1.x-dev",
-      "feature-solution-section": "0.3.0-dev"
+      "dev-develop": "0.1.x-dev"
     }
   }
 }
