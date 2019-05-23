@@ -6,7 +6,7 @@
 namespace Dhl\ShippingCore\Model\Packaging;
 
 use Magento\Framework\Config\ReaderInterface;
-use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Shipment;
 
 /**
  * Class PackagingDataProvider
@@ -17,6 +17,11 @@ use Magento\Sales\Model\Order;
  */
 class PackagingDataProvider
 {
+    /**
+     * Option group names relevant for packaging
+     */
+    const GROUP_NAMES = ['packageLevelOptions', 'itemLevelOptions'];
+
     /**
      * @var ReaderInterface
      */
@@ -40,10 +45,10 @@ class PackagingDataProvider
     }
 
     /**
-     * @param Order $order
+     * @param Shipment $shipment
      * @return mixed[]
      */
-    public function getData(Order $order): array
+    public function getData(Shipment $shipment): array
     {
         $packagingData = $this->reader->read('adminhtml');
 
@@ -51,25 +56,26 @@ class PackagingDataProvider
             $packagingData['carriers'] = [];
         }
 
-        $orderCarrier = strtok((string) $order->getShippingMethod(), '_');
+        $orderCarrier = strtok((string) $shipment->getOrder()->getShippingMethod(), '_');
         foreach ($packagingData['carriers'] as $carrierCode => $carrierData) {
             if ($orderCarrier !== $carrierCode) {
                 unset($packagingData['carriers'][$carrierCode]);
                 continue;
             }
-            foreach (['packageLevelOptions', 'itemLevelOptions'] as $group) {
+            foreach (self::GROUP_NAMES as $group) {
                 $carrierData[$group] = $this->compositeProcessor->processShippingOptions(
                     $carrierData[$group] ?? [],
-                    $order
+                    $shipment,
+                    $group
                 );
             }
             $carrierData['metaData'] = $this->compositeProcessor->processMetadata(
                 $carrierData['metaData'] ?? [],
-                $order
+                $shipment
             );
             $carrierData['compatibilityData'] = $this->compositeProcessor->processCompatibilityData(
                 $carrierData['compatibilityData'] ?? [],
-                $order
+                $shipment
             );
 
             $packagingData['carriers'][$carrierCode] = $carrierData;

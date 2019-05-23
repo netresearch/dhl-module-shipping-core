@@ -62,13 +62,9 @@ class ApplySelectionsProcessor extends AbstractProcessor
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
     }
 
-    public function processShippingOptions(array $optionsData, Order $order): array
+    public function processShippingOptions(array $optionsData, Order\Shipment $shipment, string $optionGroupName): array
     {
-        if (!$order->getShippingAddress()) {
-            return $optionsData;
-        }
-
-        $orderAddressId = $order->getShippingAddress()->getId();
+        $orderAddressId = $shipment->getShippingAddressId();
         $selections = $this->loadSelections($orderAddressId);
 
         foreach ($selections->getItems() as $selection) {

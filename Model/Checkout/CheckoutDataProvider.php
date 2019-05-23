@@ -17,6 +17,11 @@ use Magento\Framework\Config\ReaderInterface;
 class CheckoutDataProvider
 {
     /**
+     * The option group relevant for the checkout.
+     */
+    const GROUPNAME = 'packageLevelOptions';
+
+    /**
      * @var ReaderInterface
      */
     private $reader;
@@ -53,14 +58,12 @@ class CheckoutDataProvider
         }
 
         foreach ($checkoutData['carriers'] as $carrierCode => $carrierData) {
-            foreach (['packageLevelOptions', 'itemLevelOptions'] as $group) {
-                $carrierData[$group] = $this->compositeProcessor->processShippingOptions(
-                    $carrierData[$group] ?? [],
-                    $countryCode,
-                    $postalCode,
-                    $storeId
-                );
-            }
+            $carrierData[self::GROUPNAME] = $this->compositeProcessor->processShippingOptions(
+                $carrierData[self::GROUPNAME] ?? [],
+                $countryCode,
+                $postalCode,
+                $storeId
+            );
             $carrierData['metaData'] = $this->compositeProcessor->processMetadata(
                 $carrierData['metaData'] ?? [],
                 $countryCode,

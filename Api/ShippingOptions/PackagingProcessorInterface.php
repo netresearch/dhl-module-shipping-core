@@ -5,7 +5,7 @@
 
 namespace Dhl\ShippingCore\Api\ShippingOptions;
 
-use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Shipment;
 
 /**
  * Interface PackagingProcessorInterface
@@ -21,24 +21,26 @@ interface PackagingProcessorInterface
      * and return the modified array.
      *
      * @param mixed[] $optionsData
-     * @param Order $order
+     * @param Shipment $shipment
+     * @param string $optionGroupName
      * @return mixed[]
      */
     public function processShippingOptions(
         array $optionsData,
-        Order $order
+        Shipment $shipment,
+        string $optionGroupName
     ): array;
 
     /**
      * Receive shipping option metadata, modify it according to business logic and return the modified array.
      *
      * @param array $metadata
-     * @param Order $order
+     * @param Shipment $shipment
      * @return array
      */
     public function processMetadata(
         array $metadata,
-        Order $order
+        Shipment $shipment
     ): array;
 
     /**
@@ -47,11 +49,11 @@ interface PackagingProcessorInterface
      * and return the modified array.
      *
      * @param array $compatibilityData
-     * @param Order $order
+     * @param Shipment $shipment
      * @return array
      */
     public function processCompatibilityData(
         array $compatibilityData,
-        Order $order
+        Shipment $shipment
     ): array;
 }
