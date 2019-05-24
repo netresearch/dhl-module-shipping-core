@@ -8,7 +8,6 @@ namespace Dhl\ShippingCore\Test\Integration\Model\Packaging;
 use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct;
-use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
 use Dhl\ShippingCore\Test\Integration\Fixture\ShipmentFixture;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\ObjectManager;

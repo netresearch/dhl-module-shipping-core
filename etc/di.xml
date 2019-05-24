@@ -137,7 +137,7 @@
     </type>
 
     <!-- shipping option config xml reader -->
-    <virtualType name="DhlVirtualShippingOptionsReader" type="\Magento\Framework\Config\Reader\Filesystem">
+    <type name="Dhl\ShippingCore\Model\ShippingOption\Config\Reader">
         <arguments>
             <argument xsi:type="object" name="fileResolver">Dhl\ShippingCore\Model\ShippingOption\Config\FileResolver</argument>
             <argument xsi:type="object" name="schemaLocator">Dhl\ShippingCore\Model\ShippingOption\Config\SchemaLocator</argument>
@@ -156,15 +156,15 @@
                 <item xsi:type="string" name="/carriers/carrier/compatibilityData/rule">id</item>
             </argument>
         </arguments>
-    </virtualType>
+    </type>
     <type name="Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider">
         <arguments>
-            <argument xsi:type="object" name="reader">DhlVirtualShippingOptionsReader</argument>
+            <argument xsi:type="object" name="reader">Dhl\ShippingCore\Model\ShippingOption\Config\Reader</argument>
         </arguments>
     </type>
     <type name="Dhl\ShippingCore\Model\Packaging\PackagingDataProvider">
         <arguments>
-            <argument xsi:type="object" name="reader">DhlVirtualShippingOptionsReader</argument>
+            <argument xsi:type="object" name="reader">Dhl\ShippingCore\Model\ShippingOption\Config\Reader</argument>
         </arguments>
     </type>
     <!-- shipping option config processors -->
