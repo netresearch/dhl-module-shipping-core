@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Test\Integration\Model\Packaging;
 use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct;
+use Dhl\ShippingCore\Test\Integration\Fixture\FakeReader;
 use Dhl\ShippingCore\Test\Integration\Fixture\ShipmentFixture;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\ObjectManager;
@@ -34,7 +35,7 @@ class PackagingDataProviderTest extends TestCase
     {
         $objectManager = ObjectManager::getInstance();
         /** @var PackagingDataProvider $subject */
-        $subject = $objectManager->create(PackagingDataProvider::class);
+        $subject = $objectManager->create(PackagingDataProvider::class, ['reader' => new FakeReader()]);
         $packagingData = $subject->getData($shipment);
 
         self::assertInternalType('array', $packagingData);

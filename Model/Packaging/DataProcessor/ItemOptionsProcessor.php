@@ -6,6 +6,7 @@
 namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
 
 use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
+use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -18,22 +19,20 @@ class ItemOptionsProcessor extends AbstractProcessor
 {
     public function processShippingOptions(array $optionsData, Shipment $shipment, string $optionGroupName): array
     {
-        if ($optionGroupName !== 'itemLevelOptions') {
+        if ($optionGroupName !== PackagingDataProvider::GROUP_ITEM_LEVEL) {
             return $optionsData;
         }
 
-        foreach ($optionsData as $optionCode => $option) {
-            /** Clone template option for every shipment item. */
-            foreach ($shipment->getItems() as $item) {
-                $itemId = $item->getOrderItemId();
-                $clonedOption = $option;
-                $clonedOption['itemId'] = $itemId;
-                $optionsData["$optionCode.$itemId"] = $clonedOption;
+        $newOptionsData = [];
+        foreach ($shipment->getItems() as $item) {
+            $itemId = $item->getOrderItemId();
+            foreach ($optionsData as $optionCode => $option) {
+                /** Clone template option for every shipment item. */
+                $newOptionsData["$optionCode.$itemId"] = $option;
+                $newOptionsData["$optionCode.$itemId"]['itemId'] = $itemId;
             }
-            /** Remove template option */
-            unset($optionsData[$optionCode]);
         }
 
-        return $optionsData;
+        return $newOptionsData;
     }
 }

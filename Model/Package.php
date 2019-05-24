@@ -59,6 +59,14 @@ class Package extends DataObject
     }
 
     /**
+     * @return float
+     */
+    public function getWidth(): float
+    {
+        return (float) $this->getData(self::KEY_WIDTH);
+    }
+
+    /**
      * @return int
      */
     public function getSortOrder(): int

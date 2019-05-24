@@ -17,10 +17,13 @@ use Magento\Sales\Model\Order\Shipment;
  */
 class PackagingDataProvider
 {
+    const GROUP_PACKAGE_LEVEL = 'packageLevelOptions';
+    const GROUP_ITEM_LEVEL = 'itemLevelOptions';
+
     /**
      * Option group names relevant for packaging
      */
-    const GROUP_NAMES = ['packageLevelOptions', 'itemLevelOptions'];
+    const GROUP_NAMES = [self::GROUP_PACKAGE_LEVEL, self::GROUP_ITEM_LEVEL];
 
     /**
      * @var ReaderInterface

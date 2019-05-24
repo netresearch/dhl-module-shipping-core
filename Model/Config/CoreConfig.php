@@ -27,7 +27,7 @@ class CoreConfig implements CoreConfigInterface
     /**
      * @var ScopeConfigInterface
      */
-    private $scopeConfigInterface;
+    private $scopeConfig;
 
     /**
      * @var string[]
@@ -68,16 +68,16 @@ class CoreConfig implements CoreConfigInterface
     /**
      * CoreConfig constructor.
      *
-     * @param ScopeConfigInterface $scopeConfigInterface
+     * @param ScopeConfigInterface $scopeConfig
      * @param SerializerInterface $serializer
      * @param PackageCollectionFactory $collectionFactory
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfigInterface,
+        ScopeConfigInterface $scopeConfig,
         SerializerInterface $serializer,
         PackageCollectionFactory $collectionFactory
     ) {
-        $this->scopeConfigInterface = $scopeConfigInterface;
+        $this->scopeConfig = $scopeConfig;
         $this->serializer = $serializer;
         $this->packageCollectionFactory = $collectionFactory;
     }
@@ -90,7 +90,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getCodMethods($store = null): array
     {
-        $paymentMethods = $this->scopeConfigInterface->getValue(
+        $paymentMethods = $this->scopeConfig->getValue(
             self::CONFIG_PATH_COD_METHODS,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -123,7 +123,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getTermsOfTrade($store = null): string
     {
-        return (string)$this->scopeConfigInterface->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_TERMS_OF_TRADE,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -138,7 +138,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getCutOffTime($store = null): string
     {
-        return (string)$this->scopeConfigInterface->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_CUT_OFF_TIME,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -153,7 +153,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getWeightUnit($store = null): string
     {
-        $weightUOM = $this->scopeConfigInterface->getValue(
+        $weightUOM = $this->scopeConfig->getValue(
             self::CONFIG_PATH_WEIGHT_UNIT,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -250,7 +250,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getEuCountries($store = null): array
     {
-        $euCountries = $this->scopeConfigInterface->getValue(
+        $euCountries = $this->scopeConfig->getValue(
             Carrier::XML_PATH_EU_COUNTRIES_LIST,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -271,7 +271,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getOriginCountry($store = null, $scope = ScopeInterface::SCOPE_STORE): string
     {
-        return (string)$this->scopeConfigInterface->getValue(
+        return (string)$this->scopeConfig->getValue(
             Config::XML_PATH_ORIGIN_COUNTRY_ID,
             $scope,
             $store
@@ -288,7 +288,7 @@ class CoreConfig implements CoreConfigInterface
     {
         /** @var mixed[] $configValue */
         $configValue = $this->serializer->unserialize(
-            $this->scopeConfigInterface->getValue(
+            $this->scopeConfig->getValue(
                 self::CONFIG_PATH_OWN_PACKAGES,
                 ScopeInterface::SCOPE_STORE,
                 $store

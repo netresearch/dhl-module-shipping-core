@@ -1,0 +1,255 @@
+{
+  "carriers": {
+    "flatrate": {
+      "packageLevelOptions": {
+        "packageWeight": {
+          "label": "Total Weight",
+          "inputs": {
+            "weight": {
+              "label": "Total Weight",
+              "inputType": "number",
+              "code": "weight"
+            },
+            "weightUnit": {
+              "label": "Weight Unit",
+              "inputType": "static",
+              "disabled": true,
+              "code": "weightUnit"
+            }
+          },
+          "code": "totalWeight"
+        },
+        "packageSize": {
+          "label": "Total Weight",
+          "inputs": {
+            "width": {
+              "label": "Width",
+              "inputType": "number",
+              "code": "width"
+            },
+            "heigth": {
+              "label": "Heigth",
+              "inputType": "number",
+              "code": "heigth"
+            },
+            "length": {
+              "label": "Length",
+              "inputType": "number",
+              "code": "length"
+            },
+            "sizeUnit": {
+              "label": "Size Unit",
+              "inputType": "static",
+              "disabled": true,
+              "code": "sizeUnit"
+            }
+          },
+          "code": "packageSize"
+        },
+        "packageCustoms": {
+          "label": "Customs Data",
+          "inputs": {
+            "packageExportDescription": {
+              "label": "Package Description",
+              "inputType": "textarea",
+              "code": "packageExportDescription"
+            }
+          },
+          "code": "packageCustoms"
+        },
+        "preferredTime": {
+          "label": "Preferred Time: Delivery at your preferred time",
+          "sortOrder": 20,
+          "inputs": {
+            "time": {
+              "inputType": "time",
+              "label": "Enable Preferred Time",
+              "labelVisible": false,
+              "sortOrder": 0,
+              "comment": {
+                "content": "This service will incur additional shipping costs of $1 including VAT.",
+                "footnoteId": "footnote-combined-cost"
+              },
+              "tooltip": "Indicate a preferred time, which suits you best for your parcel delivery by choosing one of the displayed time windows.",
+              "code": "time"
+            }
+          },
+          "code": "preferredTime"
+        },
+        "parcelAnnouncement": {
+          "label": "Parcel Announcement",
+          "sortOrder": 30,
+          "inputs": {
+            "enabled": {
+              "inputType": "checkbox",
+              "label": "Enable DHL Parcel Notification",
+              "tooltip": "Your e-mail address will be sent to DHL upon enabling, after which DHL will trigger a package announcement for your shipment. The e-mail address will exclusively be used for the announcement of this shipment.",
+              "comment": {
+                "content": "Allow customers to request parcel notification updates via e-mail by DHL during checkout."
+              },
+              "disabled": true,
+              "code": "enabled"
+            }
+          },
+          "code": "parcelAnnouncement"
+        },
+        "preferredLocation": {
+          "label": "Preferred Location: Delivery to your preferred drop-off location",
+          "sortOrder": 40,
+          "inputs": {
+            "details": {
+              "label": "Enable preferred location",
+              "inputType": "text",
+              "tooltip": "Choose a weather-protected and non-visible place on your property where we can deposit the parcel in your absence.",
+              "placeholder": "E.g. garage, terrace",
+              "validationRules": {
+                "maxLength": {
+                  "param": 40,
+                  "name": "maxLength"
+                }
+              },
+              "code": "details"
+            }
+          },
+          "code": "preferredLocation"
+        },
+        "preferredNeighbour": {
+          "label": "Preferred Neighbour: Delivery to a neighbour of your choice",
+          "sortOrder": 50,
+          "inputs": {
+            "name": {
+              "label": "Neighbour Name",
+              "inputType": "text",
+              "tooltip": "Declare a person in your immediate neighborhood whom we can hand out your parcel. This person should live in the same building, directly opposite or next door.",
+              "placeholder": "First name, last name of neighbour",
+              "validationRules": {
+                "maxLength": {
+                  "param": 40,
+                  "name": "maxLength"
+                }
+              },
+              "code": "name"
+            },
+            "address": {
+              "label": "Neighbour Address",
+              "inputType": "text",
+              "placeholder": "Street, number, postal code, city",
+              "validationRules": {
+                "maxLength": {
+                  "param": 40,
+                  "name": "maxLength"
+                }
+              },
+              "code": "address"
+            }
+          },
+          "code": "preferredNeighbour"
+        }
+      },
+      "itemLevelOptions": {
+        "details": {
+          "label": "Item Details",
+          "inputs": {
+            "productName": {
+              "label": "Product Name",
+              "inputType": "static",
+              "disabled": true,
+              "code": "productName"
+            },
+            "weight": {
+              "label": "Weight",
+              "inputType": "number",
+              "code": "weight"
+            },
+            "qtyOrdered": {
+              "label": "Quantity Ordered",
+              "inputType": "static",
+              "disabled": true,
+              "code": "qtyOrdered"
+            },
+            "qty": {
+              "label": "Quantity",
+              "inputType": "number",
+              "code": "qty"
+            }
+          },
+          "code": "details"
+        },
+        "itemCustoms": {
+          "label": "Customs Data",
+          "inputs": {
+            "hsCode": {
+              "label": "HS Code",
+              "inputType": "text",
+              "code": "hsCode"
+            },
+            "dgCategory": {
+              "label": "Dangerous Goods Category",
+              "inputType": "text",
+              "code": "dgCategory"
+            },
+            "exportDescription": {
+              "label": "Export Description",
+              "inputType": "textarea",
+              "code": "exportDescription"
+            }
+          },
+          "code": "itemCustoms"
+        }
+      },
+      "metaData": {
+        "title": "DHL Preferred Delivery. Delivered just the way you want.",
+        "imageUrl": "http:\/\/localhost\/pub\/static\/version1558624237\/frontend\/Magento\/luma\/en_US\/Dhl_Ui\/images\/logo-dhl-wide.svg",
+        "commentsBefore": [
+          {
+            "content": "You decide when and where you want to receive your parcels with the recipient services of DHL."
+          },
+          {
+            "content": "Please choose your preferred delivery options."
+          }
+        ],
+        "footnotes": {
+          "footnote-combined-cost": {
+            "content": "For a combined booking of preferred day and preferred time, the shipping costs are a total of $1 including VAT.",
+            "subjects": [
+              "preferredTime",
+              "preferredDay"
+            ],
+            "subjectsMustBeAvailable": true,
+            "subjectsMustBeSelected": true,
+            "id": "footnote-combined-cost"
+          }
+        }
+      },
+      "compatibilityData": {
+        "preferredLocationTimeExclusion": {
+          "incompatibilityRule": true,
+          "subjects": [
+            "preferredLocation",
+            "preferredNeighbour"
+          ],
+          "errorMessage": "Please choose only one of %1.",
+          "id": "preferredLocationTimeExclusion"
+        },
+        "0": {
+          "incompatibilityRule": false,
+          "subjects": [
+            "preferredNeighbour.name",
+            "preferredNeighbour.address"
+          ],
+          "errorMessage": "Some values for Preferred Neighbour service are missing."
+        },
+        "test": {
+          "incompatibilityRule": false,
+          "subjects": [
+            "preferredDay",
+            "preferredTime"
+          ],
+          "errorMessage": "Services %1 require each other.",
+          "id": "test"
+        }
+      },
+      "code": "flatrate"
+    }
+  }
+}
