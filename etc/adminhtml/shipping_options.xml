@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<carriers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Dhl_ShippingCore/etc/shipping_options.xsd">
+    <carrier code="base">
+        <packageLevelOptions>
+            <shippingOption code="totalWeigth">
+                <label>Total Weigth</label>
+                <inputs>
+                    <input code="weigth">
+                        <label>Total Weigth</label>
+                        <inputType>number</inputType>
+                    </input>
+                    <input code="weigthUnit">
+                        <label>Weigth Unit</label>
+                        <inputType>static</inputType>
+                        <disabled>true</disabled>
+                    </input>
+                </inputs>
+            </shippingOption>
+            <shippingOption code="packageSize">
+                <label>Total Weigth</label>
+                <inputs>
+                    <input code="width">
+                        <label>Width</label>
+                        <inputType>number</inputType>
+                    </input>
+                    <input code="heigth">
+                        <label>Heigth</label>
+                        <inputType>number</inputType>
+                    </input>
+                    <input code="length">
+                        <label>Length</label>
+                        <inputType>number</inputType>
+                    </input>
+                    <input code="sizehUnit">
+                        <label>Size Unit</label>
+                        <inputType>static</inputType>
+                        <disabled>true</disabled>
+                    </input>
+                </inputs>
+            </shippingOption>
+            <shippingOption code="packageCustoms">
+                <label>Customs Data</label>
+                <inputs>
+                    <input code="packageExportDescription">
+                        <label>Package Description</label>
+                        <inputType>textarea</inputType>
+                    </input>
+                </inputs>
+            </shippingOption>
+        </packageLevelOptions>
+        <itemLevelOptions>
+            <shippingOption code="details">
+                <label>Item Details</label>
+                <inputs>
+                    <input code="productName">
+                        <label>Product Name</label>
+                        <inputType>static</inputType>
+                        <disabled>true</disabled>
+                    </input>
+                    <input code="weight">
+                        <label>Weight</label>
+                        <inputType>number</inputType>
+                    </input>
+                    <input code="qtyOrdered">
+                        <label>Quantity Ordered</label>
+                        <inputType>static</inputType>
+                        <disabled>true</disabled>
+                    </input>
+                    <input code="qty">
+                        <label>Quantity</label>
+                        <inputType>number</inputType>
+                    </input>
+                </inputs>
+            </shippingOption>
+            <shippingOption code="itemCustoms">
+                <label>Customs Data</label>
+                <inputs>
+                    <input code="hsCode">
+                        <label>HS Code</label>
+                        <inputType>text</inputType>
+                    </input>
+                    <input code="dgCategory">
+                        <label>Dangerous Goods Category</label>
+                        <inputType>text</inputType>
+                    </input>
+                    <input code="exportDescription">
+                        <label>Export Description</label>
+                        <inputType>textarea</inputType>
+                    </input>
+                </inputs>
+            </shippingOption>
+        </itemLevelOptions>
+    </carrier>
+</carriers>
