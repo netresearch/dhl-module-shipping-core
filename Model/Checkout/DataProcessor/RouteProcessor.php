@@ -6,8 +6,7 @@
 namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
 
 use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
-use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Sales\Model\Order\Shipment;
+use Dhl\ShippingCore\Model\Config\CoreConfig;
 
 /**
  * Class RouteProcessor
@@ -18,18 +17,18 @@ use Magento\Sales\Model\Order\Shipment;
 class RouteProcessor extends AbstractProcessor
 {
     /**
-     * @var ScopeConfigInterface
+     * @var CoreConfig
      */
-    private $scopeConfig;
+    private $coreConfig;
 
     /**
      * RouteProcessor constructor.
      *
-     * @param ScopeConfigInterface $scopeConfig
+     * @param CoreConfig $coreConfig
      */
-    public function __construct(ScopeConfigInterface $scopeConfig)
+    public function __construct(CoreConfig $coreConfig)
     {
-        $this->scopeConfig = $scopeConfig;
+        $this->coreConfig = $coreConfig;
     }
 
     /**
@@ -47,11 +46,7 @@ class RouteProcessor extends AbstractProcessor
         string $postalCode,
         int $scopeId = null
     ): array {
-        $shippingOrigin = strtolower($this->scopeConfig->getValue(
-            Shipment::XML_PATH_STORE_COUNTRY_ID,
-            'website',
-            $scopeId
-        ));
+        $shippingOrigin = strtolower($this->coreConfig->getOriginCountry($scopeId));
         $countryId = strtolower($countryId);
 
         foreach ($optionsData as $optionCode => $shippingOption) {
