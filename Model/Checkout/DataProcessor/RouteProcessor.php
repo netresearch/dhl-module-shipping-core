@@ -60,6 +60,27 @@ class RouteProcessor extends AbstractProcessor
     }
 
     /**
+     * @param array $route
+     * @return array
+     */
+    private function preprocessDestinations(array $route): array
+    {
+        foreach ($route['includeDestinations'] ?? [] as $key => $destination) {
+            if ($destination === 'eu') {
+                unset($route['includeDestinations'][$key]);
+                $route['includeDestinations'] += $this->coreConfig->getEuCountries();
+            }
+        }
+        foreach ($route['excludeDestinations'] ?? [] as $key => $destination) {
+            if ($destination === 'eu') {
+                unset($route['excludeDestinations'][$key]);
+                $route['excludeDestinations'] += $this->coreConfig->getEuCountries();
+            }
+        }
+        return $route;
+    }
+
+    /**
      * @param $shippingOption
      * @param $shippingOrigin
      * @param string $countryId
@@ -74,18 +95,47 @@ class RouteProcessor extends AbstractProcessor
         $matchingRoutes = array_filter(
             $shippingOption['routes'],
             function ($route) use ($shippingOrigin, $countryId) {
-                $originMatches = strtolower($route['origin']) === $shippingOrigin;
-                $destinationMatches = isset($route['destinations'])
-                    ? in_array(
-                        $countryId,
-                        array_map('strtolower', $route['destinations']),
-                        true
-                    )
-                    : true;
-                return $originMatches && $destinationMatches;
+                $route = $this->preprocessDestinations($route);
+                return $this->isRouteAllowed($route, $shippingOrigin, $countryId);
             }
         );
 
         return !empty($matchingRoutes);
+    }
+
+    /**
+     * @param mixed[] $route
+     * @param string $origin
+     * @param string $destination
+     * @return bool
+     */
+    private function isRouteAllowed(array $route, string $origin, string $destination): bool
+    {
+        if (isset($route['origin']) && $route['origin'] !== $origin) {
+            return false;
+        }
+
+        $includeDestinations = $route['includeDestinations'] ?? ['intl'];
+        $excludeDestinations = $route['excludeDestinations'] ?? [];
+        $hasIncludes = !in_array('intl', $includeDestinations, true);
+        $hasExcludes = !empty($excludeDestinations);
+
+        if (!$hasIncludes && !$hasExcludes) {
+            return true;
+        }
+
+        if ($hasIncludes && !in_array($destination, $includeDestinations, true)) {
+            return false;
+        }
+
+        if (in_array('intl', $excludeDestinations, true)) {
+            return $origin === $destination;
+        }
+
+        if ($hasExcludes && in_array($destination, $excludeDestinations, true)) {
+            return false;
+        }
+
+        return true;
     }
 }

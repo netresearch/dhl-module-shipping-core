@@ -153,13 +153,8 @@
                                         <xs:complexType>
                                             <xs:sequence>
                                                 <xs:element name="origin" type="xs:string" minOccurs="0"/>
-                                                <xs:element name="destinations" minOccurs="0">
-                                                    <xs:complexType>
-                                                        <xs:sequence>
-                                                            <xs:element name="destination" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-                                                        </xs:sequence>
-                                                    </xs:complexType>
-                                                </xs:element>
+                                                <xs:element name="includeDestinations" type="destinationList" minOccurs="0"/>
+                                                <xs:element name="excludeDestinations" type="destinationList" minOccurs="0"/>
                                             </xs:sequence>
                                         </xs:complexType>
                                     </xs:element>
@@ -192,5 +187,18 @@
                 <xs:attribute type="xs:boolean" name="translate" fixed="true"/>
             </xs:extension>
         </xs:simpleContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="destinationList">
+        <xs:sequence>
+            <xs:element name="destination" minOccurs="0" maxOccurs="unbounded">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[a-z]{2}|intl"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
     </xs:complexType>
 </xs:schema>
