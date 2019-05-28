@@ -61,7 +61,7 @@ class CheckoutDataHydrator
         $this->configureJsonMapper();
         try {
             /** @var CheckoutDataInterface $checkoutData */
-            $checkoutData = $this->jsonMapper->map($data, $this->checkoutDataFactory->create());
+            $checkoutData = $this->jsonMapper->map($data, $this->checkoutDataFactory->create(['carriers' => []]));
 
             return $checkoutData;
         } catch (\Exception $exception) {

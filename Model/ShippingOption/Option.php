@@ -19,7 +19,7 @@ class Option implements OptionInterface
     /**
      * @var string
      */
-    private $id = '';
+    private $id;
 
     /**
      * @var string
@@ -29,12 +29,12 @@ class Option implements OptionInterface
     /**
      * @var string
      */
-    private $value = '';
+    private $value;
 
     /**
      * @var bool
      */
-    private $disabled = false;
+    private $disabled;
 
     /**
      * Option constructor.
@@ -44,7 +44,7 @@ class Option implements OptionInterface
      * @param string $value
      * @param bool $disabled
      */
-    public function __construct(string $label, string $id = '', string $value = '', bool $disabled = false)
+    public function __construct(string $label, string $id, string $value, bool $disabled)
     {
         $this->label = $label;
         $this->id = $id;

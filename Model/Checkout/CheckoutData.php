@@ -20,14 +20,14 @@ class CheckoutData implements CheckoutDataInterface
     /**
      * @var \Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface[]
      */
-    private $carriers = [];
+    private $carriers;
 
     /**
      * CheckoutData constructor.
      *
      * @param \Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface[] $carriers
      */
-    public function __construct(array $carriers = [])
+    public function __construct(array $carriers)
     {
         $this->carriers = $carriers;
     }

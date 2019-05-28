@@ -33,12 +33,12 @@ class Input implements InputInterface
     /**
      * @var string
      */
-    private $defaultValue = '';
+    private $defaultValue;
 
     /**
      * @var bool
      */
-    private $disabled = false;
+    private $disabled;
 
     /**
      * @var string
@@ -48,32 +48,32 @@ class Input implements InputInterface
     /**
      * @var bool
      */
-    private $labelVisible = true;
+    private $labelVisible;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface[]
      */
-    private $options = [];
+    private $options;
 
     /**
      * @var string
      */
-    private $tooltip = '';
+    private $tooltip;
 
     /**
      * @var string
      */
-    private $placeholder = '';
+    private $placeholder;
 
     /**
      * @var int
      */
-    private $sortOrder = 0;
+    private $sortOrder;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ValidationRuleInterface[]
      */
-    private $validationRules = [];
+    private $validationRules;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface|null
@@ -100,14 +100,14 @@ class Input implements InputInterface
         string $inputType,
         string $code,
         string $label,
-        string $defaultValue = '',
-        bool $disabled = false,
-        bool $labelVisible = true,
-        array $options = [],
-        string $tooltip = '',
-        string $placeholder = '',
-        int $sortOrder = 0,
-        array $validationRules = [],
+        string $defaultValue,
+        bool $disabled,
+        bool $labelVisible,
+        array $options,
+        string $tooltip,
+        string $placeholder,
+        int $sortOrder,
+        array $validationRules,
         $comment = null
     ) {
         $this->inputType = $inputType;

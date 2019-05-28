@@ -36,21 +36,21 @@
             <xs:element name="imageUrl" type="xs:string" minOccurs="0"/>
             <xs:element name="commentsBefore" minOccurs="0">
                 <xs:complexType>
-                    <xs:sequence maxOccurs="unbounded">
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
                         <xs:element name="comment" type="commentConfig"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="commentsAfter" minOccurs="0">
                 <xs:complexType>
-                    <xs:sequence maxOccurs="unbounded">
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
                         <xs:element name="comment" type="commentConfig"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="footnotes" minOccurs="0">
                 <xs:complexType>
-                    <xs:sequence maxOccurs="unbounded">
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
                         <xs:element name="footnote">
                             <xs:complexType>
                                 <xs:all>
@@ -84,7 +84,7 @@
     </xs:complexType>
 
     <xs:complexType name="shippingOptionList">
-        <xs:sequence maxOccurs="unbounded">
+        <xs:sequence maxOccurs="unbounded" minOccurs="0">
             <xs:element name="shippingOption">
                 <xs:complexType>
                     <xs:all>
@@ -102,7 +102,7 @@
                                                 <xs:element name="options" minOccurs="0">
                                                     <xs:complexType>
                                                         <xs:sequence>
-                                                            <xs:element name="option" maxOccurs="unbounded">
+                                                            <xs:element name="option" minOccurs="0" maxOccurs="unbounded">
                                                                 <xs:complexType>
                                                                     <xs:all>
                                                                         <xs:element name="label" type="string_translatable" minOccurs="0"/>
@@ -149,7 +149,7 @@
                         <xs:element name="routes" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="route" maxOccurs="unbounded">
+                                    <xs:element name="route" minOccurs="0" maxOccurs="unbounded">
                                         <xs:complexType>
                                             <xs:sequence>
                                                 <xs:element name="origin" type="xs:string" minOccurs="0"/>
@@ -158,6 +158,13 @@
                                             </xs:sequence>
                                         </xs:complexType>
                                     </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="requiredItemIds" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="id" type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>

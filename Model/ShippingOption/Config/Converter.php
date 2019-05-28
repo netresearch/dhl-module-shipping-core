@@ -20,6 +20,7 @@ class Converter implements ConverterInterface
         'packageLevelOptions',
         'itemLevelOptions',
         'routes',
+        'requiredItemIds',
         'inputs',
         'options',
         'includeDestinations',
@@ -58,19 +59,23 @@ class Converter implements ConverterInterface
      */
     private function toArray(\DOMNode $node)
     {
-        if ($this->containsScalar($node)) {
+        if ($this->isTextNode($node)) {
             return $this->toScalar($node);
         }
         if ($this->containsArray($node)) {
             $result = [];
+            /** @var \DomNode $childNode */
             foreach ($node->childNodes as $childNode) {
-                /** @var \DomNode $childNode */
                 if ($this->isNodeApplicable($childNode)) {
                     if ($childNode->hasAttributes()) {
                         $key = $childNode->attributes->item(0)->localName;
                         $value = $childNode->attributes->item(0)->textContent;
                         $result[$value] = $this->toArray($childNode);
                         $result[$value][$key] = $value;
+                    } elseif ($this->isTextNode($childNode)) {
+                        if (trim($childNode->textContent)) {
+                            $result[] = $childNode->textContent;
+                        }
                     } else {
                         $result[] = $this->toArray($childNode);
                     }
@@ -80,9 +85,16 @@ class Converter implements ConverterInterface
         }
 
         $result = [];
+        /** @var \DOMNode $childNode */
         foreach ($node->childNodes as $childNode) {
             if ($this->isNodeApplicable($childNode)) {
-                $result[$childNode->localName] = $this->toArray($childNode);
+                if ($childNode->hasChildNodes()) {
+                    $result[$childNode->localName] = $this->toArray($childNode);
+                } elseif ($this->containsArray($childNode)) {
+                    $result[$childNode->localName] = [];
+                } elseif (!$this->isTextNode($childNode)) {
+                    $result[$childNode->localName] = $childNode->textContent;
+                }
             }
         }
         return $result;
@@ -94,14 +106,17 @@ class Converter implements ConverterInterface
      */
     private function toScalar(\DOMNode $node)
     {
-        if ($node->firstChild->textContent === 'true') {
+        while (!($node instanceof \DOMText)) {
+            $node = $node->firstChild;
+        }
+        if ($node->textContent === 'true') {
             $value = true;
-        } elseif ($node->firstChild->textContent === 'false') {
+        } elseif ($node->textContent === 'false') {
             $value = false;
-        } elseif ((string)(int)$node->firstChild->textContent === $node->firstChild->textContent) {
-            $value = (int)$node->firstChild->textContent;
+        } elseif ((string)(int)$node->textContent === $node->textContent) {
+            $value = (int)$node->textContent;
         } else {
-            $value = $node->firstChild->textContent;
+            $value = $node->textContent;
         }
 
         return $value;
@@ -111,16 +126,19 @@ class Converter implements ConverterInterface
      * @param \DomNode $node
      * @return bool
      */
-    private function containsScalar(\DomNode $node): bool
+    private function isTextNode(\DomNode $node): bool
     {
-        $hasOneChild = count($node->childNodes) === 1;
-        if (!$hasOneChild || !$node->hasChildNodes()) {
+        if ($node instanceof \DOMText) {
+            return true;
+        }
+        if ($node->childNodes->length !== 1) {
             return false;
         }
+        if ($node->childNodes->item(0) instanceof \DOMText) {
+            return true;
+        }
 
-        $hasGrandchild = $node->firstChild->hasChildNodes();
-
-        return !$hasGrandchild && $this->isNodeApplicable($node->firstChild);
+        return $this->isTextNode($node->firstChild);
     }
 
     /**
@@ -138,9 +156,6 @@ class Converter implements ConverterInterface
      */
     private function isNodeApplicable(\DOMNode $node): bool
     {
-        $isEmpty = trim($node->textContent) === '';
-        $isValidType = in_array($node->nodeType, [1, 3, 4], true);
-
-        return (!$isEmpty && $isValidType);
+        return in_array($node->nodeType, [1, 3, 4], true);
     }
 }

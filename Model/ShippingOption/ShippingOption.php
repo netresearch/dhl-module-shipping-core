@@ -35,17 +35,17 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @var mixed
      */
-    private $routes = [];
+    private $routes;
 
     /**
      * @var int
      */
-    private $sortOrder = 0;
+    private $sortOrder;
 
     /**
      * @var int[]
      */
-    private $requiredItemIds = [];
+    private $requiredItemIds;
 
     /**
      * ShippingOption constructor.
@@ -61,9 +61,9 @@ class ShippingOption implements ShippingOptionInterface
         string $code,
         string $label,
         array $inputs,
-        array $routes = [],
-        int $sortOrder = 0,
-        array $requiredItemIds = []
+        array $routes,
+        int $sortOrder,
+        array $requiredItemIds
     ) {
         $this->code = $code;
         $this->label = $label;
@@ -120,5 +120,4 @@ class ShippingOption implements ShippingOptionInterface
     {
         return $this->requiredItemIds;
     }
-
 }

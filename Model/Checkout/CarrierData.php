@@ -28,12 +28,12 @@ class CarrierData implements CarrierDataInterface
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
-    private $packageLevelOptions = [];
+    private $packageLevelOptions;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
-    private $itemLevelOptions = [];
+    private $itemLevelOptions;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface
@@ -43,7 +43,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface[]
      */
-    private $compatibilityData = [];
+    private $compatibilityData;
 
     /**
      * CarrierData constructor.
@@ -57,9 +57,9 @@ class CarrierData implements CarrierDataInterface
     public function __construct(
         string $code,
         MetadataInterface $metadata,
-        array $packageLevelOptions = [],
-        array $itemLevelOptions = [],
-        array $compatibilityData = []
+        array $packageLevelOptions,
+        array $itemLevelOptions,
+        array $compatibilityData
     ) {
         $this->code = $code;
         $this->packageLevelOptions = $packageLevelOptions;

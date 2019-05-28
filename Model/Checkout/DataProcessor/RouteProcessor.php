@@ -88,7 +88,7 @@ class RouteProcessor extends AbstractProcessor
      */
     private function checkIfOptionMatchesRoute($shippingOption, $shippingOrigin, string $countryId): bool
     {
-        if (!isset($shippingOption['routes'])) {
+        if (empty($shippingOption['routes'] ?? [])) {
             // Option matches all routes
             return true;
         }
