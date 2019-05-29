@@ -38,13 +38,9 @@ class Reader extends \Magento\Framework\Config\Reader\Filesystem
 
         list($baseCarrier, $baseShippingOption, $baseInput, $baseOption, $result) = $this->extractBaseElements($result);
 
-        $groups = [
-            PackagingDataProvider::GROUP_ITEM_LEVEL,
-            PackagingDataProvider::GROUP_PACKAGE_LEVEL,
-        ];
         foreach ($result['carriers'] as $carrierCode => $carrier) {
             $result['carriers'][$carrierCode] = $this->extendRecursive($baseCarrier, $carrier);
-            foreach ($groups as $group) {
+            foreach (PackagingDataProvider::GROUP_NAMES as $group) {
                 foreach ($carrier[$group] ?? [] as $optionCode => $shippingOption) {
                     $result['carriers'][$carrierCode][$group][$optionCode]
                         = $this->extendRecursive($baseShippingOption, $shippingOption);
@@ -83,7 +79,6 @@ class Reader extends \Magento\Framework\Config\Reader\Filesystem
                 $baseArray[$key] = $this->extendRecursive($baseArray[$key], $value);
             }
         }
-
         return $baseArray;
     }
 
@@ -94,21 +89,26 @@ class Reader extends \Magento\Framework\Config\Reader\Filesystem
     private function extractBaseElements(array $result): array
     {
         $baseCarrier = $result['carriers']['base'];
-        $baseCarrier['baseLevelOptions'] = $this->extendRecursive(
-            $baseCarrier[PackagingDataProvider::GROUP_ITEM_LEVEL],
-            $baseCarrier[PackagingDataProvider::GROUP_PACKAGE_LEVEL]
+        $baseCarrier['baseOptions'] = $this->extendRecursive(
+            $baseCarrier[PackagingDataProvider::GROUP_ITEM],
+            $baseCarrier[PackagingDataProvider::GROUP_SERVICE]
+        );
+        $baseCarrier['baseOptions'] = $this->extendRecursive(
+            $baseCarrier['baseOptions'],
+            $baseCarrier[PackagingDataProvider::GROUP_PACKAGE]
         );
 
-        $baseShippingOption = $baseCarrier['baseLevelOptions']['base'];
+        $baseShippingOption = $baseCarrier['baseOptions']['base'];
         $baseInput = $baseShippingOption['inputs']['base'];
         $baseOption = $baseInput['options']['base'];
         $baseOption['id'] = '';
 
         unset(
             $baseShippingOption['inputs'],
-            $baseCarrier['baseLevelOptions'],
-            $baseCarrier['packageLevelOptions']['base'],
-            $baseCarrier['itemLevelOptions']['base'],
+            $baseCarrier['baseOptions'],
+            $baseCarrier[PackagingDataProvider::GROUP_PACKAGE]['base'],
+            $baseCarrier[PackagingDataProvider::GROUP_ITEM]['base'],
+            $baseCarrier[PackagingDataProvider::GROUP_SERVICE]['base'],
             $baseInput['options']['base'],
             $result['carriers']['base']
         );

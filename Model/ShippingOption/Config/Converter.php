@@ -5,6 +5,7 @@
 
 namespace Dhl\ShippingCore\Model\ShippingOption\Config;
 
+use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Magento\Framework\Config\ConverterInterface;
 
 /**
@@ -17,8 +18,6 @@ class Converter implements ConverterInterface
      */
     const ARRAY_NODES = [
         'carriers',
-        'packageLevelOptions',
-        'itemLevelOptions',
         'routes',
         'requiredItemIds',
         'inputs',
@@ -31,6 +30,9 @@ class Converter implements ConverterInterface
         'footnotes',
         'subjects',
         'compatibilityData',
+        PackagingDataProvider::GROUP_SERVICE,
+        PackagingDataProvider::GROUP_ITEM,
+        PackagingDataProvider::GROUP_PACKAGE,
     ];
 
     /**

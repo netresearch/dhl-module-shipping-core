@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
-use Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface;
-use Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface;
+use Dhl\ShippingCore\Api\Data\CarrierDataInterface;
+use Dhl\ShippingCore\Api\Data\MetadataInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 
@@ -28,15 +28,20 @@ class CarrierData implements CarrierDataInterface
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
-    private $packageLevelOptions;
+    private $packageOptions;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
-    private $itemLevelOptions;
+    private $itemOptions;
 
     /**
-     * @var \Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
+     */
+    private $serviceOptions;
+
+    /**
+     * @var \Dhl\ShippingCore\Api\Data\MetadataInterface
      */
     private $metadata;
 
@@ -49,21 +54,24 @@ class CarrierData implements CarrierDataInterface
      * CarrierData constructor.
      *
      * @param string $code
-     * @param ShippingOptionInterface[] $packageLevelOptions
-     * @param ShippingOptionInterface[] $itemLevelOptions
+     * @param ShippingOptionInterface[] $packageOptions
+     * @param ShippingOptionInterface[] $itemOptions
+     * @param ShippingOptionInterface[] $serviceOptions
      * @param MetadataInterface $metadata
      * @param CompatibilityInterface[] $compatibilityData
      */
     public function __construct(
         string $code,
         MetadataInterface $metadata,
-        array $packageLevelOptions,
-        array $itemLevelOptions,
+        array $packageOptions,
+        array $itemOptions,
+        array $serviceOptions,
         array $compatibilityData
     ) {
         $this->code = $code;
-        $this->packageLevelOptions = $packageLevelOptions;
-        $this->itemLevelOptions = $itemLevelOptions;
+        $this->packageOptions = $packageOptions;
+        $this->itemOptions = $itemOptions;
+        $this->serviceOptions = $serviceOptions;
         $this->metadata = $metadata;
         $this->compatibilityData = $compatibilityData;
     }
@@ -79,17 +87,25 @@ class CarrierData implements CarrierDataInterface
     /**
      * @return ShippingOptionInterface[]
      */
-    public function getPackageLevelOptions(): array
+    public function getPackageOptions(): array
     {
-        return $this->packageLevelOptions;
+        return $this->packageOptions;
     }
 
     /**
      * @return ShippingOptionInterface[]
      */
-    public function getItemLevelOptions(): array
+    public function getItemOptions(): array
     {
-        return $this->itemLevelOptions;
+        return $this->itemOptions;
+    }
+
+    /**
+     * @return ShippingOptionInterface[]
+     */
+    public function getServiceOptions(): array
+    {
+        return $this->serviceOptions;
     }
 
     /**

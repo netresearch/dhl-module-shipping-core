@@ -7,9 +7,8 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Webapi;
 
 use Dhl\ShippingCore\Api\CheckoutManagementInterface;
-use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
+use Dhl\ShippingCore\Api\Data\ShippingDataInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\SelectionInterface;
-use Dhl\ShippingCore\Model\Checkout\CheckoutDataHydrator;
 use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
 use Dhl\ShippingCore\Model\ShippingOption\Selection\QuoteSelectionManager;
 use Magento\Framework\Exception\CouldNotDeleteException;

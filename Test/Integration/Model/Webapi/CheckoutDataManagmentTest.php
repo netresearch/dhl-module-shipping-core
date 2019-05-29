@@ -8,7 +8,7 @@ namespace Dhl\ShippingCore\Test\Integration\Model\Webapi;
 use Dhl\ShippingCore\Api\CheckoutManagementInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\SelectionInterface;
-use Dhl\ShippingCore\Model\Checkout\CheckoutData;
+use Dhl\ShippingCore\Model\Checkout\ShippingData;
 use Dhl\ShippingCore\Model\ShippingOption\Selection\QuoteSelectionRepository;
 use Dhl\ShippingCore\Model\Webapi\CheckoutManagement;
 use Dhl\ShippingCore\Test\Integration\Fixture\QuoteFixture;
@@ -50,7 +50,7 @@ class CheckoutDataManagmentTest extends \PHPUnit\Framework\TestCase
         $subject = $this->objectManager->create(CheckoutManagement::class);
         $result = $subject->getCheckoutData('DE', '04229');
 
-        self::assertInstanceOf(CheckoutData::class, $result);
+        self::assertInstanceOf(ShippingData::class, $result);
     }
 
     /**

@@ -1,62 +1,7 @@
 {
   "carriers": {
     "flatrate": {
-      "packageLevelOptions": {
-        "packageWeight": {
-          "label": "Total Weight",
-          "inputs": {
-            "weight": {
-              "label": "Total Weight",
-              "inputType": "number",
-              "code": "weight"
-            },
-            "weightUnit": {
-              "label": "Weight Unit",
-              "inputType": "static",
-              "disabled": true,
-              "code": "weightUnit"
-            }
-          },
-          "code": "totalWeight"
-        },
-        "packageSize": {
-          "label": "Total Weight",
-          "inputs": {
-            "width": {
-              "label": "Width",
-              "inputType": "number",
-              "code": "width"
-            },
-            "heigth": {
-              "label": "Heigth",
-              "inputType": "number",
-              "code": "heigth"
-            },
-            "length": {
-              "label": "Length",
-              "inputType": "number",
-              "code": "length"
-            },
-            "sizeUnit": {
-              "label": "Size Unit",
-              "inputType": "static",
-              "disabled": true,
-              "code": "sizeUnit"
-            }
-          },
-          "code": "packageSize"
-        },
-        "packageCustoms": {
-          "label": "Customs Data",
-          "inputs": {
-            "packageExportDescription": {
-              "label": "Package Description",
-              "inputType": "textarea",
-              "code": "packageExportDescription"
-            }
-          },
-          "code": "packageCustoms"
-        },
+      "serviceOptions": {
         "preferredTime": {
           "label": "Preferred Time: Delivery at your preferred time",
           "sortOrder": 20,
@@ -146,7 +91,64 @@
           "code": "preferredNeighbour"
         }
       },
-      "itemLevelOptions": {
+      "packageOptions": {
+        "packageWeight": {
+          "label": "Total Weight",
+          "inputs": {
+            "weight": {
+              "label": "Total Weight",
+              "inputType": "number",
+              "code": "weight"
+            },
+            "weightUnit": {
+              "label": "Weight Unit",
+              "inputType": "static",
+              "disabled": true,
+              "code": "weightUnit"
+            }
+          },
+          "code": "totalWeight"
+        },
+        "packageSize": {
+          "label": "Total Weight",
+          "inputs": {
+            "width": {
+              "label": "Width",
+              "inputType": "number",
+              "code": "width"
+            },
+            "heigth": {
+              "label": "Heigth",
+              "inputType": "number",
+              "code": "heigth"
+            },
+            "length": {
+              "label": "Length",
+              "inputType": "number",
+              "code": "length"
+            },
+            "sizeUnit": {
+              "label": "Size Unit",
+              "inputType": "static",
+              "disabled": true,
+              "code": "sizeUnit"
+            }
+          },
+          "code": "packageSize"
+        },
+        "packageCustoms": {
+          "label": "Customs Data",
+          "inputs": {
+            "packageExportDescription": {
+              "label": "Package Description",
+              "inputType": "textarea",
+              "code": "packageExportDescription"
+            }
+          },
+          "code": "packageCustoms"
+        }
+      },
+      "itemOptions": {
         "details": {
           "label": "Item Details",
           "inputs": {

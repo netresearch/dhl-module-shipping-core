@@ -35,7 +35,7 @@ class PackageDetailValuesProcessor extends AbstractProcessor
 
     public function processShippingOptions(array $optionsData, Shipment $shipment, string $optionGroupName): array
     {
-        if ($optionGroupName !== PackagingDataProvider::GROUP_PACKAGE_LEVEL) {
+        if ($optionGroupName !== PackagingDataProvider::GROUP_PACKAGE) {
             return $optionsData;
         }
 

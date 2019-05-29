@@ -5,7 +5,7 @@
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
-use Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface;
+use Dhl\ShippingCore\Api\Data\FootnoteInterface;
 
 /**
  * Class Footnote

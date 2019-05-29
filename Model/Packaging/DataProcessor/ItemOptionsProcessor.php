@@ -19,7 +19,7 @@ class ItemOptionsProcessor extends AbstractProcessor
 {
     public function processShippingOptions(array $optionsData, Shipment $shipment, string $optionGroupName): array
     {
-        if ($optionGroupName !== PackagingDataProvider::GROUP_ITEM_LEVEL) {
+        if ($optionGroupName !== PackagingDataProvider::GROUP_ITEM) {
             return $optionsData;
         }
 

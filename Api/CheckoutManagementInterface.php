@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api;
 
-use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
+use Dhl\ShippingCore\Api\Data\ShippingDataInterface;
 
 /**
  * Interface CheckoutManagementInterface
@@ -29,9 +29,9 @@ interface CheckoutManagementInterface
      *
      * @param string $countryId
      * @param string $postalCode
-     * @return \Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface
+     * @return \Dhl\ShippingCore\Api\Data\ShippingDataInterface
      */
-    public function getCheckoutData(string $countryId, string $postalCode): CheckoutDataInterface;
+    public function getCheckoutData(string $countryId, string $postalCode): ShippingDataInterface;
 
     /**
      * Persist a set of customer shipping option selections.

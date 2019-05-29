@@ -5,7 +5,10 @@
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
+use Dhl\ShippingCore\Api\Data\ShippingDataInterface;
+use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Magento\Framework\Config\ReaderInterface;
+use Magento\Framework\Exception\InputException;
 
 /**
  * Class CheckoutDataProvider
@@ -19,7 +22,7 @@ class CheckoutDataProvider
     /**
      * The option group relevant for the checkout.
      */
-    const GROUPNAME = 'packageLevelOptions';
+    const GROUPNAME = PackagingDataProvider::GROUP_SERVICE;
 
     /**
      * @var ReaderInterface
@@ -32,32 +35,43 @@ class CheckoutDataProvider
     private $compositeProcessor;
 
     /**
+     * @var CheckoutDataHydrator
+     */
+    private $shippingDataHydrator;
+
+    /**
      * CheckoutDataProvider constructor.
      *
      * @param ReaderInterface $reader
      * @param CheckoutDataCompositeProcessor $compositeProcessor
+     * @param CheckoutDataHydrator $shippingDataHydrator
      */
-    public function __construct(ReaderInterface $reader, CheckoutDataCompositeProcessor $compositeProcessor)
-    {
+    public function __construct(
+        ReaderInterface $reader,
+        CheckoutDataCompositeProcessor $compositeProcessor,
+        CheckoutDataHydrator $shippingDataHydrator
+    ) {
         $this->reader = $reader;
         $this->compositeProcessor = $compositeProcessor;
+        $this->shippingDataHydrator = $shippingDataHydrator;
     }
 
     /**
      * @param string $countryCode
      * @param int $storeId
      * @param string $postalCode
-     * @return array
+     * @return ShippingDataInterface
+     * @throws InputException
      */
-    public function getData(string $countryCode, int $storeId, string $postalCode): array
+    public function getData(string $countryCode, int $storeId, string $postalCode): ShippingDataInterface
     {
-        $checkoutData = $this->reader->read('frontend');
+        $shippingData = $this->reader->read('frontend');
 
-        if (!isset($checkoutData['carriers'])) {
-            $checkoutData['carriers'] = [];
+        if (!isset($shippingData['carriers'])) {
+            $shippingData['carriers'] = [];
         }
 
-        foreach ($checkoutData['carriers'] as $carrierCode => $carrierData) {
+        foreach ($shippingData['carriers'] as $carrierCode => $carrierData) {
             $carrierData[self::GROUPNAME] = $this->compositeProcessor->processShippingOptions(
                 $carrierData[self::GROUPNAME] ?? [],
                 $countryCode,
@@ -77,7 +91,7 @@ class CheckoutDataProvider
                 $storeId
             );
 
-            $checkoutData['carriers'][$carrierCode] = $carrierData;
+            $shippingData['carriers'][$carrierCode] = $carrierData;
         }
 
         return $checkoutData;

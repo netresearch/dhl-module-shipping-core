@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
-use Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface;
-use Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface;
+use Dhl\ShippingCore\Api\Data\FootnoteInterface;
+use Dhl\ShippingCore\Api\Data\MetadataInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface;
 
 /**
@@ -40,7 +40,7 @@ class Metadata implements MetadataInterface
     private $commentsAfter = [];
 
     /**
-     * @var \Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\FootnoteInterface[]
      */
     private $footnotes = [];
 
@@ -51,7 +51,7 @@ class Metadata implements MetadataInterface
      * @param string $imageUrl
      * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[] $commentsBefore
      * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[] $commentsAfter
-     * @param \Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface[] $footnotes
+     * @param \Dhl\ShippingCore\Api\Data\FootnoteInterface[] $footnotes
      */
     public function __construct(
         string $title,

@@ -15,10 +15,10 @@
 
     <preference for="Dhl\ShippingCore\Api\CheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\CheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\GuestCheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\GuestCheckoutManagement"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Checkout\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface" type="Dhl\ShippingCore\Model\Checkout\CheckoutData"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Checkout\MetadataInterface" type="Dhl\ShippingCore\Model\Checkout\Metadata"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Checkout\FootnoteInterface" type="Dhl\ShippingCore\Model\Checkout\Footnote"/>
+    <preference for="Dhl\ShippingCore\Api\Data\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingDataInterface" type="Dhl\ShippingCore\Model\Checkout\ShippingData"/>
+    <preference for="Dhl\ShippingCore\Api\Data\MetadataInterface" type="Dhl\ShippingCore\Model\Checkout\Metadata"/>
+    <preference for="Dhl\ShippingCore\Api\Data\FootnoteInterface" type="Dhl\ShippingCore\Model\Checkout\Footnote"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface" type="Dhl\ShippingCore\Model\ShippingOption\Compatibility"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface" type="Dhl\ShippingCore\Model\ShippingOption\ShippingOption"/>
@@ -145,13 +145,18 @@
             <argument xsi:type="string" name="fileName">shipping_options.xml</argument>
             <argument xsi:type="array" name="idAttributes">
                 <item xsi:type="string" name="/carriers/carrier">code</item>
-                <item xsi:type="string" name="/carriers/carrier/packageLevelOptions/shippingOption">code</item>
-                <item xsi:type="string" name="/carriers/carrier/packageLevelOptions/shippingOption/inputs/input">code</item>
-                <item xsi:type="string" name="/carriers/carrier/itemLevelOptions/shippingOption">code</item>
-                <item xsi:type="string" name="/carriers/carrier/itemLevelOptions/shippingOption/inputs/input">code</item>
-                <item xsi:type="string" name="/carriers/carrier/packageLevelOptions/shippingOption/inputs/input/options/option">id</item>
-                <item xsi:type="string" name="/carriers/carrier/itemLevelOptions/shippingOption/inputs/input/options/option">id</item>
-                <item xsi:type="string" name="/carriers/carrier/itemLevelOptions/shippingOption/inputs/input/validationRules/rule">name</item>
+                <item xsi:type="string" name="/carriers/carrier/packageOptions/shippingOption">code</item>
+                <item xsi:type="string" name="/carriers/carrier/packageOptions/shippingOption/inputs/input">code</item>
+                <item xsi:type="string" name="/carriers/carrier/packageOptions/shippingOption/inputs/input/options/option">id</item>
+                <item xsi:type="string" name="/carriers/carrier/packageOptions/shippingOption/inputs/input/validationRules/rule">name</item>
+                <item xsi:type="string" name="/carriers/carrier/itemOptions/shippingOption">code</item>
+                <item xsi:type="string" name="/carriers/carrier/itemOptions/shippingOption/inputs/input">code</item>
+                <item xsi:type="string" name="/carriers/carrier/itemOptions/shippingOption/inputs/input/options/option">id</item>
+                <item xsi:type="string" name="/carriers/carrier/itemOptions/shippingOption/inputs/input/validationRules/rule">name</item>
+                <item xsi:type="string" name="/carriers/carrier/serviceOptions/shippingOption">code</item>
+                <item xsi:type="string" name="/carriers/carrier/serviceOptions/shippingOption/inputs/input">code</item>
+                <item xsi:type="string" name="/carriers/carrier/serviceOptions/shippingOption/inputs/input/options/option">id</item>
+                <item xsi:type="string" name="/carriers/carrier/serviceOptions/shippingOption/inputs/input/validationRules/rule">name</item>
                 <item xsi:type="string" name="/carriers/carrier/metaData/footnotes/footnote">id</item>
                 <item xsi:type="string" name="/carriers/carrier/compatibilityData/rule">id</item>
             </argument>

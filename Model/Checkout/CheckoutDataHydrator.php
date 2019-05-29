@@ -4,10 +4,12 @@
  */
 namespace Dhl\ShippingCore\Model\Checkout;
 
-use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterface;
-use Dhl\ShippingCore\Api\Data\Checkout\CheckoutDataInterfaceFactory;
+use Dhl\ShippingCore\Api\CheckoutManagementInterface;
+use Dhl\ShippingCore\Api\Data\ShippingDataInterface;
+use Dhl\ShippingCore\Api\Data\ShippingDataInterfaceFactory;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\ObjectManager\ConfigInterface;
+use Magento\Framework\Webapi\ServiceOutputProcessor;
 
 /**
  * Class CheckoutDataHydrator
@@ -18,9 +20,14 @@ use Magento\Framework\ObjectManager\ConfigInterface;
 class CheckoutDataHydrator
 {
     /**
-     * @var CheckoutDataInterfaceFactory
+     * @var ShippingDataInterfaceFactory
      */
     private $checkoutDataFactory;
+
+    /**
+     * @var ServiceOutputProcessor
+     */
+    private $serviceOutputProcessor;
 
     /**
      * @var \JsonMapper
@@ -35,32 +42,35 @@ class CheckoutDataHydrator
     /**
      * CheckoutDataHydrator constructor.
      *
-     * @param CheckoutDataInterfaceFactory $checkoutDataFactory
+     * @param ShippingDataInterfaceFactory $checkoutDataFactory
+     * @param ServiceOutputProcessor $serviceOutputProcessor
      * @param \JsonMapper $jsonMapper
      * @param ConfigInterface $diConfig
      */
     public function __construct(
-        CheckoutDataInterfaceFactory $checkoutDataFactory,
+        ShippingDataInterfaceFactory $checkoutDataFactory,
+        ServiceOutputProcessor $serviceOutputProcessor,
         \JsonMapper $jsonMapper,
         ConfigInterface $diConfig
     ) {
         $this->checkoutDataFactory = $checkoutDataFactory;
+        $this->serviceOutputProcessor = $serviceOutputProcessor;
         $this->jsonMapper = $jsonMapper;
         $this->diConfig = $diConfig;
     }
 
     /**
-     * Convert a plain nested array of scalar types into a CheckoutDataInterface object.
+     * Convert a plain nested array of scalar types into a ShippingDataInterface object.
      *
      * @param array $data
-     * @return CheckoutDataInterface
+     * @return ShippingDataInterface
      * @throws InputException
      */
-    public function toObject(array $data): CheckoutDataInterface
+    public function toObject(array $data): ShippingDataInterface
     {
         $this->configureJsonMapper();
         try {
-            /** @var CheckoutDataInterface $checkoutData */
+            /** @var ShippingDataInterface $checkoutData */
             $checkoutData = $this->jsonMapper->map($data, $this->checkoutDataFactory->create(['carriers' => []]));
 
             return $checkoutData;

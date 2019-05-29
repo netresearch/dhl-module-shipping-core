@@ -6,8 +6,9 @@
                 <xs:element name="carrier" maxOccurs="unbounded" minOccurs="0">
                     <xs:complexType>
                         <xs:all>
-                            <xs:element name="packageLevelOptions" type="shippingOptionList" minOccurs="0"/>
-                            <xs:element name="itemLevelOptions" type="shippingOptionList" minOccurs="0"/>
+                            <xs:element name="packageOptions" type="shippingOptionList" minOccurs="0"/>
+                            <xs:element name="itemOptions" type="shippingOptionList" minOccurs="0"/>
+                            <xs:element name="serviceOptions" type="shippingOptionList" minOccurs="0"/>
                             <xs:element name="metaData" minOccurs="0" type="metaData"/>
                             <xs:element name="compatibilityData" minOccurs="0" type="compatibilityData"/>
                         </xs:all>
