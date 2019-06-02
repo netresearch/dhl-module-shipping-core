@@ -73,6 +73,14 @@ interface ConfigInterface
     public function getWeightUnit($store = null): string;
 
     /**
+     * Get the general dimensions unit.
+     *
+     * @param int|string|null $store
+     * @return string
+     */
+    public function getDimensionsUOM($store = null): string;
+
+    /**
      * Checks if route is dutiable by stores origin country and eu country list
      *
      * @param string $receiverCountry
@@ -93,12 +101,11 @@ interface ConfigInterface
     /**
      * Returns the shipping origin country
      *
-     * @see Config
-     *
      * @param mixed $store
      * @param string $scope
      *
      * @return string
+     * @see Config
      */
     public function getOriginCountry($store = null, $scope = ScopeInterface::SCOPE_STORE): string;
 

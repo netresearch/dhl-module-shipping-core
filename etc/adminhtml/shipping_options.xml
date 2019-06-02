@@ -63,8 +63,8 @@
                                 <label>Weight</label>
                                 <inputType>number</inputType>
                             </input>
-                            <input code="qtyOrdered">
-                                <label>Quantity Ordered</label>
+                            <input code="qtyToShip">
+                                <label>Quantity to Ship</label>
                                 <inputType>static</inputType>
                                 <disabled>true</disabled>
                             </input>

@@ -108,7 +108,7 @@ class ItemDetailValuesProcessor extends AbstractProcessor
     ): Shipment\Item {
         foreach ($shipment->getItems() as $item) {
             if ($item instanceof Shipment\Item
-                && (int)$item->getOrderItemId() === $itemShippingOptions->getItemId()
+                && (int) $item->getOrderItemId() === $itemShippingOptions->getItemId()
             ) {
                 return $item;
             }
