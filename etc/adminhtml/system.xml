@@ -1,9 +1,12 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="shipping" showInDefault="1" showInStore="1" showInWebsite="1" translate="label tooltip comment">
-            <group id="dhlglobalwebservices" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="200" translate="label tooltip comment">
-                <label><![CDATA[DHL Global Webservices Configuration]]></label>
+        <section id="dhlshippingsolutions" type="text" sortOrder="500" showInDefault="1" showInStore="1" showInWebsite="1" translate="label">
+            <label>DHL Shipping Solutions</label>
+            <tab>sales</tab>
+            <resource>Magento_Shipping::config_shipping</resource>
+            <group id="dhlglobalwebservices" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label tooltip comment">
+                <label><![CDATA[General Configuration]]></label>
                 <!-- Cash On Delivery Payment Methods -->
                 <field id="cod_methods" translate="label tooltip" type="multiselect" sortOrder="210" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label><![CDATA[Cash On Delivery Payment Methods]]></label>

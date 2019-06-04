@@ -31,7 +31,7 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_format no_rounding
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format no_rounding
      * @dataProvider provideTestRateMethods
      * @param Method[] $methods
      */
@@ -52,8 +52,8 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_format full_price
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_mode round_up
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format full_price
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_mode round_up
      * @dataProvider provideTestRateMethods
      * @param Method[] $methods
      */
@@ -74,8 +74,8 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_mode round_off
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_format full_price
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_mode round_off
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format full_price
      * @dataProvider provideTestRateMethods
      * @param Method[] $methods
      */
@@ -96,9 +96,9 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_mode round_up
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_format static_decimal
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_static_decimal 95
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_mode round_up
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format static_decimal
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_static_decimal 95
      * @dataProvider provideTestRateMethods
      * @param Method[] $methods
      */
@@ -119,9 +119,9 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_mode round_off
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_format static_decimal
-     * @magentoConfigFixture current_store carriers/foo/checkout_settings/round_prices_static_decimal 95
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_mode round_off
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format static_decimal
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_static_decimal 95
      * @dataProvider provideTestRateMethods
      * @param Method[] $methods
      */

@@ -52,9 +52,9 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      *
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_affect_rates 1
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_type F
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_fee_fixed 3
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates 1
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_handling_type F
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_handling_fee_fixed 3
      */
     public function processMethodsWithFixedDomesticHandlingFee()
     {
@@ -87,9 +87,9 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      *
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/international_affect_rates 1
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/international_handling_type F
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/international_handling_fee_fixed 3
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/international_affect_rates 1
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/international_handling_type F
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/international_handling_fee_fixed 3
      */
     public function processMethodsWithFixedInternationalHandlingFee()
     {
@@ -122,9 +122,9 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      *
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_affect_rates 1
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_type P
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_fee_percentage 50
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates 1
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_handling_type P
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_handling_fee_percentage 50
      */
     public function processMethodsWithPercentHandlingFee()
     {
@@ -157,9 +157,9 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      *
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_affect_rates 1
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_type F
-     * @magentoConfigFixture current_store carriers/foo/shipping_markup/domestic_handling_fee_fixed -10
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates 1
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_handling_type F
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_handling_fee_fixed -10
      */
     public function processMethodsWithFixedNegativeHandlingFee()
     {

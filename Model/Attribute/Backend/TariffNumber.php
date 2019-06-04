@@ -36,7 +36,9 @@ class TariffNumber extends AbstractBackend
         }
 
         if (strlen((string) $value) > 11) {
-            throw new LocalizedException(__('The value of attribute "%1" must be no longer than 11 digits.', $label));
+            throw new LocalizedException(
+                __('The value of attribute "%1" must be no longer than %2 digits.', $label, 11)
+            );
         }
 
         return parent::validate($object);

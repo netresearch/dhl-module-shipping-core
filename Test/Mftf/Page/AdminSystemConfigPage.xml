@@ -8,9 +8,11 @@
     <!-- Shipping configuration page -->
     <page name="AdminSystemConfigShippingSectionPage" url="admin/system_config/edit/section/shipping" area="admin" module="Magento_Config">
         <section name="AdminSystemConfigShippingOriginSection"/>
+    </page>
+    <!-- Shipping Solutions configuration page -->
+    <page name="AdminSystemConfigShippingSolutionSectionPage" url="admin/system_config/edit/section/dhlshippingsolutions" area="admin" module="Magento_Config">
         <section name="AdminSystemConfigShippingCoreSection"/>
     </page>
-
     <!-- Carriers configuration page -->
     <page name="AdminSystemConfigSectionCarriersPage" url="admin/system_config/edit/section/carriers" area="admin" module="Magento_Config">
         <section name="AdminSystemConfigCarriersSection"/>

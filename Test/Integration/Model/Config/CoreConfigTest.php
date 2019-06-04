@@ -27,7 +27,7 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @magentoConfigFixture current_store shipping/dhlglobalwebservices/cod_methods payflow_advanced,payflow_link,payflowpro
+     * @magentoConfigFixture current_store dhlshippingsolutions/dhlglobalwebservices/cod_methods payflow_advanced,payflow_link,payflowpro
      */
     public function getCodMethods()
     {
@@ -46,8 +46,8 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
      *
      * @magentoDataFixture Magento/Store/_files/core_fixturestore.php
      * @magentoDataFixture Magento/Store/_files/core_second_third_fixturestore.php
-     * @magentoConfigFixture current_store shipping/dhlglobalwebservices/terms_of_trade DTP/DDP
-     * @magentoConfigFixture fixturestore_store shipping/dhlglobalwebservices/terms_of_trade DDU/DAP
+     * @magentoConfigFixture current_store dhlshippingsolutions/dhlglobalwebservices/terms_of_trade DTP/DDP
+     * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlglobalwebservices/terms_of_trade DDU/DAP
      */
     public function getTermsOfTrade()
     {
@@ -60,8 +60,8 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
      *
      * @magentoDataFixture Magento/Store/_files/core_fixturestore.php
      * @magentoDataFixture Magento/Store/_files/core_second_third_fixturestore.php
-     * @magentoConfigFixture current_store shipping/dhlglobalwebservices/cut_off_time 00,00,00
-     * @magentoConfigFixture fixturestore_store shipping/dhlglobalwebservices/cut_off_time 12,07,10
+     * @magentoConfigFixture current_store dhlshippingsolutions/dhlglobalwebservices/cut_off_time 00,00,00
+     * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlglobalwebservices/cut_off_time 12,07,10
      */
     public function getCutOffTime()
     {

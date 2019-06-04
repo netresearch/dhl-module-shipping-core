@@ -21,12 +21,12 @@ use Magento\Store\Model\ScopeInterface;
  */
 interface CoreConfigInterface
 {
-    const CONFIG_PATH_COD_METHODS = 'shipping/dhlglobalwebservices/cod_methods';
-    const CONFIG_PATH_TERMS_OF_TRADE = 'shipping/dhlglobalwebservices/terms_of_trade';
-    const CONFIG_PATH_CUT_OFF_TIME = 'shipping/dhlglobalwebservices/cut_off_time';
+    const CONFIG_PATH_COD_METHODS = 'dhlshippingsolutions/dhlglobalwebservices/cod_methods';
+    const CONFIG_PATH_TERMS_OF_TRADE = 'dhlshippingsolutions/dhlglobalwebservices/terms_of_trade';
+    const CONFIG_PATH_CUT_OFF_TIME = 'dhlshippingsolutions/dhlglobalwebservices/cut_off_time';
 
     const CONFIG_PATH_WEIGHT_UNIT = 'general/locale/weight_unit';
-    const CONFIG_PATH_OWN_PACKAGES = 'shipping/dhlglobalwebservices/package_dimension';
+    const CONFIG_PATH_OWN_PACKAGES = 'dhlshippingsolutions/dhlglobalwebservices/package_dimension';
 
     /**
      * Get payment methods that were marked as cash on delivery methods in configuration

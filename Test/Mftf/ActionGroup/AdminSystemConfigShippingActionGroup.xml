@@ -71,7 +71,7 @@
 
     <!-- Navigate to the DHLGW configuration page -->
     <actionGroup name="NavigateToShippingCoreSectionActionGroup">
-        <amOnPage url="{{AdminSystemConfigShippingSectionPage.url}}" stepKey="navigateToShippingSettingsConfigPage"/>
+        <amOnPage url="{{AdminSystemConfigShippingSolutionSectionPage.url}}" stepKey="navigateToShippingSettingsConfigPage"/>
         <waitForPageLoad stepKey="waitForShippingSettingsConfigPageLoad"/>
 
         <scrollTo selector="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}" stepKey="scrollToShippingCoreGroup" x="0" y="-85"/>

@@ -25,14 +25,14 @@
 
     <!-- DHLGW -->
     <section name="AdminSystemConfigShippingCoreSection">
-        <element name="shippingCoreGroup" type="button" selector="#shipping_dhlglobalwebservices-head"/>
-        <element name="shippingCoreGroupExpanded" type="button" selector="#shipping_dhlglobalwebservices-head:not(.open)"/>
+        <element name="shippingCoreGroup" type="button" selector="#dhlshippingsolutions_dhlglobalwebservices-head"/>
+        <element name="shippingCoreGroupExpanded" type="button" selector="#dhlshippingsolutions_dhlglobalwebservices-head:not(.open)"/>
         <element name="codPaymentMethodSelection" type="multiselect"
                  selector="[data-ui-id='select-groups-dhlglobalwebservices-fields-cod-methods-value']"/>
         <element name="codPaymentMethodActiveSelection" type="multiselect"
                  selector="[data-ui-id='select-groups-dhlglobalwebservices-fields-cod-methods-value'] option[selected=selected]"/>
 
-        <element name="cutOffTimeConfigGroup" type="text" selector="#row_shipping_dhlglobalwebservices_cut_off_time"/>
+        <element name="cutOffTimeConfigGroup" type="text" selector="#row_dhlshippingsolutions_dhlglobalwebservices_cut_off_time"/>
         <element name="cutOffTimeConfigGroupHoursSelect" type="select"
                  selector="[data-ui-id='time-groups-dhlglobalwebservices-fields-cut-off-time-value-hour']"/>
         <element name="cutOffTimeConfigGroupMinutesSelect" type="select"
@@ -40,11 +40,11 @@
         <element name="cutOffTimeConfigGroupSecondsSelect" type="select"
                  selector="[data-ui-id='time-groups-dhlglobalwebservices-fields-cut-off-time-value-second']"/>
 
-        <element name="termsOfTradeConfigGroup" type="text" selector="#row_shipping_dhlglobalwebservices_terms_of_trade"/>
-        <element name="termsOfTradeConfigGroupOptionDDU" type="radio" selector="#shipping_dhlglobalwebservices_terms_of_tradeDDU"/>
-        <element name="termsOfTradeConfigGroupOptionDDP" type="radio" selector="#shipping_dhlglobalwebservices_terms_of_tradeDDP"/>
+        <element name="termsOfTradeConfigGroup" type="text" selector="#row_dhlshippingsolutions_dhlglobalwebservices_terms_of_trade"/>
+        <element name="termsOfTradeConfigGroupOptionDDU" type="radio" selector="#dhlshippingsolutions_dhlglobalwebservices_terms_of_tradeDDU"/>
+        <element name="termsOfTradeConfigGroupOptionDDP" type="radio" selector="#dhlshippingsolutions_dhlglobalwebservices_terms_of_tradeDDP"/>
 
-        <element name="termsOfTradeConfigGroupOptionDDULabel" type="text" selector="#shipping_dhlglobalwebservices_terms_of_tradeDDU + label"/>
-        <element name="termsOfTradeConfigGroupOptionDDPLabel" type="text" selector="#shipping_dhlglobalwebservices_terms_of_tradeDDP + label"/>
+        <element name="termsOfTradeConfigGroupOptionDDULabel" type="text" selector="#dhlshippingsolutions_dhlglobalwebservices_terms_of_tradeDDU + label"/>
+        <element name="termsOfTradeConfigGroupOptionDDPLabel" type="text" selector="#dhlshippingsolutions_dhlglobalwebservices_terms_of_tradeDDP + label"/>
     </section>
 </sections>

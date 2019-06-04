@@ -14,7 +14,7 @@ namespace Dhl\ShippingCore\Model\Config;
  */
 interface RateConfigInterface
 {
-    const CONFIG_ROOT = 'carriers/%s/';
+    const CONFIG_ROOT = 'dhlshippingsolutions/%s/';
 
     // 400_checkout_presentation.xml
     const CONFIG_XML_PATH_ROUNDED_PRICES_FORMAT = self::CONFIG_ROOT . 'checkout_settings/round_prices_format';
