@@ -6,9 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
-use Dhl\ShippingCore\Api\Data\FootnoteInterface;
 use Dhl\ShippingCore\Api\Data\MetadataInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface;
 
 /**
  * Class Metadata
@@ -22,27 +20,27 @@ class Metadata implements MetadataInterface
     /**
      * @var string
      */
-    private $imageUrl = '';
+    private $title;
 
     /**
      * @var string
      */
-    private $title;
+    private $imageUrl;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[]
      */
-    private $commentsBefore = [];
+    private $commentsBefore;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[]
      */
-    private $commentsAfter = [];
+    private $commentsAfter;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\FootnoteInterface[]
      */
-    private $footnotes = [];
+    private $footnotes;
 
     /**
      * Metadata constructor.
@@ -84,7 +82,7 @@ class Metadata implements MetadataInterface
     }
 
     /**
-     * @return CommentInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[]
      */
     public function getCommentsBefore(): array
     {
@@ -92,7 +90,7 @@ class Metadata implements MetadataInterface
     }
 
     /**
-     * @return CommentInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[]
      */
     public function getCommentsAfter(): array
     {
@@ -100,10 +98,58 @@ class Metadata implements MetadataInterface
     }
 
     /**
-     * @return FootnoteInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\FootnoteInterface[]
      */
     public function getFootnotes(): array
     {
         return $this->footnotes;
+    }
+
+    /**
+     * @param string $imageUrl
+     */
+    public function setImageUrl(string $imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return void
+     */
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[] $commentsBefore
+     *
+     * @return void
+     */
+    public function setCommentsBefore(array $commentsBefore)
+    {
+        $this->commentsBefore = $commentsBefore;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface[] $commentsAfter
+     *
+     * @return void
+     */
+    public function setCommentsAfter(array $commentsAfter)
+    {
+        $this->commentsAfter = $commentsAfter;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\FootnoteInterface[] $footnotes
+     *
+     * @return void
+     */
+    public function setFootnotes(array $footnotes)
+    {
+        $this->footnotes = $footnotes;
     }
 }

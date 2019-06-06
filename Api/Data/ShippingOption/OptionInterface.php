@@ -44,4 +44,32 @@ interface OptionInterface
      * @return bool
      */
     public function isDisabled(): bool;
+
+    /**
+     * @param string $id
+     *
+     * @return void
+     */
+    public function setId(string $id);
+
+    /**
+     * @param string $label
+     *
+     * @return void
+     */
+    public function setLabel(string $label);
+
+    /**
+     * @param string $value
+     *
+     * @return void
+     */
+    public function setValue(string $value);
+
+    /**
+     * @param bool $disabled
+     *
+     * @return void
+     */
+    public function setDisabled(bool $disabled);
 }

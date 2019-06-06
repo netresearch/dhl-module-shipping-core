@@ -22,7 +22,9 @@
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface" type="Dhl\ShippingCore\Model\ShippingOption\Compatibility"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface" type="Dhl\ShippingCore\Model\ShippingOption\ShippingOption"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface" type="Dhl\ShippingCore\Model\ShippingOption\ItemShippingOptions"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface" type="Dhl\ShippingCore\Model\ShippingOption\Option"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface" type="Dhl\ShippingCore\Model\ShippingOption\Route"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface" type="Dhl\ShippingCore\Model\ShippingOption\Comment"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValidationRuleInterface" type="Dhl\ShippingCore\Model\ShippingOption\ValidationRule"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\Selection\SelectionInterface" type="Dhl\ShippingCore\Model\ShippingOption\Selection\Selection"/>
@@ -157,7 +159,7 @@
                 <item xsi:type="string" name="/carriers/carrier/serviceOptions/shippingOption/inputs/input">code</item>
                 <item xsi:type="string" name="/carriers/carrier/serviceOptions/shippingOption/inputs/input/options/option">id</item>
                 <item xsi:type="string" name="/carriers/carrier/serviceOptions/shippingOption/inputs/input/validationRules/rule">name</item>
-                <item xsi:type="string" name="/carriers/carrier/metaData/footnotes/footnote">id</item>
+                <item xsi:type="string" name="/carriers/carrier/metadata/footnotes/footnote">id</item>
                 <item xsi:type="string" name="/carriers/carrier/compatibilityData/rule">id</item>
             </argument>
         </arguments>

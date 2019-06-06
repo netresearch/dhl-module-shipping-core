@@ -34,12 +34,12 @@ class Footnote implements FootnoteInterface
     /**
      * @var bool
      */
-    private $subjectsMustBeSelected = false;
+    private $subjectsMustBeSelected;
 
     /**
      * @var bool
      */
-    private $subjectsMustBeAvailable = false;
+    private $subjectsMustBeAvailable;
 
     /**
      * Footnote constructor.
@@ -52,8 +52,8 @@ class Footnote implements FootnoteInterface
      */
     public function __construct(
         string $id,
-        string $content,
-        array $subjects,
+        string $content = '',
+        array $subjects = [],
         bool $subjectsMustBeSelected = false,
         bool $subjectsMustBeAvailable = false
     ) {
@@ -102,5 +102,45 @@ class Footnote implements FootnoteInterface
     public function isSubjectsMustBeAvailable(): bool
     {
         return $this->subjectsMustBeAvailable;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId(string $id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent(string $content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @param string[] $subjects
+     */
+    public function setSubjects(array $subjects)
+    {
+        $this->subjects = $subjects;
+    }
+
+    /**
+     * @param bool $subjectsMustBeSelected
+     */
+    public function setSubjectsMustBeSelected(bool $subjectsMustBeSelected)
+    {
+        $this->subjectsMustBeSelected = $subjectsMustBeSelected;
+    }
+
+    /**
+     * @param bool $subjectsMustBeAvailable
+     */
+    public function setSubjectsMustBeAvailable(bool $subjectsMustBeAvailable)
+    {
+        $this->subjectsMustBeAvailable = $subjectsMustBeAvailable;
     }
 }

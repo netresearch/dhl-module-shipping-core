@@ -5,11 +5,14 @@
 
 namespace Dhl\ShippingCore\Test\Integration\Model\Packaging;
 
+use Dhl\ShippingCore\Api\Data\ShippingDataInterface;
+use Dhl\ShippingCore\Model\ShippingDataHydrator;
 use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct;
 use Dhl\ShippingCore\Test\Integration\Fixture\FakeReader;
 use Dhl\ShippingCore\Test\Integration\Fixture\ShipmentFixture;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\TestCase;
@@ -30,6 +33,7 @@ class PackagingDataProviderTest extends TestCase
     /**
      * @param Order\Shipment $shipment
      * @dataProvider dataProvider
+     * @throws LocalizedException
      */
     public function testGetData(Order\Shipment $shipment)
     {
@@ -38,6 +42,11 @@ class PackagingDataProviderTest extends TestCase
         $subject = $objectManager->create(PackagingDataProvider::class, ['reader' => new FakeReader()]);
         $packagingData = $subject->getData($shipment);
 
-        self::assertInternalType('array', $packagingData);
+        self::assertInstanceOf(ShippingDataInterface::class, $packagingData);
+
+        /** @var ShippingDataHydrator $hydrator */
+        $hydrator = $objectManager->create(ShippingDataHydrator::class);
+
+        $data = $hydrator->toArray($packagingData);
     }
 }

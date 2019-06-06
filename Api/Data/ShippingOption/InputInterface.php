@@ -111,4 +111,88 @@ interface InputInterface
      * @return \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface|null
      */
     public function getComment();
+
+    /**
+     * @param string $inputType
+     *
+     * @return void
+     */
+    public function setInputType(string $inputType);
+
+    /**
+     * @param string $code
+     *
+     * @return void
+     */
+    public function setCode(string $code);
+
+    /**
+     * @param string $defaultValue
+     *
+     * @return void
+     */
+    public function setDefaultValue(string $defaultValue);
+
+    /**
+     * @param bool $disabled
+     *
+     * @return void
+     */
+    public function setDisabled(bool $disabled);
+
+    /**
+     * @param string $label
+     *
+     * @return void
+     */
+    public function setLabel(string $label);
+
+    /**
+     * @param bool $labelVisible
+     *
+     * @return void
+     */
+    public function setLabelVisible(bool $labelVisible);
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface[] $options
+     *
+     * @return void
+     */
+    public function setOptions(array $options);
+
+    /**
+     * @param string $tooltip
+     *
+     * @return void
+     */
+    public function setTooltip(string $tooltip);
+
+    /**
+     * @param string $placeholder
+     *
+     * @return void
+     */
+    public function setPlaceholder(string $placeholder);
+
+    /**
+     * @param int $sortOrder
+     *
+     * @return void
+     */
+    public function setSortOrder(int $sortOrder);
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ValidationRuleInterface[] $validationRules
+     *
+     * @return void
+     */
+    public function setValidationRules(array $validationRules);
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface $comment
+     *
+     * @return void
+     */
+    public function setComment(CommentInterface $comment);
 }

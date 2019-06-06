@@ -199,7 +199,7 @@
           "code": "itemCustoms"
         }
       },
-      "metaData": {
+      "metadata": {
         "title": "DHL Preferred Delivery. Delivered just the way you want.",
         "imageUrl": "http:\/\/localhost\/pub\/static\/version1558624237\/frontend\/Magento\/luma\/en_US\/Dhl_Ui\/images\/logo-dhl-wide.svg",
         "commentsBefore": [

@@ -9,7 +9,7 @@
                             <xs:element name="packageOptions" type="shippingOptionList" minOccurs="0"/>
                             <xs:element name="itemOptions" type="shippingOptionList" minOccurs="0"/>
                             <xs:element name="serviceOptions" type="shippingOptionList" minOccurs="0"/>
-                            <xs:element name="metaData" minOccurs="0" type="metaData"/>
+                            <xs:element name="metadata" minOccurs="0" type="metadata"/>
                             <xs:element name="compatibilityData" minOccurs="0" type="compatibilityData"/>
                         </xs:all>
                         <xs:attribute type="xs:string" name="code" use="required"/>
@@ -31,7 +31,7 @@
         </xs:unique>
     </xs:element>
 
-    <xs:complexType name="metaData">
+    <xs:complexType name="metadata">
         <xs:all>
             <xs:element name="title" minOccurs="0" type="string_translatable"/>
             <xs:element name="imageUrl" type="xs:string" minOccurs="0"/>

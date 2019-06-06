@@ -5,7 +5,10 @@
 
 namespace Dhl\ShippingCore\Model\Packaging;
 
+use Dhl\ShippingCore\Api\Data\ShippingDataInterface;
+use Dhl\ShippingCore\Model\ShippingDataHydrator;
 use Magento\Framework\Config\ReaderInterface;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -37,22 +40,33 @@ class PackagingDataProvider
     private $compositeProcessor;
 
     /**
+     * @var ShippingDataHydrator
+     */
+    private $shippingDataHydrator;
+
+    /**
      * PackagingDataProvider constructor.
      *
      * @param ReaderInterface $reader
      * @param PackagingDataCompositeProcessor $compositeProcessor
+     * @param ShippingDataHydrator $shippingDataHydrator
      */
-    public function __construct(ReaderInterface $reader, PackagingDataCompositeProcessor $compositeProcessor)
-    {
+    public function __construct(
+        ReaderInterface $reader,
+        PackagingDataCompositeProcessor $compositeProcessor,
+        ShippingDataHydrator $shippingDataHydrator
+    ) {
         $this->reader = $reader;
         $this->compositeProcessor = $compositeProcessor;
+        $this->shippingDataHydrator = $shippingDataHydrator;
     }
 
     /**
      * @param Shipment $shipment
-     * @return mixed[]
+     * @return ShippingDataInterface
+     * @throws LocalizedException
      */
-    public function getData(Shipment $shipment): array
+    public function getData(Shipment $shipment): ShippingDataInterface
     {
         $packagingData = $this->reader->read('adminhtml');
 
@@ -73,8 +87,8 @@ class PackagingDataProvider
                     $group
                 );
             }
-            $carrierData['metaData'] = $this->compositeProcessor->processMetadata(
-                $carrierData['metaData'] ?? [],
+            $carrierData['metadata'] = $this->compositeProcessor->processMetadata(
+                $carrierData['metadata'] ?? [],
                 $shipment
             );
             $carrierData['compatibilityData'] = $this->compositeProcessor->processCompatibilityData(
@@ -85,6 +99,6 @@ class PackagingDataProvider
             $packagingData['carriers'][$carrierCode] = $carrierData;
         }
 
-        return $packagingData;
+        return $this->shippingDataHydrator->toObject($packagingData);
     }
 }

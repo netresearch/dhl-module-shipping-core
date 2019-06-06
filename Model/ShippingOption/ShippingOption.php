@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShippingOption;
 
-use Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 
 /**
@@ -33,7 +33,7 @@ class ShippingOption implements ShippingOptionInterface
     private $inputs;
 
     /**
-     * @var mixed
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface[]
      */
     private $routes;
 
@@ -53,17 +53,17 @@ class ShippingOption implements ShippingOptionInterface
      * @param string $code
      * @param string $label
      * @param \Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface[] $inputs
-     * @param string[] $routes
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface[] $routes
      * @param int $sortOrder
      * @param int[] $requiredItemIds
      */
     public function __construct(
         string $code,
-        string $label,
-        array $inputs,
-        array $routes,
-        int $sortOrder,
-        array $requiredItemIds
+        string $label = '',
+        array $inputs = [],
+        array $routes = [],
+        int $sortOrder = 0,
+        array $requiredItemIds = []
     ) {
         $this->code = $code;
         $this->label = $label;
@@ -90,7 +90,7 @@ class ShippingOption implements ShippingOptionInterface
     }
 
     /**
-     * @return InputInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface[]
      */
     public function getInputs(): array
     {
@@ -98,7 +98,7 @@ class ShippingOption implements ShippingOptionInterface
     }
 
     /**
-     * @return mixed
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface[]
      */
     public function getRoutes(): array
     {
@@ -119,5 +119,53 @@ class ShippingOption implements ShippingOptionInterface
     public function getRequiredItemIds(): array
     {
         return $this->requiredItemIds;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode(string $code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel(string $label)
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface[] $inputs
+     */
+    public function setInputs(array $inputs)
+    {
+        $this->inputs = $inputs;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface[] $routes
+     */
+    public function setRoutes(array $routes)
+    {
+        $this->routes = $routes;
+    }
+
+    /**
+     * @param int $sortOrder
+     */
+    public function setSortOrder(int $sortOrder)
+    {
+        $this->sortOrder = $sortOrder;
+    }
+
+    /**
+     * @param int[] $requiredItemIds
+     */
+    public function setRequiredItemIds(array $requiredItemIds)
+    {
+        $this->requiredItemIds = $requiredItemIds;
     }
 }

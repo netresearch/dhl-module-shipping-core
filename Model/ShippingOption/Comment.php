@@ -32,7 +32,7 @@ class Comment implements CommentInterface
      * @param string $content
      * @param string|null $footnoteId
      */
-    public function __construct(string $content, $footnoteId = null)
+    public function __construct(string $content = '', $footnoteId = null)
     {
         $this->content = $content;
         $this->footnoteId = $footnoteId;
@@ -52,5 +52,21 @@ class Comment implements CommentInterface
     public function getFootnoteId()
     {
         return $this->footnoteId;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent(string $content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @param string|null $footnoteId
+     */
+    public function setFootnoteId(string $footnoteId)
+    {
+        $this->footnoteId = $footnoteId;
     }
 }

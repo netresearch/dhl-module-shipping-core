@@ -33,11 +33,6 @@ class CheckoutManagement implements CheckoutManagementInterface
     private $checkoutDataProvider;
 
     /**
-     * @var CheckoutDataHydrator
-     */
-    private $checkoutDataHydrator;
-
-    /**
      * @var StoreManagerInterface
      */
     private $storeManager;
@@ -56,20 +51,17 @@ class CheckoutManagement implements CheckoutManagementInterface
      * CheckoutManagement constructor.
      *
      * @param CheckoutDataProvider $checkoutDataProvider
-     * @param CheckoutDataHydrator $checkoutDataHydrator
      * @param StoreManagerInterface $storeManager
      * @param ShippingAddressManagementInterface $addressManagement
      * @param QuoteSelectionManager $selectionManager
      */
     public function __construct(
         CheckoutDataProvider $checkoutDataProvider,
-        CheckoutDataHydrator $checkoutDataHydrator,
         StoreManagerInterface $storeManager,
         ShippingAddressManagementInterface $addressManagement,
         QuoteSelectionManager $selectionManager
     ) {
         $this->checkoutDataProvider = $checkoutDataProvider;
-        $this->checkoutDataHydrator = $checkoutDataHydrator;
         $this->storeManager = $storeManager;
         $this->addressManagement = $addressManagement;
         $this->selectionManager = $selectionManager;
@@ -78,16 +70,15 @@ class CheckoutManagement implements CheckoutManagementInterface
     /**
      * @param string $countryId
      * @param string $postalCode
-     * @return CheckoutDataInterface
+     * @return ShippingDataInterface
      * @throws NoSuchEntityException
      * @throws InputException
      */
-    public function getCheckoutData(string $countryId, string $postalCode): CheckoutDataInterface
+    public function getCheckoutData(string $countryId, string $postalCode): ShippingDataInterface
     {
         $storeId = (int) $this->storeManager->getStore()->getId();
-        $data = $this->checkoutDataProvider->getData($countryId, $storeId, $postalCode);
 
-        return $this->checkoutDataHydrator->toObject($data);
+        return $this->checkoutDataProvider->getData($countryId, $storeId, $postalCode);
     }
 
     /**

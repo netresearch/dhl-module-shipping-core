@@ -1,17 +1,17 @@
 <?xml version="1.0" ?>
 <carriers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Dhl_ShippingCore/etc/shipping_options.xsd">
     <carrier code="dhlpaket">
-        <packageLevelOptions>
+        <packageOptions>
             <shippingOption code="preferredDay">
                 <label>Wunschtag: Lieferung zum gewüschten Tag</label>
                 <sortOrder>10</sortOrder>
                 <routes>
                     <route>
                         <origin>de</origin>
-                        <destinations>
+                        <includeDestinations>
                             <destination>de</destination>
                             <destination>at</destination>
-                        </destinations>
+                        </includeDestinations>
                     </route>
                 </routes>
                 <inputs>
@@ -137,8 +137,8 @@
                     </input>
                 </inputs>
             </shippingOption>
-        </packageLevelOptions>
-        <metaData>
+        </packageOptions>
+        <metadata>
             <title>DHL Preferred Delivery. Delivered just the way you want.</title>
             <imageUrl>test.jpg</imageUrl>
             <commentsBefore>
@@ -165,7 +165,7 @@
                     <subjectsMustBeSelected>true</subjectsMustBeSelected>
                 </footnote>
             </footnotes>
-        </metaData>
+        </metadata>
         <compatibilityData>
             <rule id="preferredLocationTimeExclusion">
                 <incompatibilityRule>true</incompatibilityRule>
@@ -194,7 +194,7 @@
         </compatibilityData>
     </carrier>
     <carrier code="dhlecommerce">
-        <packageLevelOptions>
+        <packageOptions>
             <shippingOption code="testoption1">
                 <label>Testoption 1</label>
                 <inputs>
@@ -204,9 +204,9 @@
                     </input>
                 </inputs>
             </shippingOption>
-        </packageLevelOptions>
-        <metaData>
+        </packageOptions>
+        <metadata>
             <title>DHL eCommerce</title>
-        </metaData>
+        </metadata>
     </carrier>
 </carriers>

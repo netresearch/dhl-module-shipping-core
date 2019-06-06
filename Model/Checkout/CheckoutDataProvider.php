@@ -7,8 +7,9 @@ namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Api\Data\ShippingDataInterface;
 use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
+use Dhl\ShippingCore\Model\ShippingDataHydrator;
 use Magento\Framework\Config\ReaderInterface;
-use Magento\Framework\Exception\InputException;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Class CheckoutDataProvider
@@ -35,7 +36,7 @@ class CheckoutDataProvider
     private $compositeProcessor;
 
     /**
-     * @var CheckoutDataHydrator
+     * @var ShippingDataHydrator
      */
     private $shippingDataHydrator;
 
@@ -44,12 +45,12 @@ class CheckoutDataProvider
      *
      * @param ReaderInterface $reader
      * @param CheckoutDataCompositeProcessor $compositeProcessor
-     * @param CheckoutDataHydrator $shippingDataHydrator
+     * @param ShippingDataHydrator $shippingDataHydrator
      */
     public function __construct(
         ReaderInterface $reader,
         CheckoutDataCompositeProcessor $compositeProcessor,
-        CheckoutDataHydrator $shippingDataHydrator
+        ShippingDataHydrator $shippingDataHydrator
     ) {
         $this->reader = $reader;
         $this->compositeProcessor = $compositeProcessor;
@@ -61,7 +62,7 @@ class CheckoutDataProvider
      * @param int $storeId
      * @param string $postalCode
      * @return ShippingDataInterface
-     * @throws InputException
+     * @throws LocalizedException
      */
     public function getData(string $countryCode, int $storeId, string $postalCode): ShippingDataInterface
     {
@@ -78,8 +79,8 @@ class CheckoutDataProvider
                 $postalCode,
                 $storeId
             );
-            $carrierData['metaData'] = $this->compositeProcessor->processMetadata(
-                $carrierData['metaData'] ?? [],
+            $carrierData['metadata'] = $this->compositeProcessor->processMetadata(
+                $carrierData['metadata'] ?? [],
                 $countryCode,
                 $postalCode,
                 $storeId
@@ -94,6 +95,6 @@ class CheckoutDataProvider
             $shippingData['carriers'][$carrierCode] = $carrierData;
         }
 
-        return $checkoutData;
+        return $this->shippingDataHydrator->toObject($shippingData);
     }
 }

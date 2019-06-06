@@ -40,7 +40,7 @@ interface ShippingOptionInterface
     /**
      * Obtain routes the shipping option can be booked with.
      *
-     * @return mixed
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface[]
      */
     public function getRoutes(): array;
 
@@ -57,4 +57,46 @@ interface ShippingOptionInterface
      * @return int[]
      */
     public function getRequiredItemIds(): array;
+
+    /**
+     * @param string $code
+     *
+     * @return void
+     */
+    public function setCode(string $code);
+
+    /**
+     * @param string $label
+     *
+     * @return void
+     */
+    public function setLabel(string $label);
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface[] $inputs
+     *
+     * @return void
+     */
+    public function setInputs(array $inputs);
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface[] $routes
+     *
+     * @return void
+     */
+    public function setRoutes(array $routes);
+
+    /**
+     * @param int $sortOrder
+     *
+     * @return void
+     */
+    public function setSortOrder(int $sortOrder);
+
+    /**
+     * @param int[] $requiredItemIds
+     *
+     * @return void
+     */
+    public function setRequiredItemIds(array $requiredItemIds);
 }

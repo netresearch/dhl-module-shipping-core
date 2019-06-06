@@ -29,4 +29,18 @@ interface CommentInterface
      * @return string|null
      */
     public function getFootnoteId();
+
+    /**
+     * @param string $content
+     *
+     * @return void
+     */
+    public function setContent(string $content);
+
+    /**
+     * @param string $id
+     *
+     * @return void
+     */
+    public function setFootnoteId(string $id);
 }

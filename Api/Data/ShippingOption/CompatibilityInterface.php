@@ -75,4 +75,46 @@ interface CompatibilityInterface
      * @return bool
      */
     public function isHideSubjects(): bool;
+
+    /**
+     * @param string $id
+     *
+     * @return void
+     */
+    public function setId(string $id);
+
+    /**
+     * @param string[] $subjects
+     *
+     * @return void
+     */
+    public function setSubjects(array $subjects);
+
+    /**
+     * @param string $errorMessage
+     *
+     * @return void
+     */
+    public function setErrorMessage(string $errorMessage);
+
+    /**
+     * @param array $masters
+     *
+     * @return void
+     */
+    public function setMasters(array $masters);
+
+    /**
+     * @param bool $incompatibilityRule
+     *
+     * @return void
+     */
+    public function setIncompatibilityRule(bool $incompatibilityRule);
+
+    /**
+     * @param bool $hideSubjects
+     *
+     * @return void
+     */
+    public function setHideSubjects(bool $hideSubjects);
 }

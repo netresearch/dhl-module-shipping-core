@@ -24,7 +24,7 @@ class ValidationRule implements ValidationRuleInterface
     /**
      * @var mixed
      */
-    private $param = null;
+    private $param;
 
     /**
      * ValidationRule constructor.
@@ -32,7 +32,7 @@ class ValidationRule implements ValidationRuleInterface
      * @param string $name
      * @param mixed $param
      */
-    public function __construct(string $name, $param = null)
+    public function __construct(string $name = '', $param = null)
     {
         $this->name = $name;
         $this->param = $param;
@@ -52,5 +52,21 @@ class ValidationRule implements ValidationRuleInterface
     public function getParam()
     {
         return $this->param;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param mixed $param
+     */
+    public function setParam($param)
+    {
+        $this->param = $param;
     }
 }

@@ -8,8 +8,7 @@ namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Api\Data\CarrierDataInterface;
 use Dhl\ShippingCore\Api\Data\MetadataInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
 
 /**
  * Class CarrierData
@@ -31,7 +30,7 @@ class CarrierData implements CarrierDataInterface
     private $packageOptions;
 
     /**
-     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface[]
      */
     private $itemOptions;
 
@@ -54,19 +53,19 @@ class CarrierData implements CarrierDataInterface
      * CarrierData constructor.
      *
      * @param string $code
-     * @param ShippingOptionInterface[] $packageOptions
-     * @param ShippingOptionInterface[] $itemOptions
-     * @param ShippingOptionInterface[] $serviceOptions
-     * @param MetadataInterface $metadata
-     * @param CompatibilityInterface[] $compatibilityData
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[] $packageOptions
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface[] $itemOptions
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[] $serviceOptions
+     * @param \Dhl\ShippingCore\Api\Data\MetadataInterface $metadata
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface[] $compatibilityData
      */
     public function __construct(
         string $code,
-        MetadataInterface $metadata,
-        array $packageOptions,
-        array $itemOptions,
-        array $serviceOptions,
-        array $compatibilityData
+        array $packageOptions = [],
+        array $itemOptions = [],
+        array $serviceOptions = [],
+        MetadataInterface $metadata = null,
+        array $compatibilityData = []
     ) {
         $this->code = $code;
         $this->packageOptions = $packageOptions;
@@ -85,7 +84,7 @@ class CarrierData implements CarrierDataInterface
     }
 
     /**
-     * @return ShippingOptionInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
     public function getPackageOptions(): array
     {
@@ -93,7 +92,7 @@ class CarrierData implements CarrierDataInterface
     }
 
     /**
-     * @return ShippingOptionInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface[]
      */
     public function getItemOptions(): array
     {
@@ -101,7 +100,7 @@ class CarrierData implements CarrierDataInterface
     }
 
     /**
-     * @return ShippingOptionInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
     public function getServiceOptions(): array
     {
@@ -109,7 +108,7 @@ class CarrierData implements CarrierDataInterface
     }
 
     /**
-     * @return MetadataInterface
+     * @return \Dhl\ShippingCore\Api\Data\MetadataInterface
      */
     public function getMetadata(): MetadataInterface
     {
@@ -117,10 +116,58 @@ class CarrierData implements CarrierDataInterface
     }
 
     /**
-     * @return CompatibilityInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface[]
      */
     public function getCompatibilityData(): array
     {
         return $this->compatibilityData;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode(string $code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[] $packageOptions
+     */
+    public function setPackageOptions(array $packageOptions)
+    {
+        $this->packageOptions = $packageOptions;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface[] $itemOptions
+     */
+    public function setItemOptions(array $itemOptions)
+    {
+        $this->itemOptions = $itemOptions;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[] $serviceOptions
+     */
+    public function setServiceOptions(array $serviceOptions)
+    {
+        $this->serviceOptions = $serviceOptions;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\MetadataInterface$metadata
+     */
+    public function setMetadata(MetadataInterface $metadata)
+    {
+        $this->metadata = $metadata;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface[] $compatibilityData
+     */
+    public function setCompatibilityData(array $compatibilityData)
+    {
+        $this->compatibilityData = $compatibilityData;
     }
 }

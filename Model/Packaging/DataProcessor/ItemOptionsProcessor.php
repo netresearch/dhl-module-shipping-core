@@ -28,7 +28,14 @@ class ItemOptionsProcessor extends AbstractProcessor
             $itemId = $item->getOrderItemId();
             foreach ($optionsData as $optionCode => $option) {
                 /** Clone template option for every shipment item. */
-                $newOptionsData[$itemId][$optionCode] = $option;
+                if (!isset($newOptionsData[$itemId])) {
+                    $newOptionsData[$itemId] = [
+                        'itemId' => (int)$itemId,
+                        'shippingOptions' => [$optionCode => $option]
+                    ];
+                } else {
+                    $newOptionsData[$itemId]['shippingOptions'][$optionCode] = $option;
+                }
             }
         }
 

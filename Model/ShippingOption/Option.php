@@ -44,10 +44,10 @@ class Option implements OptionInterface
      * @param string $value
      * @param bool $disabled
      */
-    public function __construct(string $label, string $id, string $value, bool $disabled)
+    public function __construct(string $id, string $label = '', string $value = '', bool $disabled = false)
     {
-        $this->label = $label;
         $this->id = $id;
+        $this->label = $label;
         $this->value = $value;
         $this->disabled = $disabled;
     }
@@ -82,5 +82,37 @@ class Option implements OptionInterface
     public function isDisabled(): bool
     {
         return $this->disabled;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId(string $id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel(string $label)
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setValue(string $value)
+    {
+        $this->value = $value;
+    }
+
+    /**
+     * @param bool $disabled
+     */
+    public function setDisabled(bool $disabled)
+    {
+        $this->disabled = $disabled;
     }
 }

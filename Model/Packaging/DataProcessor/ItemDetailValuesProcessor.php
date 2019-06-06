@@ -31,13 +31,13 @@ class ItemDetailValuesProcessor extends AbstractProcessor
 
         foreach ($shipment->getItems() as $item) {
             $itemId = $item->getOrderItemId();
-            $optionsData[$itemId]['details']['inputs'] = $this->addDetailsData(
+            $optionsData[$itemId]['shippingOptions']['details']['inputs'] = $this->addDetailsData(
                 $item,
-                $optionsData[$itemId]['details']['inputs']
+                $optionsData[$itemId]['shippingOptions']['details']['inputs']
             );
-            $optionsData[$itemId]['itemCustoms']['inputs'] = $this->addCustomsData(
+            $optionsData[$itemId]['shippingOptions']['itemCustoms']['inputs'] = $this->addCustomsData(
                 $item,
-                $optionsData[$itemId]['itemCustoms']['inputs']
+                $optionsData[$itemId]['shippingOptions']['itemCustoms']['inputs']
             );
         }
 

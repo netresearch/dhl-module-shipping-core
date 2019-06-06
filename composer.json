@@ -35,7 +35,6 @@
     "magento/zendframework1": "^1.13.0",
     "magento/module-configurable-product": "^100.2.0",
     "netresearch/config-fields-m2": "^1.0.0",
-    "netresearch/jsonmapper": "^1.4.0",
     "php-http/curl-client": "^1.7.0"
   },
   "suggest": {

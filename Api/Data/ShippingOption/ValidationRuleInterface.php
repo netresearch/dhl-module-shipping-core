@@ -30,4 +30,18 @@ interface ValidationRuleInterface
      * @return mixed|null
      */
     public function getParam();
+
+    /**
+     * @param string $name
+     *
+     * @return void
+     */
+    public function setName(string $name);
+
+    /**
+     * @param mixed $param
+     *
+     * @return void
+     */
+    public function setParam($param);
 }

@@ -19,7 +19,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @var string
      */
-    private $id = '';
+    private $id;
 
     /**
      * @var string[]
@@ -34,17 +34,17 @@ class Compatibility implements CompatibilityInterface
     /**
      * @var string[]
      */
-    private $masters = [];
+    private $masters;
 
     /**
      * @var bool
      */
-    private $incompatibilityRule = false;
+    private $incompatibilityRule;
 
     /**
      * @var bool
      */
-    private $hideSubjects = false;
+    private $hideSubjects;
 
     /**
      * Compatibility constructor.
@@ -57,8 +57,8 @@ class Compatibility implements CompatibilityInterface
      * @param bool $hideSubjects
      */
     public function __construct(
-        array $subjects,
-        string $errorMessage,
+        array $subjects = [],
+        string $errorMessage = '',
         string $id = '',
         array $masters = [],
         bool $incompatibilityRule = false,
@@ -118,5 +118,53 @@ class Compatibility implements CompatibilityInterface
     public function isHideSubjects(): bool
     {
         return $this->hideSubjects;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId(string $id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param string[] $subjects
+     */
+    public function setSubjects(array $subjects)
+    {
+        $this->subjects = $subjects;
+    }
+
+    /**
+     * @param string $errorMessage
+     */
+    public function setErrorMessage(string $errorMessage)
+    {
+        $this->errorMessage = $errorMessage;
+    }
+
+    /**
+     * @param string[] $masters
+     */
+    public function setMasters(array $masters)
+    {
+        $this->masters = $masters;
+    }
+
+    /**
+     * @param bool $incompatibilityRule
+     */
+    public function setIncompatibilityRule(bool $incompatibilityRule)
+    {
+        $this->incompatibilityRule = $incompatibilityRule;
+    }
+
+    /**
+     * @param bool $hideSubjects
+     */
+    public function setHideSubjects(bool $hideSubjects)
+    {
+        $this->hideSubjects = $hideSubjects;
     }
 }
