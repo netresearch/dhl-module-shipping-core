@@ -58,7 +58,8 @@ class OrderFixture
                 ->withSku($productData->getSku())
                 ->withPrice($productData->getPrice())
                 ->withWeight($productData->getWeight())
-                ->withCustomAttributes($productData->getCustomAttributes());
+                ->withCustomAttributes($productData->getCustomAttributes())
+                ->withName($productData->getDescription());
             $product = $productBuilder->build();
 
             self::$createdEntities['products'][] = $product;

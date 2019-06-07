@@ -49,46 +49,51 @@
             </shippingOption>
         </packageOptions>
         <itemOptions>
-            <shippingOption code="details">
-                <label>Item Details</label>
-                <inputs>
-                    <input code="productName">
-                        <label>Product Name</label>
-                        <inputType>static</inputType>
-                        <disabled>true</disabled>
-                    </input>
-                    <input code="weight">
-                        <label>Weight</label>
-                        <inputType>number</inputType>
-                    </input>
-                    <input code="qtyOrdered">
-                        <label>Quantity Ordered</label>
-                        <inputType>static</inputType>
-                        <disabled>true</disabled>
-                    </input>
-                    <input code="qty">
-                        <label>Quantity</label>
-                        <inputType>number</inputType>
-                    </input>
-                </inputs>
-            </shippingOption>
-            <shippingOption code="itemCustoms">
-                <label>Customs Data</label>
-                <inputs>
-                    <input code="hsCode">
-                        <label>HS Code</label>
-                        <inputType>text</inputType>
-                    </input>
-                    <input code="dgCategory">
-                        <label>Dangerous Goods Category</label>
-                        <inputType>text</inputType>
-                    </input>
-                    <input code="exportDescription">
-                        <label>Export Description</label>
-                        <inputType>textarea</inputType>
-                    </input>
-                </inputs>
-            </shippingOption>
+            <itemShippingOptions itemId="0">
+                <shippingOptions>
+                    <shippingOption code="details">
+                        <label>Item Details</label>
+                        <inputs>
+                            <input code="productName">
+                                <label>Product Name</label>
+                                <inputType>static</inputType>
+                                <disabled>true</disabled>
+                            </input>
+                            <input code="weight">
+                                <label>Weight</label>
+                                <inputType>number</inputType>
+                            </input>
+                            <input code="qtyOrdered">
+                                <label>Quantity Ordered</label>
+                                <inputType>static</inputType>
+                                <disabled>true</disabled>
+                            </input>
+                            <input code="qty">
+                                <label>Quantity</label>
+                                <inputType>number</inputType>
+                            </input>
+                        </inputs>
+                    </shippingOption>
+                    <shippingOption code="itemCustoms">
+                        <label>Customs Data</label>
+                        <inputs>
+                            <input code="hsCode">
+                                <label>HS Code</label>
+                                <inputType>text</inputType>
+                            </input>
+                            <input code="dgCategory">
+                                <label>Dangerous Goods Category</label>
+                                <inputType>text</inputType>
+                            </input>
+                            <input code="exportDescription">
+                                <label>Export Description</label>
+                                <inputType>textarea</inputType>
+                            </input>
+                        </inputs>
+                    </shippingOption>
+                </shippingOptions>
+            </itemShippingOptions>
+
         </itemOptions>
     </carrier>
 </carriers>

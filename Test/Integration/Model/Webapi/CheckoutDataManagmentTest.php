@@ -2,6 +2,7 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Model\Webapi;
 
@@ -55,7 +56,6 @@ class CheckoutDataManagmentTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @magentoDataFixture createQuoteFixture
-     *
      */
     public function testSetServiceSelection()
     {
@@ -74,7 +74,7 @@ class CheckoutDataManagmentTest extends \PHPUnit\Framework\TestCase
         $quote = $this->objectManager->create(Quote::class);
         $quote->load('test01', 'reserved_order_id');
 
-        $quoteId = (string)$quote->getId();
+        $quoteId = (int)$quote->getId();
         $subject->updateShippingOptionSelections($quoteId, [$shippingOptionSelection]);
 
         $addressMngt = $this->objectManager->create(ShippingAddressManagementInterface::class);

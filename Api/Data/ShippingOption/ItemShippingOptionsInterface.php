@@ -7,9 +7,9 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api\Data\ShippingOption;
 
 /**
- * Interface ShippingOptionInterface
+ * Interface ItemShippingOptionsInterface
  *
- * A DTO with the rendering information for an individual shipping option with potentially multiple inputs.
+ * A DTO that acts as a container for shipping options that apply to a specific shipment item.
  *
  * @api
  * @package Dhl\ShippingCore\Api\Data
@@ -17,11 +17,15 @@ namespace Dhl\ShippingCore\Api\Data\ShippingOption;
 interface ItemShippingOptionsInterface
 {
     /**
+     * The shipment order item id the shipping options apply to.
+     *
      * @return int
      */
     public function getItemId(): int;
 
     /**
+     * The shipping options that are specific to the item id.
+     *
      * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
     public function getShippingOptions(): array;

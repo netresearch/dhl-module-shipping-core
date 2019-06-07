@@ -2,6 +2,7 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Unit\Model\ShippingOption\Config;
 

@@ -2,6 +2,7 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShippingOption\Config;
 
@@ -30,6 +31,7 @@ class Converter implements ConverterInterface
         'footnotes',
         'subjects',
         'compatibilityData',
+        'shippingOptions',
         PackagingDataProvider::GROUP_SERVICE,
         PackagingDataProvider::GROUP_ITEM,
         PackagingDataProvider::GROUP_PACKAGE,

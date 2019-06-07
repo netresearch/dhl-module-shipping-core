@@ -2,6 +2,7 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Model\Packaging;
 
@@ -48,5 +49,7 @@ class PackagingDataProviderTest extends TestCase
         $hydrator = $objectManager->create(ShippingDataHydrator::class);
 
         $data = $hydrator->toArray($packagingData);
+
+        self::assertNotEmpty($data);
     }
 }

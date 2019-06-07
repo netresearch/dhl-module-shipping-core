@@ -53,4 +53,9 @@ class SimpleProduct implements ProductInterface
     {
         return 2;
     }
+
+    public function getDescription(): string
+    {
+        return 'Test Product Description';
+    }
 }

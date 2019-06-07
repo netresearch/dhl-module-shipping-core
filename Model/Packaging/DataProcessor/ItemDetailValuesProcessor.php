@@ -2,17 +2,17 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
 
+use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
 use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
 use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
 use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
-use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Magento\Catalog\Api\Data\ProductInterface;
-use Magento\Sales\Api\Data\OrderItemInterface;
-use Magento\Sales\Api\Data\ShipmentItemInterface;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -23,76 +23,98 @@ use Magento\Sales\Model\Order\Shipment;
  */
 class ItemDetailValuesProcessor extends AbstractProcessor
 {
-    public function processShippingOptions(array $optionsData, Shipment $shipment, string $optionGroupName): array
-    {
-        if ($optionGroupName !== PackagingDataProvider::GROUP_ITEM) {
-            return $optionsData;
-        }
-
-        foreach ($shipment->getItems() as $item) {
-            $itemId = $item->getOrderItemId();
-            $optionsData[$itemId]['shippingOptions']['details']['inputs'] = $this->addDetailsData(
-                $item,
-                $optionsData[$itemId]['shippingOptions']['details']['inputs']
-            );
-            $optionsData[$itemId]['shippingOptions']['itemCustoms']['inputs'] = $this->addCustomsData(
-                $item,
-                $optionsData[$itemId]['shippingOptions']['itemCustoms']['inputs']
-            );
-        }
-
-        return $optionsData;
-    }
-
     /**
-     * @param ShipmentItemInterface $item
-     * @param array $customsInputs
-     * @return array
+     * Set default values for item detail and item customs inputs from the shipment items.
+     *
+     * @param ItemShippingOptionsInterface[] $itemData
+     * @param Shipment $shipment
+     *
+     * @return ItemShippingOptionsInterface[]
      */
-    private function addCustomsData(ShipmentItemInterface $item, array $customsInputs): array
+    public function processItemOptions(array $itemData, Shipment $shipment): array
     {
-        /** @var OrderItemInterface $orderItem */
-        $orderItem = $item->getOrderItem();
-        if ($orderItem) {
-            /** @var ProductInterface $product */
-            $product = $orderItem->getProduct();
-            if ($product) {
-                $tariffNumber = $product->getCustomAttribute(TariffNumber::CODE);
-                $dgCategory = $product->getCustomAttribute(DGCategory::CODE);
-                $exportDescription = $product->getCustomAttribute(ExportDescription::CODE);
-
-                if ($tariffNumber) {
-                    $customsInputs['hsCode']['defaultValue'] = $tariffNumber->getValue() ?? '';
-                }
-                if ($dgCategory) {
-                    $customsInputs['dgCategory']['defaultValue'] = $dgCategory->getValue() ?? '';
-                }
-                if ($exportDescription) {
-                    $customsInputs['exportDescription']['defaultValue'] = $exportDescription->getValue() ?? '';
+        foreach ($itemData as $itemShippingOptions) {
+            $shipmentItem = $this->getMatchingItem($shipment, $itemShippingOptions);
+            foreach ($itemShippingOptions->getShippingOptions() as $shippingOption) {
+                if ($shippingOption->getCode() === 'details') {
+                    $this->setDetailsValues($shippingOption, $shipmentItem);
+                } elseif ($shippingOption->getCode() === 'itemCustoms') {
+                    $this->setCustomsValues($shippingOption, $shipmentItem);
                 }
             }
         }
 
-        return $customsInputs;
+        return $itemData;
     }
 
     /**
-     * @param \Magento\Sales\Api\Data\ShipmentItemInterface $item
-     * @param array $detailsInputs
-     * @return array
+     * @param ShippingOptionInterface $shippingOption
+     * @param Shipment\Item $shipmentItem
      */
-    private function addDetailsData(\Magento\Sales\Api\Data\ShipmentItemInterface $item, array $detailsInputs): array
-    {
-        $detailsInputs['productName']['defaultValue'] = $item->getName();
-        $detailsInputs['weight']['defaultValue'] = $item->getWeight();
-
-        /** @var OrderItemInterface $orderItem */
-        $orderItem = $item->getOrderItem();
-        if ($orderItem) {
-            $detailsInputs['qtyOrdered']['defaultValue'] = $orderItem->getQtyOrdered();
-            $detailsInputs['qty']['defaultValue'] = $item->getQty();
+    private function setDetailsValues(
+        ShippingOptionInterface $shippingOption,
+        Shipment\Item $shipmentItem
+    ) {
+        foreach ($shippingOption->getInputs() as $input) {
+            if ($input->getCode() === 'productName') {
+                $input->setDefaultValue($shipmentItem->getName());
+            } elseif ($input->getCode() === 'weight') {
+                $input->setDefaultValue($shipmentItem->getWeight());
+            } elseif ($input->getCode() === 'qtyOrdered') {
+                $input->setDefaultValue($shipmentItem->getOrderItem()->getQtyOrdered());
+            } elseif ($input->getCode() === 'qty') {
+                $input->setDefaultValue($shipmentItem->getQty());
+            }
         }
+    }
 
-        return $detailsInputs;
+    /**
+     * @param ShippingOptionInterface $shippingOption
+     * @param Shipment\Item $shipmentItem
+     */
+    private function setCustomsValues(
+        ShippingOptionInterface $shippingOption,
+        Shipment\Item $shipmentItem
+    ) {
+        $product = $shipmentItem->getOrderItem()->getProduct();
+        if ($product) {
+            /** @var ProductInterface $product */
+            $tariffNumber = $product->getCustomAttribute(TariffNumber::CODE);
+            $dgCategory = $product->getCustomAttribute(DGCategory::CODE);
+            $exportDescription = $product->getCustomAttribute(ExportDescription::CODE);
+
+            foreach ($shippingOption->getInputs() as $input) {
+                if ($tariffNumber && $input->getCode() === 'hsCode') {
+                    $input->setDefaultValue($tariffNumber->getValue() ?? '');
+                } elseif ($dgCategory && $input->getCode() === 'dgCategory') {
+                    $input->setDefaultValue($dgCategory->getValue() ?? '');
+                } elseif ($exportDescription && $input->getCode() === 'exportDescription') {
+                    $input->setDefaultValue($exportDescription->getValue() ?? '');
+                }
+            }
+        }
+    }
+
+    /**
+     * @param Shipment $shipment
+     * @param ItemShippingOptionsInterface $itemShippingOptions
+     *
+     * @throws
+     * @return Shipment\Item
+     */
+    private function getMatchingItem(
+        Shipment $shipment,
+        ItemShippingOptionsInterface $itemShippingOptions
+    ): Shipment\Item {
+        foreach ($shipment->getItems() as $item) {
+            if ($item instanceof Shipment\Item
+                && (int)$item->getOrderItemId() === $itemShippingOptions->getItemId()
+            ) {
+                return $item;
+            }
+        }
+        throw new \RuntimeException(
+            "Could not find item with order item id {$itemShippingOptions->getItemId()} in shipping options."
+        );
     }
 }

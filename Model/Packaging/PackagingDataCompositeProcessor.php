@@ -2,9 +2,14 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging;
 
+use Dhl\ShippingCore\Api\Data\MetadataInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingOptions\CheckoutProcessorInterface;
 use Dhl\ShippingCore\Api\ShippingOptions\PackagingProcessorInterface;
 use Magento\Sales\Model\Order\Shipment;
@@ -39,6 +44,13 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         $this->checkoutProcessors = $checkoutProcessors;
     }
 
+    /**
+     * @param ShippingOptionInterface[] $optionsData
+     * @param Shipment $shipment
+     * @param string $optionGroupName
+     *
+     * @return ShippingOptionInterface[]
+     */
     public function processShippingOptions(
         array $optionsData,
         Shipment $shipment,
@@ -67,10 +79,34 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         return $result;
     }
 
+    /**
+     * @param ItemShippingOptionsInterface[] $itemData
+     * @param Shipment $shipment
+     *
+     * @return ItemShippingOptionsInterface[]
+     */
+    public function processItemOptions(array $itemData, Shipment $shipment): array
+    {
+        foreach ($this->processors as $processor) {
+            $itemData = $processor->processItemOptions(
+                $itemData,
+                $shipment
+            );
+        }
+
+        return $itemData;
+    }
+
+    /**
+     * @param MetadataInterface $metadata
+     * @param Shipment $shipment
+     *
+     * @return MetadataInterface
+     */
     public function processMetadata(
-        array $metadata,
+        MetadataInterface $metadata,
         Shipment $shipment
-    ): array {
+    ): MetadataInterface {
         $result = $metadata;
 
         if ($shipment->getOrder()->getShippingAddress()) {
@@ -93,6 +129,12 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         return $result;
     }
 
+    /**
+     * @param CompatibilityInterface[] $compatibilityData
+     * @param Shipment $shipment
+     *
+     * @return CompatibilityInterface[]
+     */
     public function processCompatibilityData(
         array $compatibilityData,
         Shipment $shipment

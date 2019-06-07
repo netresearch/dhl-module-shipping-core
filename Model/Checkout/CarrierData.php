@@ -8,7 +8,6 @@ namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Api\Data\CarrierDataInterface;
 use Dhl\ShippingCore\Api\Data\MetadataInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
 
 /**
  * Class CarrierData

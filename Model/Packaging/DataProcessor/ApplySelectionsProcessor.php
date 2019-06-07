@@ -2,19 +2,18 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
 
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
-use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
 use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
-use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelectionCollection;
 use Dhl\ShippingCore\Model\ShippingOption\Selection\OrderSelectionRepository;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
-use Magento\Sales\Model\Order;
-use Psr\Log\LoggerInterface;
+use Magento\Sales\Model\Order\Shipment;
 
 /**
  * Class ApplySelectionsProcessor
@@ -35,11 +34,6 @@ class ApplySelectionsProcessor extends AbstractProcessor
     private $filterBuilder;
 
     /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * @var SearchCriteriaBuilderFactory
      */
     private $searchCriteriaBuilderFactory;
@@ -49,40 +43,43 @@ class ApplySelectionsProcessor extends AbstractProcessor
      *
      * @param OrderSelectionRepository $selectionRepository
      * @param FilterBuilder $filterBuilder
-     * @param LoggerInterface $logger
      * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
      */
     public function __construct(
         OrderSelectionRepository $selectionRepository,
         FilterBuilder $filterBuilder,
-        LoggerInterface $logger,
         SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
     ) {
         $this->selectionRepository = $selectionRepository;
         $this->filterBuilder = $filterBuilder;
-        $this->logger = $logger;
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
     }
 
-    public function processShippingOptions(array $optionsData, Order\Shipment $shipment, string $optionGroupName): array
+    /**
+     * @param ShippingOptionInterface[] $optionsData
+     * @param Shipment $shipment
+     * @param string $optionGroupName
+     * @return ShippingOptionInterface[]
+     */
+    public function processShippingOptions(array $optionsData, Shipment $shipment, string $optionGroupName): array
     {
         if ($optionGroupName !== PackagingDataProvider::GROUP_SERVICE) {
             return $optionsData;
         }
 
-        $orderAddressId = $shipment->getShippingAddressId();
-        $selections = $this->loadSelections($orderAddressId);
+        $addressId = $shipment->getShippingAddressId();
 
-        foreach ($selections->getItems() as $selection) {
-            /** @var AssignedSelectionInterface $selection */
-            $option = $selection->getShippingOptionCode();
-            $input = $selection->getInputCode();
-            if (isset($optionsData[$option]['inputs'][$input])) {
-                $optionsData[$option]['inputs'][$input]['defaultValue'] = $selection->getInputValue();
-            } else {
-                $message = "Selection for shipping option $option.$input was not committed to packaging "
-                    . 'because the option is not available at packaging.';
-                $this->logger->warning($message);
+        foreach ($this->loadSelections($addressId) as $selection) {
+            foreach ($optionsData as $shippingOption) {
+                if ($shippingOption->getCode() !== $selection->getShippingOptionCode()) {
+                    continue;
+                }
+                foreach ($shippingOption->getInputs() as $input) {
+                    if ($input->getCode() !== 'defaultValue') {
+                        continue;
+                    }
+                    $input->setDefaultValue($selection->getInputValue());
+                }
             }
         }
 
@@ -91,9 +88,9 @@ class ApplySelectionsProcessor extends AbstractProcessor
 
     /**
      * @param int $orderAddressId
-     * @return ShippingOptionSelectionCollection
+     * @return AssignedSelectionInterface[]
      */
-    private function loadSelections(int $orderAddressId): ShippingOptionSelectionCollection
+    private function loadSelections(int $orderAddressId): array
     {
         $addressFilter = $this->filterBuilder
             ->setField(AssignedSelectionInterface::PARENT_ID)
@@ -104,6 +101,6 @@ class ApplySelectionsProcessor extends AbstractProcessor
         $searchCriteriaBuilder = $this->searchCriteriaBuilderFactory->create();
         $searchCriteria = $searchCriteriaBuilder->addFilter($addressFilter)->create();
 
-        return $this->selectionRepository->getList($searchCriteria);
+        return $this->selectionRepository->getList($searchCriteria)->getItems();
     }
 }

@@ -7,13 +7,30 @@
                     <xs:complexType>
                         <xs:all>
                             <xs:element name="packageOptions" type="shippingOptionList" minOccurs="0"/>
-                            <xs:element name="itemOptions" type="shippingOptionList" minOccurs="0"/>
+                            <xs:element name="itemOptions" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence maxOccurs="unbounded">
+                                        <xs:element name="itemShippingOptions">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="shippingOptions" type="shippingOptionList"/>
+                                                </xs:sequence>
+                                                <xs:attribute type="xs:int" name="itemId" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
                             <xs:element name="serviceOptions" type="shippingOptionList" minOccurs="0"/>
                             <xs:element name="metadata" minOccurs="0" type="metadata"/>
                             <xs:element name="compatibilityData" minOccurs="0" type="compatibilityData"/>
                         </xs:all>
                         <xs:attribute type="xs:string" name="code" use="required"/>
                     </xs:complexType>
+                    <xs:unique name="uniqueItemId">
+                        <xs:selector xpath="*/itemShippingOptions"/>
+                        <xs:field xpath="@itemId"/>
+                    </xs:unique>
                     <xs:unique name="uniqueOptionCode">
                         <xs:selector xpath="*/shippingOption"/>
                         <xs:field xpath="@code"/>

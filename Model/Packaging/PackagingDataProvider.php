@@ -2,6 +2,7 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging;
 
@@ -23,11 +24,6 @@ class PackagingDataProvider
     const GROUP_PACKAGE = 'packageOptions';
     const GROUP_ITEM = 'itemOptions';
     const GROUP_SERVICE = 'serviceOptions';
-
-    /**
-     * Option group names relevant for packaging
-     */
-    const GROUP_NAMES = [self::GROUP_PACKAGE, self::GROUP_ITEM, self::GROUP_SERVICE];
 
     /**
      * @var ReaderInterface
@@ -63,42 +59,70 @@ class PackagingDataProvider
 
     /**
      * @param Shipment $shipment
+     *
      * @return ShippingDataInterface
      * @throws LocalizedException
      */
     public function getData(Shipment $shipment): ShippingDataInterface
     {
-        $packagingData = $this->reader->read('adminhtml');
+        $packagingDataArray = $this->reader->read('adminhtml');
+        $packagingDataArray = $this->filterCarriers($shipment, $packagingDataArray);
+        $packagingData = $this->shippingDataHydrator->toObject($packagingDataArray);
 
-        if (!isset($packagingData['carriers'])) {
-            $packagingData['carriers'] = [];
-        }
-
-        $orderCarrier = strtok((string) $shipment->getOrder()->getShippingMethod(), '_');
-        foreach ($packagingData['carriers'] as $carrierCode => $carrierData) {
-            if ($orderCarrier !== $carrierCode) {
-                unset($packagingData['carriers'][$carrierCode]);
-                continue;
-            }
-            foreach (self::GROUP_NAMES as $group) {
-                $carrierData[$group] = $this->compositeProcessor->processShippingOptions(
-                    $carrierData[$group] ?? [],
+        foreach ($packagingData->getCarriers() as $index => $carrier) {
+            $carrier->setPackageOptions(
+                $this->compositeProcessor->processShippingOptions(
+                    $carrier->getPackageOptions(),
                     $shipment,
-                    $group
-                );
-            }
-            $carrierData['metadata'] = $this->compositeProcessor->processMetadata(
-                $carrierData['metadata'] ?? [],
-                $shipment
+                    self::GROUP_PACKAGE
+                )
             );
-            $carrierData['compatibilityData'] = $this->compositeProcessor->processCompatibilityData(
-                $carrierData['compatibilityData'] ?? [],
-                $shipment
+            $carrier->setServiceOptions(
+                $this->compositeProcessor->processShippingOptions(
+                    $carrier->getServiceOptions(),
+                    $shipment,
+                    self::GROUP_SERVICE
+                )
             );
-
-            $packagingData['carriers'][$carrierCode] = $carrierData;
+            $carrier->setItemOptions(
+                $this->compositeProcessor->processItemOptions(
+                    $carrier->getItemOptions(),
+                    $shipment
+                )
+            );
+            $carrier->setMetadata(
+                $this->compositeProcessor->processMetadata(
+                    $carrier->getMetadata(),
+                    $shipment
+                )
+            );
+            $carrier->setCompatibilityData(
+                $this->compositeProcessor->processCompatibilityData(
+                    $carrier->getCompatibilityData(),
+                    $shipment
+                )
+            );
         }
 
-        return $this->shippingDataHydrator->toObject($packagingData);
+        return $packagingData;
+    }
+
+    /**
+     * Remove all carrier data that does not match the given shipment.
+     *
+     * @param Shipment $shipment
+     * @param array $packagingDataArray
+     * @return array
+     */
+    private function filterCarriers(Shipment $shipment, array $packagingDataArray): array
+    {
+        $orderCarrier = strtok((string)$shipment->getOrder()->getShippingMethod(), '_');
+        $packagingDataArray['carriers'] = array_filter(
+            $packagingDataArray['carriers'],
+            function (array $carrier) use ($orderCarrier) {
+                return $carrier['code'] === $orderCarrier;
+            }
+        );
+        return $packagingDataArray;
     }
 }

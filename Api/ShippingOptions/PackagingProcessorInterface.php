@@ -2,9 +2,14 @@
 /**
  * See LICENSE.md for license details.
  */
+declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api\ShippingOptions;
 
+use Dhl\ShippingCore\Api\Data\MetadataInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -16,14 +21,13 @@ use Magento\Sales\Model\Order\Shipment;
 interface PackagingProcessorInterface
 {
     /**
-     * Receive an array of shipping option items,
-     * modify them according to business logic
-     * and return the modified array.
+     * Receive an array of shipping option items and
+     * modify them according to business logic.
      *
-     * @param mixed[] $optionsData
+     * @param ShippingOptionInterface[] $optionsData
      * @param Shipment $shipment
      * @param string $optionGroupName
-     * @return mixed[]
+     * @return ShippingOptionInterface[]
      */
     public function processShippingOptions(
         array $optionsData,
@@ -32,25 +36,37 @@ interface PackagingProcessorInterface
     ): array;
 
     /**
-     * Receive shipping option metadata, modify it according to business logic and return the modified array.
+     * Recieve an array of shipment items with corresponding shipping options
+     * and modify them according to business logic.
      *
-     * @param array $metadata
+     * @param ItemShippingOptionsInterface[] $itemData
      * @param Shipment $shipment
-     * @return array
+     * @return ItemShippingOptionsInterface[]
      */
-    public function processMetadata(
-        array $metadata,
+    public function processItemOptions(
+        array $itemData,
         Shipment $shipment
     ): array;
 
     /**
-     * Receive an array of compatibility rule data items,
-     * modify them according to business logic
-     * and return the modified array.
+     * Receive shipping option metadata and modify it according to business logic.
      *
-     * @param array $compatibilityData
+     * @param MetadataInterface $metadata
      * @param Shipment $shipment
-     * @return array
+     * @return MetadataInterface
+     */
+    public function processMetadata(
+        MetadataInterface $metadata,
+        Shipment $shipment
+    ): MetadataInterface;
+
+    /**
+     * Receive an array of compatibility rule data items and
+     * modify them according to business logic.
+     *
+     * @param CompatibilityInterface[] $compatibilityData
+     * @param Shipment $shipment
+     * @return CompatibilityInterface[]
      */
     public function processCompatibilityData(
         array $compatibilityData,

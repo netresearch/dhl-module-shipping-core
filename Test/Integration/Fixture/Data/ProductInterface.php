@@ -44,4 +44,9 @@ interface ProductInterface
      * @return int
      */
     public function getCheckoutQty(): int;
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string;
 }
