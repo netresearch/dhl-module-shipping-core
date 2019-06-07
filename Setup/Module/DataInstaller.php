@@ -56,7 +56,8 @@ class DataInstaller
             [
                 'group' => '',
                 'type' => 'varchar',
-                'label' => 'DHL Tariff Number (HS Code)',
+                'label' => 'HS Code',
+                'frontend_class' => 'validate-digits validate-length maximum-length-11',
                 'input' => 'text',
                 'required' => false,
                 'sort_order' => 51,
@@ -80,6 +81,7 @@ class DataInstaller
                 'group' => '',
                 'type' => 'varchar',
                 'label' => 'DHL Item Description',
+                'frontend_class' => 'validate-length maximum-length-50',
                 'input' => 'text',
                 'required' => false,
                 'sort_order' => 52,

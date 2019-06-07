@@ -31,7 +31,7 @@ class TariffNumber extends AbstractBackend
         $value = $object->getData(self::CODE);
         $label = $this->getAttribute()->getData('frontend_label');
 
-        if (isset($value) && $value !== '' && !is_numeric($value)) {
+        if (!empty($value) && !is_numeric($value)) {
             throw new LocalizedException(__('The value of attribute "%1" must be numeric.', $label));
         }
 
