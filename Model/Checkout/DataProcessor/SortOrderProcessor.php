@@ -5,6 +5,8 @@
 
 namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
 
+use Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
 
 /**
@@ -18,11 +20,12 @@ class SortOrderProcessor extends AbstractProcessor
     /**
      * Sort shipping options and inputs according to their sort orders.
      *
-     * @param array optionsData
+     * @param ShippingOptionInterface[] $optionsData
      * @param string $countryId     Destination country code
      * @param string $postalCode    Destination postal code
      * @param int|null $scopeId
-     * @return array
+     *
+     * @return ShippingOptionInterface[]
      */
     public function processShippingOptions(
         array $optionsData,
@@ -31,27 +34,27 @@ class SortOrderProcessor extends AbstractProcessor
         int $scopeId = null
     ): array {
         uasort($optionsData, [$this, 'sortItems']);
-
-        foreach (array_keys($optionsData) as $optionsIndex) {
-            uasort($optionsData[$optionsIndex]['inputs'], [$this, 'sortItems']);
+        foreach ($optionsData as $option) {
+            $inputArray = $option->getInputs();
+            uasort($inputArray, [$this, 'sortItems']);
+            $option->setInputs($inputArray);
         }
 
         return $optionsData;
     }
 
     /**
-     * @param array $a
-     * @param array $b
+     * @param InputInterface|ShippingOptionInterface $a
+     * @param InputInterface|ShippingOptionInterface $b
+     *
      * @return int
      */
-    private function sortItems(array $a, array $b): int
+    private function sortItems($a, $b): int
     {
-        $sortOrder1 = $a['sortOrder'] ?? false;
-        $sortOrder2 = $b['sortOrder'] ?? false;
-        if ($sortOrder1 === false || $sortOrder2 === false || $sortOrder1 === $sortOrder2) {
+        if ($a->getSortOrder() === $b->getSortOrder()) {
             return 0;
         }
 
-        return ($sortOrder1 < $sortOrder2) ? -1 : 1;
+        return ($a->getSortOrder() < $b->getSortOrder()) ? -1 : 1;
     }
 }

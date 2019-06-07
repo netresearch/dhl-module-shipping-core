@@ -5,6 +5,9 @@
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
+use Dhl\ShippingCore\Api\Data\MetadataInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingOptions\CheckoutProcessorInterface;
 
 /**
@@ -16,6 +19,14 @@ use Dhl\ShippingCore\Api\ShippingOptions\CheckoutProcessorInterface;
  */
 class AbstractProcessor implements CheckoutProcessorInterface
 {
+    /**
+     * @param ShippingOptionInterface[] $optionsData
+     * @param string $countryId
+     * @param string $postalCode
+     * @param int|null $scopeId
+     *
+     * @return ShippingOptionInterface[]
+     */
     public function processShippingOptions(
         array $optionsData,
         string $countryId,
@@ -25,11 +36,31 @@ class AbstractProcessor implements CheckoutProcessorInterface
         return $optionsData;
     }
 
-    public function processMetadata(array $metadata, string $countryId, string $postalCode, int $scopeId = null): array
-    {
+    /**
+     * @param MetadataInterface $metadata
+     * @param string $countryId
+     * @param string $postalCode
+     * @param int|null $scopeId
+     *
+     * @return MetadataInterface
+     */
+    public function processMetadata(
+        MetadataInterface $metadata,
+        string $countryId,
+        string $postalCode,
+        int $scopeId = null
+    ): MetadataInterface {
         return $metadata;
     }
 
+    /**
+     * @param CompatibilityInterface[] $compatibilityData
+     * @param string $countryId
+     * @param string $postalCode
+     * @param int|null $scopeId
+     *
+     * @return CompatibilityInterface[]
+     */
     public function processCompatibilityData(
         array $compatibilityData,
         string $countryId,

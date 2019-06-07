@@ -5,6 +5,9 @@
 
 namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
 
+use Dhl\ShippingCore\Api\Data\MetadataInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
 
 /**
@@ -16,78 +19,93 @@ use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
 class TranslationProcessor extends AbstractProcessor
 {
     /**
-     * @param array optionsData
-     * @param string $countryId     Destination country code
-     * @param string $postalCode    Destination postal code
+     * @param ShippingOptionInterface[] $shippingOptions
+     * @param string $countryId Destination country code
+     * @param string $postalCode Destination postal code
      * @param int|null $scopeId
-     * @return array
+     *
+     * @return ShippingOptionInterface[]
      */
     public function processShippingOptions(
-        array $optionsData,
+        array $shippingOptions,
         string $countryId,
         string $postalCode,
         int $scopeId = null
     ): array {
-        foreach ($optionsData as $optionIndex => $shippingOption) {
-            $this->translate($optionsData, [$optionIndex, 'label']);
-            if (isset($shippingOption['inputs'])) {
-                foreach ($shippingOption['inputs'] as $inputIndex => $input) {
-                    $this->translate($input, ['label']);
-                    $this->translate($input, ['tooltip']);
-                    $this->translate($input, ['placeholder']);
-                    $this->translate($input, ['comment', 'content']);
-                    if (isset($input['options'])) {
-                        foreach (array_keys($input['options']) as $inputOptionIndex) {
-                            $this->translate($input, ['options', $inputOptionIndex, 'label']);
-                        }
-                    }
-                    $optionsData[$optionIndex]['inputs'][$inputIndex] = $input;
+        foreach ($shippingOptions as $shippingOption) {
+            $shippingOption->setLabel(
+                __($shippingOption->getLabel())->render()
+            );
+            foreach ($shippingOption->getInputs() as $input) {
+                $input->setLabel(
+                    __($input->getLabel())->render()
+                );
+                $input->setTooltip(
+                    __($input->getTooltip())->render()
+                );
+                $input->setPlaceholder(
+                    __($input->getPlaceholder())->render()
+                );
+                if ($comment = $input->getComment()) {
+                    $comment->setContent(
+                        __($comment->getContent())->render()
+                    );
+                }
+                foreach ($input->getOptions() as $option) {
+                    $option->setLabel(
+                        __($option->getLabel())->render()
+                    );
                 }
             }
         }
 
-        return $optionsData;
+        return $shippingOptions;
     }
 
     /**
-     * @param array $metadata
+     * @param MetadataInterface $metadata
      * @param string $countryId
      * @param string $postalCode
      * @param int|null $scopeId
-     * @return array
+     *
+     * @return MetadataInterface
      */
     public function processMetadata(
-        array $metadata,
+        MetadataInterface $metadata,
         string $countryId,
         string $postalCode,
         int $scopeId = null
-    ): array {
-        if (isset($metadata['commentsBefore'])) {
-            foreach (array_keys($metadata['commentsBefore']) as $commentIndex) {
-                $this->translate($metadata, ['commentsBefore', $commentIndex, 'content']);
-            }
+    ): MetadataInterface {
+        foreach ($metadata->getCommentsBefore() as $comment) {
+            $comment->setContent(
+                __($comment->getContent())->render()
+            );
         }
-        if (isset($metadata['commentsAfter'])) {
-            foreach (array_keys($metadata['commentsAfter']) as $commentIndex) {
-                $this->translate($metadata, ['commentsAfter', $commentIndex, 'content']);
-            }
+        foreach ($metadata->getCommentsAfter() as $comment) {
+            $comment->setContent(
+                __($comment->getContent())->render()
+            );
         }
-        $this->translate($metadata, ['title']);
-        if (isset($metadata['footnotes'])) {
-            foreach (array_keys($metadata['footnotes']) as $footnoteIndex) {
-                $this->translate($metadata, ['footnotes', $footnoteIndex, 'content']);
-            }
+
+        $metadata->setTitle(
+            __($metadata->getTitle())->render()
+        );
+        foreach ($metadata->getFootnotes() as $footnote) {
+            $footnote->setContent(
+                __($footnote->getContent())->render()
+            );
         }
 
         return $metadata;
     }
 
     /**
-     * @param array $compatibilityData
+     * @param CompatibilityInterface[] $compatibilityData
      * @param string $countryId
      * @param string $postalCode
      * @param int|null $scopeId
-     * @return array
+     *
+     * @return CompatibilityInterface[]
      */
     public function processCompatibilityData(
         array $compatibilityData,
@@ -95,30 +113,12 @@ class TranslationProcessor extends AbstractProcessor
         string $postalCode,
         int $scopeId = null
     ): array {
-        foreach (array_keys($compatibilityData) as $ruleIndex) {
-            $this->translate($compatibilityData, [$ruleIndex, 'errorMessage']);
+        foreach ($compatibilityData as $compatibility) {
+            $compatibility->setErrorMessage(
+                __($compatibility->getErrorMessage())->render()
+            );
         }
 
         return $compatibilityData;
-    }
-
-    /**
-     * Translates the string at a given nested array index of the source array.
-     *
-     * @param array $sourceArray    Passed by reference
-     * @param array $arrayLevels
-     * @void
-     */
-    private function translate(array &$sourceArray, array $arrayLevels)
-    {
-        $reference = &$sourceArray;
-        foreach ($arrayLevels as &$key) {
-            if (isset($reference[$key])) {
-                $reference = &$reference[$key];
-            } else {
-                return;
-            }
-        }
-        $reference = (string)__($reference);
     }
 }

@@ -69,7 +69,7 @@ class ShippingDataHydrator
 
             return $this->shippingDataFactory->create(['carriers' => array_shift($carrierData)]);
         } catch (\Exception $exception) {
-            throw new LocalizedException(__('ShippingData object generation failed. Check input data array.'));
+            throw new LocalizedException(__('ShippingData object generation failed.'), $exception);
         }
     }
 

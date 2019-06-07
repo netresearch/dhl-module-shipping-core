@@ -5,6 +5,8 @@
 
 namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
 
+use Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
 use Dhl\ShippingCore\Model\Config\CoreConfig;
 
@@ -34,11 +36,12 @@ class RouteProcessor extends AbstractProcessor
     /**
      * Remove all shipping options that do not match the route (origin and destination) of the current checkout.
      *
-     * @param array optionsData
+     * @param ShippingOptionInterface[] $optionsData
      * @param string $countryId     Destination country code
      * @param string $postalCode    Destination postal code
      * @param int|null $scopeId
-     * @return array
+     *
+     * @return ShippingOptionInterface[]
      */
     public function processShippingOptions(
         array $optionsData,
@@ -49,10 +52,10 @@ class RouteProcessor extends AbstractProcessor
         $shippingOrigin = strtolower($this->coreConfig->getOriginCountry($scopeId));
         $countryId = strtolower($countryId);
 
-        foreach ($optionsData as $optionCode => $shippingOption) {
+        foreach ($optionsData as $index => $shippingOption) {
             $matchesRoute = $this->checkIfOptionMatchesRoute($shippingOption, $shippingOrigin, $countryId);
             if (!$matchesRoute) {
-                unset($optionsData[$optionCode]);
+                unset($optionsData[$index]);
             }
         }
 
@@ -60,41 +63,24 @@ class RouteProcessor extends AbstractProcessor
     }
 
     /**
-     * @param array $route
-     * @return array
-     */
-    private function preprocessDestinations(array $route): array
-    {
-        foreach ($route['includeDestinations'] ?? [] as $key => $destination) {
-            if ($destination === 'eu') {
-                unset($route['includeDestinations'][$key]);
-                $route['includeDestinations'] += $this->coreConfig->getEuCountries();
-            }
-        }
-        foreach ($route['excludeDestinations'] ?? [] as $key => $destination) {
-            if ($destination === 'eu') {
-                unset($route['excludeDestinations'][$key]);
-                $route['excludeDestinations'] += $this->coreConfig->getEuCountries();
-            }
-        }
-        return $route;
-    }
-
-    /**
-     * @param $shippingOption
-     * @param $shippingOrigin
+     * @param ShippingOptionInterface $shippingOption
+     * @param string $shippingOrigin
      * @param string $countryId
+     *
      * @return bool
      */
-    private function checkIfOptionMatchesRoute($shippingOption, $shippingOrigin, string $countryId): bool
-    {
-        if (empty($shippingOption['routes'] ?? [])) {
+    private function checkIfOptionMatchesRoute(
+        ShippingOptionInterface $shippingOption,
+        string $shippingOrigin,
+        string $countryId
+    ): bool {
+        if (empty($shippingOption->getRoutes())) {
             // Option matches all routes
             return true;
         }
         $matchingRoutes = array_filter(
-            $shippingOption['routes'],
-            function ($route) use ($shippingOrigin, $countryId) {
+            $shippingOption->getRoutes(),
+            function (RouteInterface $route) use ($shippingOrigin, $countryId) {
                 $route = $this->preprocessDestinations($route);
                 return $this->isRouteAllowed($route, $shippingOrigin, $countryId);
             }
@@ -104,19 +90,48 @@ class RouteProcessor extends AbstractProcessor
     }
 
     /**
-     * @param mixed[] $route
+     * @param RouteInterface $route
+     *
+     * @return RouteInterface
+     */
+    private function preprocessDestinations(RouteInterface $route): RouteInterface
+    {
+        $includeDestinations = $route->getIncludeDestinations();
+        foreach ($includeDestinations as $index => $destination) {
+            if ($destination === 'eu') {
+                unset($includeDestinations[$index]);
+                $route->setIncludeDestinations(
+                    $includeDestinations + $this->coreConfig->getEuCountries()
+                );
+            }
+        }
+        $excludeDestinations = $route->getExcludeDestinations();
+        foreach ($excludeDestinations as $index => $destination) {
+            if ($destination === 'eu') {
+                unset($excludeDestinations[$index]);
+                $route->setExcludeDestinations(
+                    $excludeDestinations + $this->coreConfig->getEuCountries()
+                );
+            }
+        }
+        return $route;
+    }
+
+    /**
+     * @param RouteInterface $route
      * @param string $origin
      * @param string $destination
+     *
      * @return bool
      */
-    private function isRouteAllowed(array $route, string $origin, string $destination): bool
+    private function isRouteAllowed(RouteInterface $route, string $origin, string $destination): bool
     {
-        if (isset($route['origin']) && $route['origin'] !== $origin) {
+        if ($route->getOrigin() && $route->getOrigin() !== $origin) {
             return false;
         }
 
-        $includeDestinations = $route['includeDestinations'] ?? ['intl'];
-        $excludeDestinations = $route['excludeDestinations'] ?? [];
+        $includeDestinations = $route->getIncludeDestinations() ?: ['intl'];
+        $excludeDestinations = $route->getExcludeDestinations();
         $hasIncludes = !in_array('intl', $includeDestinations, true);
         $hasExcludes = !empty($excludeDestinations);
 

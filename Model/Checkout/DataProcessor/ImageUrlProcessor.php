@@ -5,6 +5,7 @@
 
 namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
 
+use Dhl\ShippingCore\Api\Data\MetadataInterface;
 use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
 use Magento\Framework\View\Asset\Repository;
 
@@ -31,14 +32,26 @@ class ImageUrlProcessor extends AbstractProcessor
         $this->assetRepo = $assetRepo;
     }
 
-    public function processMetadata(array $metadata, string $countryId, string $postalCode, int $scopeId = null): array
-    {
-        if (isset($metadata['imageUrl'])) {
+    /**
+     * @param MetadataInterface $metadata
+     * @param string $countryId
+     * @param string $postalCode
+     * @param int|null $scopeId
+     *
+     * @return MetadataInterface
+     */
+    public function processMetadata(
+        MetadataInterface $metadata,
+        string $countryId,
+        string $postalCode,
+        int $scopeId = null
+    ): MetadataInterface {
+        if ($metadata->getImageUrl()) {
             $url = $this->assetRepo->getUrlWithParams(
-                $metadata['imageUrl'],
+                $metadata->getImageUrl(),
                 ['area' => 'frontend']
             );
-            $metadata['imageUrl'] = $url ?: $metadata['imageUrl'];
+            $metadata->setImageUrl($url);
         }
 
         return $metadata;

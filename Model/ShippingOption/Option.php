@@ -44,7 +44,7 @@ class Option implements OptionInterface
      * @param string $value
      * @param bool $disabled
      */
-    public function __construct(string $id, string $label = '', string $value = '', bool $disabled = false)
+    public function __construct(string $id = '', string $label = '', string $value = '', bool $disabled = false)
     {
         $this->id = $id;
         $this->label = $label;

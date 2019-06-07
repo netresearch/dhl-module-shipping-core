@@ -6,7 +6,6 @@
 namespace Dhl\ShippingCore\Model\Checkout;
 
 use Dhl\ShippingCore\Api\Data\ShippingDataInterface;
-use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Dhl\ShippingCore\Model\ShippingDataHydrator;
 use Magento\Framework\Config\ReaderInterface;
 use Magento\Framework\Exception\LocalizedException;
@@ -20,11 +19,6 @@ use Magento\Framework\Exception\LocalizedException;
  */
 class CheckoutDataProvider
 {
-    /**
-     * The option group relevant for the checkout.
-     */
-    const GROUPNAME = PackagingDataProvider::GROUP_SERVICE;
-
     /**
      * @var ReaderInterface
      */
@@ -66,35 +60,34 @@ class CheckoutDataProvider
      */
     public function getData(string $countryCode, int $storeId, string $postalCode): ShippingDataInterface
     {
-        $shippingData = $this->reader->read('frontend');
+        $shippingDataArray = $this->reader->read('frontend');
+        $shippingData = $this->shippingDataHydrator->toObject($shippingDataArray);
 
-        if (!isset($shippingData['carriers'])) {
-            $shippingData['carriers'] = [];
+        foreach ($shippingData->getCarriers() as $carrierData) {
+            $carrierData->setServiceOptions(
+                $this->compositeProcessor->processShippingOptions(
+                    $carrierData->getServiceOptions(),
+                    $countryCode,
+                    $postalCode,
+                    $storeId
+                )
+            );
+            $this->compositeProcessor->processMetadata(
+                $carrierData->getMetadata(),
+                $countryCode,
+                $postalCode,
+                $storeId
+            );
+            $carrierData->setCompatibilityData(
+                $this->compositeProcessor->processCompatibilityData(
+                    $carrierData->getCompatibilityData(),
+                    $countryCode,
+                    $postalCode,
+                    $storeId
+                )
+            );
         }
 
-        foreach ($shippingData['carriers'] as $carrierCode => $carrierData) {
-            $carrierData[self::GROUPNAME] = $this->compositeProcessor->processShippingOptions(
-                $carrierData[self::GROUPNAME] ?? [],
-                $countryCode,
-                $postalCode,
-                $storeId
-            );
-            $carrierData['metadata'] = $this->compositeProcessor->processMetadata(
-                $carrierData['metadata'] ?? [],
-                $countryCode,
-                $postalCode,
-                $storeId
-            );
-            $carrierData['compatibilityData'] = $this->compositeProcessor->processCompatibilityData(
-                $carrierData['compatibilityData'] ?? [],
-                $countryCode,
-                $postalCode,
-                $storeId
-            );
-
-            $shippingData['carriers'][$carrierCode] = $carrierData;
-        }
-
-        return $this->shippingDataHydrator->toObject($shippingData);
+        return $shippingData;
     }
 }

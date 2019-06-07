@@ -7,6 +7,8 @@ namespace Dhl\ShippingCore\Test\Unit\Model\Checkout\DataProcessor;
 
 use Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor;
 use Dhl\ShippingCore\Model\Config\CoreConfig;
+use Dhl\ShippingCore\Model\ShippingOption\Route;
+use Dhl\ShippingCore\Model\ShippingOption\ShippingOption;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -37,49 +39,63 @@ class RouteProcessorTest extends TestCase
     {
         return [
             'de => us, no routes specified' => [
-                'optionsData' => ['testOption' => []],
+                'optionsData' => [new ShippingOption('test')],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'us',
                 'expectedCount' => 1,
             ],
             'de => us, only to europe allowed' => [
-                'optionsData' => ['testOption' => ['routes' => [['includeDestinations' => ['eu']]]]],
+                'optionsData' => [new ShippingOption('test', '', [], [
+                    new Route('', ['eu'])
+                ])],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'us',
                 'expectedCount' => 0,
             ],
             'de => at, only to europe allowed' => [
-                'optionsData' => ['testOption' => ['routes' => [['includeDestinations' => ['eu']]]]],
+                'optionsData' => [new ShippingOption('test', '', [], [
+                    new Route('', ['eu'])
+                ])],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'at',
                 'expectedCount' => 1,
             ],
             'de => us, europe not allowed' => [
-                'optionsData' => ['testOption' => ['routes' => [['excludeDestinations' => ['eu']]]]],
+                'optionsData' => [new ShippingOption('test', '', [], [
+                    new Route('', [], ['eu'])
+                ])],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'us',
                 'expectedCount' => 1,
             ],
             'de => at, europe not allowed' => [
-                'optionsData' => ['testOption' => ['routes' => [['excludeDestinations' => ['eu']]]]],
+                'optionsData' => [new ShippingOption('test', '', [], [
+                    new Route('', [], ['eu'])
+                ])],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'at',
                 'expectedCount' => 0,
             ],
             'de => de, only domestic allowed' => [
-                'optionsData' => ['testOption' => ['routes' => [['excludeDestinations' => ['intl']]]]],
+                'optionsData' => [new ShippingOption('test', '', [], [
+                    new Route('', [], ['intl'])
+                ])],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'de',
                 'expectedCount' => 1,
             ],
             'de => at, only domestic allowed' => [
-                'optionsData' => ['testOption' => ['routes' => [['excludeDestinations' => ['intl']]]]],
+                'optionsData' => [new ShippingOption('test', '', [], [
+                    new Route('', [], ['eu'])
+                ])],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'at',
                 'expectedCount' => 0,
             ],
             'us => hk, only from de allowed' => [
-                'optionsData' => ['testOption' => ['routes' => [['origin' => 'de', 'includeDestinations' => ['intl']]]]],
+                'optionsData' => [new ShippingOption('test', '', [], [
+                    new Route('de', ['intl'], [])
+                ])],
                 'originCountryId' => 'us',
                 'destinationCountryId' => 'hk',
                 'expectedCount' => 0,

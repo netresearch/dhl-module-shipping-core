@@ -15,16 +15,24 @@ namespace Dhl\ShippingCore\Api\Data\ShippingOption;
 interface RouteInterface
 {
     /**
+     * Get the allowed origin for a route. Will return an empty string if the route has no origin restriction.
+     *
      * @return string
      */
     public function getOrigin(): string;
 
     /**
+     * Get a list of country codes of allowed destination countries. The special "intl" code is interpreted as all
+     * countries, the code "eu" is expanded to a list of countries in the EU.
+     *
      * @return string[]
      */
     public function getIncludeDestinations(): array;
 
     /**
+     * Get a list of country codes of prohibited destination countries. The special "intl" code is interpreted as all
+     * countries, the code "eu" is expanded to a list of countries in the EU.
+     *
      * @return string[]
      */
     public function getExcludeDestinations(): array;

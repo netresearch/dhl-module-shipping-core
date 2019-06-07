@@ -38,7 +38,7 @@ class Route implements RouteInterface
      * @param string[] $includeDestinations
      * @param string[] $excludeDestinations
      */
-    public function __construct(string $origin, array $includeDestinations = [], array $excludeDestinations = [])
+    public function __construct(string $origin = '', array $includeDestinations = [], array $excludeDestinations = [])
     {
         $this->origin = $origin;
         $this->includeDestinations = $includeDestinations;

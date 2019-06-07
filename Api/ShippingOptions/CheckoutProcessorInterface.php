@@ -5,6 +5,10 @@
 
 namespace Dhl\ShippingCore\Api\ShippingOptions;
 
+use Dhl\ShippingCore\Api\Data\MetadataInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
+
 /**
  * Interface CheckoutProcessorInterface
  *
@@ -14,48 +18,49 @@ namespace Dhl\ShippingCore\Api\ShippingOptions;
 interface CheckoutProcessorInterface
 {
     /**
-     * Receive an array of shipping option items,
+     * Receive an array of shipping option items and
      * modify them according to business logic
-     * and return the modified array.
      *
-     * @param mixed[] $optionsData
+     * @param ShippingOptionInterface[] $shippingOptions
      * @param string $countryId
      * @param string $postalCode
      * @param int|null $scopeId
-     * @return mixed[]
-     */
-    public function processShippingOptions(
-        array $optionsData,
-        string $countryId,
-        string $postalCode,
-        int $scopeId = null
-    ): array;
-
-    /**
-     * Receive shipping option metadata, modify it according to business logic and return the modified array.
      *
-     * @param array $metadata
-     * @param string $countryId
-     * @param string $postalCode
-     * @param int|null $scopeId
      * @return array
      */
-    public function processMetadata(
-        array $metadata,
+    public function processShippingOptions(
+        array $shippingOptions,
         string $countryId,
         string $postalCode,
         int $scopeId = null
     ): array;
 
     /**
-     * Receive an array of compatibility rule data items,
-     * modify them according to business logic
-     * and return the modified array.
+     * Receive shipping option metadata and modify it according to business logic
      *
-     * @param array $compatibilityData
+     * @param MetadataInterface $metadata
      * @param string $countryId
      * @param string $postalCode
      * @param int|null $scopeId
+     *
+     * @return MetadataInterface
+     */
+    public function processMetadata(
+        MetadataInterface $metadata,
+        string $countryId,
+        string $postalCode,
+        int $scopeId = null
+    ): MetadataInterface;
+
+    /**
+     * Receive an array of compatibility rule data items and
+     * modify them according to business logic
+     *
+     * @param CompatibilityInterface[] $compatibilityData
+     * @param string $countryId
+     * @param string $postalCode
+     * @param int|null $scopeId
+     *
      * @return array
      */
     public function processCompatibilityData(
