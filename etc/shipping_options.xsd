@@ -93,6 +93,8 @@
                     <xs:all>
                         <xs:element name="incompatibilityRule" type="xs:boolean" minOccurs="0"/>
                         <xs:element name="subjects" type="subjectsList" minOccurs="0"/>
+                        <xs:element name="masters" type="mastersList" minOccurs="0"/>
+                        <xs:element name="hideSubjects" type="xs:boolean" minOccurs="0"/>
                         <xs:element name="errorMessage" type="string_translatable" minOccurs="0"/>
                     </xs:all>
                     <xs:attribute type="xs:string" name="id"/>
@@ -196,6 +198,11 @@
     <xs:complexType name="subjectsList">
         <xs:sequence>
             <xs:element name="subject" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="mastersList">
+        <xs:sequence>
+            <xs:element name="master" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
 

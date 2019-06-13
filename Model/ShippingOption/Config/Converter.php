@@ -30,6 +30,7 @@ class Converter implements ConverterInterface
         'commentsAfter',
         'footnotes',
         'subjects',
+        'masters',
         'compatibilityData',
         'shippingOptions',
         PackagingDataProvider::GROUP_SERVICE,
