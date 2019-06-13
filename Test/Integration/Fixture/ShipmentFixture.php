@@ -34,14 +34,14 @@ class ShipmentFixture
 
     /**
      * @param AddressInterface $recipientData
-     * @param ProductInterface $productData
+     * @param ProductInterface[] $productData
      * @param string $carrierCode
      * @return Shipment
      * @throws \Exception
      */
     public static function createShipment(
         AddressInterface $recipientData,
-        ProductInterface $productData,
+        array $productData,
         string $carrierCode
     ): Shipment {
         /** @var \Magento\Sales\Model\Order $order */

@@ -194,7 +194,6 @@
                 <item name="dhlSortOrderProcessor" sortOrder="990" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\SortOrderProcessor</item>
             </argument>
             <argument name="processors" xsi:type="array">
-                <item name="dhlItemOptionsProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemOptionsProcessor</item>
                 <item name="dhlApplySelectionProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ApplySelectionsProcessor</item>
                 <item name="dhlPackageDetailValuesProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageDetailValuesProcessor</item>
                 <item name="dhlItemDetailValuesProcessor" sortOrder="20" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemDetailValuesProcessor</item>

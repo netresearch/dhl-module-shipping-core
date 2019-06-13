@@ -41,32 +41,16 @@ class OrderFixture
 
     /**
      * @param AddressInterface $recipientData
-     * @param ProductInterface $productData
+     * @param ProductInterface[] $productData
      * @param string $carrierCode
      * @return OrderInterface
      * @throws \Exception
      */
     public static function createOrder(
         AddressInterface $recipientData,
-        ProductInterface $productData,
+        array $productData,
         string $carrierCode
     ): OrderInterface {
-        if ($productData->getType() === Type::TYPE_SIMPLE) {
-            // set up product
-            $productBuilder = ProductBuilder::aSimpleProduct();
-            $productBuilder = $productBuilder
-                ->withSku($productData->getSku())
-                ->withPrice($productData->getPrice())
-                ->withWeight($productData->getWeight())
-                ->withCustomAttributes($productData->getCustomAttributes())
-                ->withName($productData->getDescription());
-            $product = $productBuilder->build();
-
-            self::$createdEntities['products'][] = $product;
-            $productFixture = new ProductFixture($product);
-        } else {
-            throw new \InvalidArgumentException('Only simple product data fixtures are currently supported.');
-        }
 
         // set up logged-in customer
         $shippingAddressBuilder = AddressBuilder::anAddress()
@@ -93,9 +77,9 @@ class OrderFixture
         $customerFixture->login();
 
         // place order
-        $cart = CartBuilder::forCurrentSession()
-                           ->withSimpleProduct($productFixture->getSku(), $productData->getCheckoutQty())
-                           ->build();
+        $cartBuilder = CartBuilder::forCurrentSession();
+        $cartBuilder = self::addProductsToCart($productData, $cartBuilder);
+        $cart = $cartBuilder->build();
 
         $checkout = CustomerCheckout::fromCart($cart);
 
@@ -140,5 +124,39 @@ class OrderFixture
             $productRepo->deleteById($product);
         }
         self::$createdEntities['products'] = [];
+    }
+
+    /**
+     * @param ProductInterface[] $productData
+     * @param CartBuilder $cartBuilder
+     * @return CartBuilder
+     * @throws \Exception
+     */
+    private static function addProductsToCart(array $productData, CartBuilder $cartBuilder): CartBuilder
+    {
+        foreach ($productData as $productDatum) {
+            if ($productDatum->getType() === Type::TYPE_SIMPLE) {
+                // set up product
+                $productBuilder = ProductBuilder::aSimpleProduct();
+                $productBuilder = $productBuilder
+                    ->withSku($productDatum->getSku())
+                    ->withPrice($productDatum->getPrice())
+                    ->withWeight($productDatum->getWeight())
+                    ->withCustomAttributes($productDatum->getCustomAttributes())
+                    ->withName($productDatum->getDescription());
+                $product = $productBuilder->build();
+
+                self::$createdEntities['products'][] = $product;
+                $productFixture = new ProductFixture($product);
+                $cartBuilder = $cartBuilder->withSimpleProduct(
+                    $productFixture->getSku(),
+                    $productDatum->getCheckoutQty()
+                );
+            } else {
+                throw new \InvalidArgumentException('Only simple product data fixtures are currently supported.');
+            }
+        }
+
+        return $cartBuilder;
     }
 }

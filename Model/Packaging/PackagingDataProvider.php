@@ -67,6 +67,7 @@ class PackagingDataProvider
     {
         $packagingDataArray = $this->reader->read('adminhtml');
         $packagingDataArray = $this->filterCarriers($shipment, $packagingDataArray);
+        $packagingDataArray = $this->cloneItemTemplates($shipment, $packagingDataArray);
         $packagingData = $this->shippingDataHydrator->toObject($packagingDataArray);
 
         foreach ($packagingData->getCarriers() as $index => $carrier) {
@@ -123,6 +124,35 @@ class PackagingDataProvider
                 return $carrier['code'] === $orderCarrier;
             }
         );
+        return $packagingDataArray;
+    }
+
+    /**
+     * Convert the static ItemShippingOption array read from xml
+     * into separate elements for each shipment item.
+     *
+     * @param Shipment $shipment
+     * @param array $packagingDataArray
+     * @return array
+     */
+    private function cloneItemTemplates(Shipment $shipment, array $packagingDataArray): array
+    {
+        foreach ($packagingDataArray['carriers'] as $carrierCode => $carrier) {
+            $newData = [];
+            foreach ($shipment->getItems() as $item) {
+                $itemId = (int)$item->getOrderItemId();
+                $newItem = [
+                    'itemId' => $itemId,
+                    'shippingOptions' => [],
+                ];
+                foreach ($carrier['itemOptions'] as $itemOptions) {
+                    $newItem['shippingOptions'] +=  $itemOptions['shippingOptions'];
+                }
+                $newData[$itemId] = $newItem;
+            }
+            $packagingDataArray['carriers'][$carrierCode]['itemOptions'] = $newData;
+        }
+
         return $packagingDataArray;
     }
 }

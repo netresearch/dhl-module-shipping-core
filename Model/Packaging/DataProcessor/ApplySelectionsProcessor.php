@@ -67,7 +67,7 @@ class ApplySelectionsProcessor extends AbstractProcessor
             return $optionsData;
         }
 
-        $addressId = $shipment->getShippingAddressId();
+        $addressId = (int)$shipment->getShippingAddressId();
 
         foreach ($this->loadSelections($addressId) as $selection) {
             foreach ($optionsData as $shippingOption) {

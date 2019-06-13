@@ -1,6 +1,7 @@
 {
   "carriers": {
     "flatrate": {
+      "code": "flatrate",
       "packageOptions": {
         "packageWeight": {
           "label": "Package Details",
@@ -114,7 +115,6 @@
           "itemId": "0"
         }
       ],
-      "code": "dhlpaket",
       "serviceOptions": {
         "preferredDay": {
           "label": "Preferred Day: Delivery on your preferred day",
