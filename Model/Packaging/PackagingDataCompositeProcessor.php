@@ -68,6 +68,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
             }
         }
 
+        /** @var PackagingProcessorInterface $processor */
         foreach ($this->processors as $processor) {
             $result = $processor->processShippingOptions(
                 $result,
@@ -119,6 +120,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
             }
         }
 
+        /** @var PackagingProcessorInterface $processor */
         foreach ($this->processors as $processor) {
             $result = $processor->processMetadata(
                 $result,
@@ -151,6 +153,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
             }
         }
 
+        /** @var PackagingProcessorInterface $processor */
         foreach ($this->processors as $processor) {
             $result = $processor->processCompatibilityData(
                 $result,

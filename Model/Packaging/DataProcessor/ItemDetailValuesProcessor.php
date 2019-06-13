@@ -59,11 +59,11 @@ class ItemDetailValuesProcessor extends AbstractProcessor
             if ($input->getCode() === 'productName') {
                 $input->setDefaultValue($shipmentItem->getName());
             } elseif ($input->getCode() === 'weight') {
-                $input->setDefaultValue($shipmentItem->getWeight());
+                $input->setDefaultValue((string) $shipmentItem->getWeight());
             } elseif ($input->getCode() === 'qtyOrdered') {
-                $input->setDefaultValue($shipmentItem->getOrderItem()->getQtyOrdered());
+                $input->setDefaultValue((string) $shipmentItem->getOrderItem()->getQtyOrdered());
             } elseif ($input->getCode() === 'qty') {
-                $input->setDefaultValue($shipmentItem->getQty());
+                $input->setDefaultValue((string) $shipmentItem->getQty());
             }
         }
     }

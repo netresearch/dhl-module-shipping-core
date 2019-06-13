@@ -6,8 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShippingOption\Config;
 
-use Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider;
-use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
+use Magento\Framework\Config\Reader\Filesystem;
 
 /**
  * Class Reader
@@ -15,9 +14,13 @@ use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
  * @package Dhl\ShippingCore\Model\ShippingOption\Config
  * @author Max Melzer <max.melzer@netresearch.de>
  */
-class Reader extends \Magento\Framework\Config\Reader\Filesystem
+class Reader extends Filesystem
 {
-    public function read($scope = null)
+    /**
+     * @param int|null $scope
+     * @return array
+     */
+    public function read($scope = null): array
     {
         $result = parent::read($scope);
 

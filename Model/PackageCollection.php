@@ -40,11 +40,17 @@ class PackageCollection implements IteratorAggregate, Countable
         $this->packageFactory = $packageFactory;
     }
 
+    /**
+     * @return \ArrayIterator
+     */
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->items);
     }
 
+    /**
+     * @return int
+     */
     public function count(): int
     {
         return count($this->items);

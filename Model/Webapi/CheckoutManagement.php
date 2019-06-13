@@ -14,6 +14,7 @@ use Dhl\ShippingCore\Model\ShippingOption\Selection\QuoteSelectionManager;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\InputException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\ShippingAddressManagementInterface;
 use Magento\Store\Model\StoreManagerInterface;
@@ -72,7 +73,7 @@ class CheckoutManagement implements CheckoutManagementInterface
      * @param string $postalCode
      * @return ShippingDataInterface
      * @throws NoSuchEntityException
-     * @throws InputException
+     * @throws LocalizedException
      */
     public function getCheckoutData(string $countryId, string $postalCode): ShippingDataInterface
     {
