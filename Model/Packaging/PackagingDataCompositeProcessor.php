@@ -25,7 +25,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
     /**
      * @var PackagingProcessorInterface[]
      */
-    private $processors;
+    private $packagingProcessors;
 
     /**
      * @var CheckoutProcessorInterface[]
@@ -40,7 +40,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
      */
     public function __construct(array $processors = [], array $checkoutProcessors = [])
     {
-        $this->processors = $processors;
+        $this->packagingProcessors = $processors;
         $this->checkoutProcessors = $checkoutProcessors;
     }
 
@@ -69,7 +69,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         }
 
         /** @var PackagingProcessorInterface $processor */
-        foreach ($this->processors as $processor) {
+        foreach ($this->packagingProcessors as $processor) {
             $result = $processor->processShippingOptions(
                 $result,
                 $shipment,
@@ -88,7 +88,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
      */
     public function processItemOptions(array $itemData, Shipment $shipment): array
     {
-        foreach ($this->processors as $processor) {
+        foreach ($this->packagingProcessors as $processor) {
             $itemData = $processor->processItemOptions(
                 $itemData,
                 $shipment
@@ -121,7 +121,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         }
 
         /** @var PackagingProcessorInterface $processor */
-        foreach ($this->processors as $processor) {
+        foreach ($this->packagingProcessors as $processor) {
             $result = $processor->processMetadata(
                 $result,
                 $shipment
@@ -154,7 +154,7 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
         }
 
         /** @var PackagingProcessorInterface $processor */
-        foreach ($this->processors as $processor) {
+        foreach ($this->packagingProcessors as $processor) {
             $result = $processor->processCompatibilityData(
                 $result,
                 $shipment

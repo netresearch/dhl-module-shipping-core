@@ -200,4 +200,12 @@
             </argument>
         </arguments>
     </type>
+    <type name="Dhl\ShippingCore\Model\Packaging\PackagingArrayCompositeProcessor">
+        <arguments>
+            <argument name="arrayProcessors" xsi:type="array">
+                <item name="dhlFilterCarriersProcessor" sortOrder="0" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\FilterCarriersProcessor</item>
+                <item name="dhlCloneItemTemplatesProcessor" sortOrder="1" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\CloneItemTemplatesProcessor</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

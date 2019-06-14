@@ -31,6 +31,11 @@ class PackagingDataProvider
     private $reader;
 
     /**
+     * @var PackagingArrayCompositeProcessor
+     */
+    private $compositeArrayProcessor;
+
+    /**
      * @var PackagingDataCompositeProcessor
      */
     private $compositeProcessor;
@@ -44,15 +49,18 @@ class PackagingDataProvider
      * PackagingDataProvider constructor.
      *
      * @param ReaderInterface $reader
+     * @param PackagingArrayCompositeProcessor $compositeArrayProcessor
      * @param PackagingDataCompositeProcessor $compositeProcessor
      * @param ShippingDataHydrator $shippingDataHydrator
      */
     public function __construct(
         ReaderInterface $reader,
+        PackagingArrayCompositeProcessor $compositeArrayProcessor,
         PackagingDataCompositeProcessor $compositeProcessor,
         ShippingDataHydrator $shippingDataHydrator
     ) {
         $this->reader = $reader;
+        $this->compositeArrayProcessor = $compositeArrayProcessor;
         $this->compositeProcessor = $compositeProcessor;
         $this->shippingDataHydrator = $shippingDataHydrator;
     }
@@ -66,8 +74,9 @@ class PackagingDataProvider
     public function getData(Shipment $shipment): ShippingDataInterface
     {
         $packagingDataArray = $this->reader->read('adminhtml');
-        $packagingDataArray = $this->filterCarriers($shipment, $packagingDataArray);
-        $packagingDataArray = $this->cloneItemTemplates($shipment, $packagingDataArray);
+
+        $packagingDataArray = $this->compositeArrayProcessor->processShippingOptions($packagingDataArray, $shipment);
+
         $packagingData = $this->shippingDataHydrator->toObject($packagingDataArray);
 
         foreach ($packagingData->getCarriers() as $index => $carrier) {
@@ -106,53 +115,5 @@ class PackagingDataProvider
         }
 
         return $packagingData;
-    }
-
-    /**
-     * Remove all carrier data that does not match the given shipment.
-     *
-     * @param Shipment $shipment
-     * @param array $packagingDataArray
-     * @return array
-     */
-    private function filterCarriers(Shipment $shipment, array $packagingDataArray): array
-    {
-        $orderCarrier = strtok((string)$shipment->getOrder()->getShippingMethod(), '_');
-        $packagingDataArray['carriers'] = array_filter(
-            $packagingDataArray['carriers'],
-            function (array $carrier) use ($orderCarrier) {
-                return $carrier['code'] === $orderCarrier;
-            }
-        );
-        return $packagingDataArray;
-    }
-
-    /**
-     * Convert the static ItemShippingOption array read from xml
-     * into separate elements for each shipment item.
-     *
-     * @param Shipment $shipment
-     * @param array $packagingDataArray
-     * @return array
-     */
-    private function cloneItemTemplates(Shipment $shipment, array $packagingDataArray): array
-    {
-        foreach ($packagingDataArray['carriers'] as $carrierCode => $carrier) {
-            $newData = [];
-            foreach ($shipment->getItems() as $item) {
-                $itemId = (int)$item->getOrderItemId();
-                $newItem = [
-                    'itemId' => $itemId,
-                    'shippingOptions' => [],
-                ];
-                foreach ($carrier['itemOptions'] as $itemOptions) {
-                    $newItem['shippingOptions'] +=  $itemOptions['shippingOptions'];
-                }
-                $newData[$itemId] = $newItem;
-            }
-            $packagingDataArray['carriers'][$carrierCode]['itemOptions'] = $newData;
-        }
-
-        return $packagingDataArray;
     }
 }
