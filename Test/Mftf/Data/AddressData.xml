@@ -33,4 +33,10 @@
         <data key="default_billing">true</data>
         <data key="region_qty">66</data>
     </entity>
+
+    <entity name="CustomerAddress_DE_with_Supplement" type="address" extends="CustomerAddress_DE">
+        <array key="street">
+            <item>Nonnenstraße 11d / 2. Etage</item>
+        </array>
+    </entity>
 </entities>

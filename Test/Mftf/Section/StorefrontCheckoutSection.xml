@@ -10,7 +10,10 @@
         <element name="checkoutShippingMethod" type="text" selector="div[id='checkout-step-shipping_method'] td[id^='label_carrier_'][id$='_{{arg1}}']" parameterized="true"/>
         <element name="checkoutShippingLabelJQuery" type="text" selector="div[id=\'checkout-step-shipping_method\'] td[id^=\'label_method_\'][id$=\'_{{arg1}}\']" parameterized="true"/>
 
-        <element name="miniCartCheckoutButton" type="button" selector="#top-cart-btn-checkout" timeout="300"/>
+        <element name="miniCartCheckoutButton" type="button" selector="#top-cart-btn-checkout" timeout="60"/>
         <element name="miniCartEmptyCartQuantityCounter" type="text" selector=".counter.qty.empty"/>
+
+        <!-- Checkout success page -->
+        <element name="orderNumber" type="text" selector=".checkout-success > p:nth-child(1) span"/>
     </section>
 </sections>

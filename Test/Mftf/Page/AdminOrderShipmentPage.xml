@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/PageObject.xsd">
+    <page name="AdminOrderShipmentViewPage"
+          url="admin/order_shipment/new/order_id/{{var1}}"
+          area="admin"
+          module="Magento_Config"
+          parameterized="true"/>
+</pages>
