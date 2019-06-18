@@ -20,3 +20,27 @@
         }
     }
 }
+
+/**
+ * Use this to style system config groups in a simpler way:
+ *
+ * <fieldset_css>simple</fieldset_css>
+ * <attribute type="expanded">1</attribute>
+ */
+#config-edit-form .section-config.simple {
+    &:not(.active) {
+        display: none;
+    }
+    a.open {
+        pointer-events: none;
+        padding: 0 0 0 33%;
+        font-size: 1.5rem;
+    }
+    a.open::before {
+        display: none;
+    }
+    border: 1px solid #e3e3e3;
+    background: #fbfbfb;
+    margin: 2em 0;
+    padding: 1em 0;
+}
