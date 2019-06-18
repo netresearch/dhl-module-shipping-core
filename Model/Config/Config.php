@@ -66,6 +66,14 @@ class Config implements ConfigInterface
     }
 
     /**
+     * @return string
+     */
+    public function getModuleVersion(): string
+    {
+        return $this->scopeConfig->getValue(self::CONFIG_PATH_VERSION);
+    }
+
+    /**
      * Get payment methods that were marked as cash on delivery methods in configuration
      *
      * @param mixed $store

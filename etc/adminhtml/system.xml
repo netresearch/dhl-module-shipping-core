@@ -7,6 +7,14 @@
             <resource>Magento_Shipping::config_shipping</resource>
             <group id="dhlglobalwebservices" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="100" translate="label tooltip comment">
                 <label><![CDATA[General Configuration]]></label>
+                <field id="shippingCoreInfoBox" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Netresearch\ConfigFields\Block\InfoBox</frontend_model>
+                    <attribute type="logo">Dhl_Ui::images/logo-dhl-wide.svg</attribute>
+                    <attribute type="body_template">Dhl_ShippingCore::system/config/infoBoxBody.phtml</attribute>
+                    <attribute type="header_template">Dhl_ShippingCore::system/config/infoBoxHeader.phtml</attribute>
+                    <attribute type="background">#ffcc01</attribute>
+                    <attribute type="view_model">Dhl\ShippingCore\ViewModel\Adminhtml\System\InfoBox</attribute>
+                </field>
                 <!-- Cash On Delivery Payment Methods -->
                 <field id="cod_methods" translate="label tooltip" type="multiselect" sortOrder="210" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label><![CDATA[Cash On Delivery Payment Methods]]></label>
