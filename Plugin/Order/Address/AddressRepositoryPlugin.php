@@ -96,7 +96,7 @@ class AddressRepositoryPlugin
      * @param Collection $collection
      * @return Collection
      */
-    public function afterGetList(AddressRepository $subject,Collection $collection): Collection
+    public function afterGetList(AddressRepository $subject, Collection $collection): Collection
     {
         $this->extensionAttributesJoinProcessor->process($collection, Address::class);
         return $collection;

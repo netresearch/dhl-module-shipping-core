@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Observer;
 
 use Dhl\ShippingCore\Api\CodSupportInterface;
-use Dhl\ShippingCore\Model\Config\CoreConfigInterface;
+use Dhl\ShippingCore\Api\ConfigInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
@@ -23,7 +23,7 @@ use Magento\Quote\Model\Quote;
 class DisableCodPaymentMethods implements ObserverInterface
 {
     /**
-     * @var CoreConfigInterface
+     * @var ConfigInterface
      */
     private $config;
 
@@ -35,10 +35,10 @@ class DisableCodPaymentMethods implements ObserverInterface
     /**
      * DisableCodPaymentMethods constructor.
      *
-     * @param CoreConfigInterface $config
+     * @param ConfigInterface $config
      * @param CodSupportInterface[] $codSupportMap
      */
-    public function __construct(CoreConfigInterface $config, array $codSupportMap = [])
+    public function __construct(ConfigInterface $config, array $codSupportMap = [])
     {
         $this->config = $config;
         $this->codSupportMap = $codSupportMap;

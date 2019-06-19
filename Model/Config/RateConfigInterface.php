@@ -9,6 +9,8 @@ namespace Dhl\ShippingCore\Model\Config;
 /**
  * Interface RateConfigInterface
  *
+ * @todo(nr): no public api: remove interface, use implementation
+ *
  * @author    Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link      https://www.netresearch.de/
  */

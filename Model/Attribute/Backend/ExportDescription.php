@@ -35,7 +35,7 @@ class ExportDescription extends AbstractBackend
         if (strlen((string) $value) > static::MAX_LENGTH) {
             throw new LocalizedException(
                 __(
-                    'The value of attribute %1 must not be longer than %2 characters.',
+                    'The value of attribute "%1" must not be longer than %2 characters.',
                     $frontendLabel,
                     static::MAX_LENGTH
                 )

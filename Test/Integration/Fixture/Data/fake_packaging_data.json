@@ -252,6 +252,63 @@
             }
           },
           "code": "preferredNeighbour"
+        },
+        "parcelstation": {
+          "label": "Parcel station delivery: Delivery to a parcel station of your choice",
+          "sortOrder": 60,
+          "routes": [
+            {
+              "origin": "de",
+              "includeDestinations": [
+                "de",
+                "at"
+              ]
+            }
+          ],
+          "inputs": {
+            "enabled": {
+              "label": "Select parcel station",
+              "labelVisible": false,
+              "inputType": "checkbox",
+              "code": "enabled"
+            },
+            "id": {
+              "label": "Parcel Station ID",
+              "labelVisible": true,
+              "inputType": "select",
+              "placeholder": "Please select a parcel station \u2026",
+              "comment": {
+                "content": "Select a nearby parcel shop. Your package will be sent there for you to pick up."
+              },
+              "validationRules": {
+                "required-entry": {
+                  "name": "required-entry"
+                }
+              },
+              "code": "id"
+            },
+            "postNumber": {
+              "label": "Post number",
+              "labelVisible": true,
+              "inputType": "text",
+              "placeholder": "Post number",
+              "validationRules": {
+                "maxLength": {
+                  "param": 10,
+                  "name": "maxLength"
+                },
+                "validate-no-html-tags": {
+                  "name": "validate-no-html-tags"
+                },
+                "dhl_filter_special_chars": {
+                  "name": "dhl_filter_special_chars"
+                }
+              },
+              "tooltip": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr.",
+              "code": "postNumber"
+            }
+          },
+          "code": "parcelstation"
         }
       },
       "metadata": {
@@ -304,6 +361,27 @@
           ],
           "errorMessage": "Services %1 require each other.",
           "id": "test"
+        },
+        "parcelstationEnabledExclusion": {
+          "incompatibilityRule": true,
+          "subjects": [
+            "parcelstation.enabled",
+            "preferredLocation",
+            "preferredNeighbour"
+          ],
+          "id": "parcelstationEnabledExclusion"
+        },
+        "parcelstationExclusion": {
+          "incompatibilityRule": false,
+          "hideSubjects": true,
+          "masters": [
+            "parcelstation.enabled"
+          ],
+          "subjects": [
+            "parcelstation.id",
+            "parcelstation.postNumber"
+          ],
+          "id": "parcelstationExclusion"
         }
       }
     }

@@ -16,7 +16,7 @@ use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetup;
 
 /**
- * Class SetupData
+ * Class DataInstaller
  *
  * @package Dhl\ShippingCore\Setup
  */
@@ -56,7 +56,7 @@ class DataInstaller
             [
                 'group' => '',
                 'type' => 'varchar',
-                'label' => 'HS Code',
+                'label' => 'DHL Tariff Number (HS Code)',
                 'frontend_class' => 'validate-digits validate-length maximum-length-11',
                 'input' => 'text',
                 'required' => false,

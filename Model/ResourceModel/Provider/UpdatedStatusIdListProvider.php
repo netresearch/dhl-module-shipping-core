@@ -65,7 +65,7 @@ class UpdatedStatusIdListProvider implements NotSyncedDataProviderInterface
             $select = $connection->select()
                 ->from(['label_status' => $mainTableName], ['order_id'])
                 ->join(['order_grid' => $gridTableName], 'label_status.order_id = order_grid.entity_id', [])
-                ->where('order_grid.dhl_label_status != label_status.status_code');
+                ->where('order_grid.dhlgw_label_status != label_status.status_code');
 
             return $connection->fetchCol($select);
         } catch (\Exception $exception) {

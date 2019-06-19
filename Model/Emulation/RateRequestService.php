@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Emulation;
 
+use Dhl\ShippingCore\Api\RateRequestEmulationInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 
@@ -16,7 +17,7 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */
-class RateRequestService implements \Dhl\ShippingCore\Api\RateRequestEmulationInterface
+class RateRequestService implements RateRequestEmulationInterface
 {
     /**
      * @var ProxyCarrierFactory

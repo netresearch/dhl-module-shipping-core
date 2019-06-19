@@ -7,11 +7,13 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api;
 
 use Magento\Quote\Model\Quote\Address\RateRequest;
+use Magento\Shipping\Model\Rate\Result;
 
 /**
- * Class RateRequestService
+ * Class RateRequestEmulationInterface
  *
- * @package Dhl\ShippingCore\Model\Emulation
+ * @api
+ * @package Dhl\ShippingCore\Api
  * @author  Paul Siedler <paul.siedler@netresearch.de>
  * @link    https://www.netresearch.de/
  */
@@ -22,7 +24,8 @@ interface RateRequestEmulationInterface
      *
      * @param string $carrierCode Carrier code to emulate
      * @param RateRequest $request Original rate request
-     * @return bool|\Magento\Framework\DataObject|null
+     * @return Result
+     * @throws \Exception
      */
     public function emulateRateRequest(string $carrierCode, RateRequest $request);
 }

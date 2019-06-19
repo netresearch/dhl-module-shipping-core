@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShipmentRequest;
 
+use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface;
@@ -15,7 +16,6 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\RecipientInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterfaceFactory;
 use Dhl\ShippingCore\Api\RequestExtractorInterface;
-use Dhl\ShippingCore\Model\Config\CoreConfigInterface;
 use Dhl\ShippingCore\Model\RecipientStreetRepository;
 use Dhl\ShippingCore\Util\StreetSplitter;
 use Magento\Framework\Exception\LocalizedException;
@@ -51,7 +51,7 @@ class RequestExtractor implements RequestExtractorInterface
     private $recipientStreetRepository;
 
     /**
-     * @var CoreConfigInterface
+     * @var ConfigInterface
      */
     private $config;
 
@@ -105,7 +105,7 @@ class RequestExtractor implements RequestExtractorInterface
      * @param RecipientInterfaceFactory $recipientFactory
      * @param PackageInterfaceFactory $packageFactory
      * @param PackageItemInterfaceFactory $packageItemFactory
-     * @param CoreConfigInterface $config
+     * @param ConfigInterface $config
      */
     public function __construct(
         Request $shipmentRequest,
@@ -115,7 +115,7 @@ class RequestExtractor implements RequestExtractorInterface
         RecipientInterfaceFactory $recipientFactory,
         PackageInterfaceFactory $packageFactory,
         PackageItemInterfaceFactory $packageItemFactory,
-        CoreConfigInterface $config
+        ConfigInterface $config
     ) {
         $this->shipmentRequest = $shipmentRequest;
         $this->streetSplitter = $streetSplitter;

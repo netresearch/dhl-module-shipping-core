@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Emulation;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 
@@ -14,8 +15,8 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
  * Class ProxyCarrierFactory
  *
  * @package Dhl\ShippingCore\Model\Emulation
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
+ * @author  Paul Siedler <paul.siedler@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 class ProxyCarrierFactory
 {
@@ -48,6 +49,8 @@ class ProxyCarrierFactory
      *
      * @param string $carrierCode Carrier model for which the config should be mocked
      * @return AbstractCarrierInterface
+     * @throws NotFoundException Requested carrier not found
+     * @throws \Exception Object manager / factory error
      */
     public function create(string $carrierCode): AbstractCarrierInterface
     {
@@ -55,6 +58,11 @@ class ProxyCarrierFactory
             'carriers/' . $carrierCode . '/model',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+
+        if (empty($carrierClass)) {
+            throw new NotFoundException(__('Carrier "%1" not found.', $carrierClass));
+        }
+
         /** @var ScopeConfigInterface $proxyConfig */
         $proxyConfig = $this->objectManager->create(
             ProxyScopeConfig::class,

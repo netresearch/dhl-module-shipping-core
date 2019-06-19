@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Config;
+namespace Dhl\ShippingCore\Api;
 
 use Dhl\ShippingCore\Model\Package;
 use Dhl\ShippingCore\Model\PackageCollection;
@@ -12,14 +12,14 @@ use Magento\Shipping\Model\Config;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Interface CoreConfigInterface
+ * Interface ConfigInterface
  *
  * @api
- * @package Dhl\ShippingCore\Model\Config
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
+ * @package Dhl\ShippingCore\Api
+ * @author  Paul Siedler <paul.siedler@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
-interface CoreConfigInterface
+interface ConfigInterface
 {
     const CONFIG_PATH_COD_METHODS = 'dhlshippingsolutions/dhlglobalwebservices/cod_methods';
     const CONFIG_PATH_TERMS_OF_TRADE = 'dhlshippingsolutions/dhlglobalwebservices/terms_of_trade';
@@ -27,6 +27,7 @@ interface CoreConfigInterface
 
     const CONFIG_PATH_WEIGHT_UNIT = 'general/locale/weight_unit';
     const CONFIG_PATH_OWN_PACKAGES = 'dhlshippingsolutions/dhlglobalwebservices/package_dimension';
+    const CONFIG_PATH_RETRY_FAILED_SHIPMENTS = 'dhlshippingsolutions/dhlglobalwebservices/retry_failed_shipments';
 
     /**
      * Get payment methods that were marked as cash on delivery methods in configuration
@@ -70,13 +71,6 @@ interface CoreConfigInterface
     public function getWeightUnit($store = null): string;
 
     /**
-     * Get the general dimensions unit.
-     *
-     * @return string
-     */
-    public function getDimensionsUOM(): string;
-
-    /**
      * Checks if route is dutiable by stores origin country and eu country list
      *
      * @param string $receiverCountry
@@ -112,14 +106,6 @@ interface CoreConfigInterface
      * @param string $unit
      * @return string
      */
-    public function normalizeDimensionUOM(string $unit): string;
-
-    /**
-     * Maps Magento's internal unit names to SDKs unit names
-     *
-     * @param string $unit
-     * @return string
-     */
     public function normalizeWeightUOM(string $unit): string;
 
     /**
@@ -133,4 +119,34 @@ interface CoreConfigInterface
      * @return Package|null
      */
     public function getOwnPackagesDefault(string $store = null);
+
+    /**
+     * @param string $carrierCode
+     * @param mixed|null $store
+     * @return string
+     */
+    public function getCarrierTitleByCode(string $carrierCode, $store = null): string;
+
+    /**
+     * @param mixed|null $store
+     * @return string
+     */
+    public function getRawWeightUnit($store = null): string;
+
+    /**
+     * @param string $weightUnit
+     * @return string
+     */
+    public function normalizeRawWeight(string $weightUnit): string;
+
+    /**
+     * @param string $weightUnit
+     * @return string
+     */
+    public function getRawDimensionUnit(string $weightUnit): string;
+
+    /**
+     * @return bool
+     */
+    public function isAutoRetryEnabled(): bool;
 }

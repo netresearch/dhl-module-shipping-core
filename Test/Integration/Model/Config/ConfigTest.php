@@ -4,34 +4,28 @@
  */
 namespace Dhl\ShippingCore\Model\Config;
 
-use Magento\TestFramework\ObjectManager;
+use Dhl\ShippingCore\Api\ConfigInterface;
+use Magento\TestFramework\Helper\Bootstrap;
 
 /**
- * ModuleConfigTest
+ * ConfigTest
  *
  * @package Dhl\ShippingCore\Test\Integration
  * @author  Ronny Gertler <ronny.gertler@netresearch.de>
  * @link    https://www.netresearch.de/
  */
-class CoreConfigTest extends \PHPUnit\Framework\TestCase
+class ConfigTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var $objectManager ObjectManager
-     */
-    private $objectManager;
-
-    /**
-     * @var CoreConfigInterface
-     */
-    private $config;
-
     /**
      * @test
      * @magentoConfigFixture current_store dhlshippingsolutions/dhlglobalwebservices/cod_methods payflow_advanced,payflow_link,payflowpro
      */
     public function getCodMethods()
     {
-        $paymentMethods = $this->config->getCodMethods();
+        /** @var ConfigInterface $config */
+        $config = Bootstrap::getObjectManager()->get(ConfigInterface::class);
+
+        $paymentMethods = $config->getCodMethods();
         self::assertInternalType('array', $paymentMethods);
         self::assertNotEmpty($paymentMethods);
         self::assertContainsOnly('string', $paymentMethods);
@@ -51,8 +45,11 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
      */
     public function getTermsOfTrade()
     {
-        self::assertEquals('DTP/DDP', $this->config->getTermsOfTrade());
-        self::assertEquals('DDU/DAP', $this->config->getTermsOfTrade('fixturestore'));
+        /** @var ConfigInterface $config */
+        $config = Bootstrap::getObjectManager()->get(ConfigInterface::class);
+
+        self::assertEquals('DTP/DDP', $config->getTermsOfTrade());
+        self::assertEquals('DDU/DAP', $config->getTermsOfTrade('fixturestore'));
     }
 
     /**
@@ -65,16 +62,10 @@ class CoreConfigTest extends \PHPUnit\Framework\TestCase
      */
     public function getCutOffTime()
     {
-        self::assertEquals('00,00,00', $this->config->getCutOffTime());
-        self::assertEquals('12,07,10', $this->config->getCutOffTime('fixturestore'));
-    }
+        /** @var ConfigInterface $config */
+        $config = Bootstrap::getObjectManager()->get(ConfigInterface::class);
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->objectManager = ObjectManager::getInstance();
-
-        $this->config = $this->objectManager->create(CoreConfig::class);
+        self::assertEquals('00,00,00', $config->getCutOffTime());
+        self::assertEquals('12,07,10', $config->getCutOffTime('fixturestore'));
     }
 }

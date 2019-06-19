@@ -21,7 +21,7 @@ use Magento\TestFramework\Helper\Bootstrap;
  * Class ShipmentFixture
  *
  * @package Dhl\Test\Integration\Fixture
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
+ * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */
 class ShipmentFixture
@@ -46,6 +46,7 @@ class ShipmentFixture
     ): Shipment {
         /** @var \Magento\Sales\Model\Order $order */
         $order = OrderFixture::createOrder($recipientData, $productData, $carrierCode);
+
         /** @var Order $convertOrder */
         $convertOrder = Bootstrap::getObjectManager()->create(Order::class);
         $shipment = $convertOrder->toShipment($order);

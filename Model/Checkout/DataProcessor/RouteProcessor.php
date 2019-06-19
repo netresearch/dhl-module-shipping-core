@@ -9,7 +9,7 @@ namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
 use Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
-use Dhl\ShippingCore\Model\Config\CoreConfig;
+use Dhl\ShippingCore\Model\Config\Config;
 
 /**
  * Class RouteProcessor
@@ -20,18 +20,18 @@ use Dhl\ShippingCore\Model\Config\CoreConfig;
 class RouteProcessor extends AbstractProcessor
 {
     /**
-     * @var CoreConfig
+     * @var Config
      */
-    private $coreConfig;
+    private $config;
 
     /**
      * RouteProcessor constructor.
      *
-     * @param CoreConfig $coreConfig
+     * @param Config $config
      */
-    public function __construct(CoreConfig $coreConfig)
+    public function __construct(Config $config)
     {
-        $this->coreConfig = $coreConfig;
+        $this->config = $config;
     }
 
     /**
@@ -50,7 +50,7 @@ class RouteProcessor extends AbstractProcessor
         string $postalCode,
         int $scopeId = null
     ): array {
-        $shippingOrigin = strtolower($this->coreConfig->getOriginCountry($scopeId));
+        $shippingOrigin = strtolower($this->config->getOriginCountry($scopeId));
         $countryId = strtolower($countryId);
 
         foreach ($optionsData as $index => $shippingOption) {
@@ -102,7 +102,7 @@ class RouteProcessor extends AbstractProcessor
             if ($destination === 'eu') {
                 unset($includeDestinations[$index]);
                 $route->setIncludeDestinations(
-                    $includeDestinations + $this->coreConfig->getEuCountries()
+                    $includeDestinations + $this->config->getEuCountries()
                 );
             }
         }
@@ -111,7 +111,7 @@ class RouteProcessor extends AbstractProcessor
             if ($destination === 'eu') {
                 unset($excludeDestinations[$index]);
                 $route->setExcludeDestinations(
-                    $excludeDestinations + $this->coreConfig->getEuCountries()
+                    $excludeDestinations + $this->config->getEuCountries()
                 );
             }
         }

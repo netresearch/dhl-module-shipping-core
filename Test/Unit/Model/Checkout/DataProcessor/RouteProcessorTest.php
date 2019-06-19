@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Test\Unit\Model\Checkout\DataProcessor;
 
 use Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor;
-use Dhl\ShippingCore\Model\Config\CoreConfig;
+use Dhl\ShippingCore\Model\Config\Config;
 use Dhl\ShippingCore\Model\ShippingOption\Route;
 use Dhl\ShippingCore\Model\ShippingOption\ShippingOption;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -22,18 +22,18 @@ use PHPUnit\Framework\TestCase;
 class RouteProcessorTest extends TestCase
 {
     /**
-     * @var CoreConfig|MockObject
+     * @var Config|MockObject
      */
-    private $coreConfigMock;
+    private $configMock;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->coreConfigMock = $this->getMockBuilder(CoreConfig::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->coreConfigMock->method('getEuCountries')->willReturn(['de', 'at', 'it', 'uk']);
+        $this->configMock = $this->getMockBuilder(Config::class)
+                                 ->disableOriginalConstructor()
+                                 ->getMock();
+        $this->configMock->method('getEuCountries')->willReturn(['de', 'at', 'it', 'uk']);
     }
 
     public function dataProvider(): array
@@ -117,9 +117,9 @@ class RouteProcessorTest extends TestCase
         string $destinationCountryId,
         int $expectedCount
     ) {
-        $this->coreConfigMock->method('getOriginCountry')->willReturn($originCountryId);
+        $this->configMock->method('getOriginCountry')->willReturn($originCountryId);
         /** @var RouteProcessor $subject */
-        $subject = new RouteProcessor($this->coreConfigMock);
+        $subject = new RouteProcessor($this->configMock);
         $result = $subject->processShippingOptions($optionsData, $destinationCountryId, '00000');
 
         self::assertCount(

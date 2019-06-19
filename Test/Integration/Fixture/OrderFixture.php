@@ -14,6 +14,7 @@ use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Api\ShipOrderInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use TddWizard\Fixtures\Catalog\ProductBuilder;
 use TddWizard\Fixtures\Catalog\ProductFixture;
@@ -32,7 +33,6 @@ use TddWizard\Fixtures\Customer\CustomerFixture;
  */
 class OrderFixture
 {
-
     private static $createdEntities = [
         'products' => [],
         'customers' => [],
@@ -87,6 +87,27 @@ class OrderFixture
             ->withShippingMethodCode($carrierCode)
             ->placeOrder();
         self::$createdEntities['orders'][] = $order;
+
+        $cart->getCheckoutSession()->clearQuote();
+
+        return $order;
+    }
+
+    /**
+     * @param AddressInterface $recipientData
+     * @param ProductInterface[] $productData
+     * @param string $carrierCode
+     * @return OrderInterface
+     * @throws \Exception
+     */
+    public static function createProcessedOrder(
+        AddressInterface $recipientData,
+        array $productData,
+        string $carrierCode
+    ) {
+        $order = self::createOrder($recipientData, $productData, $carrierCode);
+        $shipOrder = Bootstrap::getObjectManager()->get(ShipOrderInterface::class);
+        $shipOrder->execute($order->getEntityId(), [], false);
 
         return $order;
     }

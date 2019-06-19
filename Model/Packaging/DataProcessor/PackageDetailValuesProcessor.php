@@ -6,9 +6,9 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
 
+use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Config\CoreConfigInterface;
 use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
 use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Magento\Sales\Model\Order\Shipment;
@@ -22,18 +22,18 @@ use Magento\Sales\Model\Order\Shipment;
 class PackageDetailValuesProcessor extends AbstractProcessor
 {
     /**
-     * @var CoreConfigInterface
+     * @var ConfigInterface
      */
-    private $coreConfig;
+    private $config;
 
     /**
      * PackageDetailValuesProcessor constructor.
      *
-     * @param CoreConfigInterface $coreConfig
+     * @param ConfigInterface $config
      */
-    public function __construct(CoreConfigInterface $coreConfig)
+    public function __construct(ConfigInterface $config)
     {
-        $this->coreConfig = $coreConfig;
+        $this->config = $config;
     }
 
     /**
@@ -74,7 +74,7 @@ class PackageDetailValuesProcessor extends AbstractProcessor
             if ($input->getCode() === 'weight') {
                 $input->setDefaultValue((string)$shipment->getTotalWeight());
             } elseif ($input->getCode() === 'weightUnit') {
-                $input->setDefaultValue($this->coreConfig->getWeightUnit($shipment->getStoreId()));
+                $input->setDefaultValue($this->config->getWeightUnit($shipment->getStoreId()));
             }
         }
     }
@@ -87,7 +87,7 @@ class PackageDetailValuesProcessor extends AbstractProcessor
         Shipment $shipment,
         ShippingOptionInterface $shippingOption
     ) {
-        $ownPackage = $this->coreConfig->getOwnPackagesDefault((string)$shipment->getStoreId());
+        $ownPackage = $this->config->getOwnPackagesDefault((string)$shipment->getStoreId());
         foreach ($shippingOption->getInputs() as $input) {
             if ($ownPackage) {
                 if ($input->getCode() === 'width') {
@@ -99,7 +99,8 @@ class PackageDetailValuesProcessor extends AbstractProcessor
                 }
             }
             if ($input->getCode() === 'sizeUnit') {
-                $input->setDefaultValue($this->coreConfig->getDimensionsUOM());
+                $weightUnit = $this->config->getWeightUnit($shipment->getStoreId());
+                $input->setDefaultValue($weightUnit === 'kg' ? 'cm' : 'in');
             }
         }
     }

@@ -37,6 +37,6 @@ class AddressUs implements AddressInterface
 
     public function getRegionId(): string
     {
-        return 'NV';
+        return '39';
     }
 }

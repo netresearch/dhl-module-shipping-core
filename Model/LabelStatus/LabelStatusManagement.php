@@ -128,7 +128,7 @@ class LabelStatusManagement implements LabelStatusManagementInterface
      */
     public function setInitialStatus(OrderInterface $order): bool
     {
-        $shippingMethod = strtok($order->getShippingMethod(), '_');
+        $shippingMethod = strtok((string) $order->getShippingMethod(), '_');
         if (!in_array($shippingMethod, $this->carrierCodes, true)) {
             // carrier does not support label status
             return false;

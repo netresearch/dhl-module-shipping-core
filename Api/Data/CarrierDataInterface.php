@@ -24,6 +24,13 @@ interface CarrierDataInterface
     public function getCode(): string;
 
     /**
+     * Retrieve additional information to render the shipping options area.
+     *
+     * @return \Dhl\ShippingCore\Api\Data\MetadataInterface
+     */
+    public function getMetadata(): MetadataInterface;
+
+    /**
      * Retrieve rendering information about the shipping options the carrier offers on package level.
      *
      * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
@@ -52,18 +59,18 @@ interface CarrierDataInterface
     public function getCompatibilityData(): array;
 
     /**
-     * Retrieve additional information to render the shipping options area.
-     *
-     * @return \Dhl\ShippingCore\Api\Data\MetadataInterface
-     */
-    public function getMetadata(): MetadataInterface;
-
-    /**
      * @param string $code
      *
      * @return void
      */
     public function setCode(string $code);
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\MetadataInterface $metadata
+     *
+     * @return void
+     */
+    public function setMetadata(MetadataInterface $metadata);
 
     /**
      * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[] $packageOptions
@@ -92,11 +99,4 @@ interface CarrierDataInterface
      * @return void
      */
     public function setCompatibilityData(array $compatibilityData);
-
-    /**
-     * @param \Dhl\ShippingCore\Api\Data\MetadataInterface $metadata
-     *
-     * @return void
-     */
-    public function setMetadata(MetadataInterface $metadata);
 }

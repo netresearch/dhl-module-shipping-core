@@ -6,28 +6,27 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config;
 
+use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Model\Package;
 use Dhl\ShippingCore\Model\PackageCollection;
 use Dhl\ShippingCore\Model\PackageCollectionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Shipping\Helper\Carrier;
-use Magento\Shipping\Model\Config;
+use Magento\Shipping\Model\Config as ShippingConfig;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Class CoreConfig
+ * Class Config
  *
  * @package Dhl\ShippingCore\Model\Config
  */
-class CoreConfig implements CoreConfigInterface
+class Config implements ConfigInterface
 {
-    const DEFAULT_DIMENSION_UNIT = 'in';
-
     /**
      * @var ScopeConfigInterface
      */
-    private $scopeConfig;
+    private $scopeConfigInterface;
 
     /**
      * @var string[]
@@ -37,22 +36,6 @@ class CoreConfig implements CoreConfigInterface
         'lbs' => 'lb',
         'POUND' => 'lb',
         'KILOGRAM' => 'kg',
-    ];
-
-    /**
-     * @var string[]
-     */
-    private $dimensionUnitMap = [
-        'INCH' => 'in',
-        'CENTIMETER' => 'cm',
-    ];
-
-    /**
-     * @var string[]
-     */
-    private $weightUnitToDimensionUnitMap = [
-        'kg' => 'cm',
-        'lb' => 'in',
     ];
 
     /**
@@ -66,18 +49,18 @@ class CoreConfig implements CoreConfigInterface
     private $packageCollectionFactory;
 
     /**
-     * CoreConfig constructor.
+     * Config constructor.
      *
-     * @param ScopeConfigInterface $scopeConfig
+     * @param ScopeConfigInterface $scopeConfigInterface
      * @param SerializerInterface $serializer
      * @param PackageCollectionFactory $collectionFactory
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig,
+        ScopeConfigInterface $scopeConfigInterface,
         SerializerInterface $serializer,
         PackageCollectionFactory $collectionFactory
     ) {
-        $this->scopeConfig = $scopeConfig;
+        $this->scopeConfigInterface = $scopeConfigInterface;
         $this->serializer = $serializer;
         $this->packageCollectionFactory = $collectionFactory;
     }
@@ -90,7 +73,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getCodMethods($store = null): array
     {
-        $paymentMethods = $this->scopeConfig->getValue(
+        $paymentMethods = $this->scopeConfigInterface->getValue(
             self::CONFIG_PATH_COD_METHODS,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -123,7 +106,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getTermsOfTrade($store = null): string
     {
-        return (string)$this->scopeConfig->getValue(
+        return (string)$this->scopeConfigInterface->getValue(
             self::CONFIG_PATH_TERMS_OF_TRADE,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -138,7 +121,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getCutOffTime($store = null): string
     {
-        return (string)$this->scopeConfig->getValue(
+        return (string)$this->scopeConfigInterface->getValue(
             self::CONFIG_PATH_CUT_OFF_TIME,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -153,7 +136,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getWeightUnit($store = null): string
     {
-        $weightUOM = $this->scopeConfig->getValue(
+        $weightUOM = $this->scopeConfigInterface->getValue(
             self::CONFIG_PATH_WEIGHT_UNIT,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -175,54 +158,6 @@ class CoreConfig implements CoreConfigInterface
         }
 
         return $unit;
-    }
-
-    /**
-     * Get the general dimensions unit.
-     *
-     * @fixme(nr): not in use, remove?
-     *
-     * @return string
-     */
-    public function getDimensionsUOM(): string
-    {
-        return $this->getDimensionsUOMfromWeightUOM(
-            $this->getWeightUnit()
-        );
-    }
-
-    /**
-     * Maps Magento's internal unit names to SDKs unit names
-     *
-     * @fixme(nr): not in use, remove?
-     *
-     * @param string $unit
-     * @return string
-     */
-    public function normalizeDimensionUOM(string $unit): string
-    {
-        if (array_key_exists($unit, $this->dimensionUnitMap)) {
-            return $this->dimensionUnitMap[$unit];
-        }
-
-        return $unit;
-    }
-
-    /**
-     * Derives the current dimensions UOM from weight UOM (so both UOMs are in SU or SI format, but always consistent)
-     *
-     * @fixme(nr): not in use, remove?
-     *
-     * @param string $unit
-     * @return string
-     */
-    private function getDimensionsUOMfromWeightUOM($unit): string
-    {
-        if (array_key_exists($unit, $this->weightUnitToDimensionUnitMap)) {
-            return $this->weightUnitToDimensionUnitMap[$unit];
-        }
-
-        return self::DEFAULT_DIMENSION_UNIT;
     }
 
     /**
@@ -250,7 +185,7 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getEuCountries($store = null): array
     {
-        $euCountries = $this->scopeConfig->getValue(
+        $euCountries = $this->scopeConfigInterface->getValue(
             Carrier::XML_PATH_EU_COUNTRIES_LIST,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -262,7 +197,7 @@ class CoreConfig implements CoreConfigInterface
     /**
      * Returns the shipping origin country
      *
-     * @see Config
+     * @see ShippingConfig
      *
      * @param mixed  $store
      * @param string $scope
@@ -271,8 +206,8 @@ class CoreConfig implements CoreConfigInterface
      */
     public function getOriginCountry($store = null, $scope = ScopeInterface::SCOPE_STORE): string
     {
-        return (string)$this->scopeConfig->getValue(
-            Config::XML_PATH_ORIGIN_COUNTRY_ID,
+        return (string)$this->scopeConfigInterface->getValue(
+            ShippingConfig::XML_PATH_ORIGIN_COUNTRY_ID,
             $scope,
             $store
         );
@@ -288,7 +223,7 @@ class CoreConfig implements CoreConfigInterface
     {
         /** @var mixed[] $configValue */
         $configValue = $this->serializer->unserialize(
-            $this->scopeConfig->getValue(
+            $this->scopeConfigInterface->getValue(
                 self::CONFIG_PATH_OWN_PACKAGES,
                 ScopeInterface::SCOPE_STORE,
                 $store
@@ -317,5 +252,70 @@ class CoreConfig implements CoreConfigInterface
         $collection = $this->getOwnPackages($store);
 
         return $collection->getDefaultPackage();
+    }
+
+    /**
+     * @param string $carrierCode
+     * @param mixed|null $store
+     * @return string
+     */
+    public function getCarrierTitleByCode(string $carrierCode, $store = null): string
+    {
+        return $this->scopeConfigInterface->getValue(
+            'carriers/' . $carrierCode . '/title',
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * @param mixed|null $store
+     * @return string
+     */
+    public function getRawWeightUnit($store = null): string
+    {
+        $weightUnit =  $this->scopeConfigInterface->getValue(
+            self::CONFIG_PATH_WEIGHT_UNIT,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+
+        return $this->normalizeRawWeight($weightUnit);
+    }
+
+    /**
+     * @param string $weightUnit
+     * @return string
+     */
+    public function normalizeRawWeight(string $weightUnit): string
+    {
+        $weightUnit = (strtoupper($weightUnit) === \Zend_Measure_Weight::LBS)
+            ? \Zend_Measure_Weight::POUND
+            : \Zend_Measure_Weight::KILOGRAM;
+
+        return $weightUnit;
+    }
+
+    /**
+     * @param string $weightUnit
+     * @return string
+     */
+    public function getRawDimensionUnit(string $weightUnit): string
+    {
+        $dimensionUnit = (strtoupper($weightUnit) === \Zend_Measure_Weight::POUND)
+            ? \Zend_Measure_Length::INCH
+            : \Zend_Measure_Length::CENTIMETER;
+
+        return $dimensionUnit;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAutoRetryEnabled(): bool
+    {
+        return $this->scopeConfigInterface->isSetFlag(
+            self::CONFIG_PATH_RETRY_FAILED_SHIPMENTS
+        );
     }
 }
