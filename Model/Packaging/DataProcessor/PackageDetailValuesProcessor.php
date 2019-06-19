@@ -73,11 +73,26 @@ class PackageDetailValuesProcessor extends AbstractProcessor
     ) {
         foreach ($shippingOption->getInputs() as $input) {
             if ($input->getCode() === 'weight') {
-                $input->setDefaultValue((string) $shipment->getTotalWeight());
+                $input->setDefaultValue((string) $this->getTotalWeight($shipment));
             } elseif ($input->getCode() === 'weightUnit') {
                 $input->setDefaultValue($this->config->getWeightUnit($shipment->getStoreId()));
             }
         }
+    }
+
+    /**
+     * @param Shipment $shipment
+     * @return float|int
+     */
+    private function getTotalWeight(Shipment $shipment)
+    {
+        $weight = 0.0;
+        /** @var Shipment\Item $item */
+        foreach ($shipment->getAllItems() as $item) {
+            $weight += $item->getWeight() * $item->getQty();
+        }
+
+        return $weight;
     }
 
     /**

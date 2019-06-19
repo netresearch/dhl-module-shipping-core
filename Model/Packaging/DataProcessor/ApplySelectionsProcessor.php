@@ -69,7 +69,7 @@ class ApplySelectionsProcessor extends AbstractProcessor
 
         $addressId = (int)$shipment->getShippingAddressId();
 
-        foreach ($this->loadSelections($addressId) as $selection) {
+        foreach ($this->loadSelections((int) $addressId) as $selection) {
             foreach ($optionsData as $shippingOption) {
                 if ($shippingOption->getCode() !== $selection->getShippingOptionCode()) {
                     continue;
