@@ -9,7 +9,6 @@ namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Config\CoreConfigInterface;
 use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
 use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Magento\Sales\Model\Order\Shipment;
