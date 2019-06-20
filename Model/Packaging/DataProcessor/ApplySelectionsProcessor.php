@@ -75,7 +75,7 @@ class ApplySelectionsProcessor extends AbstractProcessor
                     continue;
                 }
                 foreach ($shippingOption->getInputs() as $input) {
-                    if ($input->getCode() !== 'defaultValue') {
+                    if ($input->getCode() !== $selection->getInputCode()) {
                         continue;
                     }
                     $input->setDefaultValue($selection->getInputValue());
