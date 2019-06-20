@@ -73,14 +73,6 @@ interface ConfigInterface
     public function getWeightUnit($store = null): string;
 
     /**
-     * Get the general dimensions unit.
-     *
-     * @param int|string|null $store
-     * @return string
-     */
-    public function getDimensionsUOM($store = null): string;
-
-    /**
      * Checks if route is dutiable by stores origin country and eu country list
      *
      * @param string $receiverCountry

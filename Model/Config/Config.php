@@ -159,50 +159,6 @@ class Config implements ConfigInterface
 
         return $unit;
     }
-
-    /**
-     * Get the general dimensions unit.
-     *
-     * @param int|string|null $store
-     * @return string
-     */
-    public function getDimensionsUOM($store = null): string
-    {
-        return $this->getDimensionsUOMfromWeightUOM(
-            $this->getWeightUnit($store)
-        );
-    }
-
-    /**
-     * Maps Magento's internal unit names to SDKs unit names
-     *
-     * @param string $unit
-     * @return string
-     */
-    public function normalizeDimensionUOM(string $unit): string
-    {
-        if (array_key_exists($unit, $this->dimensionUnitMap)) {
-            return $this->dimensionUnitMap[$unit];
-        }
-
-        return $unit;
-    }
-
-    /**
-     * Derives the current dimensions UOM from weight UOM (so both UOMs are in SU or SI format, but always consistent)
-     *
-     * @param string $unit
-     * @return string
-     */
-    private function getDimensionsUOMfromWeightUOM($unit): string
-    {
-        if (array_key_exists($unit, $this->weightUnitToDimensionUnitMap)) {
-            return $this->weightUnitToDimensionUnitMap[$unit];
-        }
-
-        return self::DEFAULT_DIMENSION_UNIT;
-    }
-
     /**
      * Checks if route is dutiable by stores origin country and eu country list
      *

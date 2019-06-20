@@ -116,7 +116,9 @@ class PackageDetailValuesProcessor extends AbstractProcessor
             }
 
             if ($input->getCode() === 'sizeUnit') {
-                $input->setDefaultValue($this->config->getDimensionsUOM($shipment->getStoreId()));
+                $input->setDefaultValue(
+                    $this->config->getRawDimensionUnit($this->config->getRawWeightUnit($shipment->getStoreId()))
+                );
             }
         }
     }
