@@ -41,7 +41,6 @@ class PackagingDataProviderTest extends TestCase
     {
         $objectManager = ObjectManager::getInstance();
         /** @var PackagingDataProvider $subject */
-//        $subject = $objectManager->create(PackagingDataProvider::class);
         $subject = $objectManager->create(PackagingDataProvider::class, ['reader' => new FakeReader()]);
         $packagingData = $subject->getData($shipment);
         self::assertInstanceOf(ShippingDataInterface::class, $packagingData);
