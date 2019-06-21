@@ -159,6 +159,7 @@ class Config implements ConfigInterface
 
         return $unit;
     }
+
     /**
      * Checks if route is dutiable by stores origin country and eu country list
      *

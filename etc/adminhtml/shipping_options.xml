@@ -23,8 +23,8 @@
                         <label>Width</label>
                         <inputType>number</inputType>
                     </input>
-                    <input code="heigth">
-                        <label>Heigth</label>
+                    <input code="height">
+                        <label>Height</label>
                         <inputType>number</inputType>
                     </input>
                     <input code="length">
