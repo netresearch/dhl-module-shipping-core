@@ -74,7 +74,7 @@ class PackageDetailValuesProcessor extends AbstractProcessor
             if ($input->getCode() === 'weight') {
                 $input->setDefaultValue((string) $this->getTotalWeight($shipment));
             } elseif ($input->getCode() === 'weightUnit') {
-                $input->setDefaultValue($this->config->getWeightUnit($shipment->getStoreId()));
+                $input->setDefaultValue($this->config->getRawWeightUnit($shipment->getStoreId()));
             }
         }
     }
