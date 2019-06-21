@@ -67,14 +67,10 @@ class DisableCodPaymentMethods implements ObserverInterface
             return;
         }
 
-        $methodParts = explode('_', $shippingMethod);
-        $carrier = array_shift($methodParts);
-        if (\array_key_exists($carrier, $this->codSupportMap)
-            && $this->config->isCodPaymentMethod(
-                $methodInstance->getCode(),
-                $quote->getStoreId()
-            )
-        ) {
+        $carrier = strtok($shippingMethod, '_');
+        $isCodPaymentMethod = $this->config->isCodPaymentMethod($methodInstance->getCode(), $quote->getStoreId());
+
+        if ($isCodPaymentMethod && isset($this->codSupportMap[$carrier])) {
             $checkResult->setData('is_available', $this->codSupportMap[$carrier]->hasCodSupport($quote));
         }
     }
