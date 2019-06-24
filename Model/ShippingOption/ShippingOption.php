@@ -25,53 +25,27 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @var string
      */
-    private $label;
+    private $label = '';
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface[]
      */
-    private $inputs;
+    private $inputs = [];
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface[]
      */
-    private $routes;
+    private $routes = [];
 
     /**
      * @var int
      */
-    private $sortOrder;
+    private $sortOrder = 0;
 
     /**
      * @var int[]
      */
-    private $requiredItemIds;
-
-    /**
-     * ShippingOption constructor.
-     *
-     * @param string $code
-     * @param string $label
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface[] $inputs
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface[] $routes
-     * @param int $sortOrder
-     * @param int[] $requiredItemIds
-     */
-    public function __construct(
-        string $code,
-        string $label = '',
-        array $inputs = [],
-        array $routes = [],
-        int $sortOrder = 0,
-        array $requiredItemIds = []
-    ) {
-        $this->code = $code;
-        $this->label = $label;
-        $this->inputs = $inputs;
-        $this->routes = $routes;
-        $this->sortOrder = $sortOrder;
-        $this->requiredItemIds = $requiredItemIds;
-    }
+    private $requiredItemIds = [];
 
     /**
      * @return string

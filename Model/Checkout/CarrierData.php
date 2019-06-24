@@ -31,48 +31,22 @@ class CarrierData implements CarrierDataInterface
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
-    private $packageOptions;
+    private $packageOptions = [];
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface[]
      */
-    private $itemOptions;
+    private $itemOptions = [];
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
-    private $serviceOptions;
+    private $serviceOptions = [];
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface[]
      */
-    private $compatibilityData;
-
-    /**
-     * CarrierData constructor.
-     *
-     * @param string $code
-     * @param \Dhl\ShippingCore\Api\Data\MetadataInterface $metadata
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[] $packageOptions
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface[] $itemOptions
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[] $serviceOptions
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface[] $compatibilityData
-     */
-    public function __construct(
-        string $code,
-        MetadataInterface $metadata = null,
-        array $packageOptions = [],
-        array $itemOptions = [],
-        array $serviceOptions = [],
-        array $compatibilityData = []
-    ) {
-        $this->code = $code;
-        $this->metadata = $metadata;
-        $this->packageOptions = $packageOptions;
-        $this->itemOptions = $itemOptions;
-        $this->serviceOptions = $serviceOptions;
-        $this->compatibilityData = $compatibilityData;
-    }
+    private $compatibilityData = [];
 
     /**
      * @return string

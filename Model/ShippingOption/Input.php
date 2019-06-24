@@ -21,57 +21,57 @@ class Input implements InputInterface
     /**
      * @var string
      */
-    private $inputType;
-
-    /**
-     * @var string
-     */
     private $code;
 
     /**
      * @var string
      */
-    private $defaultValue;
-
-    /**
-     * @var bool
-     */
-    private $disabled;
+    private $inputType = 'text';
 
     /**
      * @var string
      */
-    private $label;
+    private $defaultValue = '';
 
     /**
      * @var bool
      */
-    private $labelVisible;
+    private $disabled = false;
+
+    /**
+     * @var string
+     */
+    private $label = '';
+
+    /**
+     * @var bool
+     */
+    private $labelVisible = true;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface[]
      */
-    private $options;
+    private $options = [];
 
     /**
      * @var string
      */
-    private $tooltip;
+    private $tooltip = '';
 
     /**
      * @var string
      */
-    private $placeholder;
+    private $placeholder = '';
 
     /**
      * @var int
      */
-    private $sortOrder;
+    private $sortOrder = 0;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ValidationRuleInterface[]
      */
-    private $validationRules;
+    private $validationRules = [];
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface|null
@@ -79,47 +79,11 @@ class Input implements InputInterface
     private $comment;
 
     /**
-     * Input constructor.
-     *
-     * @param string $code
-     * @param string $inputType
-     * @param string $label
-     * @param string $defaultValue
-     * @param bool $disabled
-     * @param bool $labelVisible
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface[] $options
-     * @param string $tooltip
-     * @param string $placeholder
-     * @param int $sortOrder
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ValidationRuleInterface[] $validationRules
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface|null $comment
+     * @return string
      */
-    public function __construct(
-        string $code,
-        string $inputType = 'text',
-        string $label = '',
-        string $defaultValue = '',
-        bool $disabled = false,
-        bool $labelVisible = true,
-        array $options = [],
-        string $tooltip = '',
-        string $placeholder = '',
-        int $sortOrder = 0,
-        array $validationRules = [],
-        $comment = null
-    ) {
-        $this->inputType = $inputType;
-        $this->code = $code;
-        $this->label = $label;
-        $this->defaultValue = $defaultValue;
-        $this->disabled = $disabled;
-        $this->labelVisible = $labelVisible;
-        $this->options = $options;
-        $this->tooltip = $tooltip;
-        $this->placeholder = $placeholder;
-        $this->sortOrder = $sortOrder;
-        $this->validationRules = $validationRules;
-        $this->comment = $comment;
+    public function getCode(): string
+    {
+        return $this->code;
     }
 
     /**
@@ -128,14 +92,6 @@ class Input implements InputInterface
     public function getInputType(): string
     {
         return $this->inputType;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCode(): string
-    {
-        return $this->code;
     }
 
     /**
@@ -165,7 +121,7 @@ class Input implements InputInterface
     /**
      * @return bool
      */
-    public function hasLabelVisible(): bool
+    public function isLabelVisible(): bool
     {
         return $this->labelVisible;
     }
@@ -219,19 +175,19 @@ class Input implements InputInterface
     }
 
     /**
-     * @param string $inputType
-     */
-    public function setInputType(string $inputType)
-    {
-        $this->inputType = $inputType;
-    }
-
-    /**
      * @param string $code
      */
     public function setCode(string $code)
     {
         $this->code = $code;
+    }
+
+    /**
+     * @param string $inputType
+     */
+    public function setInputType(string $inputType)
+    {
+        $this->inputType = $inputType;
     }
 
     /**

@@ -19,24 +19,12 @@ class Comment implements CommentInterface
     /**
      * @var string
      */
-    private $content;
+    private $content = '';
 
     /**
      * @var string|null
      */
     private $footnoteId;
-
-    /**
-     * Comment constructor.
-     *
-     * @param string $content
-     * @param string|null $footnoteId
-     */
-    public function __construct(string $content = '', $footnoteId = null)
-    {
-        $this->content = $content;
-        $this->footnoteId = $footnoteId;
-    }
 
     /**
      * @return string

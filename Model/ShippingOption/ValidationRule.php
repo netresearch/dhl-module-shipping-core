@@ -19,24 +19,12 @@ class ValidationRule implements ValidationRuleInterface
     /**
      * @var string
      */
-    private $name;
+    private $name = '';
 
     /**
      * @var mixed
      */
-    private $param;
-
-    /**
-     * ValidationRule constructor.
-     *
-     * @param string $name
-     * @param mixed $param
-     */
-    public function __construct(string $name = '', $param = null)
-    {
-        $this->name = $name;
-        $this->param = $param;
-    }
+    private $param = null;
 
     /**
      * @return string

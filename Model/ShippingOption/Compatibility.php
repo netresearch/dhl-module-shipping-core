@@ -19,58 +19,32 @@ class Compatibility implements CompatibilityInterface
     /**
      * @var string
      */
-    private $id;
+    private $id = '';
 
     /**
      * @var string[]
      */
-    private $subjects;
+    private $subjects = [];
 
     /**
      * @var string
      */
-    private $errorMessage;
+    private $errorMessage = '';
 
     /**
      * @var string[]
      */
-    private $masters;
+    private $masters = [];
 
     /**
      * @var bool
      */
-    private $incompatibilityRule;
+    private $incompatibilityRule = false;
 
     /**
      * @var bool
      */
-    private $hideSubjects;
-
-    /**
-     * Compatibility constructor.
-     *
-     * @param string[] $subjects
-     * @param string $errorMessage
-     * @param string $id
-     * @param string[] $masters
-     * @param bool $incompatibilityRule
-     * @param bool $hideSubjects
-     */
-    public function __construct(
-        array $subjects = [],
-        string $errorMessage = '',
-        string $id = '',
-        array $masters = [],
-        bool $incompatibilityRule = false,
-        bool $hideSubjects = false
-    ) {
-        $this->subjects = $subjects;
-        $this->errorMessage = $errorMessage;
-        $this->id = $id;
-        $this->masters = $masters;
-        $this->incompatibilityRule = $incompatibilityRule;
-        $this->hideSubjects = $hideSubjects;
-    }
+    private $hideSubjects = false;
 
     /**
      * @return string

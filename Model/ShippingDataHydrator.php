@@ -54,7 +54,10 @@ class ShippingDataHydrator
     /**
      * Convert a plain nested array of scalar types into a ShippingDataInterface object.
      *
-     * @param array $data
+     * Note: For M2.2 compatibility, created types must not have constructors with required values. Only populate
+     * entities through setters.
+     *
+     * @param mixed[] $data
      * @return ShippingDataInterface
      * @throws LocalizedException
      */

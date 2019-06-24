@@ -66,7 +66,7 @@ interface InputInterface
      *
      * @return bool
      */
-    public function hasLabelVisible(): bool;
+    public function isLabelVisible(): bool;
 
     /**
      * Obtain a pre-defined set of allowed values, e.g for a select type input.

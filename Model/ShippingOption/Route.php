@@ -19,31 +19,17 @@ class Route implements RouteInterface
     /**
      * @var string
      */
-    private $origin;
+    private $origin = '';
 
     /**
      * @var string[]
      */
-    private $includeDestinations;
+    private $includeDestinations = [];
 
     /**
      * @var string[]
      */
-    private $excludeDestinations;
-
-    /**
-     * Route constructor.
-     *
-     * @param string $origin
-     * @param string[] $includeDestinations
-     * @param string[] $excludeDestinations
-     */
-    public function __construct(string $origin = '', array $includeDestinations = [], array $excludeDestinations = [])
-    {
-        $this->origin = $origin;
-        $this->includeDestinations = $includeDestinations;
-        $this->excludeDestinations = $excludeDestinations;
-    }
+    private $excludeDestinations = [];
 
     /**
      * @return string

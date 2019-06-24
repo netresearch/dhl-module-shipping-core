@@ -19,24 +19,12 @@ class ItemShippingOptions implements ItemShippingOptionsInterface
     /**
      * @var int
      */
-    private $itemId;
+    private $itemId = 0;
 
     /**
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[]
      */
-    private $shippingOptions;
-
-    /**
-     * ItemShippingOptions constructor.
-     *
-     * @param int $itemId
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface[] $shippingOptions
-     */
-    public function __construct(int $itemId = 0, array $shippingOptions = [])
-    {
-        $this->itemId = $itemId;
-        $this->shippingOptions = $shippingOptions;
-    }
+    private $shippingOptions = [];
 
     /**
      * @return int

@@ -25,45 +25,22 @@ class Footnote implements FootnoteInterface
     /**
      * @var string
      */
-    private $content;
+    private $content = '';
 
     /**
      * @var string[]
      */
-    private $subjects;
+    private $subjects = [];
 
     /**
      * @var bool
      */
-    private $subjectsMustBeSelected;
+    private $subjectsMustBeSelected = false;
 
     /**
      * @var bool
      */
-    private $subjectsMustBeAvailable;
-
-    /**
-     * Footnote constructor.
-     *
-     * @param string $id
-     * @param string $content
-     * @param string[] $subjects
-     * @param bool $subjectsMustBeSelected
-     * @param bool $subjectsMustBeAvailable
-     */
-    public function __construct(
-        string $id,
-        string $content = '',
-        array $subjects = [],
-        bool $subjectsMustBeSelected = false,
-        bool $subjectsMustBeAvailable = false
-    ) {
-        $this->id = $id;
-        $this->content = $content;
-        $this->subjects = $subjects;
-        $this->subjectsMustBeSelected = $subjectsMustBeSelected;
-        $this->subjectsMustBeAvailable = $subjectsMustBeAvailable;
-    }
+    private $subjectsMustBeAvailable = false;
 
     /**
      * @return string
