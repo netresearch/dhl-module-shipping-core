@@ -9,7 +9,6 @@ namespace Dhl\ShippingCore\Controller\Adminhtml\Order\Shipment;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Forward;
-use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Serialize\Serializer\Json;
@@ -30,11 +29,6 @@ class Save extends Action
      * @see _isAllowed()
      */
     const ADMIN_RESOURCE = 'Magento_Sales::shipment';
-
-    /**
-     * @var array
-     */
-    protected $_publicActions = ['save'];
 
     /**
      * @var Json
@@ -63,17 +57,6 @@ class Save extends Action
      */
     public function execute(): ResultInterface
     {
-        /** @var Redirect $resultRedirect */
-        $resultRedirect = $this->resultRedirectFactory->create();
-
-        $formKeyIsValid = $this->_formKeyValidator->validate($this->getRequest());
-        $isPost         = $this->getRequest()->isPost();
-
-        if (!$formKeyIsValid || !$isPost) {
-            $this->messageManager->addError(__('We can\'t save the shipment right now.'));
-            return $resultRedirect->setPath('sales/order/index');
-        }
-
         $data          = $this->getRequest()->getParam('data');
         $data          = $this->jsonSerializer->unserialize($data);
         $shipmentItems = [];
