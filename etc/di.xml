@@ -262,6 +262,7 @@
             <argument name="arrayProcessors" xsi:type="array">
                 <item name="dhlFilterCarriersProcessor" sortOrder="0" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\FilterCarriersProcessor</item>
                 <item name="dhlCloneItemTemplatesProcessor" sortOrder="1" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\CloneItemTemplatesProcessor</item>
+                <item name="dhlDefaultConfigValueProcessor" sortOrder="2" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\DefaultConfigValueProcessor</item>
             </argument>
         </arguments>
     </type>

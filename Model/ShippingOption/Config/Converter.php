@@ -73,10 +73,26 @@ class Converter implements ConverterInterface
             foreach ($node->childNodes as $childNode) {
                 if ($this->isNodeApplicable($childNode)) {
                     if ($childNode->hasAttributes()) {
-                        $key = $childNode->attributes->item(0)->localName;
-                        $value = $childNode->attributes->item(0)->textContent;
-                        $result[$value] = $this->toArray($childNode);
-                        $result[$value][$key] = $value;
+                        $attributes = [];
+
+                        /** @var \DOMAttr $attribute */
+                        foreach ($childNode->attributes as $attribute) {
+                            $key   = $attribute->localName;
+                            $value = $attribute->textContent;
+
+                            $attributes[$key] = $value;
+                        }
+
+                        $firstValue = $attributes['code'];
+
+                        $result[$firstValue] = $this->toArray($childNode);
+                        $result[$firstValue] = array_merge($result[$firstValue], $attributes);
+
+//                        $key = $childNode->attributes->item(0)->localName;
+//                        $value = $childNode->attributes->item(0)->textContent;
+//
+//                        $result[$value] = $this->toArray($childNode);
+//                        $result[$value][$key] = $value;
                     } elseif ($this->isTextNode($childNode)) {
                         if (trim($childNode->textContent)) {
                             $result[] = $childNode->textContent;
