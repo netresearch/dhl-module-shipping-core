@@ -161,6 +161,14 @@ class Converter implements ConverterInterface
      */
     private function isNodeApplicable(\DOMNode $node): bool
     {
-        return in_array($node->nodeType, [1, 3, 4], true);
+        return in_array(
+            $node->nodeType,
+            [
+                XML_ELEMENT_NODE,
+                XML_TEXT_NODE ,
+                XML_CDATA_SECTION_NODE
+            ],
+            true
+        );
     }
 }
