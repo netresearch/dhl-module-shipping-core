@@ -38,65 +38,79 @@ class RouteProcessorTest extends TestCase
 
     public function dataProvider(): array
     {
+        $optionNoRoute = new ShippingOption();
+        $optionNoRoute->setCode('test');
+
+        $routeEu = new Route();
+        $routeEu->setIncludeDestinations(['eu']);
+        $optionDestinationEu = new ShippingOption();
+        $optionDestinationEu->setCode('test');
+        $optionDestinationEu->setRoutes([$routeEu]);
+
+        $routeNonEu = new Route();
+        $routeNonEu->setExcludeDestinations(['eu']);
+        $optionDestinationNonEu = new ShippingOption();
+        $optionDestinationNonEu->setCode('test');
+        $optionDestinationNonEu->setRoutes([$routeNonEu]);
+
+        $routeNonIntl = new Route();
+        $routeNonIntl->setExcludeDestinations(['intl']);
+        $optionDestinationNonIntl = new ShippingOption();
+        $optionDestinationNonIntl->setCode('test');
+        $optionDestinationNonIntl->setRoutes([$routeNonIntl]);
+
+        $routeDeToIntl = new Route();
+        $routeDeToIntl->setOrigin('de');
+        $routeDeToIntl->setIncludeDestinations(['intl']);
+        $optionDeToIntl = new ShippingOption();
+        $optionDeToIntl->setCode('test');
+        $optionDeToIntl->setRoutes([$routeNonIntl]);
+
         return [
             'de => us, no routes specified' => [
-                'optionsData' => [new ShippingOption('test')],
+                'optionsData' => [$optionNoRoute],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'us',
                 'expectedCount' => 1,
             ],
             'de => us, only to europe allowed' => [
-                'optionsData' => [new ShippingOption('test', '', [], [
-                    new Route('', ['eu'])
-                ])],
+                'optionsData' => [$optionDestinationEu],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'us',
                 'expectedCount' => 0,
             ],
             'de => at, only to europe allowed' => [
-                'optionsData' => [new ShippingOption('test', '', [], [
-                    new Route('', ['eu'])
-                ])],
+                'optionsData' => [$optionDestinationEu],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'at',
                 'expectedCount' => 1,
             ],
             'de => us, europe not allowed' => [
-                'optionsData' => [new ShippingOption('test', '', [], [
-                    new Route('', [], ['eu'])
-                ])],
+                'optionsData' => [$optionDestinationNonEu],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'us',
                 'expectedCount' => 1,
             ],
             'de => at, europe not allowed' => [
-                'optionsData' => [new ShippingOption('test', '', [], [
-                    new Route('', [], ['eu'])
-                ])],
+                'optionsData' => [$optionDestinationNonEu],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'at',
                 'expectedCount' => 0,
             ],
             'de => de, only domestic allowed' => [
-                'optionsData' => [new ShippingOption('test', '', [], [
-                    new Route('', [], ['intl'])
-                ])],
+                'optionsData' => [$optionDestinationNonIntl],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'de',
                 'expectedCount' => 1,
             ],
             'de => at, only domestic allowed' => [
-                'optionsData' => [new ShippingOption('test', '', [], [
-                    new Route('', [], ['eu'])
-                ])],
+                'optionsData' => [$optionDestinationNonIntl],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'at',
                 'expectedCount' => 0,
             ],
             'us => hk, only from de allowed' => [
-                'optionsData' => [new ShippingOption('test', '', [], [
-                    new Route('de', ['intl'], [])
-                ])],
+                'optionsData' => [$optionDeToIntl],
                 'originCountryId' => 'us',
                 'destinationCountryId' => 'hk',
                 'expectedCount' => 0,
@@ -105,11 +119,12 @@ class RouteProcessorTest extends TestCase
     }
 
     /**
-     * @param array $optionsData
+     * @dataProvider dataProvider
+     *
+     * @param mixed[] $optionsData
      * @param string $originCountryId
      * @param string $destinationCountryId
      * @param int $expectedCount
-     * @dataProvider dataProvider
      */
     public function testProcess(
         array $optionsData,
