@@ -69,7 +69,7 @@ class Converter implements ConverterInterface
         }
         if ($this->containsArray($node)) {
             $result = [];
-            /** @var \DomNode $childNode */
+            /** @var \DOMNode $childNode */
             foreach ($node->childNodes as $childNode) {
                 if ($this->isNodeApplicable($childNode)) {
                     if ($childNode->hasAttributes()) {
@@ -128,10 +128,10 @@ class Converter implements ConverterInterface
     }
 
     /**
-     * @param \DomNode $node
+     * @param \DOMNode $node
      * @return bool
      */
-    private function isTextNode(\DomNode $node): bool
+    private function isTextNode(\DOMNode $node): bool
     {
         if ($node instanceof \DOMText) {
             return true;
