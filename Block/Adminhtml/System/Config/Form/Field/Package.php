@@ -112,7 +112,6 @@ class Package extends AbstractFieldArray
             PackageModel::KEY_IS_DEFAULT,
             [
                 'label' => __('Set Default'),
-                'renderer' => $this->getTemplateRenderer(),
             ]
         );
 
@@ -143,26 +142,45 @@ class Package extends AbstractFieldArray
     }
 
     /**
-     * @return PackageDefault|BlockInterface
-     * @throws LocalizedException
+     * Render array cell for prototypeJS template.
+     *
+     * The `is_default` radio button needs special markup. The input ID is stripped of the element name to make it
+     * a radio group spanning all package definitions.
+     *
+     * @param string $columnName
+     * @return string
+     * @throws \Exception
      */
-    private function getTemplateRenderer()
+    public function renderCellTemplate($columnName)
     {
-        if (!$this->templateRenderer) {
-            $this->templateRenderer = $this->getLayout()->createBlock(
-                Template::class,
-                'globalwebservices.mypackage.defaultPackage',
-                [
-                    'data' => [
-                        'template' => 'Dhl_ShippingCore::system/config/defaultPackage.phtml',
-                        'is_render_to_js_template' => true,
-                    ],
-                ]
-            );
-            $this->templateRenderer->setClass('package');
+        if ($columnName !== PackageModel::KEY_IS_DEFAULT) {
+            return parent::renderCellTemplate($columnName);
         }
 
-        return $this->templateRenderer;
+        $attributes = [
+            'type' => 'radio',
+            'value' => '<%- _id %>',
+            'id' => $this->_getCellInputElementId('<%- _id %>', $columnName),
+            'name' => str_replace('[<%- _id %>]', '', $this->_getCellInputElementName($columnName)),
+            'size' => $this->_columns[$columnName]['size'],
+            'style' => $this->_columns[$columnName]['style'],
+            'class' => $this->_columns[$columnName]['class'] ?? 'input-radio',
+        ];
+
+        $attributes = array_reduce(
+            array_keys($attributes),
+            function ($output, $attributeKey) use ($attributes) {
+                if (!empty($attributes[$attributeKey])) {
+                    $output[]= sprintf('%s="%s"', $attributeKey, $attributes[$attributeKey]);
+                }
+
+                return $output;
+            },
+            []
+        );
+
+        $attributes = implode(' ', $attributes);
+        return "<input $attributes />";
     }
 
     /**
