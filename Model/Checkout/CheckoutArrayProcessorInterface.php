@@ -19,7 +19,7 @@ interface CheckoutArrayProcessorInterface
      * modify it according to business logic.
      *
      * @param mixed[] $shippingData
-     * @param int     $storeId
+     * @param int $storeId
      *
      * @return mixed[]
      */

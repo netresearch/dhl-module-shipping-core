@@ -39,11 +39,11 @@ class FilterAvailableProcessor implements CheckoutArrayProcessorInterface
      * @param string       $configPath
      * @param string|null $store
      *
-     * @return string
+     * @return bool
      */
-    private function getConfigValue(string $configPath, $store = null): string
+    private function getConfigValue(string $configPath, $store = null): bool
     {
-        return $this->scopeConfig->getValue(
+        return (bool) $this->scopeConfig->getValue(
             $configPath,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -54,7 +54,7 @@ class FilterAvailableProcessor implements CheckoutArrayProcessorInterface
      * Filters the shipping data, removing those entries which are disabled in configuration.
      *
      * @param mixed[] $shippingData
-     * @param int     $storeId
+     * @param int $storeId
      *
      * @return mixed[]
      */
@@ -68,7 +68,7 @@ class FilterAvailableProcessor implements CheckoutArrayProcessorInterface
 
                 foreach ($optionValues as $code => $values) {
                     if (isset($values['available'])) {
-                        $available = (bool) $this->getConfigValue($values['available'], $storeId);
+                        $available = $this->getConfigValue($values['available'], $storeId);
 
                         if (!$available) {
                             unset($shippingData['carriers'][$carrierCode][$optionKey][$code]);
