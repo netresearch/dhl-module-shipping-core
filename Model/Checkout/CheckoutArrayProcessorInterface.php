@@ -9,7 +9,6 @@ namespace Dhl\ShippingCore\Model\Checkout;
 /**
  * Interface CheckoutArrayProcessorInterface
  *
- * @internal
  * @package Dhl\ShippingCore\Api\ShippingOptions
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
