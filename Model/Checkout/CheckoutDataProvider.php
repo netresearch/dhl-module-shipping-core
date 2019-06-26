@@ -26,6 +26,11 @@ class CheckoutDataProvider
     private $reader;
 
     /**
+     * @var CheckoutArrayCompositeProcessor
+     */
+    private $compositeArrayProcessor;
+
+    /**
      * @var CheckoutDataCompositeProcessor
      */
     private $compositeProcessor;
@@ -39,15 +44,18 @@ class CheckoutDataProvider
      * CheckoutDataProvider constructor.
      *
      * @param ReaderInterface $reader
+     * @param CheckoutArrayCompositeProcessor $compositeArrayProcessor
      * @param CheckoutDataCompositeProcessor $compositeProcessor
      * @param ShippingDataHydrator $shippingDataHydrator
      */
     public function __construct(
         ReaderInterface $reader,
+        CheckoutArrayCompositeProcessor $compositeArrayProcessor,
         CheckoutDataCompositeProcessor $compositeProcessor,
         ShippingDataHydrator $shippingDataHydrator
     ) {
         $this->reader = $reader;
+        $this->compositeArrayProcessor = $compositeArrayProcessor;
         $this->compositeProcessor = $compositeProcessor;
         $this->shippingDataHydrator = $shippingDataHydrator;
     }
@@ -62,6 +70,8 @@ class CheckoutDataProvider
     public function getData(string $countryCode, int $storeId, string $postalCode): ShippingDataInterface
     {
         $shippingDataArray = $this->reader->read('frontend');
+        $shippingDataArray = $this->compositeArrayProcessor->processShippingOptions($shippingDataArray, $storeId);
+
         $shippingData = $this->shippingDataHydrator->toObject($shippingDataArray);
 
         foreach ($shippingData->getCarriers() as $carrierData) {

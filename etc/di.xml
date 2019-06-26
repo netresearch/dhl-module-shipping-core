@@ -232,7 +232,14 @@
         </arguments>
     </type>
     <!-- shipping option config processors -->
-    <type name="Dhl\ShippingCore\Model\Checkout\CheckoutDataCompositeProcessor">
+    <type name="Dhl\ShippingCore\Model\Checkout\CheckoutArrayCompositeProcessor">
+        <arguments>
+            <argument name="arrayProcessors" xsi:type="array">
+                <item name="dhlFilterAvailableProcessor" sortOrder="1" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\FilterAvailableProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="\Dhl\ShippingCore\Model\Checkout\CheckoutDataCompositeProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
                 <item name="dhlRouteProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor</item>
