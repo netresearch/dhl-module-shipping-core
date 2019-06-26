@@ -80,7 +80,6 @@ class DefaultConfigValueProcessor implements PackagingArrayProcessorInterface
                                 = $this->getConfigValue($inputValues['defaultConfigValue'], $shipment->getStoreId());
 
                             unset($shippingData['carriers'][$carrierCode][$optionKey][$code]['inputs'][$inputCode]['defaultConfigValue']);
-                            break;
                         }
                     }
                 }

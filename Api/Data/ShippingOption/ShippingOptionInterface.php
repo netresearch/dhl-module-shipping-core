@@ -24,6 +24,13 @@ interface ShippingOptionInterface
     public function getCode(): string;
 
     /**
+     * Obtain shipping option available config path.
+     *
+     * @return string
+     */
+    public function getAvailable(): string;
+
+    /**
      * Obtain shipping option name.
      *
      * @return string
@@ -64,6 +71,13 @@ interface ShippingOptionInterface
      * @return void
      */
     public function setCode(string $code);
+
+    /**
+     * @param string $available
+     *
+     * @return void
+     */
+    public function setAvailable(string $available);
 
     /**
      * @param string $label

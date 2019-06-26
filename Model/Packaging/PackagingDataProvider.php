@@ -74,7 +74,6 @@ class PackagingDataProvider
     public function getData(Shipment $shipment): ShippingDataInterface
     {
         $packagingDataArray = $this->reader->read('adminhtml');
-
         $packagingDataArray = $this->compositeArrayProcessor->processShippingOptions($packagingDataArray, $shipment);
 
         $packagingData = $this->shippingDataHydrator->toObject($packagingDataArray);

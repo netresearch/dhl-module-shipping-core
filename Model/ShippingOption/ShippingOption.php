@@ -24,6 +24,11 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @var string
      */
+    private $available = '1';
+
+    /**
+     * @var string
+     */
     private $label = '';
 
     /**
@@ -52,6 +57,14 @@ class ShippingOption implements ShippingOptionInterface
     public function getCode(): string
     {
         return $this->code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvailable(): string
+    {
+        return $this->available;
     }
 
     /**
@@ -100,6 +113,14 @@ class ShippingOption implements ShippingOptionInterface
     public function setCode(string $code)
     {
         $this->code = $code;
+    }
+
+    /**
+     * @param string $available
+     */
+    public function setAvailable(string $available)
+    {
+        $this->available = $available;
     }
 
     /**

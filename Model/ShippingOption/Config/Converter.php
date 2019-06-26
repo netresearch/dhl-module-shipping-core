@@ -83,16 +83,17 @@ class Converter implements ConverterInterface
                             $attributes[$key] = $value;
                         }
 
-                        $firstValue = $attributes['code'];
+                        // Keep original behaviour to use the first attribute value
+                        // as the key in the result set, so we need to remove all other attributes.
+                        // As the order of attributes may differ, we need to specify a black list
+                        // of attribute names.
+                        $blackList  = ['defaultConfigValue'];
+                        $keys       = array_diff_key($attributes, array_flip($blackList));
+                        $firstKey   = key($keys);
+                        $firstValue = $attributes[$firstKey];
 
                         $result[$firstValue] = $this->toArray($childNode);
                         $result[$firstValue] = array_merge($result[$firstValue], $attributes);
-
-//                        $key = $childNode->attributes->item(0)->localName;
-//                        $value = $childNode->attributes->item(0)->textContent;
-//
-//                        $result[$value] = $this->toArray($childNode);
-//                        $result[$value][$key] = $value;
                     } elseif ($this->isTextNode($childNode)) {
                         if (trim($childNode->textContent)) {
                             $result[] = $childNode->textContent;
