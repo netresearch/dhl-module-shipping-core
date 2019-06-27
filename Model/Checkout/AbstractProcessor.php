@@ -12,11 +12,11 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingOptions\CheckoutProcessorInterface;
 
 /**
- * Interface InternalProcessorInterface
+ * Class AbstractProcessor
  *
+ * @api
  * @package Dhl\ShippingCore\Model\Checkout
  * @author  Max Melzer <max.melzer@netresearch.de>
- * @api
  */
 class AbstractProcessor implements CheckoutProcessorInterface
 {
