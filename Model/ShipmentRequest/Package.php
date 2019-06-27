@@ -75,6 +75,13 @@ class Package implements PackageInterface
     private $contentDescription;
 
     /**
+     * Additional custom data.
+     *
+     * @var array
+     */
+    private $customs;
+
+    /**
      * Package constructor.
      *
      * @param string $productCode
@@ -88,6 +95,7 @@ class Package implements PackageInterface
      * @param float|null $customsValue
      * @param string $contentType
      * @param string $contentDescription
+     * @param array $customs
      */
     public function __construct(
         string $productCode,
@@ -100,7 +108,8 @@ class Package implements PackageInterface
         float $height = null,
         float $customsValue = null,
         string $contentType = '',
-        string $contentDescription = ''
+        string $contentDescription = '',
+        array $customs = []
     ) {
         $this->productCode = $productCode;
         $this->containerType = $containerType;
@@ -113,6 +122,7 @@ class Package implements PackageInterface
         $this->customsValue = $customsValue;
         $this->contentType = $contentType;
         $this->contentDescription = $contentDescription;
+        $this->customs = $customs;
     }
 
     /**
@@ -227,5 +237,25 @@ class Package implements PackageInterface
     public function getContentDescription(): string
     {
         return $this->contentDescription;
+    }
+
+    /**
+     * Obtain package additional customs data.
+     *
+     * @return array
+     */
+    public function getCustoms(): array
+    {
+        return $this->customs;
+    }
+
+    /**
+     * Obtain package export description.
+     *
+     * @return string
+     */
+    public function getExportDescription(): string
+    {
+        return $this->customs['packageExportDescription'] ?? '';
     }
 }

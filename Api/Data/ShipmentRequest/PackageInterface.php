@@ -90,4 +90,18 @@ interface PackageInterface
      * @return string
      */
     public function getContentDescription(): string;
+
+    /**
+     * Obtain package additional customs data.
+     *
+     * @return array
+     */
+    public function getCustoms(): array;
+
+    /**
+     * Obtain package export description.
+     *
+     * @return string
+     */
+    public function getExportDescription(): string;
 }

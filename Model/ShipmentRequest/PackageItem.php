@@ -56,6 +56,13 @@ class PackageItem implements PackageItemInterface
     private $customsValue;
 
     /**
+     * Additional custom data.
+     *
+     * @var array
+     */
+    private $customs;
+
+    /**
      * PackageItem constructor.
      * @param int $orderItemId
      * @param int $productId
@@ -65,6 +72,7 @@ class PackageItem implements PackageItemInterface
      * @param float $weight
      * @param float $price
      * @param float|null $customsValue
+     * @param array $customs
      */
     public function __construct(
         int $orderItemId,
@@ -74,7 +82,8 @@ class PackageItem implements PackageItemInterface
         float $qty,
         float $weight,
         float $price,
-        float $customsValue = null
+        float $customsValue = null,
+        array $customs = []
     ) {
         $this->orderItemId = $orderItemId;
         $this->productId = $productId;
@@ -84,6 +93,7 @@ class PackageItem implements PackageItemInterface
         $this->weight = $weight;
         $this->price = $price;
         $this->customsValue = $customsValue;
+        $this->customs = $customs;
     }
 
     /**
@@ -164,5 +174,45 @@ class PackageItem implements PackageItemInterface
     public function getCustomsValue()
     {
         return $this->customsValue;
+    }
+
+    /**
+     * Obtain item's additional customs data.
+     *
+     * @return array
+     */
+    public function getCustoms(): array
+    {
+        return $this->customs;
+    }
+
+    /**
+     * Obtain item's HS code.
+     *
+     * @return null|string
+     */
+    public function getHsCode()
+    {
+        return $this->customs['hsCode'] ?? null;
+    }
+
+    /**
+     * Obtain item's export description.
+     *
+     * @return string
+     */
+    public function getExportDescription(): string
+    {
+        return $this->customs['exportDescription'] ?? '';
+    }
+
+    /**
+     * Obtain item's dangerous goods category.
+     *
+     * @return null|string
+     */
+    public function getDangerousGoodsCategory()
+    {
+        return $this->customs['dgCategory'] ?? null;
     }
 }

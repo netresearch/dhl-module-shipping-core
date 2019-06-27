@@ -310,6 +310,7 @@ class RequestExtractor implements RequestExtractorInterface
                     'customsValue' => isset($params['customs_value']) ? (float) $params['customs_value'] : null,
                     'contentType' => $params['content_type'] ?? '',
                     'contentDescription' => $params['content_type_other'] ?? '',
+                    'customs' => $params['customs'] ?? [],
                 ]);
 
                 return $package;
@@ -352,6 +353,7 @@ class RequestExtractor implements RequestExtractorInterface
                         'weight' => $itemData['weight'],
                         'price' => (float)$itemData['price'],
                         'customsValue' => isset($itemData['customs_value']) ? (float)$itemData['customs_value'] : null,
+                        'customs' => $itemData['customs'] ?? [],
                     ]);
 
                     return $packageItem;
@@ -390,5 +392,23 @@ class RequestExtractor implements RequestExtractorInterface
         $order = $this->getOrder();
 
         return $this->config->isCodPaymentMethod($order->getPayment()->getMethod(), $storeId);
+    }
+
+    /**
+     * Returns the dangerous goods category of an item.
+     *
+     * @return null|string
+     */
+    public function getDangerousGoodsCategory()
+    {
+        foreach ($this->getAllItems() as $item) {
+            $dgCategory = $item->getDangerousGoodsCategory();
+
+            if ($dgCategory !== null) {
+                return $dgCategory;
+            }
+        }
+
+        return null;
     }
 }

@@ -69,4 +69,32 @@ interface PackageItemInterface
      * @return float|null
      */
     public function getCustomsValue();
+
+    /**
+     * Obtain item's additional customs data.
+     *
+     * @return array
+     */
+    public function getCustoms(): array;
+
+    /**
+     * Obtain item's HS code.
+     *
+     * @return null|string
+     */
+    public function getHsCode();
+
+    /**
+     * Obtain item's export description.
+     *
+     * @return string
+     */
+    public function getExportDescription(): string;
+
+    /**
+     * Obtain item's dangerous goods category.
+     *
+     * @return null|string
+     */
+    public function getDangerousGoodsCategory();
 }
