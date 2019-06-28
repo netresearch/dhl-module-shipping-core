@@ -1,46 +1,78 @@
-#shipping_dhlglobalwebservices_package_dimension {
-    th, td {
-        font-size: 1.2rem;
-        padding: 1.3rem 0;
-        vertical-align: middle;
-        position: relative;
+#config-edit-form {
+    #shipping_dhlglobalwebservices_package_dimension {
+        th, td {
+            font-size: 1.2rem;
+            padding: 1.3rem 0;
+            vertical-align: middle;
+            position: relative;
 
-        &:first-child {
-            padding: 1.3rem 0 1.3rem 1.3rem;
+            &:first-child {
+                padding: 1.3rem 0 1.3rem 1.3rem;
+            }
+        }
+
+        th {
+            span {
+                position: absolute;
+                bottom: .3rem;
+                left: 0;
+                font-size: 1rem;
+                font-weight: 400;
+            }
         }
     }
 
-    th {
-        span {
-            position: absolute;
-            bottom: .3rem;
-            left: 0;
-            font-size: 1rem;
-            font-weight: 400;
+    /**
+     * Use this to style system config groups in a simpler way:
+     *
+     * <fieldset_css>simple</fieldset_css>
+     * <attribute type="expanded">1</attribute>
+     */
+    .section-config.simple {
+        &:not(.active) {
+            display: none;
+        }
+
+        a.open {
+            pointer-events: none;
+            padding: 0 0 0 33%;
+            font-size: 1.5rem;
+        }
+
+        a.open::before {
+            display: none;
+        }
+
+        border: 1px solid #e3e3e3;
+        background: #fbfbfb;
+        margin: 2em 0;
+        padding: 1em 0;
+    }
+
+    /**
+     * DHLGW-389: CSS classes for config fields
+     */
+    .section-config {
+        .value {
+            .w-25 {
+                width: 25% !important;
+            }
+
+            .w-50 {
+                width: 50% !important;
+            }
+
+            .w-75 {
+                width: 75% !important;
+            }
+
+            .w-100 {
+                width: 100% !important;
+            }
+
+            .w-auto {
+                width: auto !important;
+            }
         }
     }
-}
-
-/**
- * Use this to style system config groups in a simpler way:
- *
- * <fieldset_css>simple</fieldset_css>
- * <attribute type="expanded">1</attribute>
- */
-#config-edit-form .section-config.simple {
-    &:not(.active) {
-        display: none;
-    }
-    a.open {
-        pointer-events: none;
-        padding: 0 0 0 33%;
-        font-size: 1.5rem;
-    }
-    a.open::before {
-        display: none;
-    }
-    border: 1px solid #e3e3e3;
-    background: #fbfbfb;
-    margin: 2em 0;
-    padding: 1em 0;
 }
