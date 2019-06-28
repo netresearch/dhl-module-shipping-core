@@ -26,7 +26,7 @@ class Config implements ConfigInterface
     /**
      * @var ScopeConfigInterface
      */
-    private $scopeConfigInterface;
+    private $scopeConfig;
 
     /**
      * @var string[]
@@ -51,16 +51,16 @@ class Config implements ConfigInterface
     /**
      * Config constructor.
      *
-     * @param ScopeConfigInterface $scopeConfigInterface
+     * @param ScopeConfigInterface $scopeConfig
      * @param SerializerInterface $serializer
      * @param PackageCollectionFactory $collectionFactory
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfigInterface,
+        ScopeConfigInterface $scopeConfig,
         SerializerInterface $serializer,
         PackageCollectionFactory $collectionFactory
     ) {
-        $this->scopeConfigInterface = $scopeConfigInterface;
+        $this->scopeConfig = $scopeConfig;
         $this->serializer = $serializer;
         $this->packageCollectionFactory = $collectionFactory;
     }
@@ -73,7 +73,7 @@ class Config implements ConfigInterface
      */
     public function getCodMethods($store = null): array
     {
-        $paymentMethods = $this->scopeConfigInterface->getValue(
+        $paymentMethods = $this->scopeConfig->getValue(
             self::CONFIG_PATH_COD_METHODS,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -106,7 +106,7 @@ class Config implements ConfigInterface
      */
     public function getTermsOfTrade($store = null): string
     {
-        return (string)$this->scopeConfigInterface->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_TERMS_OF_TRADE,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -121,7 +121,7 @@ class Config implements ConfigInterface
      */
     public function getCutOffTime($store = null): string
     {
-        return (string)$this->scopeConfigInterface->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_CUT_OFF_TIME,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -136,7 +136,7 @@ class Config implements ConfigInterface
      */
     public function getWeightUnit($store = null): string
     {
-        $weightUOM = $this->scopeConfigInterface->getValue(
+        $weightUOM = $this->scopeConfig->getValue(
             self::CONFIG_PATH_WEIGHT_UNIT,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -185,7 +185,7 @@ class Config implements ConfigInterface
      */
     public function getEuCountries($store = null): array
     {
-        $euCountries = $this->scopeConfigInterface->getValue(
+        $euCountries = $this->scopeConfig->getValue(
             Carrier::XML_PATH_EU_COUNTRIES_LIST,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -206,7 +206,7 @@ class Config implements ConfigInterface
      */
     public function getOriginCountry($store = null, $scope = ScopeInterface::SCOPE_STORE): string
     {
-        return (string)$this->scopeConfigInterface->getValue(
+        return (string)$this->scopeConfig->getValue(
             ShippingConfig::XML_PATH_ORIGIN_COUNTRY_ID,
             $scope,
             $store
@@ -223,7 +223,7 @@ class Config implements ConfigInterface
     {
         /** @var mixed[] $configValue */
         $configValue = $this->serializer->unserialize(
-            $this->scopeConfigInterface->getValue(
+            $this->scopeConfig->getValue(
                 self::CONFIG_PATH_OWN_PACKAGES,
                 ScopeInterface::SCOPE_STORE,
                 $store
@@ -261,7 +261,7 @@ class Config implements ConfigInterface
      */
     public function getCarrierTitleByCode(string $carrierCode, $store = null): string
     {
-        return $this->scopeConfigInterface->getValue(
+        return $this->scopeConfig->getValue(
             'carriers/' . $carrierCode . '/title',
             ScopeInterface::SCOPE_STORE,
             $store
@@ -274,7 +274,7 @@ class Config implements ConfigInterface
      */
     public function getRawWeightUnit($store = null): string
     {
-        $weightUnit =  $this->scopeConfigInterface->getValue(
+        $weightUnit =  $this->scopeConfig->getValue(
             self::CONFIG_PATH_WEIGHT_UNIT,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -310,12 +310,29 @@ class Config implements ConfigInterface
     }
 
     /**
+     * Check whether or not failed shipments should be automatically retried during bulk/cron processing.
+     *
      * @return bool
      */
-    public function isAutoRetryEnabled(): bool
+    public function isBulkRetryEnabled(): bool
     {
-        return $this->scopeConfigInterface->isSetFlag(
-            self::CONFIG_PATH_RETRY_FAILED_SHIPMENTS
+        return $this->scopeConfig->isSetFlag(
+            self::CONFIG_PATH_AUTORETRY_FAILED
+        );
+    }
+
+    /**
+     * Check whether or not a shipment confirmation email should be sent after successful bulk/cron processing.
+     *
+     * @param mixed|null $store
+     * @return bool
+     */
+    public function isBulkNotificationEnabled($store = null): bool
+    {
+        return (bool) $this->scopeConfig->getValue(
+            self::CONFIG_PATH_AUTOCREATE_NOTIFY,
+            ScopeInterface::SCOPE_STORE,
+            $store
         );
     }
 }

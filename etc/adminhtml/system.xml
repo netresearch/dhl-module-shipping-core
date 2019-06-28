@@ -5,7 +5,7 @@
             <label>DHL Shipping Solutions</label>
             <tab>sales</tab>
             <resource>Magento_Shipping::config_shipping</resource>
-            <group id="dhlglobalwebservices" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label tooltip comment">
+            <group id="dhlglobalwebservices" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="100" translate="label tooltip comment">
                 <label><![CDATA[General Configuration]]></label>
                 <!-- Cash On Delivery Payment Methods -->
                 <field id="cod_methods" translate="label tooltip" type="multiselect" sortOrder="210" showInDefault="1" showInWebsite="0" showInStore="0">
@@ -33,11 +33,8 @@
                     <frontend_model>Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field\Package</frontend_model>
                     <backend_model>Dhl\ShippingCore\Model\Config\Backend\Packages</backend_model>
                 </field>
-                <field id="retry_failed_shipments" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="250" translate="label comment tooltip" type="Netresearch\ConfigFields\Model\Type\Checkbox">
-                    <label><![CDATA[Automatically retry failed shipments]]></label>
-                    <comment><![CDATA[Shipments that failed label creation (Label status: Failed) will automatically be retried, even if no change to the shipment data was made.]]></comment>
-                    <tooltip><![CDATA[If disabled you will have to process all shipments with a failed label yourself. If enabled there can be many label requests for a singular shipment, each failing and increasing load for the automatic processing in general.]]></tooltip>
-                </field>
+
+                <include path="Dhl_ShippingCore::system/600_bulk_settings.xml"/>
             </group>
         </section>
     </system>

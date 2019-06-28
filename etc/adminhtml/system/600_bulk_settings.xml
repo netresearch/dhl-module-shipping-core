@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="bulk_settings" translate="label" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label><![CDATA[Bulk / Cron Settings]]></label>
+        <attribute type="expanded">1</attribute>
+
+        <field id="retry_failed_shipments" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10"
+               translate="label comment tooltip" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+            <label><![CDATA[Retry Failed Shipments]]></label>
+            <comment><![CDATA[Processing of shipments with <em>Label Status: Failed</em> will automatically be retried.]]></comment>
+            <tooltip><![CDATA[If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.]]></tooltip>
+        </field>
+
+        <field id="autocreate_notify" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="20"
+               translate="label comment tooltip" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+            <label><![CDATA[Email Copy of Shipment]]></label>
+            <comment><![CDATA[A confirmation email will be sent to the customer when the shipment was successfully created.]]></comment>
+        </field>
+    </group>
+</include>

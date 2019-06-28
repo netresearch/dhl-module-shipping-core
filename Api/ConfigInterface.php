@@ -27,7 +27,9 @@ interface ConfigInterface
 
     const CONFIG_PATH_WEIGHT_UNIT = 'general/locale/weight_unit';
     const CONFIG_PATH_OWN_PACKAGES = 'dhlshippingsolutions/dhlglobalwebservices/package_dimension';
-    const CONFIG_PATH_RETRY_FAILED_SHIPMENTS = 'dhlshippingsolutions/dhlglobalwebservices/retry_failed_shipments';
+
+    const CONFIG_PATH_AUTORETRY_FAILED = 'dhlshippingsolutions/dhlglobalwebservices/bulk_settings/retry_failed_shipments';
+    const CONFIG_PATH_AUTOCREATE_NOTIFY = 'dhlshippingsolutions/dhlglobalwebservices/bulk_settings/autocreate_notify';
 
     /**
      * Get payment methods that were marked as cash on delivery methods in configuration
@@ -146,7 +148,17 @@ interface ConfigInterface
     public function getRawDimensionUnit(string $weightUnit): string;
 
     /**
+     * Check whether or not failed shipments should be automatically retried during bulk/cron processing.
+     *
      * @return bool
      */
-    public function isAutoRetryEnabled(): bool;
+    public function isBulkRetryEnabled(): bool;
+
+    /**
+     * Check whether or not a shipment confirmation email should be sent after successful bulk/cron processing.
+     *
+     * @param mixed|null $store
+     * @return bool
+     */
+    public function isBulkNotificationEnabled($store = null): bool;
 }

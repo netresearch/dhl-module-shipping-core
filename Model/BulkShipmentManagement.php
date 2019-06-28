@@ -129,7 +129,7 @@ class BulkShipmentManagement
     {
         $result = [];
 
-        $retryFailedShipments = $this->config->isAutoRetryEnabled();
+        $retryFailedShipments = $this->config->isBulkRetryEnabled();
 
         $carrierCodes = array_map(function (BulkShipmentConfigurationInterface $bulkConfiguration) {
             return $bulkConfiguration->getCarrierCode();
@@ -145,8 +145,8 @@ class BulkShipmentManagement
             }
 
             try {
-                $config = $this->getCarrierConfiguration($order);
-                $result[$order->getIncrementId()] = $this->shipOrder->execute($order->getId(), [], $config->notify());
+                $notify = $this->config->isBulkNotificationEnabled($order->getStoreId());
+                $result[$order->getIncrementId()] = $this->shipOrder->execute($order->getId(), [], $notify);
             } catch (\Exception $exception) {
                 $result[$order->getIncrementId()] = null;
                 $this->logger->error($exception->getMessage(), ['exception' => $exception]);
