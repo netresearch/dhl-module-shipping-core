@@ -87,7 +87,7 @@ class Converter implements ConverterInterface
                         // as the key in the result set, so we need to remove all other attributes.
                         // As the order of attributes may differ, we need to specify a black list
                         // of attribute names.
-                        $blackList  = ['defaultConfigValue'];
+                        $blackList  = ['defaultConfigValue', 'available'];
                         $keys       = array_diff_key($attributes, array_flip($blackList));
                         $firstKey   = key($keys);
                         $firstValue = $attributes[$firstKey];

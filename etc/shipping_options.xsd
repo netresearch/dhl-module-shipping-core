@@ -154,9 +154,9 @@
                                                 </xs:element>
                                                 <xs:element name="comment" type="commentConfig" minOccurs="0"/>
                                                 <xs:element name="defaultValue" type="xs:string" minOccurs="0"/>
-                                                <xs:element name="defaultConfigValue" type="xs:string" minOccurs="0"/>
                                             </xs:all>
                                             <xs:attribute type="xs:string" name="code" use="required"/>
+                                            <xs:attribute type="xs:string" name="defaultConfigValue"/>
                                         </xs:complexType>
                                     </xs:element>
                                 </xs:sequence>
