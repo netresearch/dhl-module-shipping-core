@@ -62,7 +62,7 @@ class Save extends Action
         $shipmentItems = [];
         $packages      = [];
 
-        foreach ($data as $packageId => $packageDetails) {
+        foreach ($data as $packageDetails) {
             $packageItems = [];
 
             foreach ($packageDetails['items'] as $itemId => $itemDetails) {
@@ -81,18 +81,18 @@ class Save extends Action
                 $shipmentItems[$itemId] = $packageItem['qty'];
             }
 
-            $packages[$packageId + 1] = [
+            $packages[$packageDetails['packageId']] = [
                 'params'=> [
                     'container'          => '',
                     'weight'             => $packageDetails['packageWeight']['weight'] ?? '',
-                    'customs_value'      => '0',
+                    'weight_units'       => $packageDetails['packageWeight']['weightUnit'],
                     'length'             => $packageDetails['packageSize']['length'] ?? '',
                     'width'              => $packageDetails['packageSize']['width'] ?? '',
                     'height'             => $packageDetails['packageSize']['height'] ?? '',
-                    'weight_units'       => $packageDetails['packageWeight']['weightUnit'],
                     'dimension_units'    => $packageDetails['packageSize']['sizeUnit'],
                     'content_type'       => '',
                     'content_type_other' => '',
+                    'customs_value'      => '0',
                     'customs'            => $packageDetails['packageCustoms'] ?? [],
                 ],
 
