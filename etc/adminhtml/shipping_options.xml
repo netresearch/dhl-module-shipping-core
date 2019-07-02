@@ -17,7 +17,7 @@
                 </inputs>
             </shippingOption>
             <shippingOption code="packageSize">
-                <label>Total Weight</label>
+                <label>Package Size</label>
                 <inputs>
                     <input code="width">
                         <label>Width</label>
