@@ -1,4 +1,9 @@
 <?xml version="1.0" ?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="dhlshippingsolutions" type="text" sortOrder="500" showInDefault="1" showInStore="1" showInWebsite="1" translate="label">
@@ -10,11 +15,11 @@
 
                 <field id="shippingCoreInfoBox" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>Netresearch\ConfigFields\Block\InfoBox</frontend_model>
-                    <attribute type="logo">Dhl_Ui::images/logo-dhl-wide.svg</attribute>
                     <attribute type="body_template">Dhl_ShippingCore::system/config/infoBoxBody.phtml</attribute>
                     <attribute type="header_template">Dhl_ShippingCore::system/config/infoBoxHeader.phtml</attribute>
-                    <attribute type="background">#ffcc01</attribute>
                     <attribute type="view_model">Dhl\ShippingCore\ViewModel\Adminhtml\System\InfoBox</attribute>
+                    <attribute type="logo">Dhl_Ui::images/logo-dhl-wide.svg</attribute>
+                    <attribute type="background">#ffcc01</attribute>
                 </field>
 
                 <!-- Cash On Delivery Payment Methods -->
