@@ -308,9 +308,10 @@ class RequestExtractor implements RequestExtractorInterface
                     'width' => isset($params['width']) ? (float) $params['width'] : null,
                     'height' => isset($params['height']) ? (float) $params['height'] : null,
                     'customsValue' => isset($params['customs_value']) ? (float) $params['customs_value'] : null,
+                    'exportDescription' => $params['customs']['exportDescription'] ?? '',
+                    'termsOfTrade' => $params['customs']['termsOfTrade'] ?? '',
                     'contentType' => $params['content_type'] ?? '',
-                    'contentDescription' => $params['content_type_other'] ?? '',
-                    'customs' => $params['customs'] ?? [],
+                    'contentExplanation' => $params['content_type_other'] ?? '',
                 ]);
 
                 return $package;
@@ -350,10 +351,12 @@ class RequestExtractor implements RequestExtractorInterface
                         'packageId' => (int)$packageId,
                         'name' => $itemData['name'],
                         'qty' => (float)$itemData['qty'],
-                        'weight' => $itemData['weight'],
+                        'weight' => (float)$itemData['weight'],
                         'price' => (float)$itemData['price'],
                         'customsValue' => isset($itemData['customs_value']) ? (float)$itemData['customs_value'] : null,
-                        'customs' => $itemData['customs'] ?? [],
+                        'exportDescription' => $itemData['customs']['exportDescription'] ?? null,
+                        'hsCode' => $itemData['customs']['hsCode'] ?? null,
+                        'countryOfOrigin' => $itemData['customs']['countryOfOrigin'] ?? null,
                     ]);
 
                     return $packageItem;
@@ -392,23 +395,5 @@ class RequestExtractor implements RequestExtractorInterface
         $order = $this->getOrder();
 
         return $this->config->isCodPaymentMethod($order->getPayment()->getMethod(), $storeId);
-    }
-
-    /**
-     * Returns the dangerous goods category of an item.
-     *
-     * @return null|string
-     */
-    public function getDangerousGoodsCategory()
-    {
-        foreach ($this->getAllItems() as $item) {
-            $dgCategory = $item->getDangerousGoodsCategory();
-
-            if ($dgCategory !== null) {
-                return $dgCategory;
-            }
-        }
-
-        return null;
     }
 }

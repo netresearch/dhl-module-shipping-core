@@ -11,6 +11,7 @@ use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\Data\ShipmentSearchResultInterface;
 use Magento\Sales\Api\ShipmentRepositoryInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class ShipmentCollectionLoader
@@ -37,19 +38,28 @@ class ShipmentCollectionLoader
     private $shipmentRepository;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * ShipmentCollectionLoader constructor.
+     *
      * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
      * @param FilterBuilder $filterBuilder
      * @param ShipmentRepositoryInterface $shipmentRepository
+     * @param LoggerInterface $logger
      */
     public function __construct(
         SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
         FilterBuilder $filterBuilder,
-        ShipmentRepositoryInterface $shipmentRepository
+        ShipmentRepositoryInterface $shipmentRepository,
+        LoggerInterface $logger
     ) {
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
         $this->filterBuilder = $filterBuilder;
         $this->shipmentRepository = $shipmentRepository;
+        $this->logger = $logger;
     }
 
     /**
@@ -73,7 +83,7 @@ class ShipmentCollectionLoader
         try {
             return $this->shipmentRepository->getList($searchCriteria);
         } catch (\Zend_Db_Exception $exception) {
-            //todo(nr): log exception
+            $this->logger->error('Could not load shipments for bulk processing.', ['exception' => $exception]);
             return [];
         }
     }

@@ -338,4 +338,28 @@ class Config implements ConfigInterface
             $store
         );
     }
+
+    /**
+     * Get the default item category for international shipments.
+     *
+     * @return string
+     */
+    public function getDefaultExportContentType(): string
+    {
+        return (string) $this->scopeConfig->getValue(
+            self::CONFIG_PATH_CONTENT_TYPE
+        );
+    }
+
+    /**
+     * For item category "OTHER", get the default explanation (e.g. "Merchandise").
+     *
+     * @return string
+     */
+    public function getDefaultExportContentExplanation(): string
+    {
+        return (string) $this->scopeConfig->getValue(
+            self::CONFIG_PATH_CONTENT_EXPLANATION
+        );
+    }
 }

@@ -4,8 +4,11 @@
         <dhlshippingsolutions>
             <dhlglobalwebservices>
                 <cut_off_time>00,00,00</cut_off_time>
-                <terms_of_trade>DDU</terms_of_trade>
                 <package_dimension>[]</package_dimension>
+                <shipment_defaults>
+                    <terms_of_trade>DDU</terms_of_trade>
+                    <export_content_type>OTHER</export_content_type>
+                </shipment_defaults>
             </dhlglobalwebservices>
         </dhlshippingsolutions>
     </default>

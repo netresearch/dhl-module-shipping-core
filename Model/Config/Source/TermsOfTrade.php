@@ -16,9 +16,9 @@ use Magento\Framework\Data\OptionSourceInterface;
  */
 class TermsOfTrade implements OptionSourceInterface
 {
-    const TOD_DDP = 'DDP';
+    const DDP = 'DDP';
 
-    const TOD_DDU = 'DDU';
+    const DDU = 'DDU';
 
     /**
      * Options getter
@@ -45,8 +45,8 @@ class TermsOfTrade implements OptionSourceInterface
     public function toArray(): array
     {
         return [
-            self::TOD_DDU => __('Customer pays duties and taxes (DDU)'),
-            self::TOD_DDP => __('I will pay duties and taxes (DDP)'),
+            self::DDU => __('Customer pays duties and taxes (DDU)'),
+            self::DDP => __('I will pay duties and taxes (DDP)'),
         ];
     }
 }

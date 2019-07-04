@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
 
 use Dhl\ShippingCore\Model\Packaging\PackagingArrayProcessorInterface;
 use Magento\Sales\Model\Order\Shipment;
+use Magento\Sales\Model\Order\Shipment\Item;
 
 /**
  * Class CloneItemTemplatesProcessor
@@ -29,8 +30,9 @@ class CloneItemTemplatesProcessor implements PackagingArrayProcessorInterface
     {
         foreach ($shippingData['carriers'] as $carrierCode => $carrier) {
             $newData = [];
-            foreach ($shipment->getItems() as $item) {
-                $itemId = (int)$item->getOrderItemId();
+            /** @var Item $item */
+            foreach ($shipment->getAllItems() as $item) {
+                $itemId = (int) $item->getOrderItemId();
                 $newItem = [
                     'itemId' => $itemId,
                     'shippingOptions' => [],

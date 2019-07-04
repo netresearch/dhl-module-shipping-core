@@ -72,7 +72,7 @@ class Autocreate extends Action
     }
 
     /**
-     * Recieve orders from a mass action and try to create shipments for them via the corresponding API.
+     * Receive orders from a mass action and try to create shipments for them via the corresponding API.
      *
      * @return ResultInterface
      * @throws LocalizedException

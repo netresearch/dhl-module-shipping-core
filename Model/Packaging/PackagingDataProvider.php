@@ -99,18 +99,22 @@ class PackagingDataProvider
                     $shipment
                 )
             );
-            $carrier->setMetadata(
-                $this->compositeProcessor->processMetadata(
-                    $carrier->getMetadata(),
-                    $shipment
-                )
-            );
             $carrier->setCompatibilityData(
                 $this->compositeProcessor->processCompatibilityData(
                     $carrier->getCompatibilityData(),
                     $shipment
                 )
             );
+
+            // metadata is optional
+            if ($carrier->getMetadata()) {
+                $carrier->setMetadata(
+                    $this->compositeProcessor->processMetadata(
+                        $carrier->getMetadata(),
+                        $shipment
+                    )
+                );
+            }
         }
 
         return $packagingData;

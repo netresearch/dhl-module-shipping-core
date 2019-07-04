@@ -24,7 +24,7 @@ class CarrierData implements CarrierDataInterface
     private $code;
 
     /**
-     * @var \Dhl\ShippingCore\Api\Data\MetadataInterface
+     * @var \Dhl\ShippingCore\Api\Data\MetadataInterface|null
      */
     private $metadata;
 
@@ -57,9 +57,9 @@ class CarrierData implements CarrierDataInterface
     }
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\MetadataInterface
+     * @return \Dhl\ShippingCore\Api\Data\MetadataInterface|null
      */
-    public function getMetadata(): MetadataInterface
+    public function getMetadata()
     {
         return $this->metadata;
     }

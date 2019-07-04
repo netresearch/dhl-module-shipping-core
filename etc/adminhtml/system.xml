@@ -21,12 +21,6 @@
                     <source_model>Magento\Config\Model\Config\Source\Date\Short</source_model>
                     <tooltip><![CDATA[All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.]]></tooltip>
                 </field>
-                <!-- Terms of Trade -->
-                <field id="terms_of_trade" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label tooltip comment" type="Netresearch\ConfigFields\Model\Type\Radioset">
-                    <label><![CDATA[Terms of Trade]]></label>
-                    <source_model>Dhl\ShippingCore\Model\Config\Source\TermsOfTrade</source_model>
-                    <tooltip><![CDATA[Select the terms of trade.]]></tooltip>
-                </field>
 
                 <field id="package_dimension" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="230" translate="label tooltip comment" type="select">
                     <label><![CDATA[My Own Packages]]></label>
@@ -34,7 +28,8 @@
                     <backend_model>Dhl\ShippingCore\Model\Config\Backend\Packages</backend_model>
                 </field>
 
-                <include path="Dhl_ShippingCore::system/600_bulk_settings.xml"/>
+                <include path="Dhl_ShippingCore::system/600_shipment_defaults.xml"/>
+                <include path="Dhl_ShippingCore::system/700_bulk_settings.xml"/>
             </group>
         </section>
     </system>

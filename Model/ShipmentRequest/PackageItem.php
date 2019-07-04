@@ -56,11 +56,19 @@ class PackageItem implements PackageItemInterface
     private $customsValue;
 
     /**
-     * Additional custom data.
-     *
-     * @var array
+     * @var string|null
      */
-    private $customs;
+    private $exportDescription;
+
+    /**
+     * @var string|null
+     */
+    private $hsCode;
+
+    /**
+     * @var string|null
+     */
+    private $countryOfOrigin;
 
     /**
      * PackageItem constructor.
@@ -72,7 +80,9 @@ class PackageItem implements PackageItemInterface
      * @param float $weight
      * @param float $price
      * @param float|null $customsValue
-     * @param array $customs
+     * @param string $hsCode
+     * @param string $exportDescription
+     * @param string $countryOfOrigin
      */
     public function __construct(
         int $orderItemId,
@@ -83,7 +93,9 @@ class PackageItem implements PackageItemInterface
         float $weight,
         float $price,
         float $customsValue = null,
-        array $customs = []
+        string $exportDescription = '',
+        string $hsCode = '',
+        string $countryOfOrigin = ''
     ) {
         $this->orderItemId = $orderItemId;
         $this->productId = $productId;
@@ -93,7 +105,9 @@ class PackageItem implements PackageItemInterface
         $this->weight = $weight;
         $this->price = $price;
         $this->customsValue = $customsValue;
-        $this->customs = $customs;
+        $this->exportDescription = $exportDescription;
+        $this->hsCode = $hsCode;
+        $this->countryOfOrigin = $countryOfOrigin;
     }
 
     /**
@@ -177,42 +191,32 @@ class PackageItem implements PackageItemInterface
     }
 
     /**
-     * Obtain item's additional customs data.
-     *
-     * @return array
-     */
-    public function getCustoms(): array
-    {
-        return $this->customs;
-    }
-
-    /**
-     * Obtain item's HS code.
-     *
-     * @return null|string
-     */
-    public function getHsCode()
-    {
-        return $this->customs['hsCode'] ?? null;
-    }
-
-    /**
-     * Obtain item's export description.
+     * Obtain item's custom declaration description.
      *
      * @return string
      */
     public function getExportDescription(): string
     {
-        return $this->customs['exportDescription'] ?? '';
+        return $this->exportDescription;
     }
 
     /**
-     * Obtain item's dangerous goods category.
+     * Obtain item's HS code / tariff number (optional).
      *
-     * @return null|string
+     * @return string
      */
-    public function getDangerousGoodsCategory()
+    public function getHsCode(): string
     {
-        return $this->customs['dgCategory'] ?? null;
+        return $this->hsCode;
+    }
+
+    /**
+     * Obtain item's country of origin (optional).
+     *
+     * @return string
+     */
+    public function getCountryOfOrigin(): string
+    {
+        return $this->countryOfOrigin;
     }
 }

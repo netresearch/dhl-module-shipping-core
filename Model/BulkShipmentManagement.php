@@ -11,6 +11,7 @@ use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
 use Dhl\ShippingCore\Model\BulkShipment\OrderCollectionLoader;
 use Dhl\ShippingCore\Model\BulkShipment\ShipmentCollectionLoader;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\ShipOrderInterface;
 use Magento\Sales\Model\Order;
 use Magento\Shipping\Model\Shipment\RequestFactory;
@@ -175,7 +176,12 @@ class BulkShipmentManagement
             $shipmentRequest = $this->requestFactory->create();
             $shipmentRequest->setOrderShipment($shipment);
 
-            $configuration->getRequestModifier()->modify($shipmentRequest);
+            try {
+                $configuration->getRequestModifier()->modify($shipmentRequest);
+            } catch (LocalizedException $exception) {
+                continue;
+            }
+
             $shipmentRequests[$configuration->getCarrierCode()][] = $shipmentRequest;
         }
 

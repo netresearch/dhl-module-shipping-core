@@ -66,13 +66,20 @@ class Save extends Action
             $packageItems = [];
 
             foreach ($packageDetails['items'] as $itemId => $itemDetails) {
+                if (isset($itemDetails['itemCustoms'], $itemDetails['itemCustoms']['customsValue'])) {
+                    $itemCustomsValue = $itemDetails['itemCustoms']['customsValue'];
+                    unset($itemDetails['itemCustoms']['customsValue']);
+                } else {
+                    $itemCustomsValue = '';
+                }
+
                 $packageItem = [
                     'qty'           => $itemDetails['details']['qty'] ?? '1',
-                    'customs_value' => '0',
-                    'price'         => '',
+                    'customs_value' => $itemCustomsValue,
+                    'price'         => $itemDetails['details']['price'],
                     'name'          => $itemDetails['details']['productName'],
                     'weight'        => $itemDetails['details']['weight'] ?? '',
-                    'product_id'    => '',
+                    'product_id'    => $itemDetails['details']['productId'],
                     'order_item_id' => $itemId,
                     'customs'       => $itemDetails['itemCustoms'] ?? [],
                 ];
@@ -80,6 +87,16 @@ class Save extends Action
                 $packageItems[$itemId]  = $packageItem;
                 $shipmentItems[$itemId] = $packageItem['qty'];
             }
+
+            // set to orig packaging popup property names and unset them from customs array
+            $customsValue = $packageDetails['packageCustoms']['customsValue'] ?? '';
+            $contentType = $packageDetails['packageCustoms']['contentType'] ?? '';
+            $contentTypeOther = $packageDetails['packageCustoms']['explanation'] ?? '';
+            unset(
+                $packageDetails['packageCustoms']['customsValue'],
+                $packageDetails['packageCustoms']['contentType'],
+                $packageDetails['packageCustoms']['explanation']
+            );
 
             $packages[$packageDetails['packageId']] = [
                 'params'=> [
@@ -90,9 +107,9 @@ class Save extends Action
                     'width'              => $packageDetails['packageSize']['width'] ?? '',
                     'height'             => $packageDetails['packageSize']['height'] ?? '',
                     'dimension_units'    => $packageDetails['packageSize']['sizeUnit'],
-                    'content_type'       => '',
-                    'content_type_other' => '',
-                    'customs_value'      => '0',
+                    'content_type'       => $contentType,
+                    'content_type_other' => $contentTypeOther,
+                    'customs_value'      => $customsValue,
                     'customs'            => $packageDetails['packageCustoms'] ?? [],
                 ],
 

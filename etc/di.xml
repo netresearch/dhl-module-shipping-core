@@ -12,6 +12,8 @@
     <preference for="Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Dhl\ShippingCore\Api\PdfCombinatorInterface" type="Dhl\ShippingCore\Util\PdfCombinator"/>
+    <preference for="Dhl\ShippingCore\Api\PackagingOptionReaderInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier\PackagingOptionReader"/>
+    <preference for="Dhl\ShippingCore\Api\ProxyCarrierFactoryInterface" type="Dhl\ShippingCore\Model\Emulation\ProxyCarrierFactory"/>
     <preference for="Dhl\ShippingCore\Api\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Emulation\RateRequestService"/>
     <preference for="Dhl\ShippingCore\Api\RecipientStreetInterface" type="Dhl\ShippingCore\Model\RecipientStreet"/>
     <preference for="Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface" type="Dhl\ShippingCore\Model\RecipientStreetRepository"/>
@@ -259,8 +261,8 @@
             </argument>
             <argument name="processors" xsi:type="array">
                 <item name="dhlApplySelectionProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ApplySelectionsProcessor</item>
-                <item name="dhlPackageDetailValuesProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageDetailValuesProcessor</item>
-                <item name="dhlItemDetailValuesProcessor" sortOrder="20" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemDetailValuesProcessor</item>
+                <item name="dhlPackageDetailValuesProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageInputDataProcessor</item>
+                <item name="dhlItemDetailValuesProcessor" sortOrder="20" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemInputDataProcessor</item>
             </argument>
         </arguments>
     </type>

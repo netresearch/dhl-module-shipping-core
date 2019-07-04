@@ -41,9 +41,25 @@
             <shippingOption code="packageCustoms">
                 <label>Customs Data</label>
                 <inputs>
-                    <input code="packageExportDescription">
+                    <input code="customsValue">
+                        <label>Customs Value</label>
+                        <inputType>price</inputType>
+                    </input>
+                    <input code="exportDescription">
                         <label>Package Description</label>
                         <inputType>textarea</inputType>
+                    </input>
+                    <input code="termsOfTrade" defaultConfigValue="dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/terms_of_trade">
+                        <label>Terms of Trade</label>
+                        <inputType>select</inputType>
+                    </input>
+                    <input code="contentType" defaultConfigValue="dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_type">
+                        <label>Export Content Type</label>
+                        <inputType>select</inputType>
+                    </input>
+                    <input code="explanation" defaultConfigValue="dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_explanation">
+                        <label>Export Content Explanation</label>
+                        <inputType>text</inputType>
                     </input>
                 </inputs>
             </shippingOption>
@@ -54,10 +70,16 @@
                     <shippingOption code="details">
                         <label>Item Details</label>
                         <inputs>
+                            <input code="productId">
+                                <inputType>hidden</inputType>
+                            </input>
                             <input code="productName">
                                 <label>Product Name</label>
                                 <inputType>static</inputType>
                                 <disabled>true</disabled>
+                            </input>
+                            <input code="price">
+                                <inputType>hidden</inputType>
                             </input>
                             <input code="weight">
                                 <label>Weight</label>
@@ -78,16 +100,24 @@
                         <label>Customs Data</label>
                         <inputs>
                             <input code="hsCode">
+                                <sortOrder>10</sortOrder>
                                 <label>HS Code</label>
                                 <inputType>text</inputType>
                             </input>
-                            <input code="dgCategory">
-                                <label>Dangerous Goods Category</label>
-                                <inputType>text</inputType>
-                            </input>
                             <input code="exportDescription">
+                                <sortOrder>20</sortOrder>
                                 <label>Export Description</label>
                                 <inputType>textarea</inputType>
+                            </input>
+                            <input code="customsValue">
+                                <sortOrder>30</sortOrder>
+                                <label>Customs Value</label>
+                                <inputType>price</inputType>
+                            </input>
+                            <input code="countryOfOrigin">
+                                <sortOrder>40</sortOrder>
+                                <label>Country of Origin</label>
+                                <inputType>select</inputType>
                             </input>
                         </inputs>
                     </shippingOption>

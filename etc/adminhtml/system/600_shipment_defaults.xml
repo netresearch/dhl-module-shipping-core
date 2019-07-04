@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="shipment_defaults" translate="label" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label><![CDATA[Shipment Defaults]]></label>
+        <attribute type="expanded">0</attribute>
+
+        <field id="terms_of_trade" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
+               translate="label tooltip comment" type="Netresearch\ConfigFields\Model\Type\Radioset">
+            <label><![CDATA[Terms of Trade]]></label>
+            <source_model>Dhl\ShippingCore\Model\Config\Source\TermsOfTrade</source_model>
+            <tooltip><![CDATA[Select the terms of trade.]]></tooltip>
+        </field>
+        <field id="export_content_type" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20"
+               translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
+            <label><![CDATA[Export Content Type]]></label>
+            <source_model>Dhl\ShippingCore\Model\Config\Source\ExportContentType</source_model>
+        </field>
+        <field id="export_content_explanation" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="30"
+               translate="label">
+            <label><![CDATA[Export Content Explanation]]></label>
+            <depends>
+                <field id="export_content_type">OTHER</field>
+            </depends>
+        </field>
+    </group>
+</include>

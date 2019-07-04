@@ -6,15 +6,12 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShipmentRequest;
 
-use Dhl\ShippingCore\Api\ConfigInterface;
+use Dhl\ShippingCore\Api\PackagingOptionReaderInterfaceFactory;
 use Dhl\ShippingCore\Api\RequestModifierInterface;
-use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
-use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
-use Dhl\ShippingCore\Model\ProductData;
 use Magento\Directory\Model\RegionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObjectFactory;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Model\Shipment\Request;
 use Magento\Store\Model\ScopeInterface;
@@ -31,9 +28,9 @@ class RequestModifier implements RequestModifierInterface
     private $scopeConfig;
 
     /**
-     * @var ConfigInterface
+     * @var PackagingOptionReaderInterfaceFactory
      */
-    private $config;
+    private $packagingOptionReaderFactory;
 
     /**
      * @var RegionFactory
@@ -46,62 +43,77 @@ class RequestModifier implements RequestModifierInterface
     private $dataObjectFactory;
 
     /**
-     * @var ProductData
-     */
-    private $productData;
-
-    /**
      * RequestModifier constructor.
+     *
      * @param ScopeConfigInterface $scopeConfig
-     * @param ConfigInterface $config
+     * @param PackagingOptionReaderInterfaceFactory $packagingOptionReaderFactory
      * @param RegionFactory $regionFactory
      * @param DataObjectFactory $dataObjectFactory
-     * @param ProductData $productData
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        ConfigInterface $config,
+        PackagingOptionReaderInterfaceFactory $packagingOptionReaderFactory,
         RegionFactory $regionFactory,
-        DataObjectFactory $dataObjectFactory,
-        ProductData $productData
+        DataObjectFactory $dataObjectFactory
     ) {
         $this->scopeConfig = $scopeConfig;
-        $this->config = $config;
+        $this->packagingOptionReaderFactory = $packagingOptionReaderFactory;
         $this->regionFactory = $regionFactory;
         $this->dataObjectFactory = $dataObjectFactory;
-        $this->productData = $productData;
     }
 
     /**
-     * Modify / add shipment request params
+     * Add general shipment request data.
      *
      * @param Request $shipmentRequest
-     * @return Request
      */
-    public function modify(Request $shipmentRequest): Request
+    private function modifyGeneralParams(Request $shipmentRequest)
     {
         $orderShipment = $shipmentRequest->getOrderShipment();
         $order = $orderShipment->getOrder();
         $storeId = $orderShipment->getStoreId();
         $baseCurrencyCode = $order->getBaseCurrencyCode();
         $shippingMethod = $order->getShippingMethod(true)->getData('method');
+
         $shipmentRequest->setShippingMethod($shippingMethod);
-        $shipmentRequest->setBaseCurrencyCode($baseCurrencyCode);
-        $shipmentRequest->setStoreId($storeId);
-
-        $this->addReceiverData($shipmentRequest);
-        $this->addShipperData($shipmentRequest);
-        $this->preparePackage($shipmentRequest);
-
-        return $shipmentRequest;
+        $shipmentRequest->setData('base_currency_code', $baseCurrencyCode);
+        $shipmentRequest->setData('store_id', $storeId);
     }
 
     /**
-     * Add shipper data to shipment request
+     * Add recipient data to shipment request.
      *
      * @param Request $shipmentRequest
      */
-    private function addShipperData(Request $shipmentRequest)
+    private function modifyReceiver(Request $shipmentRequest)
+    {
+        $address = $shipmentRequest->getOrderShipment()->getShippingAddress();
+        $personName = trim($address->getFirstname() . ' ' . $address->getLastname());
+        $addressStreet = trim($address->getStreetLine(1) . ' ' . $address->getStreetLine(2));
+        $region = $address->getRegionCode() ? $address->getRegionCode() : $address->getRegion();
+
+        $shipmentRequest->setRecipientContactPersonName((string)$personName);
+        $shipmentRequest->setRecipientContactPersonFirstName((string)$address->getFirstname());
+        $shipmentRequest->setRecipientContactPersonLastName((string)$address->getLastname());
+        $shipmentRequest->setRecipientContactCompanyName((string)$address->getCompany());
+        $shipmentRequest->setData('recipient_contact_phone_number', (string)$address->getTelephone());
+        $shipmentRequest->setData('recipient_email', (string)$address->getEmail());
+        $shipmentRequest->setRecipientAddressStreet((string)$addressStreet);
+        $shipmentRequest->setRecipientAddressStreet1((string)$address->getStreetLine(1));
+        $shipmentRequest->setRecipientAddressStreet2((string)$address->getStreetLine(2));
+        $shipmentRequest->setRecipientAddressCity((string)$address->getCity());
+        $shipmentRequest->setRecipientAddressStateOrProvinceCode((string)$region);
+        $shipmentRequest->setData('recipient_address_region_code', $address->getRegionCode());
+        $shipmentRequest->setData('recipient_address_postal_code', $address->getPostcode());
+        $shipmentRequest->setRecipientAddressCountryCode((string)$address->getCountryId());
+    }
+
+    /**
+     * Add shipper data to shipment request.
+     *
+     * @param Request $shipmentRequest
+     */
+    private function modifyShipper(Request $shipmentRequest)
     {
         $storeId = $shipmentRequest->getOrderShipment()->getStoreId();
         $originStreet = $this->scopeConfig->getValue(
@@ -134,9 +146,9 @@ class RequestModifier implements RequestModifierInterface
         $shipmentRequest->setShipperContactPersonName('');
         $shipmentRequest->setShipperContactPersonFirstName('');
         $shipmentRequest->setShipperContactPersonLastName('');
-        $shipmentRequest->setShipperContactCompanyName($storeInfo->getName());
-        $shipmentRequest->setShipperContactPhoneNumber($storeInfo->getPhone());
-        $shipmentRequest->setShipperEmail('');
+        $shipmentRequest->setShipperContactCompanyName($storeInfo->getData('name'));
+        $shipmentRequest->setShipperContactPhoneNumber($storeInfo->getData('phone'));
+        $shipmentRequest->setData('shipper_email', '');
         $shipmentRequest->setShipperAddressStreet(trim($originStreet . ' ' . $originStreet2));
         $shipmentRequest->setShipperAddressStreet1($originStreet);
         $shipmentRequest->setShipperAddressStreet2($originStreet2);
@@ -166,94 +178,76 @@ class RequestModifier implements RequestModifierInterface
     }
 
     /**
-     * Add reciever data to shipment request
+     * Add package params and items data to shipment request.
+     *
+     * Cross-border params are omitted because the carrier decides whether the route requires customs data or not.
      *
      * @param Request $shipmentRequest
+     * @throws LocalizedException
      */
-    private function addReceiverData(Request $shipmentRequest)
+    private function modifyPackage(Request $shipmentRequest)
     {
-        $address = $shipmentRequest->getOrderShipment()->getShippingAddress();
-        $personName = trim($address->getFirstname() . ' ' . $address->getLastname());
-        $addressStreet = trim($address->getStreetLine(1) . ' ' . $address->getStreetLine(2));
-        $region = $address->getRegionCode() ? $address->getRegionCode() : $address->getRegion();
+        // fixed package id on bulk shipments
+        $packageId = 1;
+        $shipment = $shipmentRequest->getOrderShipment();
 
-        $shipmentRequest->setRecipientContactPersonName((string)$personName);
-        $shipmentRequest->setRecipientContactPersonFirstName((string)$address->getFirstname());
-        $shipmentRequest->setRecipientContactPersonLastName((string)$address->getLastname());
-        $shipmentRequest->setRecipientContactCompanyName((string)$address->getCompany());
-        $shipmentRequest->setRecipientContactPhoneNumber((string)$address->getTelephone());
-        $shipmentRequest->setRecipientEmail((string)$address->getEmail());
-        $shipmentRequest->setRecipientAddressStreet((string)$addressStreet);
-        $shipmentRequest->setRecipientAddressStreet1((string)$address->getStreetLine(1));
-        $shipmentRequest->setRecipientAddressStreet2((string)$address->getStreetLine(2));
-        $shipmentRequest->setRecipientAddressCity((string)$address->getCity());
-        $shipmentRequest->setRecipientAddressStateOrProvinceCode((string)$region);
-        $shipmentRequest->setRecipientAddressRegionCode($address->getRegionCode());
-        // core expects int but this would end in false postcode begin with 0
-        $shipmentRequest->setRecipientAddressPostalCode($address->getPostcode());
-        $shipmentRequest->setRecipientAddressCountryCode((string)$address->getCountryId());
-    }
+        /** @var \Dhl\ShippingCore\Api\PackagingOptionReaderInterface $packagingOptionReader */
+        $packagingOptionReader = $this->packagingOptionReaderFactory->create(['shipment' => $shipment]);
 
-    /**
-     * add package data to shipment request
-     *
-     * @param Request $shipmentRequest
-     */
-    private function preparePackage(Request $shipmentRequest)
-    {
-        $storeId = $shipmentRequest->getOrderShipment()->getStoreId();
-        $totalWeight = 0;
-        $packageValue = 0;
-        $productIds = [];
-        $orderItemIds = [];
-        $package = [
-            'params' => [],
-            'items' => [],
+        $packageItems = [];
+        $packageParams = [
+            'container' => '',
+            'weight' => $packagingOptionReader->getPackageOptionValue('packageWeight', 'weight'),
+            'weight_units' => $packagingOptionReader->getPackageOptionValue('packageWeight', 'weightUnit'),
+            'length' => $packagingOptionReader->getPackageOptionValue('packageSize', 'length'),
+            'width' => $packagingOptionReader->getPackageOptionValue('packageSize', 'width'),
+            'height' => $packagingOptionReader->getPackageOptionValue('packageSize', 'height'),
+            'dimension_units' => $packagingOptionReader->getPackageOptionValue('packageSize', 'sizeUnit'),
         ];
 
         /** @var \Magento\Sales\Model\Order\Shipment\Item $item */
-        foreach ($shipmentRequest->getOrderShipment()->getAllItems() as $item) {
-            if ($item->getOrderItem()->isDummy(true)) {
-                continue;
-            }
-            $itemData = $item->toArray(['qty', 'price', 'name', 'weight', 'product_id', 'order_item_id']);
-            $itemData['customs_value'] = $item->getPrice();
-            $package['items'][$item->getOrderItemId()] = $itemData;
-            $totalWeight += $item->getWeight() * $item->getQty();
-            $packageValue += $item->getPrice();
-            $productIds[$item->getOrderItemId()] = $item->getProductId();
-            $orderItemIds[$item->getOrderItemId()] = $item->getProductId();
+        foreach ($shipment->getAllItems() as $item) {
+            $orderItemId = (int) $item->getOrderItemId();
+            $packageItem = [
+                'qty' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'qtyToShip'),
+                'price' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'price'),
+                'name' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'productName'),
+                'weight' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'weight'),
+                'product_id' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'productId'),
+                'order_item_id' => $orderItemId,
+            ];
+            $packageItems[$orderItemId] = $packageItem;
         }
 
-        $productData = $this->productData->getProductData($productIds, $storeId);
+        $packages = [
+            $packageId => [
+                'params' => $packageParams,
+                'items' => $packageItems,
+            ]
+        ];
 
-        foreach ($orderItemIds as $itemId => $productId) {
-            $package['items'][$itemId]['description'] = $productData[$productId][ExportDescription::CODE] ?? '';
-            $package['items'][$itemId]['hsCode'] = $productData[$productId][TariffNumber::CODE] ?? '';
-            $package['items'][$itemId][DGCategory::CODE] = $productData[$productId][DGCategory::CODE] ?? '';
-            $package['items'][$itemId]['countryOfOrigin'] = $productData[$productId]['countryOfOrigin'] ?? '';
-        }
-
-        $weightUnit = $this->config->getRawWeightUnit((string)$storeId);
-
-        $dimensionUnit = $this->config->getRawDimensionUnit($weightUnit);
-
-        $package['params']['container'] = '';
-        $package['params']['weight'] = $totalWeight;
-        $package['params']['customs_value'] = $packageValue;
-        $package['params']['length'] = '';
-        $package['params']['width'] = '';
-        $package['params']['height'] = '';
-        $package['params']['weight_units'] = $weightUnit;
-        $package['params']['dimension_units'] = $dimensionUnit;
-        $package['params']['content_type'] = '';
-        $package['params']['content_type_other'] = '';
-
-        $packages = [1 => $package];
         $shipmentRequest->setData('packages', $packages);
-        $shipmentRequest->setData('package_id', 1);
-        $shipmentRequest->setData('package_items', $package['items']);
-        $shipmentRequest->setData('package_params', $package['params']);
-        $shipmentRequest->getOrderShipment()->setPackages($packages);
+        $shipmentRequest->setData('package_id', $packageId);
+        $shipmentRequest->setData('package_items', $packageItems);
+        $shipmentRequest->setData('package_params', $packageParams);
+
+        $shipment->setPackages($packages);
+    }
+
+    /**
+     * Add shipment request data using given shipment.
+     *
+     * The request modifier collects all additional data from defaults (config, product attributes)
+     * during bulk label creation where no user input (packaging popup) is involved.
+     *
+     * @param Request $shipmentRequest
+     * @throws LocalizedException
+     */
+    public function modify(Request $shipmentRequest)
+    {
+        $this->modifyGeneralParams($shipmentRequest);
+        $this->modifyReceiver($shipmentRequest);
+        $this->modifyShipper($shipmentRequest);
+        $this->modifyPackage($shipmentRequest);
     }
 }

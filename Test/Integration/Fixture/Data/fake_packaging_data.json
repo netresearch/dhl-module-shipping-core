@@ -50,10 +50,10 @@
         "packageCustoms": {
           "label": "Customs Data",
           "inputs": {
-            "packageExportDescription": {
+            "exportDescription": {
               "label": "Package Description",
               "inputType": "textarea",
-              "code": "packageExportDescription"
+              "code": "exportDescription"
             }
           },
           "code": "packageCustoms"

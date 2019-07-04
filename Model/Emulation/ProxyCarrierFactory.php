@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Emulation;
 
+use Dhl\ShippingCore\Api\ProxyCarrierFactoryInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\ObjectManagerInterface;
@@ -14,13 +15,11 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 /**
  * Class ProxyCarrierFactory
  *
- * fixme(nr): make it public (api)
- *
  * @package Dhl\ShippingCore\Model\Emulation
  * @author  Paul Siedler <paul.siedler@netresearch.de>
  * @link    https://www.netresearch.de/
  */
-class ProxyCarrierFactory
+class ProxyCarrierFactory implements ProxyCarrierFactoryInterface
 {
     /**
      * @var ObjectManagerInterface

@@ -12,6 +12,7 @@ use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderSearchResultInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Psr\Log\LoggerInterface;
 use Zend_Db_Exception;
 
 /**
@@ -44,22 +45,31 @@ class OrderCollectionLoader
     private $orderRepository;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * OrderCollectionLoader constructor.
+     *
      * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
      * @param FilterBuilder $filterBuilder
      * @param FilterGroupBuilder $filterGroupBuilder
      * @param OrderRepositoryInterface $orderRepository
+     * @param LoggerInterface $logger
      */
     public function __construct(
         SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
         FilterBuilder $filterBuilder,
         FilterGroupBuilder $filterGroupBuilder,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
+        LoggerInterface $logger
     ) {
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
         $this->filterBuilder = $filterBuilder;
         $this->filterGroupBuilder = $filterGroupBuilder;
         $this->orderRepository = $orderRepository;
+        $this->logger = $logger;
     }
 
     /**
@@ -101,7 +111,7 @@ class OrderCollectionLoader
         try {
             return $this->orderRepository->getList($searchCriteria);
         } catch (Zend_Db_Exception $exception) {
-            //todo(nr): log exception
+            $this->logger->error('Could not load orders for bulk processing.', ['exception' => $exception]);
             return [];
         }
     }

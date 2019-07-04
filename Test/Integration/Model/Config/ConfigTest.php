@@ -40,8 +40,8 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
      *
      * @magentoDataFixture Magento/Store/_files/core_fixturestore.php
      * @magentoDataFixture Magento/Store/_files/core_second_third_fixturestore.php
-     * @magentoConfigFixture current_store dhlshippingsolutions/dhlglobalwebservices/terms_of_trade DTP/DDP
-     * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlglobalwebservices/terms_of_trade DDU/DAP
+     * @magentoConfigFixture current_store dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/terms_of_trade DTP/DDP
+     * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/terms_of_trade DDU/DAP
      */
     public function getTermsOfTrade()
     {

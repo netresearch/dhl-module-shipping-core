@@ -26,9 +26,9 @@ interface CarrierDataInterface
     /**
      * Retrieve additional information to render the shipping options area.
      *
-     * @return \Dhl\ShippingCore\Api\Data\MetadataInterface
+     * @return \Dhl\ShippingCore\Api\Data\MetadataInterface|null
      */
-    public function getMetadata(): MetadataInterface;
+    public function getMetadata();
 
     /**
      * Retrieve rendering information about the shipping options the carrier offers on package level.

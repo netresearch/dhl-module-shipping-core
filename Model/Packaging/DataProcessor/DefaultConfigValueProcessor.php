@@ -44,7 +44,7 @@ class DefaultConfigValueProcessor implements PackagingArrayProcessorInterface
      */
     private function getConfigValue(string $configPath, $store = null): string
     {
-        return $this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             $configPath,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -53,7 +53,7 @@ class DefaultConfigValueProcessor implements PackagingArrayProcessorInterface
 
     /**
      * Uses the provided default config value path to read the respective value and pass it into the
-     * defaultValue element. Afterwards the "defaultConfigValue" element is removed the the shipping data
+     * defaultValue element. Afterwards the "defaultConfigValue" element is removed from the shipping data
      * array.
      *
      * @param mixed[] $shippingData
@@ -63,24 +63,25 @@ class DefaultConfigValueProcessor implements PackagingArrayProcessorInterface
      */
     public function processShippingOptions(array $shippingData, Shipment $shipment): array
     {
-        foreach ($shippingData['carriers'] as $carrierCode => $carrier) {
-            foreach ($carrier as $optionKey => $optionValues) {
+        foreach ($shippingData['carriers'] as $carrierCode => &$carrier) {
+            foreach ($carrier as $optionKey => &$optionValues) {
                 if (!is_array($optionValues)) {
                     continue;
                 }
 
-                foreach ($optionValues as $code => $values) {
+                foreach ($optionValues as $code => &$values) {
                     if (!isset($values['inputs'])) {
                         continue;
                     }
 
-                    foreach ($values['inputs'] as $inputCode => $inputValues) {
-                        if (isset($inputValues['defaultConfigValue'])) {
-                            $shippingData['carriers'][$carrierCode][$optionKey][$code]['inputs'][$inputCode]['defaultValue']
-                                = $this->getConfigValue($inputValues['defaultConfigValue'], $shipment->getStoreId());
-
-                            unset($shippingData['carriers'][$carrierCode][$optionKey][$code]['inputs'][$inputCode]['defaultConfigValue']);
+                    foreach ($values['inputs'] as $inputCode => &$inputValues) {
+                        if (!isset($inputValues['defaultConfigValue'])) {
+                            continue;
                         }
+
+                        $configPath = $inputValues['defaultConfigValue'];
+                        $inputValues['defaultValue'] = $this->getConfigValue($configPath, $shipment->getStoreId());
+                        unset($inputValues['defaultConfigValue']);
                     }
                 }
             }

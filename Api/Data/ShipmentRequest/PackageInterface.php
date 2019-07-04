@@ -78,6 +78,20 @@ interface PackageInterface
     public function getCustomsValue();
 
     /**
+     * Obtain package export description (optional).
+     *
+     * @return string
+     */
+    public function getExportDescription(): string;
+
+    /**
+     * Obtain package customs terms of trade (optional).
+     *
+     * @return string
+     */
+    public function getTermsOfTrade(): string;
+
+    /**
      * Obtain package customs declaration content type (optional).
      *
      * @return string
@@ -89,19 +103,5 @@ interface PackageInterface
      *
      * @return string
      */
-    public function getContentDescription(): string;
-
-    /**
-     * Obtain package additional customs data.
-     *
-     * @return array
-     */
-    public function getCustoms(): array;
-
-    /**
-     * Obtain package export description.
-     *
-     * @return string
-     */
-    public function getExportDescription(): string;
+    public function getContentExplanation(): string;
 }

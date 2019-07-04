@@ -71,30 +71,23 @@ interface PackageItemInterface
     public function getCustomsValue();
 
     /**
-     * Obtain item's additional customs data.
-     *
-     * @return array
-     */
-    public function getCustoms(): array;
-
-    /**
-     * Obtain item's HS code.
-     *
-     * @return null|string
-     */
-    public function getHsCode();
-
-    /**
-     * Obtain item's export description.
+     * Obtain item's custom declaration description.
      *
      * @return string
      */
     public function getExportDescription(): string;
 
     /**
-     * Obtain item's dangerous goods category.
+     * Obtain item's HS code / tariff number (optional).
      *
-     * @return null|string
+     * @return string
      */
-    public function getDangerousGoodsCategory();
+    public function getHsCode(): string;
+
+    /**
+     * Obtain item's country of origin (optional).
+     *
+     * @return string
+     */
+    public function getCountryOfOrigin(): string;
 }

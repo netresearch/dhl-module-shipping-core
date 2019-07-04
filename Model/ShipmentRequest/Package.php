@@ -67,19 +67,22 @@ class Package implements PackageInterface
     /**
      * @var string
      */
+    private $exportDescription;
+
+    /**
+     * @var string
+     */
+    private $termsOfTrade;
+
+    /**
+     * @var string
+     */
     private $contentType;
 
     /**
      * @var string
      */
-    private $contentDescription;
-
-    /**
-     * Additional custom data.
-     *
-     * @var array
-     */
-    private $customs;
+    private $contentExplanation;
 
     /**
      * Package constructor.
@@ -93,9 +96,10 @@ class Package implements PackageInterface
      * @param float|null $width
      * @param float|null $height
      * @param float|null $customsValue
+     * @param string $exportDescription
+     * @param string $termsOfTrade
      * @param string $contentType
-     * @param string $contentDescription
-     * @param array $customs
+     * @param string $contentExplanation
      */
     public function __construct(
         string $productCode,
@@ -107,9 +111,10 @@ class Package implements PackageInterface
         float $width = null,
         float $height = null,
         float $customsValue = null,
+        string $exportDescription = '',
+        string $termsOfTrade = '',
         string $contentType = '',
-        string $contentDescription = '',
-        array $customs = []
+        string $contentExplanation = ''
     ) {
         $this->productCode = $productCode;
         $this->containerType = $containerType;
@@ -120,9 +125,10 @@ class Package implements PackageInterface
         $this->width = $width;
         $this->height = $height;
         $this->customsValue = $customsValue;
+        $this->exportDescription = $exportDescription;
+        $this->termsOfTrade = $termsOfTrade;
         $this->contentType = $contentType;
-        $this->contentDescription = $contentDescription;
-        $this->customs = $customs;
+        $this->contentExplanation = $contentExplanation;
     }
 
     /**
@@ -220,6 +226,26 @@ class Package implements PackageInterface
     }
 
     /**
+     * Obtain package export description (optional).
+     *
+     * @return string
+     */
+    public function getExportDescription(): string
+    {
+        return $this->exportDescription;
+    }
+
+    /**
+     * Obtain package customs terms of trade (optional).
+     *
+     * @return string
+     */
+    public function getTermsOfTrade(): string
+    {
+        return $this->termsOfTrade;
+    }
+
+    /**
      * Obtain package customs declaration content type (optional).
      *
      * @return string
@@ -234,28 +260,8 @@ class Package implements PackageInterface
      *
      * @return string
      */
-    public function getContentDescription(): string
+    public function getContentExplanation(): string
     {
-        return $this->contentDescription;
-    }
-
-    /**
-     * Obtain package additional customs data.
-     *
-     * @return array
-     */
-    public function getCustoms(): array
-    {
-        return $this->customs;
-    }
-
-    /**
-     * Obtain package export description.
-     *
-     * @return string
-     */
-    public function getExportDescription(): string
-    {
-        return $this->customs['packageExportDescription'] ?? '';
+        return $this->contentExplanation;
     }
 }

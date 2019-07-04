@@ -116,11 +116,4 @@ interface RequestExtractorInterface
      * @return bool
      */
     public function isCashOnDelivery(): bool;
-
-    /**
-     * Returns the dangerous goods category of an item.
-     *
-     * @return null|string
-     */
-    public function getDangerousGoodsCategory();
 }

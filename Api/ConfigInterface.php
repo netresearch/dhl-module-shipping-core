@@ -22,7 +22,6 @@ use Magento\Store\Model\ScopeInterface;
 interface ConfigInterface
 {
     const CONFIG_PATH_COD_METHODS = 'dhlshippingsolutions/dhlglobalwebservices/cod_methods';
-    const CONFIG_PATH_TERMS_OF_TRADE = 'dhlshippingsolutions/dhlglobalwebservices/terms_of_trade';
     const CONFIG_PATH_CUT_OFF_TIME = 'dhlshippingsolutions/dhlglobalwebservices/cut_off_time';
 
     const CONFIG_PATH_WEIGHT_UNIT = 'general/locale/weight_unit';
@@ -30,6 +29,10 @@ interface ConfigInterface
 
     const CONFIG_PATH_AUTORETRY_FAILED = 'dhlshippingsolutions/dhlglobalwebservices/bulk_settings/retry_failed_shipments';
     const CONFIG_PATH_AUTOCREATE_NOTIFY = 'dhlshippingsolutions/dhlglobalwebservices/bulk_settings/autocreate_notify';
+
+    const CONFIG_PATH_TERMS_OF_TRADE = 'dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/terms_of_trade';
+    const CONFIG_PATH_CONTENT_TYPE = 'dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_type';
+    const CONFIG_PATH_CONTENT_EXPLANATION = 'dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_explanation';
 
     /**
      * Get payment methods that were marked as cash on delivery methods in configuration
@@ -161,4 +164,18 @@ interface ConfigInterface
      * @return bool
      */
     public function isBulkNotificationEnabled($store = null): bool;
+
+    /**
+     * Get the default item category for international shipments.
+     *
+     * @return string
+     */
+    public function getDefaultExportContentType(): string;
+
+    /**
+     * For item category "OTHER", get the default explanation (e.g. "Merchandise").
+     *
+     * @return string
+     */
+    public function getDefaultExportContentExplanation(): string;
 }

@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Emulation;
 
 use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
+use Dhl\ShippingCore\Api\ProxyCarrierFactoryInterface;
 use Dhl\ShippingCore\Api\RateRequestEmulationInterface;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Quote\Model\Quote\Address\RateRequest;
@@ -24,7 +25,7 @@ use Psr\Log\LoggerInterface;
 class RateRequestService implements RateRequestEmulationInterface
 {
     /**
-     * @var ProxyCarrierFactory
+     * @var ProxyCarrierFactoryInterface
      */
     private $proxyCarrierFactory;
 
