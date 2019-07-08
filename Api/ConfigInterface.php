@@ -51,7 +51,7 @@ interface ConfigInterface
     /**
      * Get terms of trade.
      *
-     * @param null $store
+     * @param mixed $store
      * @return string
      */
     public function getTermsOfTrade($store = null): string;
@@ -59,7 +59,7 @@ interface ConfigInterface
     /**
      * Get the cut off time.
      *
-     * @param null $store
+     * @param mixed $store
      * @return string
      */
     public function getCutOffTime($store = null): string;
@@ -67,7 +67,7 @@ interface ConfigInterface
     /**
      * Get the general weight unit.
      *
-     * @param null $store
+     * @param mixed $store
      * @return string
      */
     public function getWeightUnit($store = null): string;
@@ -95,7 +95,7 @@ interface ConfigInterface
      *
      * @see Config
      *
-     * @param mixed  $store
+     * @param mixed $store
      * @param string $scope
      *
      * @return string
@@ -111,26 +111,26 @@ interface ConfigInterface
     public function normalizeWeightUOM(string $unit): string;
 
     /**
-     * @param null|string $store
+     * @param mixed $store
      * @return PackageCollection
      */
-    public function getOwnPackages(string $store = null): PackageCollection;
+    public function getOwnPackages($store = null): PackageCollection;
 
     /**
-     * @param null|string $store
+     * @param mixed $store
      * @return Package|null
      */
-    public function getOwnPackagesDefault(string $store = null);
+    public function getOwnPackagesDefault($store = null);
 
     /**
      * @param string $carrierCode
-     * @param mixed|null $store
+     * @param mixed $store
      * @return string
      */
     public function getCarrierTitleByCode(string $carrierCode, $store = null): string;
 
     /**
-     * @param mixed|null $store
+     * @param mixed $store
      * @return string
      */
     public function getRawWeightUnit($store = null): string;
@@ -150,14 +150,15 @@ interface ConfigInterface
     /**
      * Check whether or not failed shipments should be automatically retried during bulk/cron processing.
      *
+     * @param mixed $store
      * @return bool
      */
-    public function isBulkRetryEnabled(): bool;
+    public function isBulkRetryEnabled($store = null): bool;
 
     /**
      * Check whether or not a shipment confirmation email should be sent after successful bulk/cron processing.
      *
-     * @param mixed|null $store
+     * @param mixed $store
      * @return bool
      */
     public function isBulkNotificationEnabled($store = null): bool;

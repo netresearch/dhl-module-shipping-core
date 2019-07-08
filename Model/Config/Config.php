@@ -101,7 +101,7 @@ class Config implements ConfigInterface
     /**
      * Get terms of trade.
      *
-     * @param null $store
+     * @param mixed $store
      * @return string
      */
     public function getTermsOfTrade($store = null): string
@@ -116,7 +116,7 @@ class Config implements ConfigInterface
     /**
      * Get the cut off time.
      *
-     * @param null $store
+     * @param mixed $store
      * @return string
      */
     public function getCutOffTime($store = null): string
@@ -131,7 +131,7 @@ class Config implements ConfigInterface
     /**
      * Get the general weight unit.
      *
-     * @param null $store
+     * @param mixed $store
      * @return string
      */
     public function getWeightUnit($store = null): string
@@ -216,10 +216,10 @@ class Config implements ConfigInterface
     /**
      * Get PackageCollection of My Own Packages
      *
-     * @param null|string $store
+     * @param mixed $store
      * @return PackageCollection
      */
-    public function getOwnPackages(string $store = null): PackageCollection
+    public function getOwnPackages($store = null): PackageCollection
     {
         /** @var mixed[] $configValue */
         $configValue = $this->serializer->unserialize(
@@ -244,10 +244,10 @@ class Config implements ConfigInterface
     }
 
     /**
-     * @param null|string $store
+     * @param mixed $store
      * @return Package|null
      */
-    public function getOwnPackagesDefault(string $store = null)
+    public function getOwnPackagesDefault($store = null)
     {
         $collection = $this->getOwnPackages($store);
 
@@ -256,7 +256,7 @@ class Config implements ConfigInterface
 
     /**
      * @param string $carrierCode
-     * @param mixed|null $store
+     * @param mixed $store
      * @return string
      */
     public function getCarrierTitleByCode(string $carrierCode, $store = null): string
@@ -269,7 +269,7 @@ class Config implements ConfigInterface
     }
 
     /**
-     * @param mixed|null $store
+     * @param mixed $store
      * @return string
      */
     public function getRawWeightUnit($store = null): string
@@ -312,19 +312,22 @@ class Config implements ConfigInterface
     /**
      * Check whether or not failed shipments should be automatically retried during bulk/cron processing.
      *
+     * @param mixed $store
      * @return bool
      */
-    public function isBulkRetryEnabled(): bool
+    public function isBulkRetryEnabled($store = null): bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::CONFIG_PATH_AUTORETRY_FAILED
+            self::CONFIG_PATH_AUTORETRY_FAILED,
+            ScopeInterface::SCOPE_STORE,
+            $store
         );
     }
 
     /**
      * Check whether or not a shipment confirmation email should be sent after successful bulk/cron processing.
      *
-     * @param mixed|null $store
+     * @param mixed $store
      * @return bool
      */
     public function isBulkNotificationEnabled($store = null): bool
