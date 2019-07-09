@@ -21,7 +21,7 @@
             </depends>
         </field>
         <field id="round_prices_static_decimal" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="90"
-               translate="tooltip label" type="text">
+               translate="label tooltip" type="text">
             <label><![CDATA[Decimal Value]]></label>
             <validate>validate-length maximum-length-2 minimum-length-2 validate-digits</validate>
             <tooltip><![CDATA[Enter the value without the decimal separator (ex. 99 for the shipping charges to be rounded to 99 cents)]]></tooltip>

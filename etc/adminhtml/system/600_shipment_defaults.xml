@@ -10,10 +10,10 @@
         <attribute type="expanded">0</attribute>
 
         <field id="terms_of_trade" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
-               translate="label tooltip comment" type="Netresearch\ConfigFields\Model\Type\Radioset">
+               translate="label comment" type="Netresearch\ConfigFields\Model\Type\Radioset">
             <label><![CDATA[Terms of Trade]]></label>
             <source_model>Dhl\ShippingCore\Model\Config\Source\TermsOfTrade</source_model>
-            <tooltip><![CDATA[Select the terms of trade.]]></tooltip>
+            <comment>Select whether duties and taxes for the shipment are paid by the shipper or not.</comment>
         </field>
         <field id="export_content_type" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20"
                translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
