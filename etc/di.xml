@@ -257,12 +257,12 @@
                 <item name="dhlRouteProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor</item>
                 <item name="dhlImageUrlProcessor" sortOrder="970" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ImageUrlProcessor</item>
                 <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\TranslationProcessor</item>
-                <item name="dhlSortOrderProcessor" sortOrder="990" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\SortOrderProcessor</item>
             </argument>
             <argument name="processors" xsi:type="array">
                 <item name="dhlApplySelectionProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ApplySelectionsProcessor</item>
-                <item name="dhlPackageDetailValuesProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageInputDataProcessor</item>
-                <item name="dhlItemDetailValuesProcessor" sortOrder="20" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemInputDataProcessor</item>
+                <item name="dhlPackageDetailValuesProcessor" sortOrder="20" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageInputDataProcessor</item>
+                <item name="dhlItemDetailValuesProcessor" sortOrder="30" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemInputDataProcessor</item>
+                <item name="dhlSortOrderProcessor" sortOrder="40" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\SortOrderProcessor</item>
             </argument>
         </arguments>
     </type>
