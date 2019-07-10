@@ -9,7 +9,6 @@ namespace Dhl\ShippingCore\Model\Packaging;
 use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
 use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
 use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
-use Magento\Catalog\Model\Product;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
@@ -17,7 +16,7 @@ use Magento\Sales\Model\Order\Shipment\Item;
 /**
  * Class ItemAttributeReader
  *
- * Read properties from shipment items. If a configurable is passed in, properties are read from the actual simple.
+ * Read product attributes from shipment items.
  *
  * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
@@ -26,14 +25,17 @@ use Magento\Sales\Model\Order\Shipment\Item;
 class ItemAttributeReader
 {
     /**
-     * Obtain the actual product added to cart, i.e. the chosen configuration.
+     * Obtain the actual product added to cart, i.e. the chosen configuration, and return value of given attribute.
      *
      * @param Item $shipmentItem
-     * @return Product
+     * @param string $attributeCode
+     * @return string
      */
-    private static function getProductFromShipmentItem(Item $shipmentItem)
+    private function readAttribute(Item $shipmentItem, string $attributeCode): string
     {
         $orderItem = $shipmentItem->getOrderItem();
+
+        // load the product to read the attribute from. if configurable item is passed in, load from simple item.
         if ($orderItem->getProductType() === Configurable::TYPE_CODE) {
             $childItem = current($orderItem->getChildrenItems());
             $product = $childItem->getProduct();
@@ -41,7 +43,17 @@ class ItemAttributeReader
             $product = $orderItem->getProduct();
         }
 
-        return $product;
+        if (!$product) {
+            return '';
+        }
+
+        if ($product->hasData($attributeCode)) {
+            // attribute value found in simple
+            return (string) $product->getData($attributeCode);
+        }
+
+        // as a last resort, fall back to the configurable (if exists) or return empty value
+        return (string) ($orderItem->getProduct() ? $orderItem->getProduct()->getData($attributeCode) : '');
     }
 
     /**
@@ -52,10 +64,7 @@ class ItemAttributeReader
      */
     public function getWeight(Item $shipmentItem): float
     {
-        $product = self::getProductFromShipmentItem($shipmentItem);
-        $weight = $product->getWeight();
-
-        return (float) ($weight ?: $shipmentItem->getOrderItem()->getProduct()->getWeight());
+        return (float) $this->readAttribute($shipmentItem, 'weight');
     }
 
     /**
@@ -64,14 +73,9 @@ class ItemAttributeReader
      * @param Item $shipmentItem
      * @return string
      */
-    public function getHsCode(Item $shipmentItem)
+    public function getHsCode(Item $shipmentItem): string
     {
-        $product = self::getProductFromShipmentItem($shipmentItem);
-        if ($product->hasData(TariffNumber::CODE)) {
-            return (string) $product->getData(TariffNumber::CODE);
-        }
-
-        return (string) $shipmentItem->getOrderItem()->getProduct()->getData(TariffNumber::CODE);
+        return $this->readAttribute($shipmentItem, TariffNumber::CODE);
     }
 
     /**
@@ -82,12 +86,7 @@ class ItemAttributeReader
      */
     public function getDgCategory(Item $shipmentItem): string
     {
-        $product = self::getProductFromShipmentItem($shipmentItem);
-        if ($product->hasData(DGCategory::CODE)) {
-            return (string) $product->getData(DGCategory::CODE);
-        }
-
-        return (string) $shipmentItem->getOrderItem()->getProduct()->getData(DGCategory::CODE);
+        return $this->readAttribute($shipmentItem, DGCategory::CODE);
     }
 
     /**
@@ -98,13 +97,7 @@ class ItemAttributeReader
      */
     public function getExportDescription(Item $shipmentItem): string
     {
-        $product = self::getProductFromShipmentItem($shipmentItem);
-
-        if ($product->hasData(ExportDescription::CODE)) {
-            return (string) $product->getData(ExportDescription::CODE);
-        }
-
-        return (string) $shipmentItem->getOrderItem()->getProduct()->getData(ExportDescription::CODE);
+        return $this->readAttribute($shipmentItem, ExportDescription::CODE);
     }
 
     /**
@@ -115,13 +108,7 @@ class ItemAttributeReader
      */
     public function getCountryOfManufacture(Item $shipmentItem): string
     {
-        $product = self::getProductFromShipmentItem($shipmentItem);
-
-        if ($product->hasData('country_of_manufacture')) {
-            return (string) $product->getData('country_of_manufacture');
-        }
-
-        return (string) $shipmentItem->getOrderItem()->getProduct()->getData('country_of_manufacture');
+        return $this->readAttribute($shipmentItem, 'country_of_manufacture');
     }
 
     /**

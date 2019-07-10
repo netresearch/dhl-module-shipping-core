@@ -64,7 +64,7 @@ class ItemInputDataProcessor extends AbstractProcessor
      * @return Item
      * @throws \RuntimeException
      */
-    private function getShipmentItemByOrderItemId(int $orderItemId, array $shipmentItems)
+    private function getShipmentItemByOrderItemId(int $orderItemId, array $shipmentItems): Item
     {
         foreach ($shipmentItems as $shipmentItem) {
             if ((int) $shipmentItem->getOrderItemId() === $orderItemId) {
