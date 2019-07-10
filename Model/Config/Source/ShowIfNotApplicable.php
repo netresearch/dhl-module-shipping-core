@@ -22,7 +22,7 @@ class ShowIfNotApplicable implements OptionSourceInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => '0', 'label' => __('Hide this option from customer')],
+            ['value' => '0', 'label' => __('Hide this shipping method in checkout')],
             ['value' => '1', 'label' => __('Display customized message')],
         ];
     }

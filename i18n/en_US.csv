@@ -39,7 +39,7 @@
 "For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount","For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount"
 "General Configuration","General Configuration"
 "Height %1","Height %1"
-"Hide this option from customer","Hide this option from customer"
+"Hide this shipping method in checkout","Hide this shipping method in checkout"
 "HS Code","HS Code"
 "If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.","If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general."
 "International Shipping","International Shipping"

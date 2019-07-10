@@ -39,7 +39,7 @@
 "For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount","Geben Sie z.B. 20 ein, um einen Aufschlag von 20% in der konfigurierten Währung anzuwenden. Geben Sie -20 ein, um einen Rabatt von 20% zu gewähren."
 "General Configuration","Allgemeine Konfiguration"
 "Height %1","Höhe %1"
-"Hide this option from customer","Diese Option beim Kunden ausblenden"
+"Hide this shipping method in checkout","Diese Versandart im Checkout ausblenden"
 "HS Code","HS-Code"
 "If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.","Ist die automatische Wiederholung deaktiviert, so müssen alle zuvor fehlgeschlagenen Labels nach Korrektur der Versanddaten manuell angefordert werden. Ist sie aktiviert, dann wird wiederholt versucht, Labels vom Webservice abzurufen – auch wenn noch keine Korrektur der Sendungsdaten vorgenommen wurde. Dies mag komfortabel erscheinen, kann die Anzahl der Label-Anfragen und damit die Last der automatischen Verarbeitung aber drastisch erhöhen."
 "International Shipping","Internationaler Versand"
