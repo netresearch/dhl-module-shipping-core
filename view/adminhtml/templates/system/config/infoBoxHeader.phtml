@@ -1,9 +1,12 @@
 <?php
-/** @var \Magento\Backend\Block\Template $block */
+/**
+ * See LICENSE.md for license details.
+ */
+/** @var \Magento\Framework\View\Element\Template $block */
 /** @var \Dhl\ShippingCore\ViewModel\Adminhtml\System\InfoBox $viewModel */
 $viewModel = $block->getViewModel();
 ?>
-<h2 style="margin: 0"><?php echo $block->escapeHtml($viewModel->getModuleTitle()); ?></h2>
-<p style="margin: 0">
-    <strong>Module Version <?php echo $block->escapeHtml($viewModel->getModuleVersion()); ?></strong>
+<p class="info">
+    <?php echo $block->escapeHtml(__('Module version:')) ?>
+    <?php echo $block->escapeHtml($viewModel->getModuleVersion()) ?>
 </p>

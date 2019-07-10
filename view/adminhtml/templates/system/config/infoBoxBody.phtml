@@ -2,19 +2,23 @@
 /**
  * See LICENSE.md for license details.
  */
+/** @var Magento\Framework\View\Element\Template $block */
 ?>
-<div class="col col-l-7 col-xl-8 content">
+<div class="col content">
     <p>
-        The DHL Shipping Solutions section provides common configuration options for all subsequent DHL carrier modules.
+        <?php echo $block->escapeHtml(__('The DHL Shipping Solutions section provides common configuration options for all subsequent DHL carrier modules.')) ?>
     </p>
     <p>
-        It allows you to globally configure the available payment methods, the order cut off times or specify your own package types.
+        <?php echo $block->escapeHtml(__('It allows you to globally configure the available payment methods, the order cut off times or specify your own package types.')) ?>
     </p>
 </div>
-<div class="col col-l-5 col-xl-4">
-    <aside style="padding: 1em; background: white; border: 1px solid #e3e3e3">
-        <h3>DHL & Magento</h3>
-        <p>Having issues configuring the extension? Contact your DHL account
-            representative who will facilitate technical assistance.</p>
+<div class="col side">
+    <aside>
+        <div class="section">
+            <h3><?php echo $block->escapeHtml(__('DHL & Magento')) ?></h3>
+            <p>
+                <?php echo $block->escapeHtml(__('Having issues configuring the extension? Contact your DHL account representative who will facilitate technical assistance.')) ?>
+            </p>
+        </div>
     </aside>
 </div>

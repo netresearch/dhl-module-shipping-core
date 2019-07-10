@@ -40,12 +40,4 @@ class InfoBox implements ArgumentInterface
     {
         return $this->coreConfig->getModuleVersion();
     }
-
-    /**
-     * @return string
-     */
-    public function getModuleTitle(): string
-    {
-        return 'DHL Shipping Solutions';
-    }
 }

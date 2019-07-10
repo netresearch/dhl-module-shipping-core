@@ -19,7 +19,7 @@
                     <attribute type="header_template">Dhl_ShippingCore::system/config/infoBoxHeader.phtml</attribute>
                     <attribute type="view_model">Dhl\ShippingCore\ViewModel\Adminhtml\System\InfoBox</attribute>
                     <attribute type="logo">Dhl_Ui::images/logo-dhl-wide.svg</attribute>
-                    <attribute type="background">#ffcc01</attribute>
+                    <attribute type="css_class">dhlgw</attribute>
                 </field>
 
                 <!-- Cash On Delivery Payment Methods -->
