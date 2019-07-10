@@ -19,7 +19,6 @@ use Magento\Framework\Serialize\Serializer\Json;
  * @package Dhl\ShippingCore\Controller
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
-
  */
 class Save extends Action
 {
@@ -57,10 +56,10 @@ class Save extends Action
      */
     public function execute(): ResultInterface
     {
-        $data          = $this->getRequest()->getParam('data');
-        $data          = $this->jsonSerializer->unserialize($data);
+        $data = $this->getRequest()->getParam('data');
+        $data = $this->jsonSerializer->unserialize($data);
         $shipmentItems = [];
-        $packages      = [];
+        $packages = [];
 
         foreach ($data as $packageDetails) {
             $packageItems = [];
@@ -74,17 +73,17 @@ class Save extends Action
                 }
 
                 $packageItem = [
-                    'qty'           => $itemDetails['details']['qty'] ?? '1',
+                    'qty' => $itemDetails['details']['qty'] ?? '1',
                     'customs_value' => $itemCustomsValue,
-                    'price'         => $itemDetails['details']['price'],
-                    'name'          => $itemDetails['details']['productName'],
-                    'weight'        => $itemDetails['details']['weight'] ?? '',
-                    'product_id'    => $itemDetails['details']['productId'],
+                    'price' => $itemDetails['details']['price'],
+                    'name' => $itemDetails['details']['productName'],
+                    'weight' => $itemDetails['details']['weight'] ?? '',
+                    'product_id' => $itemDetails['details']['productId'],
                     'order_item_id' => $itemId,
-                    'customs'       => $itemDetails['itemCustoms'] ?? [],
+                    'customs' => $itemDetails['itemCustoms'] ?? [],
                 ];
 
-                $packageItems[$itemId]  = $packageItem;
+                $packageItems[$itemId] = $packageItem;
                 $shipmentItems[$itemId] = $packageItem['qty'];
             }
 
@@ -99,18 +98,18 @@ class Save extends Action
             );
 
             $packages[$packageDetails['packageId']] = [
-                'params'=> [
-                    'container'          => '',
-                    'weight'             => $packageDetails['packageWeight']['weight'] ?? '',
-                    'weight_units'       => $packageDetails['packageWeight']['weightUnit'],
-                    'length'             => $packageDetails['packageSize']['length'] ?? '',
-                    'width'              => $packageDetails['packageSize']['width'] ?? '',
-                    'height'             => $packageDetails['packageSize']['height'] ?? '',
-                    'dimension_units'    => $packageDetails['packageSize']['sizeUnit'],
-                    'content_type'       => $contentType,
+                'params' => [
+                    'container' => '',
+                    'weight' => $packageDetails['packageWeight']['weight'] ?? '',
+                    'weight_units' => $packageDetails['packageWeight']['weightUnit'],
+                    'length' => $packageDetails['packageSize']['length'] ?? '',
+                    'width' => $packageDetails['packageSize']['width'] ?? '',
+                    'height' => $packageDetails['packageSize']['height'] ?? '',
+                    'dimension_units' => $packageDetails['packageSize']['sizeUnit'],
+                    'content_type' => $contentType,
                     'content_type_other' => $contentTypeOther,
-                    'customs_value'      => $customsValue,
-                    'customs'            => $packageDetails['packageCustoms'] ?? [],
+                    'customs_value' => $customsValue,
+                    'customs' => $packageDetails['packageCustoms'] ?? [],
                 ],
 
                 'items' => $packageItems,
@@ -119,9 +118,9 @@ class Save extends Action
 
         $shipment = [
             'shipment' => [
-                'comment_text'          => '',
+                'comment_text' => '',
                 'create_shipping_label' => '1',
-                'items'                 => $shipmentItems,
+                'items' => $shipmentItems,
             ],
             'packages' => $packages,
         ];
@@ -129,9 +128,13 @@ class Save extends Action
         /** @var Forward $resultForward */
         $resultForward = $this->resultFactory->create(ResultFactory::TYPE_FORWARD);
         $resultForward->setController('order_shipment')
-            ->setModule('admin')
-            ->setParams($shipment)
-            ->forward('save');
+                      ->setModule('admin')
+                      ->setParams($shipment);
+        if ($this->getRequest()->getParam('shipment_id', false)) {
+            $resultForward->forward('createLabel');
+        } else {
+            $resultForward->forward('save');
+        }
 
         return $resultForward;
     }
