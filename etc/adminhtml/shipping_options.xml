@@ -7,12 +7,10 @@
                 <inputs>
                     <input code="weight">
                         <label>Total Weight</label>
-                        <inputType>number</inputType>
+                        <inputType>prefixed</inputType>
                     </input>
                     <input code="weightUnit">
-                        <label>Weight Unit</label>
-                        <inputType>static</inputType>
-                        <disabled>true</disabled>
+                        <inputType>hidden</inputType>
                     </input>
                 </inputs>
             </shippingOption>
@@ -21,20 +19,18 @@
                 <inputs>
                     <input code="width">
                         <label>Width</label>
-                        <inputType>number</inputType>
+                        <inputType>prefixed</inputType>
                     </input>
                     <input code="height">
                         <label>Height</label>
-                        <inputType>number</inputType>
+                        <inputType>prefixed</inputType>
                     </input>
                     <input code="length">
                         <label>Length</label>
-                        <inputType>number</inputType>
+                        <inputType>prefixed</inputType>
                     </input>
                     <input code="sizeUnit">
-                        <label>Size Unit</label>
-                        <inputType>static</inputType>
-                        <disabled>true</disabled>
+                        <inputType>hidden</inputType>
                     </input>
                 </inputs>
             </shippingOption>
@@ -43,7 +39,7 @@
                 <inputs>
                     <input code="customsValue">
                         <label>Customs Value</label>
-                        <inputType>price</inputType>
+                        <inputType>prefixed</inputType>
                     </input>
                     <input code="exportDescription">
                         <label>Package Description</label>
@@ -74,16 +70,14 @@
                                 <inputType>hidden</inputType>
                             </input>
                             <input code="productName">
-                                <label>Product Name</label>
-                                <inputType>static</inputType>
-                                <disabled>true</disabled>
+                                <inputType>hidden</inputType>
                             </input>
                             <input code="price">
                                 <inputType>hidden</inputType>
                             </input>
                             <input code="weight">
                                 <label>Weight</label>
-                                <inputType>number</inputType>
+                                <inputType>prefixed</inputType>
                             </input>
                             <input code="qtyToShip">
                                 <label>Quantity to Ship</label>
@@ -105,17 +99,17 @@
                                 <inputType>text</inputType>
                             </input>
                             <input code="exportDescription">
-                                <sortOrder>20</sortOrder>
+                                <sortOrder>1000</sortOrder>
                                 <label>Export Description</label>
                                 <inputType>textarea</inputType>
                             </input>
                             <input code="customsValue">
-                                <sortOrder>30</sortOrder>
+                                <sortOrder>20</sortOrder>
                                 <label>Customs Value</label>
-                                <inputType>price</inputType>
+                                <inputType>prefixed</inputType>
                             </input>
                             <input code="countryOfOrigin">
-                                <sortOrder>40</sortOrder>
+                                <sortOrder>30</sortOrder>
                                 <label>Country of Origin</label>
                                 <inputType>select</inputType>
                             </input>

@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Util;
 
 use Dhl\ShippingCore\Api\UnitConverterInterface;
 use Magento\Directory\Helper\Data;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Locale\FormatInterface;
 use Magento\Shipping\Helper\Carrier;
 
@@ -37,6 +38,7 @@ class UnitConverter implements UnitConverterInterface
 
     /**
      * UnitConverter constructor.
+     *
      * @param FormatInterface $localeFormat
      * @param Data $currencyConverter
      * @param Carrier $unitConverter
@@ -74,10 +76,12 @@ class UnitConverter implements UnitConverterInterface
      * @param string $unitIn
      * @param string $unitOut
      * @return float
+     * @throws NoSuchEntityException
      */
     public function convertMonetaryValue(float $value, string $unitIn, string $unitOut): float
     {
         $amount = $this->currencyConverter->currencyConvert($value, $unitIn, $unitOut);
+
         return round($amount, self::CONVERSION_PRECISION);
     }
 
@@ -97,6 +101,45 @@ class UnitConverter implements UnitConverterInterface
         }
 
         $converted = (float) $this->unitConverter->convertMeasureWeight($value, $unitIn, $unitOut);
+
         return round($converted, self::CONVERSION_PRECISION);
+    }
+
+    /**
+     * Returns lowercase two letter representation of weight unit, e.g. KILOGRAM => kg
+     *
+     * @param $weightUnit
+     * @return string
+     */
+    public function normalizeWeightUnit($weightUnit): string
+    {
+        switch (strtoupper($weightUnit)) {
+            case \Zend_Measure_Weight::KILOGRAM:
+            case 'KGS':
+                return 'kg';
+            case \Zend_Measure_Weight::POUND:
+            case 'LBS':
+                return 'lb';
+            default:
+                return $weightUnit;
+        }
+    }
+
+    /**
+     * Returns lowercase two letter representation of given dimension unit
+     *
+     * @param $dimensionUnit
+     * @return string
+     */
+    public function normalizeDimensionUnit($dimensionUnit): string
+    {
+        switch (strtoupper($dimensionUnit)) {
+            case \Zend_Measure_Length::CENTIMETER:
+                return 'cm';
+            case \Zend_Measure_Length::INCH:
+                return 'in';
+            default:
+                return $dimensionUnit;
+        }
     }
 }

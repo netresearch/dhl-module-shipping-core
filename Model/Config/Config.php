@@ -7,9 +7,11 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Config;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
+use Dhl\ShippingCore\Api\UnitConverterInterface;
 use Dhl\ShippingCore\Model\Package;
 use Dhl\ShippingCore\Model\PackageCollection;
 use Dhl\ShippingCore\Model\PackageCollectionFactory;
+use Dhl\ShippingCore\Util\UnitConverter;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Shipping\Helper\Carrier;
@@ -29,16 +31,6 @@ class Config implements ConfigInterface
     private $scopeConfig;
 
     /**
-     * @var string[]
-     */
-    private $weightUnitMap = [
-        'kgs' => 'kg',
-        'lbs' => 'lb',
-        'POUND' => 'lb',
-        'KILOGRAM' => 'kg',
-    ];
-
-    /**
      * @var SerializerInterface
      */
     private $serializer;
@@ -49,20 +41,28 @@ class Config implements ConfigInterface
     private $packageCollectionFactory;
 
     /**
+     * @var UnitConverterInterface
+     */
+    private $unitConverter;
+
+    /**
      * Config constructor.
      *
      * @param ScopeConfigInterface $scopeConfig
      * @param SerializerInterface $serializer
-     * @param PackageCollectionFactory $collectionFactory
+     * @param PackageCollectionFactory $packageCollectionFactory
+     * @param UnitConverterInterface $unitConverter
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         SerializerInterface $serializer,
-        PackageCollectionFactory $collectionFactory
+        PackageCollectionFactory $packageCollectionFactory,
+        UnitConverterInterface $unitConverter
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->serializer = $serializer;
-        $this->packageCollectionFactory = $collectionFactory;
+        $this->packageCollectionFactory = $packageCollectionFactory;
+        $this->unitConverter = $unitConverter;
     }
 
     /**
@@ -106,7 +106,7 @@ class Config implements ConfigInterface
      */
     public function getTermsOfTrade($store = null): string
     {
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_TERMS_OF_TRADE,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -121,7 +121,7 @@ class Config implements ConfigInterface
      */
     public function getCutOffTime($store = null): string
     {
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_CUT_OFF_TIME,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -131,8 +131,8 @@ class Config implements ConfigInterface
     /**
      * Get the general weight unit.
      *
-     * @param mixed $store
-     * @return string
+     * @param int|string|null $store
+     * @return string - either kg or lb
      */
     public function getWeightUnit($store = null): string
     {
@@ -142,22 +142,20 @@ class Config implements ConfigInterface
             $store
         );
 
-        return $this->normalizeWeightUOM($weightUOM);
+        return $this->unitConverter->normalizeWeightUnit($weightUOM);
     }
 
     /**
-     * Maps Magento's internal unit names to SDKs unit names
+     * Get the normalized dimension unit
      *
-     * @param string $unit
-     * @return string
+     * @param int|string|null $store
+     * @return string - either cm or in
      */
-    public function normalizeWeightUOM(string $unit): string
+    public function getDimensionUnit($store = null): string
     {
-        if (array_key_exists($unit, $this->weightUnitMap)) {
-            return $this->weightUnitMap[$unit];
-        }
+        $weightUOM = $this->getWeightUnit($store);
 
-        return $unit;
+        return $weightUOM === 'kg' ? 'cm' : 'in';
     }
 
     /**
@@ -197,16 +195,16 @@ class Config implements ConfigInterface
     /**
      * Returns the shipping origin country
      *
-     * @see ShippingConfig
-     *
-     * @param mixed  $store
+     * @param mixed $store
      * @param string $scope
      *
      * @return string
+     * @see ShippingConfig
+     *
      */
     public function getOriginCountry($store = null, $scope = ScopeInterface::SCOPE_STORE): string
     {
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             ShippingConfig::XML_PATH_ORIGIN_COUNTRY_ID,
             $scope,
             $store
@@ -266,47 +264,6 @@ class Config implements ConfigInterface
             ScopeInterface::SCOPE_STORE,
             $store
         );
-    }
-
-    /**
-     * @param mixed $store
-     * @return string
-     */
-    public function getRawWeightUnit($store = null): string
-    {
-        $weightUnit =  $this->scopeConfig->getValue(
-            self::CONFIG_PATH_WEIGHT_UNIT,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-
-        return $this->normalizeRawWeight($weightUnit);
-    }
-
-    /**
-     * @param string $weightUnit
-     * @return string
-     */
-    public function normalizeRawWeight(string $weightUnit): string
-    {
-        $weightUnit = (strtoupper($weightUnit) === \Zend_Measure_Weight::LBS)
-            ? \Zend_Measure_Weight::POUND
-            : \Zend_Measure_Weight::KILOGRAM;
-
-        return $weightUnit;
-    }
-
-    /**
-     * @param string $weightUnit
-     * @return string
-     */
-    public function getRawDimensionUnit(string $weightUnit): string
-    {
-        $dimensionUnit = (strtoupper($weightUnit) === \Zend_Measure_Weight::POUND)
-            ? \Zend_Measure_Length::INCH
-            : \Zend_Measure_Length::CENTIMETER;
-
-        return $dimensionUnit;
     }
 
     /**

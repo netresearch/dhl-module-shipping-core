@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
 
+use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
@@ -43,19 +44,28 @@ class ItemInputDataProcessor extends AbstractProcessor
     private $commentFactory;
 
     /**
+     * @var ConfigInterface
+     */
+    private $config;
+
+    /**
      * ItemInputDataProcessor constructor.
+     *
      * @param ItemAttributeReader $itemAttributeReader
      * @param Countryofmanufacture $countrySource
      * @param CommentInterfaceFactory $commentFactory
+     * @param ConfigInterface $config
      */
     public function __construct(
         ItemAttributeReader $itemAttributeReader,
         Countryofmanufacture $countrySource,
-        CommentInterfaceFactory $commentFactory
+        CommentInterfaceFactory $commentFactory,
+        ConfigInterface $config
     ) {
         $this->itemAttributeReader = $itemAttributeReader;
         $this->countrySource = $countrySource;
         $this->commentFactory = $commentFactory;
+        $this->config = $config;
     }
 
     /**
@@ -96,6 +106,9 @@ class ItemInputDataProcessor extends AbstractProcessor
                     $input->setDefaultValue((string) $shipmentItem->getPrice());
                     break;
                 case 'weight':
+                    $comment = $this->commentFactory->create();
+                    $comment->setContent($this->config->getWeightUnit($shipmentItem->getShipment()->getStoreId()));
+                    $input->setComment($comment);
                     $input->setDefaultValue((string) $this->itemAttributeReader->getWeight($shipmentItem));
                     break;
                 case 'qtyToShip':

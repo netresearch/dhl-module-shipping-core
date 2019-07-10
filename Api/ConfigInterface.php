@@ -76,6 +76,14 @@ interface ConfigInterface
     public function getWeightUnit($store = null): string;
 
     /**
+     * Get the normalized weight unit
+     *
+     * @param int|string|null $store
+     * @return string - either cm or in
+     */
+    public function getDimensionUnit($store = null): string;
+
+    /**
      * Checks if route is dutiable by stores origin country and eu country list
      *
      * @param string $receiverCountry
@@ -105,14 +113,6 @@ interface ConfigInterface
     public function getOriginCountry($store = null, $scope = ScopeInterface::SCOPE_STORE): string;
 
     /**
-     * Maps Magento's internal unit names to SDKs unit names
-     *
-     * @param string $unit
-     * @return string
-     */
-    public function normalizeWeightUOM(string $unit): string;
-
-    /**
      * @param mixed $store
      * @return PackageCollection
      */
@@ -130,24 +130,6 @@ interface ConfigInterface
      * @return string
      */
     public function getCarrierTitleByCode(string $carrierCode, $store = null): string;
-
-    /**
-     * @param mixed $store
-     * @return string
-     */
-    public function getRawWeightUnit($store = null): string;
-
-    /**
-     * @param string $weightUnit
-     * @return string
-     */
-    public function normalizeRawWeight(string $weightUnit): string;
-
-    /**
-     * @param string $weightUnit
-     * @return string
-     */
-    public function getRawDimensionUnit(string $weightUnit): string;
 
     /**
      * Check whether or not failed shipments should be automatically retried during bulk/cron processing.

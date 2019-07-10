@@ -50,4 +50,20 @@ interface UnitConverterInterface
      * @return float
      */
     public function convertWeight(float $value, string $unitIn, string $unitOut): float;
+
+    /**
+     * Returns lowercase two letter representation of weight unit, e.g. KILOGRAM => kg
+     *
+     * @param $weightUnit
+     * @return string
+     */
+    public function normalizeWeightUnit($weightUnit): string;
+
+    /**
+     * Returns lowercase two letter representation of given dimension unit
+     *
+     * @param $dimensionUnit
+     * @return string
+     */
+    public function normalizeDimensionUnit($dimensionUnit): string;
 }

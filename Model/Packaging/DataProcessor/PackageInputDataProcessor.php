@@ -87,25 +87,40 @@ class PackageInputDataProcessor extends AbstractProcessor
                 // weight
                 case 'weight':
                     $totalWeight = $this->itemAttributeReader->getTotalWeight($shipment);
+                    $comment = $this->commentFactory->create();
+                    $comment->setContent($this->config->getWeightUnit($shipment->getStoreId()));
+                    $input->setComment($comment);
                     $input->setDefaultValue((string) $totalWeight);
                     break;
                 case 'weightUnit':
-                    $weightUnit = $this->config->getRawWeightUnit($shipment->getStoreId());
+                    $weightUnit = $this->config->getWeightUnit($shipment->getStoreId()) === 'kg'
+                        ? \Zend_Measure_Weight::KILOGRAM
+                        : \Zend_Measure_Weight::POUND;
                     $input->setDefaultValue($weightUnit);
                     break;
                 // dimensions
                 case 'width':
+                    $comment = $this->commentFactory->create();
+                    $comment->setContent($this->config->getDimensionUnit($shipment->getStoreId()));
+                    $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getWidth() : '');
                     break;
                 case 'height':
+                    $comment = $this->commentFactory->create();
+                    $comment->setContent($this->config->getDimensionUnit($shipment->getStoreId()));
+                    $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getHeight() : '');
                     break;
                 case 'length':
+                    $comment = $this->commentFactory->create();
+                    $comment->setContent($this->config->getDimensionUnit($shipment->getStoreId()));
+                    $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getLength() : '');
                     break;
                 case 'sizeUnit':
-                    $weightUnit = $this->config->getRawWeightUnit($shipment->getStoreId());
-                    $dimensionsUnit = $this->config->getRawDimensionUnit($weightUnit);
+                    $dimensionsUnit = $this->config->getDimensionUnit($shipment->getStoreId()) === 'cm'
+                        ? \Zend_Measure_Length::CENTIMETER
+                        : \Zend_Measure_Length::INCH;
                     $input->setDefaultValue($dimensionsUnit);
                     break;
                 // customs
