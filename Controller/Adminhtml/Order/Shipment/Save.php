@@ -98,14 +98,15 @@ class Save extends Action
             );
 
             $packages[$packageDetails['packageId']] = [
+
                 'params' => [
                     'container' => '',
-                    'weight' => $packageDetails['packageWeight']['weight'] ?? '',
-                    'weight_units' => $packageDetails['packageWeight']['weightUnit'],
-                    'length' => $packageDetails['packageSize']['length'] ?? '',
-                    'width' => $packageDetails['packageSize']['width'] ?? '',
-                    'height' => $packageDetails['packageSize']['height'] ?? '',
-                    'dimension_units' => $packageDetails['packageSize']['sizeUnit'],
+                    'weight' => $packageDetails['packageDetails']['weight'] ?? '',
+                    'weight_units' => $packageDetails['packageDetails']['weightUnit'],
+                    'length' => $packageDetails['packageDetails']['length'] ?? '',
+                    'width' => $packageDetails['packageDetails']['width'] ?? '',
+                    'height' => $packageDetails['packageDetails']['height'] ?? '',
+                    'dimension_units' => $packageDetails['packageDetails']['sizeUnit'],
                     'content_type' => $contentType,
                     'content_type_other' => $contentTypeOther,
                     'customs_value' => $customsValue,
