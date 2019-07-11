@@ -10,6 +10,7 @@
             <label>DHL Shipping Solutions</label>
             <tab>sales</tab>
             <resource>Magento_Shipping::config_shipping</resource>
+
             <group id="dhlglobalwebservices" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="100" translate="label">
                 <label>General Configuration</label>
 

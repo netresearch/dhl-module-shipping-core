@@ -8,7 +8,6 @@
     <group id="shipment_defaults" translate="label comment" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>Shipment Defaults</label>
         <comment>This section configures information about the exported goods relevant for customs for international shipments.</comment>
-        <attribute type="expanded">0</attribute>
 
         <field id="terms_of_trade" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20"
                translate="label comment" type="Netresearch\ConfigFields\Model\Type\Radioset">

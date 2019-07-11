@@ -4,7 +4,6 @@
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <group id="shipment_settings" translate="label" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>Shipping Preferences</label>
-        <attribute type="expanded">1</attribute>
 
         <!-- Products -->
         <field id="allowedinternationalproducts" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"

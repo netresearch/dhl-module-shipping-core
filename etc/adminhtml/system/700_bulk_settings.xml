@@ -7,7 +7,6 @@
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <group id="bulk_settings" translate="label" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>Bulk / Cron Settings</label>
-        <attribute type="expanded">0</attribute>
 
         <field id="retry_failed_shipments" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10"
                translate="label comment tooltip" type="Netresearch\ConfigFields\Model\Type\Checkbox">
