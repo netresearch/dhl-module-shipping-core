@@ -37,6 +37,7 @@
                         <inputType>prefixed</inputType>
                     </input>
                     <input code="exportDescription">
+                        <sortOrder>1000</sortOrder>
                         <label>Package Description</label>
                         <inputType>textarea</inputType>
                     </input>
@@ -70,43 +71,46 @@
                             <input code="price">
                                 <inputType>hidden</inputType>
                             </input>
-                            <input code="weight">
-                                <label>Weight</label>
-                                <inputType>suffixed</inputType>
-                            </input>
                             <input code="qtyToShip">
+                                <sortOrder>10</sortOrder>
                                 <label>Quantity to Ship</label>
                                 <inputType>static</inputType>
                                 <disabled>true</disabled>
                             </input>
                             <input code="qty">
+                                <sortOrder>20</sortOrder>
                                 <label>Quantity</label>
                                 <inputType>text</inputType>
+                            </input>
+                            <input code="weight">
+                                <sortOrder>30</sortOrder>
+                                <label>Weight</label>
+                                <inputType>suffixed</inputType>
                             </input>
                         </inputs>
                     </shippingOption>
                     <shippingOption code="itemCustoms">
                         <label>Customs Data</label>
                         <inputs>
-                            <input code="hsCode">
-                                <sortOrder>10</sortOrder>
-                                <label>HS Code</label>
-                                <inputType>text</inputType>
-                            </input>
-                            <input code="exportDescription">
-                                <sortOrder>1000</sortOrder>
-                                <label>Export Description</label>
-                                <inputType>textarea</inputType>
-                            </input>
                             <input code="customsValue">
-                                <sortOrder>20</sortOrder>
+                                <sortOrder>10</sortOrder>
                                 <label>Customs Value</label>
                                 <inputType>prefixed</inputType>
+                            </input>
+                            <input code="hsCode">
+                                <sortOrder>20</sortOrder>
+                                <label>HS Code</label>
+                                <inputType>text</inputType>
                             </input>
                             <input code="countryOfOrigin">
                                 <sortOrder>30</sortOrder>
                                 <label>Country of Origin</label>
                                 <inputType>select</inputType>
+                            </input>
+                            <input code="exportDescription">
+                                <sortOrder>1000</sortOrder>
+                                <label>Export Description</label>
+                                <inputType>textarea</inputType>
                             </input>
                         </inputs>
                     </shippingOption>
