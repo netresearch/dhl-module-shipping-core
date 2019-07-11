@@ -7,22 +7,34 @@
                 <inputs>
                     <input code="weight">
                         <label>Total Weight</label>
-                        <inputType>suffixed</inputType>
+                        <inputType>prefixed</inputType>
+                        <validationRules>
+                            <rule name="validate-number"/>
+                        </validationRules>
                     </input>
                     <input code="weightUnit">
                         <inputType>hidden</inputType>
                     </input>
                     <input code="width">
                         <label>Width</label>
-                        <inputType>suffixed</inputType>
+                        <inputType>prefixed</inputType>
+                        <validationRules>
+                            <rule name="validate-number"/>
+                        </validationRules>
                     </input>
                     <input code="height">
                         <label>Height</label>
-                        <inputType>suffixed</inputType>
+                        <inputType>prefixed</inputType>
+                        <validationRules>
+                            <rule name="validate-number"/>
+                        </validationRules>
                     </input>
                     <input code="length">
                         <label>Length</label>
-                        <inputType>suffixed</inputType>
+                        <inputType>prefixed</inputType>
+                        <validationRules>
+                            <rule name="validate-number"/>
+                        </validationRules>
                     </input>
                     <input code="sizeUnit">
                         <inputType>hidden</inputType>
@@ -35,6 +47,9 @@
                     <input code="customsValue">
                         <label>Customs Value</label>
                         <inputType>prefixed</inputType>
+                        <validationRules>
+                            <rule name="validate-number"/>
+                        </validationRules>
                     </input>
                     <input code="exportDescription">
                         <sortOrder>1000</sortOrder>
@@ -81,11 +96,17 @@
                                 <sortOrder>20</sortOrder>
                                 <label>Quantity</label>
                                 <inputType>text</inputType>
+                                <validationRules>
+                                    <rule name="validate-number"/>
+                                </validationRules>
                             </input>
                             <input code="weight">
                                 <sortOrder>30</sortOrder>
                                 <label>Weight</label>
-                                <inputType>suffixed</inputType>
+                                <inputType>prefixed</inputType>
+                                <validationRules>
+                                    <rule name="validate-number"/>
+                                </validationRules>
                             </input>
                         </inputs>
                     </shippingOption>
@@ -96,6 +117,9 @@
                                 <sortOrder>10</sortOrder>
                                 <label>Customs Value</label>
                                 <inputType>prefixed</inputType>
+                                <validationRules>
+                                    <rule name="validate-number"/>
+                                </validationRules>
                             </input>
                             <input code="hsCode">
                                 <sortOrder>20</sortOrder>
