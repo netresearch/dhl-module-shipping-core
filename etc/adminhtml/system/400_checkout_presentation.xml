@@ -3,18 +3,18 @@
  you can either directly include this file or copy it into your module for adjustments -->
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <group id="checkout_settings" translate="label" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
-        <label><![CDATA[Checkout Presentation]]></label>
+        <label>Checkout Presentation</label>
         <attribute type="expanded">1</attribute>
 
         <!-- Round prices -->
         <field id="round_prices_format" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="70"
                translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
-            <label><![CDATA[Round Prices]]></label>
+            <label>Round Prices</label>
             <source_model>Dhl\ShippingCore\Model\Config\Source\RoundedPricesFormat</source_model>
         </field>
         <field id="round_prices_mode" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="80"
                translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
-            <label><![CDATA[Rounding Direction]]></label>
+            <label>Rounding Direction</label>
             <source_model>Dhl\ShippingCore\Model\Config\Source\RoundedPricesMode</source_model>
             <depends>
                 <field id="round_prices_format" separator=",">full_price,static_decimal</field>
@@ -22,9 +22,9 @@
         </field>
         <field id="round_prices_static_decimal" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="90"
                translate="label tooltip" type="text">
-            <label><![CDATA[Decimal Value]]></label>
+            <label>Decimal Value</label>
             <validate>validate-length maximum-length-2 minimum-length-2 validate-digits</validate>
-            <tooltip><![CDATA[Enter the value without the decimal separator (ex. 99 for the shipping charges to be rounded to 99 cents)]]></tooltip>
+            <tooltip>Enter the value without the decimal separator (ex. 99 for the shipping charges to be rounded to 99 cents)</tooltip>
             <depends>
                 <field id="round_prices_format">static_decimal</field>
             </depends>
