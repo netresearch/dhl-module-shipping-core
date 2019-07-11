@@ -23,31 +23,7 @@
                     <attribute type="css_class">dhlgw</attribute>
                 </field>
 
-                <!-- Cash On Delivery Payment Methods -->
-                <field id="cod_methods" sortOrder="210" showInDefault="1" showInWebsite="0" showInStore="0"
-                       translate="label comment" type="multiselect">
-                    <label>Cash On Delivery Payment Methods</label>
-                    <comment>Selected payment methods will be treated as CoD methods during shipment order creation.</comment>
-                    <source_model>Dhl\ShippingCore\Model\Config\Source\AllPaymentMethods</source_model>
-                    <frontend_class>w-75</frontend_class>
-                </field>
-
-                <!-- Cut-off Time -->
-                <field id="cut_off_time" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="220"
-                       translate="label comment" type="time">
-                    <label>Order Cut-off Time</label>
-                    <comment>All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.</comment>
-                    <source_model>Magento\Config\Model\Config\Source\Date\Short</source_model>
-                </field>
-
-                <field id="package_dimension" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="240"
-                       translate="label comment" type="select">
-                    <label>My Own Packages</label>
-                    <comment>Use this to create your own types of packages with your specific titles, sizes and weights.</comment>
-                    <frontend_model>Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field\Package</frontend_model>
-                    <backend_model>Dhl\ShippingCore\Model\Config\Backend\Packages</backend_model>
-                </field>
-
+                <include path="Dhl_ShippingCore::system/100_general_settings.xml"/>
                 <include path="Dhl_ShippingCore::system/600_shipment_defaults.xml"/>
                 <include path="Dhl_ShippingCore::system/700_bulk_settings.xml"/>
             </group>

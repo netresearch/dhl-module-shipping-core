@@ -24,6 +24,13 @@
 
         <actionGroup ref="NavigateToShippingCoreSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
 
+        <!-- Scroll to subgroup and expand it -->
+        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.generalSettingsGroup}}" stepKey="scrollToGeneralSettingsGroup" x="0" y="-85"/>
+        <conditionalClick stepKey="expandGeneralSettingsGroup"
+                          selector="{{AdminSystemConfigShippingCoreSection.generalSettingsGroup}}"
+                          dependentSelector="{{AdminSystemConfigShippingCoreSection.generalSettingsGroupExpanded}}"
+                          visible="true"/>
+
         <!-- Select payment methods and save -->
         <selectOption selector="{{AdminSystemConfigShippingCoreSection.codPaymentMethodSelection}}"
                       parameterArray="[{{ShippingCorePaymentMethods.cashOnDelivery}}, {{ShippingCorePaymentMethods.checkMoneyOrder}}]"
@@ -64,6 +71,13 @@
         </after>
 
         <actionGroup ref="NavigateToShippingCoreSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
+
+        <!-- Scroll to subgroup and expand it -->
+        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.generalSettingsGroup}}" stepKey="scrollToGeneralSettingsGroup" x="0" y="-85"/>
+        <conditionalClick stepKey="expandGeneralSettingsGroup"
+                          selector="{{AdminSystemConfigShippingCoreSection.generalSettingsGroup}}"
+                          dependentSelector="{{AdminSystemConfigShippingCoreSection.generalSettingsGroupExpanded}}"
+                          visible="true"/>
 
         <!-- Configure a cut-off time and save -->
         <seeElement selector="{{AdminSystemConfigShippingCoreSection.cutOffTimeConfigGroup}}" stepKey="seeCutOffTimeConfigGroup"/>
@@ -109,6 +123,13 @@
         </after>
 
         <actionGroup ref="NavigateToShippingCoreSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
+
+        <!-- Scroll to subgroup and expand it -->
+        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroup}}" stepKey="scrollToGeneralSettingsGroup" x="0" y="-85"/>
+        <conditionalClick stepKey="expandShipmentDefaultsGroup"
+                          selector="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroup}}"
+                          dependentSelector="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroupExpanded}}"
+                          visible="true"/>
 
         <!-- Configure a terms of trade and save -->
         <seeElement selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroup}}" stepKey="seeTermsOfTradeConfigGroup"/>

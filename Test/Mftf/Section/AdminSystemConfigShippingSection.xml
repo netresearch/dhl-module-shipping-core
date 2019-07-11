@@ -27,23 +27,31 @@
     <section name="AdminSystemConfigShippingCoreSection">
         <element name="shippingCoreGroup" type="button" selector="#dhlshippingsolutions_dhlglobalwebservices-head"/>
         <element name="shippingCoreGroupExpanded" type="button" selector="#dhlshippingsolutions_dhlglobalwebservices-head:not(.open)"/>
-        <element name="codPaymentMethodSelection" type="multiselect"
-                 selector="[data-ui-id='select-groups-dhlglobalwebservices-fields-cod-methods-value']"/>
-        <element name="codPaymentMethodActiveSelection" type="multiselect"
-                 selector="[data-ui-id='select-groups-dhlglobalwebservices-fields-cod-methods-value'] option[selected=selected]"/>
 
-        <element name="cutOffTimeConfigGroup" type="text" selector="#row_dhlshippingsolutions_dhlglobalwebservices_cut_off_time"/>
+        <!-- Sub groups -->
+        <element name="generalSettingsGroup" type="button" selector="#dhlshippingsolutions_dhlglobalwebservices_general_settings-head"/>
+        <element name="generalSettingsGroupExpanded" type="button" selector="#dhlshippingsolutions_dhlglobalwebservices_general_settings-head:not(.open)"/>
+        <element name="shipmentDefaultsGroup" type="button" selector="#dhlshippingsolutions_dhlglobalwebservices_shipment_defaults-head"/>
+        <element name="shipmentDefaultsGroupExpanded" type="button" selector="#dhlshippingsolutions_dhlglobalwebservices_shipment_defaults-head:not(.open)"/>
+        <element name="bulkSettingsGroup" type="button" selector="#dhlshippingsolutions_dhlglobalwebservices_bulk_settings-head"/>
+        <element name="bulkSettingsGroupExpanded" type="button" selector="#dhlshippingsolutions_dhlglobalwebservices_bulk_settings-head:not(.open)"/>
+
+        <element name="codPaymentMethodSelection" type="multiselect"
+                 selector="[data-ui-id='select-groups-dhlglobalwebservices-groups-general-settings-fields-cod-methods-value']"/>
+        <element name="codPaymentMethodActiveSelection" type="multiselect"
+                 selector="[data-ui-id='select-groups-dhlglobalwebservices-groups-general-settings-fields-cod-methods-value'] option[selected=selected]"/>
+
+        <element name="cutOffTimeConfigGroup" type="text" selector="#row_dhlshippingsolutions_dhlglobalwebservices_general_settings_cut_off_time"/>
         <element name="cutOffTimeConfigGroupHoursSelect" type="select"
-                 selector="[data-ui-id='time-groups-dhlglobalwebservices-fields-cut-off-time-value-hour']"/>
+                 selector="[data-ui-id='time-groups-dhlglobalwebservices-groups-general-settings-fields-cut-off-time-value-hour']"/>
         <element name="cutOffTimeConfigGroupMinutesSelect" type="select"
-                 selector="[data-ui-id='time-groups-dhlglobalwebservices-fields-cut-off-time-value-minute']"/>
+                 selector="[data-ui-id='time-groups-dhlglobalwebservices-groups-general-settings-fields-cut-off-time-value-minute']"/>
         <element name="cutOffTimeConfigGroupSecondsSelect" type="select"
-                 selector="[data-ui-id='time-groups-dhlglobalwebservices-fields-cut-off-time-value-second']"/>
+                 selector="[data-ui-id='time-groups-dhlglobalwebservices-groups-general-settings-fields-cut-off-time-value-second']"/>
 
         <element name="termsOfTradeConfigGroup" type="text" selector="#row_dhlshippingsolutions_dhlglobalwebservices_shipment_defaults_terms_of_trade"/>
         <element name="termsOfTradeConfigGroupOptionDDU" type="radio" selector="#dhlshippingsolutions_dhlglobalwebservices_shipment_defaults_terms_of_tradeDDU"/>
         <element name="termsOfTradeConfigGroupOptionDDP" type="radio" selector="#dhlshippingsolutions_dhlglobalwebservices_shipment_defaults_terms_of_tradeDDP"/>
-
         <element name="termsOfTradeConfigGroupOptionDDULabel" type="text" selector="#dhlshippingsolutions_dhlglobalwebservices_shipment_defaults_terms_of_tradeDDU + label"/>
         <element name="termsOfTradeConfigGroupOptionDDPLabel" type="text" selector="#dhlshippingsolutions_dhlglobalwebservices_shipment_defaults_terms_of_tradeDDP + label"/>
     </section>
