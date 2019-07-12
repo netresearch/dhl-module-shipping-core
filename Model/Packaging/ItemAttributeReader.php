@@ -57,14 +57,14 @@ class ItemAttributeReader
     }
 
     /**
-     * Read weight from product.
+     * Read weight from shipment item.
      *
      * @param Item $shipmentItem
      * @return float
      */
     public function getWeight(Item $shipmentItem): float
     {
-        return (float) $this->readAttribute($shipmentItem, 'weight');
+        return (float) $shipmentItem->getWeight();
     }
 
     /**

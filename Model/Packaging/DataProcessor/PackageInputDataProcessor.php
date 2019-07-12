@@ -84,6 +84,13 @@ class PackageInputDataProcessor extends AbstractProcessor
 
         foreach ($shippingOption->getInputs() as $input) {
             switch ($input->getCode()) {
+                // shipping product
+                case 'productCode':
+                    $value = substr(strrchr((string) $shipment->getOrder()->getShippingMethod(), "_"), 1);
+                    $label = $shipment->getOrder()->getShippingDescription();
+                    $input->setOptions([['value' => $value, 'label' => $label,]]);
+                    $input->setDefaultValue($value);
+                    break;
                 // weight
                 case 'weight':
                     $totalWeight = $this->itemAttributeReader->getTotalWeight($shipment);

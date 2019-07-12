@@ -267,17 +267,7 @@ class RequestExtractor implements RequestExtractorInterface
     }
 
     /**
-     * Extract shipping method from shipment request.
-     *
-     * @return string
-     */
-    public function getShippingMethod(): string
-    {
-        return (string) $this->shipmentRequest->getShippingMethod();
-    }
-
-    /**
-     * Extract package weihgt from shipment request.
+     * Extract package weight from shipment request.
      *
      * @return float
      */
@@ -298,8 +288,7 @@ class RequestExtractor implements RequestExtractorInterface
             $this->packages = array_map(function (array $packageData) {
                 $params = $packageData['params'];
                 $package = $this->packageFactory->create([
-                    //todo(nr): use dedicated property for product code once it's available
-                    'productCode' => $params['container'],
+                    'productCode' => $params['shipping_product'] ?? '',
                     'containerType' => $params['container'] ?? '',
                     'weightUom' => $params['weight_units'],
                     'dimensionsUom' => $params['dimension_units'],

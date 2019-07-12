@@ -179,6 +179,7 @@ class BulkShipmentManagement
             try {
                 $configuration->getRequestModifier()->modify($shipmentRequest);
             } catch (LocalizedException $exception) {
+                $shipment->addComment(__('Automatic label creation failed: %1', $exception->getMessage()));
                 continue;
             }
 

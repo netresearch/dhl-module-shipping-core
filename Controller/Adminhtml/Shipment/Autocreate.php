@@ -51,7 +51,7 @@ class Autocreate extends Action
     private $bulkShipmentManagement;
 
     /**
-     * AutoCreate constructor.
+     * Autocreate constructor.
      *
      * @param Context $context
      * @param CollectionFactory $collectionFactory
@@ -110,12 +110,13 @@ class Autocreate extends Action
             ) {
                 // collect successfully created labels
                 $incrementIds['success'][] = $orderIncrementId;
-            } elseif ($shipmentResponse instanceof ShipmentErrorResponseInterface) {
-                // add error message if details are available
-                $this->messageManager->addErrorMessage(__('Order %1: %2.', $orderIncrementId, $shipmentResponse->getErrors()));
             } else {
-                // collect other errors, not further specified
+                // collect label errors
                 $incrementIds['error'][] = $orderIncrementId;
+                if ($shipmentResponse instanceof ShipmentErrorResponseInterface) {
+                    // add error message if details are available
+                    $this->messageManager->addErrorMessage(__('Order %1: %2.', $orderIncrementId, $shipmentResponse->getErrors()));
+                }
             }
 
             return $incrementIds;
@@ -124,14 +125,24 @@ class Autocreate extends Action
         $labelResponses = array_reduce($result, $processResult, ['success' => [], 'error' => []]);
 
         if (!empty($labelResponses['success'])) {
+            // positive webservice responses
             $this->messageManager->addSuccessMessage(
                 __('Shipping label(s) for the order(s) %1 were successfully created.', implode(', ', $labelResponses['success']))
             );
         }
 
         if (!empty($labelResponses['error'])) {
+            // negative webservice responses
             $this->messageManager->addErrorMessage(
                 __('Shipping label(s) for the order(s) %1 could not be created.', implode(', ', $labelResponses['error']))
+            );
+        }
+
+        $autoCreateErrors = array_diff(array_keys($shipmentIds), $labelResponses['success'], $labelResponses['error']);
+        if (!empty($autoCreateErrors)) {
+            // no webservice responses, errors during request preparation
+            $this->messageManager->addErrorMessage(
+                __('Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.', implode(', ', $autoCreateErrors))
             );
         }
 

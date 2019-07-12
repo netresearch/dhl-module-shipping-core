@@ -5,6 +5,10 @@
             <shippingOption code="packageDetails">
                 <label>Package Details</label>
                 <inputs>
+                    <input code="productCode">
+                        <label>Shipping Product</label>
+                        <inputType>radioset</inputType>
+                    </input>
                     <input code="weight">
                         <label>Total Weight</label>
                         <inputType>prefixed</inputType>

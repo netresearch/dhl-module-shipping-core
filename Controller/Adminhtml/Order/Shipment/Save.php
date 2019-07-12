@@ -100,6 +100,7 @@ class Save extends Action
             $packages[$packageDetails['packageId']] = [
 
                 'params' => [
+                    'shipping_product' => $packageDetails['packageDetails']['productCode'],
                     'container' => '',
                     'weight' => $packageDetails['packageDetails']['weight'] ?? '',
                     'weight_units' => $packageDetails['packageDetails']['weightUnit'],

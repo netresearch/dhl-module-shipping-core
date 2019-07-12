@@ -75,14 +75,7 @@ interface RequestExtractorInterface
     public function getRecipient(): RecipientInterface;
 
     /**
-     * Extract shipping method from shipment request.
-     *
-     * @return string
-     */
-    public function getShippingMethod(): string;
-
-    /**
-     * Extract package weihgt from shipment request.
+     * Extract package weight from shipment request.
      *
      * @return float
      */

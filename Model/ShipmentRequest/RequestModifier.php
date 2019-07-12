@@ -196,13 +196,14 @@ class RequestModifier implements RequestModifierInterface
 
         $packageItems = [];
         $packageParams = [
+            'shipping_product' => $shipmentRequest->getShippingMethod(),
             'container' => '',
-            'weight' => $packagingOptionReader->getPackageOptionValue('packageWeight', 'weight'),
-            'weight_units' => $packagingOptionReader->getPackageOptionValue('packageWeight', 'weightUnit'),
-            'length' => $packagingOptionReader->getPackageOptionValue('packageSize', 'length'),
-            'width' => $packagingOptionReader->getPackageOptionValue('packageSize', 'width'),
-            'height' => $packagingOptionReader->getPackageOptionValue('packageSize', 'height'),
-            'dimension_units' => $packagingOptionReader->getPackageOptionValue('packageSize', 'sizeUnit'),
+            'weight' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'weight'),
+            'weight_units' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'weightUnit'),
+            'length' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'length'),
+            'width' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'width'),
+            'height' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'height'),
+            'dimension_units' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'sizeUnit'),
         ];
 
         /** @var \Magento\Sales\Model\Order\Shipment\Item $item */
