@@ -35,7 +35,6 @@
 "Email Copy of Shipment","Email Copy of Shipment"
 "Enter the markup amount in the currency of your store. Enter a negative to apply a discount","Enter the markup amount in the currency of your store. Enter a negative to apply a discount"
 "Enter the value without the decimal separator (ex. 99 for the shipping charges to be rounded to 99 cents)","Enter the value without the decimal separator (ex. 99 for the shipping charges to be rounded to 99 cents)"
-"Error logging level","Error logging level"
 "Export Content Explanation","Export Content Explanation"
 "Export Content Type","Export Content Type"
 "Export Description","Export Description"
@@ -108,3 +107,4 @@
 "Use this to create your own types of packages with your specific titles, sizes and weights.","Use this to create your own types of packages with your specific titles, sizes and weights."
 "Weight %1","Weight %1"
 "Width %1","Width %1"
+"This shipping method is not available. To use this shipping method, please contact us.","This shipping method is not available. To use this shipping method, please contact us."
