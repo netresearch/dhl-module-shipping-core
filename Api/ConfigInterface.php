@@ -23,17 +23,17 @@ interface ConfigInterface
 {
     const CONFIG_PATH_VERSION = 'dhlshippingsolutions/version';
 
-    const CONFIG_PATH_COD_METHODS = 'dhlshippingsolutions/dhlglobalwebservices/cod_methods';
+    const CONFIG_PATH_COD_METHODS  = 'dhlshippingsolutions/dhlglobalwebservices/cod_methods';
     const CONFIG_PATH_CUT_OFF_TIME = 'dhlshippingsolutions/dhlglobalwebservices/cut_off_time';
 
     const CONFIG_PATH_WEIGHT_UNIT = 'general/locale/weight_unit';
     const CONFIG_PATH_OWN_PACKAGES = 'dhlshippingsolutions/dhlglobalwebservices/package_dimension';
 
-    const CONFIG_PATH_AUTORETRY_FAILED = 'dhlshippingsolutions/dhlglobalwebservices/bulk_settings/retry_failed_shipments';
+    const CONFIG_PATH_AUTORETRY_FAILED  = 'dhlshippingsolutions/dhlglobalwebservices/bulk_settings/retry_failed_shipments';
     const CONFIG_PATH_AUTOCREATE_NOTIFY = 'dhlshippingsolutions/dhlglobalwebservices/bulk_settings/autocreate_notify';
 
-    const CONFIG_PATH_TERMS_OF_TRADE = 'dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/terms_of_trade';
-    const CONFIG_PATH_CONTENT_TYPE = 'dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_type';
+    const CONFIG_PATH_TERMS_OF_TRADE      = 'dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/terms_of_trade';
+    const CONFIG_PATH_CONTENT_TYPE        = 'dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_type';
     const CONFIG_PATH_CONTENT_EXPLANATION = 'dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_explanation';
 
     /**

@@ -61,7 +61,7 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format full_price
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_mode round_up
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_mode round_up
      * @dataProvider provideTestRateMethods
      * @param Method[] $methods
      */
@@ -82,8 +82,8 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_mode round_off
      * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format full_price
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_mode round_off
      * @dataProvider provideTestRateMethods
      * @param Method[] $methods
      */
@@ -104,9 +104,9 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_mode round_up
      * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format static_decimal
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_static_decimal 95
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_mode round_up
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_static_decimal 95
      * @dataProvider provideTestRateMethods
      * @param Method[] $methods
      */
@@ -127,9 +127,9 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_mode round_off
      * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format static_decimal
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_static_decimal 95
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_mode round_off
+     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_static_decimal 95
      * @dataProvider provideTestRateMethods
      * @param Method[] $methods
      */

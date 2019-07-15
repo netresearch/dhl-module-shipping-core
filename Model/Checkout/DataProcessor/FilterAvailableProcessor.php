@@ -36,8 +36,8 @@ class FilterAvailableProcessor implements CheckoutArrayProcessorInterface
     /**
      * Returns the specified configuration value.
      *
-     * @param string       $configPath
-     * @param string|null $store
+     * @param string $configPath
+     * @param mixed  $store
      *
      * @return bool
      */
