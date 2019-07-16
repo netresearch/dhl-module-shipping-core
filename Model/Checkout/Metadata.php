@@ -20,7 +20,7 @@ class Metadata implements MetadataInterface
     /**
      * @var string
      */
-    private $title;
+    private $title = '';
 
     /**
      * @var string
