@@ -87,33 +87,33 @@ class Save extends Action
                 $shipmentItems[$itemId] = $packageItem['qty'];
             }
 
+            $packageParams = $packageDetails['package'];
             // set to orig packaging popup property names and unset them from customs array
-            $customsValue = $packageDetails['packageCustoms']['customsValue'] ?? '';
-            $contentType = $packageDetails['packageCustoms']['contentType'] ?? '';
-            $contentTypeOther = $packageDetails['packageCustoms']['explanation'] ?? '';
+            $customsValue = $packageParams['packageCustoms']['customsValue'] ?? '';
+            $contentType = $packageParams['packageCustoms']['contentType'] ?? '';
+            $contentTypeOther = $packageParams['packageCustoms']['explanation'] ?? '';
             unset(
-                $packageDetails['packageCustoms']['customsValue'],
-                $packageDetails['packageCustoms']['contentType'],
-                $packageDetails['packageCustoms']['explanation']
+                $packageParams['packageCustoms']['customsValue'],
+                $packageParams['packageCustoms']['contentType'],
+                $packageParams['packageCustoms']['explanation']
             );
 
             $packages[$packageDetails['packageId']] = [
-
                 'params' => [
-                    'shipping_product' => $packageDetails['packageDetails']['productCode'],
+                    'shipping_product' => $packageParams['packageDetails']['productCode'],
                     'container' => '',
-                    'weight' => $packageDetails['packageDetails']['weight'] ?? '',
-                    'weight_units' => $packageDetails['packageDetails']['weightUnit'],
-                    'length' => $packageDetails['packageDetails']['length'] ?? '',
-                    'width' => $packageDetails['packageDetails']['width'] ?? '',
-                    'height' => $packageDetails['packageDetails']['height'] ?? '',
-                    'dimension_units' => $packageDetails['packageDetails']['sizeUnit'],
+                    'weight' => $packageParams['packageDetails']['weight'] ?? '',
+                    'weight_units' => $packageParams['packageDetails']['weightUnit'],
+                    'length' => $packageParams['packageDetails']['length'] ?? '',
+                    'width' => $packageParams['packageDetails']['width'] ?? '',
+                    'height' => $packageParams['packageDetails']['height'] ?? '',
+                    'dimension_units' => $packageParams['packageDetails']['sizeUnit'],
                     'content_type' => $contentType,
                     'content_type_other' => $contentTypeOther,
                     'customs_value' => $customsValue,
-                    'customs' => $packageDetails['packageCustoms'] ?? [],
+                    'customs' => $packageParams['packageCustoms'] ?? [],
+                    'services' => $packageDetails['service'] ?? [],
                 ],
-
                 'items' => $packageItems,
             ];
         }

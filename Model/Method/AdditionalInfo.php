@@ -24,7 +24,7 @@ class AdditionalInfo extends DataObject implements MethodAdditionalInfoInterface
      */
     public function getDeliveryDate(): string
     {
-        return (string)$this->getData(self::DELIVERY_DATE);
+        return (string) $this->getData(self::DELIVERY_DATE);
     }
 
     /**
@@ -40,7 +40,7 @@ class AdditionalInfo extends DataObject implements MethodAdditionalInfoInterface
      */
     public function getCarrierLogoUrl(): string
     {
-        return (string)$this->getData(self::CARRIER_LOGO_URL);
+        return (string) $this->getData(self::CARRIER_LOGO_URL);
     }
 
     /**

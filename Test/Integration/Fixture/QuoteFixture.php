@@ -19,9 +19,10 @@ use Magento\TestFramework\Helper\Bootstrap;
 
 /**
  * Class QuoteFixture
+ *
  * @package Dhl\ShippingCore\Test
  */
-final class QuoteFixture
+class QuoteFixture
 {
     public static function createQuote()
     {
@@ -63,7 +64,7 @@ final class QuoteFixture
             'city' => 'Leipzig',
             'email' => 'test@netrestest.de',
             'telephone' => '11111111',
-            'country_id' => 'DE'
+            'country_id' => 'DE',
         ];
         $billingAddress = $objectManager->create(Address::class, ['data' => $addressData]);
         $billingAddress->setAddressType('billing');
