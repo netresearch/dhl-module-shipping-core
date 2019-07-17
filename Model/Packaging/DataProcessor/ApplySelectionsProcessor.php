@@ -75,7 +75,11 @@ class ApplySelectionsProcessor extends AbstractProcessor
     private function filterNotSelectedServices(array $selections, array $optionsData): array
     {
         $availableCustomerServices = [
-            'preferredDay', 'preferredTime', 'preferredLocation', 'preferredNeighbour', "parcelstation",
+            'preferredDay',
+            'preferredTime',
+            'preferredLocation',
+            'preferredNeighbour',
+            "parcelstation",
         ];
 
         $selectedServices = [];
@@ -106,8 +110,8 @@ class ApplySelectionsProcessor extends AbstractProcessor
             return $optionsData;
         }
 
-        $addressId   = (int) $shipment->getShippingAddressId();
-        $selections  = $this->loadSelections($addressId);
+        $addressId = (int) $shipment->getShippingAddressId();
+        $selections = $this->loadSelections($addressId);
         $optionsData = $this->filterNotSelectedServices($selections, $optionsData);
 
         foreach ($selections as $selection) {
@@ -135,7 +139,7 @@ class ApplySelectionsProcessor extends AbstractProcessor
                     } elseif ($selection->getShippingOptionCode() === 'preferredTime') {
                         $timeRange = str_split($selection->getInputValue(), 4);
                         $startTime = implode(':', str_split($timeRange[0], 2));
-                        $endTime   = implode(':', str_split($timeRange[1], 2));
+                        $endTime = implode(':', str_split($timeRange[1], 2));
 
                         $input->setDefaultValue(
                             $startTime . ' - ' . $endTime

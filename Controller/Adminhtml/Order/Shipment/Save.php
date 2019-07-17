@@ -84,7 +84,11 @@ class Save extends Action
                 ];
 
                 $packageItems[$itemId] = $packageItem;
-                $shipmentItems[$itemId] = $packageItem['qty'];
+                if (isset($shipmentItems[$itemId])) {
+                    $shipmentItems[$itemId] += $packageItem['qty'];
+                } else {
+                    $shipmentItems[$itemId] = $packageItem['qty'];
+                }
             }
 
             $packageParams = $packageDetails['package'];
