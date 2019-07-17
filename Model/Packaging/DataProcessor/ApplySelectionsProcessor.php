@@ -11,10 +11,8 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
 use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Dhl\ShippingCore\Model\ShippingOption\Selection\OrderSelectionRepository;
-use IntlDateFormatter;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -41,28 +39,20 @@ class ApplySelectionsProcessor extends AbstractProcessor
     private $searchCriteriaBuilderFactory;
 
     /**
-     * @var TimezoneInterface
-     */
-    private $timezone;
-
-    /**
      * ApplySelectionsProcessor constructor.
      *
      * @param OrderSelectionRepository $selectionRepository
      * @param FilterBuilder $filterBuilder
      * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
-     * @param TimezoneInterface $timezone
      */
     public function __construct(
         OrderSelectionRepository $selectionRepository,
         FilterBuilder $filterBuilder,
-        SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
-        TimezoneInterface $timezone
+        SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
     ) {
         $this->selectionRepository = $selectionRepository;
         $this->filterBuilder = $filterBuilder;
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
-        $this->timezone = $timezone;
     }
 
     /**
@@ -129,24 +119,7 @@ class ApplySelectionsProcessor extends AbstractProcessor
                         continue;
                     }
 
-                    if ($selection->getShippingOptionCode() === 'preferredDay') {
-                        $input->setDefaultValue(
-                            $this->timezone->formatDate(
-                                $selection->getInputValue(),
-                                IntlDateFormatter::MEDIUM
-                            )
-                        );
-                    } elseif ($selection->getShippingOptionCode() === 'preferredTime') {
-                        $timeRange = str_split($selection->getInputValue(), 4);
-                        $startTime = implode(':', str_split($timeRange[0], 2));
-                        $endTime = implode(':', str_split($timeRange[1], 2));
-
-                        $input->setDefaultValue(
-                            $startTime . ' - ' . $endTime
-                        );
-                    } else {
-                        $input->setDefaultValue($selection->getInputValue());
-                    }
+                    $input->setDefaultValue($selection->getInputValue());
                 }
             }
         }
