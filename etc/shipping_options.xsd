@@ -173,7 +173,7 @@
                                     <xs:element name="route" minOccurs="0" maxOccurs="unbounded">
                                         <xs:complexType>
                                             <xs:sequence>
-                                                <xs:element name="origin" type="xs:string" minOccurs="0"/>
+                                                <xs:element name="origin" type="originCountry" minOccurs="0"/>
                                                 <xs:element name="includeDestinations" type="destinationList" minOccurs="0"/>
                                                 <xs:element name="excludeDestinations" type="destinationList" minOccurs="0"/>
                                             </xs:sequence>
@@ -229,10 +229,16 @@
             <xs:element name="destination" minOccurs="0" maxOccurs="unbounded">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:pattern value="[a-z]{2}|intl"/>
+                        <xs:pattern value="[A-Z]{2}|eu|intl|domestic"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+
+    <xs:simpleType name="originCountry">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

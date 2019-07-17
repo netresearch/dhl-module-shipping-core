@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
 
+use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
@@ -50,8 +51,7 @@ class RouteProcessor extends AbstractProcessor
         string $postalCode,
         int $scopeId = null
     ): array {
-        $shippingOrigin = strtolower($this->config->getOriginCountry($scopeId));
-        $countryId = strtolower($countryId);
+        $shippingOrigin = $this->config->getOriginCountry($scopeId);
 
         foreach ($optionsData as $index => $shippingOption) {
             $matchesRoute = $this->checkIfOptionMatchesRoute($shippingOption, $shippingOrigin, $countryId);
@@ -98,11 +98,12 @@ class RouteProcessor extends AbstractProcessor
     private function preprocessDestinations(RouteInterface $route): RouteInterface
     {
         $includeDestinations = $route->getIncludeDestinations();
+        $euCountries = $this->config->getEuCountries();
         foreach ($includeDestinations as $index => $destination) {
             if ($destination === 'eu') {
                 unset($includeDestinations[$index]);
                 $route->setIncludeDestinations(
-                    $includeDestinations + $this->config->getEuCountries()
+                    $includeDestinations + $euCountries
                 );
             }
         }
@@ -111,7 +112,7 @@ class RouteProcessor extends AbstractProcessor
             if ($destination === 'eu') {
                 unset($excludeDestinations[$index]);
                 $route->setExcludeDestinations(
-                    $excludeDestinations + $this->config->getEuCountries()
+                    $excludeDestinations + $euCountries
                 );
             }
         }
@@ -146,6 +147,11 @@ class RouteProcessor extends AbstractProcessor
 
         if (in_array('intl', $excludeDestinations, true)) {
             return $origin === $destination;
+        }
+
+        // needed to hide customs data in packaging popup for domestic shipments
+        if (in_array('domestic', $excludeDestinations, true)) {
+            return !($origin === $destination);
         }
 
         if ($hasExcludes && in_array($destination, $excludeDestinations, true)) {

@@ -63,7 +63,8 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
                 $result = $processor->processShippingOptions(
                     $result,
                     $shipment->getShippingAddress()->getCountryId(),
-                    $shipment->getShippingAddress()->getPostcode()
+                    $shipment->getShippingAddress()->getPostcode(),
+                    (int) $shipment->getStoreId()
                 );
             }
         }
