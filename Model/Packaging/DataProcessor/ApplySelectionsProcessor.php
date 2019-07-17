@@ -11,8 +11,10 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
 use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Dhl\ShippingCore\Model\ShippingOption\Selection\OrderSelectionRepository;
+use IntlDateFormatter;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -39,6 +41,11 @@ class ApplySelectionsProcessor extends AbstractProcessor
     private $searchCriteriaBuilderFactory;
 
     /**
+     * @var TimezoneInterface
+     */
+    private $timezone;
+
+    /**
      * ApplySelectionsProcessor constructor.
      *
      * @param OrderSelectionRepository $selectionRepository
@@ -48,11 +55,42 @@ class ApplySelectionsProcessor extends AbstractProcessor
     public function __construct(
         OrderSelectionRepository $selectionRepository,
         FilterBuilder $filterBuilder,
-        SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
+        SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
+        TimezoneInterface $timezone
     ) {
         $this->selectionRepository = $selectionRepository;
         $this->filterBuilder = $filterBuilder;
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
+        $this->timezone = $timezone;
+    }
+
+    /**
+     * Filters all not selected customer services out of the options data array.
+     *
+     * @param AssignedSelectionInterface[] $selections
+     * @param array $optionsData
+     * @return array
+     */
+    private function filterNotSelectedServices(array $selections, array $optionsData): array
+    {
+        $availableCustomerServices = [
+            'preferredDay', 'preferredTime', 'preferredLocation', 'preferredNeighbour', "parcelstation",
+        ];
+
+        $selectedServices = [];
+        foreach ($selections as $selection) {
+            $selectedServices[] = $selection->getShippingOptionCode();
+        }
+
+        $notSelectedServices = array_diff($availableCustomerServices, array_unique($selectedServices));
+
+        foreach ($optionsData as $optionCode => $shippingOption) {
+            if (in_array($shippingOption->getCode(), $notSelectedServices, true)) {
+                unset($optionsData[$optionCode]);
+            }
+        }
+
+        return $optionsData;
     }
 
     /**
@@ -67,18 +105,43 @@ class ApplySelectionsProcessor extends AbstractProcessor
             return $optionsData;
         }
 
-        $addressId = (int)$shipment->getShippingAddressId();
+        $addressId   = (int) $shipment->getShippingAddressId();
+        $selections  = $this->loadSelections($addressId);
+        $optionsData = $this->filterNotSelectedServices($selections, $optionsData);
 
-        foreach ($this->loadSelections((int) $addressId) as $selection) {
+        foreach ($selections as $selection) {
             foreach ($optionsData as $shippingOption) {
                 if ($shippingOption->getCode() !== $selection->getShippingOptionCode()) {
                     continue;
                 }
+
                 foreach ($shippingOption->getInputs() as $input) {
+                    if ($input->getCode() === 'enabled') {
+                        $input->setDefaultValue('1');
+                    }
+
                     if ($input->getCode() !== $selection->getInputCode()) {
                         continue;
                     }
-                    $input->setDefaultValue($selection->getInputValue());
+
+                    if ($selection->getShippingOptionCode() === 'preferredDay') {
+                        $input->setDefaultValue(
+                            $this->timezone->formatDate(
+                                $selection->getInputValue(),
+                                IntlDateFormatter::MEDIUM
+                            )
+                        );
+                    } elseif ($selection->getShippingOptionCode() === 'preferredTime') {
+                        $timeRange = str_split($selection->getInputValue(), 4);
+                        $startTime = implode(':', str_split($timeRange[0], 2));
+                        $endTime   = implode(':', str_split($timeRange[1], 2));
+
+                        $input->setDefaultValue(
+                            $startTime . ' - ' . $endTime
+                        );
+                    } else {
+                        $input->setDefaultValue($selection->getInputValue());
+                    }
                 }
             }
         }

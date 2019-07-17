@@ -78,9 +78,9 @@ class ImageUrlProcessor extends AbstractProcessor
             return $metadata;
         }
 
-        if (in_array($this->design->getArea(), [Area::AREA_FRONTEND, Area::AREA_ADMINHTML])) {
-            $params = [];
-        } else {
+        $params = [];
+
+        if (!in_array($this->design->getArea(), [Area::AREA_FRONTEND, Area::AREA_ADMINHTML], true)) {
             $themeId = $this->design->getConfigurationDesignTheme(Area::AREA_FRONTEND);
             $params = [
                 'area' => Area::AREA_FRONTEND,
