@@ -51,6 +51,7 @@ class ApplySelectionsProcessor extends AbstractProcessor
      * @param OrderSelectionRepository $selectionRepository
      * @param FilterBuilder $filterBuilder
      * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
+     * @param TimezoneInterface $timezone
      */
     public function __construct(
         OrderSelectionRepository $selectionRepository,
