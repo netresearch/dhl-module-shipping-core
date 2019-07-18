@@ -2,7 +2,6 @@
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <group id="general_settings" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
         <label>General Settings</label>
-        <attribute type="expanded">1</attribute>
 
         <!-- Cash On Delivery Payment Methods -->
         <field id="cod_methods" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10"
