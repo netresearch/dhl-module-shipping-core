@@ -8,7 +8,7 @@
 "Allowed International Products","Erlaubte internationale Produkte"
 "An error occurred while updating the recipient street.","Beim Aktualisieren der Empfängeradresse ist ein Fehler aufgetreten."
 "Automatic label creation failed: %1","Die automatische Sendungserstellung ist fehlgeschlagen: %1"
-"Bulk / Cron Settings"," Einstellungen für automatische Sendungserstellung"
+"Bulk / Cron Settings","Einstellungen für automatische Sendungserstellung"
 "Calculate Markup","Aufschlag berechnen"
 "Cannot initialize packaging data, please provide shipment.","Paketdaten konnten nicht geladen werden. Stellen Sie ein Shipment bereit."
 "Carrier ""%1"" not found.","Carrier ""%1"" konnte nicht gefunden werden."
