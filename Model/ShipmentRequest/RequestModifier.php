@@ -204,6 +204,7 @@ class RequestModifier implements RequestModifierInterface
             'width' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'width'),
             'height' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'height'),
             'dimension_units' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'sizeUnit'),
+            'services' => $packagingOptionReader->getServiceOptionValues(),
         ];
 
         /** @var \Magento\Sales\Model\Order\Shipment\Item $item */

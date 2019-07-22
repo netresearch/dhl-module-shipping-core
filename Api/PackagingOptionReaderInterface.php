@@ -47,4 +47,12 @@ interface PackagingOptionReaderInterface
      * @throws LocalizedException
      */
     public function getServiceOptionValue(string $serviceCode, string $inputCode);
+
+    /**
+     * Read all service options.
+     *
+     * @return string[][]
+     * @throws LocalizedException
+     */
+    public function getServiceOptionValues(): array;
 }

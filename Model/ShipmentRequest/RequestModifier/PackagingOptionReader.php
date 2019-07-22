@@ -146,4 +146,22 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
 
         return $inputs[$inputCode]->getDefaultValue();
     }
+
+    /**
+     * Read all service option values.
+     *
+     * @return string[][]
+     * @throws LocalizedException
+     */
+    public function getServiceOptionValues(): array
+    {
+        $services = [];
+        foreach ($this->getCarrierData()->getServiceOptions() as $serviceCode => $serviceOption) {
+            foreach ($serviceOption->getInputs() as $inputCode => $input) {
+                $services[$serviceCode][$inputCode] = $input->getDefaultValue();
+            }
+        }
+
+        return $services;
+    }
 }
