@@ -4,12 +4,19 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Rate\Processor;
+namespace Dhl\ShippingCore\Webservice\Pipeline\Rate\ResponseProcessor;
 
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
 use Magento\TestFramework\ObjectManager;
 
+/**
+ * RoundedPricesTest
+ *
+ * @package Dhl\ShippingCore\Test\Integration
+ * @author  Rico Sonntag <rico.sonntag@netresearch.de>
+ * @link    https://www.netresearch.de/
+ */
 class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 {
     /**

@@ -85,11 +85,8 @@ class RateConfig implements RateConfigInterface
      */
     public function getRoundedPricesStaticDecimal(string $carrierCode, $store = null): float
     {
-        return (float) $this->scopeConfig->getValue(
-                $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_ROUNDED_PRICES_STATIC_DECIMAL),
-                ScopeInterface::SCOPE_STORE,
-                $store
-            ) / 100;
+        $path = $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_ROUNDED_PRICES_STATIC_DECIMAL);
+        return (float) $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE, $store) / 100;
     }
 
     /**

@@ -75,13 +75,13 @@ class AddressRepositoryPlugin
 
         try {
             $recipientStreet = $this->recipientStreetRepository->get($orderAddress->getEntityId());
-            $extensionAttributes->setDhlStreetName($recipientStreet->getName());
-            $extensionAttributes->setDhlStreetNumber($recipientStreet->getNumber());
-            $extensionAttributes->setDhlStreetSupplement($recipientStreet->getSupplement());
+            $extensionAttributes->setDhlgwStreetName($recipientStreet->getName());
+            $extensionAttributes->setDhlgwStreetNumber($recipientStreet->getNumber());
+            $extensionAttributes->setDhlgwStreetSupplement($recipientStreet->getSupplement());
         } catch (\Exception $e) {
-            $extensionAttributes->setDhlStreetName(null);
-            $extensionAttributes->setDhlStreetNumber(null);
-            $extensionAttributes->setDhlStreetSupplement(null);
+            $extensionAttributes->setDhlgwStreetName(null);
+            $extensionAttributes->setDhlgwStreetNumber(null);
+            $extensionAttributes->setDhlgwStreetSupplement(null);
         }
 
         $orderAddress->setExtensionAttributes($extensionAttributes);

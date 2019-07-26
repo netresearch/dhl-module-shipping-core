@@ -4,11 +4,11 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Webservice\Processor;
+namespace Dhl\ShippingCore\Webservice\Pipeline\Track;
 
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface;
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
-use Dhl\ShippingCore\Api\TrackResponseProcessorInterface;
+use Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface;
 
 /**
  * Class TrackResponseProcessor
@@ -33,10 +33,10 @@ class TrackResponseProcessor implements TrackResponseProcessorInterface
     }
 
     /**
-     * Perform actions after receiving the track response.
+     * Perform actions after receiving the "request tracks" response.
      *
-     * @param TrackResponseInterface[] $trackResponses Shipment cancellation responses
-     * @param TrackErrorResponseInterface[] $errorResponses Shipment cancellation errors
+     * @param TrackResponseInterface[] $trackResponses
+     * @param TrackErrorResponseInterface[] $errorResponses
      */
     public function processResponse(array $trackResponses, array $errorResponses)
     {

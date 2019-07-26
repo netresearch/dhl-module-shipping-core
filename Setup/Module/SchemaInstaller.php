@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Setup\Module;
 
-use Dhl\ShippingCore\Api\Data\Selection\AssignedServiceSelectionInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Api\RecipientStreetInterface;

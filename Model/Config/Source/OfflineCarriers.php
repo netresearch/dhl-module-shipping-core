@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Config\Source;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Option\ArrayInterface;
+use Magento\Framework\Data\OptionSourceInterface;
 
 /**
  * Class OfflineCarriers
@@ -16,7 +16,7 @@ use Magento\Framework\Option\ArrayInterface;
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */
-class OfflineCarriers implements ArrayInterface
+class OfflineCarriers implements OptionSourceInterface
 {
     /**
      * @var ScopeConfigInterface

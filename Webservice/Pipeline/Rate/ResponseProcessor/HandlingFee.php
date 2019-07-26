@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Rate\Processor;
+namespace Dhl\ShippingCore\Webservice\Pipeline\Rate\ResponseProcessor;
 
+use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 use Dhl\ShippingCore\Model\Config\RateConfigInterface;
-use Dhl\ShippingCore\Model\Rate\RateProcessorInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
@@ -15,10 +15,11 @@ use Magento\Shipping\Model\Carrier\AbstractCarrier;
 /**
  * A rate processor to append the handling fee based on handling type to the shipping price.
  *
- * @author   Rico Sonntag <rico.sonntag@netresearch.de>
- * @link     https://www.netresearch.de/
+ * @package Dhl\ShippingCore\Model
+ * @author  Rico Sonntag <rico.sonntag@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
-class HandlingFee implements RateProcessorInterface
+class HandlingFee implements RateResponseProcessorInterface
 {
     /**
      * @var RateConfigInterface
@@ -36,7 +37,12 @@ class HandlingFee implements RateProcessorInterface
     }
 
     /**
-     * @inheritdoc
+     * Add handling fee to shipping price if applicable.
+     *
+     * @param Method[] $methods List of rate methods
+     * @param RateRequest|null $request The rate request
+     *
+     * @return Method[]
      */
     public function processMethods(array $methods, RateRequest $request = null): array
     {
@@ -59,7 +65,7 @@ class HandlingFee implements RateProcessorInterface
     }
 
     /**
-     * Calculates the shipping price altered by the handling type aqnd fee.
+     * Calculates the shipping price altered by the handling type and fee.
      *
      * @param float $amount The total price of the rated shipment for the product
      * @param string $handlingType The handling type determining the type of calculation to do

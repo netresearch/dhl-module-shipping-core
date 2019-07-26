@@ -27,7 +27,7 @@ class CompositeValidator implements RequestValidatorInterface
     /**
      * @param RequestValidatorInterface[] $validators
      */
-    public function __construct(array $validators)
+    public function __construct(array $validators = [])
     {
         $this->validators = $validators;
     }

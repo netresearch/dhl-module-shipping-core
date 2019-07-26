@@ -99,8 +99,8 @@ class ItemDetailValuesProcessor extends AbstractProcessor
      * @param Shipment $shipment
      * @param ItemShippingOptionsInterface $itemShippingOptions
      *
-     * @throws
      * @return Shipment\Item
+     * @throws \RuntimeException
      */
     private function getMatchingItem(
         Shipment $shipment,

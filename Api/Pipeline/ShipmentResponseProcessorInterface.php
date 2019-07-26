@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\Pipeline;
 
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;

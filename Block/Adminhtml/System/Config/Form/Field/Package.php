@@ -7,15 +7,15 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field;
 
 use Dhl\ShippingCore\Model\Package as PackageModel;
-use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\View\Element\BlockInterface;
 
 /**
  * Class Package
+ *
+ * @method \Magento\Framework\Data\Form\Element\AbstractElement getElement
  *
  * @package Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
@@ -29,11 +29,6 @@ class Package extends AbstractFieldArray
      * @var ScopeConfigInterface
      */
     private $config;
-
-    /**
-     * @var PackageDefault
-     */
-    private $templateRenderer;
 
     /**
      * Package constructor.
@@ -124,12 +119,12 @@ class Package extends AbstractFieldArray
      */
     private function getWeightUnit(): string
     {
-        $id = $this->getElement()->getScopeId() !== '' ? $this->getElement()->getScopeId() : 0;
+        $scopeId = $this->getElement()->getScopeId() !== '' ? $this->getElement()->getScopeId() : 0;
 
-        return (string)$this->config->getValue(
+        return (string) $this->config->getValue(
             'general/locale/weight_unit',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-            $id
+            $scopeId
         );
     }
 
@@ -171,7 +166,7 @@ class Package extends AbstractFieldArray
             array_keys($attributes),
             function ($output, $attributeKey) use ($attributes) {
                 if (!empty($attributes[$attributeKey])) {
-                    $output[]= sprintf('%s="%s"', $attributeKey, $attributes[$attributeKey]);
+                    $output[] = sprintf('%s="%s"', $attributeKey, $attributes[$attributeKey]);
                 }
 
                 return $output;
@@ -180,6 +175,7 @@ class Package extends AbstractFieldArray
         );
 
         $attributes = implode(' ', $attributes);
+
         return "<input $attributes />";
     }
 

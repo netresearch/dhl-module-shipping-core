@@ -2,21 +2,24 @@
 /**
  * See LICENSE.md for license details.
  */
-namespace Dhl\ShippingCore\Model\Rate\Processor;
+declare(strict_types=1);
 
+namespace Dhl\ShippingCore\Webservice\Pipeline\Rate\ResponseProcessor;
+
+use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 use Dhl\ShippingCore\Model\Config\RateConfigInterface;
 use Dhl\ShippingCore\Model\Config\Source\RoundedPricesFormat;
-use Dhl\ShippingCore\Model\Rate\RateProcessorInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
+use Magento\Quote\Model\Quote\Address\RateResult\Method;
 
 /**
  * A rate processor to round prices.
  *
- * @package  Dhl\ShippingCore\Model
- * @author   Ronny Gertler <ronny.gertler@netresearch.de>
- * @link     https://www.netresearch.de/
+ * @package Dhl\ShippingCore\Model
+ * @author  Ronny Gertler <ronny.gertler@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
-class RoundedPrices implements RateProcessorInterface
+class RoundedPrices implements RateResponseProcessorInterface
 {
     /**
      * @var RateConfigInterface
@@ -34,7 +37,12 @@ class RoundedPrices implements RateProcessorInterface
     }
 
     /**
-     * @inheritdoc
+     * Round shipping price according to module configuration rules.
+     *
+     * @param Method[] $methods List of rate methods
+     * @param RateRequest|null $request The rate request
+     *
+     * @return Method[]
      */
     public function processMethods(array $methods, RateRequest $request = null): array
     {

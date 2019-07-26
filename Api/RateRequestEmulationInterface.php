@@ -24,8 +24,7 @@ interface RateRequestEmulationInterface
      *
      * @param string $carrierCode Carrier code to emulate
      * @param RateRequest $request Original rate request
-     * @return Result
-     * @throws \Exception
+     * @return Result|bool
      */
     public function emulateRateRequest(string $carrierCode, RateRequest $request);
 }

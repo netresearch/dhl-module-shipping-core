@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShippingOption;
 
-use Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 
 /**

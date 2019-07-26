@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Rate\Processor;
+namespace Dhl\ShippingCore\Webservice\Pipeline\Rate\ResponseProcessor;
 
 use Dhl\ShippingCore\Model\Config\RateConfigInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
@@ -14,7 +14,7 @@ use Magento\TestFramework\ObjectManager;
 /**
  * HandlingFeeTest
  *
- * @package Dhl\Express\Test\Integration
+ * @package Dhl\ShippingCore\Test\Integration
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

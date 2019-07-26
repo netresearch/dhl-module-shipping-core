@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config\Source;
 
-use Magento\Framework\Option\ArrayInterface;
+use Magento\Framework\Data\OptionSourceInterface;
 
 /**
  * Class Rounded prices type
@@ -15,7 +15,7 @@ use Magento\Framework\Option\ArrayInterface;
  * @author Ronny Gertler <ronny.gertler@netresearch.de>
  * @link https://www.netresearch.de/
  */
-class RoundedPricesFormat implements ArrayInterface
+class RoundedPricesFormat implements OptionSourceInterface
 {
     /**
      * No rounding key.

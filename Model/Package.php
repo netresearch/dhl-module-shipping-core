@@ -81,5 +81,4 @@ class Package extends DataObject
     {
         return (bool) $this->getData(self::KEY_IS_DEFAULT);
     }
-
 }

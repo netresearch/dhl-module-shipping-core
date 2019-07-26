@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config\Source;
 
-use Magento\Framework\Option\ArrayInterface;
+use Magento\Framework\Data\OptionSourceInterface;
 
 /**
  * Class TermsOfTrade
@@ -14,7 +14,7 @@ use Magento\Framework\Option\ArrayInterface;
  * @author    Rico Sonntag <rico.sonntag@netresearch.de>
  * @link      https://www.netresearch.de/
  */
-class TermsOfTrade implements ArrayInterface
+class TermsOfTrade implements OptionSourceInterface
 {
     const TOD_DDP = 'DDP';
     const TOD_DDU = 'DDU';

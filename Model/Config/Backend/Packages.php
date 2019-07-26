@@ -31,5 +31,4 @@ class Packages extends ArraySerialized
 
         return parent::beforeSave();
     }
-
 }

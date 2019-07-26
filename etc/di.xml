@@ -5,15 +5,19 @@
     <preference for="Dhl\ShippingCore\Api\ConfigInterface" type="Dhl\ShippingCore\Model\Config\Config"/>
     <preference for="Dhl\ShippingCore\Api\GuestCheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\GuestCheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
-    <preference for="Dhl\ShippingCore\Api\PdfCombinatorInterface" type="\Dhl\ShippingCore\Util\PdfCombinator"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Rate\CollectRatesPipeline"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\CreateShipmentsPipeline"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Rate\RateResponseProcessor"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\RequestTracksPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Track\RequestTracksPipeline"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Track\TrackResponseProcessor"/>
+    <preference for="Dhl\ShippingCore\Api\PdfCombinatorInterface" type="Dhl\ShippingCore\Util\PdfCombinator"/>
     <preference for="Dhl\ShippingCore\Api\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Emulation\RateRequestService"/>
     <preference for="Dhl\ShippingCore\Api\RecipientStreetInterface" type="Dhl\ShippingCore\Model\RecipientStreet"/>
     <preference for="Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface" type="Dhl\ShippingCore\Model\RecipientStreetRepository"/>
     <preference for="Dhl\ShippingCore\Api\RequestExtractorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestExtractor"/>
     <preference for="Dhl\ShippingCore\Api\RequestModifierInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier"/>
     <preference for="Dhl\ShippingCore\Api\RequestValidatorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Validator\CompositeValidator"/>
-    <preference for="Dhl\ShippingCore\Api\ShipmentResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Processor\ShipmentResponseProcessor"/>
-    <preference for="Dhl\ShippingCore\Api\TrackResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Processor\TrackResponseProcessor"/>
     <preference for="Dhl\ShippingCore\Api\UnitConverterInterface" type="Dhl\ShippingCore\Util\UnitConverter"/>
     <!-- # data interface preferences -->
     <preference for="Dhl\ShippingCore\Api\Data\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
@@ -58,12 +62,12 @@
             </argument>
         </arguments>
     </virtualType>
-    <virtualType name="Dhl\ShippingCore\Webservice\Processor\BulkShipmentResponseProcessor\Virtual" type="Dhl\ShippingCore\Webservice\Processor\ShipmentResponseProcessor">
+    <virtualType name="Dhl\ShippingCore\Webservice\Pipeline\BulkShipment\ShipmentResponseProcessor\Virtual" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="addLabel" xsi:type="object">Dhl\ShippingCore\Webservice\Processor\ShipmentResponse\AddShippingLabel</item>
-                <item name="addTrack" xsi:type="object">Dhl\ShippingCore\Webservice\Processor\ShipmentResponse\AddTrack</item>
-                <item name="updateLabelStatus" xsi:type="object">Dhl\ShippingCore\Webservice\Processor\ShipmentResponse\UpdateLabelStatus</item>
+                <item name="addLabel" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\AddShippingLabel</item>
+                <item name="addTrack" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\AddTrack</item>
+                <item name="updateLabelStatus" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\UpdateLabelStatus</item>
             </argument>
         </arguments>
     </virtualType>
@@ -108,7 +112,7 @@
             <argument name="appState" xsi:type="object">Magento\Framework\App\State\Proxy</argument>
         </arguments>
     </type>
-    <type name="\Dhl\ShippingCore\Model\BulkShipment\OrderCollectionLoader">
+    <type name="Dhl\ShippingCore\Model\BulkShipment\OrderCollectionLoader">
         <arguments>
             <argument name="orderRepository" xsi:type="object">Dhl\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
         </arguments>
@@ -145,10 +149,10 @@
             </argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Webservice\Processor\ShipmentResponseProcessor">
+    <type name="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="updateLabelStatus" xsi:type="object">Dhl\ShippingCore\Webservice\Processor\ShipmentResponse\UpdateLabelStatus</item>
+                <item name="updateLabelStatus" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\UpdateLabelStatus</item>
             </argument>
         </arguments>
     </type>
@@ -228,7 +232,7 @@
         </arguments>
     </type>
     <!-- shipping option config processors -->
-    <type name="\Dhl\ShippingCore\Model\Checkout\CheckoutDataCompositeProcessor">
+    <type name="Dhl\ShippingCore\Model\Checkout\CheckoutDataCompositeProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
                 <item name="dhlRouteProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor</item>
@@ -238,7 +242,7 @@
             </argument>
         </arguments>
     </type>
-    <type name="\Dhl\ShippingCore\Model\Packaging\PackagingDataCompositeProcessor">
+    <type name="Dhl\ShippingCore\Model\Packaging\PackagingDataCompositeProcessor">
         <arguments>
             <argument name="checkoutProcessors" xsi:type="array">
                 <item name="dhlRouteProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor</item>

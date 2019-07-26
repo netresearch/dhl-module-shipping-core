@@ -12,11 +12,9 @@ use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
 use Dhl\ShippingCore\Model\BulkShipmentManagement;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\OrderInterface;
-use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 use Magento\Ui\Component\MassAction\Filter;
 

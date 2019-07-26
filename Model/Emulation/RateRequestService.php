@@ -6,9 +6,13 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Emulation;
 
+use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 use Dhl\ShippingCore\Api\RateRequestEmulationInterface;
+use Magento\Framework\Exception\NotFoundException;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
+use Magento\Shipping\Model\Rate\Result;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class RateRequestService
@@ -25,6 +29,16 @@ class RateRequestService implements RateRequestEmulationInterface
     private $proxyCarrierFactory;
 
     /**
+     * @var RateResponseProcessorInterface
+     */
+    private $responseProcessor;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * @var AbstractCarrierInterface[]
      */
     private $emulatedCarriers = [];
@@ -33,23 +47,49 @@ class RateRequestService implements RateRequestEmulationInterface
      * RateRequestEmulator constructor.
      *
      * @param ProxyCarrierFactory $proxyCarrierFactory
+     * @param RateResponseProcessorInterface $responseProcessor
+     * @param LoggerInterface $logger
      */
-    public function __construct(ProxyCarrierFactory $proxyCarrierFactory)
-    {
+    public function __construct(
+        ProxyCarrierFactory $proxyCarrierFactory,
+        RateResponseProcessorInterface $responseProcessor,
+        LoggerInterface $logger
+    ) {
         $this->proxyCarrierFactory = $proxyCarrierFactory;
+        $this->responseProcessor = $responseProcessor;
+        $this->logger = $logger;
     }
 
     /**
-     * @inheritdoc
+     * Retrieve rates from a given proxy carrier and process the result.
+     *
+     * @param string $carrierCode Carrier code to emulate
+     * @param RateRequest $request Original rate request
+     * @return Result|bool
      */
     public function emulateRateRequest(string $carrierCode, RateRequest $request)
     {
         if (!array_key_exists($carrierCode, $this->emulatedCarriers)) {
-            /** @var AbstractCarrierInterface $proxyCarrier */
-            $proxyCarrier = $this->proxyCarrierFactory->create($carrierCode);
-            $this->emulatedCarriers[$carrierCode] = $proxyCarrier;
+            try {
+                $proxyCarrier = $this->proxyCarrierFactory->create($carrierCode);
+                $this->emulatedCarriers[$carrierCode] = $proxyCarrier;
+            } catch (NotFoundException $exception) {
+                $this->logger->error($exception->getLogMessage());
+
+                return false;
+            } catch (\Exception $exception) {
+                $logMessage = sprintf('Carrier "%s" could not be created: %s', $carrierCode, $exception->getMessage());
+                $this->logger->error($logMessage);
+
+                return false;
+            }
         }
 
-        return $this->emulatedCarriers[$carrierCode]->collectRates($request);
+        $rateResult = $this->emulatedCarriers[$carrierCode]->collectRates($request);
+        if ($rateResult instanceof Result) {
+            $this->responseProcessor->processMethods($rateResult->getAllRates(), $request);
+        }
+
+        return $rateResult;
     }
 }

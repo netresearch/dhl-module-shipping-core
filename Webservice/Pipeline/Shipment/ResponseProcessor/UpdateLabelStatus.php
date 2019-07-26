@@ -4,12 +4,12 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Webservice\Processor\ShipmentResponse;
+namespace Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor;
 
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
-use Dhl\ShippingCore\Api\ShipmentResponseProcessorInterface;
+use Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Sales\Api\Data\ShipmentInterface;

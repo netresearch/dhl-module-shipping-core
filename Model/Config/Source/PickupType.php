@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config\Source;
 
-use Magento\Framework\Option\ArrayInterface;
+use Magento\Framework\Data\OptionSourceInterface;
 
 /**
  * Class PickupType
@@ -14,7 +14,7 @@ use Magento\Framework\Option\ArrayInterface;
  * @author    Max Melzer <max.melzer@netresearch.de>
  * @link      https://www.netresearch.de/
  */
-class PickupType implements ArrayInterface
+class PickupType implements OptionSourceInterface
 {
     /**
      * @inheritDoc

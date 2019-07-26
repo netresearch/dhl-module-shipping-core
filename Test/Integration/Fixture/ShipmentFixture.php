@@ -8,11 +8,6 @@ namespace Dhl\ShippingCore\Test\Integration\Fixture;
 
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressInterface;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\ProductInterface;
-use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\Customer\Api\Data\CustomerInterface;
-use Magento\Sales\Api\Data\OrderInterface;
-use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Convert\Order;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\TestFramework\Helper\Bootstrap;

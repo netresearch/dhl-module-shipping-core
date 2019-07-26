@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\Pipeline;
 
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface;
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
@@ -22,10 +22,10 @@ use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
 interface TrackResponseProcessorInterface
 {
     /**
-     * Perform actions after receiving the "delete shipments" response.
+     * Perform actions after receiving the "request tracks" response.
      *
-     * @param TrackResponseInterface[] $trackResponses Shipment cancellation responses
-     * @param TrackErrorResponseInterface[] $errorResponses Shipment cancellation errors
+     * @param TrackResponseInterface[] $trackResponses
+     * @param TrackErrorResponseInterface[] $errorResponses
      */
     public function processResponse(array $trackResponses, array $errorResponses);
 }

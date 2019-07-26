@@ -7,7 +7,6 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model;
 
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\LocalizedException;
 
 /**
  * LabelStatusRepository

@@ -16,7 +16,7 @@ use Magento\Framework\DataObject;
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */
-final class AdditionalInfo extends DataObject implements MethodAdditionalInfoInterface
+class AdditionalInfo extends DataObject implements MethodAdditionalInfoInterface
 {
 
     /**
@@ -50,5 +50,4 @@ final class AdditionalInfo extends DataObject implements MethodAdditionalInfoInt
     {
         $this->setData(self::CARRIER_LOGO_URL, $carrierLogoUrl);
     }
-
 }

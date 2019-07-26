@@ -4,11 +4,11 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Webservice\Processor;
+namespace Dhl\ShippingCore\Webservice\Pipeline\Shipment;
 
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
-use Dhl\ShippingCore\Api\ShipmentResponseProcessorInterface;
+use Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
 
 /**
  * Class ShipmentResponseProcessor
