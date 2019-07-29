@@ -56,39 +56,6 @@ class ApplySelectionsProcessor extends AbstractProcessor
     }
 
     /**
-     * Filters all not selected customer services out of the options data array.
-     *
-     * @param AssignedSelectionInterface[] $selections
-     * @param array $optionsData
-     * @return array
-     */
-    private function filterNotSelectedServices(array $selections, array $optionsData): array
-    {
-        $availableCustomerServices = [
-            'preferredDay',
-            'preferredTime',
-            'preferredLocation',
-            'preferredNeighbour',
-            "parcelstation",
-        ];
-
-        $selectedServices = [];
-        foreach ($selections as $selection) {
-            $selectedServices[] = $selection->getShippingOptionCode();
-        }
-
-        $notSelectedServices = array_diff($availableCustomerServices, array_unique($selectedServices));
-
-        foreach ($optionsData as $optionCode => $shippingOption) {
-            if (in_array($shippingOption->getCode(), $notSelectedServices, true)) {
-                unset($optionsData[$optionCode]);
-            }
-        }
-
-        return $optionsData;
-    }
-
-    /**
      * @param ShippingOptionInterface[] $optionsData
      * @param Shipment $shipment
      * @param string $optionGroupName
@@ -102,7 +69,6 @@ class ApplySelectionsProcessor extends AbstractProcessor
 
         $addressId = (int) $shipment->getShippingAddressId();
         $selections = $this->loadSelections($addressId);
-        $optionsData = $this->filterNotSelectedServices($selections, $optionsData);
 
         foreach ($selections as $selection) {
             foreach ($optionsData as $shippingOption) {
@@ -111,10 +77,6 @@ class ApplySelectionsProcessor extends AbstractProcessor
                 }
 
                 foreach ($shippingOption->getInputs() as $input) {
-                    if ($input->getCode() === 'enabled') {
-                        $input->setDefaultValue('1');
-                    }
-
                     if ($input->getCode() !== $selection->getInputCode()) {
                         continue;
                     }
