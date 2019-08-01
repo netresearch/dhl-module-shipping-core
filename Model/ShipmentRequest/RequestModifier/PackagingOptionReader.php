@@ -164,4 +164,46 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
 
         return $services;
     }
+
+    /**
+     * Read package customs values
+     *
+     * @return array
+     * @throws LocalizedException
+     */
+    public function getPackageCustomsValues():array
+    {
+        $customsValues = [];
+        $packageOptions = $this->getCarrierData()->getPackageOptions();
+
+        if (isset($packageOptions['packageCustoms'])) {
+            foreach ($packageOptions['packageCustoms']->getInputs() as $optionCode => $input) {
+                $customsValues[$optionCode] = $input->getDefaultValue();
+            }
+        }
+
+        return $customsValues;
+    }
+
+    /**
+     * Read item customs values
+     *
+     * @param int $orderItemId
+     *
+     * @return array
+     * @throws LocalizedException
+     */
+    public function getItemCustomsValues(int $orderItemId): array
+    {
+        $customsValues = [];
+        $itemOptions = $this->getCarrierData()->getItemOptions();
+        $shippingOptions = $itemOptions[$orderItemId]->getShippingOptions();
+        if (isset($shippingOptions['itemCustoms'])) {
+            foreach ($shippingOptions['itemCustoms']->getInputs() as $inputCode => $input) {
+                $customsValues[$inputCode] = $input->getDefaultValue();
+            }
+        }
+
+        return $customsValues;
+    }
 }

@@ -194,6 +194,16 @@ class RequestModifier implements RequestModifierInterface
         /** @var \Dhl\ShippingCore\Api\PackagingOptionReaderInterface $packagingOptionReader */
         $packagingOptionReader = $this->packagingOptionReaderFactory->create(['shipment' => $shipment]);
 
+        $customs = $packagingOptionReader->getPackageCustomsValues();
+        $customsValue = $customs['customsValue']?? '';
+        $contentType = $customs['contentType'] ?? '';
+        $explanation = $customs['explanation'] ?? '';
+        unset(
+            $customs['customsValue'],
+            $customs['contentType'],
+            $customs['explanation']
+        );
+
         $packageItems = [];
         $packageParams = [
             'shipping_product' => $shipmentRequest->getShippingMethod(),
@@ -204,12 +214,18 @@ class RequestModifier implements RequestModifierInterface
             'width' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'width'),
             'height' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'height'),
             'dimension_units' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'sizeUnit'),
+            'content_type' => $contentType,
+            'content_type_other' => $explanation,
+            'customs_value' => $customsValue,
+            'customs' => $customs,
             'services' => $packagingOptionReader->getServiceOptionValues(),
         ];
 
         /** @var \Magento\Sales\Model\Order\Shipment\Item $item */
         foreach ($shipment->getAllItems() as $item) {
             $orderItemId = (int) $item->getOrderItemId();
+            $itemCustoms = $packagingOptionReader->getItemCustomsValues($orderItemId);
+            $itemCustomsValue = $itemCustoms['customsValue'] ?? '';
             $packageItem = [
                 'qty' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'qtyToShip'),
                 'price' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'price'),
@@ -217,6 +233,8 @@ class RequestModifier implements RequestModifierInterface
                 'weight' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'weight'),
                 'product_id' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'productId'),
                 'order_item_id' => $orderItemId,
+                'customs_value' => $itemCustomsValue,
+                'customs' => $customs,
             ];
             $packageItems[$orderItemId] = $packageItem;
         }
