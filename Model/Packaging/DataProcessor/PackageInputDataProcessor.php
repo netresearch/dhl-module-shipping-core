@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Config\Source\ExportContentType;
 use Dhl\ShippingCore\Model\Config\Source\TermsOfTrade;
@@ -50,6 +51,11 @@ class PackageInputDataProcessor extends AbstractProcessor
     private $commentFactory;
 
     /**
+     * @var OptionInterfaceFactory
+     */
+    private $optionFactory;
+
+    /**
      * PackageInputDataProcessor constructor.
      *
      * @param ConfigInterface $config
@@ -57,19 +63,22 @@ class PackageInputDataProcessor extends AbstractProcessor
      * @param TermsOfTrade $termsOfTradeSource
      * @param ExportContentType $contentTypeSource
      * @param CommentInterfaceFactory $commentFactory
+     * @param OptionInterfaceFactory $optionFactory
      */
     public function __construct(
         ConfigInterface $config,
         ItemAttributeReader $itemAttributeReader,
         TermsOfTrade $termsOfTradeSource,
         ExportContentType $contentTypeSource,
-        CommentInterfaceFactory $commentFactory
+        CommentInterfaceFactory $commentFactory,
+        OptionInterfaceFactory $optionFactory
     ) {
         $this->config = $config;
         $this->itemAttributeReader = $itemAttributeReader;
         $this->termsOfTradeSource = $termsOfTradeSource;
         $this->contentTypeSource = $contentTypeSource;
         $this->commentFactory = $commentFactory;
+        $this->optionFactory = $optionFactory;
     }
 
     /**
@@ -86,9 +95,13 @@ class PackageInputDataProcessor extends AbstractProcessor
             switch ($input->getCode()) {
                 // shipping product
                 case 'productCode':
-                    $value = substr(strrchr((string) $shipment->getOrder()->getShippingMethod(), "_"), 1);
-                    $label = $shipment->getOrder()->getShippingDescription();
-                    $input->setOptions([['value' => $value, 'label' => $label,]]);
+                    $option = $this->optionFactory->create();
+                    $value = substr(strrchr((string)$shipment->getOrder()->getShippingMethod(), "_"), 1);
+                    $option->setValue($value);
+                    $option->setLabel(
+                        $shipment->getOrder()->getShippingDescription()
+                    );
+                    $input->setOptions([$option]);
                     $input->setDefaultValue($value);
                     break;
                 // weight
@@ -146,10 +159,30 @@ class PackageInputDataProcessor extends AbstractProcessor
                     $input->setDefaultValue(substr($exportDescription, 0, 80));
                     break;
                 case 'termsOfTrade':
-                    $input->setOptions($this->termsOfTradeSource->toOptionArray());
+                    $input->setOptions(
+                        array_map(
+                            function ($optionArray) {
+                                $option = $this->optionFactory->create();
+                                $option->setValue($optionArray['value']);
+                                $option->setLabel((string)$optionArray['label']);
+                                return $option;
+                            },
+                            $this->termsOfTradeSource->toOptionArray()
+                        )
+                    );
                     break;
                 case 'contentType':
-                    $input->setOptions($this->contentTypeSource->toOptionArray());
+                    $input->setOptions(
+                        array_map(
+                            function ($optionArray) {
+                                $option = $this->optionFactory->create();
+                                $option->setValue($optionArray['value']);
+                                $option->setLabel((string)$optionArray['label']);
+                                return $option;
+                            },
+                            $this->contentTypeSource->toOptionArray()
+                        )
+                    );
                     break;
             }
         }
