@@ -96,6 +96,23 @@ class PackagingDataCompositeProcessor implements PackagingProcessorInterface
             );
         }
 
+        /**
+         * Apply checkout processors to item based shipping options as well
+         */
+        if ($shipment->getOrder()->getShippingAddress()) {
+            foreach ($this->checkoutProcessors as $processor) {
+                foreach ($itemData as $item) {
+                    $item->setShippingOptions(
+                        $result = $processor->processShippingOptions(
+                            $item->getShippingOptions(),
+                            $shipment->getShippingAddress()->getCountryId(),
+                            $shipment->getShippingAddress()->getPostcode()
+                        )
+                    );
+                }
+            }
+        }
+
         return $itemData;
     }
 

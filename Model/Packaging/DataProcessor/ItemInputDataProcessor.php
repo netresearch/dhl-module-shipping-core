@@ -9,6 +9,8 @@ namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface;
+use Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
 use Dhl\ShippingCore\Model\Packaging\ItemAttributeReader;
@@ -44,6 +46,11 @@ class ItemInputDataProcessor extends AbstractProcessor
     private $commentFactory;
 
     /**
+     * @var OptionInterfaceFactory
+     */
+    private $optionFactory;
+
+    /**
      * @var ConfigInterface
      */
     private $config;
@@ -54,17 +61,20 @@ class ItemInputDataProcessor extends AbstractProcessor
      * @param ItemAttributeReader $itemAttributeReader
      * @param Countryofmanufacture $countrySource
      * @param CommentInterfaceFactory $commentFactory
+     * @param OptionInterfaceFactory $optionFactory
      * @param ConfigInterface $config
      */
     public function __construct(
         ItemAttributeReader $itemAttributeReader,
         Countryofmanufacture $countrySource,
         CommentInterfaceFactory $commentFactory,
+        OptionInterfaceFactory $optionFactory,
         ConfigInterface $config
     ) {
         $this->itemAttributeReader = $itemAttributeReader;
         $this->countrySource = $countrySource;
         $this->commentFactory = $commentFactory;
+        $this->optionFactory = $optionFactory;
         $this->config = $config;
     }
 
@@ -137,7 +147,15 @@ class ItemInputDataProcessor extends AbstractProcessor
                     $input->setDefaultValue((string) number_format($price, 2));
                     break;
                 case 'countryOfOrigin':
-                    $input->setOptions($this->countrySource->getAllOptions());
+                    $input->setOptions(array_map(
+                        function ($optionArray) {
+                            $option = $this->optionFactory->create();
+                            $option->setValue($optionArray['value']);
+                            $option->setLabel($optionArray['label']);
+                            return $option;
+                        },
+                        $this->countrySource->getAllOptions()
+                    ));
                     $input->setDefaultValue($this->itemAttributeReader->getCountryOfManufacture($shipmentItem));
                     break;
             }
