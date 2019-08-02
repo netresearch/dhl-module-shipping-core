@@ -91,11 +91,22 @@
             <xs:element name="rule">
                 <xs:complexType>
                     <xs:all>
-                        <xs:element name="incompatibilityRule" type="xs:boolean" minOccurs="0"/>
-                        <xs:element name="subjects" type="subjectsList" minOccurs="0"/>
+                        <xs:element name="subjects" type="subjectsList"/>
                         <xs:element name="masters" type="mastersList" minOccurs="0"/>
-                        <xs:element name="triggerValue" type="xs:string" minOccurs="0"/>
-                        <xs:element name="hideSubjects" type="xs:boolean" minOccurs="0"/>
+                        <xs:element name="action">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:pattern value="show|hide|enable|disable|require|unrequire"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="triggerValue">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:pattern value=".*|true|\*"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
                         <xs:element name="errorMessage" type="string_translatable" minOccurs="0"/>
                     </xs:all>
                     <xs:attribute type="xs:string" name="id"/>

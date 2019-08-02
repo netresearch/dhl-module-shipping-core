@@ -70,19 +70,13 @@ interface CompatibilityInterface
     public function getTriggerValue(): string;
 
     /**
-     * Return true if the compatibility rule describes an incompatibilty between subjects.
-     * Otherwise, the subjects should be treated as requiring each other.
+     * Will return one of show|hide|enable|disable.
+     * This decides what action to take if a master has the designated triggerValue.
+     * If there is no match, the opposite action will be applied.
      *
-     * @return bool
+     * @return string
      */
-    public function isIncompatibilityRule(): bool;
-
-    /**
-     * Return true to enforce this rule by hiding instead of just disabling items.
-     *
-     * @return bool
-     */
-    public function isHideSubjects(): bool;
+    public function getAction(): string;
 
     /**
      * @param string $id
@@ -120,16 +114,9 @@ interface CompatibilityInterface
     public function setTriggerValue(string $triggerValue);
 
     /**
-     * @param bool $incompatibilityRule
      *
-     * @return void
+     * @param string $action
+     * @return mixed
      */
-    public function setIncompatibilityRule(bool $incompatibilityRule);
-
-    /**
-     * @param bool $hideSubjects
-     *
-     * @return void
-     */
-    public function setHideSubjects(bool $hideSubjects);
+    public function setAction(string $action);
 }

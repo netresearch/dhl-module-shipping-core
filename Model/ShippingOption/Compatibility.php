@@ -42,14 +42,9 @@ class Compatibility implements CompatibilityInterface
     private $triggerValue = '';
 
     /**
-     * @var bool
+     * @var string
      */
-    private $incompatibilityRule = false;
-
-    /**
-     * @var bool
-     */
-    private $hideSubjects = false;
+    private $action;
 
     /**
      * @return string
@@ -57,54 +52,6 @@ class Compatibility implements CompatibilityInterface
     public function getId(): string
     {
         return $this->id;
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getSubjects(): array
-    {
-        return $this->subjects;
-    }
-
-    /**
-     * @return string
-     */
-    public function getErrorMessage(): string
-    {
-        return $this->errorMessage;
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getMasters(): array
-    {
-        return $this->masters;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isIncompatibilityRule(): bool
-    {
-        return $this->incompatibilityRule;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isHideSubjects(): bool
-    {
-        return $this->hideSubjects;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTriggerValue(): string
-    {
-        return $this->triggerValue;
     }
 
     /**
@@ -116,11 +63,27 @@ class Compatibility implements CompatibilityInterface
     }
 
     /**
+     * @return string[]
+     */
+    public function getSubjects(): array
+    {
+        return $this->subjects;
+    }
+
+    /**
      * @param string[] $subjects
      */
     public function setSubjects(array $subjects)
     {
         $this->subjects = $subjects;
+    }
+
+    /**
+     * @return string
+     */
+    public function getErrorMessage(): string
+    {
+        return $this->errorMessage;
     }
 
     /**
@@ -132,6 +95,14 @@ class Compatibility implements CompatibilityInterface
     }
 
     /**
+     * @return string[]
+     */
+    public function getMasters(): array
+    {
+        return $this->masters;
+    }
+
+    /**
      * @param string[] $masters
      */
     public function setMasters(array $masters)
@@ -140,19 +111,11 @@ class Compatibility implements CompatibilityInterface
     }
 
     /**
-     * @param bool $incompatibilityRule
+     * @return string
      */
-    public function setIncompatibilityRule(bool $incompatibilityRule)
+    public function getTriggerValue(): string
     {
-        $this->incompatibilityRule = $incompatibilityRule;
-    }
-
-    /**
-     * @param bool $hideSubjects
-     */
-    public function setHideSubjects(bool $hideSubjects)
-    {
-        $this->hideSubjects = $hideSubjects;
+        return $this->triggerValue;
     }
 
     /**
@@ -161,5 +124,21 @@ class Compatibility implements CompatibilityInterface
     public function setTriggerValue(string $triggerValue)
     {
         $this->triggerValue = $triggerValue;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAction(): string
+    {
+        return $this->action;
+    }
+
+    /**
+     * @param string $action
+     */
+    public function setAction(string $action)
+    {
+        $this->action = $action;
     }
 }

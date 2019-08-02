@@ -165,11 +165,10 @@
                     <master>packageCustoms.contentType</master>
                 </masters>
                 <triggerValue>OTHER</triggerValue>
+                <action>show</action>
                 <subjects>
                     <subject>packageCustoms.explanation</subject>
                 </subjects>
-                <hideSubjects>true</hideSubjects>
-                <incompatibilityRule>false</incompatibilityRule>
             </rule>
         </compatibilityData>
     </carrier>
