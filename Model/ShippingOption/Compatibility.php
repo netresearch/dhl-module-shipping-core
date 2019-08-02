@@ -37,6 +37,11 @@ class Compatibility implements CompatibilityInterface
     private $masters = [];
 
     /**
+     * @var string
+     */
+    private $triggerValue = '';
+
+    /**
      * @var bool
      */
     private $incompatibilityRule = false;
@@ -95,6 +100,14 @@ class Compatibility implements CompatibilityInterface
     }
 
     /**
+     * @return string
+     */
+    public function getTriggerValue(): string
+    {
+        return $this->triggerValue;
+    }
+
+    /**
      * @param string $id
      */
     public function setId(string $id)
@@ -140,5 +153,13 @@ class Compatibility implements CompatibilityInterface
     public function setHideSubjects(bool $hideSubjects)
     {
         $this->hideSubjects = $hideSubjects;
+    }
+
+    /**
+     * @param string $triggerValue
+     */
+    public function setTriggerValue(string $triggerValue)
+    {
+        $this->triggerValue = $triggerValue;
     }
 }

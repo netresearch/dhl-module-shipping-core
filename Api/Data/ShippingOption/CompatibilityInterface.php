@@ -62,6 +62,14 @@ interface CompatibilityInterface
     public function getMasters(): array;
 
     /**
+     * Returns the input value on which the rule should be triggered.
+     * The default ("") causes the rule to be triggered on non-empty values.
+     *
+     * @return string
+     */
+    public function getTriggerValue(): string;
+
+    /**
      * Return true if the compatibility rule describes an incompatibilty between subjects.
      * Otherwise, the subjects should be treated as requiring each other.
      *
@@ -103,6 +111,13 @@ interface CompatibilityInterface
      * @return void
      */
     public function setMasters(array $masters);
+
+    /**
+     * @param string $triggerValue
+     *
+     * @return void
+     */
+    public function setTriggerValue(string $triggerValue);
 
     /**
      * @param bool $incompatibilityRule
