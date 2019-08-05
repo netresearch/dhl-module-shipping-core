@@ -14,6 +14,7 @@
                         <inputType>prefixed</inputType>
                         <validationRules>
                             <rule name="validate-number"/>
+                            <rule name="validate-greater-than-zero"/>
                         </validationRules>
                     </input>
                     <input code="weightUnit">
