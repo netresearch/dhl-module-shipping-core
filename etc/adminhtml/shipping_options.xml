@@ -78,6 +78,9 @@
                     <input code="explanation" defaultConfigValue="dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_explanation">
                         <label>Export Content Explanation</label>
                         <inputType>text</inputType>
+                        <validationRules>
+                            <rule name="required"/>
+                        </validationRules>
                     </input>
                 </inputs>
             </shippingOption>
