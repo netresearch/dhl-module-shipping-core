@@ -261,6 +261,7 @@
                 <item name="dhlPackageInputDataProcessor" sortOrder="200" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageInputDataProcessor</item>
                 <item name="dhlItemInputDataProcessor" sortOrder="300" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemInputDataProcessor</item>
                 <item name="dhlSortOrderProcessor" sortOrder="400" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\SortOrderProcessor</item>
+                <item name="dhlItemQtyOptionsProcessor" sortOrder="500" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemQtyOptionsProcessor</item>
             </argument>
         </arguments>
     </type>

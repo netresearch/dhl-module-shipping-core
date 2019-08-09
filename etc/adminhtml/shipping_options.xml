@@ -110,7 +110,17 @@
                             <input code="qty">
                                 <sortOrder>20</sortOrder>
                                 <label>Quantity</label>
-                                <inputType>text</inputType>
+                                <inputType>select</inputType>
+                                <options>
+                                    <option>
+                                        <label>0</label>
+                                        <value>0</value>
+                                    </option>
+                                    <option>
+                                        <label>1</label>
+                                        <value>1</value>
+                                    </option>
+                                </options>
                                 <validationRules>
                                     <rule name="validate-number"/>
                                 </validationRules>
