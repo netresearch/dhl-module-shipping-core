@@ -190,9 +190,9 @@ interface InputInterface
     public function setValidationRules(array $validationRules);
 
     /**
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface $comment
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface|null $comment
      *
      * @return void
      */
-    public function setComment(CommentInterface $comment);
+    public function setComment(?CommentInterface $comment);
 }
