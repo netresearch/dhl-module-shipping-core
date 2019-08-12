@@ -194,5 +194,5 @@ interface InputInterface
      *
      * @return void
      */
-    public function setComment(?CommentInterface $comment);
+    public function setComment($comment);
 }

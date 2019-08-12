@@ -265,7 +265,7 @@ class Input implements InputInterface
     /**
      * @param \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface|null $comment
      */
-    public function setComment(?CommentInterface $comment)
+    public function setComment($comment)
     {
         $this->comment = $comment;
     }
