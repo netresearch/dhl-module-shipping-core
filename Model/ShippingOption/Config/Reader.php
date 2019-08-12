@@ -6,7 +6,15 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShippingOption\Config;
 
+use Magento\Framework\App\CacheInterface;
+use Magento\Framework\Config\ConverterInterface;
+use Magento\Framework\Config\Dom;
+use Magento\Framework\Config\FileResolverInterface;
 use Magento\Framework\Config\Reader\Filesystem;
+use Magento\Framework\Config\SchemaLocatorInterface;
+use Magento\Framework\Config\ValidationStateInterface;
+use Magento\Framework\Serialize\SerializerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class Reader
@@ -16,15 +24,96 @@ use Magento\Framework\Config\Reader\Filesystem;
  */
 class Reader extends Filesystem
 {
+    const CACHE_KEY_SHIPPING_OPTIONS_CONFIG = 'dhl_shipping_option_config';
+
     /**
-     * @param int|null $scope
+     * @var CacheInterface
+     */
+    private $cache;
+
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * Reader constructor.
+     *
+     * @param FileResolverInterface $fileResolver
+     * @param ConverterInterface $converter
+     * @param SchemaLocatorInterface $schemaLocator
+     * @param ValidationStateInterface $validationState
+     * @param CacheInterface $cache
+     * @param SerializerInterface $serializer
+     * @param LoggerInterface $logger
+     * @param string $fileName
+     * @param array $idAttributes
+     * @param string $domDocumentClass
+     * @param string $defaultScope
+     */
+    public function __construct(
+        FileResolverInterface $fileResolver,
+        ConverterInterface $converter,
+        SchemaLocatorInterface $schemaLocator,
+        ValidationStateInterface $validationState,
+        CacheInterface $cache,
+        SerializerInterface $serializer,
+        LoggerInterface $logger,
+        string $fileName,
+        array $idAttributes = [],
+        string $domDocumentClass = Dom::class,
+        string $defaultScope = 'global'
+    ) {
+        $this->cache = $cache;
+        $this->serializer = $serializer;
+        $this->logger = $logger;
+
+        parent::__construct(
+            $fileResolver,
+            $converter,
+            $schemaLocator,
+            $validationState,
+            $fileName,
+            $idAttributes,
+            $domDocumentClass,
+            $defaultScope
+        );
+    }
+
+    /**
+     * Do base configuration post processing and cache the result. Load from cache on successive requests.
+     *
+     * You must clear the Magento cache to apply changes to any shipping_options.xml file.
+     *
+     * @param string $scope
      * @return array
      */
-    public function read($scope = null): array
+    public function read($scope = ''): array
     {
-        $result = parent::read($scope);
+        $data = $this->cache->load(self::CACHE_KEY_SHIPPING_OPTIONS_CONFIG . $scope);
 
-        return $this->applyBaseConfiguration($result);
+        if ($data) {
+            try {
+                return $this->serializer->unserialize($data);
+            } catch (\InvalidArgumentException $exception) {
+                // re-read the files if the cache is corrupted
+                $this->logger->debug('Issue with DHL shipping option cache: ' . $exception->getMessage());
+            }
+        }
+
+        $data = parent::read($scope);
+        $data = $this->applyBaseConfiguration($data);
+        $this->cache->save(
+            $this->serializer->serialize($data),
+            self::CACHE_KEY_SHIPPING_OPTIONS_CONFIG . $scope
+        );
+
+        return $data;
     }
 
     /**
@@ -70,6 +159,7 @@ class Reader extends Filesystem
                 $baseArray[$key] = $this->extendRecursive($baseArray[$key], $value);
             }
         }
+
         return $baseArray;
     }
 }
