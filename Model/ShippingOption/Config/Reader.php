@@ -110,7 +110,8 @@ class Reader extends Filesystem
         $data = $this->applyBaseConfiguration($data);
         $this->cache->save(
             $this->serializer->serialize($data),
-            self::CACHE_KEY_SHIPPING_OPTIONS_CONFIG . $scope
+            self::CACHE_KEY_SHIPPING_OPTIONS_CONFIG . $scope,
+            [\Magento\Framework\App\Config::CACHE_TAG]
         );
 
         return $data;
