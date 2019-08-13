@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShippingOption;
 
-use Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface;
 
 /**
@@ -77,6 +76,11 @@ class Input implements InputInterface
      * @var \Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface|null
      */
     private $comment;
+
+    /**
+     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ItemCombinationRuleInterface|null
+     */
+    private $itemCombinationRule;
 
     /**
      * @return string
@@ -175,6 +179,14 @@ class Input implements InputInterface
     }
 
     /**
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ItemCombinationRuleInterface|null
+     */
+    public function getItemCombinationRule()
+    {
+        return $this->itemCombinationRule;
+    }
+
+    /**
      * @param string $code
      */
     public function setCode(string $code)
@@ -268,5 +280,13 @@ class Input implements InputInterface
     public function setComment($comment)
     {
         $this->comment = $comment;
+    }
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ItemCombinationRuleInterface|null $itemCombinationRule
+     */
+    public function setItemCombinationRule($itemCombinationRule)
+    {
+        $this->itemCombinationRule = $itemCombinationRule;
     }
 }

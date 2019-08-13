@@ -113,6 +113,14 @@ interface InputInterface
     public function getComment();
 
     /**
+     * Retrieve an optional combination rule for this input.
+     * This only works on package level inputs in the context of the packaging popup.
+     *
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ItemCombinationRuleInterface|null
+     */
+    public function getItemCombinationRule();
+
+    /**
      * @param string $inputType
      *
      * @return void
@@ -195,4 +203,11 @@ interface InputInterface
      * @return void
      */
     public function setComment($comment);
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ItemCombinationRuleInterface|null $itemCombinationRule
+     *
+     * @return void
+     */
+    public function setItemCombinationRule($itemCombinationRule);
 }

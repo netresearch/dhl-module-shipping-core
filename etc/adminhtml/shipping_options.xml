@@ -16,6 +16,10 @@
                             <rule name="validate-number"/>
                             <rule name="validate-greater-than-zero"/>
                         </validationRules>
+                        <itemCombinationRule>
+                            <sourceItemInputCode>details.weight</sourceItemInputCode>
+                            <action>add</action>
+                        </itemCombinationRule>
                     </input>
                     <input code="weightUnit">
                         <inputType>hidden</inputType>
@@ -62,11 +66,19 @@
                         <validationRules>
                             <rule name="validate-number"/>
                         </validationRules>
+                        <itemCombinationRule>
+                            <sourceItemInputCode>itemCustoms.customsValue</sourceItemInputCode>
+                            <action>add</action>
+                        </itemCombinationRule>
                     </input>
                     <input code="exportDescription">
                         <sortOrder>1000</sortOrder>
                         <label>Package Description</label>
                         <inputType>textarea</inputType>
+                        <itemCombinationRule>
+                            <sourceItemInputCode>itemCustoms.exportDescription</sourceItemInputCode>
+                            <action>concat</action>
+                        </itemCombinationRule>
                     </input>
                     <input code="termsOfTrade" defaultConfigValue="dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/terms_of_trade">
                         <label>Terms of Trade</label>

@@ -164,6 +164,26 @@
                                                         </xs:sequence>
                                                     </xs:complexType>
                                                 </xs:element>
+                                                <xs:element name="itemCombinationRule" minOccurs="0">
+                                                    <xs:complexType>
+                                                        <xs:all>
+                                                            <xs:element name="sourceItemInputCode">
+                                                                <xs:simpleType>
+                                                                    <xs:restriction base="xs:string">
+                                                                        <xs:pattern value=".*\..*"/>
+                                                                    </xs:restriction>
+                                                                </xs:simpleType>
+                                                            </xs:element>
+                                                            <xs:element name="action">
+                                                                <xs:simpleType>
+                                                                    <xs:restriction base="xs:string">
+                                                                        <xs:pattern value="add|concat"/>
+                                                                    </xs:restriction>
+                                                                </xs:simpleType>
+                                                            </xs:element>
+                                                        </xs:all>
+                                                    </xs:complexType>
+                                                </xs:element>
                                                 <xs:element name="comment" type="commentConfig" minOccurs="0"/>
                                                 <xs:element name="defaultValue" type="xs:string" minOccurs="0"/>
                                             </xs:all>
