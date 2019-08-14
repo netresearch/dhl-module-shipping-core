@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Controller\Adminhtml\Recipient\Street;
 
-use Dhl\ShippingCore\Api\RecipientStreetInterface;
+use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface;
 use Dhl\ShippingCore\Model\RecipientStreet;
 use Magento\Backend\App\Action;

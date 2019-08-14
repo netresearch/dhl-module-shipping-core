@@ -15,7 +15,7 @@
     <preference for="Dhl\ShippingCore\Api\PackagingOptionReaderInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier\PackagingOptionReader"/>
     <preference for="Dhl\ShippingCore\Api\ProxyCarrierFactoryInterface" type="Dhl\ShippingCore\Model\Emulation\ProxyCarrierFactory"/>
     <preference for="Dhl\ShippingCore\Api\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Emulation\RateRequestService"/>
-    <preference for="Dhl\ShippingCore\Api\RecipientStreetInterface" type="Dhl\ShippingCore\Model\RecipientStreet"/>
+    <preference for="Dhl\ShippingCore\Api\Data\RecipientStreetInterface" type="Dhl\ShippingCore\Model\RecipientStreet"/>
     <preference for="Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface" type="Dhl\ShippingCore\Model\RecipientStreetRepository"/>
     <preference for="Dhl\ShippingCore\Api\RequestExtractorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestExtractor"/>
     <preference for="Dhl\ShippingCore\Api\RequestModifierInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier"/>

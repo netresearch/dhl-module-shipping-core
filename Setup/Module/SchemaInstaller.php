@@ -8,7 +8,7 @@ namespace Dhl\ShippingCore\Setup\Module;
 
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
-use Dhl\ShippingCore\Api\RecipientStreetInterface;
+use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Sales\Api\Data\OrderAddressInterface;

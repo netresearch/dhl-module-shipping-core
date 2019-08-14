@@ -4,16 +4,15 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\Data;
 
 /**
- * OrderAddressInterface
+ * RecipientStreetInterface
  *
  * @api
- *
- * @package Dhl\ShippingCore\Api
+ * @package Dhl\ShippingCore\Api\Data
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
+ * @link    https://www.netresearch.de/
  */
 interface RecipientStreetInterface
 {
