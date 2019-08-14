@@ -1,6 +1,6 @@
 {
   "name": "dhl/module-shipping-core",
-  "version": "0.3.1",
+  "version": "0.5.0",
   "type": "magento2-module",
   "description": "DHL component providing utilities and frameworks for advanced shipping features",
   "license": "OSL-3.0",
@@ -50,8 +50,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-develop": "0.3.7.x-dev",
-      "dev-DHLGW-39": "0.3.8.x-dev"
+      "dev-develop": "0.5.x-dev"
       }
   }
 }
