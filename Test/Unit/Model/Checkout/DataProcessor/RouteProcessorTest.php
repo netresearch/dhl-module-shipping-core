@@ -64,7 +64,7 @@ class RouteProcessorTest extends TestCase
         $routeDeToIntl->setIncludeDestinations(['intl']);
         $optionDeToIntl = new ShippingOption();
         $optionDeToIntl->setCode('test');
-        $optionDeToIntl->setRoutes([$routeNonIntl]);
+        $optionDeToIntl->setRoutes([$routeDeToIntl]);
 
         return [
             'de => us, no routes specified' => [
@@ -73,25 +73,25 @@ class RouteProcessorTest extends TestCase
                 'destinationCountryId' => 'us',
                 'expectedCount' => 1,
             ],
-            'de => us, only to europe allowed' => [
+            'de => us, eu destination required' => [
                 'optionsData' => [$optionDestinationEu],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'us',
                 'expectedCount' => 0,
             ],
-            'de => at, only to europe allowed' => [
+            'de => at, eu destination required' => [
                 'optionsData' => [$optionDestinationEu],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'at',
                 'expectedCount' => 1,
             ],
-            'de => us, europe not allowed' => [
+            'de => us, eu destination not allowed' => [
                 'optionsData' => [$optionDestinationNonEu],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'us',
                 'expectedCount' => 1,
             ],
-            'de => at, europe not allowed' => [
+            'de => at, eu destination not allowed' => [
                 'optionsData' => [$optionDestinationNonEu],
                 'originCountryId' => 'de',
                 'destinationCountryId' => 'at',
@@ -109,11 +109,23 @@ class RouteProcessorTest extends TestCase
                 'destinationCountryId' => 'at',
                 'expectedCount' => 0,
             ],
-            'us => hk, only from de allowed' => [
+            'de => hk, all destinations from de allowed' => [
+                'optionsData' => [$optionDeToIntl],
+                'originCountryId' => 'de',
+                'destinationCountryId' => 'hk',
+                'expectedCount' => 1,
+            ],
+            'us => hk, all destinations from de allowed' => [
                 'optionsData' => [$optionDeToIntl],
                 'originCountryId' => 'us',
                 'destinationCountryId' => 'hk',
                 'expectedCount' => 0,
+            ],
+            'de => de, all destinations from de allowed' => [
+                'optionsData' => [$optionDeToIntl],
+                'originCountryId' => 'de',
+                'destinationCountryId' => 'de',
+                'expectedCount' => 1,
             ],
         ];
     }

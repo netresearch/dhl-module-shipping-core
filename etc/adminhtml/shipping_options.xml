@@ -47,6 +47,13 @@
             </shippingOption>
             <shippingOption code="packageCustoms">
                 <label>Customs Data</label>
+                <routes>
+                    <route>
+                        <excludeDestinations>
+                            <destination>domestic</destination>
+                        </excludeDestinations>
+                    </route>
+                </routes>
                 <inputs>
                     <input code="customsValue">
                         <label>Customs Value</label>
@@ -119,7 +126,7 @@
                         <routes>
                             <route>
                                 <excludeDestinations>
-                                    <destination>eu</destination>
+                                    <destination>domestic</destination>
                                 </excludeDestinations>
                             </route>
                         </routes>
