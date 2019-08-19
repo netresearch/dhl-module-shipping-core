@@ -256,7 +256,7 @@ class RequestExtractor implements RequestExtractorInterface
                 'state' => (string) $this->shipmentRequest->getRecipientAddressStateOrProvinceCode(),
                 'postalCode' => (string) $this->shipmentRequest->getRecipientAddressPostalCode(),
                 'countryCode' => (string) $this->shipmentRequest->getRecipientAddressCountryCode(),
-                'regionCode' => (string) $this->shipmentRequest->getData('address_region_code'),
+                'regionCode' => (string) $this->shipmentRequest->getData('recipient_address_region_code'),
             ];
 
             $recipientData = array_merge($recipientData, $streetData);
