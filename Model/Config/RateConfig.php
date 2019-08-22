@@ -6,8 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config;
 
-use Dhl\ShippingCore\Model\Config\Source\RoundedPricesFormat;
-use Dhl\ShippingCore\Model\Config\Source\RoundedPricesMode;
+use Dhl\ShippingCore\Model\Config\Source\RoundingFormat;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
 use Magento\Store\Model\ScopeInterface;
@@ -15,11 +14,30 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Class RateConfig
  *
- * @author    Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link      https://www.netresearch.de/
+ * @package Dhl\ShippingCore\Model
+ * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
-class RateConfig implements RateConfigInterface
+class RateConfig
 {
+    // rounding
+    const CONFIG_PATH_USE_ROUNDING = 'dhlshippingsolutions/%s/rates_calculation/use_rounding';
+    const CONFIG_PATH_ROUNDING_FORMAT = 'dhlshippingsolutions/%s/rates_calculation/rounding_group/number_format';
+    const CONFIG_PATH_ROUNDING_DIRECTION = 'dhlshippingsolutions/%s/rates_calculation/rounding_group/direction';
+    const CONFIG_PATH_ROUNDING_DECIMAL_VALUE = 'dhlshippingsolutions/%s/rates_calculation/rounding_group/decimal_value';
+
+    // cross-border markup
+    const CONFIG_PATH_USE_MARKUP_INTL = 'dhlshippingsolutions/%s/rates_calculation/use_markup_intl';
+    const CONFIG_PATH_INTL_MARKUP_TYPE = 'dhlshippingsolutions/%s/rates_calculation/intl_markup_group/type';
+    const CONFIG_PATH_INTL_MARKUP_AMOUNT = 'dhlshippingsolutions/%s/rates_calculation/intl_markup_group/amount';
+    const CONFIG_PATH_INTL_MARKUP_PERCENTAGE = 'dhlshippingsolutions/%s/rates_calculation/intl_markup_group/percentage';
+
+    // domestic markup
+    const CONFIG_PATH_USE_MARKUP_DOMESTIC = 'dhlshippingsolutions/%s/rates_calculation/use_markup_domestic';
+    const CONFIG_PATH_DOMESTIC_MARKUP_TYPE = 'dhlshippingsolutions/%s/rates_calculation/domestic_markup_group/type';
+    const CONFIG_PATH_DOMESTIC_MARKUP_AMOUNT = 'dhlshippingsolutions/%s/rates_calculation/domestic_markup_group/amount';
+    const CONFIG_PATH_DOMESTIC_MARKUP_PERCENTAGE = 'dhlshippingsolutions/%s/rates_calculation/domestic_markup_group/percentage';
+
     /**
      * @var ScopeConfigInterface
      */
@@ -36,177 +54,227 @@ class RateConfig implements RateConfigInterface
     }
 
     /**
-     * @param string $carrierCode
-     * @param string $path
+     * Check if rates rounding is enabled for a given carrier.
      *
+     * @param string $carrierCode
+     * @param mixed $store
+     * @return bool
+     */
+    public function isRoundingEnabled(string $carrierCode, $store = null): bool
+    {
+        $configPath = sprintf(self::CONFIG_PATH_USE_ROUNDING, $carrierCode);
+        return $this->scopeConfig->isSetFlag($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
+
+    /**
+     * Obtain rounding format for a given carrier.
+     *
+     * There are multiple supported ways to round a rate:
+     * - round to a full integer value ("integer")
+     * - round to a static floating point decimal ("static_decimal")
+     *
+     * @param string $carrierCode
+     * @param mixed $store
+     * @return string
+     *
+     * @see \Dhl\ShippingCore\Model\Config\Source\RoundingFormat
+     */
+    public function getRoundingFormat(string $carrierCode, $store = null): string
+    {
+        if (!$this->isRoundingEnabled($carrierCode, $store)) {
+            return '';
+        }
+
+        $configPath = sprintf(self::CONFIG_PATH_ROUNDING_FORMAT, $carrierCode);
+        return (string) $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
+
+    /**
+     * Obtain rounding direction for a given carrier.
+     *
+     * @param string $carrierCode
+     * @param mixed $store
+     * @return string
+     *
+     * @see \Dhl\ShippingCore\Model\Config\Source\RoundingDirection
+     */
+    public function getRoundingDirection(string $carrierCode, $store = null): string
+    {
+        if (!$this->isRoundingEnabled($carrierCode, $store)) {
+            return '';
+        }
+
+        $configPath = sprintf(self::CONFIG_PATH_ROUNDING_DIRECTION, $carrierCode);
+        return (string) $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
+
+    /**
+     * Obtain the static decimal to round to.
+     *
+     * @param string $carrierCode
+     * @param mixed $store
      * @return string
      */
-    private function getConfigPathByCarrierCode(string $carrierCode, string $path): string
+    public function getRoundingDecimal(string $carrierCode, $store = null): string
     {
-        return sprintf($path, $carrierCode);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function roundUp(string $carrierCode, $store = null): bool
-    {
-        return $this->getRoundedPricesFormat($carrierCode, $store) === RoundedPricesFormat::DO_NOT_ROUND
-            ? false
-            : $this->getRoundedPricesMode($carrierCode, $store) === RoundedPricesMode::ROUND_UP;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoundedPricesFormat(string $carrierCode, $store = null): string
-    {
-        return (string) $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_ROUNDED_PRICES_FORMAT),
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoundedPricesMode(string $carrierCode, $store = null): string
-    {
-        return (string) $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_ROUNDED_PRICES_MODE),
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoundedPricesStaticDecimal(string $carrierCode, $store = null): float
-    {
-        $path = $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_ROUNDED_PRICES_STATIC_DECIMAL);
-
-        return (float) $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE, $store) / 100;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function roundOff(string $carrierCode, $store = null): bool
-    {
-        return $this->getRoundedPricesFormat($carrierCode, $store) === RoundedPricesFormat::DO_NOT_ROUND
-            ? false
-            : $this->getRoundedPricesMode($carrierCode, $store) === RoundedPricesMode::ROUND_OFF;
-    }
-
-    /**
-     * Check if domestic rates configuration is enabled.
-     *
-     * @param string $carrierCode The carrier code
-     * @param string|null $store
-     *
-     * @return bool
-     */
-    private function isDomesticRatesConfigurationEnabled(string $carrierCode, $store = null): bool
-    {
-        $value = $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_DOMESTIC_AFFECT_RATES),
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-
-        return $value === '1';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getDomesticHandlingType(string $carrierCode, $store = null): string
-    {
-        if (!$this->isDomesticRatesConfigurationEnabled($carrierCode, $store)) {
+        if (!$this->isRoundingEnabled($carrierCode, $store)) {
             return '';
         }
 
-        return (string) $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_DOMESTIC_HANDLING_TYPE),
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getDomesticHandlingFee(string $carrierCode, $store = null): float
-    {
-        if (!$this->isDomesticRatesConfigurationEnabled($carrierCode, $store)) {
-            return 0;
-        }
-
-        $type = $this->getDomesticHandlingType($carrierCode, $store) === AbstractCarrier::HANDLING_TYPE_FIXED
-            ? self::CONFIG_XML_SUFFIX_FIXED
-            : self::CONFIG_XML_SUFFIX_PERCENTAGE;
-
-        return (float) $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_DOMESTIC_HANDLING_FEE) . $type,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
-     * Check if international rates configuration is enabled.
-     *
-     * @param string $carrierCode The carrier code
-     * @param string|null $store
-     *
-     * @return bool
-     */
-    private function isInternationalRatesConfigurationEnabled(string $carrierCode, $store = null): bool
-    {
-        $value = $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_INTERNATIONAL_AFFECT_RATES),
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-
-        return $value === '1';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getInternationalHandlingType(string $carrierCode, $store = null): string
-    {
-        if (!$this->isInternationalRatesConfigurationEnabled($carrierCode, $store)) {
+        $roundingFormat = $this->getRoundingFormat($carrierCode, $store);
+        if ($roundingFormat !== RoundingFormat::DECIMAL) {
             return '';
         }
 
-        return (string) $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_INTERNATIONAL_HANDLING_TYPE),
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
+        $configPath = sprintf(self::CONFIG_PATH_ROUNDING_DECIMAL_VALUE, $carrierCode);
+        return (string) $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
     }
 
     /**
-     * @inheritDoc
+     * Check if markup calculation is enabled for cross-border routes.
+     *
+     * @param string $carrierCode
+     * @param mixed $store
+     * @return bool
      */
-    public function getInternationalHandlingFee(string $carrierCode, $store = null): float
+    public function isInternationalMarkupEnabled(string $carrierCode, $store = null): bool
     {
-        if (!$this->isInternationalRatesConfigurationEnabled($carrierCode, $store)) {
-            return 0;
+        $configPath = sprintf(self::CONFIG_PATH_USE_MARKUP_INTL, $carrierCode);
+        return $this->scopeConfig->isSetFlag($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
+
+    /**
+     * Obtain markup type (fixed, percentage) for cross-border routes.
+     *
+     * @param string $carrierCode
+     * @param null $store
+     * @return string
+     */
+    public function getInternationalMarkupType(string $carrierCode, $store = null): string
+    {
+        if (!$this->isInternationalMarkupEnabled($carrierCode, $store)) {
+            return '';
         }
 
-        $type = $this->getInternationalHandlingType($carrierCode, $store) === AbstractCarrier::HANDLING_TYPE_FIXED
-            ? self::CONFIG_XML_SUFFIX_FIXED
-            : self::CONFIG_XML_SUFFIX_PERCENTAGE;
+        $configPath = sprintf(self::CONFIG_PATH_INTL_MARKUP_TYPE, $carrierCode);
+        return (string) $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
 
-        return (float) $this->scopeConfig->getValue(
-            $this->getConfigPathByCarrierCode($carrierCode, self::CONFIG_XML_PATH_INTERNATIONAL_HANDLING_FEE) . $type,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
+    /**
+     * Obtain markup amount for cross-border routes.
+     *
+     * @param string $carrierCode
+     * @param null $store
+     * @return string
+     */
+    public function getInternationalMarkupAmount(string $carrierCode, $store = null):string
+    {
+        if (!$this->isInternationalMarkupEnabled($carrierCode, $store)) {
+            return '';
+        }
+
+        $markupType = $this->getInternationalMarkupType($carrierCode, $store);
+        if ($markupType !== AbstractCarrier::HANDLING_TYPE_FIXED) {
+            return '';
+        }
+
+        $configPath = sprintf(self::CONFIG_PATH_INTL_MARKUP_AMOUNT, $carrierCode);
+        return (string) $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
+
+    /**
+     * Obtain markup percentage for cross-border routes.
+     *
+     * @param string $carrierCode
+     * @param null $store
+     * @return string
+     */
+    public function getInternationalMarkupPercentage(string $carrierCode, $store = null): string
+    {
+        if (!$this->isInternationalMarkupEnabled($carrierCode, $store)) {
+            return '';
+        }
+
+        $markupType = $this->getInternationalMarkupType($carrierCode, $store);
+        if ($markupType !== AbstractCarrier::HANDLING_TYPE_PERCENT) {
+            return '';
+        }
+
+        $configPath = sprintf(self::CONFIG_PATH_INTL_MARKUP_PERCENTAGE, $carrierCode);
+        return (string) $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
+
+    /**
+     * Check if markup calculation is enabled for domestic routes.
+     *
+     * @param string $carrierCode
+     * @param mixed $store
+     * @return bool
+     */
+    public function isDomesticMarkupEnabled(string $carrierCode, $store = null): bool
+    {
+        $configPath = sprintf(self::CONFIG_PATH_USE_MARKUP_DOMESTIC, $carrierCode);
+        return $this->scopeConfig->isSetFlag($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
+
+    /**
+     * Obtain markup type (fixed, percentage) for domestic routes.
+     *
+     * @param string $carrierCode
+     * @param null $store
+     * @return string
+     */
+    public function getDomesticMarkupType(string $carrierCode, $store = null): string
+    {
+        if (!$this->isDomesticMarkupEnabled($carrierCode, $store)) {
+            return '';
+        }
+
+        $configPath = sprintf(self::CONFIG_PATH_DOMESTIC_MARKUP_TYPE, $carrierCode);
+        return (string) $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
+
+    /**
+     * Obtain markup amount for domestic routes.
+     *
+     * @param string $carrierCode
+     * @param null $store
+     * @return string
+     */
+    public function getDomesticMarkupAmount(string $carrierCode, $store = null): string
+    {
+        if (!$this->isDomesticMarkupEnabled($carrierCode, $store)) {
+            return '';
+        }
+
+        $markupType = $this->getDomesticMarkupType($carrierCode, $store);
+        if ($markupType !== AbstractCarrier::HANDLING_TYPE_FIXED) {
+            return '';
+        }
+
+        $configPath = sprintf(self::CONFIG_PATH_DOMESTIC_MARKUP_AMOUNT, $carrierCode);
+        return (string) $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
+
+    /**
+     * Obtain markup percentage for domestic routes.
+     *
+     * @param string $carrierCode
+     * @param null $store
+     * @return string
+     */
+    public function getDomesticMarkupPercentage(string $carrierCode, $store = null): string
+    {
+        if (!$this->isDomesticMarkupEnabled($carrierCode, $store)) {
+            return '';
+        }
+
+        $markupType = $this->getDomesticMarkupType($carrierCode, $store);
+        if ($markupType !== AbstractCarrier::HANDLING_TYPE_PERCENT) {
+            return '';
+        }
+
+        $configPath = sprintf(self::CONFIG_PATH_DOMESTIC_MARKUP_PERCENTAGE, $carrierCode);
+        return (string) $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
     }
 }

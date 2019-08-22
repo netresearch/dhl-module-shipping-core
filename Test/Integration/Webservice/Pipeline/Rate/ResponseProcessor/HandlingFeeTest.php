@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Webservice\Pipeline\Rate\ResponseProcessor;
 
-use Dhl\ShippingCore\Model\Config\RateConfigInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
 use Magento\TestFramework\ObjectManager;
@@ -21,30 +20,20 @@ use Magento\TestFramework\ObjectManager;
 class HandlingFeeTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var $objectManager ObjectManager
+     * @var ObjectManager
      */
     private $objectManager;
-
-    /**
-     * @var RateConfigInterface
-     */
-    private $config;
 
     /**
      * @var MethodFactory
      */
     private $methodFactory;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     */
     protected function setUp()
     {
         parent::setUp();
 
         $this->objectManager = ObjectManager::getInstance();
-        $this->config        = $this->objectManager->create(RateConfigInterface::class);
         $this->methodFactory = $this->objectManager->create(MethodFactory::class);
     }
 
@@ -53,34 +42,35 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      *
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates 1
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates_group/domestic_handling_type F
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates_group/domestic_handling_fee_fixed 3
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_markup_domestic 1
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/type F
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/amount 3
      */
     public function processMethodsWithFixedDomesticHandlingFee()
     {
+        /** @var RateRequest $request */
         $request = $this->objectManager->create(RateRequest::class);
-        $request->setOrigCountryId('US');
+        $request->setStoreId(1);
+        $request->setCountryId('US');
         $request->setDestCountryId('US');
 
-        $method = $this->methodFactory->create(
-            [
-                'data' => [
-                    'carrier' => 'foo',
-                    'carrier_title' => 'TEST',
-                    'method' => 'N',
-                    'method_title' => 'LABEL',
-                    'price' => 6.0,
-                    'cost' => 6.0,
-                ],
-            ]
-        );
+        $methodData = [
+            'carrier' => 'foo',
+            'carrier_title' => 'Foo Domestic',
+            'method' => 'N',
+            'method_title' => 'Markup Amount 3',
+            'price' => 6.0,
+            'cost' => 6.0,
+        ];
 
-        $handlingFee = new HandlingFee($this->config);
+        $method = $this->methodFactory->create(['data' => $methodData]);
+
+        /** @var HandlingFee $handlingFee */
+        $handlingFee = $this->objectManager->get(HandlingFee::class);
         $methods = $handlingFee->processMethods([$method], $request);
 
-        self::assertSame(9.0, $methods[0]->getPrice());
-        self::assertSame(9.0, $methods[0]->getCost());
+        self::assertSame($methodData['price'] + 3, $methods[0]->getPrice());
+        self::assertSame($methodData['cost'], $methods[0]->getCost());
     }
 
     /**
@@ -88,34 +78,34 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      *
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/international_affect_rates 1
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/international_affect_rates_group/international_handling_type F
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/international_affect_rates_group/international_handling_fee_fixed 3
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_markup_intl 1
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/intl_markup_group/type F
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/intl_markup_group/amount 3
      */
     public function processMethodsWithFixedInternationalHandlingFee()
     {
         $request = $this->objectManager->create(RateRequest::class);
-        $request->setOrigCountryId('US');
+        $request->setStoreId(1);
+        $request->setCountryId('US');
         $request->setDestCountryId('DE');
 
-        $method = $this->methodFactory->create(
-            [
-                'data' => [
-                    'carrier' => 'foo',
-                    'carrier_title' => 'TEST',
-                    'method' => 'X',
-                    'method_title' => 'LABEL',
-                    'price' => 6.0,
-                    'cost' => 6.0,
-                ],
-            ]
-        );
+        $methodData = [
+            'carrier' => 'foo',
+            'carrier_title' => 'Foo Intl',
+            'method' => 'N',
+            'method_title' => 'Markup Amount 3',
+            'price' => 6.0,
+            'cost' => 6.0,
+        ];
 
-        $handlingFee = new HandlingFee($this->config);
+        $method = $this->methodFactory->create(['data' => $methodData]);
+
+        /** @var HandlingFee $handlingFee */
+        $handlingFee = $this->objectManager->get(HandlingFee::class);
         $methods = $handlingFee->processMethods([$method], $request);
 
-        self::assertSame(9.0, $methods[0]->getPrice());
-        self::assertSame(9.0, $methods[0]->getCost());
+        self::assertSame($methodData['price'] + 3, $methods[0]->getPrice());
+        self::assertSame($methodData['cost'], $methods[0]->getCost());
     }
 
     /**
@@ -123,34 +113,34 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      *
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates 1
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates_group/domestic_handling_type P
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates_group/domestic_handling_fee_percentage 50
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_markup_domestic 1
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/type P
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/percentage 50
      */
     public function processMethodsWithPercentHandlingFee()
     {
         $request = $this->objectManager->create(RateRequest::class);
-        $request->setOrigCountryId('US');
+        $request->setStoreId(1);
+        $request->setCountryId('US');
         $request->setDestCountryId('US');
 
-        $method = $this->methodFactory->create(
-            [
-                'data' => [
-                    'carrier' => 'foo',
-                    'carrier_title' => 'TEST',
-                    'method' => 'N',
-                    'method_title' => 'LABEL',
-                    'price' => 6.0,
-                    'cost' => 6.0,
-                ],
-            ]
-        );
+        $methodData = [
+            'carrier' => 'foo',
+            'carrier_title' => 'Foo Intl',
+            'method' => 'N',
+            'method_title' => 'Markup Percentage 50',
+            'price' => 6.0,
+            'cost' => 6.0,
+        ];
 
-        $handlingFee = new HandlingFee($this->config);
+        $method = $this->methodFactory->create(['data' => $methodData]);
+
+        /** @var HandlingFee $handlingFee */
+        $handlingFee = $this->objectManager->get(HandlingFee::class);
         $methods = $handlingFee->processMethods([$method], $request);
 
-        self::assertSame(9.0, $methods[0]->getPrice());
-        self::assertSame(9.0, $methods[0]->getCost());
+        self::assertSame($methodData['price'] * 1.5, $methods[0]->getPrice());
+        self::assertSame($methodData['cost'], $methods[0]->getCost());
     }
 
     /**
@@ -158,33 +148,33 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      *
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates 1
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates_group/domestic_handling_type F
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/shipping_markup/domestic_affect_rates_group/domestic_handling_fee_fixed -10
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_markup_domestic 1
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/type F
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/amount -10
      */
     public function processMethodsWithFixedNegativeHandlingFee()
     {
         $request = $this->objectManager->create(RateRequest::class);
-        $request->setOrigCountryId('US');
+        $request->setStoreId(1);
+        $request->setCountryId('US');
         $request->setDestCountryId('US');
 
-        $method = $this->methodFactory->create(
-            [
-                'data' => [
-                    'carrier' => 'foo',
-                    'carrier_title' => 'TEST',
-                    'method' => 'N',
-                    'method_title' => 'LABEL',
-                    'price' => 6.0,
-                    'cost' => 6.0,
-                ],
-            ]
-        );
+        $methodData = [
+            'carrier' => 'foo',
+            'carrier_title' => 'Foo Intl',
+            'method' => 'N',
+            'method_title' => 'Markup Amount -10',
+            'price' => 6.0,
+            'cost' => 6.0,
+        ];
 
-        $handlingFee = new HandlingFee($this->config);
+        $method = $this->methodFactory->create(['data' => $methodData]);
+
+        /** @var HandlingFee $handlingFee */
+        $handlingFee = $this->objectManager->get(HandlingFee::class);
         $methods = $handlingFee->processMethods([$method], $request);
 
         self::assertSame(0.0, $methods[0]->getPrice());
-        self::assertSame(0.0, $methods[0]->getCost());
+        self::assertSame($methodData['cost'], $methods[0]->getCost());
     }
 }

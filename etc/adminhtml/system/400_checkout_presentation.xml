@@ -9,12 +9,12 @@
         <field id="round_prices_format" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="70"
                translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
             <label>Round Prices</label>
-            <source_model>Dhl\ShippingCore\Model\Config\Source\RoundedPricesFormat</source_model>
+            <source_model>Dhl\ShippingCore\Model\Config\Source\RoundingFormat</source_model>
         </field>
         <field id="round_prices_mode" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="80"
                translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
             <label>Rounding Direction</label>
-            <source_model>Dhl\ShippingCore\Model\Config\Source\RoundedPricesMode</source_model>
+            <source_model>Dhl\ShippingCore\Model\Config\Source\RoundingDirection</source_model>
             <depends>
                 <field id="round_prices_format" separator=",">full_price,static_decimal</field>
             </depends>

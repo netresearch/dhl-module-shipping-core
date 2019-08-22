@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="rates_calculation" translate="label" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="0">
+        <label>Rates Calculation</label>
+
+        <!-- Price Rounding -->
+        <field id="use_rounding" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="100"
+               translate="label button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+            <label>Round Prices</label>
+            <button_label>Apply rounding to shipping price</button_label>
+        </field>
+        <group id="rounding_group" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="110" translate="label">
+            <label>Rounding Rules</label>
+            <depends><field id="use_rounding">1</field></depends>
+            <attribute type="expanded">1</attribute>
+            <fieldset_css>simple</fieldset_css>
+
+            <field id="number_format" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="111"
+                   translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
+                <label>Rounding Format</label>
+                <source_model>Dhl\ShippingCore\Model\Config\Source\RoundingFormat</source_model>
+            </field>
+            <field id="direction" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="112"
+                   translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
+                <label>Rounding Direction</label>
+                <source_model>Dhl\ShippingCore\Model\Config\Source\RoundingDirection</source_model>
+                <depends>
+                    <field id="number_format" separator=",">integer,decimal</field>
+                </depends>
+            </field>
+            <field id="decimal_value" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="113"
+                   translate="label tooltip" type="text">
+                <label>Decimal Value</label>
+                <validate>validate-length maximum-length-2 minimum-length-2 validate-digits</validate>
+                <tooltip>Enter the value without the decimal separator (ex. 99 for the shipping charges to be rounded to 99 cents)</tooltip>
+                <depends>
+                    <field id="number_format">decimal</field>
+                </depends>
+            </field>
+        </group>
+
+        <!-- Cross-border Markup -->
+        <field id="use_markup_intl" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="200"
+               translate="label button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+            <label>International Shipping</label>
+            <button_label>Add markup to shipping price</button_label>
+        </field>
+        <group id="intl_markup_group" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="210" translate="label">
+            <label>Cross-border Shipping Price Markup</label>
+            <depends><field id="use_markup_intl">1</field></depends>
+            <attribute type="expanded">1</attribute>
+            <fieldset_css>simple</fieldset_css>
+
+            <field id="type" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="211"
+                   translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
+                <label>Calculate Markup</label>
+                <source_model>Magento\Shipping\Model\Source\HandlingType</source_model>
+            </field>
+            <field id="amount" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="212"
+                   translate="label comment" type="text">
+                <label>Fixed amount</label>
+                <validate>validate-number</validate>
+                <comment>Enter the markup amount in the currency of your store. Enter a negative to apply a discount</comment>
+                <depends>
+                    <field id="type">F</field>
+                </depends>
+            </field>
+            <field id="percentage" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="213"
+                   translate="label comment" type="text">
+                <label>Percentage</label>
+                <validate>validate-number</validate>
+                <comment>For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount</comment>
+                <depends>
+                    <field id="type">P</field>
+                </depends>
+            </field>
+        </group>
+
+        <!-- Domestic Markup -->
+        <field id="use_markup_domestic" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="300"
+               translate="label button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+            <label>Domestic Shipping</label>
+            <button_label>Add markup to shipping price</button_label>
+        </field>
+        <group id="domestic_markup_group" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="310" translate="label">
+            <label>Domestic shipping price markup</label>
+            <depends><field id="use_markup_domestic">1</field></depends>
+            <attribute type="expanded">1</attribute>
+            <fieldset_css>simple</fieldset_css>
+
+            <field id="type" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="311"
+                   translate="label" type="Netresearch\ConfigFields\Model\Type\Radioset">
+                <label>Calculate Markup</label>
+                <source_model>Magento\Shipping\Model\Source\HandlingType</source_model>
+            </field>
+            <field id="amount" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="312"
+                   translate="label comment" type="text">
+                <label>Fixed amount</label>
+                <validate>validate-number</validate>
+                <comment>Enter the markup amount in the currency of your store. Enter a negative to apply a discount</comment>
+                <depends>
+                    <field id="type">F</field>
+                </depends>
+            </field>
+            <field id="percentage" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="313"
+                   translate="label comment" type="text">
+                <label>Percentage</label>
+                <validate>validate-number</validate>
+                <comment>For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount</comment>
+                <depends>
+                    <field id="type">P</field>
+                </depends>
+            </field>
+        </group>
+    </group>
+</include>

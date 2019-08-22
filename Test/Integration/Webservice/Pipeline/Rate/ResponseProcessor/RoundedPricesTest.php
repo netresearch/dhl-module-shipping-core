@@ -20,7 +20,7 @@ use Magento\TestFramework\ObjectManager;
 class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var $objectManager ObjectManager
+     * @var ObjectManager
      */
     private $objectManager;
 
@@ -38,182 +38,135 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @test
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format no_rounding
-     * @dataProvider provideTestRateMethods
-     * @param Method[] $methods
+     * @return mixed[]
      */
-    public function processMethodsWithNoRounding(array $methods)
+    public function rateMethodProvider(): array
     {
-        $method = $this->roundedPrices->processMethods($methods['0']);
-        self::assertSame(0.00, $method[0]->getPrice());
+        $data = [];
 
-        $method = $this->roundedPrices->processMethods($methods['5.55']);
-        self::assertSame(5.55, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['9.99']);
-        self::assertSame(9.99, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['10']);
-        self::assertSame(10.00, $method[0]->getPrice());
-    }
-
-    /**
-     * @test
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format full_price
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_mode round_up
-     * @dataProvider provideTestRateMethods
-     * @param Method[] $methods
-     */
-    public function processMethodsRoundUpFullPrice(array $methods)
-    {
-        $method = $this->roundedPrices->processMethods($methods['0']);
-        self::assertSame(0.00, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['5.55']);
-        self::assertSame(6.00, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['9.99']);
-        self::assertSame(10.00, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['10']);
-        self::assertSame(10.00, $method[0]->getPrice());
-    }
-
-    /**
-     * @test
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format full_price
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_mode round_off
-     * @dataProvider provideTestRateMethods
-     * @param Method[] $methods
-     */
-    public function processMethodsRoundOffFullPrice(array $methods)
-    {
-        $method = $this->roundedPrices->processMethods($methods['0']);
-        self::assertSame(0.00, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['5.55']);
-        self::assertSame(5.00, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['9.99']);
-        self::assertSame(9.00, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['10']);
-        self::assertSame(10.00, $method[0]->getPrice());
-    }
-
-    /**
-     * @test
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format static_decimal
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_mode round_up
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_static_decimal 95
-     * @dataProvider provideTestRateMethods
-     * @param Method[] $methods
-     */
-    public function processMethodsRoundUpToStaticDecimal(array $methods)
-    {
-        $method = $this->roundedPrices->processMethods($methods['0']);
-        self::assertSame(0.95, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['5.55']);
-        self::assertSame(5.95, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['9.99']);
-        self::assertSame(10.95, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['10']);
-        self::assertSame(10.95, $method[0]->getPrice());
-    }
-
-    /**
-     * @test
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format static_decimal
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_mode round_off
-     * @magentoConfigFixture current_store dhlshippingsolutions/foo/checkout_settings/round_prices_format_group/round_prices_static_decimal 95
-     * @dataProvider provideTestRateMethods
-     * @param Method[] $methods
-     */
-    public function processMethodsRoundOffToStaticDecimal(array $methods)
-    {
-        $method = $this->roundedPrices->processMethods($methods['0']);
-        self::assertSame(0.00, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['5.55']);
-        self::assertSame(4.95, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['9.99']);
-        self::assertSame(9.95, $method[0]->getPrice());
-
-        $method = $this->roundedPrices->processMethods($methods['10']);
-        self::assertSame(9.95, $method[0]->getPrice());
-    }
-
-    /**
-     * @return Method[]
-     */
-    public function provideTestRateMethods(): array
-    {
+        /** @var MethodFactory $methodFactory */
         $methodFactory = ObjectManager::getInstance()->create(MethodFactory::class);
-        $methods = [];
-        $methods['0'] = [
-            $methodFactory->create(
-                [
-                    'data' => [
-                        'carrier' => 'foo',
-                        'carrier_title' => 'DHL EXPRESS',
-                        'method' => 'X',
-                        'method_title' => 'foo',
-                        'price' => 0,
-                        'cost' => 0,
-                    ],
-                ]
-            ),
-        ];
-        $methods['5.55'] = [
-            $methodFactory->create(
-                [
-                    'data' => [
-                        'carrier' => 'foo',
-                        'carrier_title' => 'DHL EXPRESS',
-                        'method' => 'X',
-                        'method_title' => 'foo',
-                        'price' => 5.55,
-                        'cost' =>5.55 ,
-                    ],
-                ]
-            ),
-        ];
-        $methods['9.99'] = [
-            $methodFactory->create(
-                [
-                    'data' => [
-                        'carrier' => 'foo',
-                        'carrier_title' => 'DHL EXPRESS',
-                        'method' => 'X',
-                        'method_title' => 'foo',
-                        'price' => 9.99,
-                        'cost' => 9.99,
-                    ],
-                ]
-            ),
-        ];
-        $methods['10'] = [
-            $methodFactory->create(
-                [
-                    'data' => [
-                        'carrier' => 'foo',
-                        'carrier_title' => 'DHL EXPRESS',
-                        'method' => 'X',
-                        'method_title' => 'foo',
-                        'price' => 10,
-                        'cost' => 10,
-                    ],
-                ]
-            ),
+        $methodData = [
+            'carrier' => 'foo',
+            'carrier_title' => 'Foo Carrier',
+            'method' => 'X',
+            'method_title' => 'Foo Method',
         ];
 
-        return [
-            'methods' => [$methods]
+        $methodPrices = [
+            'free' => ['original' => 0.0, 'up' => 0.0, 'down' => 0.0, 'decimal_up' => 0.95, 'decimal_down' => 0.0],
+            '3.456' => ['original' => 3.456, 'up' => 4.0, 'down' => 3.0, 'decimal_up' => 3.95, 'decimal_down' => 2.95],
+            '5.55' => ['original' => 5.55, 'up' => 6.0, 'down' => 5.0, 'decimal_up' => 5.95, 'decimal_down' => 4.95],
+            '9.99' => ['original' => 9.99, 'up' => 10.0, 'down' => 9.0, 'decimal_up' => 10.95, 'decimal_down' => 9.95],
+            '9.95' => ['original' => 9.95, 'up' => 10.0, 'down' => 9.0, 'decimal_up' => 9.95, 'decimal_down' => 9.95],
+            '10.00' => ['original' => 10, 'up' => 10.0, 'down' => 10.0, 'decimal_up' => 10.95, 'decimal_down' => 9.95],
         ];
+
+        foreach ($methodPrices as $id => $prices) {
+            $methodData['price'] = $prices['original'];
+            $methodData['cost'] = $prices['original'];
+
+            $data[$id] = [
+                $methodFactory->create(['data' => $methodData]),
+                $prices,
+            ];
+        }
+
+        return $data;
+    }
+
+    /**
+     * @test
+     *
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_rounding 0
+     * @dataProvider rateMethodProvider
+     *
+     * @param Method $method
+     * @param float[] $prices
+     */
+    public function processMethodsWithNoRounding(Method $method, array $prices)
+    {
+        $methods = $this->roundedPrices->processMethods([$method]);
+
+        self::assertSame($prices['original'], $methods[0]->getData('price'));
+        self::assertSame($prices['original'], $methods[0]->getData('cost'));
+    }
+
+    /**
+     * @test
+     *
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_rounding 1
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/rounding_group/number_format integer
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/rounding_group/direction up
+     * @dataProvider rateMethodProvider
+     *
+     * @param Method $method
+     * @param float[] $prices
+     */
+    public function processMethodsRoundUpToInteger(Method $method, array $prices)
+    {
+        $methods = $this->roundedPrices->processMethods([$method]);
+
+        self::assertSame($prices['up'], $methods[0]->getData('price'));
+        self::assertSame($prices['original'], $methods[0]->getData('cost'));
+    }
+
+    /**
+     * @test
+     *
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_rounding 1
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/rounding_group/number_format integer
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/rounding_group/direction down
+     * @dataProvider rateMethodProvider
+     *
+     * @param Method $method
+     * @param float[] $prices
+     */
+    public function processMethodsRoundDownToInteger(Method $method, array $prices)
+    {
+        $methods = $this->roundedPrices->processMethods([$method]);
+
+        self::assertSame($prices['down'], $methods[0]->getData('price'));
+        self::assertSame($prices['original'], $methods[0]->getData('cost'));
+    }
+
+    /**
+     * @test
+     *
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_rounding 1
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/rounding_group/number_format decimal
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/rounding_group/direction up
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/rounding_group/decimal_value 95
+     * @dataProvider rateMethodProvider
+     *
+     * @param Method $method
+     * @param float[] $prices
+     */
+    public function processMethodsRoundUpToStaticDecimal(Method $method, array $prices)
+    {
+        $methods = $this->roundedPrices->processMethods([$method]);
+
+        self::assertSame($prices['decimal_up'], $methods[0]->getData('price'));
+        self::assertSame($prices['original'], $methods[0]->getData('cost'));
+    }
+
+    /**
+     * @test
+     *
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_rounding 1
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/rounding_group/number_format decimal
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/rounding_group/direction down
+     * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/rounding_group/decimal_value 95
+     * @dataProvider rateMethodProvider
+     *
+     * @param Method $method
+     * @param float[] $prices
+     */
+    public function processMethodsRoundDownToStaticDecimal(Method $method, array $prices)
+    {
+        $methods = $this->roundedPrices->processMethods([$method]);
+
+        self::assertSame($prices['decimal_down'], $methods[0]->getData('price'));
+        self::assertSame($prices['original'], $methods[0]->getData('cost'));
     }
 }

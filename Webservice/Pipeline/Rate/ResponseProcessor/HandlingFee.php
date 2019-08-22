@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Webservice\Pipeline\Rate\ResponseProcessor;
 
 use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
-use Dhl\ShippingCore\Model\Config\RateConfigInterface;
+use Dhl\ShippingCore\Model\Config\RateConfig;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
@@ -22,18 +22,62 @@ use Magento\Shipping\Model\Carrier\AbstractCarrier;
 class HandlingFee implements RateResponseProcessorInterface
 {
     /**
-     * @var RateConfigInterface
+     * @var RateConfig
      */
     private $rateConfig;
 
     /**
      * HandlingFee constructor.
      *
-     * @param RateConfigInterface $rateConfig
+     * @param RateConfig $rateConfig
      */
-    public function __construct(RateConfigInterface $rateConfig)
+    public function __construct(RateConfig $rateConfig)
     {
         $this->rateConfig = $rateConfig;
+    }
+
+    /**
+     * Calculate markup for the given amount.
+     *
+     * @param float $price
+     * @param string $carrierCode
+     * @param mixed $store
+     * @return float
+     */
+    private function calculateDomesticMarkup(float $price, string $carrierCode, $store = null): float
+    {
+        $markupType = $this->rateConfig->getDomesticMarkupType($carrierCode, $store);
+
+        if ($markupType === AbstractCarrier::HANDLING_TYPE_FIXED) {
+            return (float) $this->rateConfig->getDomesticMarkupAmount($carrierCode, $store);
+        } elseif ($markupType === AbstractCarrier::HANDLING_TYPE_PERCENT) {
+            $percentage = $this->rateConfig->getDomesticMarkupPercentage($carrierCode, $store);
+            return $price * ($percentage / 100);
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Calculate markup for the given amount.
+     *
+     * @param float $price
+     * @param string $carrierCode
+     * @param mixed $store
+     * @return float
+     */
+    private function calculateInternationalMarkup(float $price, string $carrierCode, $store = null): float
+    {
+        $markupType = $this->rateConfig->getInternationalMarkupType($carrierCode, $store);
+
+        if ($markupType === AbstractCarrier::HANDLING_TYPE_FIXED) {
+            return (float) $this->rateConfig->getInternationalMarkupAmount($carrierCode, $store);
+        } elseif ($markupType === AbstractCarrier::HANDLING_TYPE_PERCENT) {
+            $percentage = $this->rateConfig->getInternationalMarkupPercentage($carrierCode, $store);
+            return $price * ($percentage / 100);
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -46,87 +90,30 @@ class HandlingFee implements RateResponseProcessorInterface
      */
     public function processMethods(array $methods, RateRequest $request = null): array
     {
+        $store = $request ? $request->getStoreId() : null;
+        $isDomestic = $request->getDestCountryId() === $request->getCountryId();
+
         /** @var Method $method */
         foreach ($methods as $method) {
             $carrierCode = $method->getData('carrier');
 
-            // Calculate fee depending on shipping type
-            $price = $this->calculatePrice(
-                $method->getData('price'),
-                $this->getHandlingType($carrierCode, $request),
-                $this->getHandlingFee($carrierCode, $request)
-            );
+            $isMarkupEnabled = $isDomestic
+                ? $this->rateConfig->isDomesticMarkupEnabled($carrierCode, $store)
+                : $this->rateConfig->isInternationalMarkupEnabled($carrierCode, $store);
+
+            if (!$isMarkupEnabled) {
+                continue;
+            }
+
+            $markup = $isDomestic
+                ? $this->calculateDomesticMarkup($method->getData('price'), $carrierCode, $store)
+                : $this->calculateInternationalMarkup($method->getData('price'), $carrierCode, $store);
+
+            $price = max(0.0, $method->getData('price') + $markup);
 
             $method->setPrice($price);
-            $method->setData('cost', $price);
         }
 
         return $methods;
-    }
-
-    /**
-     * Calculates the shipping price altered by the handling type and fee.
-     *
-     * @param float $amount The total price of the rated shipment for the product
-     * @param string $handlingType The handling type determining the type of calculation to do
-     * @param float $handlingFee The handling fee to apply to the amount
-     *
-     * @return float
-     */
-    private function calculatePrice(float $amount, string $handlingType, float $handlingFee): float
-    {
-        if ($handlingType === AbstractCarrier::HANDLING_TYPE_PERCENT) {
-            $amount += $amount * $handlingFee / 100.0;
-        } elseif ($handlingType === AbstractCarrier::HANDLING_TYPE_FIXED) {
-            $amount += $handlingFee;
-        }
-
-        return max(0.0, $amount);
-    }
-
-    /**
-     * Returns TRUE, if the current rate request is determined for a cross border route.
-     *
-     * @param null|RateRequest $request The rate request
-     *
-     * @return bool
-     */
-    private function isCrossBorderRoute(RateRequest $request = null): bool
-    {
-        return $request ? ($request->getDestCountryId() !== $request->getOrigCountryId()) : false;
-    }
-
-    /**
-     * Returns the configured handling type depending on the shipping type.
-     *
-     * @param string           $carrierCode The carrier code
-     * @param null|RateRequest $request     The rate request
-     *
-     * @return string
-     */
-    private function getHandlingType(string $carrierCode, RateRequest $request = null): string
-    {
-        if ($this->isCrossBorderRoute($request)) {
-            return $this->rateConfig->getInternationalHandlingType($carrierCode);
-        }
-
-        return $this->rateConfig->getDomesticHandlingType($carrierCode);
-    }
-
-    /**
-     * Returns the configured handling fee depending on the shipping type.
-     *
-     * @param string           $carrierCode The carrier code
-     * @param null|RateRequest $request     The rate request
-     *
-     * @return float
-     */
-    private function getHandlingFee(string $carrierCode, RateRequest $request = null): float
-    {
-        if ($this->isCrossBorderRoute($request)) {
-            return $this->rateConfig->getInternationalHandlingFee($carrierCode);
-        }
-
-        return $this->rateConfig->getDomesticHandlingFee($carrierCode);
     }
 }
