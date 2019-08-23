@@ -273,14 +273,24 @@
         </xs:simpleContent>
     </xs:complexType>
 
-
     <xs:complexType name="destinationList">
         <xs:sequence>
             <xs:element name="destination" minOccurs="0" maxOccurs="unbounded">
                 <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="[A-Z]{2}|eu|intl|domestic"/>
-                    </xs:restriction>
+                    <xs:union>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="eu"/>
+                                <xs:enumeration value="intl"/>
+                                <xs:enumeration value="domestic"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[A-Z]{2}"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:union>
                 </xs:simpleType>
             </xs:element>
         </xs:sequence>
