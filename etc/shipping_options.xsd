@@ -129,7 +129,25 @@
                                             <xs:all>
                                                 <xs:element name="label" type="string_translatable" minOccurs="0"/>
                                                 <xs:element name="labelVisible" type="xs:boolean" minOccurs="0"/>
-                                                <xs:element name="inputType" type="xs:string" minOccurs="0"/>
+                                                <xs:element name="inputType" minOccurs="0">
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:string">
+                                                            <xs:enumeration value="hidden"/>
+                                                            <xs:enumeration value="text"/>
+                                                            <xs:enumeration value="number"/>
+                                                            <xs:enumeration value="prefixed"/>
+                                                            <xs:enumeration value="suffixed"/>
+                                                            <xs:enumeration value="checkbox"/>
+                                                            <xs:enumeration value="radio"/>
+                                                            <xs:enumeration value="radioset"/>
+                                                            <xs:enumeration value="time"/>
+                                                            <xs:enumeration value="date"/>
+                                                            <xs:enumeration value="textarea"/>
+                                                            <xs:enumeration value="select"/>
+                                                            <xs:enumeration value="static"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:element>
                                                 <xs:element name="disabled" type="xs:boolean" minOccurs="0"/>
                                                 <xs:element name="options" minOccurs="0">
                                                     <xs:complexType>
