@@ -10,7 +10,14 @@ use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 use Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface;
 
 /**
- * Interface RequestTracksStageInterface
+ * Perform action on track requests as part of running the request tracks pipeline.
+ *
+ * A pipeline is composed of a sequence of configured stages. Each stage performs a certain task on the request object,
+ * e.g. validation, transformation, mapping, sending, etc. The pipeline passes an artifacts container into all the
+ * stages to store intermediate results.
+ *
+ * @see ArtifactsContainerInterface
+ * @see RequestTracksPipelineInterface
  *
  * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>

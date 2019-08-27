@@ -10,9 +10,13 @@ use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
 
 /**
- * Interface ShipmentResponseProcessorInterface
+ * Post-process shipping labels and label errors as retrieved from the create shipments pipeline.
  *
- * Perform arbitrary actions after api calls.
+ * Response processors offer a dedicated way to perform additional actions on the artifacts collected during pipeline
+ * execution. The default implementation is a composite processor. There are pre-defined processors available, any
+ * further processors which implement this interface may be created and added via configuration.
+ *
+ * @see CreateShipmentsPipelineInterface
  *
  * @api
  * @package Dhl\ShippingCore\Api

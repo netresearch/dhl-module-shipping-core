@@ -10,7 +10,13 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 
 /**
- * Interface RateResponseProcessorInterface
+ * Post-process shipping methods as retrieved from the collect rates pipeline.
+ *
+ * Response processors offer a dedicated way to perform additional actions on the artifacts collected during pipeline
+ * execution. The default implementation is a composite processor. There are pre-defined processors available, any
+ * further processors which implement this interface may be created and added via configuration.
+ *
+ * @see CollectRatesPipelineInterface
  *
  * @api
  * @package Dhl\ShippingCore\Api

@@ -11,7 +11,14 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 
 /**
- * Interface CollectRatesStageInterface
+ * Perform action on a rate request as part of running the collect rates pipeline.
+ *
+ * A pipeline is composed of a sequence of configured stages. One stage performs a certain task on the request object,
+ * e.g. validation, transformation, mapping, sending, etc. The pipeline passes an artifacts container into all the
+ * stages to store intermediate results.
+ *
+ * @see ArtifactsContainerInterface
+ * @see CollectRatesPipelineInterface
  *
  * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>

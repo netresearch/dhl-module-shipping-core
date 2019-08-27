@@ -10,9 +10,13 @@ use Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface;
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
 
 /**
- * Interface TrackResponseProcessorInterface
+ * Post-process tracks and errors as retrieved from the request tracks pipeline.
  *
- * Perform arbitrary actions after api calls.
+ * Response processors offer a dedicated way to perform additional actions on the artifacts collected during pipeline
+ * execution. The default implementation is a composite processor. Any actual processors which implement this interface
+ * may be created and added via configuration.
+ *
+ * @see RequestTracksPipelineInterface
  *
  * @api
  * @package Dhl\ShippingCore\Api

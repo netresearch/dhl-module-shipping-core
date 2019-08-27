@@ -10,7 +10,18 @@ use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 use Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface;
 
 /**
- * Class RequestTracksPipelineInterface
+ * Retrieve tracking information from a web service by passing a track request through multiple configurable stages.
+ *
+ * When the tracking history (or any information related to tracking numbers) is to be fetched from a web service,
+ * a "track request" object needs to be created. Pipeline stages process and transform the request to become suitable
+ * for sending it to the carrier-specific web service, then send and transform it back to application data.
+ * The result of running the pipeline is the artifacts container where all stages add their output data to.
+ * Consequently, the overall pipeline result (e.g. the tracking events) can afterwards be obtained from the artifacts
+ * container.
+ *
+ * @see ArtifactsContainerInterface
+ * @see RequestTracksStageInterface
+ * @see TrackResponseProcessorInterface
  *
  * @api
  * @package Dhl\ShippingCore\Api

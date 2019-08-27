@@ -10,7 +10,14 @@ use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 use Magento\Shipping\Model\Shipment\Request;
 
 /**
- * Interface CreateShipmentsStageInterface
+ * Perform action on shipment requests as part of running the create shipments pipeline.
+ *
+ * A pipeline is composed of a sequence of configured stages. One stage performs a certain task on the request object,
+ * e.g. validation, transformation, mapping, sending, etc. The pipeline passes an artifacts container into all the
+ * stages to store intermediate results.
+ *
+ * @see ArtifactsContainerInterface
+ * @see CreateShipmentsPipelineInterface
  *
  * @api
  * @package Dhl\ShippingCore\Api
