@@ -22,6 +22,7 @@
 
         <const name="TESTS_CLEANUP" value="disabled"/>
         <const name="TESTS_MAGENTO_MODE" value="developer"/>
+        <const name="TESTS_ERROR_LOG_LISTENER_LEVEL" value="1000"/>
     </php>
     <filter>
         <whitelist>

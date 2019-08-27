@@ -14,6 +14,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Sales\Model\Order\Address;
+use Psr\Log\LoggerInterface;
 
 /**
  * SplitAddress Observer
@@ -40,6 +41,11 @@ class SplitAddress implements ObserverInterface
     private $streetSplitter;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * @var string[]
      */
     private $carrierCodes;
@@ -49,17 +55,20 @@ class SplitAddress implements ObserverInterface
      * @param RecipientStreetFactory $recipientStreetFactory
      * @param RecipientStreetRepositoryInterface $recipientStreetRepository
      * @param StreetSplitter $streetSplitter
+     * @param LoggerInterface $logger
      * @param string[] $carrierCodes
      */
     public function __construct(
         RecipientStreetFactory $recipientStreetFactory,
         RecipientStreetRepositoryInterface $recipientStreetRepository,
         StreetSplitter $streetSplitter,
+        LoggerInterface $logger,
         array $carrierCodes = []
     ) {
         $this->recipientStreetFactory = $recipientStreetFactory;
         $this->recipientStreetRepository = $recipientStreetRepository;
         $this->streetSplitter = $streetSplitter;
+        $this->logger = $logger;
         $this->carrierCodes = $carrierCodes;
     }
 
@@ -67,7 +76,6 @@ class SplitAddress implements ObserverInterface
      * Split address and save entity in custom table.
      *
      * @param Observer $observer
-     * @throws CouldNotSaveException
      */
     public function execute(Observer $observer)
     {
@@ -84,7 +92,7 @@ class SplitAddress implements ObserverInterface
             return;
         }
 
-        $street = implode(' ', $address->getStreet());
+        $street = implode(', ', $address->getStreet());
         $addressParts = $this->streetSplitter->splitStreet($street);
 
         $orderAddress = $this->recipientStreetFactory->create();
@@ -95,6 +103,10 @@ class SplitAddress implements ObserverInterface
             RecipientStreetInterface::SUPPLEMENT => $addressParts['supplement'],
         ]);
 
-        $this->recipientStreetRepository->save($orderAddress);
+        try {
+            $this->recipientStreetRepository->save($orderAddress);
+        } catch (CouldNotSaveException $exception) {
+            $this->logger->error($exception->getLogMessage(), ['exception' => $exception]);
+        }
     }
 }

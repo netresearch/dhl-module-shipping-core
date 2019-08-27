@@ -22,7 +22,7 @@ use Magento\TestFramework\Helper\Bootstrap;
 /**
  * Class CheckoutDataManagmentTest
  *
- * @package Dhl\ShippingCore\Test\Model\Rest
+ * @package Dhl\ShippingCore\Test\Integration
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

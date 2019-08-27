@@ -20,7 +20,7 @@ use Magento\TestFramework\Helper\Bootstrap;
 /**
  * Class QuoteFixture
  *
- * @package Dhl\ShippingCore\Test
+ * @package Dhl\ShippingCore\Test\Integration
  */
 class QuoteFixture
 {

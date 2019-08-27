@@ -10,10 +10,8 @@ namespace Dhl\ShippingCore\Model\Support;
  * Class PackagingPopup
  *
  * @package Dhl\ShippingCore\Model
- * @author Max Melzer <max.melzer@netresearch.de>
- * @copyright 2018 Netresearch GmbH & Co. KG
- * @link http://www.netresearch.de/
- *
+ * @author  Max Melzer <max.melzer@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
 class PackagingPopup
 {
