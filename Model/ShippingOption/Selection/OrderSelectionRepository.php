@@ -9,7 +9,7 @@ namespace Dhl\ShippingCore\Model\ShippingOption\Selection;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelection;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelectionCollection;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelectionCollectionFactory;
-use Magento\Framework\Api\Search\SearchCriteriaInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;

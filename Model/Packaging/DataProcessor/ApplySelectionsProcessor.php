@@ -11,8 +11,7 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
 use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Dhl\ShippingCore\Model\ShippingOption\Selection\OrderSelectionRepository;
-use Magento\Framework\Api\FilterBuilder;
-use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -29,30 +28,22 @@ class ApplySelectionsProcessor extends AbstractProcessor
     private $selectionRepository;
 
     /**
-     * @var FilterBuilder
+     * @var SearchCriteriaBuilder
      */
-    private $filterBuilder;
-
-    /**
-     * @var SearchCriteriaBuilderFactory
-     */
-    private $searchCriteriaBuilderFactory;
+    private $searchCriteriaBuilder;
 
     /**
      * ApplySelectionsProcessor constructor.
      *
      * @param OrderSelectionRepository $selectionRepository
-     * @param FilterBuilder $filterBuilder
-     * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
      */
     public function __construct(
         OrderSelectionRepository $selectionRepository,
-        FilterBuilder $filterBuilder,
-        SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
+        SearchCriteriaBuilder $searchCriteriaBuilder
     ) {
         $this->selectionRepository = $selectionRepository;
-        $this->filterBuilder = $filterBuilder;
-        $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
     }
 
     /**
@@ -95,14 +86,11 @@ class ApplySelectionsProcessor extends AbstractProcessor
      */
     private function loadSelections(int $orderAddressId): array
     {
-        $addressFilter = $this->filterBuilder
-            ->setField(AssignedSelectionInterface::PARENT_ID)
-            ->setValue($orderAddressId)
-            ->setConditionType('eq')
-            ->create();
-
-        $searchCriteriaBuilder = $this->searchCriteriaBuilderFactory->create();
-        $searchCriteria = $searchCriteriaBuilder->addFilter($addressFilter)->create();
+        $searchCriteria = $this->searchCriteriaBuilder
+            ->addFilter(
+                AssignedSelectionInterface::PARENT_ID,
+                $orderAddressId
+            )->create();
 
         return $this->selectionRepository->getList($searchCriteria)->getItems();
     }
