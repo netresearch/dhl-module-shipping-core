@@ -13,7 +13,7 @@ use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 /**
  * Collection
  *
- * @package Dhl\LabelStatus\Model\ResourceModel
+ * @package Dhl\ShippingCore\Model\ResourceModel
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */

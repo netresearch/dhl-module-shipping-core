@@ -206,9 +206,9 @@ class BulkShipmentManagement
      * Get the first shipment with no label from shipments collection
      *
      * @param Order $order
-     * @return string
+     * @return string|null
      */
-    private function getOrderShipmentId(Order $order): string
+    private function getOrderShipmentId(Order $order)
     {
         $shipmentIds = [];
         foreach ($order->getShipmentsCollection()->getItems() as $item) {
@@ -217,6 +217,6 @@ class BulkShipmentManagement
             }
         }
 
-        return $shipmentIds[0];
+        return array_shift($shipmentIds);
     }
 }

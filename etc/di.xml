@@ -113,6 +113,11 @@
             <argument name="appState" xsi:type="object">Magento\Framework\App\State\Proxy</argument>
         </arguments>
     </type>
+    <type name="Dhl\ShippingCore\Cron\AutoCreate\OrderCollectionLoader">
+        <arguments>
+            <argument name="orderRepository" xsi:type="object">Dhl\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
+        </arguments>
+    </type>
     <type name="Dhl\ShippingCore\Model\BulkShipment\OrderCollectionLoader">
         <arguments>
             <argument name="orderRepository" xsi:type="object">Dhl\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>

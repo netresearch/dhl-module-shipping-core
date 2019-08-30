@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <dhlshippingsolutions>
-            <version>0.3.0</version>
+            <version>0.5.0</version>
             <dhlglobalwebservices>
                 <cut_off_time>00,00,00</cut_off_time>
                 <package_dimension>[]</package_dimension>
@@ -11,6 +11,9 @@
                     <terms_of_trade>DDU</terms_of_trade>
                     <export_content_type>OTHER</export_content_type>
                 </shipment_defaults>
+                <bulk_settings>
+                    <cron_order_status>pending,processing</cron_order_status>
+                </bulk_settings>
             </dhlglobalwebservices>
         </dhlshippingsolutions>
     </default>
