@@ -292,7 +292,7 @@ class RequestExtractor implements RequestExtractorInterface
                     'containerType' => $params['container'] ?? '',
                     'weightUom' => $params['weight_units'],
                     'dimensionsUom' => $params['dimension_units'],
-                    'weight' => isset($params['weight']) ? (float) $params['weight'] : null,
+                    'weight' => (float) $params['weight'],
                     'length' => isset($params['length']) ? (float) $params['length'] : null,
                     'width' => isset($params['width']) ? (float) $params['width'] : null,
                     'height' => isset($params['height']) ? (float) $params['height'] : null,
@@ -343,9 +343,9 @@ class RequestExtractor implements RequestExtractorInterface
                         'weight' => (float)$itemData['weight'],
                         'price' => (float)$itemData['price'],
                         'customsValue' => isset($itemData['customs_value']) ? (float)$itemData['customs_value'] : null,
-                        'exportDescription' => $itemData['customs']['exportDescription'] ?? null,
-                        'hsCode' => $itemData['customs']['hsCode'] ?? null,
-                        'countryOfOrigin' => $itemData['customs']['countryOfOrigin'] ?? null,
+                        'exportDescription' => $itemData['customs']['exportDescription'] ?? '',
+                        'hsCode' => $itemData['customs']['hsCode'] ?? '',
+                        'countryOfOrigin' => $itemData['customs']['countryOfOrigin'] ?? '',
                     ]);
 
                     return $packageItem;
