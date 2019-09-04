@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Test\Unit\Model\Checkout\DataProcessor;
+namespace Dhl\ShippingCore\Test\Unit\Model\Checkout\DataProcessor\ServiceOptions;
 
-use Dhl\ShippingCore\Model\Checkout\DataProcessor\RouteProcessor;
+use Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\RouteProcessor;
 use Dhl\ShippingCore\Model\Config\Config;
 use Dhl\ShippingCore\Model\ShippingOption\Route;
 use Dhl\ShippingCore\Model\ShippingOption\ShippingOption;
@@ -148,7 +148,7 @@ class RouteProcessorTest extends TestCase
         $this->configMock->method('getOriginCountry')->willReturn($originCountryId);
         /** @var RouteProcessor $subject */
         $subject = new RouteProcessor($this->configMock);
-        $result = $subject->processShippingOptions($optionsData, $destinationCountryId, '00000');
+        $result = $subject->process($optionsData, $destinationCountryId, '00000');
 
         self::assertCount(
             $expectedCount,

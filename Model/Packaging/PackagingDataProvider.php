@@ -22,7 +22,7 @@ use Magento\Sales\Model\Order\Shipment;
 class PackagingDataProvider
 {
     const GROUP_PACKAGE = 'packageOptions';
-    const GROUP_ITEM = 'itemOptions';
+    const GROUP_ITEM    = 'itemOptions';
     const GROUP_SERVICE = 'serviceOptions';
 
     /**
@@ -38,7 +38,7 @@ class PackagingDataProvider
     /**
      * @var PackagingDataCompositeProcessor
      */
-    private $compositeProcessor;
+    private $compositeDataProcessor;
 
     /**
      * @var ShippingDataHydrator
@@ -50,18 +50,18 @@ class PackagingDataProvider
      *
      * @param ReaderInterface $reader
      * @param PackagingArrayCompositeProcessor $compositeArrayProcessor
-     * @param PackagingDataCompositeProcessor $compositeProcessor
+     * @param PackagingDataCompositeProcessor $compositeDataProcessor
      * @param ShippingDataHydrator $shippingDataHydrator
      */
     public function __construct(
         ReaderInterface $reader,
         PackagingArrayCompositeProcessor $compositeArrayProcessor,
-        PackagingDataCompositeProcessor $compositeProcessor,
+        PackagingDataCompositeProcessor $compositeDataProcessor,
         ShippingDataHydrator $shippingDataHydrator
     ) {
         $this->reader = $reader;
         $this->compositeArrayProcessor = $compositeArrayProcessor;
-        $this->compositeProcessor = $compositeProcessor;
+        $this->compositeDataProcessor = $compositeDataProcessor;
         $this->shippingDataHydrator = $shippingDataHydrator;
     }
 
@@ -74,49 +74,10 @@ class PackagingDataProvider
     public function getData(Shipment $shipment): ShippingDataInterface
     {
         $packagingDataArray = $this->reader->read('adminhtml');
-        $packagingDataArray = $this->compositeArrayProcessor->processShippingOptions($packagingDataArray, $shipment);
+        $packagingDataArray = $this->compositeArrayProcessor->process($packagingDataArray, $shipment);
+        $packagingData      = $this->shippingDataHydrator->toObject($packagingDataArray);
 
-        $packagingData = $this->shippingDataHydrator->toObject($packagingDataArray);
-
-        foreach ($packagingData->getCarriers() as $index => $carrier) {
-            $carrier->setPackageOptions(
-                $this->compositeProcessor->processShippingOptions(
-                    $carrier->getPackageOptions(),
-                    $shipment,
-                    self::GROUP_PACKAGE
-                )
-            );
-            $carrier->setServiceOptions(
-                $this->compositeProcessor->processShippingOptions(
-                    $carrier->getServiceOptions(),
-                    $shipment,
-                    self::GROUP_SERVICE
-                )
-            );
-            $carrier->setItemOptions(
-                $this->compositeProcessor->processItemOptions(
-                    $carrier->getItemOptions(),
-                    $shipment
-                )
-            );
-            $carrier->setCompatibilityData(
-                $this->compositeProcessor->processCompatibilityData(
-                    $carrier->getCompatibilityData(),
-                    $shipment
-                )
-            );
-
-            // metadata is optional
-            if ($carrier->getMetadata()) {
-                $carrier->setMetadata(
-                    $this->compositeProcessor->processMetadata(
-                        $carrier->getMetadata(),
-                        $shipment
-                    )
-                );
-            }
-        }
-
-        return $packagingData;
+        return $this->compositeDataProcessor
+            ->process($packagingData, $shipment);
     }
 }

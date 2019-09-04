@@ -4,19 +4,20 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
+namespace Dhl\ShippingCore\Model\Checkout\ArrayProcessor\ShippingOptions;
 
-use Dhl\ShippingCore\Model\Checkout\CheckoutArrayProcessorInterface;
+use Dhl\ShippingCore\Model\Checkout\ArrayProcessor\ShippingOptionsProcessorInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
  * Class FilterAvailableProcessor
  *
- * @package Dhl\ShippingCore\Model\Checkout\DataProcessor
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
+ * @package Dhl\ShippingCore\Model\Checkout\ArrayProcessor
+ * @author Max Melzer <max.melzer@netresearch.de>
+ * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
-class FilterAvailableProcessor implements CheckoutArrayProcessorInterface
+class FilterAvailableProcessor implements ShippingOptionsProcessorInterface
 {
     /**
      * @var ScopeConfigInterface
@@ -58,7 +59,7 @@ class FilterAvailableProcessor implements CheckoutArrayProcessorInterface
      *
      * @return mixed[]
      */
-    public function processShippingOptions(array $shippingData, int $storeId): array
+    public function process(array $shippingData, int $storeId): array
     {
         foreach ($shippingData['carriers'] as $carrierCode => $carrier) {
             foreach ($carrier as $optionKey => $optionValues) {

@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
+namespace Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterfaceFactory;
@@ -12,9 +12,8 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Config\Source\ExportContentType;
 use Dhl\ShippingCore\Model\Config\Source\TermsOfTrade;
-use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
+use Dhl\ShippingCore\Model\Packaging\DataProcessor\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\Packaging\ItemAttributeReader;
-use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -23,7 +22,7 @@ use Magento\Sales\Model\Order\Shipment;
  * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  */
-class PackageInputDataProcessor extends AbstractProcessor
+class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
 {
     /**
      * @var ConfigInterface
@@ -96,7 +95,7 @@ class PackageInputDataProcessor extends AbstractProcessor
                 // shipping product
                 case 'productCode':
                     $option = $this->optionFactory->create();
-                    $value = substr(strrchr((string)$shipment->getOrder()->getShippingMethod(), "_"), 1);
+                    $value = substr(strrchr((string) $shipment->getOrder()->getShippingMethod(), '_'), 1);
                     $option->setValue($value);
                     $option->setLabel(
                         $shipment->getOrder()->getShippingDescription()
@@ -104,6 +103,7 @@ class PackageInputDataProcessor extends AbstractProcessor
                     $input->setOptions([$option]);
                     $input->setDefaultValue($value);
                     break;
+
                 // weight
                 case 'weight':
                     $totalWeight = $this->itemAttributeReader->getTotalWeight($shipment);
@@ -112,12 +112,14 @@ class PackageInputDataProcessor extends AbstractProcessor
                     $input->setComment($comment);
                     $input->setDefaultValue((string) $totalWeight);
                     break;
+
                 case 'weightUnit':
                     $weightUnit = $this->config->getWeightUnit($shipment->getStoreId()) === 'kg'
                         ? \Zend_Measure_Weight::KILOGRAM
                         : \Zend_Measure_Weight::POUND;
                     $input->setDefaultValue($weightUnit);
                     break;
+
                 // dimensions
                 case 'width':
                     $comment = $this->commentFactory->create();
@@ -125,24 +127,28 @@ class PackageInputDataProcessor extends AbstractProcessor
                     $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getWidth() : '');
                     break;
+
                 case 'height':
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->config->getDimensionUnit($shipment->getStoreId()));
                     $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getHeight() : '');
                     break;
+
                 case 'length':
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->config->getDimensionUnit($shipment->getStoreId()));
                     $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getLength() : '');
                     break;
+
                 case 'sizeUnit':
                     $dimensionsUnit = $this->config->getDimensionUnit($shipment->getStoreId()) === 'cm'
                         ? \Zend_Measure_Length::CENTIMETER
                         : \Zend_Measure_Length::INCH;
                     $input->setDefaultValue($dimensionsUnit);
                     break;
+
                 // customs
                 case 'customsValue':
                     $price = $this->itemAttributeReader->getTotalPrice($shipment);
@@ -153,11 +159,13 @@ class PackageInputDataProcessor extends AbstractProcessor
                     $input->setComment($comment);
                     $input->setDefaultValue((string) number_format($price, 2));
                     break;
+
                 case 'exportDescription':
                     $exportDescriptions = $this->itemAttributeReader->getPackageExportDescriptions($shipment);
                     $exportDescription = implode(' ', $exportDescriptions);
                     $input->setDefaultValue(substr($exportDescription, 0, 80));
                     break;
+
                 case 'termsOfTrade':
                     $input->setOptions(
                         array_map(
@@ -171,6 +179,7 @@ class PackageInputDataProcessor extends AbstractProcessor
                         )
                     );
                     break;
+
                 case 'contentType':
                     $input->setOptions(
                         array_map(
@@ -191,16 +200,11 @@ class PackageInputDataProcessor extends AbstractProcessor
     /**
      * @param ShippingOptionInterface[] $optionsData
      * @param Shipment $shipment
-     * @param string $optionGroupName
      *
      * @return ShippingOptionInterface[]
      */
-    public function processShippingOptions(array $optionsData, Shipment $shipment, string $optionGroupName): array
+    public function process(array $optionsData, Shipment $shipment): array
     {
-        if ($optionGroupName !== PackagingDataProvider::GROUP_PACKAGE) {
-            return $optionsData;
-        }
-
         foreach ($optionsData as $optionGroup) {
             $this->processInputs($optionGroup, $shipment);
         }

@@ -4,15 +4,14 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
+namespace Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemOptions;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
-use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
+use Dhl\ShippingCore\Model\Packaging\DataProcessor\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\Packaging\ItemAttributeReader;
 use Magento\Catalog\Model\Product\Attribute\Source\Countryofmanufacture;
 use Magento\Sales\Model\Order\Shipment;
@@ -28,7 +27,7 @@ use Magento\Sales\Model\Order\Shipment\Item;
  * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  */
-class ItemInputDataProcessor extends AbstractProcessor
+class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
 {
     /**
      * @var ItemAttributeReader
@@ -109,34 +108,43 @@ class ItemInputDataProcessor extends AbstractProcessor
                 case 'productId':
                     $input->setDefaultValue((string) $shipmentItem->getProductId());
                     break;
+
                 case 'productName':
                     $input->setDefaultValue((string) $shipmentItem->getName());
                     break;
+
                 case 'price':
                     $input->setDefaultValue((string) $shipmentItem->getPrice());
                     break;
+
                 case 'weight':
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->config->getWeightUnit($shipmentItem->getShipment()->getStoreId()));
                     $input->setComment($comment);
                     $input->setDefaultValue((string) $this->itemAttributeReader->getWeight($shipmentItem));
                     break;
+
                 case 'qtyToShip':
                     $input->setDefaultValue((string) $shipmentItem->getOrderItem()->getQtyOrdered());
                     break;
+
                 case 'qty':
                     $input->setDefaultValue((string) $shipmentItem->getQty());
                     break;
+
                 // customs
                 case 'hsCode':
                     $input->setDefaultValue($this->itemAttributeReader->getHsCode($shipmentItem));
                     break;
+
                 case 'dgCategory':
                     $input->setDefaultValue($this->itemAttributeReader->getDgCategory($shipmentItem));
                     break;
+
                 case 'exportDescription':
                     $input->setDefaultValue($this->itemAttributeReader->getExportDescription($shipmentItem));
                     break;
+
                 case 'customsValue':
                     $price = (float) $shipmentItem->getPrice();
                     $currency = $shipmentItem->getShipment()->getStore()->getBaseCurrency();
@@ -146,6 +154,7 @@ class ItemInputDataProcessor extends AbstractProcessor
                     $input->setComment($comment);
                     $input->setDefaultValue((string) number_format($price, 2));
                     break;
+
                 case 'countryOfOrigin':
                     $input->setOptions(array_map(
                         function ($optionArray) {
@@ -170,7 +179,7 @@ class ItemInputDataProcessor extends AbstractProcessor
      *
      * @return ItemShippingOptionsInterface[]
      */
-    public function processItemOptions(array $itemData, Shipment $shipment): array
+    public function process(array $itemData, Shipment $shipment): array
     {
         foreach ($itemData as $itemShippingOptions) {
             try {

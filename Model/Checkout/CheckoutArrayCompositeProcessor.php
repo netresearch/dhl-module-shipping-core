@@ -6,39 +6,44 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
+use Dhl\ShippingCore\Model\Checkout\ArrayProcessor\ShippingOptionsProcessorInterface;
+
 /**
  * Class CheckoutArrayCompositeProcessor
  *
  * @package Dhl\ShippingCore\Model\Checkout
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
-class CheckoutArrayCompositeProcessor implements CheckoutArrayProcessorInterface
+class CheckoutArrayCompositeProcessor
 {
     /**
-     * @var CheckoutArrayProcessorInterface[]
+     * @var ShippingOptionsProcessorInterface[]
      */
-    private $arrayProcessors;
+    private $shippingOptionsProcessors;
 
     /**
      * CheckoutArrayCompositeProcessor constructor.
      *
-     * @param CheckoutArrayProcessorInterface[] $arrayProcessors
+     * @param ShippingOptionsProcessorInterface[] $shippingOptionsProcessors
      */
-    public function __construct(array $arrayProcessors = [])
-    {
-        $this->arrayProcessors = $arrayProcessors;
+    public function __construct(
+        array $shippingOptionsProcessors = []
+    ) {
+        $this->shippingOptionsProcessors = $shippingOptionsProcessors;
     }
 
     /**
+     * Receive an array of shipping option data and modify it according to business logic.
+     *
      * @param mixed[] $shippingData
-     * @param int     $storeId
+     * @param int $storeId
      *
      * @return mixed[]
      */
-    public function processShippingOptions(array $shippingData, int $storeId): array
+    public function process(array $shippingData, int $storeId): array
     {
-        foreach ($this->arrayProcessors as $processor) {
-            $shippingData = $processor->processShippingOptions($shippingData, $storeId);
+        foreach ($this->shippingOptionsProcessors as $processor) {
+            $shippingData = $processor->process($shippingData, $storeId);
         }
 
         return $shippingData;

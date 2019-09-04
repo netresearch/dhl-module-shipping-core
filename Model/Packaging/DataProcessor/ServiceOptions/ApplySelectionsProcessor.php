@@ -4,12 +4,11 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
+namespace Dhl\ShippingCore\Model\Packaging\DataProcessor\ServiceOptions;
 
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
-use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
-use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
+use Dhl\ShippingCore\Model\Packaging\DataProcessor\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\ShippingOption\Selection\OrderSelectionRepository;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Model\Order\Shipment;
@@ -20,7 +19,7 @@ use Magento\Sales\Model\Order\Shipment;
  * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  */
-class ApplySelectionsProcessor extends AbstractProcessor
+class ApplySelectionsProcessor implements ShippingOptionsProcessorInterface
 {
     /**
      * @var OrderSelectionRepository
@@ -49,16 +48,12 @@ class ApplySelectionsProcessor extends AbstractProcessor
     /**
      * @param ShippingOptionInterface[] $optionsData
      * @param Shipment $shipment
-     * @param string $optionGroupName
+     *
      * @return ShippingOptionInterface[]
      */
-    public function processShippingOptions(array $optionsData, Shipment $shipment, string $optionGroupName): array
+    public function process(array $optionsData, Shipment $shipment): array
     {
-        if ($optionGroupName !== PackagingDataProvider::GROUP_SERVICE) {
-            return $optionsData;
-        }
-
-        $addressId = (int) $shipment->getShippingAddressId();
+        $addressId  = (int) $shipment->getShippingAddressId();
         $selections = $this->loadSelections($addressId);
 
         foreach ($selections as $selection) {

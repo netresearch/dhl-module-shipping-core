@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
+namespace Dhl\ShippingCore\Model\Checkout\DataProcessor\Metadata;
 
 use Dhl\ShippingCore\Api\Data\MetadataInterface;
-use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
+use Dhl\ShippingCore\Model\Checkout\DataProcessor\MetadataProcessorInterface;
 use Magento\Framework\App\Area;
 use Magento\Framework\View\Asset\Repository;
 use Magento\Framework\View\Design\Theme\ThemeProviderInterface;
@@ -16,10 +16,11 @@ use Magento\Framework\View\DesignInterface;
 /**
  * Class ImageUrlProcessor
  *
- * @package Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor
+ * @package Dhl\ShippingCore\Model\Checkout\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
+ * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
-class ImageUrlProcessor extends AbstractProcessor
+class ImageUrlProcessor implements MetadataProcessorInterface
 {
     /**
      * @var DesignInterface
@@ -43,8 +44,11 @@ class ImageUrlProcessor extends AbstractProcessor
      * @param ThemeProviderInterface $themeProvider
      * @param Repository $assetRepo
      */
-    public function __construct(DesignInterface $design, ThemeProviderInterface $themeProvider, Repository $assetRepo)
-    {
+    public function __construct(
+        DesignInterface $design,
+        ThemeProviderInterface $themeProvider,
+        Repository $assetRepo
+    ) {
         $this->design = $design;
         $this->themeProvider = $themeProvider;
         $this->assetRepo = $assetRepo;
@@ -61,19 +65,13 @@ class ImageUrlProcessor extends AbstractProcessor
      * @see \Magento\Framework\View\Asset\Repository::updateDesignParams
      *
      * @param MetadataInterface $metadata
-     * @param string $countryId
-     * @param string $postalCode
-     * @param int|null $scopeId
      *
      * @return MetadataInterface
      */
-    public function processMetadata(
-        MetadataInterface $metadata,
-        string $countryId,
-        string $postalCode,
-        int $scopeId = null
-    ): MetadataInterface {
+    public function process(MetadataInterface $metadata): MetadataInterface
+    {
         $imageId = $metadata->getImageUrl();
+
         if (!$imageId) {
             return $metadata;
         }

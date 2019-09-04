@@ -4,21 +4,21 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Checkout\DataProcessor;
+namespace Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions;
 
-use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
-use Dhl\ShippingCore\Model\Checkout\AbstractProcessor;
+use Dhl\ShippingCore\Model\Checkout\DataProcessor\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\Config\Config;
 
 /**
  * Class RouteProcessor
  *
- * @package Dhl\ShippingCore\Model\Checkout\CheckoutDataProcessor
+ * @package Dhl\ShippingCore\Model\Checkout\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
+ * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
-class RouteProcessor extends AbstractProcessor
+class RouteProcessor implements ShippingOptionsProcessorInterface
 {
     /**
      * @var Config
@@ -39,22 +39,23 @@ class RouteProcessor extends AbstractProcessor
      * Remove all shipping options that do not match the route (origin and destination) of the current checkout.
      *
      * @param ShippingOptionInterface[] $optionsData
-     * @param string $countryId     Destination country code
-     * @param string $postalCode    Destination postal code
-     * @param int|null $scopeId
+     * @param string $countryCode
+     * @param string $postalCode
+     * @param int|null $storeId
      *
      * @return ShippingOptionInterface[]
      */
-    public function processShippingOptions(
+    public function process(
         array $optionsData,
-        string $countryId,
+        string $countryCode,
         string $postalCode,
-        int $scopeId = null
+        int $storeId = null
     ): array {
-        $shippingOrigin = $this->config->getOriginCountry($scopeId);
+        $shippingOrigin = $this->config->getOriginCountry($storeId);
 
         foreach ($optionsData as $index => $shippingOption) {
-            $matchesRoute = $this->checkIfOptionMatchesRoute($shippingOption, $shippingOrigin, $countryId);
+            $matchesRoute = $this->checkIfOptionMatchesRoute($shippingOption, $shippingOrigin, $countryCode);
+
             if (!$matchesRoute) {
                 unset($optionsData[$index]);
             }
@@ -107,6 +108,7 @@ class RouteProcessor extends AbstractProcessor
                 );
             }
         }
+
         $excludeDestinations = $route->getExcludeDestinations();
         foreach ($excludeDestinations as $index => $destination) {
             if ($destination === 'eu') {

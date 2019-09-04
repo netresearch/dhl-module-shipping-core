@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
+namespace Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptions;
 
-use Dhl\ShippingCore\Model\Packaging\PackagingArrayProcessorInterface;
+use Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptionsProcessorInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Store\Model\ScopeInterface;
@@ -17,7 +17,7 @@ use Magento\Store\Model\ScopeInterface;
  * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
-class DefaultConfigValueProcessor implements PackagingArrayProcessorInterface
+class DefaultConfigValueProcessor implements ShippingOptionsProcessorInterface
 {
     /**
      * @var ScopeConfigInterface
@@ -61,7 +61,7 @@ class DefaultConfigValueProcessor implements PackagingArrayProcessorInterface
      *
      * @return mixed[]
      */
-    public function processShippingOptions(array $shippingData, Shipment $shipment): array
+    public function process(array $shippingData, Shipment $shipment): array
     {
         foreach ($shippingData['carriers'] as $carrierCode => &$carrier) {
             foreach ($carrier as $optionKey => &$optionValues) {

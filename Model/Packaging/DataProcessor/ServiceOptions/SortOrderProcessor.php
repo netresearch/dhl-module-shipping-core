@@ -4,11 +4,11 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
+namespace Dhl\ShippingCore\Model\Packaging\DataProcessor\ServiceOptions;
 
 use Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
-use Dhl\ShippingCore\Model\Packaging\AbstractProcessor;
+use Dhl\ShippingCore\Model\Packaging\DataProcessor\ShippingOptionsProcessorInterface;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -17,18 +17,17 @@ use Magento\Sales\Model\Order\Shipment;
  * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
-class SortOrderProcessor extends AbstractProcessor
+class SortOrderProcessor implements ShippingOptionsProcessorInterface
 {
     /**
      * Sort shipping options and inputs according to their sort orders.
      *
      * @param ShippingOptionInterface[] $optionsData
      * @param Shipment $shipment
-     * @param string $optionsGroupName
      *
      * @return ShippingOptionInterface[]
      */
-    public function processShippingOptions(array $optionsData, Shipment $shipment, string $optionsGroupName): array
+    public function process(array $optionsData, Shipment $shipment): array
     {
         uasort($optionsData, static function (ShippingOptionInterface $a, ShippingOptionInterface $b) {
             return $a->getSortOrder() - $b->getSortOrder();

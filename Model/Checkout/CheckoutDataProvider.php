@@ -33,7 +33,7 @@ class CheckoutDataProvider
     /**
      * @var CheckoutDataCompositeProcessor
      */
-    private $compositeProcessor;
+    private $compositeDataProcessor;
 
     /**
      * @var ShippingDataHydrator
@@ -45,18 +45,18 @@ class CheckoutDataProvider
      *
      * @param ReaderInterface $reader
      * @param CheckoutArrayCompositeProcessor $compositeArrayProcessor
-     * @param CheckoutDataCompositeProcessor $compositeProcessor
+     * @param CheckoutDataCompositeProcessor $compositeDataProcessor
      * @param ShippingDataHydrator $shippingDataHydrator
      */
     public function __construct(
         ReaderInterface $reader,
         CheckoutArrayCompositeProcessor $compositeArrayProcessor,
-        CheckoutDataCompositeProcessor $compositeProcessor,
+        CheckoutDataCompositeProcessor $compositeDataProcessor,
         ShippingDataHydrator $shippingDataHydrator
     ) {
         $this->reader = $reader;
         $this->compositeArrayProcessor = $compositeArrayProcessor;
-        $this->compositeProcessor = $compositeProcessor;
+        $this->compositeDataProcessor = $compositeDataProcessor;
         $this->shippingDataHydrator = $shippingDataHydrator;
     }
 
@@ -64,41 +64,27 @@ class CheckoutDataProvider
      * @param string $countryCode
      * @param int $storeId
      * @param string $postalCode
+     *
      * @return ShippingDataInterface
+     *
      * @throws LocalizedException
      */
     public function getData(string $countryCode, int $storeId, string $postalCode): ShippingDataInterface
     {
         $shippingDataArray = $this->reader->read('frontend');
-        $shippingDataArray = $this->compositeArrayProcessor->processShippingOptions($shippingDataArray, $storeId);
+
+        $shippingDataArray = $this->compositeArrayProcessor->process(
+            $shippingDataArray,
+            $storeId
+        );
 
         $shippingData = $this->shippingDataHydrator->toObject($shippingDataArray);
 
-        foreach ($shippingData->getCarriers() as $carrierData) {
-            $carrierData->setServiceOptions(
-                $this->compositeProcessor->processShippingOptions(
-                    $carrierData->getServiceOptions(),
-                    $countryCode,
-                    $postalCode,
-                    $storeId
-                )
-            );
-            $this->compositeProcessor->processMetadata(
-                $carrierData->getMetadata(),
-                $countryCode,
-                $postalCode,
-                $storeId
-            );
-            $carrierData->setCompatibilityData(
-                $this->compositeProcessor->processCompatibilityData(
-                    $carrierData->getCompatibilityData(),
-                    $countryCode,
-                    $postalCode,
-                    $storeId
-                )
-            );
-        }
-
-        return $shippingData;
+        return $this->compositeDataProcessor->process(
+            $shippingData,
+            $countryCode,
+            $postalCode,
+            $storeId
+        );
     }
 }

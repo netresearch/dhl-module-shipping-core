@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Packaging\DataProcessor;
+namespace Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptions;
 
-use Dhl\ShippingCore\Model\Packaging\PackagingArrayProcessorInterface;
+use Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptionsProcessorInterface;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
 
@@ -16,7 +16,7 @@ use Magento\Sales\Model\Order\Shipment\Item;
  * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  */
-class CloneItemTemplatesProcessor implements PackagingArrayProcessorInterface
+class CloneItemTemplatesProcessor implements ShippingOptionsProcessorInterface
 {
     /**
      * Convert the static ItemShippingOption arrays read from xml
@@ -24,12 +24,14 @@ class CloneItemTemplatesProcessor implements PackagingArrayProcessorInterface
      *
      * @param mixed[] $shippingData
      * @param Shipment $shipment
+     *
      * @return mixed[]
      */
-    public function processShippingOptions(array $shippingData, Shipment $shipment): array
+    public function process(array $shippingData, Shipment $shipment): array
     {
         foreach ($shippingData['carriers'] as $carrierCode => $carrier) {
             $newData = [];
+
             /** @var Item $item */
             foreach ($shipment->getAllItems() as $item) {
                 $itemId = (int) $item->getOrderItemId();
@@ -37,11 +39,14 @@ class CloneItemTemplatesProcessor implements PackagingArrayProcessorInterface
                     'itemId' => $itemId,
                     'shippingOptions' => [],
                 ];
+
                 foreach ($carrier['itemOptions'] as $itemOptions) {
                     $newItem['shippingOptions'] += $itemOptions['shippingOptions'];
                 }
+
                 $newData[$itemId] = $newItem;
             }
+
             $shippingData['carriers'][$carrierCode]['itemOptions'] = $newData;
         }
 

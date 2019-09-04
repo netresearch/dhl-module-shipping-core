@@ -6,10 +6,10 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Checkout;
 
-use Dhl\ShippingCore\Api\Data\MetadataInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
-use Dhl\ShippingCore\Api\ShippingOptions\CheckoutProcessorInterface;
+use Dhl\ShippingCore\Api\Data\ShippingDataInterface;
+use Dhl\ShippingCore\Model\Checkout\DataProcessor\CompatibilityProcessorInterface;
+use Dhl\ShippingCore\Model\Checkout\DataProcessor\MetadataProcessorInterface;
+use Dhl\ShippingCore\Model\Checkout\DataProcessor\ShippingOptionsProcessorInterface;
 
 /**
  * Class CheckoutDataCompositeProcessor
@@ -17,98 +17,81 @@ use Dhl\ShippingCore\Api\ShippingOptions\CheckoutProcessorInterface;
  * @package Dhl\ShippingCore\Model\Checkout
  * @author Max Melzer <max.melzer@netresearch.de>
  */
-class CheckoutDataCompositeProcessor implements CheckoutProcessorInterface
+class CheckoutDataCompositeProcessor
 {
     /**
-     * @var CheckoutProcessorInterface[]
+     * @var ShippingOptionsProcessorInterface[]
      */
-    private $processors;
+    private $serviceOptionsProcessors;
+
+    /**
+     * @var MetadataProcessorInterface[]
+     */
+    private $metadataProcessors;
+
+    /**
+     * @var CompatibilityProcessorInterface[]
+     */
+    private $compatibilityProcessors;
 
     /**
      * CheckoutDataCompositeProcessor constructor.
      *
-     * @param CheckoutProcessorInterface[] $processors
+     * @param ShippingOptionsProcessorInterface[] $serviceOptionsProcessors
+     * @param MetadataProcessorInterface[] $metadataProcessors
+     * @param CompatibilityProcessorInterface[] $compatibilityProcessors
      */
-    public function __construct(array $processors = [])
-    {
-        $this->processors = $processors;
+    public function __construct(
+        array $serviceOptionsProcessors = [],
+        array $metadataProcessors = [],
+        array $compatibilityProcessors = []
+    ) {
+        $this->serviceOptionsProcessors = $serviceOptionsProcessors;
+        $this->metadataProcessors       = $metadataProcessors;
+        $this->compatibilityProcessors  = $compatibilityProcessors;
     }
 
     /**
-     * @param array $optionsData
-     * @param string $countryId
+     * @param ShippingDataInterface $shippingData
+     * @param string $countryCode
      * @param string $postalCode
-     * @param int|null $scopeId
+     * @param int|null $storeId
      *
-     * @return ShippingOptionInterface[]
+     * @return ShippingDataInterface
      */
-    public function processShippingOptions(
-        array $optionsData,
-        string $countryId,
+    public function process(
+        ShippingDataInterface $shippingData,
+        string $countryCode,
         string $postalCode,
-        int $scopeId = null
-    ): array {
-        foreach ($this->processors as $processor) {
-            $optionsData = $processor->processShippingOptions(
-                $optionsData,
-                $countryId,
-                $postalCode,
-                $scopeId
-            );
+        int $storeId = null
+    ): ShippingDataInterface {
+        foreach ($shippingData->getCarriers() as $carrierData) {
+            foreach ($this->serviceOptionsProcessors as $processor) {
+                $carrierData->setServiceOptions(
+                    $processor->process(
+                        $carrierData->getServiceOptions(),
+                        $countryCode,
+                        $postalCode,
+                        $storeId
+                    )
+                );
+            }
+
+            foreach ($this->metadataProcessors as $processor) {
+                $processor->process(
+                    $carrierData->getMetadata()
+                );
+            }
+
+            foreach ($this->compatibilityProcessors as $processor) {
+                $carrierData->setCompatibilityData(
+                    $processor->process(
+                        $carrierData->getCompatibilityData()
+                    )
+                );
+            }
         }
 
-        return $optionsData;
-    }
-
-    /**
-     * @param MetadataInterface $metadata
-     * @param string $countryId
-     * @param string $postalCode
-     * @param int|null $scopeId
-     *
-     * @return MetadataInterface
-     */
-    public function processMetadata(
-        MetadataInterface $metadata,
-        string $countryId,
-        string $postalCode,
-        int $scopeId = null
-    ): MetadataInterface {
-        foreach ($this->processors as $processor) {
-            $metadata = $processor->processMetadata(
-                $metadata,
-                $countryId,
-                $postalCode,
-                $scopeId
-            );
-        }
-
-        return $metadata;
-    }
-
-    /**
-     * @param CompatibilityInterface[] $compatibilityData
-     * @param string $countryId
-     * @param string $postalCode
-     * @param int|null $scopeId
-     *
-     * @return CompatibilityInterface[]
-     */
-    public function processCompatibilityData(
-        array $compatibilityData,
-        string $countryId,
-        string $postalCode,
-        int $scopeId = null
-    ): array {
-        foreach ($this->processors as $processor) {
-            $compatibilityData = $processor->processCompatibilityData(
-                $compatibilityData,
-                $countryId,
-                $postalCode,
-                $scopeId
-            );
-        }
-
-        return $compatibilityData;
+        return $shippingData;
     }
 }

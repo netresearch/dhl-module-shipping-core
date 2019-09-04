@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging;
 
+use Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptionsProcessorInterface;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -14,32 +15,35 @@ use Magento\Sales\Model\Order\Shipment;
  * @package Dhl\ShippingCore\Model\Packaging
  * @author Max Melzer <max.melzer@netresearch.de>
  */
-class PackagingArrayCompositeProcessor implements PackagingArrayProcessorInterface
+class PackagingArrayCompositeProcessor
 {
     /**
-     * @var PackagingArrayProcessorInterface[]
+     * @var ShippingOptionsProcessorInterface[]
      */
-    private $arrayProcessors;
+    private $shippingOptionsProcessors;
 
     /**
      * PackagingArrayCompositeProcessor constructor.
      *
-     * @param PackagingArrayProcessorInterface[] $arrayProcessors
+     * @param ShippingOptionsProcessorInterface[] $shippingOptionsProcessors
      */
-    public function __construct(array $arrayProcessors = [])
+    public function __construct(array $shippingOptionsProcessors = [])
     {
-        $this->arrayProcessors = $arrayProcessors;
+        $this->shippingOptionsProcessors = $shippingOptionsProcessors;
     }
 
     /**
+     * Receive an array of shipping option data and modify it according to business logic.
+     *
      * @param mixed[] $shippingData
      * @param Shipment $shipment
+     *
      * @return mixed[]
      */
-    public function processShippingOptions(array $shippingData, Shipment $shipment): array
+    public function process(array $shippingData, Shipment $shipment): array
     {
-        foreach ($this->arrayProcessors as $processor) {
-            $shippingData = $processor->processShippingOptions($shippingData, $shipment);
+        foreach ($this->shippingOptionsProcessors as $processor) {
+            $shippingData = $processor->process($shippingData, $shipment);
         }
 
         return $shippingData;
