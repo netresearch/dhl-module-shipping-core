@@ -20,8 +20,9 @@ interface MetadataProcessorInterface
      * Receive shipping option metadata and modify it according to business logic.
      *
      * @param MetadataInterface $metadata
+     * @param int|null $storeId
      *
      * @return MetadataInterface
      */
-    public function process(MetadataInterface $metadata): MetadataInterface;
+    public function process(MetadataInterface $metadata, int $storeId = null): MetadataInterface;
 }

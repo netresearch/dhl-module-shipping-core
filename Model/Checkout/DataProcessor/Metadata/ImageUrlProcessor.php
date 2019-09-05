@@ -62,13 +62,14 @@ class ImageUrlProcessor implements MetadataProcessorInterface
      * Area emulation does not help either as the theme does not get properly initialized.
      * The workaround is to load the configured frontend theme manually.
      *
-     * @see \Magento\Framework\View\Asset\Repository::updateDesignParams
-     *
      * @param MetadataInterface $metadata
+     * @param int|null $storeId
      *
      * @return MetadataInterface
+     *
+     * @see \Magento\Framework\View\Asset\Repository::updateDesignParams
      */
-    public function process(MetadataInterface $metadata): MetadataInterface
+    public function process(MetadataInterface $metadata, int $storeId = null): MetadataInterface
     {
         $imageId = $metadata->getImageUrl();
 

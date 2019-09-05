@@ -79,7 +79,8 @@ class CheckoutDataCompositeProcessor
 
             foreach ($this->metadataProcessors as $processor) {
                 $processor->process(
-                    $carrierData->getMetadata()
+                    $carrierData->getMetadata(),
+                    $storeId
                 );
             }
 

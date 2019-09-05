@@ -20,10 +20,11 @@ class TranslationProcessor implements MetadataProcessorInterface
 {
     /**
      * @param MetadataInterface $metadata
+     * @param int|null $storeId
      *
      * @return MetadataInterface
      */
-    public function process(MetadataInterface $metadata): MetadataInterface
+    public function process(MetadataInterface $metadata, int $storeId = null): MetadataInterface
     {
         // Comments before
         foreach ($metadata->getCommentsBefore() as $comment) {
