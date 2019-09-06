@@ -242,7 +242,7 @@
     <type name="Dhl\ShippingCore\Model\Checkout\CheckoutDataCompositeProcessor">
         <arguments>
             <argument name="serviceOptionsProcessors" xsi:type="array">
-                <item name="dhlRouteProcessor" sortOrder="500" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\RouteProcessor</item>
+                <item name="dhlRouteProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\RouteProcessor</item>
                 <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\TranslationProcessor</item>
                 <item name="dhlSortOrderProcessor" sortOrder="990" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\SortOrderProcessor</item>
             </argument>

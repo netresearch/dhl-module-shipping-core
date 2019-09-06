@@ -10,6 +10,7 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Checkout\DataProcessor\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\Config\Config;
+use Dhl\ShippingCore\Model\RouteMatcher;
 
 /**
  * Class RouteProcessor
@@ -26,35 +27,47 @@ class RouteProcessor implements ShippingOptionsProcessorInterface
     private $config;
 
     /**
+     * @var RouteMatcher
+     */
+    private $routeMatcher;
+
+    /**
      * RouteProcessor constructor.
      *
      * @param Config $config
+     * @param RouteMatcher $routeValidator
      */
-    public function __construct(Config $config)
+    public function __construct(Config $config, RouteMatcher $routeValidator)
     {
         $this->config = $config;
+        $this->routeMatcher = $routeValidator;
     }
 
     /**
      * Remove all shipping options that do not match the route (origin and destination) of the current checkout.
      *
      * @param ShippingOptionInterface[] $optionsData
-     * @param string $countryCode
+     * @param string $countryId
      * @param string $postalCode
-     * @param int|null $storeId
+     * @param int|null $scopeId
      *
      * @return ShippingOptionInterface[]
      */
     public function process(
         array $optionsData,
-        string $countryCode,
+        string $countryId,
         string $postalCode,
-        int $storeId = null
+        int $scopeId = null
     ): array {
-        $shippingOrigin = $this->config->getOriginCountry($storeId);
+        $shippingOrigin = $this->config->getOriginCountry($scopeId);
 
         foreach ($optionsData as $index => $shippingOption) {
-            $matchesRoute = $this->checkIfOptionMatchesRoute($shippingOption, $shippingOrigin, $countryCode);
+            $matchesRoute = $this->routeMatcher->match(
+                $shippingOption->getRoutes(),
+                $shippingOrigin,
+                $countryId,
+                $scopeId
+            );
 
             if (!$matchesRoute) {
                 unset($optionsData[$index]);
@@ -62,104 +75,5 @@ class RouteProcessor implements ShippingOptionsProcessorInterface
         }
 
         return $optionsData;
-    }
-
-    /**
-     * @param ShippingOptionInterface $shippingOption
-     * @param string $shippingOrigin
-     * @param string $countryId
-     *
-     * @return bool
-     */
-    private function checkIfOptionMatchesRoute(
-        ShippingOptionInterface $shippingOption,
-        string $shippingOrigin,
-        string $countryId
-    ): bool {
-        if (empty($shippingOption->getRoutes())) {
-            // Option matches all routes
-            return true;
-        }
-        $matchingRoutes = array_filter(
-            $shippingOption->getRoutes(),
-            function (RouteInterface $route) use ($shippingOrigin, $countryId) {
-                $route = $this->preprocessDestinations($route);
-                return $this->isRouteAllowed($route, $shippingOrigin, $countryId);
-            }
-        );
-
-        return !empty($matchingRoutes);
-    }
-
-    /**
-     * @param RouteInterface $route
-     *
-     * @return RouteInterface
-     */
-    private function preprocessDestinations(RouteInterface $route): RouteInterface
-    {
-        $includeDestinations = $route->getIncludeDestinations();
-        $euCountries = $this->config->getEuCountries();
-        foreach ($includeDestinations as $index => $destination) {
-            if ($destination === 'eu') {
-                unset($includeDestinations[$index]);
-                $route->setIncludeDestinations(
-                    $includeDestinations + $euCountries
-                );
-            }
-        }
-
-        $excludeDestinations = $route->getExcludeDestinations();
-        foreach ($excludeDestinations as $index => $destination) {
-            if ($destination === 'eu') {
-                unset($excludeDestinations[$index]);
-                $route->setExcludeDestinations(
-                    $excludeDestinations + $euCountries
-                );
-            }
-        }
-        return $route;
-    }
-
-    /**
-     * @param RouteInterface $route
-     * @param string $origin
-     * @param string $destination
-     *
-     * @return bool
-     */
-    private function isRouteAllowed(RouteInterface $route, string $origin, string $destination): bool
-    {
-        if ($route->getOrigin() && $route->getOrigin() !== $origin) {
-            return false;
-        }
-
-        $includeDestinations = $route->getIncludeDestinations() ?: ['intl'];
-        $excludeDestinations = $route->getExcludeDestinations();
-        $hasIncludes = !in_array('intl', $includeDestinations, true);
-        $hasExcludes = !empty($excludeDestinations);
-
-        if (!$hasIncludes && !$hasExcludes) {
-            return true;
-        }
-
-        if ($hasIncludes && !in_array($destination, $includeDestinations, true)) {
-            return false;
-        }
-
-        if (in_array('intl', $excludeDestinations, true)) {
-            return $origin === $destination;
-        }
-
-        // needed to hide customs data in packaging popup for domestic shipments
-        if (in_array('domestic', $excludeDestinations, true)) {
-            return !($origin === $destination);
-        }
-
-        if ($hasExcludes && in_array($destination, $excludeDestinations, true)) {
-            return false;
-        }
-
-        return true;
     }
 }

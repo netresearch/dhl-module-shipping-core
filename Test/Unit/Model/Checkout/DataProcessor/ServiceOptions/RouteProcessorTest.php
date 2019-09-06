@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Test\Unit\Model\Checkout\DataProcessor\ServiceOptions
 
 use Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\RouteProcessor;
 use Dhl\ShippingCore\Model\Config\Config;
+use Dhl\ShippingCore\Model\RouteMatcher;
 use Dhl\ShippingCore\Model\ShippingOption\Route;
 use Dhl\ShippingCore\Model\ShippingOption\ShippingOption;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -34,7 +35,7 @@ class RouteProcessorTest extends TestCase
         $this->configMock = $this->getMockBuilder(Config::class)
                                  ->disableOriginalConstructor()
                                  ->getMock();
-        $this->configMock->method('getEuCountries')->willReturn(['de', 'at', 'it', 'uk']);
+        $this->configMock->method('getEuCountries')->willReturn(['DE', 'AT', 'IT', 'UK']);
     }
 
     public function dataProvider(): array
@@ -49,84 +50,66 @@ class RouteProcessorTest extends TestCase
         $optionDestinationEu->setRoutes([$routeEu]);
 
         $routeNonEu = new Route();
+        $routeNonEu->setOrigin('eu');
         $routeNonEu->setExcludeDestinations(['eu']);
         $optionDestinationNonEu = new ShippingOption();
         $optionDestinationNonEu->setCode('test');
         $optionDestinationNonEu->setRoutes([$routeNonEu]);
 
         $routeNonIntl = new Route();
-        $routeNonIntl->setExcludeDestinations(['intl']);
+        $routeNonIntl->setIncludeDestinations(['domestic']);
         $optionDestinationNonIntl = new ShippingOption();
         $optionDestinationNonIntl->setCode('test');
         $optionDestinationNonIntl->setRoutes([$routeNonIntl]);
 
         $routeDeToIntl = new Route();
         $routeDeToIntl->setOrigin('de');
-        $routeDeToIntl->setIncludeDestinations(['intl']);
+        $routeDeToIntl->setExcludeDestinations(['domestic']);
         $optionDeToIntl = new ShippingOption();
         $optionDeToIntl->setCode('test');
-        $optionDeToIntl->setRoutes([$routeDeToIntl]);
 
         return [
             'de => us, no routes specified' => [
                 'optionsData' => [$optionNoRoute],
-                'originCountryId' => 'de',
-                'destinationCountryId' => 'us',
+                'originCountryId' => 'DE',
+                'destinationCountryId' => 'US',
                 'expectedCount' => 1,
             ],
             'de => us, eu destination required' => [
                 'optionsData' => [$optionDestinationEu],
-                'originCountryId' => 'de',
-                'destinationCountryId' => 'us',
+                'originCountryId' => 'DE',
+                'destinationCountryId' => 'US',
                 'expectedCount' => 0,
             ],
             'de => at, eu destination required' => [
                 'optionsData' => [$optionDestinationEu],
-                'originCountryId' => 'de',
-                'destinationCountryId' => 'at',
+                'originCountryId' => 'DE',
+                'destinationCountryId' => 'AT',
                 'expectedCount' => 1,
             ],
             'de => us, eu destination not allowed' => [
                 'optionsData' => [$optionDestinationNonEu],
-                'originCountryId' => 'de',
-                'destinationCountryId' => 'us',
+                'originCountryId' => 'DE',
+                'destinationCountryId' => 'US',
                 'expectedCount' => 1,
             ],
             'de => at, eu destination not allowed' => [
                 'optionsData' => [$optionDestinationNonEu],
-                'originCountryId' => 'de',
-                'destinationCountryId' => 'at',
+                'originCountryId' => 'DE',
+                'destinationCountryId' => 'AT',
                 'expectedCount' => 0,
             ],
             'de => de, only domestic allowed' => [
                 'optionsData' => [$optionDestinationNonIntl],
-                'originCountryId' => 'de',
-                'destinationCountryId' => 'de',
+                'originCountryId' => 'DE',
+                'destinationCountryId' => 'DE',
                 'expectedCount' => 1,
             ],
             'de => at, only domestic allowed' => [
                 'optionsData' => [$optionDestinationNonIntl],
-                'originCountryId' => 'de',
-                'destinationCountryId' => 'at',
+                'originCountryId' => 'DE',
+                'destinationCountryId' => 'AT',
                 'expectedCount' => 0,
-            ],
-            'de => hk, all destinations from de allowed' => [
-                'optionsData' => [$optionDeToIntl],
-                'originCountryId' => 'de',
-                'destinationCountryId' => 'hk',
-                'expectedCount' => 1,
-            ],
-            'us => hk, all destinations from de allowed' => [
-                'optionsData' => [$optionDeToIntl],
-                'originCountryId' => 'us',
-                'destinationCountryId' => 'hk',
-                'expectedCount' => 0,
-            ],
-            'de => de, all destinations from de allowed' => [
-                'optionsData' => [$optionDeToIntl],
-                'originCountryId' => 'de',
-                'destinationCountryId' => 'de',
-                'expectedCount' => 1,
             ],
         ];
     }
@@ -146,9 +129,10 @@ class RouteProcessorTest extends TestCase
         int $expectedCount
     ) {
         $this->configMock->method('getOriginCountry')->willReturn($originCountryId);
+        $routeMatcher = new RouteMatcher($this->configMock);
         /** @var RouteProcessor $subject */
-        $subject = new RouteProcessor($this->configMock);
-        $result = $subject->process($optionsData, $destinationCountryId, '00000');
+        $subject = new RouteProcessor($this->configMock, $routeMatcher);
+        $result = $subject->process($optionsData, $destinationCountryId, '00000', 0);
 
         self::assertCount(
             $expectedCount,

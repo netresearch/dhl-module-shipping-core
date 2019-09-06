@@ -247,6 +247,7 @@ class PackagingDataCompositeProcessor
         MetadataInterface $metadata,
         Shipment $shipment
     ): MetadataInterface {
+
         if ($shipment->getShippingAddress()) {
             /** @var CheckoutMetadataProcessorInterface $processor */
             foreach ($this->checkoutMetadataProcessors as $processor) {
