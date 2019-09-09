@@ -160,6 +160,15 @@ class PackagingDataCompositeProcessor
         array $optionsData,
         Shipment $shipment
     ): array {
+        /** @var CheckoutShippingOptionsProcessorInterface $processor */
+        foreach ($this->checkoutServiceOptionsProcessors as $processor) {
+            $optionsData = $processor->process(
+                $optionsData,
+                $shipment->getShippingAddress()->getCountryId(),
+                $shipment->getShippingAddress()->getPostcode(),
+                (int) $shipment->getStoreId()
+            );
+        }
         /** @var PackagingShippingOptionsProcessorInterface $processor */
         foreach ($this->packagingPackageOptionsProcessors as $processor) {
             $optionsData = $processor->process(
