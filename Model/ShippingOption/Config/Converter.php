@@ -49,143 +49,109 @@ class Converter implements ConverterInterface
         if ($source === null) {
             return [];
         }
+        $xmlElement = simplexml_import_dom($source);
 
-        return $this->toArray($source);
+        return [$xmlElement->getName() => $this->toArray($xmlElement)];
     }
 
     /**
-     * Transform Xml to array
+     * Recursively transform an XML Element to a nested array of scalar values.
      *
-     * @param \DOMNode $node
-     * @return array|string
-     *
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @param \SimpleXMLElement $xmlElement
+     * @return string[]|string
      */
-    private function toArray(\DOMNode $node)
+    private function toArray(\SimpleXMLElement $xmlElement)
     {
-        if ($this->isTextNode($node)) {
-            return $this->toScalar($node);
-        }
-        if ($this->containsArray($node)) {
-            $result = [];
-            /** @var \DOMNode $childNode */
-            foreach ($node->childNodes as $childNode) {
-                if ($this->isNodeApplicable($childNode)) {
-                    if ($childNode->hasAttributes()) {
-                        $attributes = [];
-
-                        /** @var \DOMAttr $attribute */
-                        foreach ($childNode->attributes as $attribute) {
-                            $key   = $attribute->localName;
-                            $value = $attribute->textContent;
-
-                            $attributes[$key] = $value;
-                        }
-
-                        // Keep original behaviour to use the first attribute value
-                        // as the key in the result set, so we need to remove all other attributes.
-                        // As the order of attributes may differ, we need to specify a black list
-                        // of attribute names.
-                        $blackList  = ['defaultConfigValue', 'available'];
-                        $keys       = array_diff_key($attributes, array_flip($blackList));
-                        $firstKey   = key($keys);
-                        $firstValue = $attributes[$firstKey];
-
-                        $result[$firstValue] = $this->toArray($childNode);
-                        $result[$firstValue] = array_merge($result[$firstValue], $attributes);
-                    } elseif ($this->isTextNode($childNode)) {
-                        if (trim($childNode->textContent)) {
-                            $result[] = $childNode->textContent;
-                        }
-                    } else {
-                        $result[] = $this->toArray($childNode);
-                    }
-                }
-            }
-            return $result;
-        }
-
         $result = [];
-        /** @var \DOMNode $childNode */
-        foreach ($node->childNodes as $childNode) {
-            if ($this->isNodeApplicable($childNode)) {
-                if ($childNode->hasChildNodes()) {
-                    $result[$childNode->localName] = $this->toArray($childNode);
-                } elseif ($this->containsArray($childNode)) {
-                    $result[$childNode->localName] = [];
-                } elseif (!$this->isTextNode($childNode)) {
-                    $result[$childNode->localName] = $childNode->textContent;
+
+        if ($this->containsArray($xmlElement)) {
+            foreach ($xmlElement->children() as $childElement) {
+                if ($childElement->attributes()) {
+                    $result += $this->handleAttributes($childElement);
+                } elseif ($childElement->count()) {
+                    $result[] = $this->toArray($childElement);
+                } else {
+                    $result[] = $this->toScalar($childElement);
+                }
+            }
+        } else {
+            foreach ($xmlElement->children() as $childElement) {
+                if ($childElement->count()) {
+                    $result[$childElement->getName()] = $this->toArray($childElement);
+                } else {
+                    $result[$childElement->getName()] = $this->toScalar($childElement);
                 }
             }
         }
+
         return $result;
     }
 
     /**
-     * @param \DOMNode $node
+     * Transform XML Element to a string
+     *
+     * @param \SimpleXMLElement $xmlElement
      * @return bool|int|string
      */
-    private function toScalar(\DOMNode $node)
+    private function toScalar(\SimpleXMLElement $xmlElement)
     {
-        while (!($node instanceof \DOMText)) {
-            $node = $node->firstChild;
-        }
-        if ($node->textContent === 'true') {
+        if ((string) $xmlElement === 'true') {
             $value = true;
-        } elseif ($node->textContent === 'false') {
+        } elseif ((string) $xmlElement === 'false') {
             $value = false;
-        } elseif ((string)(int)$node->textContent === $node->textContent) {
-            $value = (int)$node->textContent;
+        } elseif ((string) $xmlElement === '0' || (int) (string) $xmlElement !== 0) {
+            $value = (int) (string) $xmlElement;
         } else {
-            $value = $node->textContent;
+            $value = trim((string) $xmlElement);
         }
 
         return $value;
     }
 
     /**
-     * @param \DOMNode $node
+     * @param \SimpleXMLElement $xmlElement
      * @return bool
      */
-    private function isTextNode(\DOMNode $node): bool
+    private function containsArray(\SimpleXMLElement $xmlElement): bool
     {
-        if ($node instanceof \DOMText) {
-            return true;
-        }
-        if ($node->childNodes->length !== 1) {
-            return false;
-        }
-        if ($node->childNodes->item(0) instanceof \DOMText) {
-            return true;
-        }
-
-        return $this->isTextNode($node->firstChild);
+        return in_array($xmlElement->getName(), self::ARRAY_NODES, true);
     }
 
     /**
-     * @param \DOMNode $node
-     * @return bool
+     * Handle XML Element attributes. Will use first attribute as array key.
+     * Other attributes are appended to the children.
+     *
+     * @param \SimpleXMLElement $childElement
+     * @return array
      */
-    private function containsArray(\DOMNode $node): bool
+    private function handleAttributes(\SimpleXMLElement $childElement): array
     {
-        return in_array($node->localName, self::ARRAY_NODES, true);
-    }
+        $result = [];
+        $attributes = [];
 
-    /**
-     * @param \DOMNode $node
-     * @return bool
-     */
-    private function isNodeApplicable(\DOMNode $node): bool
-    {
-        return in_array(
-            $node->nodeType,
-            [
-                XML_ELEMENT_NODE,
-                XML_TEXT_NODE ,
-                XML_CDATA_SECTION_NODE
-            ],
-            true
-        );
+        foreach ($childElement->attributes() as $attribute) {
+            $key = $attribute->getName();
+            $value = (string) $attribute;
+
+            $attributes[$key] = $value;
+        }
+
+        // Keep original behaviour to use the first attribute value
+        // as the key in the result set, so we need to remove all other attributes.
+        // As the order of attributes may differ, we need to specify a black list
+        // of attribute names.
+        $blackList = ['defaultConfigValue', 'available'];
+        $keys = array_diff_key($attributes, array_flip($blackList));
+        $firstKey = key($keys);
+        $firstValue = $attributes[$firstKey];
+
+        $result[$firstValue] = $this->toArray($childElement);
+        if (is_array($result[$firstValue])) {
+            $result[$firstValue] = array_merge($result[$firstValue], $attributes);
+        } else {
+            $result[$firstValue] = $attributes;
+        }
+
+        return $result;
     }
 }
