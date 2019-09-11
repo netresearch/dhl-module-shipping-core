@@ -63,18 +63,9 @@ class Uninstaller
      */
     public static function deleteAttributes(EavSetup $eavSetup)
     {
-        $eavSetup->removeAttribute(
-            Product::ENTITY,
-            DGCategory::CODE
-        );
-        $eavSetup->removeAttribute(
-            Product::ENTITY,
-            TariffNumber::CODE
-        );
-        $eavSetup->removeAttribute(
-            Product::ENTITY,
-            ExportDescription::CODE
-        );
+        $eavSetup->removeAttribute(Product::ENTITY, DGCategory::CODE);
+        $eavSetup->removeAttribute(Product::ENTITY, TariffNumber::CODE);
+        $eavSetup->removeAttribute(Product::ENTITY, ExportDescription::CODE);
     }
 
     /**

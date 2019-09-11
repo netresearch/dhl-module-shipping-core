@@ -92,26 +92,4 @@ class DataInstaller
             ]
         );
     }
-
-    /**
-     * Remove EAV product attributes.
-     *
-     * @param EavSetup $uninstaller
-     * @return void
-     */
-    public static function removeProductAttributes(EavSetup $uninstaller)
-    {
-        $uninstaller->removeAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            DGCategory::CODE
-        );
-        $uninstaller->removeAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            TariffNumber::CODE
-        );
-        $uninstaller->removeAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            ExportDescription::CODE
-        );
-    }
 }
