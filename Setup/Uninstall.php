@@ -50,5 +50,6 @@ class Uninstall implements UninstallInterface
         Uninstaller::dropLabelStatusTable($schemaSetup);
         Uninstaller::dropDhlRecipientStreetTable($schemaSetup);
         Uninstaller::dropShippingOptionSelectionTables($schemaSetup);
+        Uninstaller::removeAdditionalFeeColumns($schemaSetup);
     }
 }

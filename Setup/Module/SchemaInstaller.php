@@ -224,4 +224,140 @@ class SchemaInstaller
         $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)->createTable($quoteTable);
         $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->createTable($orderTable);
     }
+
+    /**
+     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     */
+    public static function createAdditionalFeeColumns(SchemaSetupInterface $schemaSetup)
+    {
+        $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
+            ->addColumn(
+                $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
+                Constants::ADDITIONAL_FEE_FIELD_NAME,
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'DHLGW Additional Fee'
+                ]
+            );
+
+        $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
+            ->addColumn(
+                $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME,Constants::CHECKOUT_CONNECTION_NAME),
+                Constants::ADDITIONAL_FEE_FIELD_NAME,
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'DHLGW Additional Fee'
+                ]
+            );
+
+        $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
+            ->addColumn(
+                $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
+                Constants::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'Base DHLGW Additional Fee'
+                ]
+            );
+
+        $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
+            ->addColumn(
+                $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
+                Constants::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'Base DHLGW Additional Fee'
+                ]
+            );
+
+        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
+            ->addColumn(
+                $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+                Constants::ADDITIONAL_FEE_FIELD_NAME,
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'DHLGW Additional Fee'
+                ]
+            );
+
+        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
+            ->addColumn(
+                $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+                Constants::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'Base DHLGW Additional Fee'
+                ]
+            );
+
+        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
+            ->addColumn(
+                $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+                Constants::ADDITIONAL_FEE_FIELD_NAME,
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'DHLGW Additional Fee'
+                ]
+            );
+
+        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
+            ->addColumn(
+                $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+                Constants::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'Base DHLGW Additional Fee'
+                ]
+            );
+
+        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
+            ->addColumn(
+                $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+                Constants::ADDITIONAL_FEE_FIELD_NAME,
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'DHLGW Additional Fee'
+                ]
+            );
+
+        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
+            ->addColumn(
+                $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+                Constants::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'Base DHLGW Additional Fee'
+                ]
+            );
+    }
 }

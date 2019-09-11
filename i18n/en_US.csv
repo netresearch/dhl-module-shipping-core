@@ -28,6 +28,7 @@
 "Depends on chosen product. Its only mandatory for international, non EU shipments.","Depends on chosen product. Its only mandatory for international, non EU shipments."
 "DHL Dangerous Goods Category","DHL Dangerous Goods Category"
 "DHL Item Description","DHL Item Description"
+"DHL Preferred Delivery","DHL Preferred Delivery"
 "DHL Tariff Number (HS Code)","DHL Tariff Number (HS Code)"
 "Display customized message","Display customized message"
 "Document","Document"

@@ -102,4 +102,66 @@ class Uninstaller
         $salesConnection = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME);
         $salesConnection->dropTable(Constants::TABLE_ORDER_SHIPPING_OPTION_SELECTION);
     }
+
+    /**
+     * Remove Service
+     *
+     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @return void
+     */
+    public static function removeAdditionalFeeColumns(SchemaSetupInterface $schemaSetup)
+    {
+        $checkoutConnection = $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME);
+        $checkoutConnection->dropColumn(
+            $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
+            Constants::ADDITIONAL_FEE_FIELD_NAME
+        );
+
+        $checkoutConnection->dropColumn(
+            $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
+            Constants::ADDITIONAL_FEE_FIELD_NAME
+        );
+
+        $checkoutConnection->dropColumn(
+            $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
+            Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
+        );
+
+
+        $checkoutConnection->dropColumn(
+            $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
+            Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
+        );
+
+        $salesConnection = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME);
+        $salesConnection->dropColumn(
+            $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+            Constants::ADDITIONAL_FEE_FIELD_NAME
+        );
+
+        $salesConnection->dropColumn(
+            $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+            Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
+        );
+
+        $salesConnection->dropColumn(
+            $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+            Constants::ADDITIONAL_FEE_FIELD_NAME
+        );
+
+        $salesConnection->dropColumn(
+            $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+            Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
+        );
+
+        $salesConnection->dropColumn(
+            $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+            Constants::ADDITIONAL_FEE_FIELD_NAME
+        );
+
+        $salesConnection->dropColumn(
+            $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+            Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
+        );
+    }
 }
