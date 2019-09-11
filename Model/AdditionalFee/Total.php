@@ -135,7 +135,7 @@ class Total extends Address\Total\AbstractTotal
         if ($fee > 0.0) {
             $result = [
                 'code' => $this->getCode(),
-                'title' => __($this->getLabel($quote->getShippingAddress()->getShippingMethod())),
+                'title' => __($this->getLabel($shippingAddress->getShippingMethod())),
                 'value' => $fee,
             ];
         }
