@@ -25,6 +25,7 @@
     <preference for="Dhl\ShippingCore\Api\Data\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
     <preference for="Dhl\ShippingCore\Api\Data\FootnoteInterface" type="Dhl\ShippingCore\Model\Checkout\Footnote"/>
     <preference for="Dhl\ShippingCore\Api\Data\MetadataInterface" type="Dhl\ShippingCore\Model\Checkout\Metadata"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageAdditionalInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\PackageAdditional"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Package"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\PackageItem"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\RecipientInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Recipient"/>

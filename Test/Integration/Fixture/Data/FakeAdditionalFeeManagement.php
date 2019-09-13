@@ -20,5 +20,4 @@ class FakeAdditionalFeeManagement extends AdditionalFeeManagement
         $additionalFeeConfiguration[] = new FakeAdditionalFeeConfiguration();
         parent::__construct($additionalFeeConfiguration);
     }
-
 }

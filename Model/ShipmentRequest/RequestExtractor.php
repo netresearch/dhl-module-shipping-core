@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\ShipmentRequest;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
+use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageAdditionalInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface;
@@ -71,6 +72,11 @@ class RequestExtractor implements RequestExtractorInterface
     private $packageFactory;
 
     /**
+     * @var PackageAdditionalInterfaceFactory
+     */
+    private $packageAdditionalFactory;
+
+    /**
      * @var PackageItemInterfaceFactory
      */
     private $packageItemFactory;
@@ -104,6 +110,7 @@ class RequestExtractor implements RequestExtractorInterface
      * @param ShipperInterfaceFactory $shipperFactory
      * @param RecipientInterfaceFactory $recipientFactory
      * @param PackageInterfaceFactory $packageFactory
+     * @param PackageAdditionalInterfaceFactory $packageAdditionalFactory
      * @param PackageItemInterfaceFactory $packageItemFactory
      * @param ConfigInterface $config
      */
@@ -114,6 +121,7 @@ class RequestExtractor implements RequestExtractorInterface
         ShipperInterfaceFactory $shipperFactory,
         RecipientInterfaceFactory $recipientFactory,
         PackageInterfaceFactory $packageFactory,
+        PackageAdditionalInterfaceFactory $packageAdditionalFactory,
         PackageItemInterfaceFactory $packageItemFactory,
         ConfigInterface $config
     ) {
@@ -123,6 +131,7 @@ class RequestExtractor implements RequestExtractorInterface
         $this->shipperFactory = $shipperFactory;
         $this->recipientFactory = $recipientFactory;
         $this->packageFactory = $packageFactory;
+        $this->packageAdditionalFactory = $packageAdditionalFactory;
         $this->packageItemFactory = $packageItemFactory;
         $this->config = $config;
     }
@@ -301,6 +310,7 @@ class RequestExtractor implements RequestExtractorInterface
                     'termsOfTrade' => $params['customs']['termsOfTrade'] ?? '',
                     'contentType' => $params['content_type'] ?? '',
                     'contentExplanation' => $params['content_type_other'] ?? '',
+                    'packageAdditional' => $this->packageAdditionalFactory->create(),
                 ]);
 
                 return $package;

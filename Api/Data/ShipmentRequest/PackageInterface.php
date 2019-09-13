@@ -104,4 +104,9 @@ interface PackageInterface
      * @return string
      */
     public function getContentExplanation(): string;
+
+    /**
+     * @return PackageAdditionalInterface
+     */
+    public function getPackageAdditional(): PackageAdditionalInterface;
 }

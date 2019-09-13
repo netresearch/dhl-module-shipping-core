@@ -5,7 +5,6 @@
 
 namespace Dhl\ShippingCore\Test\Integration\Fixture\Data;
 
-
 use Dhl\ShippingCore\Api\AdditionalFeeConfigurationInterface;
 use Magento\Quote\Model\Quote;
 
@@ -42,5 +41,4 @@ class FakeAdditionalFeeConfiguration implements AdditionalFeeConfigurationInterf
     {
         return self::LABEL;
     }
-
 }

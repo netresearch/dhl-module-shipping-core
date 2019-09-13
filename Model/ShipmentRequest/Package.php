@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShipmentRequest;
 
+use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageAdditionalInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface;
 
 /**
@@ -85,6 +86,11 @@ class Package implements PackageInterface
     private $contentExplanation;
 
     /**
+     * @var PackageAdditionalInterface
+     */
+    private $packageAdditional;
+
+    /**
      * Package constructor.
      *
      * @param string $productCode
@@ -100,6 +106,7 @@ class Package implements PackageInterface
      * @param string $termsOfTrade
      * @param string $contentType
      * @param string $contentExplanation
+     * @param PackageAdditionalInterface|null $packageAdditional
      */
     public function __construct(
         string $productCode,
@@ -114,7 +121,8 @@ class Package implements PackageInterface
         string $exportDescription = '',
         string $termsOfTrade = '',
         string $contentType = '',
-        string $contentExplanation = ''
+        string $contentExplanation = '',
+        PackageAdditionalInterface $packageAdditional = null
     ) {
         $this->productCode = $productCode;
         $this->containerType = $containerType;
@@ -129,6 +137,7 @@ class Package implements PackageInterface
         $this->termsOfTrade = $termsOfTrade;
         $this->contentType = $contentType;
         $this->contentExplanation = $contentExplanation;
+        $this->packageAdditional = $packageAdditional ?? new PackageAdditional();
     }
 
     /**
@@ -263,5 +272,13 @@ class Package implements PackageInterface
     public function getContentExplanation(): string
     {
         return $this->contentExplanation;
+    }
+
+    /**
+     * @return PackageAdditionalInterface
+     */
+    public function getPackageAdditional(): PackageAdditionalInterface
+    {
+        return $this->packageAdditional;
     }
 }

@@ -245,7 +245,7 @@ class SchemaInstaller
 
         $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
             ->addColumn(
-                $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME,Constants::CHECKOUT_CONNECTION_NAME),
+                $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
                 Constants::ADDITIONAL_FEE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
