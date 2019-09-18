@@ -7,22 +7,24 @@
 <actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
     <!-- Navigate to the shipping origin configuration page -->
-    <actionGroup name="NavigateToShippingOriginSectionActionGroup">
+    <actionGroup name="NavigateToShippingOriginSectionActionGroup"
+                 extends="ScrollToAndExpandGroupActionGroup"
+                 insertBefore="seeElementGroupName"
+    >
+        <arguments>
+            <argument name="groupName" defaultValue="AdminSystemConfigShippingOriginSection.shippingOriginGroup"/>
+            <argument name="groupNameExpanded" defaultValue="AdminSystemConfigShippingOriginSection.shippingOriginGroupExpanded"/>
+        </arguments>
+
         <amOnPage url="{{AdminSystemConfigShippingSectionPage.url}}" stepKey="navigateToShippingSettingsConfigPage"/>
         <waitForPageLoad stepKey="waitForShippingSettingsConfigPageLoad"/>
-
-        <scrollTo selector="{{AdminSystemConfigShippingOriginSection.shippingOriginGroup}}" stepKey="scrollToShippingOriginGroup" x="0" y="-85"/>
-        <seeElement selector="{{AdminSystemConfigShippingOriginSection.shippingOriginGroup}}" stepKey="seeShippingOriginGroup"/>
-        <conditionalClick stepKey="expandShippingOriginGroup"
-                          selector="{{AdminSystemConfigShippingOriginSection.shippingOriginGroup}}"
-                          dependentSelector="{{AdminSystemConfigShippingOriginSection.shippingOriginGroupExpanded}}"
-                          visible="true"/>
     </actionGroup>
 
     <!-- Set shipping origin address (default: DE)
 
          Region is sometimes a select and sometimes a input field, so use either the
-         actionGroup "ConfigureShippingOriginRegionSelectActionGroup" or "ConfigureShippingOriginRegionInputActionGroup" -->
+         actionGroup "ConfigureShippingOriginRegionSelectActionGroup" or "ConfigureShippingOriginRegionInputActionGroup"
+    -->
     <actionGroup name="ConfigureShippingOriginActionGroup">
         <arguments>
             <argument name="ShippingOriginData" defaultValue="ShippingOrigin_DE"/>
@@ -73,12 +75,5 @@
     <actionGroup name="NavigateToShippingCoreSectionActionGroup">
         <amOnPage url="{{AdminSystemConfigShippingSolutionSectionPage.url}}" stepKey="navigateToShippingSettingsConfigPage"/>
         <waitForPageLoad stepKey="waitForShippingSettingsConfigPageLoad"/>
-
-        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}" stepKey="scrollToShippingCoreGroup" x="0" y="-85"/>
-        <seeElement selector="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}" stepKey="seeShippingCoreGroup"/>
-        <conditionalClick stepKey="expandShippingCoreGroup"
-                          selector="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}"
-                          dependentSelector="{{AdminSystemConfigShippingCoreSection.shippingCoreGroupExpanded}}"
-                          visible="true"/>
     </actionGroup>
 </actionGroups>
