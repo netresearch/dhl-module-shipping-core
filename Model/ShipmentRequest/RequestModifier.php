@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShipmentRequest;
 
+use Dhl\ShippingCore\Api\PackagingOptionReaderInterface;
 use Dhl\ShippingCore\Api\PackagingOptionReaderInterfaceFactory;
 use Dhl\ShippingCore\Api\RequestModifierInterface;
 use Magento\Directory\Model\RegionFactory;
@@ -13,6 +14,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObjectFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order\Shipment;
+use Magento\Sales\Model\Order\Shipment\Item;
 use Magento\Shipping\Model\Shipment\Request;
 use Magento\Store\Model\ScopeInterface;
 
@@ -191,7 +193,7 @@ class RequestModifier implements RequestModifierInterface
         $packageId = 1;
         $shipment = $shipmentRequest->getOrderShipment();
 
-        /** @var \Dhl\ShippingCore\Api\PackagingOptionReaderInterface $packagingOptionReader */
+        /** @var PackagingOptionReaderInterface $packagingOptionReader */
         $packagingOptionReader = $this->packagingOptionReaderFactory->create(['shipment' => $shipment]);
 
         $customs = $packagingOptionReader->getPackageCustomsValues();
@@ -221,7 +223,7 @@ class RequestModifier implements RequestModifierInterface
             'services' => $packagingOptionReader->getServiceOptionValues(),
         ];
 
-        /** @var \Magento\Sales\Model\Order\Shipment\Item $item */
+        /** @var Item $item */
         foreach ($shipment->getAllItems() as $item) {
             $orderItemId = (int) $item->getOrderItemId();
             $itemCustoms = $packagingOptionReader->getItemCustomsValues($orderItemId);
@@ -234,7 +236,7 @@ class RequestModifier implements RequestModifierInterface
                 'product_id' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'productId'),
                 'order_item_id' => $orderItemId,
                 'customs_value' => $itemCustomsValue,
-                'customs' => $customs,
+                'customs' => $itemCustoms,
             ];
             $packageItems[$orderItemId] = $packageItem;
         }
