@@ -91,7 +91,7 @@ class HandlingFee implements RateResponseProcessorInterface
     public function processMethods(array $methods, RateRequest $request = null): array
     {
         $store = $request ? $request->getStoreId() : null;
-        $isDomestic = $request->getDestCountryId() === $request->getCountryId();
+        $isDomestic = $request->getDestCountryId() === $request->getData('country_id');
 
         /** @var Method $method */
         foreach ($methods as $method) {

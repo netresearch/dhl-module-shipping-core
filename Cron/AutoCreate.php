@@ -6,12 +6,13 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Cron;
 
-use Dhl\ShippingCore\Api\BulkShipmentConfigurationInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
 use Dhl\ShippingCore\Cron\AutoCreate\OrderCollectionLoader;
 use Dhl\ShippingCore\Cron\AutoCreate\OrderCollectionLoader\AutoCreateDisabledException;
+use Dhl\ShippingCore\Model\BulkShipment\NotImplementedException;
+use Dhl\ShippingCore\Model\BulkShipmentConfiguration;
 use Dhl\ShippingCore\Model\BulkShipmentManagement;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\OrderInterface;
@@ -26,6 +27,11 @@ use Psr\Log\LoggerInterface;
  */
 class AutoCreate
 {
+    /**
+     * @var BulkShipmentConfiguration
+     */
+    private $bulkConfig;
+
     /**
      * @var OrderCollectionLoader
      */
@@ -42,28 +48,23 @@ class AutoCreate
     private $logger;
 
     /**
-     * @var BulkShipmentConfigurationInterface[]
-     */
-    private $configurations;
-
-    /**
      * AutoCreate constructor.
      *
+     * @param BulkShipmentConfiguration $bulkConfig
      * @param OrderCollectionLoader $orderCollectionLoader
      * @param BulkShipmentManagement $bulkShipmentManagement
      * @param LoggerInterface $logger
-     * @param BulkShipmentConfigurationInterface[] $configurations
      */
     public function __construct(
+        BulkShipmentConfiguration $bulkConfig,
         OrderCollectionLoader $orderCollectionLoader,
         BulkShipmentManagement $bulkShipmentManagement,
-        LoggerInterface $logger,
-        array $configurations = []
+        LoggerInterface $logger
     ) {
+        $this->bulkConfig = $bulkConfig;
         $this->orderCollectionLoader = $orderCollectionLoader;
         $this->bulkShipmentManagement = $bulkShipmentManagement;
         $this->logger = $logger;
-        $this->configurations = $configurations;
     }
 
     /**
@@ -71,10 +72,15 @@ class AutoCreate
      */
     public function execute()
     {
-        $getCarrierCode = static function (BulkShipmentConfigurationInterface $bulkConfiguration) {
-            return $bulkConfiguration->getCarrierCode();
+        $fnFilter = function (string $carrierCode) {
+            try {
+                return $this->bulkConfig->getBulkShipmentService($carrierCode);
+            } catch (NotImplementedException $exception) {
+                return false;
+            }
         };
-        $carrierCodes = array_map($getCarrierCode, $this->configurations);
+
+        $carrierCodes = array_filter($this->bulkConfig->getCarrierCodes(), $fnFilter);
 
         try {
             /** @var \Magento\Framework\Data\Collection\AbstractDb $orderCollection */

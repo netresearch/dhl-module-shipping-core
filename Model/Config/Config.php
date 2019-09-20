@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\UnitConverterInterface;
 use Dhl\ShippingCore\Model\Package;
 use Dhl\ShippingCore\Model\PackageCollection;
 use Dhl\ShippingCore\Model\PackageCollectionFactory;
-use Dhl\ShippingCore\Util\UnitConverter;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Shipping\Helper\Carrier;

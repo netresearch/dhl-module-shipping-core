@@ -27,7 +27,6 @@ class Constants
 
     const TABLE_ORDER_SHIPPING_OPTION_SELECTION = 'dhlgw_order_address_shipping_option_selection';
 
-
     const QUOTE_TABLE_NAME = 'quote';
 
     const QUOTE_ADDRESS_TABLE_NAME = 'quote_address';

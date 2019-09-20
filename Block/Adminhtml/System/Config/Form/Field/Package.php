@@ -46,8 +46,6 @@ class Package extends AbstractFieldArray
 
     /**
      * Prepare to render
-     *
-     * @throws LocalizedException
      */
     protected function _prepareToRender()
     {
@@ -119,7 +117,7 @@ class Package extends AbstractFieldArray
      */
     private function getWeightUnit(): string
     {
-        $scopeId = $this->getElement()->getScopeId() !== '' ? $this->getElement()->getScopeId() : 0;
+        $scopeId = $this->getElement()->getData('scope_id') ?: 0;
 
         return (string) $this->config->getValue(
             'general/locale/weight_unit',

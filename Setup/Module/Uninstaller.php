@@ -118,7 +118,6 @@ class Uninstaller
             Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
         );
 
-
         $checkoutConnection->dropColumn(
             $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
             Constants::ADDITIONAL_FEE_BASE_FIELD_NAME

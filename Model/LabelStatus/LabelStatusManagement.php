@@ -194,4 +194,21 @@ class LabelStatusManagement implements LabelStatusManagementInterface
 
         return $this->updateLabelStatus($labelStatus);
     }
+
+    /**
+     * Set the order's label status to "partial".
+     *
+     * @param OrderInterface|Order $order
+     * @return bool
+     */
+    public function setLabelStatusPartial(OrderInterface $order): bool
+    {
+        $labelStatus = $this->labelStatusFactory->create();
+        $labelStatus->setData([
+            LabelStatus::ORDER_ID => $order->getEntityId(),
+            LabelStatus::STATUS_CODE => self::LABEL_STATUS_PARTIAL
+        ]);
+
+        return $this->updateLabelStatus($labelStatus);
+    }
 }

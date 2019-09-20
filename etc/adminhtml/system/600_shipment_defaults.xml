@@ -25,6 +25,7 @@
                translate="label comment">
             <label>Export Content Explanation</label>
             <comment><![CDATA[The content description is mandatory if export content type is <em>OTHER</em>.]]></comment>
+            <validate>required-entry</validate>
             <depends>
                 <field id="export_content_type">OTHER</field>
             </depends>

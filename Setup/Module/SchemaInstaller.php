@@ -149,12 +149,17 @@ class SchemaInstaller
      */
     public static function createShippingOptionSelectionTables(SchemaSetupInterface $schemaSetup)
     {
-        $quoteTable = $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)->newTable(
-            $schemaSetup->getTable(Constants::TABLE_QUOTE_SHIPPING_OPTION_SELECTION, Constants::CHECKOUT_CONNECTION_NAME)
+        $quoteTableName = $schemaSetup->getTable(
+            Constants::TABLE_QUOTE_SHIPPING_OPTION_SELECTION,
+            Constants::CHECKOUT_CONNECTION_NAME
         );
-        $orderTable = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->newTable(
-            $schemaSetup->getTable(Constants::TABLE_ORDER_SHIPPING_OPTION_SELECTION, Constants::SALES_CONNECTION_NAME)
+        $orderTableName = $schemaSetup->getTable(
+            Constants::TABLE_ORDER_SHIPPING_OPTION_SELECTION,
+            Constants::SALES_CONNECTION_NAME
         );
+
+        $quoteTable = $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)->newTable($quoteTableName);
+        $orderTable = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->newTable($orderTableName);
 
         /** @var \Magento\Framework\DB\Ddl\Table $table */
         foreach ([$quoteTable, $orderTable] as $table) {
@@ -197,7 +202,7 @@ class SchemaInstaller
 
         $quoteTable->addForeignKey(
             $schemaSetup->getFkName(
-                $schemaSetup->getTable(Constants::TABLE_QUOTE_SHIPPING_OPTION_SELECTION, Constants::CHECKOUT_CONNECTION_NAME),
+                $quoteTableName,
                 'parent_id',
                 $schemaSetup->getTable('quote_address', Constants::CHECKOUT_CONNECTION_NAME),
                 'address_id'
@@ -210,7 +215,7 @@ class SchemaInstaller
 
         $orderTable->addForeignKey(
             $schemaSetup->getFkName(
-                $schemaSetup->getTable(Constants::TABLE_ORDER_SHIPPING_OPTION_SELECTION, Constants::SALES_CONNECTION_NAME),
+                $orderTableName,
                 'parent_id',
                 $schemaSetup->getTable('sales_order_address', Constants::SALES_CONNECTION_NAME),
                 'entity_id'

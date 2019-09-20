@@ -4,17 +4,16 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor;
+namespace Dhl\ShippingCore\Webservice\Pipeline\Track\ResponseProcessor;
 
-use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
-use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
+use Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface;
+use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
-use Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
+use Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\ShipmentRepositoryInterface;
-use Magento\Sales\Model\Order\Item;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -24,7 +23,7 @@ use Magento\Sales\Model\Order\Shipment;
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */
-class UpdateLabelStatus implements ShipmentResponseProcessorInterface
+class UpdateLabelStatus implements TrackResponseProcessorInterface
 {
     /**
      * @var LabelStatusManagementInterface
@@ -47,7 +46,7 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
     private $shipmentRepository;
 
     /**
-     * LabelStatusProcessor constructor.
+     * UpdateLabelStatus constructor.
      *
      * @param LabelStatusManagementInterface $labelStatusManagement
      * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
@@ -67,17 +66,14 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
     }
 
     /**
-     * Check if all shipments, apart from the current shipment, have a shipping label.
+     * Check if no shipments, apart from the current shipment, have a shipping label.
      *
-     * - If the label is created through packaging popup, then the shipment is not yet persisted
-     * - If the label is created through bulk action, then the shipment is already persisted
-     *
-     * The current shipment will have its label persisted later in the process.
+     * The current shipment will have its label update persisted later in the process.
      *
      * @param ShipmentInterface|Shipment $currentShipment
      * @return bool
      */
-    private function isShippingCompleted(ShipmentInterface $currentShipment): bool
+    private function isShippingPending(ShipmentInterface $currentShipment): bool
     {
         $orderIdFilter = $this->filterBuilder
             ->setField(ShipmentInterface::ORDER_ID)
@@ -86,7 +82,7 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
             ->create();
         $shippingLabelFilter = $this->filterBuilder
             ->setField(ShipmentInterface::SHIPPING_LABEL)
-            ->setConditionType('null')
+            ->setConditionType('notnull')
             ->create();
         $shipmentIdFilter = $this->filterBuilder->setField(ShipmentInterface::ENTITY_ID)
             ->setValue((int) $currentShipment->getId())
@@ -104,59 +100,23 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
     }
 
     /**
-     * Check if all order items are assigned to shipments.
+     * Mark orders with cancelled shipments "pending" or "partial".
      *
-     * @param Shipment $shipment
-     * @return bool
+     * @param TrackResponseInterface[] $trackResponses Shipment cancellation responses
+     * @param TrackErrorResponseInterface[] $errorResponses Shipment cancellation errors
      */
-    private function isOrderShipped(Shipment $shipment): bool
+    public function processResponse(array $trackResponses, array $errorResponses)
     {
-        $qtyOrdered = (float) $shipment->getOrder()->getTotalQtyOrdered();
-
-        $qtyShipped = array_reduce(
-            $shipment->getOrder()->getAllVisibleItems(),
-            function ($qtyShipped, Item $orderItem) {
-                if ($orderItem->getIsVirtual()) {
-                    $qtyShipped += $orderItem->getQtyOrdered();
-                } else {
-                    $qtyShipped += $orderItem->getQtyShipped();
-                }
-                return $qtyShipped;
-            },
-            0
-        );
-
-        return ($qtyOrdered === $qtyShipped);
-    }
-
-    /**
-     * Mark orders' label status according to the webservice operation result.
-     *
-     * @param LabelResponseInterface[] $labelResponses
-     * @param ShipmentErrorResponseInterface[] $errorResponses
-     */
-    public function processResponse(array $labelResponses, array $errorResponses)
-    {
-        foreach ($errorResponses as $errorResponse) {
+        foreach ($trackResponses as $trackResponse) {
             /** @var Shipment $shipment */
-            $shipment = $errorResponse->getSalesShipment();
-            $order = $shipment->getOrder();
-
-            $this->labelStatusManagement->setLabelStatusFailed($order);
-        }
-
-        foreach ($labelResponses as $labelResponse) {
-            /** @var Shipment $shipment */
-            $shipment = $labelResponse->getSalesShipment();
+            $shipment = $trackResponse->getSalesShipment();
             if (!$shipment) {
                 continue;
             }
 
-            if ($this->isOrderShipped($shipment) && $this->isShippingCompleted($shipment)) {
-                // all shippable items are assigned to a shipment and all shipments have labels.
-                $this->labelStatusManagement->setLabelStatusProcessed($shipment->getOrder());
+            if ($this->isShippingPending($shipment)) {
+                $this->labelStatusManagement->setLabelStatusPending($shipment->getOrder());
             } else {
-                // some items are not assigned to a shipment or shipments are missing labels.
                 $this->labelStatusManagement->setLabelStatusPartial($shipment->getOrder());
             }
         }

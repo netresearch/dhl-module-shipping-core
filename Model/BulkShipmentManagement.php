@@ -6,11 +6,13 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model;
 
-use Dhl\ShippingCore\Api\BulkShipmentConfigurationInterface;
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
+use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
+use Dhl\ShippingCore\Model\BulkShipment\NotImplementedException;
 use Dhl\ShippingCore\Model\BulkShipment\OrderCollectionLoader;
 use Dhl\ShippingCore\Model\BulkShipment\ShipmentCollectionLoader;
+use Dhl\ShippingCore\Model\Shipment\CancelRequestBuilder;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\ShipOrderInterface;
 use Magento\Sales\Model\Order;
@@ -27,9 +29,14 @@ use Psr\Log\LoggerInterface;
 class BulkShipmentManagement
 {
     /**
-     * @var BulkShipmentConfigurationInterface[]
+     * @var ConfigInterface
      */
-    private $configurations;
+    private $config;
+
+    /**
+     * @var BulkShipmentConfiguration
+     */
+    private $bulkConfig;
 
     /**
      * @var OrderCollectionLoader
@@ -47,6 +54,11 @@ class BulkShipmentManagement
     private $shipOrder;
 
     /**
+     * @var CancelRequestBuilder
+     */
+    private $cancelRequestBuilder;
+
+    /**
      * @var LoggerInterface
      */
     private $logger;
@@ -57,67 +69,53 @@ class BulkShipmentManagement
     private $requestFactory;
 
     /**
-     * @var ConfigInterface
-     */
-    private $config;
-
-    /**
-     * BulkShipmentProcessor constructor.
+     * BulkShipmentManagement constructor.
+     *
+     * @param ConfigInterface $config
+     * @param BulkShipmentConfiguration $bulkConfig
      * @param OrderCollectionLoader $orderCollectionLoader
      * @param ShipmentCollectionLoader $shipmentCollectionLoader
      * @param ShipOrderInterface $shipOrder
+     * @param CancelRequestBuilder $cancelRequestBuilder
      * @param LoggerInterface $logger
      * @param RequestFactory $requestFactory
-     * @param ConfigInterface $config
-     * @param BulkShipmentConfigurationInterface[] $configurations
      */
     public function __construct(
+        ConfigInterface $config,
+        BulkShipmentConfiguration $bulkConfig,
         OrderCollectionLoader $orderCollectionLoader,
         ShipmentCollectionLoader $shipmentCollectionLoader,
         ShipOrderInterface $shipOrder,
+        CancelRequestBuilder $cancelRequestBuilder,
         LoggerInterface $logger,
-        RequestFactory $requestFactory,
-        ConfigInterface $config,
-        array $configurations = []
+        RequestFactory $requestFactory
     ) {
+        $this->config = $config;
+        $this->bulkConfig = $bulkConfig;
         $this->orderCollectionLoader = $orderCollectionLoader;
         $this->shipmentCollectionLoader = $shipmentCollectionLoader;
         $this->shipOrder = $shipOrder;
+        $this->cancelRequestBuilder = $cancelRequestBuilder;
         $this->logger = $logger;
         $this->requestFactory = $requestFactory;
-        $this->config = $config;
-        $this->configurations = $configurations;
     }
 
     /**
-     * Load bulk shipment configuration for the given carrier code.
+     * Get the first shipment with no label from shipments collection
      *
-     * @param string $carrierCode
-     * @return BulkShipmentConfigurationInterface
-     * @throws \InvalidArgumentException
+     * @param Order $order
+     * @return string|null
      */
-    private function getCarrierConfigurationByCode(string $carrierCode): BulkShipmentConfigurationInterface
+    private function getOrderShipmentId(Order $order)
     {
-        foreach ($this->configurations as $configuration) {
-            if ($configuration->getCarrierCode() === $carrierCode) {
-                return $configuration;
+        $shipmentIds = [];
+        foreach ($order->getShipmentsCollection()->getItems() as $item) {
+            if (!$item->getShippingLabel()) {
+                $shipmentIds[] = $item->getEntityId();
             }
         }
 
-        throw new \InvalidArgumentException("Bulk shipment configuration for carrier $carrierCode is not available.");
-    }
-
-    /**
-     * Load bulk shipment configuration for the given order.
-     *
-     * @param Order $order
-     * @return BulkShipmentConfigurationInterface
-     * @throws \InvalidArgumentException
-     */
-    private function getCarrierConfiguration(Order $order): BulkShipmentConfigurationInterface
-    {
-        $carrierCode = strtok((string) $order->getShippingMethod(), '_');
-        return $this->getCarrierConfigurationByCode($carrierCode);
+        return array_shift($shipmentIds);
     }
 
     /**
@@ -132,10 +130,15 @@ class BulkShipmentManagement
 
         $retryFailedShipments = $this->config->isBulkRetryEnabled();
 
-        $carrierCodes = array_map(function (BulkShipmentConfigurationInterface $bulkConfiguration) {
-            return $bulkConfiguration->getCarrierCode();
-        }, $this->configurations);
+        $fnFilter = function (string $carrierCode) {
+            try {
+                return $this->bulkConfig->getBulkShipmentService($carrierCode);
+            } catch (NotImplementedException $exception) {
+                return false;
+            }
+        };
 
+        $carrierCodes = array_filter($this->bulkConfig->getCarrierCodes(), $fnFilter);
         $orders = $this->orderCollectionLoader->load($orderIds, $carrierCodes);
 
         /** @var Order $order */
@@ -158,6 +161,8 @@ class BulkShipmentManagement
     }
 
     /**
+     * Create labels for given shipment IDs.
+     *
      * @param int[] $shipmentIds
      * @return ShipmentResponseInterface[]
      */
@@ -171,23 +176,30 @@ class BulkShipmentManagement
         /** @var \Magento\Sales\Model\Order\Shipment $shipment */
         foreach ($shipmentCollection as $shipment) {
             $order = $shipment->getOrder();
-            $configuration = $this->getCarrierConfiguration($order);
+            $carrierCode = strtok((string) $order->getShippingMethod(), '_');
 
             $shipmentRequest = $this->requestFactory->create();
             $shipmentRequest->setOrderShipment($shipment);
 
             try {
-                $configuration->getRequestModifier()->modify($shipmentRequest);
+                $this->bulkConfig->getRequestModifier($carrierCode)->modify($shipmentRequest);
             } catch (LocalizedException $exception) {
                 $shipment->addComment(__('Automatic label creation failed: %1', $exception->getMessage()));
                 continue;
             }
 
-            $shipmentRequests[$configuration->getCarrierCode()][] = $shipmentRequest;
+            $shipmentRequests[$carrierCode][] = $shipmentRequest;
         }
 
         foreach ($shipmentRequests as $carrierCode => $carrierShipmentRequests) {
-            $labelService = $this->getCarrierConfigurationByCode($carrierCode)->getLabelService();
+            try {
+                $labelService = $this->bulkConfig->getBulkShipmentService($carrierCode);
+            } catch (NotImplementedException $exception) {
+                $msg = "Bulk label creation is not supported by carrier '$carrierCode'";
+                $this->logger->warning($msg, ['exception' => $exception]);
+                continue;
+            }
+
             $carrierResults[$carrierCode] = $labelService->createLabels($carrierShipmentRequests);
         }
 
@@ -203,20 +215,47 @@ class BulkShipmentManagement
     }
 
     /**
-     * Get the first shipment with no label from shipments collection
+     * Cancel all tracks for given shipment IDs.
      *
-     * @param Order $order
-     * @return string|null
+     * @param int[] $shipmentIds
+     * @return TrackResponseInterface[]
      */
-    private function getOrderShipmentId(Order $order)
+    public function cancelLabels(array $shipmentIds)
     {
-        $shipmentIds = [];
-        foreach ($order->getShipmentsCollection()->getItems() as $item) {
-            if (!$item->getShippingLabel()) {
-                $shipmentIds[] = $item->getEntityId();
-            }
+        $shipmentCollection = $this->shipmentCollectionLoader->load($shipmentIds);
+        $carrierShipments = [];
+        $carrierResults = [];
+
+        // divide shipments by carrier code
+        /** @var \Magento\Sales\Model\Order\Shipment $shipment */
+        foreach ($shipmentCollection as $shipment) {
+            $order = $shipment->getOrder();
+            $carrierCode = strtok((string)$order->getShippingMethod(), '_');
+
+            $carrierShipments[$carrierCode][] = $shipment;
         }
 
-        return array_shift($shipmentIds);
+        // cancel tracks per carrier
+        foreach ($carrierShipments as $carrierCode => $shipments) {
+            $this->cancelRequestBuilder->setShipments($shipments);
+            $cancelRequests = $this->cancelRequestBuilder->build($carrierCode);
+
+            try {
+                $labelService = $this->bulkConfig->getBulkCancellationService($carrierCode);
+            } catch (NotImplementedException $exception) {
+                $msg = "Bulk label cancellation is not supported by carrier '$carrierCode'";
+                $this->logger->warning($msg, ['exception' => $exception]);
+                continue;
+            }
+
+            $carrierResults[$carrierCode] = $labelService->cancelLabels($cancelRequests);
+        }
+
+        if (!empty($carrierResults)) {
+            // convert results per carrier to flat response
+            $carrierResults = array_reduce($carrierResults, 'array_merge', []);
+        }
+
+        return $carrierResults;
     }
 }

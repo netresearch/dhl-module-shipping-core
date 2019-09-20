@@ -18,11 +18,10 @@ use Magento\Sales\Api\Data\OrderInterface;
  */
 interface LabelStatusManagementInterface
 {
-    const LABEL_STATUS_PENDING = 'pending';
-
+    const LABEL_STATUS_PENDING   = 'pending';
+    const LABEL_STATUS_PARTIAL   = 'partial';
     const LABEL_STATUS_PROCESSED = 'processed';
-
-    const LABEL_STATUS_FAILED = 'failed';
+    const LABEL_STATUS_FAILED    = 'failed';
 
     /**
      * Set the initial label status.
@@ -33,7 +32,7 @@ interface LabelStatusManagementInterface
     public function setInitialStatus(OrderInterface $order): bool;
 
     /**
-     * Set label status pending.
+     * Set label status "pending".
      *
      * @param OrderInterface $order
      * @return bool
@@ -41,7 +40,7 @@ interface LabelStatusManagementInterface
     public function setLabelStatusPending(OrderInterface $order): bool;
 
     /**
-     * Set label status processed.
+     * Set label status "processed".
      *
      * @param OrderInterface $order
      * @return bool
@@ -49,10 +48,18 @@ interface LabelStatusManagementInterface
     public function setLabelStatusProcessed(OrderInterface $order): bool;
 
     /**
-     * Set label status failed.
+     * Set label status "failed".
      *
      * @param OrderInterface $order
      * @return bool
      */
     public function setLabelStatusFailed(OrderInterface $order): bool;
+
+    /**
+     * Set label status "partial".
+     *
+     * @param OrderInterface $order
+     * @return bool
+     */
+    public function setLabelStatusPartial(OrderInterface $order): bool;
 }

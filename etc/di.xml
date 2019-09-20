@@ -64,12 +64,20 @@
             </argument>
         </arguments>
     </virtualType>
-    <virtualType name="Dhl\ShippingCore\Webservice\Pipeline\BulkShipment\ShipmentResponseProcessor\Virtual" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor">
+    <virtualType name="Dhl\ShippingCore\Webservice\Pipeline\BulkShipment\CreateLabelResponseProcessor\Virtual" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
                 <item name="addLabel" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\AddShippingLabel</item>
                 <item name="addTrack" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\AddTrack</item>
-                <item name="updateLabelStatus" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\UpdateLabelStatus</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Dhl\ShippingCore\Webservice\Pipeline\BulkShipment\CancelLabelResponseProcessor\Virtual" type="Dhl\ShippingCore\Webservice\Pipeline\Track\TrackResponseProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="deleteTrack" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Track\ResponseProcessor\DeleteTrack</item>
+                <item name="unsetLabel" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Track\ResponseProcessor\UnsetShippingLabel</item>
+                <item name="updateLabelStatus" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Track\ResponseProcessor\UpdateLabelStatus</item>
             </argument>
         </arguments>
     </virtualType>

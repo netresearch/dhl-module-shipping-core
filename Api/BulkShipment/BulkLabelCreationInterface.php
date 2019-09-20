@@ -4,13 +4,15 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\BulkShipment;
 
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
 use Magento\Shipping\Model\Shipment\Request;
 
 /**
  * Interface BulkLabelCreationInterface
+ *
+ * Service to create shipping labels.
  *
  * @api
  * @package Dhl\ShippingCore\Api
@@ -20,6 +22,8 @@ use Magento\Shipping\Model\Shipment\Request;
 interface BulkLabelCreationInterface
 {
     /**
+     * Create shipping labels for given shipment requests.
+     *
      * @param Request[] $shipmentRequests
      * @return ShipmentResponseInterface[]
      */

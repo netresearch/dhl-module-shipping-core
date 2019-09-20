@@ -99,7 +99,6 @@ class TotalsManager
         }
     }
 
-
     /**
      * @param Order|Order\Invoice|Order\Creditmemo $source
      * @param string $code

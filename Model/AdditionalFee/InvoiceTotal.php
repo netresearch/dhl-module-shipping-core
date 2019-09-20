@@ -30,7 +30,6 @@ class InvoiceTotal extends AbstractTotal
         parent::__construct($data);
     }
 
-
     /**
      * @param Invoice $invoice
      * @return $this

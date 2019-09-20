@@ -4,7 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\BulkShipment;
+
+use Dhl\ShippingCore\Api\RequestModifierInterface;
+use Dhl\ShippingCore\Model\BulkShipment\NotImplementedException;
 
 /**
  * Interface BulkShipmentConfigurationInterface
@@ -27,13 +30,30 @@ interface BulkShipmentConfigurationInterface
      * Obtain the carrier's modifier to add carrier specific data to the shipment request.
      *
      * @return RequestModifierInterface
+     * @throws NotImplementedException
      */
     public function getRequestModifier(): RequestModifierInterface;
 
     /**
-     * Obtain the service that connects to the carrier's label api.
+     * Obtain the service that connects to the carrier's label api for creating labels.
      *
      * @return BulkLabelCreationInterface
+     * @throws NotImplementedException
      */
     public function getLabelService(): BulkLabelCreationInterface;
+
+    /**
+     * Obtain the service that connects to the carrier's label api for cancelling labels.
+     *
+     * @return BulkLabelCancellationInterface
+     * @throws NotImplementedException
+     */
+    public function getCancellationService(): BulkLabelCancellationInterface;
+
+    /**
+     * Check if a carrier allows deleting single tracks of a shipment.
+     *
+     * @return bool
+     */
+    public function isSingleTrackDeletionAllowed(): bool;
 }

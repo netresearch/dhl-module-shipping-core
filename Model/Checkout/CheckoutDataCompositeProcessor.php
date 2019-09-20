@@ -67,6 +67,7 @@ class CheckoutDataCompositeProcessor
     ): ShippingDataInterface {
         foreach ($shippingData->getCarriers() as $carrierData) {
             foreach ($this->serviceOptionsProcessors as $processor) {
+                /** @var ShippingOptionsProcessorInterface $processor */
                 $carrierData->setServiceOptions(
                     $processor->process(
                         $carrierData->getServiceOptions(),
@@ -78,6 +79,7 @@ class CheckoutDataCompositeProcessor
             }
 
             foreach ($this->metadataProcessors as $processor) {
+                /** @var MetadataProcessorInterface $processor */
                 $processor->process(
                     $carrierData->getMetadata(),
                     $storeId
@@ -85,6 +87,7 @@ class CheckoutDataCompositeProcessor
             }
 
             foreach ($this->compatibilityProcessors as $processor) {
+                /** @var CompatibilityProcessorInterface $processor */
                 $carrierData->setCompatibilityData(
                     $processor->process(
                         $carrierData->getCompatibilityData()
