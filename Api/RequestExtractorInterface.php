@@ -6,10 +6,12 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api;
 
+use DateTime;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\RecipientInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Shipment;
 
@@ -85,7 +87,7 @@ interface RequestExtractorInterface
      * Extract packages from shipment request.
      *
      * @return PackageInterface[]
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function getPackages(): array;
 
@@ -109,4 +111,12 @@ interface RequestExtractorInterface
      * @return bool
      */
     public function isCashOnDelivery(): bool;
+
+    /**
+     * Obtain shipment date.
+     *
+     * @return string
+     * @throws LocalizedException
+     */
+    public function getShipmentDate(): string;
 }

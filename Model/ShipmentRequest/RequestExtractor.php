@@ -18,6 +18,7 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterfaceFactory;
 use Dhl\ShippingCore\Api\RequestExtractorInterface;
 use Dhl\ShippingCore\Model\RecipientStreetRepository;
+use Dhl\ShippingCore\Model\ShipmentDate;
 use Dhl\ShippingCore\Util\StreetSplitter;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -102,6 +103,11 @@ class RequestExtractor implements RequestExtractorInterface
     private $packageItems;
 
     /**
+     * @var ShipmentDate
+     */
+    private $shipmentDate;
+
+    /**
      * RequestExtractor constructor.
      *
      * @param Request $shipmentRequest
@@ -113,6 +119,7 @@ class RequestExtractor implements RequestExtractorInterface
      * @param PackageAdditionalInterfaceFactory $packageAdditionalFactory
      * @param PackageItemInterfaceFactory $packageItemFactory
      * @param ConfigInterface $config
+     * @param ShipmentDate $shipmentDate
      */
     public function __construct(
         Request $shipmentRequest,
@@ -123,7 +130,8 @@ class RequestExtractor implements RequestExtractorInterface
         PackageInterfaceFactory $packageFactory,
         PackageAdditionalInterfaceFactory $packageAdditionalFactory,
         PackageItemInterfaceFactory $packageItemFactory,
-        ConfigInterface $config
+        ConfigInterface $config,
+        ShipmentDate $shipmentDate
     ) {
         $this->shipmentRequest = $shipmentRequest;
         $this->streetSplitter = $streetSplitter;
@@ -134,6 +142,7 @@ class RequestExtractor implements RequestExtractorInterface
         $this->packageAdditionalFactory = $packageAdditionalFactory;
         $this->packageItemFactory = $packageItemFactory;
         $this->config = $config;
+        $this->shipmentDate = $shipmentDate;
     }
 
     /**
@@ -376,7 +385,7 @@ class RequestExtractor implements RequestExtractorInterface
     public function getPackageItems(): array
     {
         $packageId = $this->shipmentRequest->getData('package_id');
-        $items = array_filter($this->getAllItems(), function (PackageItemInterface $item) use ($packageId) {
+        $items = array_filter($this->getAllItems(), static function (PackageItemInterface $item) use ($packageId) {
             return ($packageId === $item->getPackageId());
         });
 
@@ -394,5 +403,18 @@ class RequestExtractor implements RequestExtractorInterface
         $order = $this->getOrder();
 
         return $this->config->isCodPaymentMethod($order->getPayment()->getMethod(), $storeId);
+    }
+
+    /**
+     * Obtain shipment date. This currently does not check for holidays or weekends.
+     *
+     * @return string
+     * @throws LocalizedException
+     */
+    public function getShipmentDate(): string
+    {
+        return $this->shipmentDate
+            ->getDate($this->getOrder())
+            ->format('Y-m-d');
     }
 }

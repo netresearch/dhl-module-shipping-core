@@ -70,9 +70,9 @@ interface ConfigInterface
      * Get the cut off time.
      *
      * @param mixed $store
-     * @return string
+     * @return DateTime
      */
-    public function getCutOffTime($store = null): string;
+    public function getCutOffTime($store = null): \DateTime;
 
     /**
      * Get the general weight unit.

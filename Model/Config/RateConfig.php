@@ -44,7 +44,7 @@ class RateConfig
     private $scopeConfig;
 
     /**
-     * ModuleConfig constructor.
+     * RateConfig constructor.
      *
      * @param ScopeConfigInterface $scopeConfig
      */

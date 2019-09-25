@@ -65,7 +65,7 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
         /** @var ConfigInterface $config */
         $config = Bootstrap::getObjectManager()->get(ConfigInterface::class);
 
-        self::assertEquals('00,00,00', $config->getCutOffTime());
-        self::assertEquals('12,07,10', $config->getCutOffTime('fixturestore'));
+        self::assertEquals('00,00,00', $config->getCutOffTime()->format('H,i,s'));
+        self::assertEquals('12,07,10', $config->getCutOffTime('fixturestore')->format('H,i,s'));
     }
 }

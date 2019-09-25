@@ -13,6 +13,7 @@ use Dhl\ShippingCore\Model\PackageCollection;
 use Dhl\ShippingCore\Model\PackageCollectionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterfaceFactory;
 use Magento\Shipping\Helper\Carrier;
 use Magento\Shipping\Model\Config as ShippingConfig;
 use Magento\Store\Model\ScopeInterface;
@@ -45,23 +46,31 @@ class Config implements ConfigInterface
     private $unitConverter;
 
     /**
+     * @var TimezoneInterfaceFactory
+     */
+    private $timezoneFactory;
+
+    /**
      * Config constructor.
      *
      * @param ScopeConfigInterface $scopeConfig
      * @param SerializerInterface $serializer
      * @param PackageCollectionFactory $packageCollectionFactory
      * @param UnitConverterInterface $unitConverter
+     * @param TimezoneInterfaceFactory $timezoneFactory
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         SerializerInterface $serializer,
         PackageCollectionFactory $packageCollectionFactory,
-        UnitConverterInterface $unitConverter
+        UnitConverterInterface $unitConverter,
+        TimezoneInterfaceFactory $timezoneFactory
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->serializer = $serializer;
         $this->packageCollectionFactory = $packageCollectionFactory;
         $this->unitConverter = $unitConverter;
+        $this->timezoneFactory = $timezoneFactory;
     }
 
     /**
@@ -124,15 +133,25 @@ class Config implements ConfigInterface
      * Get the cut off time.
      *
      * @param mixed $store
-     * @return string
+     * @return \DateTime
      */
-    public function getCutOffTime($store = null): string
+    public function getCutOffTime($store = null): \DateTime
     {
-        return (string) $this->scopeConfig->getValue(
+        $cutOffTimeRaw = (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_CUT_OFF_TIME,
             ScopeInterface::SCOPE_STORE,
             $store
         );
+        $cutOffTimeParts  = explode(
+            ',',
+            $cutOffTimeRaw
+        );
+
+        list($hours, $minutes, $seconds) = array_map('intval', $cutOffTimeParts);
+
+        $timezone = $this->timezoneFactory->create();
+
+        return $timezone->date()->setTime($hours, $minutes, $seconds);
     }
 
     /**

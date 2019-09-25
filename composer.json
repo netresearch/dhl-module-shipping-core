@@ -37,7 +37,8 @@
     "magento/module-store": "^100.2.0|^101.0.0",
     "magento/zendframework1": "^1.13.0",
     "netresearch/config-fields-m2": "^1.0.0",
-    "php-http/curl-client": "^1.7.0"
+    "php-http/curl-client": "^1.7.0",
+    "azuyalabs/yasumi": "^1.8.0"
   },
   "require-dev": {
     "magento/module-customer": "^101.0.0|^102.0.0",
@@ -52,7 +53,8 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-develop": "0.5.5.x-dev"
+      "dev-develop": "0.5.5.x-dev",
+      "dev-DHLGW-526": "0.5.6.x-dev"
     }
   }
 }

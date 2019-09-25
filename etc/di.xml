@@ -171,6 +171,13 @@
             </argument>
         </arguments>
     </type>
+    <type name="Dhl\ShippingCore\Model\ShipmentDate">
+        <arguments>
+            <argument name="dayValidators" xsi:type="array">
+                <item name="noHoliday" xsi:type="object">Dhl\ShippingCore\Model\DayValidator\NoHoliday</item>
+            </argument>
+        </arguments>
+    </type>
 
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
