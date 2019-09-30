@@ -14,7 +14,7 @@
             <group id="dhlglobalwebservices" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="100" translate="label">
                 <label>General Configuration</label>
 
-                <field id="shippingCoreInfoBox" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="shippingCoreInfoBox" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>Netresearch\ConfigFields\Block\InfoBox</frontend_model>
                     <attribute type="body_template">Dhl_ShippingCore::system/config/infoBoxBody.phtml</attribute>
                     <attribute type="header_template">Dhl_ShippingCore::system/config/infoBoxHeader.phtml</attribute>
