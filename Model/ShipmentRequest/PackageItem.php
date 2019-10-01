@@ -56,17 +56,22 @@ class PackageItem implements PackageItemInterface
     private $customsValue;
 
     /**
-     * @var string|null
+     * @var string
+     */
+    private $sku;
+
+    /**
+     * @var string
      */
     private $exportDescription;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $hsCode;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $countryOfOrigin;
 
@@ -80,8 +85,9 @@ class PackageItem implements PackageItemInterface
      * @param float $weight
      * @param float $price
      * @param float|null $customsValue
-     * @param string $hsCode
+     * @param string $sku
      * @param string $exportDescription
+     * @param string $hsCode
      * @param string $countryOfOrigin
      */
     public function __construct(
@@ -93,6 +99,7 @@ class PackageItem implements PackageItemInterface
         float $weight,
         float $price,
         float $customsValue = null,
+        string $sku = '',
         string $exportDescription = '',
         string $hsCode = '',
         string $countryOfOrigin = ''
@@ -105,6 +112,7 @@ class PackageItem implements PackageItemInterface
         $this->weight = $weight;
         $this->price = $price;
         $this->customsValue = $customsValue;
+        $this->sku = $sku;
         $this->exportDescription = $exportDescription;
         $this->hsCode = $hsCode;
         $this->countryOfOrigin = $countryOfOrigin;
@@ -188,6 +196,16 @@ class PackageItem implements PackageItemInterface
     public function getCustomsValue()
     {
         return $this->customsValue;
+    }
+
+    /**
+     * Obtain item's SKU.
+     *
+     * @return string
+     */
+    public function getSku(): string
+    {
+        return $this->sku;
     }
 
     /**

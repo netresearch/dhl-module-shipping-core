@@ -362,6 +362,7 @@ class RequestExtractor implements RequestExtractorInterface
                         'weight' => (float)$itemData['weight'],
                         'price' => (float)$itemData['price'],
                         'customsValue' => isset($itemData['customs_value']) ? (float)$itemData['customs_value'] : null,
+                        'sku' => $itemData['sku'] ?? '',
                         'exportDescription' => $itemData['customs']['exportDescription'] ?? '',
                         'hsCode' => $itemData['customs']['hsCode'] ?? '',
                         'countryOfOrigin' => $itemData['customs']['countryOfOrigin'] ?? '',

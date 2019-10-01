@@ -71,6 +71,13 @@ interface PackageItemInterface
     public function getCustomsValue();
 
     /**
+     * Obtain item's SKU.
+     *
+     * @return string
+     */
+    public function getSku(): string;
+
+    /**
      * Obtain item's custom declaration description.
      *
      * @return string
