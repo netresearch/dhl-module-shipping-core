@@ -9,7 +9,6 @@ namespace Dhl\ShippingCore\Model\AdditionalFee;
 use Dhl\ShippingCore\Api\UnitConverterInterface;
 use Dhl\ShippingCore\Model\AdditionalFeeManagement;
 use Magento\Framework\DataObject;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Api\Data\ShippingAssignmentInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address;
@@ -94,19 +93,15 @@ class Total extends Address\Total\AbstractTotal
         if (!$this->additionalFeeManagement->isActive($quote)) {
             return $this;
         }
-
         $baseFee = $this->additionalFeeManagement->getTotalAmount($quote);
-        try {
-            $total = $this->totalsManager->addFeeToTotal(
-                $total,
-                $baseFee,
-                $quote->getBaseCurrencyCode(),
-                $quote->getQuoteCurrencyCode()
-            );
+        $total = $this->totalsManager->addFeeToTotal(
+            $total,
+            $baseFee,
+            $quote->getBaseCurrencyCode(),
+            $quote->getQuoteCurrencyCode()
+        );
 
-            $this->totalsManager->transferAdditionalFees($total, $quote);
-        } catch (NoSuchEntityException $e) {
-        }
+        $this->totalsManager->transferAdditionalFees($total, $quote);
 
         return $this;
     }
@@ -135,7 +130,7 @@ class Total extends Address\Total\AbstractTotal
         if ($fee > 0.0) {
             $result = [
                 'code' => $this->getCode(),
-                'title' => __($this->getLabel($shippingAddress->getShippingMethod())),
+                'title' => $this->getLabel($shippingAddress->getShippingMethod()),
                 'value' => $fee,
             ];
         }
@@ -148,9 +143,9 @@ class Total extends Address\Total\AbstractTotal
      * to render the custom total.
      *
      * @param Order|Order\Invoice|Order\Creditmemo $source
-     * @return DataObject
+     * @return DataObject|null
      */
-    public function createTotalDisplayObject($source): DataObject
+    public function createTotalDisplayObject($source)
     {
         if ($source->getOrder()) {
             $shippingMethod = $source->getOrder()->getShippingMethod();

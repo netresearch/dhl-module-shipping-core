@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Setup\Module;
 
+use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
 use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
 use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
 use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
@@ -105,53 +106,53 @@ class Uninstaller
         $checkoutConnection = $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME);
         $checkoutConnection->dropColumn(
             $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-            Constants::ADDITIONAL_FEE_FIELD_NAME
+            TotalsManager::ADDITIONAL_FEE_FIELD_NAME
         );
 
         $checkoutConnection->dropColumn(
             $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-            Constants::ADDITIONAL_FEE_FIELD_NAME
+            TotalsManager::ADDITIONAL_FEE_FIELD_NAME
         );
 
         $checkoutConnection->dropColumn(
             $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-            Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
+            TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
         );
 
         $checkoutConnection->dropColumn(
             $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-            Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
+            TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
         );
 
         $salesConnection = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME);
         $salesConnection->dropColumn(
             $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            Constants::ADDITIONAL_FEE_FIELD_NAME
+            TotalsManager::ADDITIONAL_FEE_FIELD_NAME
         );
 
         $salesConnection->dropColumn(
             $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
+            TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
         );
 
         $salesConnection->dropColumn(
             $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            Constants::ADDITIONAL_FEE_FIELD_NAME
+            TotalsManager::ADDITIONAL_FEE_FIELD_NAME
         );
 
         $salesConnection->dropColumn(
             $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
+            TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
         );
 
         $salesConnection->dropColumn(
             $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            Constants::ADDITIONAL_FEE_FIELD_NAME
+            TotalsManager::ADDITIONAL_FEE_FIELD_NAME
         );
 
         $salesConnection->dropColumn(
             $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            Constants::ADDITIONAL_FEE_BASE_FIELD_NAME
+            TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
         );
     }
 }

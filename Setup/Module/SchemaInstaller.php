@@ -9,7 +9,9 @@ namespace Dhl\ShippingCore\Setup\Module;
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
+use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
 use Magento\Framework\DB\Ddl\Table;
+use Magento\Framework\Module\Setup;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Sales\Api\Data\OrderAddressInterface;
 
@@ -25,7 +27,7 @@ class SchemaInstaller
     /**
      * Add label status column to orders grid.
      *
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      */
     public static function addLabelStatusColumn(SchemaSetupInterface $schemaSetup)
     {
@@ -43,7 +45,7 @@ class SchemaInstaller
     /**
      * Create label status table.
      *
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      * @throws \Zend_Db_Exception
      */
     public static function createLabelStatusTable(SchemaSetupInterface $schemaSetup)
@@ -71,11 +73,11 @@ class SchemaInstaller
             $schemaSetup->getFkName(
                 $schemaSetup->getTable(Constants::TABLE_DHLGW_LABEL_STATUS, Constants::SALES_CONNECTION_NAME),
                 'order_id',
-                $schemaSetup->getTable('sales_order', Constants::SALES_CONNECTION_NAME),
+                $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
                 'entity_id'
             ),
             'order_id',
-            $schemaSetup->getTable('sales_order', Constants::SALES_CONNECTION_NAME),
+            $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
             'entity_id',
             Table::ACTION_CASCADE
         );
@@ -84,7 +86,7 @@ class SchemaInstaller
     }
 
     /**
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      * @throws \Zend_Db_Exception
      */
     public static function createDhlRecipientStreetTable(SchemaSetupInterface $schemaSetup)
@@ -144,7 +146,7 @@ class SchemaInstaller
     /**
      * Create Shipping Option selection tables.
      *
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      * @throws \Zend_Db_Exception
      */
     public static function createShippingOptionSelectionTables(SchemaSetupInterface $schemaSetup)
@@ -204,11 +206,11 @@ class SchemaInstaller
             $schemaSetup->getFkName(
                 $quoteTableName,
                 'parent_id',
-                $schemaSetup->getTable('quote_address', Constants::CHECKOUT_CONNECTION_NAME),
+                $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
                 'address_id'
             ),
             'parent_id',
-            $schemaSetup->getTable('quote_address'),
+            $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME),
             'address_id',
             Table::ACTION_CASCADE
         );
@@ -231,19 +233,18 @@ class SchemaInstaller
     }
 
     /**
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      */
     public static function createAdditionalFeeColumns(SchemaSetupInterface $schemaSetup)
     {
         $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
             ->addColumn(
                 $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-                Constants::ADDITIONAL_FEE_FIELD_NAME,
+                TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
-                    'default' => '0.0000',
                     'comment' => 'DHLGW Additional Fee'
                 ]
             );
@@ -251,12 +252,11 @@ class SchemaInstaller
         $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
             ->addColumn(
                 $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-                Constants::ADDITIONAL_FEE_FIELD_NAME,
+                TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
-                    'default' => '0.0000',
                     'comment' => 'DHLGW Additional Fee'
                 ]
             );
@@ -264,12 +264,11 @@ class SchemaInstaller
         $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
             ->addColumn(
                 $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-                Constants::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
-                    'default' => '0.0000',
                     'comment' => 'Base DHLGW Additional Fee'
                 ]
             );
@@ -277,12 +276,11 @@ class SchemaInstaller
         $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
             ->addColumn(
                 $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-                Constants::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
-                    'default' => '0.0000',
                     'comment' => 'Base DHLGW Additional Fee'
                 ]
             );
@@ -290,12 +288,11 @@ class SchemaInstaller
         $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
             ->addColumn(
                 $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                Constants::ADDITIONAL_FEE_FIELD_NAME,
+                TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
-                    'default' => '0.0000',
                     'comment' => 'DHLGW Additional Fee'
                 ]
             );
@@ -303,12 +300,11 @@ class SchemaInstaller
         $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
             ->addColumn(
                 $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                Constants::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
-                    'default' => '0.0000',
                     'comment' => 'Base DHLGW Additional Fee'
                 ]
             );
@@ -316,12 +312,11 @@ class SchemaInstaller
         $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
             ->addColumn(
                 $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                Constants::ADDITIONAL_FEE_FIELD_NAME,
+                TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
-                    'default' => '0.0000',
                     'comment' => 'DHLGW Additional Fee'
                 ]
             );
@@ -329,12 +324,11 @@ class SchemaInstaller
         $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
             ->addColumn(
                 $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                Constants::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
-                    'default' => '0.0000',
                     'comment' => 'Base DHLGW Additional Fee'
                 ]
             );
@@ -342,12 +336,11 @@ class SchemaInstaller
         $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
             ->addColumn(
                 $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                Constants::ADDITIONAL_FEE_FIELD_NAME,
+                TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
-                    'default' => '0.0000',
                     'comment' => 'DHLGW Additional Fee'
                 ]
             );
@@ -355,12 +348,11 @@ class SchemaInstaller
         $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
             ->addColumn(
                 $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                Constants::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
-                    'default' => '0.0000',
                     'comment' => 'Base DHLGW Additional Fee'
                 ]
             );

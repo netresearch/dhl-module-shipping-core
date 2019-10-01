@@ -15,6 +15,7 @@ use Magento\Quote\Model\Quote\Address\Total;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Creditmemo;
 use Magento\Sales\Model\Order\Invoice;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class TotalsManager
@@ -25,7 +26,7 @@ use Magento\Sales\Model\Order\Invoice;
 class TotalsManager
 {
     const ADDITIONAL_FEE_FIELD_NAME = 'dhlgw_additional_fee';
-    const ADDITIONAL_FEE_BASE_FIELD_NAME = 'base_dhlgw_additional_fee';
+    const ADDITIONAL_FEE_BASE_FIELD_NAME = 'dhlgw_additional_base_fee';
 
     /**
      * @var UnitConverter
@@ -38,15 +39,25 @@ class TotalsManager
     private $dataObjectFactory;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * TotalsManager constructor.
      *
      * @param UnitConverter $unitConverter
      * @param DataObjectFactory $dataObjectFactory
+     * @param LoggerInterface $logger
      */
-    public function __construct(UnitConverter $unitConverter, DataObjectFactory $dataObjectFactory)
-    {
+    public function __construct(
+        UnitConverter $unitConverter,
+        DataObjectFactory $dataObjectFactory,
+        LoggerInterface $logger
+    ) {
         $this->unitConverter = $unitConverter;
         $this->dataObjectFactory = $dataObjectFactory;
+        $this->logger = $logger;
     }
 
     /**
@@ -55,7 +66,6 @@ class TotalsManager
      * @param string $baseCurrency
      * @param string $quoteCurrency
      * @return Total
-     * @throws NoSuchEntityException
      */
     public function addFeeToTotal(
         Total $total,
@@ -63,11 +73,18 @@ class TotalsManager
         string $baseCurrency,
         string $quoteCurrency
     ): Total {
-        $fee = $this->unitConverter->convertMonetaryValue(
-            $baseFee,
-            $baseCurrency,
-            $quoteCurrency
-        );
+        try {
+            $fee = $this->unitConverter->convertMonetaryValue(
+                $baseFee,
+                $baseCurrency,
+                $quoteCurrency
+            );
+        } catch (NoSuchEntityException $e) {
+            $msg = "An error occurred while converting fee amount from {$baseCurrency} to {$quoteCurrency}.";
+            $this->logger->error("$msg {$e->getLogMessage()}");
+
+            return $total;
+        }
 
         $total->setTotalAmount(self::ADDITIONAL_FEE_FIELD_NAME, $fee);
         $total->setBaseTotalAmount(self::ADDITIONAL_FEE_FIELD_NAME, $baseFee);
@@ -86,16 +103,16 @@ class TotalsManager
         $amount = $source->getData(self::ADDITIONAL_FEE_FIELD_NAME);
         $baseAmount = $source->getData(self::ADDITIONAL_FEE_BASE_FIELD_NAME);
 
-        if (!$baseAmount || !$amount) {
+        if ($baseAmount === null) {
             return;
         }
 
-        $destination->setData(self::ADDITIONAL_FEE_FIELD_NAME, $amount);
-        $destination->setData(self::ADDITIONAL_FEE_BASE_FIELD_NAME, $baseAmount);
+        $destination->setData(self::ADDITIONAL_FEE_FIELD_NAME, (float)$amount);
+        $destination->setData(self::ADDITIONAL_FEE_BASE_FIELD_NAME, (float)$baseAmount);
 
         if (!($destination instanceof Order)) {
-            $destination->setGrandTotal($destination->getGrandTotal() + $amount);
-            $destination->setBaseGrandTotal($destination->getBaseGrandTotal() + $baseAmount);
+            $destination->setGrandTotal($destination->getGrandTotal() + (float)$amount);
+            $destination->setBaseGrandTotal($destination->getBaseGrandTotal() + (float)$baseAmount);
         }
     }
 
@@ -103,20 +120,24 @@ class TotalsManager
      * @param Order|Order\Invoice|Order\Creditmemo $source
      * @param string $code
      * @param string $label
-     * @return DataObject
+     * @return DataObject|null
      */
-    public function createTotalDisplayObject($source, string $code, string $label): DataObject
+    public function createTotalDisplayObject($source, string $code, string $label)
     {
-        $fee = (float)$source->getData(self::ADDITIONAL_FEE_FIELD_NAME);
-        $baseFee = (float)$source->getData(self::ADDITIONAL_FEE_BASE_FIELD_NAME);
+        $fee = $source->getData(self::ADDITIONAL_FEE_FIELD_NAME);
+        $baseFee = $source->getData(self::ADDITIONAL_FEE_BASE_FIELD_NAME);
+
+        if ($baseFee === null) {
+            return null;
+        }
 
         return $this->dataObjectFactory->create(
             [
                 'data' => [
                     'code' => $code,
-                    'value' => $fee,
-                    'base_value' => $baseFee,
-                    'label' => __($label)
+                    'value' => (float)$fee,
+                    'base_value' => (float)$baseFee,
+                    'label' => $label
                 ]
             ]
         );

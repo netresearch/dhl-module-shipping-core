@@ -36,8 +36,4 @@ class Constants
     const INVOICE_TABLE_NAME = 'sales_invoice';
 
     const CREDITMEMO_TABLE_NAME = 'sales_creditmemo';
-
-    const ADDITIONAL_FEE_FIELD_NAME = 'dhlgw_additional_fee';
-
-    const ADDITIONAL_FEE_BASE_FIELD_NAME = 'base_dhlgw_additional_fee';
 }
