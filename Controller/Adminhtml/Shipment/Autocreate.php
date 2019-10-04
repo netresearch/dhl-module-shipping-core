@@ -96,7 +96,7 @@ class Autocreate extends Action
         }
 
         // create labels and tracks for above shipments
-        $result = $this->bulkShipmentManagement->createLabels($shipmentIds);
+        $result = $this->bulkShipmentManagement->createLabels(array_reduce($shipmentIds, 'array_merge', []));
 
         // check result, inform about created and failed labels/tracks
         $processResult = function (array $incrementIds, ShipmentResponseInterface $shipmentResponse) {
@@ -109,10 +109,10 @@ class Autocreate extends Action
                 && !empty($shipment->getTracks())
             ) {
                 // collect successfully created labels
-                $incrementIds['success'][] = $orderIncrementId;
+                $incrementIds['success'][$orderIncrementId] = $orderIncrementId;
             } else {
                 // collect label errors
-                $incrementIds['error'][] = $orderIncrementId;
+                $incrementIds['error'][$orderIncrementId] = $orderIncrementId;
                 if ($shipmentResponse instanceof ShipmentErrorResponseInterface) {
                     // add error message if details are available
                     $this->messageManager->addErrorMessage(__('Order %1: %2.', $orderIncrementId, $shipmentResponse->getErrors()));

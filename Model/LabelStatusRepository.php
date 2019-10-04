@@ -24,11 +24,11 @@ class LabelStatusRepository
 
     /**
      * LabelStatusRepository constructor.
-     *
      * @param ResourceModel\LabelStatus $resource
      */
-    public function __construct(ResourceModel\LabelStatus $resource)
-    {
+    public function __construct(
+        ResourceModel\LabelStatus $resource
+    ) {
         $this->resource = $resource;
     }
 

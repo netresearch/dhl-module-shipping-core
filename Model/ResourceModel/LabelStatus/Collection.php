@@ -26,4 +26,14 @@ class Collection extends AbstractCollection
     {
         $this->_init(LabelStatus::class, LabelStatusResource::class);
     }
+
+    /**
+     * Obtain the collection's status code column with order id as index.
+     *
+     * @return string[]
+     */
+    public function getValues(): array
+    {
+        return $this->_toOptionHash(LabelStatus::ORDER_ID, LabelStatus::STATUS_CODE);
+    }
 }

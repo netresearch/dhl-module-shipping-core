@@ -9,11 +9,14 @@ namespace Dhl\ShippingCore\Model;
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
+use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
+use Dhl\ShippingCore\Model\BulkShipment\LabelStatusProvider;
 use Dhl\ShippingCore\Model\BulkShipment\NotImplementedException;
 use Dhl\ShippingCore\Model\BulkShipment\OrderCollectionLoader;
 use Dhl\ShippingCore\Model\BulkShipment\ShipmentCollectionLoader;
 use Dhl\ShippingCore\Model\Shipment\CancelRequestBuilder;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\ShipOrderInterface;
 use Magento\Sales\Model\Order;
 use Magento\Shipping\Model\Shipment\RequestFactory;
@@ -49,6 +52,11 @@ class BulkShipmentManagement
     private $shipmentCollectionLoader;
 
     /**
+     * @var LabelStatusProvider
+     */
+    private $labelStatusProvider;
+
+    /**
      * @var ShipOrderInterface
      */
     private $shipOrder;
@@ -79,6 +87,7 @@ class BulkShipmentManagement
      * @param CancelRequestBuilder $cancelRequestBuilder
      * @param LoggerInterface $logger
      * @param RequestFactory $requestFactory
+     * @param LabelStatusProvider $labelStatusProvider
      */
     public function __construct(
         ConfigInterface $config,
@@ -88,7 +97,8 @@ class BulkShipmentManagement
         ShipOrderInterface $shipOrder,
         CancelRequestBuilder $cancelRequestBuilder,
         LoggerInterface $logger,
-        RequestFactory $requestFactory
+        RequestFactory $requestFactory,
+        LabelStatusProvider $labelStatusProvider
     ) {
         $this->config = $config;
         $this->bulkConfig = $bulkConfig;
@@ -98,31 +108,14 @@ class BulkShipmentManagement
         $this->cancelRequestBuilder = $cancelRequestBuilder;
         $this->logger = $logger;
         $this->requestFactory = $requestFactory;
-    }
-
-    /**
-     * Get the first shipment with no label from shipments collection
-     *
-     * @param Order $order
-     * @return string|null
-     */
-    private function getOrderShipmentId(Order $order)
-    {
-        $shipmentIds = [];
-        foreach ($order->getShipmentsCollection()->getItems() as $item) {
-            if (!$item->getShippingLabel()) {
-                $shipmentIds[] = $item->getEntityId();
-            }
-        }
-
-        return array_shift($shipmentIds);
+        $this->labelStatusProvider = $labelStatusProvider;
     }
 
     /**
      * Create shipments for given order IDs.
      *
      * @param string[] $orderIds List of selected order ids
-     * @return int[] Created shipment IDs by order increment ID, e.g. ['1000023' => 42, '1000024' => null]
+     * @return int[][] Created shipment IDs by order increment ID, e.g. ['1000023' => [42, 43], '1000024' => []]
      */
     public function createShipments(array $orderIds): array
     {
@@ -140,21 +133,31 @@ class BulkShipmentManagement
 
         $carrierCodes = array_filter($this->bulkConfig->getCarrierCodes(), $fnFilter);
         $orders = $this->orderCollectionLoader->load($orderIds, $carrierCodes);
+        $ordersLabelStatus = $this->labelStatusProvider->getLabelStatus($orderIds);
 
         /** @var Order $order */
         foreach ($orders as $order) {
-            if (!$order->canShip()) {
-                $result[$order->getIncrementId()] = $retryFailedShipments ? $this->getOrderShipmentId($order) : null;
-                continue;
+            $notify = $this->config->isBulkNotificationEnabled($order->getStoreId());
+            $shipmentsCollection = $order->getShipmentsCollection()
+                ->addFieldToFilter(ShipmentInterface::SHIPPING_LABEL, ['null' => true]);
+
+            $labelStatus = $ordersLabelStatus[$order->getId()] ?? null;
+            if ($retryFailedShipments || $labelStatus !== LabelStatusManagementInterface::LABEL_STATUS_FAILED) {
+                $shipmentIds = $shipmentsCollection->getAllIds();
+            } else {
+                $shipmentIds = [];
             }
 
-            try {
-                $notify = $this->config->isBulkNotificationEnabled($order->getStoreId());
-                $result[$order->getIncrementId()] = $this->shipOrder->execute($order->getId(), [], $notify);
-            } catch (\Exception $exception) {
-                $result[$order->getIncrementId()] = null;
-                $this->logger->error($exception->getMessage(), ['exception' => $exception]);
+            if ($order->canShip()) {
+                try {
+                    $shipmentId = $this->shipOrder->execute($order->getId(), [], $notify);
+                    $shipmentIds[]= $shipmentId;
+                } catch (\Exception $exception) {
+                    $this->logger->error($exception->getMessage(), ['exception' => $exception]);
+                }
             }
+
+            $result[$order->getIncrementId()] = $shipmentIds;
         }
 
         return $result;
