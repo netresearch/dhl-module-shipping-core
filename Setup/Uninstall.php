@@ -28,6 +28,7 @@ class Uninstall implements UninstallInterface
 
     /**
      * Uninstall constructor.
+     *
      * @param EavSetup $eavSetup
      */
     public function __construct(EavSetup $eavSetup)

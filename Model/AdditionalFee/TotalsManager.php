@@ -7,8 +7,6 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\AdditionalFee;
 
 use Dhl\ShippingCore\Util\UnitConverter;
-use Magento\Framework\DataObject;
-use Magento\Framework\DataObjectFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address\Total;
@@ -26,7 +24,9 @@ use Psr\Log\LoggerInterface;
 class TotalsManager
 {
     const ADDITIONAL_FEE_FIELD_NAME = 'dhlgw_additional_fee';
-    const ADDITIONAL_FEE_BASE_FIELD_NAME = 'dhlgw_additional_base_fee';
+    const ADDITIONAL_FEE_INCL_TAX_FIELD_NAME = 'dhlgw_additional_fee_incl_tax';
+    const ADDITIONAL_FEE_BASE_FIELD_NAME = 'base_dhlgw_additional_fee';
+    const ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME = 'base_dhlgw_additional_fee_incl_tax';
 
     /**
      * @var UnitConverter
@@ -34,7 +34,7 @@ class TotalsManager
     private $unitConverter;
 
     /**
-     * @var DataObjectFactory
+     * @var DisplayObjectFactory
      */
     private $dataObjectFactory;
 
@@ -47,12 +47,12 @@ class TotalsManager
      * TotalsManager constructor.
      *
      * @param UnitConverter $unitConverter
-     * @param DataObjectFactory $dataObjectFactory
+     * @param DisplayObjectFactory $dataObjectFactory
      * @param LoggerInterface $logger
      */
     public function __construct(
         UnitConverter $unitConverter,
-        DataObjectFactory $dataObjectFactory,
+        DisplayObjectFactory $dataObjectFactory,
         LoggerInterface $logger
     ) {
         $this->unitConverter = $unitConverter;
@@ -63,6 +63,7 @@ class TotalsManager
     /**
      * @param Total $total
      * @param float $baseFee
+     * @param float $baseFeeInclTax
      * @param string $baseCurrency
      * @param string $quoteCurrency
      * @return Total
@@ -70,12 +71,18 @@ class TotalsManager
     public function addFeeToTotal(
         Total $total,
         float $baseFee,
+        float $baseFeeInclTax,
         string $baseCurrency,
         string $quoteCurrency
     ): Total {
         try {
             $fee = $this->unitConverter->convertMonetaryValue(
                 $baseFee,
+                $baseCurrency,
+                $quoteCurrency
+            );
+            $feeInclTax = $this->unitConverter->convertMonetaryValue(
+                $baseFeeInclTax,
                 $baseCurrency,
                 $quoteCurrency
             );
@@ -89,7 +96,9 @@ class TotalsManager
         $total->setTotalAmount(self::ADDITIONAL_FEE_FIELD_NAME, $fee);
         $total->setBaseTotalAmount(self::ADDITIONAL_FEE_FIELD_NAME, $baseFee);
         $total->setData(self::ADDITIONAL_FEE_FIELD_NAME, $fee);
+        $total->setData(self::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME, $feeInclTax);
         $total->setData(self::ADDITIONAL_FEE_BASE_FIELD_NAME, $baseFee);
+        $total->setData(self::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME, $baseFeeInclTax);
 
         return $total;
     }
@@ -101,18 +110,53 @@ class TotalsManager
     public function transferAdditionalFees($source, $destination)
     {
         $amount = $source->getData(self::ADDITIONAL_FEE_FIELD_NAME);
+        $amountInclTax = $source->getData(self::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME);
         $baseAmount = $source->getData(self::ADDITIONAL_FEE_BASE_FIELD_NAME);
+        $baseAmountInclTax = $source->getData(self::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME);
 
         if ($baseAmount === null) {
             return;
         }
 
-        $destination->setData(self::ADDITIONAL_FEE_FIELD_NAME, (float)$amount);
-        $destination->setData(self::ADDITIONAL_FEE_BASE_FIELD_NAME, (float)$baseAmount);
+        $destination->setData(self::ADDITIONAL_FEE_FIELD_NAME, $amount);
+        $destination->setData(self::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME, $amountInclTax);
+        $destination->setData(self::ADDITIONAL_FEE_BASE_FIELD_NAME, $baseAmount);
+        $destination->setData(self::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME, $baseAmountInclTax);
 
-        if (!($destination instanceof Order)) {
-            $destination->setGrandTotal($destination->getGrandTotal() + (float)$amount);
-            $destination->setBaseGrandTotal($destination->getBaseGrandTotal() + (float)$baseAmount);
+        if ($destination instanceof Invoice || $destination instanceof Creditmemo) {
+            if (!$destination->isLast()) {
+                /**
+                 * If sales document is not the final entity on the order Magento is confused about tax amounts,
+                 * fix this here by adding the total incl tax to the grand total
+                 * and the fee tax amounts to the total tax amount
+                 */
+                $baseFeeTaxAmount = (float) $source->getData(self::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME)
+                                    - (float) $source->getData(self::ADDITIONAL_FEE_BASE_FIELD_NAME);
+                $feeTaxAmount = (float) $source->getData(self::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME)
+                                - (float) $source->getData(self::ADDITIONAL_FEE_FIELD_NAME);
+                $destination->setTaxAmount($source->getTaxAmount() + $feeTaxAmount);
+                $destination->setBaseTaxAmount($source->getBaseTaxAmount() + $baseFeeTaxAmount);
+
+                $destination->setBaseGrandTotal(
+                    $destination->getBaseGrandTotal()
+                    + $destination->getData(self::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME)
+                );
+                $destination->setGrandTotal(
+                    $destination->getGrandTotal()
+                    + $destination->getData(self::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME)
+                );
+            } else {
+                /**
+                 * If this is the last instance of the sales entity type on that order, just add the fee (excl tax)
+                 * to the grand total
+                 */
+                $destination->setBaseGrandTotal(
+                    $destination->getBaseGrandTotal() + $destination->getData(self::ADDITIONAL_FEE_BASE_FIELD_NAME)
+                );
+                $destination->setGrandTotal(
+                    $destination->getGrandTotal() + $destination->getData(self::ADDITIONAL_FEE_FIELD_NAME)
+                );
+            }
         }
     }
 
@@ -120,14 +164,16 @@ class TotalsManager
      * @param Order|Order\Invoice|Order\Creditmemo $source
      * @param string $code
      * @param string $label
-     * @return DataObject|null
+     * @return DisplayObject|null
      */
     public function createTotalDisplayObject($source, string $code, string $label)
     {
-        $fee = $source->getData(self::ADDITIONAL_FEE_FIELD_NAME);
-        $baseFee = $source->getData(self::ADDITIONAL_FEE_BASE_FIELD_NAME);
+        $amount = (float) $source->getData(self::ADDITIONAL_FEE_FIELD_NAME);
+        $amountInclTax = (float) $source->getData(self::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME);
+        $baseAmount = (float) $source->getData(self::ADDITIONAL_FEE_BASE_FIELD_NAME);
+        $baseAmountInclTax = (float) $source->getData(self::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME);
 
-        if ($baseFee === null) {
+        if ($baseAmount === 0) {
             return null;
         }
 
@@ -135,10 +181,12 @@ class TotalsManager
             [
                 'data' => [
                     'code' => $code,
-                    'value' => (float)$fee,
-                    'base_value' => (float)$baseFee,
-                    'label' => $label
-                ]
+                    'value' => $amount,
+                    'value_incl_tax' => $amountInclTax,
+                    'base_value' => $baseAmount,
+                    'base_value_incl_tax' => $baseAmountInclTax,
+                    'label' => __($label),
+                ],
             ]
         );
     }

@@ -3,6 +3,7 @@
     <!-- # service interface preferences -->
     <preference for="Dhl\ShippingCore\Api\CheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\CheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\ConfigInterface" type="Dhl\ShippingCore\Model\Config\Config"/>
+    <preference for="Dhl\ShippingCore\Api\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
     <preference for="Dhl\ShippingCore\Api\GuestCheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\GuestCheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Rate\CollectRatesPipeline"/>
@@ -178,7 +179,6 @@
             </argument>
         </arguments>
     </type>
-
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
@@ -200,6 +200,19 @@
             </argument>
         </arguments>
     </type>
+    <type name="Dhl\ShippingCore\Model\BulkShipmentManagement">
+        <arguments>
+            <argument name="orderRepository" xsi:type="object">Dhl\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
+        </arguments>
+    </type>
+    <type name="Dhl\ShippingCore\Model\AdditionalFee\Total">
+        <arguments>
+            <argument name="taxHelper" xsi:type="object">Magento\Tax\Helper\Data\Proxy</argument>
+            <argument name="taxCalculation" xsi:type="object">Magento\Tax\Api\TaxCalculationInterface\Proxy</argument>
+            <argument name="taxConfig" xsi:type="object">Dhl\ShippingCore\Api\TaxConfigInterface\Proxy</argument>
+            <argument name="totalsManager" xsi:type="object">Dhl\ShippingCore\Model\AdditionalFee\TotalsManager\Proxy</argument>
+        </arguments>
+    </type>
 
     <!-- # interceptor plugins -->
     <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
@@ -211,10 +224,11 @@
     <type name="Magento\Sales\Model\Order\AddressRepository">
         <plugin name="Dhl_ShippingCore_Address_Extension" type="Dhl\ShippingCore\Plugin\Order\Address\AddressRepositoryPlugin"/>
     </type>
-    <type name="Dhl\ShippingCore\Model\BulkShipmentManagement">
-        <arguments>
-            <argument name="orderRepository" xsi:type="object">Dhl\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
-        </arguments>
+    <type name="Magento\Quote\Api\CartTotalRepositoryInterface">
+        <plugin name="DhlgwAddFeeAmountsPlugin" type="Dhl\ShippingCore\Plugin\Quote\Cart\AddTotalSegmentExtensionAttributes"/>
+    </type>
+    <type name="Magento\Tax\Helper\Data">
+        <plugin name="DhlgwAddFeeTaxPlugin" type="Dhl\ShippingCore\Plugin\Tax\AddFeeTaxAmounts"/>
     </type>
 
     <!-- shipping option config xml reader -->

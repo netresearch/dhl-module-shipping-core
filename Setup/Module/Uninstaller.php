@@ -13,6 +13,7 @@ use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
 use Magento\Catalog\Model\Product;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\App\ResourceConnection;
+use Magento\Framework\Module\Setup;
 use Magento\Framework\Setup\SchemaSetupInterface;
 
 /**
@@ -25,7 +26,7 @@ class Uninstaller
     /**
      * Delete all config data related to Dhl_ShippingCore.
      *
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      */
     public static function deleteConfig(SchemaSetupInterface $schemaSetup)
     {
@@ -37,7 +38,7 @@ class Uninstaller
     /**
      * Remove label status column from orders grid.
      *
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      */
     public static function deleteLabelStatusColumn(SchemaSetupInterface $schemaSetup)
     {
@@ -51,7 +52,7 @@ class Uninstaller
     /**
      * Drop label status table.
      *
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      */
     public static function dropLabelStatusTable(SchemaSetupInterface $schemaSetup)
     {
@@ -72,7 +73,7 @@ class Uninstaller
     /**
      * Drop label status table.
      *
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      */
     public static function dropDhlRecipientStreetTable(SchemaSetupInterface $schemaSetup)
     {
@@ -83,7 +84,7 @@ class Uninstaller
     /**
      * Drop shipping option selection table
      *
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      * @return void
      */
     public static function dropShippingOptionSelectionTables(SchemaSetupInterface $schemaSetup)
@@ -96,63 +97,45 @@ class Uninstaller
     }
 
     /**
-     * Remove Service
+     * Remove shipping option fees
      *
-     * @param SchemaSetupInterface|\Magento\Framework\Module\Setup $schemaSetup
+     * @param SchemaSetupInterface|Setup $schemaSetup
      * @return void
      */
     public static function removeAdditionalFeeColumns(SchemaSetupInterface $schemaSetup)
     {
-        $checkoutConnection = $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME);
-        $checkoutConnection->dropColumn(
-            $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-            TotalsManager::ADDITIONAL_FEE_FIELD_NAME
-        );
-
-        $checkoutConnection->dropColumn(
-            $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-            TotalsManager::ADDITIONAL_FEE_FIELD_NAME
-        );
-
-        $checkoutConnection->dropColumn(
-            $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-            TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
-        );
-
-        $checkoutConnection->dropColumn(
-            $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-            TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
-        );
-
-        $salesConnection = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME);
-        $salesConnection->dropColumn(
-            $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            TotalsManager::ADDITIONAL_FEE_FIELD_NAME
-        );
-
-        $salesConnection->dropColumn(
-            $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
-        );
-
-        $salesConnection->dropColumn(
-            $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            TotalsManager::ADDITIONAL_FEE_FIELD_NAME
-        );
-
-        $salesConnection->dropColumn(
-            $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
-        );
-
-        $salesConnection->dropColumn(
-            $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            TotalsManager::ADDITIONAL_FEE_FIELD_NAME
-        );
-
-        $salesConnection->dropColumn(
-            $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-            TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
-        );
+        $allTables = [
+            Constants::CHECKOUT_CONNECTION_NAME => [Constants::QUOTE_TABLE_NAME],
+            Constants::SALES_CONNECTION_NAME => [
+                Constants::ORDER_TABLE_NAME,
+                Constants::INVOICE_TABLE_NAME,
+                Constants::CREDITMEMO_TABLE_NAME,
+            ],
+        ];
+        foreach ($allTables as $connection => $tables) {
+            foreach ($tables as $table) {
+                $adapter = $schemaSetup->getConnection($connection);
+                $adapter
+                    ->dropColumn(
+                        $schemaSetup->getTable($table, $connection),
+                        TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME
+                    );
+                $adapter
+                    ->dropColumn(
+                        $schemaSetup->getTable($table, $connection),
+                        TotalsManager::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME
+                    );
+                $adapter
+                    ->dropColumn(
+                        $schemaSetup->getTable($table, $connection),
+                        TotalsManager::ADDITIONAL_FEE_FIELD_NAME
+                    );
+                $adapter
+                    ->dropColumn(
+                        $schemaSetup->getTable($table, $connection),
+                        TotalsManager::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME
+                    );
+            }
+        }
     }
 }

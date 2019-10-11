@@ -10,12 +10,13 @@ See LICENSE.md for license details.
     </section>
     <section name="order_invoice">
         <group name="totals">
-            <item name="dhlgw_additional_fee" instance="Dhl\ShippingCore\Model\AdditionalFee\InvoiceTotal" sort_order="150"/>
+            <!-- needs to be calculated after general tax total -->
+            <item name="dhlgw_additional_fee" instance="Dhl\ShippingCore\Model\AdditionalFee\InvoiceTotal" sort_order="250"/>
         </group>
     </section>
     <section name="order_creditmemo">
         <group name="totals">
-            <item name="dhlgw_additional_fee" instance="Dhl\ShippingCore\Model\AdditionalFee\CreditmemoTotal" sort_order="160"/>
+            <item name="dhlgw_additional_fee" instance="Dhl\ShippingCore\Model\AdditionalFee\CreditmemoTotal" sort_order="200"/>
         </group>
     </section>
 </config>

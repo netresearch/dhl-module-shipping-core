@@ -23,6 +23,12 @@ class CreditmemoTotal extends AbstractTotal
      */
     private $totalsManager;
 
+    /**
+     * CreditmemoTotal constructor.
+     *
+     * @param TotalsManager $totalsManager
+     * @param array $data
+     */
     public function __construct(TotalsManager $totalsManager, array $data = [])
     {
         $this->totalsManager = $totalsManager;
@@ -32,10 +38,17 @@ class CreditmemoTotal extends AbstractTotal
 
     /**
      * @param Creditmemo $creditmemo
-     * @return $this|AbstractTotal
+     * @return self|AbstractTotal
      */
     public function collect(Creditmemo $creditmemo)
     {
+        foreach ($creditmemo->getOrder()->getCreditmemosCollection() as $previousCreditmemo) {
+            if ((float) $previousCreditmemo->getData(TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME) > 0) {
+                // in case the additional fee has already been refunded, do not add it to another creditmemo
+                return $this;
+            }
+        }
+
         $this->totalsManager->transferAdditionalFees(
             $creditmemo->getOrder(),
             $creditmemo

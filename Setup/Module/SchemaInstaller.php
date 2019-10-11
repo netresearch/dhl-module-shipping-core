@@ -6,9 +6,9 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Setup\Module;
 
+use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
-use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
 use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Module\Setup;
@@ -37,7 +37,7 @@ class SchemaInstaller
             [
                 'type' => Table::TYPE_TEXT,
                 'length' => 10,
-                'comment' => 'DHL Label Status'
+                'comment' => 'DHL Label Status',
             ]
         );
     }
@@ -51,7 +51,12 @@ class SchemaInstaller
     public static function createLabelStatusTable(SchemaSetupInterface $schemaSetup)
     {
         $table = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
-            ->newTable($schemaSetup->getTable(Constants::TABLE_DHLGW_LABEL_STATUS, Constants::SALES_CONNECTION_NAME));
+                             ->newTable(
+                                 $schemaSetup->getTable(
+                                     Constants::TABLE_DHLGW_LABEL_STATUS,
+                                     Constants::SALES_CONNECTION_NAME
+                                 )
+                             );
 
         $table->addColumn(
             'order_id',
@@ -163,7 +168,7 @@ class SchemaInstaller
         $quoteTable = $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)->newTable($quoteTableName);
         $orderTable = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->newTable($orderTableName);
 
-        /** @var \Magento\Framework\DB\Ddl\Table $table */
+        /** @var Table $table */
         foreach ([$quoteTable, $orderTable] as $table) {
             $table->addColumn(
                 'entity_id',
@@ -233,128 +238,54 @@ class SchemaInstaller
     }
 
     /**
+     * Add columns to sales documents for service charge total values
+     *
      * @param SchemaSetupInterface|Setup $schemaSetup
      */
     public static function createAdditionalFeeColumns(SchemaSetupInterface $schemaSetup)
     {
-        $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
-            ->addColumn(
-                $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-                TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'comment' => 'DHLGW Additional Fee'
-                ]
-            );
-
-        $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
-            ->addColumn(
-                $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-                TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'comment' => 'DHLGW Additional Fee'
-                ]
-            );
-
-        $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
-            ->addColumn(
-                $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-                TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'comment' => 'Base DHLGW Additional Fee'
-                ]
-            );
-
-        $schemaSetup->getConnection(Constants::CHECKOUT_CONNECTION_NAME)
-            ->addColumn(
-                $schemaSetup->getTable(Constants::QUOTE_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
-                TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'comment' => 'Base DHLGW Additional Fee'
-                ]
-            );
-
-        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
-            ->addColumn(
-                $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'comment' => 'DHLGW Additional Fee'
-                ]
-            );
-
-        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
-            ->addColumn(
-                $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'comment' => 'Base DHLGW Additional Fee'
-                ]
-            );
-
-        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
-            ->addColumn(
-                $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'comment' => 'DHLGW Additional Fee'
-                ]
-            );
-
-        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
-            ->addColumn(
-                $schemaSetup->getTable(Constants::INVOICE_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'comment' => 'Base DHLGW Additional Fee'
-                ]
-            );
-
-        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
-            ->addColumn(
-                $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'comment' => 'DHLGW Additional Fee'
-                ]
-            );
-
-        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
-            ->addColumn(
-                $schemaSetup->getTable(Constants::CREDITMEMO_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
-                TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
-                [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'comment' => 'Base DHLGW Additional Fee'
-                ]
-            );
+        $allTables = [
+            Constants::CHECKOUT_CONNECTION_NAME => [Constants::QUOTE_TABLE_NAME],
+            Constants::SALES_CONNECTION_NAME => [
+                Constants::ORDER_TABLE_NAME,
+                Constants::INVOICE_TABLE_NAME,
+                Constants::CREDITMEMO_TABLE_NAME,
+            ],
+        ];
+        $columnDefinition = [
+            'type' => Table::TYPE_DECIMAL,
+            'nullable' => true,
+            'length' => '12,4',
+            'comment' => 'DHLGW Additional Fee',
+        ];
+        foreach ($allTables as $connection => $tables) {
+            foreach ($tables as $table) {
+                $adapter = $schemaSetup->getConnection($connection);
+                $adapter
+                    ->addColumn(
+                        $schemaSetup->getTable($table, $connection),
+                        TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME,
+                        $columnDefinition
+                    );
+                $adapter
+                    ->addColumn(
+                        $schemaSetup->getTable($table, $connection),
+                        TotalsManager::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME,
+                        $columnDefinition
+                    );
+                $adapter
+                    ->addColumn(
+                        $schemaSetup->getTable($table, $connection),
+                        TotalsManager::ADDITIONAL_FEE_FIELD_NAME,
+                        $columnDefinition
+                    );
+                $adapter
+                    ->addColumn(
+                        $schemaSetup->getTable($table, $connection),
+                        TotalsManager::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME,
+                        $columnDefinition
+                    );
+            }
+        }
     }
 }

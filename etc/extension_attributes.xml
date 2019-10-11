@@ -26,4 +26,8 @@
             </join>
         </attribute>
     </extension_attributes>
+    <extension_attributes for="Magento\Quote\Api\Data\TotalSegmentInterface">
+        <attribute code="dhlgw_fee" type="float"/>
+        <attribute code="dhlgw_fee_incl_tax" type="float"/>
+    </extension_attributes>
 </config>

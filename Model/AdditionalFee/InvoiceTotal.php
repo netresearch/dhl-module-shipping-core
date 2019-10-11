@@ -23,6 +23,12 @@ class InvoiceTotal extends AbstractTotal
      */
     private $totalsManager;
 
+    /**
+     * InvoiceTotal constructor.
+     *
+     * @param TotalsManager $totalsManager
+     * @param array $data
+     */
     public function __construct(TotalsManager $totalsManager, array $data = [])
     {
         $this->totalsManager = $totalsManager;
@@ -36,6 +42,14 @@ class InvoiceTotal extends AbstractTotal
      */
     public function collect(Invoice $invoice): self
     {
+        /** @var Invoice $previousInvoice */
+        foreach ($invoice->getOrder()->getInvoiceCollection() as $previousInvoice) {
+            if ((float) $previousInvoice->getData(TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME) > 0) {
+                // in case the additional fee has already been invoiced, do not add it to another invoice
+                return $this;
+            }
+        }
+
         $this->totalsManager->transferAdditionalFees(
             $invoice->getOrder(),
             $invoice
