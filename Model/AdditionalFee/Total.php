@@ -9,6 +9,7 @@ namespace Dhl\ShippingCore\Model\AdditionalFee;
 use Dhl\ShippingCore\Api\TaxConfigInterface;
 use Dhl\ShippingCore\Api\UnitConverterInterface;
 use Dhl\ShippingCore\Model\AdditionalFeeManagement;
+use Magento\Framework\Phrase;
 use Magento\Quote\Api\Data\ShippingAssignmentInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address;
@@ -92,9 +93,9 @@ class Total extends Address\Total\AbstractTotal
 
     /**
      * @param string|null $shippingMethod
-     * @return string
+     * @return Phrase
      */
-    public function getLabel(string $shippingMethod = null): string
+    public function getLabel(string $shippingMethod = null): Phrase
     {
         if ($shippingMethod === null) {
             /**
@@ -202,7 +203,7 @@ class Total extends Address\Total\AbstractTotal
                  *
                  * @see \Magento\Quote\Model\Cart\TotalsConverter::process
                  */
-                'title' => __($this->getLabel($shippingAddress->getShippingMethod())),
+                'title' => $this->getLabel($shippingAddress->getShippingMethod()),
                 'value' => $fee,
             ];
         }

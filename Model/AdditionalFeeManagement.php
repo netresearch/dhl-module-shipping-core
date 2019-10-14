@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Model;
 
 use Dhl\ShippingCore\Api\AdditionalFeeConfigurationInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Phrase;
 use Magento\Quote\Model\Quote;
 
 /**
@@ -46,6 +47,7 @@ class AdditionalFeeManagement
 
         try {
             $configuration = $this->getConfigurationForCarrierCode($carrierCode);
+
             return $configuration->isActive($quote);
         } catch (LocalizedException $e) {
             return false;
@@ -65,19 +67,21 @@ class AdditionalFeeManagement
 
         try {
             $configuration = $this->getConfigurationForCarrierCode($carrierCode);
+
             return $configuration->getServiceCharge($quote);
         } catch (LocalizedException $e) {
             return 0.0;
         }
     }
 
-    public function getLabel(string $carrierCode): string
+    public function getLabel(string $carrierCode): Phrase
     {
         try {
             $configuration = $this->getConfigurationForCarrierCode($carrierCode);
+
             return $configuration->getLabel();
         } catch (LocalizedException $e) {
-            return '';
+            return __('');
         }
     }
 

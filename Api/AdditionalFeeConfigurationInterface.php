@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api;
 
+use Magento\Framework\Phrase;
 use Magento\Quote\Model\Quote;
 
 /**
@@ -36,7 +37,7 @@ interface AdditionalFeeConfigurationInterface
     public function getServiceCharge(Quote $quote): float;
 
     /**
-     * @return string
+     * @return Phrase
      */
-    public function getLabel(): string;
+    public function getLabel(): Phrase;
 }
