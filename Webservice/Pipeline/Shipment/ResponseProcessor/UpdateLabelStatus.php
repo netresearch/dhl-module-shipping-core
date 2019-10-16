@@ -77,11 +77,25 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
      * @param ShipmentInterface|Shipment $currentShipment
      * @return bool
      */
-    private function isShippingCompleted(ShipmentInterface $currentShipment): bool
+
+    /**
+     * Check if all shipments, apart from the current shipment, have a shipping label.
+     *
+     * - If the label is created through packaging popup, then the shipment is not yet persisted
+     * - If the label is created through bulk action, then the shipment is already persisted
+     *
+     * The current shipment will have its label persisted later in the process.
+     *
+     *
+     * @param int $orderId
+     * @param array $orderShipmentIds
+     * @return bool
+     */
+    private function isShippingCompleted(int $orderId, array $orderShipmentIds): bool
     {
         $orderIdFilter = $this->filterBuilder
             ->setField(ShipmentInterface::ORDER_ID)
-            ->setValue($currentShipment->getOrderId())
+            ->setValue($orderId)
             ->setConditionType('eq')
             ->create();
         $shippingLabelFilter = $this->filterBuilder
@@ -89,9 +103,9 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
             ->setConditionType('null')
             ->create();
         $shipmentIdFilter = $this->filterBuilder->setField(ShipmentInterface::ENTITY_ID)
-            ->setValue((int) $currentShipment->getId())
-            ->setConditionType('neq')
-            ->create();
+                                                ->setValue($orderShipmentIds)
+                                                ->setConditionType('nin')
+                                                ->create();
 
         $searchCriteriaBuilder = $this->searchCriteriaBuilderFactory->create();
         $searchCriteriaBuilder->addFilter($orderIdFilter);
@@ -100,6 +114,7 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
         $searchCriteria = $searchCriteriaBuilder->create();
 
         $searchResult = $this->shipmentRepository->getList($searchCriteria);
+
         return ($searchResult->getTotalCount() === 0);
     }
 
@@ -121,6 +136,7 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
                 } else {
                     $qtyShipped += $orderItem->getQtyShipped();
                 }
+
                 return $qtyShipped;
             },
             0
@@ -145,6 +161,13 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
             $this->labelStatusManagement->setLabelStatusFailed($order);
         }
 
+        $shipmentIds = array_map(
+            static function (LabelResponseInterface $labelResponse) {
+                return $labelResponse->getSalesShipment()->getEntityId();
+            },
+            $labelResponses
+        );
+
         foreach ($labelResponses as $labelResponse) {
             /** @var Shipment $shipment */
             $shipment = $labelResponse->getSalesShipment();
@@ -152,7 +175,9 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
                 continue;
             }
 
-            if ($this->isOrderShipped($shipment) && $this->isShippingCompleted($shipment)) {
+            $orderId = (int) $shipment->getOrder()->getId();
+            if ($this->isOrderShipped($shipment)
+                && $this->isShippingCompleted($orderId, $shipmentIds)) {
                 // all shippable items are assigned to a shipment and all shipments have labels.
                 $this->labelStatusManagement->setLabelStatusProcessed($shipment->getOrder());
             } else {

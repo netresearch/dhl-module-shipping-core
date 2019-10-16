@@ -103,7 +103,7 @@ class Total extends Address\Total\AbstractTotal
              * pass a shipping method. For the theoretical edge case where
              * Magento Core calls this method, we return an empty string.
              */
-            return '';
+            return _('');
         }
         $carrierCode = strtok($shippingMethod, '_');
 
@@ -229,7 +229,7 @@ class Total extends Address\Total\AbstractTotal
         return $this->totalsManager->createTotalDisplayObject(
             $source,
             $this->getCode(),
-            $this->getLabel($shippingMethod)
+            $this->getLabel($shippingMethod)->render()
         );
     }
 }

@@ -78,7 +78,7 @@ class TotalTest extends TestCase
         );
         self::assertSame(
             FakeAdditionalFeeConfiguration::LABEL,
-            $subject->getLabel(FakeAdditionalFeeConfiguration::CARRIERCODE)
+            $subject->getLabel(FakeAdditionalFeeConfiguration::CARRIERCODE)->render()
         );
     }
 
