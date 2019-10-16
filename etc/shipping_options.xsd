@@ -145,6 +145,7 @@
                                                             <xs:enumeration value="textarea"/>
                                                             <xs:enumeration value="select"/>
                                                             <xs:enumeration value="static"/>
+                                                            <xs:enumeration value="shopfinder"/>
                                                         </xs:restriction>
                                                     </xs:simpleType>
                                                 </xs:element>
