@@ -10,7 +10,6 @@ use Dhl\ShippingCore\Model\Package as PackageModel;
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Class Package
@@ -61,7 +60,7 @@ class Package extends AbstractFieldArray
         $this->addColumn(
             PackageModel::KEY_LENGTH,
             [
-                'label' => __('Length %1', '<span>' . $this->getMeasureLengthUnit() . '</span>'),
+                'label' => __('Length %1', $this->getMeasureLengthUnit()),
                 'style' => 'width:40px',
                 'class' => 'validate-digits required',
             ]
@@ -69,7 +68,7 @@ class Package extends AbstractFieldArray
         $this->addColumn(
             PackageModel::KEY_WIDTH,
             [
-                'label' => __('Width %1', '<span>' . $this->getMeasureLengthUnit() . '</span>'),
+                'label' => __('Width %1', $this->getMeasureLengthUnit()),
                 'style' => 'width:40px',
                 'class' => 'validate-digits required',
             ]
@@ -77,7 +76,7 @@ class Package extends AbstractFieldArray
         $this->addColumn(
             PackageModel::KEY_HEIGHT,
             [
-                'label' => __('Height %1', '<span>' . $this->getMeasureLengthUnit() . '</span>'),
+                'label' => __('Height %1', $this->getMeasureLengthUnit()),
                 'style' => 'width:40px',
                 'class' => 'validate-number required',
             ]
@@ -86,7 +85,7 @@ class Package extends AbstractFieldArray
         $this->addColumn(
             PackageModel::KEY_WEIGHT,
             [
-                'label' => __('Weight %1', '<span>' . $this->getWeightUnit() . '</span>'),
+                'label' => __('Weight %1', $this->getWeightUnit()),
                 'style' => 'width:40px',
                 'class' => 'validate-number required',
             ]
