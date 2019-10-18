@@ -47,6 +47,9 @@
     <preference for="Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface" type="Dhl\ShippingCore\Model\TrackRequest\TrackRequest"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackResponse"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackErrorResponse"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface" type="Dhl\ShippingCore\Model\Webapi\Data\ShippingOption"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Sales\ServiceDataInterface" type="Dhl\ShippingCore\Model\Webapi\Data\ServiceData"/>
+    <preference for="Dhl\ShippingCore\Api\Data\KeyValueObjectInterface" type="Dhl\ShippingCore\Model\Webapi\Data\KeyValueObject"/>
 
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\QuoteTableNameIterator\Virtual" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
@@ -229,6 +232,11 @@
     </type>
     <type name="Magento\Tax\Helper\Data">
         <plugin name="DhlgwAddFeeTaxPlugin" type="Dhl\ShippingCore\Plugin\Tax\AddFeeTaxAmounts"/>
+    </type>
+    <type name="Dhl\ShippingCore\Model\BulkShipmentManagement">
+        <arguments>
+            <argument name="orderRepository" xsi:type="object">Dhl\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
+        </arguments>
     </type>
 
     <!-- shipping option config xml reader -->

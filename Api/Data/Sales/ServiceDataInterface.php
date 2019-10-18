@@ -1,0 +1,31 @@
+<?php
+/**
+ * See LICENSE.md for license details.
+ */
+declare(strict_types=1);
+
+namespace Dhl\ShippingCore\Api\Data\Sales;
+
+/**
+ * Interface ServiceDataInterface
+ *
+ * A DTO with package parameter service rendering data for carriers that support it
+ *
+ * @api
+ * @package Dhl\ShippingCore\Api\Data\Package
+ */
+interface ServiceDataInterface
+{
+    const CODE = 'code';
+    const DETAILS = 'details';
+
+    /**
+     * @return string
+     */
+    public function getCode(): string;
+
+    /**
+     * @return \Dhl\ShippingCore\Api\Data\KeyValueObjectInterface[]
+     */
+    public function getDetails(): array;
+}

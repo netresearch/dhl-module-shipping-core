@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
     <extension_attributes for="Magento\Quote\Api\Data\ShippingMethodInterface">
-        <attribute code="additional_info" type="Dhl\ShippingCore\Api\Data\MethodAdditionalInfoInterface" />
+        <attribute code="additional_info" type="Dhl\ShippingCore\Api\Data\MethodAdditionalInfoInterface"/>
     </extension_attributes>
     <extension_attributes for="Magento\Sales\Api\Data\OrderAddressInterface">
-        <attribute code="dhlgw_street_name" type="string" >
+        <attribute code="dhlgw_street_name" type="string">
             <join reference_table="dhlgw_recipient_street"
                   reference_field="order_address_id"
                   join_on_field="entity_id">
@@ -30,4 +30,11 @@
         <attribute code="dhlgw_fee" type="float"/>
         <attribute code="dhlgw_fee_incl_tax" type="float"/>
     </extension_attributes>
+
+    <!-- Additional attributes fetched from the salesOrderRepositoryV1 M2 API -->
+    <extension_attributes for="Magento\Sales\Api\Data\ShippingInterface">
+        <attribute code="dhlgw" type="Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface"/>
+    </extension_attributes>
+
+
 </config>
