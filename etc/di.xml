@@ -23,6 +23,7 @@
     <preference for="Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface" type="Dhl\ShippingCore\Model\ItemAttribute\ItemAttributeReader"/>
     <preference for="Dhl\ShippingCore\Api\Util\PdfCombinatorInterface" type="Dhl\ShippingCore\Model\Util\PdfCombinator"/>
     <preference for="Dhl\ShippingCore\Api\Util\UnitConverterInterface" type="Dhl\ShippingCore\Model\Util\UnitConverter"/>
+    <preference for="Dhl\ShippingCore\Api\ParcelShopFinderManagementInterface" type="Dhl\ShippingCore\Model\Webapi\ParcelShopFinderManagement"/>
     <!-- # data interface preferences -->
     <preference for="Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface" type="Dhl\ShippingCore\Model\OrderItemAttributes"/>
     <preference for="Dhl\ShippingCore\Api\Data\RecipientStreetInterface" type="Dhl\ShippingCore\Model\SplitAddress\RecipientStreet"/>
@@ -55,7 +56,9 @@
     <preference for="Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface" type="Dhl\ShippingCore\Model\TrackRequest\TrackRequest"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackResponse"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackErrorResponse"/>
-
+    <preference for="Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface" type="Dhl\ShippingCore\Model\ParcelshopFinder\Address"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ParcelshopFinder\LocationInterface" type="Dhl\ShippingCore\Model\ParcelshopFinder\Location"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ParcelshopFinder\OpeningHoursInterface" type="Dhl\ShippingCore\Model\ParcelshopFinder\OpeningHours"/>
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\QuoteTableNameIterator\Virtual" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>

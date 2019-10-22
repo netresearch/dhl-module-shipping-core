@@ -25,4 +25,11 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+
+    <route url="/V1/dhl/location-data/get" method="POST">
+        <service class="Dhl\ShippingCore\Api\ParcelShopFinderManagementInterface" method="getLocationByAddress"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
 </routes>
