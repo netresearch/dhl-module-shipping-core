@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api;
 
-use DateTime;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\RecipientInterface;
@@ -115,8 +114,8 @@ interface RequestExtractorInterface
     /**
      * Obtain shipment date.
      *
-     * @return string
+     * @return \DateTime
      * @throws LocalizedException
      */
-    public function getShipmentDate(): string;
+    public function getShipmentDate(): \DateTime;
 }

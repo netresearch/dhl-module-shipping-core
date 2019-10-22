@@ -70,7 +70,7 @@ interface ConfigInterface
      * Get the cut off time.
      *
      * @param mixed $store
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCutOffTime($store = null): \DateTime;
 

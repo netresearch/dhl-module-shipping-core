@@ -17,7 +17,7 @@
         <field id="cut_off_time" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20"
                translate="label comment" type="time">
             <label>Order Cut-off Time</label>
-            <comment>All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.</comment>
+            <comment>All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website</comment>
             <source_model>Magento\Config\Model\Config\Source\Date\Short</source_model>
             <config_path>dhlshippingsolutions/dhlglobalwebservices/cut_off_time</config_path>
         </field>

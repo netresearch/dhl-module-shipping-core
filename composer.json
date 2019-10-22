@@ -53,8 +53,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-develop": "0.5.7.x-dev",
-      "dev-DHLGW-556": "0.5.8.x-dev"
+      "dev-develop": "0.5.8.x-dev"
     }
   }
 }

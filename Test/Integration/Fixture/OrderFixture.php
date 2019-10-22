@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Fixture;
 
+use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressInterface;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -106,8 +107,12 @@ class OrderFixture
         string $carrierCode
     ) {
         $order = self::createOrder($recipientData, $productData, $carrierCode);
+        /** @var ShipOrderInterface $shipOrder */
         $shipOrder = Bootstrap::getObjectManager()->get(ShipOrderInterface::class);
         $shipOrder->execute($order->getEntityId(), [], false);
+        /** @var LabelStatusManagementInterface $labelStatusMgmnt */
+        $labelStatusMgmnt = Bootstrap::getObjectManager()->get(LabelStatusManagementInterface::class);
+        $labelStatusMgmnt->setLabelStatusFailed($order);
 
         return $order;
     }

@@ -6,12 +6,9 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\DayValidator;
 
-use DateTime;
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\DayValidatorInterface;
-use Exception;
 use Magento\Framework\Locale\ResolverInterfaceFactory;
-use Magento\Sales\Model\Order;
 use Yasumi\Provider\AbstractProvider;
 use Yasumi\Yasumi;
 
@@ -52,20 +49,20 @@ class NoHoliday implements DayValidatorInterface
     /**
      * Returns the holiday provider instance.
      *
-     * @param Order $order
-     * @param DateTime $dateTime
+     * @param \DateTime $dateTime
+     * @param int|null $storeId
      *
      * @return AbstractProvider|null
      */
-    private function getHolidayProvider(Order $order, DateTime $dateTime)
+    private function getHolidayProvider(\DateTime $dateTime, int $storeId = null)
     {
         try {
             $year      = (int) $dateTime->format('Y');
             $locale    = $this->localeResolverFactory->create()->getLocale();
-            $countryId = $this->config->getOriginCountry($order->getStoreId());
+            $countryId = $this->config->getOriginCountry($storeId);
 
             return Yasumi::createByISO3166_2($countryId, $year, $locale);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return null;
         }
     }
@@ -73,14 +70,14 @@ class NoHoliday implements DayValidatorInterface
     /**
      * Returns TRUE if the date is NOT a holiday otherwise FALSE.
      *
-     * @param Order    $order    The current order
-     * @param DateTime $dateTime The date/time object to check
+     * @param \DateTime $dateTime The date/time object to check
+     * @param int|null $storeId  The current orderId
      *
      * @return bool
      */
-    public function validate(Order $order, DateTime $dateTime): bool
+    public function validate(\DateTime $dateTime, int $storeId = null): bool
     {
-        $holidayProvider = $this->getHolidayProvider($order, $dateTime);
+        $holidayProvider = $this->getHolidayProvider($dateTime, $storeId);
         return $holidayProvider === null ? true : !$holidayProvider->isHoliday($dateTime);
     }
 }

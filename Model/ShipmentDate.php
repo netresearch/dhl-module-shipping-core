@@ -6,12 +6,10 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model;
 
-use DateTime;
 use Dhl\ShippingCore\Api\DayValidatorInterface;
 use Dhl\ShippingCore\Model\Config\Config;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterfaceFactory;
-use Magento\Sales\Model\Order;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
 /**
  * The class ShipmentDate calculates the next available shipment date.
@@ -21,12 +19,10 @@ use Magento\Sales\Model\Order;
  */
 class ShipmentDate
 {
-    const WEEKDAY_SUNDAY = '7';
-
     /**
-     * @var TimezoneInterfaceFactory
+     * @var TimezoneInterface
      */
-    private $timezoneFactory;
+    private $timezone;
 
     /**
      * @var Config
@@ -41,17 +37,17 @@ class ShipmentDate
     /**
      * ShipmentDate constructor.
      *
-     * @param TimezoneInterfaceFactory $timezoneFactory
+     * @param TimezoneInterface $timezone
      * @param Config $config
      * @param DayValidatorInterface[] $dayValidators A list of validators used to check if the current
      *                                               date can be uses as the shipping date.
      */
     public function __construct(
-        TimezoneInterfaceFactory $timezoneFactory,
+        TimezoneInterface $timezone,
         Config $config,
         array $dayValidators
     ) {
-        $this->timezoneFactory = $timezoneFactory;
+        $this->timezone = $timezone;
         $this->config = $config;
         $this->dayValidators = $dayValidators;
     }
@@ -59,35 +55,35 @@ class ShipmentDate
     /**
      * Get the start date.
      *
-     * @param Order $order
+     * @param int $storeId
      *
-     * @return DateTime
+     * @return \DateTime
      * @throws LocalizedException
      */
-    public function getDate(Order $order): DateTime
+    public function getDate(int $storeId): \DateTime
     {
         return $this->getNextPossibleDate(
-            $this->timezoneFactory->create()->date(),
-            $this->config->getCutOffTime($order->getStoreId()),
-            $order
+            $this->timezone->scopeDate($storeId),
+            $this->config->getCutOffTime($storeId),
+            $storeId
         );
     }
 
     /**
      * Determines the next possible shipment date.
      *
-     * @param DateTime $shipmentDate The current date/time
-     * @param DateTime $cutOffDateTime  The configured cut off date/time
-     * @param Order    $order
+     * @param \DateTime $shipmentDate The current date/time
+     * @param \DateTime $cutOffDateTime  The configured cut off date/time
+     * @param int    $storeId
      *
-     * @return DateTime
+     * @return \DateTime
      * @throws LocalizedException
      */
     private function getNextPossibleDate(
-        DateTime $shipmentDate,
-        DateTime $cutOffDateTime,
-        Order $order
-    ): DateTime {
+        \DateTime $shipmentDate,
+        \DateTime $cutOffDateTime,
+        int $storeId
+    ): \DateTime {
         if ($shipmentDate >= $cutOffDateTime) {
             $shipmentDate->modify('+1 day');
         }
@@ -100,7 +96,7 @@ class ShipmentDate
             // Apply all validators to the current date/time
             foreach ($this->dayValidators as $dayValidator) {
                 // The validator returns TRUE if the date is valid for it
-                $shipmentDateAllowed = $dayValidator->validate($order, $shipmentDate);
+                $shipmentDateAllowed = $dayValidator->validate($shipmentDate, $storeId);
 
                 // All validators have to agree that a date is valid before it can be used
                 if (!$shipmentDateAllowed) {

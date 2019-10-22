@@ -6,9 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api;
 
-use DateTime;
-use Magento\Sales\Model\Order;
-
 /**
  * Day validator interface.
  *
@@ -21,10 +18,10 @@ interface DayValidatorInterface
     /**
      * Returns TRUE if the given date is valid for this validator or FALSE otherwise.
      *
-     * @param Order    $order    The current order
-     * @param DateTime $dateTime The date/time object to check
+     * @param \DateTime $dateTime The date/time object to check
+     * @param int|null $storeId  The current store id
      *
      * @return bool
      */
-    public function validate(Order $order, DateTime $dateTime): bool;
+    public function validate(\DateTime $dateTime, int $storeId = null): bool;
 }

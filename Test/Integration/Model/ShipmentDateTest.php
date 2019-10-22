@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Model;
 
-use DateTime;
 use Dhl\ShippingCore\Model\Config\Config;
 use Dhl\ShippingCore\Model\DayValidator\NoHoliday;
 use Dhl\ShippingCore\Model\ShipmentDate;
@@ -15,7 +14,6 @@ use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;
 use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterfaceFactory;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
@@ -42,11 +40,6 @@ class ShipmentDateTest extends TestCase
     private $mockConfig;
 
     /**
-     * @var TimezoneInterfaceFactory|MockObject
-     */
-    private $mockTimezoneFactory;
-
-    /**
      * @var TimezoneInterface|MockObject
      */
     private $mockTimezone;
@@ -70,12 +63,6 @@ class ShipmentDateTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->mockTimezoneFactory = $this->getMockBuilder(TimezoneInterfaceFactory::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->mockTimezoneFactory->method('create')->willReturn($this->mockTimezone);
-
         /** @var Order $order */
         $this->order = OrderFixture::createOrder(
             new AddressDe(),
@@ -96,10 +83,10 @@ class ShipmentDateTest extends TestCase
         /**
          * 2019-02-01 10:00:00 was a Friday.
          *
-         * @return DateTime
+         * @return \DateTime
          */
-        $createBaseDate = static function (): DateTime {
-            return (new DateTime())
+        $createBaseDate = static function (): \DateTime {
+            return (new \DateTime())
                 ->setDate(2019, 2, 1)
                 ->setTime(10, 0);
         };
@@ -135,20 +122,20 @@ class ShipmentDateTest extends TestCase
     /**
      * @dataProvider getTestData
      *
-     * @param DateTime $currentTime
-     * @param DateTime $cutOffTime
-     * @param DateTime $expectedDate
+     * @param \DateTime $currentTime
+     * @param \DateTime $cutOffTime
+     * @param \DateTime $expectedDate
      * @param string $originCountry
      *
      * @throws LocalizedException
      */
     public function testGetDate(
-        DateTime $currentTime,
-        DateTime $cutOffTime,
-        DateTime $expectedDate,
+        \DateTime $currentTime,
+        \DateTime $cutOffTime,
+        \DateTime $expectedDate,
         string $originCountry
     ) {
-        $this->mockTimezone->method('date')->willReturn($currentTime);
+        $this->mockTimezone->method('scopeDate')->willReturn($currentTime);
         $this->mockConfig->method('getCutOffTime')->willReturn($cutOffTime);
         $this->mockConfig->method('getOriginCountry')->willReturn($originCountry);
 
@@ -156,7 +143,7 @@ class ShipmentDateTest extends TestCase
         $subject = $this->objectManager->create(
             ShipmentDate::class,
             [
-                'timezoneFactory' => $this->mockTimezoneFactory,
+                'timezone' => $this->mockTimezone,
                 'config'          => $this->mockConfig,
                 'dayValidators'   => [
                     $this->objectManager->create(
@@ -169,7 +156,7 @@ class ShipmentDateTest extends TestCase
             ]
         );
 
-        $result = $subject->getDate($this->order);
+        $result = $subject->getDate($this->order->getStoreId());
 
         self::assertEquals($expectedDate, $result);
     }
@@ -183,10 +170,10 @@ class ShipmentDateTest extends TestCase
         /**
          * 2019-02-01 10:00:00 was a Friday.
          *
-         * @return DateTime
+         * @return \DateTime
          */
-        $createBaseDate = static function (): DateTime {
-            return (new DateTime())
+        $createBaseDate = static function (): \DateTime {
+            return (new \DateTime())
                 ->setDate(2019, 2, 1)
                 ->setTime(10, 0);
         };
@@ -200,14 +187,14 @@ class ShipmentDateTest extends TestCase
         // All days are holidays
         $mockHoliday->method('validate')->willReturn(false);
 
-        $this->mockTimezone->method('date')->willReturn($createBaseDate());
+        $this->mockTimezone->method('scopeDate')->willReturn($createBaseDate());
         $this->mockConfig->method('getCutOffTime')->willReturn($cutOffTime);
 
         /** @var ShipmentDate $subject */
         $subject = $this->objectManager->create(
             ShipmentDate::class,
             [
-                'timezoneFactory' => $this->mockTimezoneFactory,
+                'timezone' => $this->mockTimezone,
                 'config'          => $this->mockConfig,
                 'dayValidators'   => [
                     $mockHoliday,
@@ -215,6 +202,6 @@ class ShipmentDateTest extends TestCase
             ]
         );
 
-        $subject->getDate($this->order);
+        $subject->getDate($this->order->getStoreId());
     }
 }

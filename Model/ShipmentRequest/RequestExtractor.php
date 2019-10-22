@@ -409,13 +409,12 @@ class RequestExtractor implements RequestExtractorInterface
     /**
      * Obtain shipment date. This currently does not check for holidays or weekends.
      *
-     * @return string
+     * @return \DateTime
      * @throws LocalizedException
      */
-    public function getShipmentDate(): string
+    public function getShipmentDate(): \DateTime
     {
         return $this->shipmentDate
-            ->getDate($this->getOrder())
-            ->format('Y-m-d');
+            ->getDate((int)$this->getStoreId());
     }
 }

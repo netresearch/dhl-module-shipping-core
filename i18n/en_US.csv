@@ -2,7 +2,7 @@
 "Action","Action"
 "Ad hoc pickup or service point drop-off","Ad hoc pickup or service point drop-off"
 "Add markup to shipping price","Add markup to shipping price"
-"All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.","All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day."
+"All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website","All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website"
 "Allowed Domestic Products","Allowed Domestic Products"
 "Allowed International Products","Allowed International Products"
 "An error occurred while updating the recipient street.","An error occurred while updating the recipient street."

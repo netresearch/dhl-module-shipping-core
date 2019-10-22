@@ -13,7 +13,7 @@ use Dhl\ShippingCore\Model\PackageCollection;
 use Dhl\ShippingCore\Model\PackageCollectionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterfaceFactory;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Shipping\Helper\Carrier;
 use Magento\Shipping\Model\Config as ShippingConfig;
 use Magento\Store\Model\ScopeInterface;
@@ -46,9 +46,9 @@ class Config implements ConfigInterface
     private $unitConverter;
 
     /**
-     * @var TimezoneInterfaceFactory
+     * @var TimezoneInterface
      */
-    private $timezoneFactory;
+    private $timezone;
 
     /**
      * Config constructor.
@@ -57,20 +57,20 @@ class Config implements ConfigInterface
      * @param SerializerInterface $serializer
      * @param PackageCollectionFactory $packageCollectionFactory
      * @param UnitConverterInterface $unitConverter
-     * @param TimezoneInterfaceFactory $timezoneFactory
+     * @param TimezoneInterface $timezone
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         SerializerInterface $serializer,
         PackageCollectionFactory $packageCollectionFactory,
         UnitConverterInterface $unitConverter,
-        TimezoneInterfaceFactory $timezoneFactory
+        TimezoneInterface $timezone
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->serializer = $serializer;
         $this->packageCollectionFactory = $packageCollectionFactory;
         $this->unitConverter = $unitConverter;
-        $this->timezoneFactory = $timezoneFactory;
+        $this->timezone = $timezone;
     }
 
     /**
@@ -149,9 +149,7 @@ class Config implements ConfigInterface
 
         list($hours, $minutes, $seconds) = array_map('intval', $cutOffTimeParts);
 
-        $timezone = $this->timezoneFactory->create();
-
-        return $timezone->date()->setTime($hours, $minutes, $seconds);
+        return $this->timezone->scopeDate($store)->setTime($hours, $minutes, $seconds);
     }
 
     /**

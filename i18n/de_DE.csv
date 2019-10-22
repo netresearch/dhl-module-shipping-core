@@ -2,7 +2,7 @@
 "Action","Aktion"
 "Ad hoc pickup or service point drop-off","Ad-hoc-Abholung oder Abgabe am Servicepunkt"
 "Add markup to shipping price","Aufschlag zum Versandpreis hinzufügen"
-"All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day.","Es wird davon ausgegangen, dass alle Bestellungen, die nach dem konfigurierten Zeitpunkt aufgegeben werden, am nächsten Geschäftstag an den jeweiligen Spediteur übergeben werden. Alle Bestellungen, die vor diesem Zeitpunkt aufgegeben werden, werden voraussichtlich am selben Tag an den jeweiligen Spediteur übergeben."
+"All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website","Es wird davon ausgegangen, dass alle Bestellungen, die nach dem konfigurierten Zeitpunkt aufgegeben werden, am nächsten Geschäftstag an den jeweiligen Spediteur übergeben werden. Alle Bestellungen, die vor diesem Zeitpunkt aufgegeben werden, werden voraussichtlich am selben Tag an den jeweiligen Spediteur übergeben. Der Wert wird nach der für die aktuelle Website konfigurierten Zeitzone interpretiert."
 "Allowed Domestic Products","Erlaubte inländische Produkte"
 "Allowed International Products","Erlaubte internationale Produkte"
 "An error occurred while updating the recipient street.","Beim Aktualisieren der Empfängeradresse ist ein Fehler aufgetreten."
