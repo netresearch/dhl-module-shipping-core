@@ -74,7 +74,7 @@ class AddressRepositoryPlugin
         }
 
         try {
-            $recipientStreet = $this->recipientStreetRepository->get($orderAddress->getEntityId());
+            $recipientStreet = $this->recipientStreetRepository->get((int) $orderAddress->getEntityId());
             $extensionAttributes->setDhlgwStreetName($recipientStreet->getName());
             $extensionAttributes->setDhlgwStreetNumber($recipientStreet->getNumber());
             $extensionAttributes->setDhlgwStreetSupplement($recipientStreet->getSupplement());

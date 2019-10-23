@@ -16,7 +16,6 @@ use Magento\TestFramework\ErrorLog\Logger;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Psr\Log\LoggerInterface;
-use Psr\Log\Test\TestLogger;
 
 /**
  * SplitAddressObserverTest

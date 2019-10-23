@@ -87,6 +87,7 @@ class OrderFixture
         $order = $checkout
             ->withShippingMethodCode($carrierCode)
             ->placeOrder();
+
         self::$createdEntities['orders'][] = $order;
 
         $cart->getCheckoutSession()->clearQuote();
