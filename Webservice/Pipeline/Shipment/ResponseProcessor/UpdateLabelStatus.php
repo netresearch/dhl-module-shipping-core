@@ -10,6 +10,8 @@ use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
+use Magento\Bundle\Model\Product\Type;
+use Magento\Catalog\Model\Product\Type\AbstractType;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Sales\Api\Data\ShipmentInterface;
@@ -74,21 +76,8 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
      *
      * The current shipment will have its label persisted later in the process.
      *
-     * @param ShipmentInterface|Shipment $currentShipment
-     * @return bool
-     */
-
-    /**
-     * Check if all shipments, apart from the current shipment, have a shipping label.
-     *
-     * - If the label is created through packaging popup, then the shipment is not yet persisted
-     * - If the label is created through bulk action, then the shipment is already persisted
-     *
-     * The current shipment will have its label persisted later in the process.
-     *
-     *
      * @param int $orderId
-     * @param array $orderShipmentIds
+     * @param int[] $orderShipmentIds
      * @return bool
      */
     private function isShippingCompleted(int $orderId, array $orderShipmentIds): bool
@@ -126,21 +115,36 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
      */
     private function isOrderShipped(Shipment $shipment): bool
     {
-        $qtyOrdered = (float) $shipment->getOrder()->getTotalQtyOrdered();
+        $fnCollectItems = function (array $orderItems, Item $orderItem) {
+            if (($orderItem->getProductType() === Type::TYPE_CODE)
+                && ((int) $orderItem->getProductOptionByCode('shipment_type') === AbstractType::SHIPMENT_SEPARATELY)
+            ) {
+                $orderItems = array_merge($orderItems, $orderItem->getChildrenItems());
+            } else {
+                $orderItems[]= $orderItem;
+            }
 
-        $qtyShipped = array_reduce(
-            $shipment->getOrder()->getAllVisibleItems(),
-            function ($qtyShipped, Item $orderItem) {
-                if ($orderItem->getIsVirtual()) {
-                    $qtyShipped += $orderItem->getQtyOrdered();
-                } else {
-                    $qtyShipped += $orderItem->getQtyShipped();
-                }
+            return $orderItems;
+        };
 
-                return $qtyShipped;
-            },
-            0
-        );
+        $fnSumOrdered = function ($qtyOrdered, Item $orderItem) {
+            $qtyOrdered += $orderItem->getQtyOrdered();
+            return $qtyOrdered;
+        };
+
+        $fnSumShipped = function ($qtyShipped, Item $orderItem) {
+            if ($orderItem->getIsVirtual()) {
+                $qtyShipped += $orderItem->getQtyOrdered();
+            } else {
+                $qtyShipped += $orderItem->getQtyShipped();
+            }
+
+            return $qtyShipped;
+        };
+
+        $orderItems = array_reduce($shipment->getOrder()->getAllVisibleItems(), $fnCollectItems, []);
+        $qtyOrdered = array_reduce($orderItems, $fnSumOrdered, 0);
+        $qtyShipped = array_reduce($orderItems, $fnSumShipped, 0);
 
         return ($qtyOrdered === $qtyShipped);
     }
