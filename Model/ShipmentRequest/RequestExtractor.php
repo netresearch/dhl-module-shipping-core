@@ -386,9 +386,12 @@ class RequestExtractor implements RequestExtractorInterface
     public function getPackageItems(): array
     {
         $packageId = $this->shipmentRequest->getData('package_id');
-        $items = array_filter($this->getAllItems(), static function (PackageItemInterface $item) use ($packageId) {
-            return ($packageId === $item->getPackageId());
-        });
+        $items = array_filter(
+            $this->getAllItems(),
+            static function (PackageItemInterface $item) use ($packageId) {
+                return ($packageId === $item->getPackageId());
+            }
+        );
 
         return $items;
     }
@@ -414,7 +417,6 @@ class RequestExtractor implements RequestExtractorInterface
      */
     public function getShipmentDate(): \DateTime
     {
-        return $this->shipmentDate
-            ->getDate((int)$this->getStoreId());
+        return $this->shipmentDate->getDate($this->getStoreId());
     }
 }

@@ -55,17 +55,17 @@ class ShipmentDate
     /**
      * Get the start date.
      *
-     * @param int $storeId
+     * @param mixed $store
      *
      * @return \DateTime
      * @throws LocalizedException
      */
-    public function getDate(int $storeId): \DateTime
+    public function getDate($store = null): \DateTime
     {
         return $this->getNextPossibleDate(
-            $this->timezone->scopeDate($storeId),
-            $this->config->getCutOffTime($storeId),
-            $storeId
+            $this->timezone->scopeDate($store),
+            $this->config->getCutOffTime($store),
+            $store
         );
     }
 
@@ -73,8 +73,8 @@ class ShipmentDate
      * Determines the next possible shipment date.
      *
      * @param \DateTime $shipmentDate The current date/time
-     * @param \DateTime $cutOffDateTime  The configured cut off date/time
-     * @param int    $storeId
+     * @param \DateTime $cutOffDateTime The configured cut off date/time
+     * @param mixed $store
      *
      * @return \DateTime
      * @throws LocalizedException
@@ -82,7 +82,7 @@ class ShipmentDate
     private function getNextPossibleDate(
         \DateTime $shipmentDate,
         \DateTime $cutOffDateTime,
-        int $storeId
+        $store = null
     ): \DateTime {
         if ($shipmentDate >= $cutOffDateTime) {
             $shipmentDate->modify('+1 day');
@@ -96,7 +96,7 @@ class ShipmentDate
             // Apply all validators to the current date/time
             foreach ($this->dayValidators as $dayValidator) {
                 // The validator returns TRUE if the date is valid for it
-                $shipmentDateAllowed = $dayValidator->validate($shipmentDate, $storeId);
+                $shipmentDateAllowed = $dayValidator->validate($shipmentDate, $store);
 
                 // All validators have to agree that a date is valid before it can be used
                 if (!$shipmentDateAllowed) {

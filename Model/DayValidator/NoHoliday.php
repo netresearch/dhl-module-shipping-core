@@ -50,16 +50,16 @@ class NoHoliday implements DayValidatorInterface
      * Returns the holiday provider instance.
      *
      * @param \DateTime $dateTime
-     * @param int|null $storeId
+     * @param mixed $store
      *
      * @return AbstractProvider|null
      */
-    private function getHolidayProvider(\DateTime $dateTime, int $storeId = null)
+    private function getHolidayProvider(\DateTime $dateTime, $store = null)
     {
         try {
             $year      = (int) $dateTime->format('Y');
             $locale    = $this->localeResolverFactory->create()->getLocale();
-            $countryId = $this->config->getOriginCountry($storeId);
+            $countryId = $this->config->getOriginCountry($store);
 
             return Yasumi::createByISO3166_2($countryId, $year, $locale);
         } catch (\Exception $e) {
@@ -71,13 +71,13 @@ class NoHoliday implements DayValidatorInterface
      * Returns TRUE if the date is NOT a holiday otherwise FALSE.
      *
      * @param \DateTime $dateTime The date/time object to check
-     * @param int|null $storeId  The current orderId
+     * @param mixed $store The store to use for validation
      *
      * @return bool
      */
-    public function validate(\DateTime $dateTime, int $storeId = null): bool
+    public function validate(\DateTime $dateTime, $store = null): bool
     {
-        $holidayProvider = $this->getHolidayProvider($dateTime, $storeId);
+        $holidayProvider = $this->getHolidayProvider($dateTime, $store);
         return $holidayProvider === null ? true : !$holidayProvider->isHoliday($dateTime);
     }
 }
