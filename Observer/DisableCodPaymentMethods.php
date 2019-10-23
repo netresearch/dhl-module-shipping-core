@@ -45,23 +45,25 @@ class DisableCodPaymentMethods implements ObserverInterface
     }
 
     /**
-     * Disable cash on delivery payment methods if carrier does not support them for the given parameters
+     * Disable cash on delivery payment methods if carrier does not support them for the given parameters.
+     *
+     * COD will not be disabled for virtual quotes, these will not be processed with DHL.
      *
      * @param Observer $observer
      */
     public function execute(Observer $observer)
     {
         /** @var DataObject $checkResult */
-        $checkResult = $observer->getEvent()->getDataByKey('result');
+        $checkResult = $observer->getData('result');
         /** @var Quote|null $quote */
-        $quote = $observer->getEvent()->getDataByKey('quote');
+        $quote = $observer->getData('quote');
         if ($quote === null || $checkResult->getData('is_available') === false || $quote->isVirtual()) {
             // not called in checkout or already unavailable
             return;
         }
 
         /** @var \Magento\Payment\Model\MethodInterface $methodInstance */
-        $methodInstance = $observer->getEvent()->getData('method_instance');
+        $methodInstance = $observer->getData('method_instance');
         $shippingMethod = $quote->getShippingAddress()->getShippingMethod();
         if (empty($shippingMethod)) {
             return;
