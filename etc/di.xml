@@ -348,6 +348,7 @@
             <argument name="packagingServiceOptionsProcessors" xsi:type="array">
                 <item name="dhlApplySelectionsProcessor" sortOrder="100" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ApplySelectionsProcessor</item>
                 <item name="dhlSortOrderProcessor" sortOrder="400" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\SortOrderProcessor</item>
+                <item name="dhlAddParcelshopFinderInputsProcessor" sortOrder="50" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ParcelshopFinderInputsProcessor</item>
             </argument>
             <argument name="packagingPackageOptionsProcessors" xsi:type="array">
                 <item name="dhlPackageInputDataProcessor" sortOrder="200" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\PackageInputDataProcessor</item>
