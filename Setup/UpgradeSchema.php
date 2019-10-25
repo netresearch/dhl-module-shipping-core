@@ -35,6 +35,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             SchemaInstaller::createDhlRecipientStreetTable($schemaSetup);
             SchemaInstaller::createShippingOptionSelectionTables($schemaSetup);
             SchemaInstaller::createAdditionalFeeColumns($schemaSetup);
+            SchemaInstaller::createOrderItemTable($schemaSetup);
         }
     }
 }

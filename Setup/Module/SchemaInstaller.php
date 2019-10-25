@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Setup\Module;
 
+use Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface;
 use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
@@ -14,6 +15,7 @@ use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Module\Setup;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Sales\Api\Data\OrderAddressInterface;
+use Magento\Sales\Api\Data\OrderItemInterface;
 
 /**
  * Setup
@@ -53,7 +55,7 @@ class SchemaInstaller
         $table = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)
                              ->newTable(
                                  $schemaSetup->getTable(
-                                     Constants::TABLE_DHLGW_LABEL_STATUS,
+                                     Constants::TABLE_LABEL_STATUS,
                                      Constants::SALES_CONNECTION_NAME
                                  )
                              );
@@ -76,13 +78,13 @@ class SchemaInstaller
 
         $table->addForeignKey(
             $schemaSetup->getFkName(
-                $schemaSetup->getTable(Constants::TABLE_DHLGW_LABEL_STATUS, Constants::SALES_CONNECTION_NAME),
+                $schemaSetup->getTable(Constants::TABLE_LABEL_STATUS, Constants::SALES_CONNECTION_NAME),
                 'order_id',
-                $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+                $schemaSetup->getTable('sales_order', Constants::SALES_CONNECTION_NAME),
                 'entity_id'
             ),
             'order_id',
-            $schemaSetup->getTable(Constants::ORDER_TABLE_NAME, Constants::SALES_CONNECTION_NAME),
+            $schemaSetup->getTable('sales_order', Constants::SALES_CONNECTION_NAME),
             'entity_id',
             Table::ACTION_CASCADE
         );
@@ -97,7 +99,7 @@ class SchemaInstaller
     public static function createDhlRecipientStreetTable(SchemaSetupInterface $schemaSetup)
     {
         $table = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->newTable(
-            $schemaSetup->getTable(Constants::TABLE_DHLGW_RECIPIENT_STREET, Constants::SALES_CONNECTION_NAME)
+            $schemaSetup->getTable(Constants::TABLE_RECIPIENT_STREET, Constants::SALES_CONNECTION_NAME)
         );
 
         $table->addColumn(
@@ -134,7 +136,7 @@ class SchemaInstaller
 
         $table->addForeignKey(
             $schemaSetup->getFkName(
-                $schemaSetup->getTable(Constants::TABLE_DHLGW_RECIPIENT_STREET, Constants::SALES_CONNECTION_NAME),
+                $schemaSetup->getTable(Constants::TABLE_RECIPIENT_STREET, Constants::SALES_CONNECTION_NAME),
                 RecipientStreetInterface::ORDER_ADDRESS_ID,
                 $schemaSetup->getTable('sales_order_address', Constants::SALES_CONNECTION_NAME),
                 OrderAddressInterface::ENTITY_ID
@@ -211,11 +213,11 @@ class SchemaInstaller
             $schemaSetup->getFkName(
                 $quoteTableName,
                 'parent_id',
-                $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME, Constants::CHECKOUT_CONNECTION_NAME),
+                $schemaSetup->getTable('quote_address', Constants::CHECKOUT_CONNECTION_NAME),
                 'address_id'
             ),
             'parent_id',
-            $schemaSetup->getTable(Constants::QUOTE_ADDRESS_TABLE_NAME),
+            $schemaSetup->getTable('quote_address'),
             'address_id',
             Table::ACTION_CASCADE
         );
@@ -245,11 +247,11 @@ class SchemaInstaller
     public static function createAdditionalFeeColumns(SchemaSetupInterface $schemaSetup)
     {
         $allTables = [
-            Constants::CHECKOUT_CONNECTION_NAME => [Constants::QUOTE_TABLE_NAME],
+            Constants::CHECKOUT_CONNECTION_NAME => ['quote'],
             Constants::SALES_CONNECTION_NAME => [
-                Constants::ORDER_TABLE_NAME,
-                Constants::INVOICE_TABLE_NAME,
-                Constants::CREDITMEMO_TABLE_NAME,
+                'sales_order',
+                'sales_invoice',
+                'sales_creditmemo',
             ],
         ];
         $columnDefinition = [
@@ -287,5 +289,70 @@ class SchemaInstaller
                     );
             }
         }
+    }
+
+    /**
+     * @param SchemaSetupInterface|Setup $schemaSetup
+     * @throws \Zend_Db_Exception
+     */
+    public static function createOrderItemTable(SchemaSetupInterface $schemaSetup)
+    {
+        $table = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->newTable(
+            $schemaSetup->getTable(Constants::TABLE_ORDER_ITEM, Constants::SALES_CONNECTION_NAME)
+        );
+
+        $table->addColumn(
+            OrderItemAttributesInterface::ITEM_ID,
+            Table::TYPE_INTEGER,
+            10,
+            ['unsigned' => true, 'nullable' => false, 'primary' => true],
+            'Order Item Id'
+        );
+
+        $table->addColumn(
+            OrderItemAttributesInterface::TARIFF_NUMBER,
+            Table::TYPE_TEXT,
+            10,
+            ['default' => null, 'nullable' => true],
+            'Tariff Number (HS Code)'
+        );
+
+        $table->addColumn(
+            OrderItemAttributesInterface::DG_CATEGORY,
+            Table::TYPE_TEXT,
+            50,
+            ['default' => null, 'nullable' => true],
+            'Dangerous Goods Category'
+        );
+
+        $table->addColumn(
+            OrderItemAttributesInterface::EXPORT_DESCRIPTION,
+            Table::TYPE_TEXT,
+            50,
+            ['default' => null, 'nullable' => true],
+            'Export Description'
+        );
+
+        $table->addColumn(
+            OrderItemAttributesInterface::COUNTRY_OF_MANUFACTURE,
+            Table::TYPE_TEXT,
+            2,
+            ['default' => null, 'nullable' => true],
+            'Country of Manufacture'
+        );
+
+        $table->addForeignKey(
+            $schemaSetup->getFkName(
+                $schemaSetup->getTable(Constants::TABLE_ORDER_ITEM, Constants::SALES_CONNECTION_NAME),
+                OrderItemAttributesInterface::ITEM_ID,
+                $schemaSetup->getTable('sales_order_item', Constants::SALES_CONNECTION_NAME),
+                OrderItemInterface::ITEM_ID
+            ),
+            OrderItemAttributesInterface::ITEM_ID,
+            $schemaSetup->getTable('sales_order_item', Constants::SALES_CONNECTION_NAME),
+            OrderItemInterface::ITEM_ID,
+            Table::ACTION_CASCADE
+        );
+        $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME)->createTable($table);
     }
 }

@@ -6,18 +6,19 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ResourceModel;
 
+use Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface;
 use Dhl\ShippingCore\Setup\Module\Constants;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
 
 /**
- * Label Status Resource Model
+ * Order Item Attribute Resource Model
  *
  * @package Dhl\ShippingCore\Model\ResourceModel
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */
-class LabelStatus extends AbstractDb
+class OrderItemAttributes extends AbstractDb
 {
     /**
      * Entities with no auto-increment ID must toggle "$_useIsObjectNew" property
@@ -44,7 +45,7 @@ class LabelStatus extends AbstractDb
      */
     protected function _construct()
     {
-        $this->_init(Constants::TABLE_LABEL_STATUS, 'order_id');
+        $this->_init(Constants::TABLE_ORDER_ITEM, OrderItemAttributesInterface::ITEM_ID);
     }
 
     /**

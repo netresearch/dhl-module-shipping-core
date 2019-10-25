@@ -46,7 +46,7 @@ class RecipientStreet extends AbstractDb
     protected function _construct()
     {
         $this->_init(
-            Constants::TABLE_DHLGW_RECIPIENT_STREET,
+            Constants::TABLE_RECIPIENT_STREET,
             RecipientStreetInterface::ORDER_ADDRESS_ID
         );
     }

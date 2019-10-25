@@ -12,7 +12,7 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Packaging\DataProcessor\ShippingOptionsProcessorInterface;
-use Dhl\ShippingCore\Model\Packaging\ItemAttributeReader;
+use Dhl\ShippingCore\Model\Packaging\ShipmentItemAttributeReader;
 use Magento\Catalog\Model\Product\Attribute\Source\Countryofmanufacture;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
@@ -30,7 +30,7 @@ use Magento\Sales\Model\Order\Shipment\Item;
 class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
 {
     /**
-     * @var ItemAttributeReader
+     * @var ShipmentItemAttributeReader
      */
     private $itemAttributeReader;
 
@@ -57,14 +57,14 @@ class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
     /**
      * ItemInputDataProcessor constructor.
      *
-     * @param ItemAttributeReader $itemAttributeReader
+     * @param ShipmentItemAttributeReader $itemAttributeReader
      * @param Countryofmanufacture $countrySource
      * @param CommentInterfaceFactory $commentFactory
      * @param OptionInterfaceFactory $optionFactory
      * @param ConfigInterface $config
      */
     public function __construct(
-        ItemAttributeReader $itemAttributeReader,
+        ShipmentItemAttributeReader $itemAttributeReader,
         Countryofmanufacture $countrySource,
         CommentInterfaceFactory $commentFactory,
         OptionInterfaceFactory $optionFactory,

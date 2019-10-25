@@ -25,7 +25,11 @@
     <!-- # data interface preferences -->
     <preference for="Dhl\ShippingCore\Api\Data\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
     <preference for="Dhl\ShippingCore\Api\Data\FootnoteInterface" type="Dhl\ShippingCore\Model\Checkout\Footnote"/>
+    <preference for="Dhl\ShippingCore\Api\Data\KeyValueObjectInterface" type="Dhl\ShippingCore\Model\Webapi\Data\KeyValueObject"/>
     <preference for="Dhl\ShippingCore\Api\Data\MetadataInterface" type="Dhl\ShippingCore\Model\Checkout\Metadata"/>
+    <preference for="Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface" type="Dhl\ShippingCore\Model\OrderItemAttributes"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface" type="Dhl\ShippingCore\Model\Webapi\Data\ShippingOption"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Sales\ServiceDataInterface" type="Dhl\ShippingCore\Model\Webapi\Data\ServiceData"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageAdditionalInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\PackageAdditional"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Package"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\PackageItem"/>
@@ -47,9 +51,6 @@
     <preference for="Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface" type="Dhl\ShippingCore\Model\TrackRequest\TrackRequest"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackResponse"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackErrorResponse"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface" type="Dhl\ShippingCore\Model\Webapi\Data\ShippingOption"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Sales\ServiceDataInterface" type="Dhl\ShippingCore\Model\Webapi\Data\ServiceData"/>
-    <preference for="Dhl\ShippingCore\Api\Data\KeyValueObjectInterface" type="Dhl\ShippingCore\Model\Webapi\Data\KeyValueObject"/>
 
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\QuoteTableNameIterator\Virtual" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
@@ -62,9 +63,10 @@
     <virtualType name="Dhl\ShippingCore\SalesTableNameIterator\Virtual" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>
             <argument name="tableNames" xsi:type="array">
-                <item name="dhlgw_label_status" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_DHLGW_LABEL_STATUS</item>
-                <item name="dhlgw_recipient_street" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_DHLGW_RECIPIENT_STREET</item>
+                <item name="dhlgw_label_status" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_LABEL_STATUS</item>
+                <item name="dhlgw_recipient_street" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_RECIPIENT_STREET</item>
                 <item name="dhlgw_order_address_shipping_option_selection" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_ORDER_SHIPPING_OPTION_SELECTION</item>
+                <item name="dhlgw_order_item_attribute" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_ORDER_ITEM</item>
             </argument>
         </arguments>
     </virtualType>
@@ -101,7 +103,7 @@
         <arguments>
             <argument name="joins" xsi:type="array">
                 <item name="dhlgw_label_status" xsi:type="array">
-                    <item name="table" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_DHLGW_LABEL_STATUS</item>
+                    <item name="table" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::TABLE_LABEL_STATUS</item>
                     <item name="origin_column" xsi:type="string">entity_id</item>
                     <item name="target_column" xsi:type="string">order_id</item>
                 </item>
@@ -146,12 +148,12 @@
             <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\ResourceModel\RecipientStreet">
+    <type name="Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelection">
         <arguments>
             <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelection">
+    <type name="Dhl\ShippingCore\Model\ResourceModel\OrderItemAttributes">
         <arguments>
             <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
         </arguments>
@@ -159,6 +161,11 @@
     <type name="Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ShippingOptionSelection">
         <arguments>
             <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::CHECKOUT_CONNECTION_NAME</argument>
+        </arguments>
+    </type>
+    <type name="Dhl\ShippingCore\Model\ResourceModel\RecipientStreet">
+        <arguments>
+            <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
         </arguments>
     </type>
     <type name="Dhl\ShippingCore\Model\ShipmentRequest\Validator\CompositeValidator">
@@ -233,10 +240,11 @@
     <type name="Magento\Tax\Helper\Data">
         <plugin name="DhlgwAddFeeTaxPlugin" type="Dhl\ShippingCore\Plugin\Tax\AddFeeTaxAmounts"/>
     </type>
-    <type name="Dhl\ShippingCore\Model\BulkShipmentManagement">
-        <arguments>
-            <argument name="orderRepository" xsi:type="object">Dhl\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
-        </arguments>
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="DhlgwAddOrderItemExtensionAttributes" type="Dhl\ShippingCore\Plugin\Quote\Item\AttributesToOrderItem"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\ItemRepository">
+        <plugin name="DhlgwPersistOrderItemAttributes" type="Dhl\ShippingCore\Plugin\Order\PersistOrderItemAttributes"/>
     </type>
 
     <!-- shipping option config xml reader -->

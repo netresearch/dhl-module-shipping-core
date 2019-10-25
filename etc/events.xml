@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <!--
-See LICENSE.md for license details.
+/**
+ * See LICENSE.md for license details.
+ */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="sales_order_save_after">
@@ -21,5 +23,8 @@ See LICENSE.md for license details.
     </event>
     <event name="controller_action_predispatch_adminhtml_order_shipment_removeTrack">
         <observer name="dhlgw_disallow_delete_track" instance="Dhl\ShippingCore\Observer\PreventTrackDeletion"/>
+    </event>
+    <event name="sales_order_item_collection_load_before">
+        <observer name="dhlgw_join_order_item_attributes" instance="Dhl\ShippingCore\Observer\JoinOrderItemAttributes"/>
     </event>
 </config>

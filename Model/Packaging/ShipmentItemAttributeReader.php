@@ -6,54 +6,35 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging;
 
-use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
-use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
-use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
+use Dhl\ShippingCore\Model\Order\ItemAttributeReader;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
 
 /**
- * Class ItemAttributeReader
+ * Class ShipmentItemAttributeReader
  *
- * Read product attributes from shipment items.
+ * Read additional attributes from shipment items.
  *
  * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
+ * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link    https://www.netresearch.de/
  */
-class ItemAttributeReader
+class ShipmentItemAttributeReader
 {
     /**
-     * Obtain the actual product added to cart, i.e. the chosen configuration, and return value of given attribute.
-     *
-     * @param Item $shipmentItem
-     * @param string $attributeCode
-     * @return string
+     * @var ItemAttributeReader
      */
-    private function readAttribute(Item $shipmentItem, string $attributeCode): string
+    private $orderItemAttributeReader;
+
+    /**
+     * ShipmentItemAttributeReader constructor.
+     *
+     * @param ItemAttributeReader $orderItemAttributeReader
+     */
+    public function __construct(ItemAttributeReader $orderItemAttributeReader)
     {
-        $orderItem = $shipmentItem->getOrderItem();
-
-        // load the product to read the attribute from. if configurable item is passed in, load from simple item.
-        if ($orderItem->getProductType() === Configurable::TYPE_CODE) {
-            $childItem = current($orderItem->getChildrenItems());
-            $product = $childItem->getProduct();
-        } else {
-            $product = $orderItem->getProduct();
-        }
-
-        if (!$product) {
-            return '';
-        }
-
-        if ($product->hasData($attributeCode)) {
-            // attribute value found in simple
-            return (string) $product->getData($attributeCode);
-        }
-
-        // as a last resort, fall back to the configurable (if exists) or return empty value
-        return (string) ($orderItem->getProduct() ? $orderItem->getProduct()->getData($attributeCode) : '');
+        $this->orderItemAttributeReader = $orderItemAttributeReader;
     }
 
     /**
@@ -68,47 +49,51 @@ class ItemAttributeReader
     }
 
     /**
-     * Read HS code from product.
+     * Read HS code from extension attributes.
      *
      * @param Item $shipmentItem
      * @return string
      */
     public function getHsCode(Item $shipmentItem): string
     {
-        return $this->readAttribute($shipmentItem, TariffNumber::CODE);
+        $orderItem = $shipmentItem->getOrderItem();
+        return $this->orderItemAttributeReader->getHsCode($orderItem);
     }
 
     /**
-     * Read dangerous goods category from product.
+     * Read dangerous goods category from extension attributes.
      *
      * @param Item $shipmentItem
      * @return string
      */
     public function getDgCategory(Item $shipmentItem): string
     {
-        return $this->readAttribute($shipmentItem, DGCategory::CODE);
+        $orderItem = $shipmentItem->getOrderItem();
+        return $this->orderItemAttributeReader->getDgCategory($orderItem);
     }
 
     /**
-     * Read export description from product.
+     * Read export description from extension attributes.
      *
      * @param Item $shipmentItem
      * @return string
      */
     public function getExportDescription(Item $shipmentItem): string
     {
-        return $this->readAttribute($shipmentItem, ExportDescription::CODE);
+        $orderItem = $shipmentItem->getOrderItem();
+        return $this->orderItemAttributeReader->getExportDescription($orderItem);
     }
 
     /**
-     * Read country of manufacture from product.
+     * Read country of manufacture from extension attributes.
      *
      * @param Item $shipmentItem
      * @return string
      */
     public function getCountryOfManufacture(Item $shipmentItem): string
     {
-        return $this->readAttribute($shipmentItem, 'country_of_manufacture');
+        $orderItem = $shipmentItem->getOrderItem();
+        return $this->orderItemAttributeReader->getCountryOfManufacture($orderItem);
     }
 
     /**

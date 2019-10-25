@@ -47,7 +47,7 @@ class LabelStatusJoinProcessor implements CollectionProcessorInterface
      */
     public function process(SearchCriteriaInterface $searchCriteria, AbstractDb $collection)
     {
-        $tableName = $this->labelStatusResource->getTable(Constants::TABLE_DHLGW_LABEL_STATUS);
+        $tableName = $this->labelStatusResource->getTable(Constants::TABLE_LABEL_STATUS);
 
         // Do not select any columns as its not required and may lead to invalid results
         // if all (*) columns will selected (e.g. entity_id)

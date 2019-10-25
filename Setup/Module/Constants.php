@@ -17,23 +17,15 @@ class Constants
 
     const SALES_CONNECTION_NAME = 'sales';
 
-    const TABLE_DHLGW_LABEL_STATUS = 'dhlgw_label_status';
+    const TABLE_LABEL_STATUS = 'dhlgw_label_status';
 
-    const TABLE_DHLGW_RECIPIENT_STREET ='dhlgw_recipient_street';
-
-    const COLUMN_DHLGW_LABEL_STATUS = 'dhlgw_label_status';
-
-    const TABLE_QUOTE_SHIPPING_OPTION_SELECTION = 'dhlgw_quote_address_shipping_option_selection';
+    const TABLE_ORDER_ITEM = 'dhlgw_order_item';
 
     const TABLE_ORDER_SHIPPING_OPTION_SELECTION = 'dhlgw_order_address_shipping_option_selection';
 
-    const QUOTE_TABLE_NAME = 'quote';
+    const TABLE_QUOTE_SHIPPING_OPTION_SELECTION = 'dhlgw_quote_address_shipping_option_selection';
 
-    const QUOTE_ADDRESS_TABLE_NAME = 'quote_address';
+    const TABLE_RECIPIENT_STREET ='dhlgw_recipient_street';
 
-    const ORDER_TABLE_NAME = 'sales_order';
-
-    const INVOICE_TABLE_NAME = 'sales_invoice';
-
-    const CREDITMEMO_TABLE_NAME = 'sales_creditmemo';
+    const COLUMN_DHLGW_LABEL_STATUS = 'dhlgw_label_status';
 }

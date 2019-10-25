@@ -13,7 +13,7 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
 use Dhl\ShippingCore\Model\Config\Source\ExportContentType;
 use Dhl\ShippingCore\Model\Config\Source\TermsOfTrade;
 use Dhl\ShippingCore\Model\Packaging\DataProcessor\ShippingOptionsProcessorInterface;
-use Dhl\ShippingCore\Model\Packaging\ItemAttributeReader;
+use Dhl\ShippingCore\Model\Packaging\ShipmentItemAttributeReader;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -30,7 +30,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
     private $config;
 
     /**
-     * @var ItemAttributeReader
+     * @var ShipmentItemAttributeReader
      */
     private $itemAttributeReader;
 
@@ -58,7 +58,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
      * PackageInputDataProcessor constructor.
      *
      * @param ConfigInterface $config
-     * @param ItemAttributeReader $itemAttributeReader
+     * @param ShipmentItemAttributeReader $itemAttributeReader
      * @param TermsOfTrade $termsOfTradeSource
      * @param ExportContentType $contentTypeSource
      * @param CommentInterfaceFactory $commentFactory
@@ -66,7 +66,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
      */
     public function __construct(
         ConfigInterface $config,
-        ItemAttributeReader $itemAttributeReader,
+        ShipmentItemAttributeReader $itemAttributeReader,
         TermsOfTrade $termsOfTradeSource,
         ExportContentType $contentTypeSource,
         CommentInterfaceFactory $commentFactory,
@@ -164,6 +164,11 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     $exportDescriptions = $this->itemAttributeReader->getPackageExportDescriptions($shipment);
                     $exportDescription = implode(' ', $exportDescriptions);
                     $input->setDefaultValue(substr($exportDescription, 0, 80));
+                    break;
+
+                case 'dgCategory':
+                    $dgCategories = $this->itemAttributeReader->getPackageDgCategories($shipment);
+                    $input->setDefaultValue(implode(', ', $dgCategories));
                     break;
 
                 case 'termsOfTrade':

@@ -57,7 +57,7 @@ class Uninstaller
     public static function dropLabelStatusTable(SchemaSetupInterface $schemaSetup)
     {
         $salesConnection = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME);
-        $salesConnection->dropTable(Constants::TABLE_DHLGW_LABEL_STATUS);
+        $salesConnection->dropTable(Constants::TABLE_LABEL_STATUS);
     }
 
     /**
@@ -78,7 +78,7 @@ class Uninstaller
     public static function dropDhlRecipientStreetTable(SchemaSetupInterface $schemaSetup)
     {
         $salesConnection = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME);
-        $salesConnection->dropTable(Constants::TABLE_DHLGW_RECIPIENT_STREET);
+        $salesConnection->dropTable(Constants::TABLE_RECIPIENT_STREET);
     }
 
     /**
@@ -105,11 +105,11 @@ class Uninstaller
     public static function removeAdditionalFeeColumns(SchemaSetupInterface $schemaSetup)
     {
         $allTables = [
-            Constants::CHECKOUT_CONNECTION_NAME => [Constants::QUOTE_TABLE_NAME],
+            Constants::CHECKOUT_CONNECTION_NAME => ['quote'],
             Constants::SALES_CONNECTION_NAME => [
-                Constants::ORDER_TABLE_NAME,
-                Constants::INVOICE_TABLE_NAME,
-                Constants::CREDITMEMO_TABLE_NAME,
+                'sales_order',
+                'sales_invoice',
+                'sales_creditmemo',
             ],
         ];
         foreach ($allTables as $connection => $tables) {
@@ -137,5 +137,16 @@ class Uninstaller
                     );
             }
         }
+    }
+
+    /**
+     * Drop order item attribute table.
+     *
+     * @param SchemaSetupInterface|Setup $schemaSetup
+     */
+    public static function dropOrderItemAttributeTable(SchemaSetupInterface $schemaSetup)
+    {
+        $salesConnection = $schemaSetup->getConnection(Constants::SALES_CONNECTION_NAME);
+        $salesConnection->dropTable(Constants::TABLE_ORDER_ITEM);
     }
 }
