@@ -30,6 +30,7 @@ class ParcelshopFinderInputsProcessor implements ShippingOptionsProcessorInterfa
      */
     const INPUT_CODES = [
         'shop-name',
+        'shop-number',
         'address-street',
         'address-postalcode',
         'address-city',
