@@ -6,31 +6,21 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Order;
 
+use Dhl\ShippingCore\Api\ItemAttributeReaderInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
 
 /**
  * Class ItemAttributeReader
  *
- * Read product attributes from shipment items.
+ * Read product attributes from order items.
  *
  * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link    https://www.netresearch.de/
  */
-class ItemAttributeReader
+class ItemAttributeReader implements ItemAttributeReaderInterface
 {
-    /**
-     * Read weight from order item.
-     *
-     * @param OrderItemInterface $orderItem
-     * @return float
-     */
-    public function getWeight(OrderItemInterface $orderItem): float
-    {
-        return (float) $orderItem->getWeight();
-    }
-
     /**
      * Read HS code from extension attributes.
      *

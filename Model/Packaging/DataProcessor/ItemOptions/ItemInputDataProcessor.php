@@ -121,7 +121,7 @@ class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->config->getWeightUnit($shipmentItem->getShipment()->getStoreId()));
                     $input->setComment($comment);
-                    $input->setDefaultValue((string) $this->itemAttributeReader->getWeight($shipmentItem));
+                    $input->setDefaultValue((string) $shipmentItem->getWeight());
                     break;
 
                 case 'qtyToShip':

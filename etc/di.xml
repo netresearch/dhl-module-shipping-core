@@ -22,6 +22,7 @@
     <preference for="Dhl\ShippingCore\Api\RequestModifierInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier"/>
     <preference for="Dhl\ShippingCore\Api\RequestValidatorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Validator\CompositeValidator"/>
     <preference for="Dhl\ShippingCore\Api\UnitConverterInterface" type="Dhl\ShippingCore\Util\UnitConverter"/>
+    <preference for="Dhl\ShippingCore\Api\ItemAttributeReaderInterface" type="Dhl\ShippingCore\Model\Order\ItemAttributeReader"/>
     <!-- # data interface preferences -->
     <preference for="Dhl\ShippingCore\Api\Data\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
     <preference for="Dhl\ShippingCore\Api\Data\FootnoteInterface" type="Dhl\ShippingCore\Model\Checkout\Footnote"/>

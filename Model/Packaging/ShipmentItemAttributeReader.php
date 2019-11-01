@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging;
 
-use Dhl\ShippingCore\Model\Order\ItemAttributeReader;
+use Dhl\ShippingCore\Api\ItemAttributeReaderInterface;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
 
@@ -23,29 +23,18 @@ use Magento\Sales\Model\Order\Shipment\Item;
 class ShipmentItemAttributeReader
 {
     /**
-     * @var ItemAttributeReader
+     * @var ItemAttributeReaderInterface
      */
     private $orderItemAttributeReader;
 
     /**
      * ShipmentItemAttributeReader constructor.
      *
-     * @param ItemAttributeReader $orderItemAttributeReader
+     * @param ItemAttributeReaderInterface $orderItemAttributeReader
      */
-    public function __construct(ItemAttributeReader $orderItemAttributeReader)
+    public function __construct(ItemAttributeReaderInterface $orderItemAttributeReader)
     {
         $this->orderItemAttributeReader = $orderItemAttributeReader;
-    }
-
-    /**
-     * Read weight from shipment item.
-     *
-     * @param Item $shipmentItem
-     * @return float
-     */
-    public function getWeight(Item $shipmentItem): float
-    {
-        return (float) $shipmentItem->getWeight();
     }
 
     /**
@@ -105,9 +94,7 @@ class ShipmentItemAttributeReader
     public function getTotalWeight(Shipment $shipment): float
     {
         $fnAdd = function ($totalWeight, Item $shipmentItem) {
-            $itemWeight = $this->getWeight($shipmentItem);
-
-            $totalWeight += $itemWeight * $shipmentItem->getQty();
+            $totalWeight += $shipmentItem->getWeight() * $shipmentItem->getQty();
             return $totalWeight;
         };
 
