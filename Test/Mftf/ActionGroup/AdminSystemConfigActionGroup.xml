@@ -8,8 +8,8 @@
               xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
     <!-- Save configuration -->
     <actionGroup name="SaveAdminSystemConfigSectionActionGroup">
-        <click selector="{{AdminConfigSection.saveButton}}" stepKey="saveConfigSettings"/>
-        <waitForLoadingMaskToDisappear stepKey="waitForSavedConfig"/>
+        <click selector="{{AdminConfigSection.saveButton}}" stepKey="clickSaveConfigSettingsButton"/>
+        <waitForPageLoad stepKey="waitForSavingConfigSettings"/>
         <seeElement selector="{{AdminSystemConfigSection.saveSuccessMessage}}" stepKey="seeSaveSuccessMessage"/>
     </actionGroup>
 </actionGroups>
