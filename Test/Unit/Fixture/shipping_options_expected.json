@@ -22,66 +22,6 @@
           "code": "parcelAnnouncement",
           "available": "dhlshippingsolutions\/dhlpaket\/additional_services\/services_group\/parcelannouncement"
         },
-        "parcelstation": {
-          "label": "Parcel station delivery: Delivery to a parcel station of your choice",
-          "sortOrder": 20,
-          "routes": [
-            {
-              "origin": "DE",
-              "includeDestinations": [
-                "DE",
-                "AT"
-              ]
-            }
-          ],
-          "inputs": {
-            "enabled": {
-              "label": "Select parcel station",
-              "labelVisible": false,
-              "inputType": "checkbox",
-              "code": "enabled"
-            },
-            "id": {
-              "label": "Parcel Station ID",
-              "labelVisible": true,
-              "inputType": "select",
-              "placeholder": "Please select a parcel station \u2026",
-              "comment": {
-                "content": "Select a nearby parcel shop. Your package will be sent there for you to pick up."
-              },
-              "validationRules": {
-                "required-entry": {
-                  "name": "required-entry"
-                }
-              },
-              "code": "id"
-            },
-            "postNumber": {
-              "label": "Post number",
-              "labelVisible": true,
-              "inputType": "text",
-              "placeholder": "Post number",
-              "validationRules": {
-                "maxLength": {
-                  "param": 10,
-                  "name": "maxLength"
-                },
-                "validate-no-html-tags": {
-                  "name": "validate-no-html-tags"
-                },
-                "dhl_filter_special_chars": {
-                  "name": "dhl_filter_special_chars"
-                },
-                "required-entry": {
-                  "name": "required-entry"
-                }
-              },
-              "code": "postNumber"
-            }
-          },
-          "code": "parcelstation",
-          "available": "dhlshippingsolutions\/dhlpaket\/additional_services\/services_group\/parcelstation"
-        },
         "preferredDay": {
           "label": "Preferred Day: Delivery on your preferred day",
           "sortOrder": 30,
@@ -296,60 +236,6 @@
           ],
           "errorMessage": "Some values for Preferred Neighbour service are missing.",
           "id": "preferredNeighbourRequireChildren"
-        },
-        "parcelstationShowMore": {
-          "triggerValue": true,
-          "action": "show",
-          "masters": [
-            "parcelstation.enabled"
-          ],
-          "subjects": [
-            "parcelstation.id",
-            "parcelstation.postNumber"
-          ],
-          "id": "parcelstationShowMore"
-        },
-        "parcelstationRequireChildren": {
-          "triggerValue": true,
-          "action": "require",
-          "masters": [
-            "parcelstation.enabled"
-          ],
-          "subjects": [
-            "parcelstation.id",
-            "parcelstation.postNumber"
-          ],
-          "id": "parcelstationRequireChildren"
-        },
-        "parcelstationExcludeAllOthers": {
-          "masters": [
-            "parcelstation.enabled"
-          ],
-          "subjects": [
-            "preferredDay",
-            "preferredTime",
-            "preferredLocation",
-            "preferredNeighbour",
-            "parcelOutletRouting"
-          ],
-          "triggerValue": true,
-          "action": "hide",
-          "id": "parcelstationExcludeAllOthers"
-        },
-        "allOthersExcludeParcelstation": {
-          "masters": [
-            "preferredDay",
-            "preferredTime",
-            "preferredLocation",
-            "preferredNeighbour",
-            "parcelOutletRouting"
-          ],
-          "subjects": [
-            "parcelstation.enabled"
-          ],
-          "triggerValue": "*",
-          "action": "hide",
-          "id": "allOthersExcludeParcelstation"
         }
       },
       "code": "dhlpaket"
