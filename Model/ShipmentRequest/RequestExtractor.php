@@ -413,7 +413,7 @@ class RequestExtractor implements RequestExtractorInterface
      * Obtain shipment date. This currently does not check for holidays or weekends.
      *
      * @return \DateTime
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getShipmentDate(): \DateTime
     {

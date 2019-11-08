@@ -59,7 +59,7 @@ class ShippingDataHydrator
      *
      * @param mixed[] $data
      * @return ShippingDataInterface
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function toObject(array $data): ShippingDataInterface
     {
@@ -72,7 +72,7 @@ class ShippingDataHydrator
 
             return $this->shippingDataFactory->create(['carriers' => array_shift($carrierData)]);
         } catch (\Exception $exception) {
-            throw new LocalizedException(__('ShippingData object generation failed.'), $exception);
+            throw new \RuntimeException('ShippingData object generation failed.', $exception);
         }
     }
 

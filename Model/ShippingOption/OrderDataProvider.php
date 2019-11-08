@@ -55,7 +55,7 @@ class OrderDataProvider
             /** @var Order\Shipment $shipment */
             $shipment = $this->shipmentFactory->create($order);
             $packagingData = $this->packageDataProvider->getData($shipment);
-        } catch (LocalizedException $e) {
+        } catch (\RuntimeException $e) {
             return null;
         }
         $carrierCode = strtok((string) $order->getShippingMethod(), '_');

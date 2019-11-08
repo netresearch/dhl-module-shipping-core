@@ -49,7 +49,7 @@ class AdditionalFeeManagement
             $configuration = $this->getConfigurationForCarrierCode($carrierCode);
 
             return $configuration->isActive($quote);
-        } catch (LocalizedException $e) {
+        } catch (\RuntimeException $e) {
             return false;
         }
     }
@@ -69,7 +69,7 @@ class AdditionalFeeManagement
             $configuration = $this->getConfigurationForCarrierCode($carrierCode);
 
             return $configuration->getServiceCharge($quote);
-        } catch (LocalizedException $e) {
+        } catch (\RuntimeException $e) {
             return 0.0;
         }
     }
@@ -80,15 +80,15 @@ class AdditionalFeeManagement
             $configuration = $this->getConfigurationForCarrierCode($carrierCode);
 
             return $configuration->getLabel();
-        } catch (LocalizedException $e) {
-            return __('');
+        } catch (\RuntimeException $e) {
+            return __('Additional Fee');
         }
     }
 
     /**
      * @param string $carrierCode
      * @return AdditionalFeeConfigurationInterface
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     private function getConfigurationForCarrierCode(string $carrierCode): AdditionalFeeConfigurationInterface
     {
@@ -98,6 +98,6 @@ class AdditionalFeeManagement
             }
         }
 
-        throw new LocalizedException(__('No configuration found for given carrier code.'));
+        throw new \RuntimeException('No configuration found for given carrier code.');
     }
 }

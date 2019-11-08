@@ -58,7 +58,7 @@ class ShipmentDate
      * @param mixed $store
      *
      * @return \DateTime
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getDate($store = null): \DateTime
     {
@@ -77,7 +77,7 @@ class ShipmentDate
      * @param mixed $store
      *
      * @return \DateTime
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     private function getNextPossibleDate(
         \DateTime $shipmentDate,
@@ -114,7 +114,7 @@ class ShipmentDate
             // If merchant has a bad configuration eg. all days marked as non drop off days we need to exit the loop.
             // Exception is thrown and service will be removed from the array.
             if ($dayCount === 6) {
-                throw new LocalizedException(__('No valid start date.'));
+                throw new \RuntimeException('No valid start date.');
             }
         } while (!$shipmentDateAllowed);
 

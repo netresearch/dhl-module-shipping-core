@@ -7,6 +7,6 @@
 $viewModel = $block->getViewModel();
 ?>
 <p class="info">
-    <?php echo $block->escapeHtml(__('Module version:')) ?>
-    <?php echo $block->escapeHtml($viewModel->getModuleVersion()) ?>
+    <?= $block->escapeHtml(__('Module version:')) ?>
+    <?= $block->escapeHtml($viewModel->getModuleVersion()) ?>
 </p>

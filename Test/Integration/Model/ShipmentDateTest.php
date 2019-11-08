@@ -12,7 +12,6 @@ use Dhl\ShippingCore\Model\ShipmentDate;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;
 use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\Helper\Bootstrap;
@@ -127,7 +126,7 @@ class ShipmentDateTest extends TestCase
      * @param \DateTime $expectedDate
      * @param string $originCountry
      *
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function testGetDate(
         \DateTime $currentTime,
@@ -162,7 +161,7 @@ class ShipmentDateTest extends TestCase
     }
 
     /**
-     * @expectedException        \Magento\Framework\Exception\LocalizedException
+     * @expectedException        \RuntimeException
      * @expectedExceptionMessage No valid start date.
      */
     public function testGetDateException()

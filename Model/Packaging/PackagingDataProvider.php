@@ -69,7 +69,7 @@ class PackagingDataProvider
      * @param Shipment $shipment
      *
      * @return ShippingDataInterface
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getData(Shipment $shipment): ShippingDataInterface
     {

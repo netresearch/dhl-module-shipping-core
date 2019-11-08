@@ -67,7 +67,7 @@ class CheckoutDataProvider
      *
      * @return ShippingDataInterface
      *
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getData(string $countryCode, int $storeId, string $postalCode): ShippingDataInterface
     {

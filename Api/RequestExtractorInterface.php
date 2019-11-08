@@ -115,7 +115,7 @@ interface RequestExtractorInterface
      * Obtain shipment date.
      *
      * @return \DateTime
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getShipmentDate(): \DateTime;
 }
