@@ -10,6 +10,7 @@
                 <shipment_defaults>
                     <terms_of_trade>DDU</terms_of_trade>
                     <export_content_type>OTHER</export_content_type>
+                    <export_content_explanation>Commercial Goods</export_content_explanation>
                 </shipment_defaults>
                 <bulk_settings>
                     <cron_order_status>pending,processing</cron_order_status>
