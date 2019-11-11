@@ -3,9 +3,10 @@
     <!-- # service interface preferences -->
     <preference for="Dhl\ShippingCore\Api\CheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\CheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\ConfigInterface" type="Dhl\ShippingCore\Model\Config\Config"/>
-    <preference for="Dhl\ShippingCore\Api\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
     <preference for="Dhl\ShippingCore\Api\GuestCheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\GuestCheckoutManagement"/>
+    <preference for="Dhl\ShippingCore\Api\ItemAttributeReaderInterface" type="Dhl\ShippingCore\Model\Order\ItemAttributeReader"/>
     <preference for="Dhl\ShippingCore\Api\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
+    <preference for="Dhl\ShippingCore\Api\PackagingOptionReaderInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier\PackagingOptionReader"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Rate\CollectRatesPipeline"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\CreateShipmentsPipeline"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Rate\RateResponseProcessor"/>
@@ -13,22 +14,22 @@
     <preference for="Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Dhl\ShippingCore\Api\PdfCombinatorInterface" type="Dhl\ShippingCore\Util\PdfCombinator"/>
-    <preference for="Dhl\ShippingCore\Api\PackagingOptionReaderInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier\PackagingOptionReader"/>
     <preference for="Dhl\ShippingCore\Api\ProxyCarrierFactoryInterface" type="Dhl\ShippingCore\Model\Emulation\ProxyCarrierFactory"/>
     <preference for="Dhl\ShippingCore\Api\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Emulation\RateRequestService"/>
-    <preference for="Dhl\ShippingCore\Api\Data\RecipientStreetInterface" type="Dhl\ShippingCore\Model\RecipientStreet"/>
     <preference for="Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface" type="Dhl\ShippingCore\Model\RecipientStreetRepository"/>
     <preference for="Dhl\ShippingCore\Api\RequestExtractorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestExtractor"/>
     <preference for="Dhl\ShippingCore\Api\RequestModifierInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier"/>
     <preference for="Dhl\ShippingCore\Api\RequestValidatorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Validator\CompositeValidator"/>
+    <preference for="Dhl\ShippingCore\Api\ShipmentItemFilterInterface" type="Dhl\ShippingCore\Model\Shipment\ItemFilter"/>
+    <preference for="Dhl\ShippingCore\Api\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
     <preference for="Dhl\ShippingCore\Api\UnitConverterInterface" type="Dhl\ShippingCore\Util\UnitConverter"/>
-    <preference for="Dhl\ShippingCore\Api\ItemAttributeReaderInterface" type="Dhl\ShippingCore\Model\Order\ItemAttributeReader"/>
     <!-- # data interface preferences -->
     <preference for="Dhl\ShippingCore\Api\Data\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
     <preference for="Dhl\ShippingCore\Api\Data\FootnoteInterface" type="Dhl\ShippingCore\Model\Checkout\Footnote"/>
     <preference for="Dhl\ShippingCore\Api\Data\KeyValueObjectInterface" type="Dhl\ShippingCore\Model\Webapi\Data\KeyValueObject"/>
     <preference for="Dhl\ShippingCore\Api\Data\MetadataInterface" type="Dhl\ShippingCore\Model\Checkout\Metadata"/>
     <preference for="Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface" type="Dhl\ShippingCore\Model\OrderItemAttributes"/>
+    <preference for="Dhl\ShippingCore\Api\Data\RecipientStreetInterface" type="Dhl\ShippingCore\Model\RecipientStreet"/>
     <preference for="Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface" type="Dhl\ShippingCore\Model\Webapi\Data\ShippingOption"/>
     <preference for="Dhl\ShippingCore\Api\Data\Sales\ServiceDataInterface" type="Dhl\ShippingCore\Model\Webapi\Data\ServiceData"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageAdditionalInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\PackageAdditional"/>

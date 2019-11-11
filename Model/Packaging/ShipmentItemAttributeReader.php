@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Packaging;
 
 use Dhl\ShippingCore\Api\ItemAttributeReaderInterface;
+use Dhl\ShippingCore\Api\ShipmentItemFilterInterface;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
 
@@ -28,13 +29,22 @@ class ShipmentItemAttributeReader
     private $orderItemAttributeReader;
 
     /**
+     * @var ShipmentItemFilterInterface
+     */
+    private $itemFilter;
+
+    /**
      * ShipmentItemAttributeReader constructor.
      *
      * @param ItemAttributeReaderInterface $orderItemAttributeReader
+     * @param ShipmentItemFilterInterface $itemFilter
      */
-    public function __construct(ItemAttributeReaderInterface $orderItemAttributeReader)
-    {
+    public function __construct(
+        ItemAttributeReaderInterface $orderItemAttributeReader,
+        ShipmentItemFilterInterface $itemFilter
+    ) {
         $this->orderItemAttributeReader = $orderItemAttributeReader;
+        $this->itemFilter = $itemFilter;
     }
 
     /**
@@ -98,7 +108,8 @@ class ShipmentItemAttributeReader
             return $totalWeight;
         };
 
-        return array_reduce($shipment->getAllItems(), $fnAdd, 0);
+        $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
+        return (float) array_reduce($items, $fnAdd, 0);
     }
 
     /**
@@ -114,7 +125,8 @@ class ShipmentItemAttributeReader
             return $price;
         };
 
-        return array_reduce($shipment->getAllItems(), $fnAdd, 0);
+        $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
+        return (float) array_reduce($items, $fnAdd, 0);
     }
 
     /**
@@ -138,7 +150,8 @@ class ShipmentItemAttributeReader
             return $shipmentItem->getName();
         };
 
-        return array_map($fnCollect, $shipment->getAllItems());
+        $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
+        return array_map($fnCollect, $items);
     }
 
     /**
@@ -153,7 +166,8 @@ class ShipmentItemAttributeReader
             return $this->getDgCategory($shipmentItem);
         };
 
-        $dgCategories = array_map($fnCollect, $shipment->getAllItems());
+        $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
+        $dgCategories = array_map($fnCollect, $items);
 
         return array_filter($dgCategories);
     }

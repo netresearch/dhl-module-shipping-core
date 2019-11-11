@@ -6,9 +6,9 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptions;
 
+use Dhl\ShippingCore\Api\ShipmentItemFilterInterface;
 use Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptionsProcessorInterface;
 use Magento\Sales\Model\Order\Shipment;
-use Magento\Sales\Model\Order\Shipment\Item;
 
 /**
  * Class CloneItemTemplatesProcessor
@@ -18,6 +18,21 @@ use Magento\Sales\Model\Order\Shipment\Item;
  */
 class CloneItemTemplatesProcessor implements ShippingOptionsProcessorInterface
 {
+    /**
+     * @var ShipmentItemFilterInterface
+     */
+    private $itemFilter;
+
+    /**
+     * CloneItemTemplatesProcessor constructor.
+     *
+     * @param ShipmentItemFilterInterface $itemFilter
+     */
+    public function __construct(ShipmentItemFilterInterface $itemFilter)
+    {
+        $this->itemFilter = $itemFilter;
+    }
+
     /**
      * Convert the static ItemShippingOption arrays read from xml
      * into separate elements for each shipment item.
@@ -29,11 +44,12 @@ class CloneItemTemplatesProcessor implements ShippingOptionsProcessorInterface
      */
     public function process(array $shippingData, Shipment $shipment): array
     {
+        $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
+
         foreach ($shippingData['carriers'] as $carrierCode => $carrier) {
             $newData = [];
 
-            /** @var Item $item */
-            foreach ($shipment->getAllItems() as $item) {
+            foreach ($items as $item) {
                 $itemId = (int) $item->getOrderItemId();
                 $newItem = [
                     'itemId' => $itemId,

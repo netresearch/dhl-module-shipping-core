@@ -9,12 +9,12 @@ namespace Dhl\ShippingCore\Model\ShipmentRequest;
 use Dhl\ShippingCore\Api\PackagingOptionReaderInterface;
 use Dhl\ShippingCore\Api\PackagingOptionReaderInterfaceFactory;
 use Dhl\ShippingCore\Api\RequestModifierInterface;
+use Dhl\ShippingCore\Api\ShipmentItemFilterInterface;
 use Magento\Directory\Model\RegionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObjectFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order\Shipment;
-use Magento\Sales\Model\Order\Shipment\Item;
 use Magento\Shipping\Model\Shipment\Request;
 use Magento\Store\Model\ScopeInterface;
 
@@ -35,6 +35,11 @@ class RequestModifier implements RequestModifierInterface
     private $packagingOptionReaderFactory;
 
     /**
+     * @var ShipmentItemFilterInterface
+     */
+    private $itemFilter;
+
+    /**
      * @var RegionFactory
      */
     private $regionFactory;
@@ -49,17 +54,20 @@ class RequestModifier implements RequestModifierInterface
      *
      * @param ScopeConfigInterface $scopeConfig
      * @param PackagingOptionReaderInterfaceFactory $packagingOptionReaderFactory
+     * @param ShipmentItemFilterInterface $itemFilter
      * @param RegionFactory $regionFactory
      * @param DataObjectFactory $dataObjectFactory
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         PackagingOptionReaderInterfaceFactory $packagingOptionReaderFactory,
+        ShipmentItemFilterInterface $itemFilter,
         RegionFactory $regionFactory,
         DataObjectFactory $dataObjectFactory
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->packagingOptionReaderFactory = $packagingOptionReaderFactory;
+        $this->itemFilter = $itemFilter;
         $this->regionFactory = $regionFactory;
         $this->dataObjectFactory = $dataObjectFactory;
     }
@@ -223,8 +231,8 @@ class RequestModifier implements RequestModifierInterface
             'services' => $packagingOptionReader->getServiceOptionValues(),
         ];
 
-        /** @var Item $item */
-        foreach ($shipment->getAllItems() as $item) {
+        $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
+        foreach ($items as $item) {
             $orderItemId = (int) $item->getOrderItemId();
             $itemCustoms = $packagingOptionReader->getItemCustomsValues($orderItemId);
             $itemCustomsValue = $itemCustoms['customsValue'] ?? '';
