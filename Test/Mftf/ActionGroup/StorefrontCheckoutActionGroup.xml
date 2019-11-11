@@ -78,7 +78,7 @@
         </assertEquals>
 
         <!-- Extract the first shipping carrier price -->
-        <executeJS function="return parseFloat(jQuery('{{StorefrontCheckoutSection.checkoutShippingLabelJQuery(expectedShippingCarrierCode)}}').prev('.col-price').find('.price .price').first().text().replace(',', '.'));"
+        <executeJS function="return parseFloat(jQuery('{{StorefrontCheckoutSection.checkoutShippingLabelJQuery(expectedShippingCarrierCode)}}').prev('.col-price').find('.price .price').first().text().replace(/[^0-9.-]+/g, ''));"
                    stepKey="priceColumnText"/>
 
         <assertGreaterThanOrEqual stepKey="assertPriceColumnText">
