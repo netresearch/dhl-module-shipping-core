@@ -9,6 +9,17 @@
                         <label>Shipping Product</label>
                         <inputType>radioset</inputType>
                     </input>
+                    <input code="customPackageId">
+                        <label>Container</label>
+                        <inputType>select</inputType>
+                        <tooltip>
+                            You can configure your preset package sizes in the system configuration
+                        </tooltip>
+                    </input>
+                    <input code="packagingWeight">
+                        <label>Tare weight</label>
+                        <inputType>prefixed</inputType>
+                    </input>
                     <input code="weight">
                         <label>Total Weight</label>
                         <inputType>prefixed</inputType>
@@ -18,6 +29,9 @@
                         </validationRules>
                         <itemCombinationRule>
                             <sourceItemInputCode>details.weight</sourceItemInputCode>
+                            <additionalSourceInputCodes>
+                                <input>packageDetails.packagingWeight</input>
+                            </additionalSourceInputCodes>
                             <action>add</action>
                         </itemCombinationRule>
                     </input>

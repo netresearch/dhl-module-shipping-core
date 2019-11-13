@@ -26,6 +26,14 @@ interface ItemCombinationRuleInterface
     public function getSourceItemInputCode(): string;
 
     /**
+     * Contains compound codes of additional package or service level inputs
+     * that should also be considered when combining values
+     *
+     * @return string[]
+     */
+    public function getAdditionalSourceInputCodes(): array;
+
+    /**
      * The action to perform on the source values. Valid values:
      *
      * - 'add': adds up each value multiplied by the item's quantity,
@@ -40,6 +48,12 @@ interface ItemCombinationRuleInterface
      * @return void
      */
     public function setSourceItemInputCode(string $action);
+
+    /**
+     * @param string[] $additionalServiceInputCodes
+     * @return mixed
+     */
+    public function setAdditionalSourceInputCodes(array $additionalServiceInputCodes);
 
     /**
      * @param string $action

@@ -121,6 +121,16 @@ interface InputInterface
     public function getItemCombinationRule();
 
     /**
+     * Retrieve a list of mappings of input values to "input code" => "value maps"
+     *
+     * This can is used to let this input directly change the values of other inputs,
+     * for example updating the package dimensions when selecting a package type.
+     *
+     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface[]
+     */
+    public function getValueMaps(): array;
+
+    /**
      * @param string $inputType
      *
      * @return void
@@ -210,4 +220,11 @@ interface InputInterface
      * @return void
      */
     public function setItemCombinationRule($itemCombinationRule);
+
+    /**
+     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface[] $valueMaps
+     *
+     * @return void
+     */
+    public function setValueMaps(array $valueMaps);
 }

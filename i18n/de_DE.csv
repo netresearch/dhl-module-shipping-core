@@ -15,9 +15,16 @@ Action,Aktion
 "Cancel Labels","Versandaufträge stornieren"
 "Cannot initialize packaging data, please provide shipment.","Paketdaten konnten nicht geladen werden. Stellen Sie ein Shipment bereit."
 "Carrier ""%1"" not found.","Carrier ""%1"" konnte nicht gefunden werden."
+<<<<<<< HEAD
 "Cash On Delivery Payment Methods",Nachnahmezahlungsmethoden
 "Checkout Presentation",Checkout-Darstellung
 "Commercial Sample",Warenmuster
+=======
+"Cash On Delivery Payment Methods","Nachnahmezahlungsmethoden"
+"Checkout Presentation","Checkout-Darstellung"
+"Commercial Sample","Warenmuster"
+"Container","Container"
+>>>>>>> DHLGW-639: Container type input in packaging popup
 "Cost and estimated delivery dates","Kosten und voraussichtliche Liefertermine"
 "Cost only","Nur Kosten"
 "Could not delete service selection.","Die Serviceauswahl konnte nicht gelöscht werden."
@@ -121,9 +128,9 @@ Sat,Sa
 "Shipping label(s) for the order(s) %1 could not be created.","Versandetiketten für die Bestellung(en) %1 konnten nicht erstellt werden."
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Versandetiketten für die Bestellung(en) %1 konnten nicht abgerufen werden. Bitte prüfen Sie die Lieferscheinkommentare."
 "Shipping label(s) for the order(s) %1 were successfully created.","Versandetiketten für die Bestellung(en) %1 wurden erfolgreich erstellt."
-"Sort Order",Sortierreihenfolge
 "Terms of Trade",Handelsklauseln
 "The DHL Shipping Solutions section provides common configuration options for all subsequent DHL carrier modules.","Der Abschnitt ""Allgemeine Konfiguration"" bietet gemeinsame Konfigurationseinstellungen für sämtliche DHL Versandmethoden."
+"Tare weight",Leergewicht
 "The content description is mandatory if export content type is <em>OTHER</em>.","Eine Inhaltsbeschreibung ist vorgeschrieben, wenn die Inhaltskategorie <em>SONSTIGES</em> ist."
 "The item option ""%1"" is not available.","Die Artikeloption ""%1"" ist nicht verfügbar."
 "The package option ""%1"" is not available.","Die Paketoption ""%1"" ist nicht verfügbar."
@@ -154,4 +161,9 @@ Weight,Gewicht
 "Weight %1","Gewicht %1"
 Width,Breite
 "Width %1","Breite %1"
+<<<<<<< HEAD
 "You need to have at least one drop off day.","Sie müssen mindestens einen Tag für die Paketübergabe angeben."
+=======
+"Width","Breite"
+"You can configure your preset package sizes in the system configuration","Ihre voreingestellten Paketgrößen können Sie in der Systemkonfiguration konfigurieren"
+>>>>>>> DHLGW-639: Container type input in packaging popup

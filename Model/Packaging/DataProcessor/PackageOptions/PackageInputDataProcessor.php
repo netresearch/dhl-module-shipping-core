@@ -104,9 +104,18 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setDefaultValue($value);
                     break;
 
+                case 'packagingWeight':
+                    $comment = $this->commentFactory->create();
+                    $comment->setContent($this->config->getWeightUnit($shipment->getStoreId()));
+                    $input->setComment($comment);
+                    $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getWeight() : '');
+                    break;
+
                 // weight
                 case 'weight':
-                    $totalWeight = $this->itemAttributeReader->getTotalWeight($shipment);
+                    $itemTotalWeight = $this->itemAttributeReader->getTotalWeight($shipment);
+                    $packagingWeight = $defaultPackage ? $defaultPackage->getWeight() : 0;
+                    $totalWeight = $itemTotalWeight + $packagingWeight;
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->config->getWeightUnit($shipment->getStoreId()));
                     $input->setComment($comment);

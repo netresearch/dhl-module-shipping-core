@@ -21,7 +21,6 @@ class Package extends DataObject
     const KEY_WEIGHT = 'weight';
     const KEY_LENGTH = 'length';
     const KEY_WIDTH = 'width';
-    const KEY_SORT_ORDER = 'sort_order';
     const KEY_TITLE = 'title';
     const KEY_IS_DEFAULT = 'is_default';
     const KEY_ID = 'id';
@@ -64,14 +63,6 @@ class Package extends DataObject
     public function getWidth(): float
     {
         return (float) $this->getData(self::KEY_WIDTH);
-    }
-
-    /**
-     * @return int
-     */
-    public function getSortOrder(): int
-    {
-        return (int) $this->getData(self::KEY_SORT_ORDER);
     }
 
     /**

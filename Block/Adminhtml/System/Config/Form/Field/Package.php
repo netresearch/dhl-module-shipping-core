@@ -92,15 +92,6 @@ class Package extends AbstractFieldArray
         );
 
         $this->addColumn(
-            PackageModel::KEY_SORT_ORDER,
-            [
-                'label' => __('Sort Order'),
-                'style' => 'width:40px',
-                'class' => 'validate-digits required',
-            ]
-        );
-
-        $this->addColumn(
             PackageModel::KEY_IS_DEFAULT,
             [
                 'label' => __('Set Default'),

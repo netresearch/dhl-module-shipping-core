@@ -23,6 +23,11 @@ class ItemCombinationRule implements ItemCombinationRuleInterface
     private $sourceItemInputCode;
 
     /**
+     * @var string[]
+     */
+    private $additionalSourceInputCodes = [];
+
+    /**
      * @var string
      */
     private $action;
@@ -36,11 +41,27 @@ class ItemCombinationRule implements ItemCombinationRuleInterface
     }
 
     /**
+     * @return string[]
+     */
+    public function getAdditionalSourceInputCodes(): array
+    {
+        return $this->additionalSourceInputCodes;
+    }
+
+    /**
      * @param string $sourceItemInputCode
      */
     public function setSourceItemInputCode(string $sourceItemInputCode)
     {
         $this->sourceItemInputCode = $sourceItemInputCode;
+    }
+
+    /**
+     * @param string[] $additionalServiceInputCodes
+     */
+    public function setAdditionalSourceInputCodes(array $additionalServiceInputCodes)
+    {
+        $this->additionalSourceInputCodes = $additionalServiceInputCodes;
     }
 
     /**

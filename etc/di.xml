@@ -54,6 +54,9 @@
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackResponse"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackErrorResponse"/>
 
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input\InputValue"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input\ValueMap"/>
+
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\QuoteTableNameIterator\Virtual" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>
@@ -330,6 +333,8 @@
             </argument>
             <argument name="packagingPackageOptionsProcessors" xsi:type="array">
                 <item name="dhlPackageInputDataProcessor" sortOrder="200" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\PackageInputDataProcessor</item>
+                <item name="dhlPackageContainerInputDataProcessor" sortOrder="210" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\PackageContainerInputDataProcessor</item>
+                <item name="dhlCustomPackageValueMapProcessor" sortOrder="300" xsi:type="object">\Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\CustomPackageValueMapProcessor</item>
             </argument>
             <argument name="packagingItemOptionsProcessors" xsi:type="array">
                 <item name="dhlItemInputDataProcessor" sortOrder="300" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemOptions\ItemInputDataProcessor</item>

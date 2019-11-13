@@ -186,13 +186,7 @@
                                                 <xs:element name="itemCombinationRule" minOccurs="0">
                                                     <xs:complexType>
                                                         <xs:all>
-                                                            <xs:element name="sourceItemInputCode">
-                                                                <xs:simpleType>
-                                                                    <xs:restriction base="xs:string">
-                                                                        <xs:pattern value=".*\..*"/>
-                                                                    </xs:restriction>
-                                                                </xs:simpleType>
-                                                            </xs:element>
+                                                            <xs:element name="sourceItemInputCode" type="codestring"/>
                                                             <xs:element name="action">
                                                                 <xs:simpleType>
                                                                     <xs:restriction base="xs:string">
@@ -200,9 +194,23 @@
                                                                     </xs:restriction>
                                                                 </xs:simpleType>
                                                             </xs:element>
+                                                            <xs:element name="additionalSourceInputCodes" minOccurs="0">
+                                                                <xs:complexType>
+                                                                    <xs:sequence maxOccurs="unbounded">
+                                                                        <xs:element name="input">
+                                                                            <xs:simpleType>
+                                                                                <xs:restriction base="xs:string">
+                                                                                    <xs:pattern value=".*\..*"/>
+                                                                                </xs:restriction>
+                                                                            </xs:simpleType>
+                                                                        </xs:element>
+                                                                    </xs:sequence>
+                                                                </xs:complexType>
+                                                            </xs:element>
                                                         </xs:all>
                                                     </xs:complexType>
                                                 </xs:element>
+                                                <xs:element name="valueMaps" minOccurs="0" type="valueMapList"/>
                                                 <xs:element name="comment" type="commentConfig" minOccurs="0"/>
                                                 <xs:element name="defaultValue" type="xs:string" minOccurs="0"/>
                                             </xs:all>
@@ -300,6 +308,39 @@
     <xs:simpleType name="originCountry">
         <xs:restriction base="xs:string">
             <xs:pattern value="[A-Z]{2}|eu"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="valueMapList">
+        <xs:sequence>
+            <xs:element name="valueMapItem" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="inputValues">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="inputValue" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:simpleContent>
+                                                <xs:extension base="xs:string">
+                                                    <xs:attribute name="code" type="codestring" use="required"/>
+                                                </xs:extension>
+                                            </xs:simpleContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="sourceValue" type="xs:string" use="required"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="codestring">
+        <xs:restriction base="xs:string">
+            <xs:pattern value=".*\..*"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

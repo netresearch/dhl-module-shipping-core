@@ -32,7 +32,10 @@ class Converter implements ConverterInterface
         'subjects',
         'masters',
         'compatibilityData',
+        'additionalSourceInputCodes',
         'shippingOptions',
+        'valueMaps',
+        'inputValues',
         PackagingDataProvider::GROUP_SERVICE,
         PackagingDataProvider::GROUP_ITEM,
         PackagingDataProvider::GROUP_PACKAGE,
@@ -145,7 +148,17 @@ class Converter implements ConverterInterface
         $firstKey = key($keys);
         $firstValue = $attributes[$firstKey];
 
-        $result[$firstValue] = $this->toArray($childElement);
+        if ($childElement->count()) {
+            $result[$firstValue] = $this->toArray($childElement);
+        } else {
+            $scalar = $this->toScalar($childElement);
+            if ($scalar !== '') {
+                $result[$firstValue]['value'] = $this->toScalar($childElement);
+            } else {
+                $result[$firstValue] = [];
+            }
+        }
+
         if (is_array($result[$firstValue])) {
             $result[$firstValue] = array_merge($result[$firstValue], $attributes);
         } else {
