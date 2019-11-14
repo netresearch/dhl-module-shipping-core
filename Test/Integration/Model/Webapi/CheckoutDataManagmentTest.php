@@ -12,6 +12,7 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\SelectionInterface;
 use Dhl\ShippingCore\Model\Checkout\ShippingData;
 use Dhl\ShippingCore\Model\ShippingOption\Selection\QuoteSelectionRepository;
 use Dhl\ShippingCore\Model\Webapi\CheckoutManagement;
+use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
 use Dhl\ShippingCore\Test\Integration\Fixture\QuoteFixture;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilder;
@@ -100,5 +101,14 @@ class CheckoutDataManagmentTest extends \PHPUnit\Framework\TestCase
             $storedServiceSelection->getShippingOptionCode(),
             $shippingOptionSelection->getShippingOptionCode()
         );
+    }
+
+    /**
+     *
+     */
+    public function tearDown()
+    {
+        QuoteFixture::rollback();
+        parent::tearDown();
     }
 }

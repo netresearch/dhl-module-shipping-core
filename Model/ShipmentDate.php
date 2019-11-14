@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model;
 
 use Dhl\ShippingCore\Api\DayValidatorInterface;
-use Dhl\ShippingCore\Model\Config\Config;
+use Dhl\ShippingCore\Api\ConfigInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
@@ -25,7 +25,7 @@ class ShipmentDate
     private $timezone;
 
     /**
-     * @var Config
+     * @var ConfigInterface
      */
     private $config;
 
@@ -38,13 +38,13 @@ class ShipmentDate
      * ShipmentDate constructor.
      *
      * @param TimezoneInterface $timezone
-     * @param Config $config
+     * @param ConfigInterface $config
      * @param DayValidatorInterface[] $dayValidators A list of validators used to check if the current
      *                                               date can be uses as the shipping date.
      */
     public function __construct(
         TimezoneInterface $timezone,
-        Config $config,
+        ConfigInterface $config,
         array $dayValidators
     ) {
         $this->timezone = $timezone;

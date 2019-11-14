@@ -25,7 +25,7 @@ class DropOffDays extends Value
      */
     public function beforeSave()
     {
-        $noDropOffConfig = explode(',', $this->getValue());
+        $noDropOffConfig = explode(',', (string)$this->getValue());
 
         if (count($noDropOffConfig) === 6) {
             throw new LocalizedException(__('You need to have at least one drop off day.'));

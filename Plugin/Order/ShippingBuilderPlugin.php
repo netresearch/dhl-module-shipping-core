@@ -12,11 +12,13 @@ use Dhl\ShippingCore\Api\Data\Sales\ServiceDataInterface;
 use Dhl\ShippingCore\Api\Data\Sales\ServiceDataInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterfaceFactory;
+use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
 use Dhl\ShippingCore\Model\ShippingOption\OrderDataProvider;
 use Magento\Sales\Api\Data\ShippingExtensionFactory;
 use Magento\Sales\Api\Data\ShippingInterface;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\ShippingBuilder;
+use Magento\Sales\Api\Data\TotalExtensionInterfaceFactory;
 
 /**
  * Class ShippingBuilderPlugin
@@ -53,6 +55,11 @@ class ShippingBuilderPlugin
     private $orderDataProvider;
 
     /**
+     * @var TotalExtensionInterfaceFactory
+     */
+    private $totalExtensionFactory;
+
+    /**
      * ShippingBuilderPlugin constructor.
      *
      * @param ShippingExtensionFactory $shippingExtensionFactory
@@ -60,19 +67,22 @@ class ShippingBuilderPlugin
      * @param ShippingOptionInterfaceFactory $packageDataFactory
      * @param KeyValueObjectInterfaceFactory $keyValueObjectFactory
      * @param OrderDataProvider $orderDataProvider
+     * @param TotalExtensionInterfaceFactory $totalExtensionFactory
      */
     public function __construct(
         ShippingExtensionFactory $shippingExtensionFactory,
         ServiceDataInterfaceFactory $serviceDataFactory,
         ShippingOptionInterfaceFactory $packageDataFactory,
         KeyValueObjectInterfaceFactory $keyValueObjectFactory,
-        OrderDataProvider $orderDataProvider
+        OrderDataProvider $orderDataProvider,
+        TotalExtensionInterfaceFactory $totalExtensionFactory
     ) {
         $this->shippingExtensionFactory = $shippingExtensionFactory;
         $this->serviceDataFactory = $serviceDataFactory;
         $this->packageDataFactory = $packageDataFactory;
         $this->keyValueObjectFactory = $keyValueObjectFactory;
         $this->orderDataProvider = $orderDataProvider;
+        $this->totalExtensionFactory = $totalExtensionFactory;
     }
 
     /**
@@ -171,8 +181,31 @@ class ShippingBuilderPlugin
         );
 
         $extensionAttributes->setDhlgw($packageData);
-
         $shipping->setExtensionAttributes($extensionAttributes);
+
+        if (!$shipping->getTotal()) {
+            return $shipping;
+        }
+
+        $totalsExtensionAttributes = $shipping->getTotal()->getExtensionAttributes();
+        if (!$totalsExtensionAttributes) {
+            $totalsExtensionAttributes = $this->totalExtensionFactory->create();
+        }
+
+        $totalsExtensionAttributes->setBaseDhlgwAdditionalFee(
+            $order->getData(TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME)
+        );
+        $totalsExtensionAttributes->setBaseDhlgwAdditionalFeeInclTax(
+            $order->getData(TotalsManager::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME)
+        );
+        $totalsExtensionAttributes->setDhlgwAdditionalFee(
+            $order->getData(TotalsManager::ADDITIONAL_FEE_FIELD_NAME)
+        );
+        $totalsExtensionAttributes->setDhlgwAdditionalFeeInclTax(
+            $order->getData(TotalsManager::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME)
+        );
+
+        $shipping->getTotal()->setExtensionAttributes($totalsExtensionAttributes);
 
         return $shipping;
     }

@@ -251,6 +251,18 @@
     <type name="Magento\Sales\Model\Order\ItemRepository">
         <plugin name="DhlgwPersistOrderItemAttributes" type="Dhl\ShippingCore\Plugin\Order\PersistOrderItemAttributes"/>
     </type>
+    <type name="Magento\Sales\Model\Order\ShippingBuilder">
+        <plugin name="exportShippingOptions" type="Dhl\ShippingCore\Plugin\Order\ShippingBuilderPlugin"/>
+    </type>
+    <type name="Magento\Sales\Model\OrderRepository">
+        <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddTotalsAsExtensionAttributes"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\InvoiceRepository">
+        <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Invoice\AddTotalsAsExtensionAttributes"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\CreditmemoRepository">
+        <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Creditmemo\AddTotalsAsExtensionAttributes"/>
+    </type>
 
     <!-- shipping option config xml reader -->
     <type name="Dhl\ShippingCore\Model\ShippingOption\Config\Reader">

@@ -38,6 +38,7 @@ class OrderFixture
         'products' => [],
         'customers' => [],
         'orders' => [],
+        'selections' => []
     ];
 
     /**
@@ -81,7 +82,6 @@ class OrderFixture
         $cartBuilder = CartBuilder::forCurrentSession();
         $cartBuilder = self::addProductsToCart($productData, $cartBuilder);
         $cart = $cartBuilder->build();
-
         $checkout = CustomerCheckout::fromCart($cart);
 
         $order = $checkout
@@ -128,6 +128,16 @@ class OrderFixture
     public static function rollbackFixtureEntities()
     {
         $objectManager = Bootstrap::getObjectManager();
+
+        /**
+         * this is needed otherwise delete operations will possible not work.
+         * see: Magento\Framework\Model\AbstractModel::beforeDelete
+         */
+        /** @var \Magento\Framework\Registry $registry */
+        $registry = $objectManager->get(\Magento\Framework\Registry::class);
+        $registry->unregister('isSecureArea');
+        $registry->register('isSecureArea', true);
+
         /** @var OrderInterface $order */
         foreach (self::$createdEntities['orders'] as $order) {
             /** @var OrderRepositoryInterface $orderRepo */
@@ -148,9 +158,10 @@ class OrderFixture
         foreach (self::$createdEntities['products'] as $product) {
             /** @var ProductRepositoryInterface $productRepo */
             $productRepo = $objectManager->get(ProductRepositoryInterface::class);
-            $productRepo->deleteById($product);
+            $productRepo->delete($product);
         }
         self::$createdEntities['products'] = [];
+        $registry->unregister('isSecureArea');
     }
 
     /**
