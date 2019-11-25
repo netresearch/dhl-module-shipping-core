@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Api;
 
 use Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface;
 use Dhl\ShippingCore\Api\Data\ParcelshopFinder\LocationInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Interface LocationProviderInterface
@@ -21,6 +22,7 @@ interface LocationProviderInterface
     /**
      * @param AddressInterface $address
      * @return LocationInterface[]
+     * @throws LocalizedException
      */
     public function getLocationsByAddress(AddressInterface $address): array;
 

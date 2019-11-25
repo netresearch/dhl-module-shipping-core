@@ -10,6 +10,7 @@ use Dhl\ShippingCore\Api\Data\ParcelshopFinder\LocationInterface;
 use Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface;
 use Dhl\ShippingCore\Api\LocationProviderInterface;
 use Dhl\ShippingCore\Api\ParcelShopFinderManagementInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Class ParcelShopFinderManagement
@@ -39,6 +40,7 @@ class ParcelShopFinderManagement implements ParcelShopFinderManagementInterface
      * @param string $carrierCode
      * @param AddressInterface $address
      * @return LocationInterface[]
+     * @throws LocalizedException
      */
     public function getLocationByAddress(string $carrierCode, AddressInterface $address): array
     {
@@ -48,6 +50,6 @@ class ParcelShopFinderManagement implements ParcelShopFinderManagementInterface
             }
         }
 
-        return [];
+        throw new \RuntimeException('No parcel shop location provider configured');
     }
 }

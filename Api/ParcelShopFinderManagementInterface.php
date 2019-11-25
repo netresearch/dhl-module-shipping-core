@@ -21,6 +21,7 @@ interface ParcelShopFinderManagementInterface
      * @param string $carrierCode
      * @param \Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface $address
      * @return \Dhl\ShippingCore\Api\Data\ParcelshopFinder\LocationInterface[]
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getLocationByAddress(string $carrierCode, AddressInterface $address): array;
 }
