@@ -71,9 +71,8 @@
 
     <!-- Additional attributes fetched from the salesOrderRepositoryV1 M2 API -->
     <extension_attributes for="Magento\Sales\Api\Data\ShippingInterface">
-        <attribute code="dhlgw" type="Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface"/>
+        <attribute code="dhlgw_shipping_options" type="Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface"/>
     </extension_attributes>
-
     <extension_attributes for="Magento\Quote\Api\Data\TotalSegmentInterface">
         <attribute code="dhlgw_fee" type="float"/>
         <attribute code="dhlgw_fee_incl_tax" type="float"/>

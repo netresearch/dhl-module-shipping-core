@@ -180,7 +180,7 @@ class ShippingBuilderPlugin
             ]
         );
 
-        $extensionAttributes->setDhlgw($packageData);
+        $extensionAttributes->setDhlgwShippingOptions($packageData);
         $shipping->setExtensionAttributes($extensionAttributes);
 
         if (!$shipping->getTotal()) {
