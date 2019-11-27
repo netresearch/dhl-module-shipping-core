@@ -40,16 +40,6 @@ class Location implements LocationInterface
     private $shopId;
 
     /**
-     * @var string
-     */
-    private $shopStation;
-
-    /**
-     * @var string[]
-     */
-    private $services;
-
-    /**
      * @var AddressInterface
      */
     private $address;
@@ -104,22 +94,6 @@ class Location implements LocationInterface
     public function getShopId(): string
     {
         return $this->shopId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getShopStation(): string
-    {
-        return $this->shopStation;
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getServices(): array
-    {
-        return $this->services;
     }
 
     /**
@@ -191,22 +165,6 @@ class Location implements LocationInterface
     public function setShopId(string $shopId)
     {
         $this->shopId = $shopId;
-    }
-
-    /**
-     * @param string $shopStation
-     */
-    public function setShopStation(string $shopStation)
-    {
-        $this->shopStation = $shopStation;
-    }
-
-    /**
-     * @param string[] $services
-     */
-    public function setServices(array $services)
-    {
-        $this->services = $services;
     }
 
     /**
