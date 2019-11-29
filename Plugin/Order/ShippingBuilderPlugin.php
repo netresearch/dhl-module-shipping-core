@@ -13,12 +13,13 @@ use Dhl\ShippingCore\Api\Data\Sales\ServiceDataInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterfaceFactory;
 use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
+use Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\PackageContainerInputDataProcessor;
 use Dhl\ShippingCore\Model\ShippingOption\OrderDataProvider;
 use Magento\Sales\Api\Data\ShippingExtensionFactory;
 use Magento\Sales\Api\Data\ShippingInterface;
+use Magento\Sales\Api\Data\TotalExtensionInterfaceFactory;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\ShippingBuilder;
-use Magento\Sales\Api\Data\TotalExtensionInterfaceFactory;
 
 /**
  * Class ShippingBuilderPlugin
@@ -133,9 +134,12 @@ class ShippingBuilderPlugin
             if ($shippingOption->getAvailable()) {
                 foreach ($shippingOption->getInputs() as $input) {
                     // drop empty default values (meaning there was no preconfigured value)
-                    if (empty($input->getDefaultValue())) {
+                    if (empty($input->getDefaultValue())
+                        || $input->getCode() === PackageContainerInputDataProcessor::CONTAINER_INPUT_CODE
+                    ) {
                         continue;
                     }
+
                     $package[] = $this->keyValueObjectFactory->create(
                         [
                             KeyValueObjectInterface::KEY => $input->getCode(),
