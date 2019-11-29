@@ -30,7 +30,7 @@ class Address implements AddressInterface
     /**
      * @var string
      */
-    private $country;
+    private $countryCode;
 
     /**
      * @var string
@@ -56,9 +56,9 @@ class Address implements AddressInterface
     /**
      * @return string
      */
-    public function getCountry(): string
+    public function getCountryCode(): string
     {
-        return $this->country;
+        return $this->countryCode;
     }
 
     /**
@@ -86,11 +86,11 @@ class Address implements AddressInterface
     }
 
     /**
-     * @param string $country
+     * @param string $countryCode
      */
-    public function setCountry(string $country): void
+    public function setCountryCode(string $countryCode): void
     {
-        $this->country = $country;
+        $this->countryCode = $countryCode;
     }
 
     /**

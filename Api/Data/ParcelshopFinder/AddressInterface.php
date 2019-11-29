@@ -29,7 +29,7 @@ interface AddressInterface
     /**
      * @return string
      */
-    public function getCountry(): string;
+    public function getCountryCode(): string;
 
     /**
      * @return string
@@ -52,7 +52,7 @@ interface AddressInterface
      * @param string $string
      * @return void
      */
-    public function setCountry(string $string);
+    public function setCountryCode(string $string);
 
     /**
      * @param string $string
