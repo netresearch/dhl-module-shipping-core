@@ -15,16 +15,10 @@ Action,Aktion
 "Cancel Labels","Versandaufträge stornieren"
 "Cannot initialize packaging data, please provide shipment.","Paketdaten konnten nicht geladen werden. Stellen Sie ein Shipment bereit."
 "Carrier ""%1"" not found.","Carrier ""%1"" konnte nicht gefunden werden."
-<<<<<<< HEAD
 "Cash On Delivery Payment Methods",Nachnahmezahlungsmethoden
 "Checkout Presentation",Checkout-Darstellung
 "Commercial Sample",Warenmuster
-=======
-"Cash On Delivery Payment Methods","Nachnahmezahlungsmethoden"
-"Checkout Presentation","Checkout-Darstellung"
-"Commercial Sample","Warenmuster"
-"Container","Container"
->>>>>>> DHLGW-639: Container type input in packaging popup
+Container,Container
 "Cost and estimated delivery dates","Kosten und voraussichtliche Liefertermine"
 "Cost only","Nur Kosten"
 "Could not delete service selection.","Die Serviceauswahl konnte nicht gelöscht werden."
@@ -161,9 +155,6 @@ Weight,Gewicht
 "Weight %1","Gewicht %1"
 Width,Breite
 "Width %1","Breite %1"
-<<<<<<< HEAD
-"You need to have at least one drop off day.","Sie müssen mindestens einen Tag für die Paketübergabe angeben."
-=======
-"Width","Breite"
+Width,Breite
 "You can configure your preset package sizes in the system configuration","Ihre voreingestellten Paketgrößen können Sie in der Systemkonfiguration konfigurieren"
->>>>>>> DHLGW-639: Container type input in packaging popup
+"You need to have at least one drop off day.","Sie müssen mindestens einen Tag für die Paketübergabe angeben."
