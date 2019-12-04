@@ -123,7 +123,13 @@ class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
                     break;
 
                 case 'price':
-                    $input->setDefaultValue((string) $shipmentItem->getPrice());
+                    $totalAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
+                        - $shipmentItem->getOrderItem()->getBaseDiscountAmount()
+                        + $shipmentItem->getOrderItem()->getBaseTaxAmount()
+                        + $shipmentItem->getOrderItem()->getbaseDiscountTaxCompensationAmount();
+
+                    $itemPrice = $totalAmount / $shipmentItem->getOrderItem()->getQtyOrdered();
+                    $input->setDefaultValue((string) $itemPrice);
                     break;
 
                 case 'weight':
@@ -155,13 +161,18 @@ class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
                     break;
 
                 case 'customsValue':
-                    $price = (float) $shipmentItem->getPrice();
-                    $currency = $shipmentItem->getShipment()->getStore()->getBaseCurrency();
+                    $totalAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
+                        - $shipmentItem->getOrderItem()->getBaseDiscountAmount()
+                        + $shipmentItem->getOrderItem()->getBaseTaxAmount()
+                        + $shipmentItem->getOrderItem()->getbaseDiscountTaxCompensationAmount();
+                    $itemPrice = $totalAmount / $shipmentItem->getOrderItem()->getQtyOrdered();
+                    $input->setDefaultValue((string) $itemPrice);
+
+                    $currency = $shipmentItem->getOrderItem()->getStore()->getBaseCurrency();
                     $currencySymbol = $currency->getCurrencySymbol() ?: $currency->getCode();
                     $comment = $this->commentFactory->create();
                     $comment->setContent($currencySymbol);
                     $input->setComment($comment);
-                    $input->setDefaultValue((string) number_format($price, 2));
                     break;
 
                 case 'countryOfOrigin':

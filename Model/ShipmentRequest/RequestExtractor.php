@@ -348,7 +348,7 @@ class RequestExtractor implements RequestExtractorInterface
     public function getAllItems(): array
     {
         if (empty($this->packageItems)) {
-            $this->packageItems = [];
+            $allItems = [];
             $packages = $this->shipmentRequest->getData('packages');
 
             foreach ($packages as $packageId => $packageData) {
@@ -371,8 +371,10 @@ class RequestExtractor implements RequestExtractorInterface
                     return $packageItem;
                 }, $packageData['items']);
 
-                $this->packageItems = array_merge($this->packageItems, $packageItems);
+                $allItems[] = $packageItems;
             }
+
+            $this->packageItems = array_merge(...$allItems);
         }
 
         return $this->packageItems;

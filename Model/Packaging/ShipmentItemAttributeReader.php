@@ -121,7 +121,14 @@ class ShipmentItemAttributeReader
     public function getTotalPrice(Shipment $shipment): float
     {
         $fnAdd = function ($price, Item $shipmentItem) {
-            $price += $shipmentItem->getPrice() * $shipmentItem->getQty();
+            $totalAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
+                - $shipmentItem->getOrderItem()->getBaseDiscountAmount()
+                + $shipmentItem->getOrderItem()->getBaseTaxAmount()
+                + $shipmentItem->getOrderItem()->getbaseDiscountTaxCompensationAmount();
+
+            $itemPrice = $totalAmount / $shipmentItem->getOrderItem()->getQtyOrdered();
+            $price += ($itemPrice * $shipmentItem->getQty());
+
             return $price;
         };
 

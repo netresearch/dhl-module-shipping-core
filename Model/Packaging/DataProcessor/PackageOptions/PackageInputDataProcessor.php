@@ -166,7 +166,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     $comment = $this->commentFactory->create();
                     $comment->setContent($currencySymbol);
                     $input->setComment($comment);
-                    $input->setDefaultValue((string) number_format($price, 2));
+                    $input->setDefaultValue((string) $price);
                     break;
 
                 case 'exportDescription':

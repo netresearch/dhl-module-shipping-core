@@ -237,7 +237,7 @@ class RequestModifier implements RequestModifierInterface
             $itemCustoms = $packagingOptionReader->getItemCustomsValues($orderItemId);
             $itemCustomsValue = $itemCustoms['customsValue'] ?? '';
             $packageItem = [
-                'qty' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'qtyToShip'),
+                'qty' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'qty'),
                 'price' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'price'),
                 'name' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'productName'),
                 'weight' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'weight'),
