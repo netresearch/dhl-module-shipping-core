@@ -37,6 +37,11 @@ interface LocationInterface
     public function getShopId(): string;
 
     /**
+     * @return string[]
+     */
+    public function getServices(): array;
+
+    /**
      * @return \Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface
      */
     public function getAddress(): AddressInterface;
@@ -84,6 +89,12 @@ interface LocationInterface
      * @return void
      */
     public function setShopId(string $shopId);
+
+    /**
+     * @param string[] $services
+     * @return void
+     */
+    public function setServices(array $services);
 
     /**
      * @param \Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface $address
