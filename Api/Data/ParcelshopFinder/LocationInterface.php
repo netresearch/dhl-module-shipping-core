@@ -67,6 +67,11 @@ interface LocationInterface
     public function getLatitude(): float;
 
     /**
+     * @return string
+     */
+    public function getDisplayName(): string;
+
+    /**
      * @param string $shopType
      * @return void
      */
@@ -125,4 +130,10 @@ interface LocationInterface
      * @return void
      */
     public function setLongitude(float $longitude);
+
+    /**
+     * @param string $displayName
+     * @return void
+     */
+    public function setDisplayName(string $displayName);
 }

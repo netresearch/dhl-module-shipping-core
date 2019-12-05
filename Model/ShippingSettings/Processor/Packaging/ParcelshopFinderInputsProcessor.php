@@ -29,12 +29,14 @@ class ParcelshopFinderInputsProcessor implements ShippingOptionsProcessorInterfa
      * to the shipping option with the shopfinder input.
      */
     const INPUT_CODES = [
-        'shop-name',
-        'shop-number',
-        'address-street',
-        'address-postalcode',
-        'address-city',
-        'address-country',
+        'company',
+        'locationType',
+        'locationNumber',
+        'locationId',
+        'street',
+        'postalCode',
+        'city',
+        'countryCode',
     ];
 
     /**
@@ -79,7 +81,7 @@ class ParcelshopFinderInputsProcessor implements ShippingOptionsProcessorInterfa
                 /** @var InputInterface $input */
                 $input = $this->inputFactory->create();
                 $input->setCode($inputCode);
-                $input->setInputType('static');
+                $input->setInputType('hidden');
                 $inputs[$inputCode] = $input;
             }
             $shopFinder->setInputs($inputs);

@@ -70,6 +70,11 @@ class Location implements LocationInterface
     private $longitude;
 
     /**
+     * @var string
+     */
+    private $displayName;
+
+    /**
      * @return string
      */
     public function getShopType(): string
@@ -149,6 +154,14 @@ class Location implements LocationInterface
         return $this->latitude;
     }
     /**
+     * @return string
+     */
+    public function getDisplayName(): string
+    {
+        return $this->displayName;
+    }
+
+    /**
      * @param string $shopType
      */
     public function setShopType(string $shopType)
@@ -226,5 +239,13 @@ class Location implements LocationInterface
     public function setLongitude(float $longitude)
     {
         $this->longitude = $longitude;
+    }
+
+    /**
+     * @param string $displayName
+     */
+    public function setDisplayName(string $displayName)
+    {
+        $this->displayName = $displayName;
     }
 }
