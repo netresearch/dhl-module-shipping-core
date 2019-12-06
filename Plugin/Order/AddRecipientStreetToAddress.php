@@ -4,24 +4,29 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Plugin\Order\Address;
+namespace Dhl\ShippingCore\Plugin\Order;
 
 use Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 use Magento\Sales\Api\Data\OrderAddressExtensionFactory;
 use Magento\Sales\Api\Data\OrderAddressInterface;
+use Magento\Sales\Api\OrderAddressRepositoryInterface;
 use Magento\Sales\Model\Order\Address;
-use Magento\Sales\Model\Order\AddressRepository;
-use Magento\Sales\Model\ResourceModel\Order\Address\Collection;
 
 /**
- * Class AddressRepositoryPlugin
+ * Class AddRecipientStreetToEntity
  *
- * @package Dhl\ShippingCore\Plugin\Order\Address
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
+ * DHL uses street name and street number as separate fields. These fields are persisted as
+ * extension attributes to the shipping address. In cases where a single entity gets loaded
+ * through the repository, additional fields are added here.
+ *
+ * For loading a list of addresses see `AddRecipientStreetToAddressCollection`.
+ *
+ * @package Dhl\ShippingCore\Plugin
+ * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @link    https://www.netresearch.de/
  */
-class AddressRepositoryPlugin
+class AddRecipientStreetToAddress
 {
     /**
      * @var OrderAddressExtensionFactory
@@ -39,7 +44,8 @@ class AddressRepositoryPlugin
     protected $extensionAttributesJoinProcessor;
 
     /**
-     * AddressRepositoryPlugin constructor.
+     * AddRecipientStreetToEntity constructor.
+     *
      * @param OrderAddressExtensionFactory $orderAddressExtensionFactory
      * @param RecipientStreetRepositoryInterface $recipientStreetRepository
      * @param JoinProcessorInterface $extensionAttributesJoinProcessor
@@ -57,12 +63,14 @@ class AddressRepositoryPlugin
     /**
      * Add scalar types from our table as extension attributes.
      *
-     * @param AddressRepository $subject
+     * @param OrderAddressRepositoryInterface $repository
      * @param OrderAddressInterface $orderAddress
      * @return OrderAddressInterface
      */
-    public function afterGet(AddressRepository $subject, OrderAddressInterface $orderAddress): OrderAddressInterface
-    {
+    public function afterGet(
+        OrderAddressRepositoryInterface $repository,
+        OrderAddressInterface $orderAddress
+    ): OrderAddressInterface {
         if ($orderAddress->getAddressType() !== Address::TYPE_SHIPPING) {
             // no need to handle billing addresses
             return $orderAddress;
@@ -87,18 +95,5 @@ class AddressRepositoryPlugin
         $orderAddress->setExtensionAttributes($extensionAttributes);
 
         return $orderAddress;
-    }
-
-    /**
-     * Add our fields as extension attributes.
-     *
-     * @param AddressRepository $subject
-     * @param Collection $collection
-     * @return Collection
-     */
-    public function afterGetList(AddressRepository $subject, Collection $collection): Collection
-    {
-        $this->extensionAttributesJoinProcessor->process($collection, Address::class);
-        return $collection;
     }
 }

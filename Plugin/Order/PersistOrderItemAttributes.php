@@ -10,7 +10,7 @@ use Dhl\ShippingCore\Api\Data\OrderItemAttributesInterfaceFactory;
 use Dhl\ShippingCore\Model\OrderItemAttributesRepository;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\OrderItemInterface;
-use Magento\Sales\Model\Order\ItemRepository;
+use Magento\Sales\Api\OrderItemRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -61,12 +61,12 @@ class PersistOrderItemAttributes
      * Shift order item's extension attributes to a new attribute entity
      * and save it with reference to the original item.
      *
-     * @param ItemRepository $subject
+     * @param OrderItemRepositoryInterface $subject
      * @param OrderItemInterface $orderItem
      * @return OrderItemInterface
      */
     public function afterSave(
-        ItemRepository $subject,
+        OrderItemRepositoryInterface $subject,
         OrderItemInterface $orderItem
     ): OrderItemInterface {
         $extensionAttributes = $orderItem->getExtensionAttributes();

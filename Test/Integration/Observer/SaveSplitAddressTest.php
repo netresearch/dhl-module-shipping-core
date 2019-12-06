@@ -132,6 +132,7 @@ class SaveSplitAddressTest extends TestCase
      * @param string $expectedName
      * @param string $expectedNumber
      * @param string $expectedSupplement
+     * @throws LocalizedException
      */
     public function saveAddress(
         string $carrierCode,
@@ -155,6 +156,7 @@ class SaveSplitAddressTest extends TestCase
         $orderRepository->save(self::$order);
 
         // reset repository's registry, reload address
+        /** @var AddressRepository $addressRepository */
         $addressRepository = Bootstrap::getObjectManager()->create(AddressRepository::class);
 
         $address = $addressRepository->get($address->getEntityId());

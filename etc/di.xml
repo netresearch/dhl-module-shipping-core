@@ -236,9 +236,6 @@
     <type name="Magento\Quote\Model\Quote\Address\Rate">
         <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
     </type>
-    <type name="Magento\Sales\Model\Order\AddressRepository">
-        <plugin name="Dhl_ShippingCore_Address_Extension" type="Dhl\ShippingCore\Plugin\Order\Address\AddressRepositoryPlugin"/>
-    </type>
     <type name="Magento\Quote\Api\CartTotalRepositoryInterface">
         <plugin name="DhlgwAddFeeAmountsPlugin" type="Dhl\ShippingCore\Plugin\Quote\Cart\AddTotalSegmentExtensionAttributes"/>
     </type>
@@ -248,20 +245,26 @@
     <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
         <plugin name="DhlgwAddOrderItemExtensionAttributes" type="Dhl\ShippingCore\Plugin\Quote\Item\AttributesToOrderItem"/>
     </type>
-    <type name="Magento\Sales\Model\Order\ItemRepository">
+    <type name="Magento\Sales\Api\CreditmemoRepositoryInterface">
+        <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Creditmemo\AddTotalsAsExtensionAttributes"/>
+    </type>
+    <type name="Magento\Sales\Api\InvoiceRepositoryInterface">
+        <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Invoice\AddTotalsAsExtensionAttributes"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderAddressRepositoryInterface">
+        <plugin name="addSplitAddressAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddRecipientStreetToAddress"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderItemRepositoryInterface">
         <plugin name="DhlgwPersistOrderItemAttributes" type="Dhl\ShippingCore\Plugin\Order\PersistOrderItemAttributes"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddTotalsAsExtensionAttributes"/>
     </type>
     <type name="Magento\Sales\Model\Order\ShippingBuilder">
         <plugin name="exportShippingOptions" type="Dhl\ShippingCore\Plugin\Order\ShippingBuilderPlugin"/>
     </type>
-    <type name="Magento\Sales\Model\OrderRepository">
-        <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddTotalsAsExtensionAttributes"/>
-    </type>
-    <type name="Magento\Sales\Model\Order\InvoiceRepository">
-        <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Invoice\AddTotalsAsExtensionAttributes"/>
-    </type>
-    <type name="Magento\Sales\Model\Order\CreditmemoRepository">
-        <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Creditmemo\AddTotalsAsExtensionAttributes"/>
+    <type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
+        <plugin name="addSplitAddressAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddRecipientStreetToAddressCollection"/>
     </type>
 
     <!-- shipping option config xml reader -->
