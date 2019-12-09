@@ -11,9 +11,9 @@ use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
 use Dhl\ShippingCore\Cron\AutoCreate\OrderCollectionLoader;
 use Dhl\ShippingCore\Cron\AutoCreate\OrderCollectionLoader\AutoCreateDisabledException;
-use Dhl\ShippingCore\Model\BulkShipment\NotImplementedException;
 use Dhl\ShippingCore\Model\BulkShipmentConfiguration;
 use Dhl\ShippingCore\Model\BulkShipmentManagement;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\OrderInterface;
 use Psr\Log\LoggerInterface;
@@ -75,7 +75,7 @@ class AutoCreate
         $fnFilter = function (string $carrierCode) {
             try {
                 return $this->bulkConfig->getBulkShipmentService($carrierCode);
-            } catch (NotImplementedException $exception) {
+            } catch (LocalizedException $exception) {
                 return false;
             }
         };

@@ -10,7 +10,7 @@ use Dhl\ShippingCore\Api\BulkShipment\BulkLabelCancellationInterface;
 use Dhl\ShippingCore\Api\BulkShipment\BulkLabelCreationInterface;
 use Dhl\ShippingCore\Api\BulkShipment\BulkShipmentConfigurationInterface;
 use Dhl\ShippingCore\Api\RequestModifierInterface;
-use Dhl\ShippingCore\Model\BulkShipment\NotImplementedException;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Class BulkShipmentConfiguration
@@ -44,7 +44,7 @@ class BulkShipmentConfiguration
      *
      * @param string $carrierCode
      * @return BulkShipmentConfigurationInterface
-     * @throws NotImplementedException
+     * @throws LocalizedException
      */
     private function getCarrierConfiguration(string $carrierCode): BulkShipmentConfigurationInterface
     {
@@ -54,7 +54,7 @@ class BulkShipmentConfiguration
             }
         }
 
-        throw new NotImplementedException(__("Bulk shipment configuration for carrier $carrierCode is not available."));
+        throw new LocalizedException(__("Bulk shipment configuration for carrier $carrierCode is not available."));
     }
 
     /**
@@ -78,7 +78,7 @@ class BulkShipmentConfiguration
      * Obtain the shipment request modifier to
      * @param string $carrierCode
      * @return RequestModifierInterface
-     * @throws NotImplementedException
+     * @throws LocalizedException
      */
     public function getRequestModifier(string $carrierCode): RequestModifierInterface
     {
@@ -90,7 +90,7 @@ class BulkShipmentConfiguration
      *
      * @param string $carrierCode
      * @return BulkLabelCreationInterface
-     * @throws NotImplementedException
+     * @throws LocalizedException
      */
     public function getBulkShipmentService(string $carrierCode): BulkLabelCreationInterface
     {
@@ -103,7 +103,7 @@ class BulkShipmentConfiguration
      *
      * @param string $carrierCode
      * @return BulkLabelCancellationInterface
-     * @throws NotImplementedException
+     * @throws LocalizedException
      */
     public function getBulkCancellationService(string $carrierCode): BulkLabelCancellationInterface
     {
@@ -122,7 +122,7 @@ class BulkShipmentConfiguration
      *
      * @param string $carrierCode
      * @return bool
-     * @throws NotImplementedException
+     * @throws LocalizedException
      */
     public function isSingleTrackDeletionAllowed(string $carrierCode): bool
     {

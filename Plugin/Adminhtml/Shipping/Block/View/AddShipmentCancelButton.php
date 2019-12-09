@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Plugin\Adminhtml\Shipping\Block\View;
 
-use Dhl\ShippingCore\Model\BulkShipment\NotImplementedException;
 use Dhl\ShippingCore\Model\BulkShipmentConfiguration;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\ShipmentTrackInterface;
 use Magento\Shipping\Block\Adminhtml\View;
 
@@ -46,7 +46,7 @@ class AddShipmentCancelButton
 
         try {
             $this->bulkConfigProvider->getBulkCancellationService($carrierCode);
-        } catch (NotImplementedException $exception) {
+        } catch (LocalizedException $exception) {
             // cancellation not supported by given carrier
             return null;
         }

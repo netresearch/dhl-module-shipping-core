@@ -6,13 +6,13 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Observer;
 
-use Dhl\ShippingCore\Model\BulkShipment\NotImplementedException;
 use Dhl\ShippingCore\Model\BulkShipmentConfiguration;
 use Magento\Framework\App\ActionFlag;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\HTTP\PhpEnvironment\Request;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Sales\Model\Order\Shipment\TrackRepository;
@@ -85,7 +85,7 @@ class PreventTrackDeletion implements ObserverInterface
 
         try {
             $isAllowed = $this->bulkConfig->isSingleTrackDeletionAllowed($track->getCarrierCode());
-        } catch (NotImplementedException $exception) {
+        } catch (LocalizedException $exception) {
             // no restrictions given, continue with default behaviour
             return;
         }

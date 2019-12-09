@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api\BulkShipment;
 
 use Dhl\ShippingCore\Api\RequestModifierInterface;
-use Dhl\ShippingCore\Model\BulkShipment\NotImplementedException;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Interface BulkShipmentConfigurationInterface
@@ -30,7 +30,7 @@ interface BulkShipmentConfigurationInterface
      * Obtain the carrier's modifier to add carrier specific data to the shipment request.
      *
      * @return RequestModifierInterface
-     * @throws NotImplementedException
+     * @throws LocalizedException
      */
     public function getRequestModifier(): RequestModifierInterface;
 
@@ -38,7 +38,7 @@ interface BulkShipmentConfigurationInterface
      * Obtain the service that connects to the carrier's label api for creating labels.
      *
      * @return BulkLabelCreationInterface
-     * @throws NotImplementedException
+     * @throws LocalizedException
      */
     public function getLabelService(): BulkLabelCreationInterface;
 
@@ -46,7 +46,7 @@ interface BulkShipmentConfigurationInterface
      * Obtain the service that connects to the carrier's label api for cancelling labels.
      *
      * @return BulkLabelCancellationInterface
-     * @throws NotImplementedException
+     * @throws LocalizedException
      */
     public function getCancellationService(): BulkLabelCancellationInterface;
 

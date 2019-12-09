@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
 use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Model\BulkShipment\LabelStatusProvider;
-use Dhl\ShippingCore\Model\BulkShipment\NotImplementedException;
 use Dhl\ShippingCore\Model\BulkShipment\OrderCollectionLoader;
 use Dhl\ShippingCore\Model\BulkShipment\ShipmentCollectionLoader;
 use Dhl\ShippingCore\Model\Shipment\CancelRequestBuilder;
@@ -126,7 +125,7 @@ class BulkShipmentManagement
         $fnFilter = function (string $carrierCode) {
             try {
                 return $this->bulkConfig->getBulkShipmentService($carrierCode);
-            } catch (NotImplementedException $exception) {
+            } catch (LocalizedException $exception) {
                 return false;
             }
         };
@@ -197,7 +196,7 @@ class BulkShipmentManagement
         foreach ($shipmentRequests as $carrierCode => $carrierShipmentRequests) {
             try {
                 $labelService = $this->bulkConfig->getBulkShipmentService($carrierCode);
-            } catch (NotImplementedException $exception) {
+            } catch (LocalizedException $exception) {
                 $msg = "Bulk label creation is not supported by carrier '$carrierCode'";
                 $this->logger->warning($msg, ['exception' => $exception]);
                 continue;
@@ -245,7 +244,7 @@ class BulkShipmentManagement
 
             try {
                 $labelService = $this->bulkConfig->getBulkCancellationService($carrierCode);
-            } catch (NotImplementedException $exception) {
+            } catch (LocalizedException $exception) {
                 $msg = "Bulk label cancellation is not supported by carrier '$carrierCode'";
                 $this->logger->warning($msg, ['exception' => $exception]);
                 continue;
