@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Plugin\Quote\Cart;
 
-use Dhl\ShippingCore\Api\Data\MethodAdditionalInfoInterface;
+use Dhl\ShippingCore\Api\Data\Rate\MethodAdditionalInfoInterface;
 use Magento\Quote\Api\Data\ShippingMethodExtensionFactory;
 use Magento\Quote\Api\Data\ShippingMethodExtensionInterface;
 use Magento\Quote\Api\Data\ShippingMethodInterface;

@@ -4,9 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Emulation;
+namespace Dhl\ShippingCore\Model\Rate\Emulation;
 
-use Dhl\ShippingCore\Api\ProxyCarrierFactoryInterface;
+use Dhl\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface;
+use Dhl\ShippingCore\Model\Rate\Emulation\ProxyScopeConfig;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\ObjectManagerInterface;

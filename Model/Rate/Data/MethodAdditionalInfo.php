@@ -4,48 +4,35 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Method;
+namespace Dhl\ShippingCore\Model\Rate\Data;
 
-use Dhl\ShippingCore\Api\Data\MethodAdditionalInfoInterface;
+use Dhl\ShippingCore\Api\Data\Rate\MethodAdditionalInfoInterface;
 use Magento\Framework\DataObject;
 
 /**
- * Class AdditionalInfo
+ * Class MethodAdditionalInfo
  *
  * @package Dhl\ShippingCore\Model\Method
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */
-class AdditionalInfo extends DataObject implements MethodAdditionalInfoInterface
+class MethodAdditionalInfo extends DataObject implements MethodAdditionalInfoInterface
 {
-
-    /**
-     * @inheritdoc
-     */
     public function getDeliveryDate(): string
     {
         return (string) $this->getData(self::DELIVERY_DATE);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setDeliveryDate(string $deliveryDate)
     {
         $this->setData(self::DELIVERY_DATE, $deliveryDate);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getCarrierLogoUrl(): string
     {
         return (string) $this->getData(self::CARRIER_LOGO_URL);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setCarrierLogoUrl(string $carrierLogoUrl)
     {
         $this->setData(self::CARRIER_LOGO_URL, $carrierLogoUrl);

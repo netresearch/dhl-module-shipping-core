@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\Rate;
 
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;

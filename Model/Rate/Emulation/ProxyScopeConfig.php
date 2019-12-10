@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Emulation;
+namespace Dhl\ShippingCore\Model\Rate\Emulation;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 

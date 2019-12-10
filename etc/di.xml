@@ -14,8 +14,8 @@
     <preference for="Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Dhl\ShippingCore\Api\PdfCombinatorInterface" type="Dhl\ShippingCore\Util\PdfCombinator"/>
-    <preference for="Dhl\ShippingCore\Api\ProxyCarrierFactoryInterface" type="Dhl\ShippingCore\Model\Emulation\ProxyCarrierFactory"/>
-    <preference for="Dhl\ShippingCore\Api\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Emulation\RateRequestService"/>
+    <preference for="Dhl\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface" type="Dhl\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory"/>
+    <preference for="Dhl\ShippingCore\Api\Rate\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Rate\Emulation\RateRequestService"/>
     <preference for="Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface" type="Dhl\ShippingCore\Model\RecipientStreetRepository"/>
     <preference for="Dhl\ShippingCore\Api\RequestExtractorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestExtractor"/>
     <preference for="Dhl\ShippingCore\Api\RequestModifierInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier"/>

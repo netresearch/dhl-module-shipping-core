@@ -4,11 +4,12 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Emulation;
+namespace Dhl\ShippingCore\Model\Rate\Emulation;
 
 use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
-use Dhl\ShippingCore\Api\ProxyCarrierFactoryInterface;
-use Dhl\ShippingCore\Api\RateRequestEmulationInterface;
+use Dhl\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface;
+use Dhl\ShippingCore\Api\Rate\RateRequestEmulationInterface;
+use Dhl\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
