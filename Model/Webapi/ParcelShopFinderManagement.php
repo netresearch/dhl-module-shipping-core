@@ -38,15 +38,15 @@ class ParcelShopFinderManagement implements ParcelShopFinderManagementInterface
 
     /**
      * @param string $carrierCode
-     * @param AddressInterface $address
+     * @param AddressInterface $searchAddress
      * @return LocationInterface[]
      * @throws LocalizedException
      */
-    public function getLocationByAddress(string $carrierCode, AddressInterface $address): array
+    public function getLocationByAddress(string $carrierCode, AddressInterface $searchAddress): array
     {
         foreach ($this->locationProviders as $provider) {
             if ($provider->getCarrierCode() === $carrierCode) {
-                return $provider->getLocationsByAddress($address);
+                return $provider->getLocationsByAddress($searchAddress);
             }
         }
 
