@@ -80,6 +80,7 @@
             <argument name="processors" xsi:type="array">
                 <item name="addLabel" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\AddShippingLabel</item>
                 <item name="addTrack" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\AddTrack</item>
+                <item name="addComment" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\AddShipmentComment</item>
             </argument>
         </arguments>
     </virtualType>
