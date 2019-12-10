@@ -188,10 +188,10 @@
             </argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\ShipmentDate">
+    <type name="Dhl\ShippingCore\Model\ShipmentDate\ShipmentDate">
         <arguments>
             <argument name="dayValidators" xsi:type="array">
-                <item name="noHoliday" xsi:type="object">Dhl\ShippingCore\Model\DayValidator\NoHoliday</item>
+                <item name="noHoliday" xsi:type="object">Dhl\ShippingCore\Model\ShipmentDate\Validator\NoHoliday</item>
             </argument>
         </arguments>
     </type>

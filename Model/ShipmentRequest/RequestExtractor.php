@@ -18,7 +18,7 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterfaceFactory;
 use Dhl\ShippingCore\Api\RequestExtractorInterface;
 use Dhl\ShippingCore\Model\RecipientStreetRepository;
-use Dhl\ShippingCore\Model\ShipmentDate;
+use Dhl\ShippingCore\Model\ShipmentDate\ShipmentDate;
 use Dhl\ShippingCore\Util\StreetSplitter;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;

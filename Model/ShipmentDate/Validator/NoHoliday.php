@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\DayValidator;
+namespace Dhl\ShippingCore\Model\ShipmentDate\Validator;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
-use Dhl\ShippingCore\Api\DayValidatorInterface;
+use Dhl\ShippingCore\Api\ShipmentDate\DayValidatorInterface;
 use Magento\Framework\Locale\ResolverInterfaceFactory;
 use Yasumi\Provider\AbstractProvider;
 use Yasumi\Yasumi;

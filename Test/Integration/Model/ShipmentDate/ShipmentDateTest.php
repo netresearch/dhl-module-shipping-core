@@ -4,11 +4,11 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Test\Integration\Model;
+namespace Dhl\ShippingCore\Test\Integration\Model\ShipmentDate;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
-use Dhl\ShippingCore\Model\DayValidator\NoHoliday;
-use Dhl\ShippingCore\Model\ShipmentDate;
+use Dhl\ShippingCore\Model\ShipmentDate\Validator\NoHoliday;
+use Dhl\ShippingCore\Model\ShipmentDate\ShipmentDate;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;
 use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
