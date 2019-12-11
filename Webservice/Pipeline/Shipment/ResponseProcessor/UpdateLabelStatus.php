@@ -8,7 +8,7 @@ namespace Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor;
 
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
-use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
+use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
 use Magento\Bundle\Model\Product\Type;
 use Magento\Catalog\Model\Product\Type\AbstractType;

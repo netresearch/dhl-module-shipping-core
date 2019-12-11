@@ -4,8 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model;
+namespace Dhl\ShippingCore\Model\LabelStatus;
 
+use Dhl\ShippingCore\Model\ResourceModel;
 use Magento\Framework\Model\AbstractModel;
 
 /**

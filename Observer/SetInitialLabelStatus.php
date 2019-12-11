@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Observer;
 
-use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
+use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 

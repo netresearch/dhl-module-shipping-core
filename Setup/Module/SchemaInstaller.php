@@ -9,7 +9,7 @@ namespace Dhl\ShippingCore\Setup\Module;
 use Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface;
 use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
-use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
+use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
 use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Module\Setup;

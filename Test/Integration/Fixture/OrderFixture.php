@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Fixture;
 
-use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
+use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressInterface;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;

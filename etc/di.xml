@@ -5,7 +5,7 @@
     <preference for="Dhl\ShippingCore\Api\ConfigInterface" type="Dhl\ShippingCore\Model\Config\Config"/>
     <preference for="Dhl\ShippingCore\Api\GuestCheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\GuestCheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\ItemAttributeReaderInterface" type="Dhl\ShippingCore\Model\Order\ItemAttributeReader"/>
-    <preference for="Dhl\ShippingCore\Api\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
+    <preference for="Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
     <preference for="Dhl\ShippingCore\Api\PackagingOptionReaderInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier\PackagingOptionReader"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Rate\CollectRatesPipeline"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\CreateShipmentsPipeline"/>
@@ -96,7 +96,7 @@
     <virtualType name="Dhl\ShippingCore\BulkShipment\CollectionProcessor\Virtual" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="joins" xsi:type="object">Dhl\ShippingCore\Model\BulkShipment\LabelStatusJoinProcessor</item>
+                <item name="joins" xsi:type="object">Dhl\ShippingCore\Model\LabelStatus\LabelStatusJoinProcessor</item>
             </argument>
         </arguments>
     </virtualType>

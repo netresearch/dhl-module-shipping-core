@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\LabelStatus;
 
 use Magento\Sales\Api\Data\OrderInterface;
 

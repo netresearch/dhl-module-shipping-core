@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\BulkShipment;
+namespace Dhl\ShippingCore\Model\LabelStatus;
 
 use Dhl\ShippingCore\Model\ResourceModel\LabelStatus\CollectionFactory;
 use Psr\Log\LoggerInterface;

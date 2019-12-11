@@ -6,10 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\LabelStatus;
 
-use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
-use Dhl\ShippingCore\Model\LabelStatus;
-use Dhl\ShippingCore\Model\LabelStatusFactory;
-use Dhl\ShippingCore\Model\LabelStatusRepository;
+use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Model\ResourceModel\LabelStatus\CollectionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\CouldNotSaveException;

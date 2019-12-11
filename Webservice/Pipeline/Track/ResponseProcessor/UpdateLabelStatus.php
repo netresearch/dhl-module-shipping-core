@@ -8,7 +8,7 @@ namespace Dhl\ShippingCore\Webservice\Pipeline\Track\ResponseProcessor;
 
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface;
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
-use Dhl\ShippingCore\Api\LabelStatusManagementInterface;
+use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;

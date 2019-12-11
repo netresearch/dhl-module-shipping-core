@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ResourceModel\OrderItemAttributes;
 
-use Dhl\ShippingCore\Model\LabelStatus;
+use Dhl\ShippingCore\Model\LabelStatus\LabelStatus;
 use Dhl\ShippingCore\Model\ResourceModel\OrderItemAttributes as OrderItemAttributesResource;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
