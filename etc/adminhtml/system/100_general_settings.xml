@@ -10,6 +10,7 @@
             <comment>Selected payment methods will be treated as CoD methods during shipment order creation.</comment>
             <source_model>Dhl\ShippingCore\Model\Config\Source\AllPaymentMethods</source_model>
             <frontend_class>w-75</frontend_class>
+            <can_be_empty>1</can_be_empty>
             <config_path>dhlshippingsolutions/dhlglobalwebservices/cod_methods</config_path>
         </field>
 

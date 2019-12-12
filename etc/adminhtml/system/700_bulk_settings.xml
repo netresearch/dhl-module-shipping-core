@@ -17,6 +17,7 @@
         <field id="cron_order_status" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20"
                translate="label comment" type="multiselect">
             <label>Order Status</label>
+            <can_be_empty>1</can_be_empty>
             <comment>Include orders with the given status for automatic label retrieval.</comment>
             <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
         </field>
