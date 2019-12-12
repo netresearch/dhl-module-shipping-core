@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\AdditionalFee;
 
 use Magento\Store\Model\Store;
 use Magento\Tax\Model\Config;

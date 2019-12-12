@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config;
 
-use Dhl\ShippingCore\Api\TaxConfigInterface;
+use Dhl\ShippingCore\Api\AdditionalFee\TaxConfigInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 

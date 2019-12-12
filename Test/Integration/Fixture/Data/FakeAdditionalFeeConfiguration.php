@@ -5,7 +5,7 @@
 
 namespace Dhl\ShippingCore\Test\Integration\Fixture\Data;
 
-use Dhl\ShippingCore\Api\AdditionalFeeConfigurationInterface;
+use Dhl\ShippingCore\Api\AdditionalFee\AdditionalFeeConfigurationInterface;
 use Magento\Framework\Phrase;
 use Magento\Quote\Model\Quote;
 

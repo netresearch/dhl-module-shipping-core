@@ -4,10 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model;
+namespace Dhl\ShippingCore\Model\AdditionalFee;
 
-use Dhl\ShippingCore\Api\AdditionalFeeConfigurationInterface;
-use Magento\Framework\Exception\LocalizedException;
+use Dhl\ShippingCore\Api\AdditionalFee\AdditionalFeeConfigurationInterface;
 use Magento\Framework\Phrase;
 use Magento\Quote\Model\Quote;
 

@@ -5,7 +5,7 @@
 
 namespace Dhl\ShippingCore\Test\Integration\Fixture\Data;
 
-use Dhl\ShippingCore\Model\AdditionalFeeManagement;
+use Dhl\ShippingCore\Model\AdditionalFee\AdditionalFeeManagement;
 
 /**
  * Class FakeAdditionalFeeManagement

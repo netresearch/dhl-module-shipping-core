@@ -21,7 +21,7 @@
     <preference for="Dhl\ShippingCore\Api\RequestModifierInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier"/>
     <preference for="Dhl\ShippingCore\Api\RequestValidatorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Validator\CompositeValidator"/>
     <preference for="Dhl\ShippingCore\Api\ShipmentItemFilterInterface" type="Dhl\ShippingCore\Model\Shipment\ItemFilter"/>
-    <preference for="Dhl\ShippingCore\Api\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
+    <preference for="Dhl\ShippingCore\Api\AdditionalFee\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
     <preference for="Dhl\ShippingCore\Api\UnitConverterInterface" type="Dhl\ShippingCore\Util\UnitConverter"/>
     <!-- # data interface preferences -->
     <preference for="Dhl\ShippingCore\Api\Data\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
@@ -225,7 +225,7 @@
         <arguments>
             <argument name="taxHelper" xsi:type="object">Magento\Tax\Helper\Data\Proxy</argument>
             <argument name="taxCalculation" xsi:type="object">Magento\Tax\Api\TaxCalculationInterface\Proxy</argument>
-            <argument name="taxConfig" xsi:type="object">Dhl\ShippingCore\Api\TaxConfigInterface\Proxy</argument>
+            <argument name="taxConfig" xsi:type="object">Dhl\ShippingCore\Api\AdditionalFee\TaxConfigInterface\Proxy</argument>
             <argument name="totalsManager" xsi:type="object">Dhl\ShippingCore\Model\AdditionalFee\TotalsManager\Proxy</argument>
         </arguments>
     </type>
