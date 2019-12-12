@@ -37,6 +37,11 @@ interface AddressInterface
     public function getPostalCode(): string;
 
     /**
+     * @return string
+     */
+    public function getCompany(): string;
+
+    /**
      * @param string $string
      * @return void
      */
@@ -59,4 +64,10 @@ interface AddressInterface
      * @return void
      */
     public function setPostalCode(string $string);
+
+    /**
+     * @param string $string
+     * @return void
+     */
+    public function setCompany(string $string);
 }

@@ -32,7 +32,7 @@ class Location implements LocationInterface
     /**
      * @var string
      */
-    private $shopName;
+    private $shopTypeName;
 
     /**
      * @var string
@@ -88,14 +88,6 @@ class Location implements LocationInterface
     public function getShopNumber(): string
     {
         return $this->shopNumber;
-    }
-
-    /**
-     * @return string
-     */
-    public function getShopName(): string
-    {
-        return $this->shopName;
     }
 
     /**
@@ -175,14 +167,6 @@ class Location implements LocationInterface
     public function setShopNumber(string $shopNumber)
     {
         $this->shopNumber = $shopNumber;
-    }
-
-    /**
-     * @param string $shopName
-     */
-    public function setShopName(string $shopName)
-    {
-        $this->shopName = $shopName;
     }
 
     /**

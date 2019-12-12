@@ -38,6 +38,11 @@ class Address implements AddressInterface
     private $postalCode;
 
     /**
+     * @var string
+     */
+    private $company;
+
+    /**
      * @return string
      */
     public function getStreet(): string
@@ -70,6 +75,14 @@ class Address implements AddressInterface
     }
 
     /**
+     * @return string
+     */
+    public function getCompany(): string
+    {
+        return $this->company;
+    }
+
+    /**
      * @param string $street
      */
     public function setStreet(string $street): void
@@ -99,5 +112,13 @@ class Address implements AddressInterface
     public function setPostalCode(string $postalCode): void
     {
         $this->postalCode = $postalCode;
+    }
+
+    /**
+     * @param string $company
+     */
+    public function setCompany(string $company): void
+    {
+        $this->company = $company;
     }
 }

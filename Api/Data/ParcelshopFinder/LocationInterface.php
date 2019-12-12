@@ -29,11 +29,6 @@ interface LocationInterface
     /**
      * @return string
      */
-    public function getShopName(): string;
-
-    /**
-     * @return string
-     */
     public function getShopId(): string;
 
     /**
@@ -82,12 +77,6 @@ interface LocationInterface
      * @return void
      */
     public function setShopNumber(string $shopNumber);
-
-    /**
-     * @param string $shopName
-     * @return void
-     */
-    public function setShopName(string $shopName);
 
     /**
      * @param string $shopId
