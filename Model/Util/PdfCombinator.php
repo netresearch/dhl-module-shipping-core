@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Util;
+namespace Dhl\ShippingCore\Model\Util;
 
-use Dhl\ShippingCore\Api\PdfCombinatorInterface;
+use Dhl\ShippingCore\Api\Util\PdfCombinatorInterface;
 use Magento\Framework\Exception\RuntimeException;
 use Magento\Shipping\Model\Shipping\LabelGenerator;
 

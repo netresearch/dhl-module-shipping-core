@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging;
 
-use Dhl\ShippingCore\Api\ItemAttributeReaderInterface;
-use Dhl\ShippingCore\Api\ShipmentItemFilterInterface;
+use Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface;
+use Dhl\ShippingCore\Model\Util\ShipmentItemFilter;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
 
@@ -29,7 +29,7 @@ class ShipmentItemAttributeReader
     private $orderItemAttributeReader;
 
     /**
-     * @var ShipmentItemFilterInterface
+     * @var ShipmentItemFilter
      */
     private $itemFilter;
 
@@ -37,11 +37,11 @@ class ShipmentItemAttributeReader
      * ShipmentItemAttributeReader constructor.
      *
      * @param ItemAttributeReaderInterface $orderItemAttributeReader
-     * @param ShipmentItemFilterInterface $itemFilter
+     * @param ShipmentItemFilter $itemFilter
      */
     public function __construct(
         ItemAttributeReaderInterface $orderItemAttributeReader,
-        ShipmentItemFilterInterface $itemFilter
+        ShipmentItemFilter $itemFilter
     ) {
         $this->orderItemAttributeReader = $orderItemAttributeReader;
         $this->itemFilter = $itemFilter;

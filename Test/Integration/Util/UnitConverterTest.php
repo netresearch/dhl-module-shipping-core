@@ -4,8 +4,9 @@
  */
 namespace Dhl\ShippingCore\Util;
 
-use Magento\TestFramework\ObjectManager;
+use Dhl\ShippingCore\Api\Util\UnitConverterInterface;
 use Magento\Directory\Model\CurrencyFactory;
+use Magento\TestFramework\ObjectManager;
 
 /**
  * HandlingFeeTest
@@ -22,7 +23,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase
     private $objectManager;
 
     /**
-     * @var UnitConverter
+     * @var UnitConverterInterface
      */
     private $unitConverter;
 
@@ -61,7 +62,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase
             'currencyFactory' => $currencyFactoryMock,
         ]);
 
-        $this->unitConverter = $this->objectManager->create(UnitConverter::class, [
+        $this->unitConverter = $this->objectManager->create(UnitConverterInterface::class, [
             'currencyConverter' => $directoryHelper,
             'unitConverter' => $carrierHelper,
         ]);

@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Observer;
 
-use Dhl\ShippingCore\Model\RecipientStreet;
+use Dhl\ShippingCore\Model\SplitAddress\RecipientStreet;
 use Dhl\ShippingCore\Model\ResourceModel\RecipientStreet as RecipientStreetResource;
 use Dhl\ShippingCore\Test\Provider\StreetDataProvider;
 use Magento\Framework\Event\InvokerInterface;

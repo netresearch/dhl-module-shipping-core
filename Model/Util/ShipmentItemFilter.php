@@ -4,21 +4,20 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Shipment;
+namespace Dhl\ShippingCore\Model\Util;
 
-use Dhl\ShippingCore\Api\ShipmentItemFilterInterface;
 use Magento\Sales\Api\Data\ShipmentItemInterface;
 use Magento\Sales\Model\Order\Shipment\Item;
 
 /**
- * Class ItemFilter
+ * Class ShipmentItemFilter
  *
  * Extract shippable items from a list of shipment items.
  *
  * @author Andreas Müller <andreas.mueller@netresearch.de>
  * @link   https://netresearch.de
  */
-class ItemFilter implements ShipmentItemFilterInterface
+class ShipmentItemFilter
 {
     /**
      * From the given shipment items, return only those that actually get shipped.

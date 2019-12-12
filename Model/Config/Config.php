@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Config;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
-use Dhl\ShippingCore\Api\UnitConverterInterface;
+use Dhl\ShippingCore\Api\Util\UnitConverterInterface;
 use Dhl\ShippingCore\Model\Package;
 use Dhl\ShippingCore\Model\PackageCollection;
 use Dhl\ShippingCore\Model\PackageCollectionFactory;

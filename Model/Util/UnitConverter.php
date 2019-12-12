@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Util;
+namespace Dhl\ShippingCore\Model\Util;
 
-use Dhl\ShippingCore\Api\UnitConverterInterface;
+use Dhl\ShippingCore\Api\Util\UnitConverterInterface;
 use Magento\Directory\Helper\Data;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Locale\FormatInterface;

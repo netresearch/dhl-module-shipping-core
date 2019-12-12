@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\AdditionalFee;
 
-use Dhl\ShippingCore\Util\UnitConverter;
+use Dhl\ShippingCore\Api\Util\UnitConverterInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address\Total;
@@ -29,7 +29,7 @@ class TotalsManager
     const ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME = 'base_dhlgw_additional_fee_incl_tax';
 
     /**
-     * @var UnitConverter
+     * @var UnitConverterInterface
      */
     private $unitConverter;
 
@@ -46,12 +46,12 @@ class TotalsManager
     /**
      * TotalsManager constructor.
      *
-     * @param UnitConverter $unitConverter
+     * @param UnitConverterInterface $unitConverter
      * @param DisplayObjectFactory $dataObjectFactory
      * @param LoggerInterface $logger
      */
     public function __construct(
-        UnitConverter $unitConverter,
+        UnitConverterInterface $unitConverter,
         DisplayObjectFactory $dataObjectFactory,
         LoggerInterface $logger
     ) {

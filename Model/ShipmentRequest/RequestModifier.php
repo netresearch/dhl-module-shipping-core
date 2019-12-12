@@ -9,7 +9,7 @@ namespace Dhl\ShippingCore\Model\ShipmentRequest;
 use Dhl\ShippingCore\Api\PackagingOptionReaderInterface;
 use Dhl\ShippingCore\Api\PackagingOptionReaderInterfaceFactory;
 use Dhl\ShippingCore\Api\RequestModifierInterface;
-use Dhl\ShippingCore\Api\ShipmentItemFilterInterface;
+use Dhl\ShippingCore\Model\Util\ShipmentItemFilter;
 use Magento\Directory\Model\RegionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObjectFactory;
@@ -35,7 +35,7 @@ class RequestModifier implements RequestModifierInterface
     private $packagingOptionReaderFactory;
 
     /**
-     * @var ShipmentItemFilterInterface
+     * @var ShipmentItemFilter
      */
     private $itemFilter;
 
@@ -54,14 +54,14 @@ class RequestModifier implements RequestModifierInterface
      *
      * @param ScopeConfigInterface $scopeConfig
      * @param PackagingOptionReaderInterfaceFactory $packagingOptionReaderFactory
-     * @param ShipmentItemFilterInterface $itemFilter
+     * @param ShipmentItemFilter $itemFilter
      * @param RegionFactory $regionFactory
      * @param DataObjectFactory $dataObjectFactory
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         PackagingOptionReaderInterfaceFactory $packagingOptionReaderFactory,
-        ShipmentItemFilterInterface $itemFilter,
+        ShipmentItemFilter $itemFilter,
         RegionFactory $regionFactory,
         DataObjectFactory $dataObjectFactory
     ) {

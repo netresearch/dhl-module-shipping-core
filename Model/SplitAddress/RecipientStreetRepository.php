@@ -4,10 +4,11 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model;
+namespace Dhl\ShippingCore\Model\SplitAddress;
 
 use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
-use Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface;
+use Dhl\ShippingCore\Api\Data\RecipientStreetInterfaceFactory;
+use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface;
 use Dhl\ShippingCore\Model\ResourceModel\RecipientStreet as RecipientStreetResource;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
@@ -28,7 +29,7 @@ class RecipientStreetRepository implements RecipientStreetRepositoryInterface
     private $resource;
 
     /**
-     * @var RecipientStreetFactory
+     * @var RecipientStreetInterfaceFactory
      */
     private $recipientStreetFactory;
 
@@ -36,11 +37,11 @@ class RecipientStreetRepository implements RecipientStreetRepositoryInterface
      * OrderAddressRepository constructor.
      *
      * @param RecipientStreetResource $resource
-     * @param RecipientStreetFactory $recipientStreetFactory
+     * @param RecipientStreetInterfaceFactory $recipientStreetFactory
      */
     public function __construct(
         RecipientStreetResource $resource,
-        RecipientStreetFactory $recipientStreetFactory
+        RecipientStreetInterfaceFactory $recipientStreetFactory
     ) {
         $this->resource = $resource;
         $this->recipientStreetFactory = $recipientStreetFactory;
@@ -78,6 +79,7 @@ class RecipientStreetRepository implements RecipientStreetRepositoryInterface
      */
     public function get(int $orderAddressId): RecipientStreetInterface
     {
+        /** @var RecipientStreet $recipientStreet */
         $recipientStreet = $this->recipientStreetFactory->create();
 
         try {

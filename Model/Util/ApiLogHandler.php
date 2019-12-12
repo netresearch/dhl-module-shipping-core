@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Log;
+namespace Dhl\ShippingCore\Model\Util;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Filesystem\DriverInterface;

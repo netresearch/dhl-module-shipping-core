@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\SplitAddress;
 
 use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Magento\Framework\Exception\CouldNotSaveException;

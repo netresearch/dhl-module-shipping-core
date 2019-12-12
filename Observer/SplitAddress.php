@@ -7,9 +7,10 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Observer;
 
 use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
-use Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface;
-use Dhl\ShippingCore\Model\RecipientStreetFactory;
-use Dhl\ShippingCore\Util\StreetSplitter;
+use Dhl\ShippingCore\Api\Data\RecipientStreetInterfaceFactory;
+use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface;
+use Dhl\ShippingCore\Model\SplitAddress\RecipientStreet;
+use Dhl\ShippingCore\Model\Util\StreetSplitter;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -26,7 +27,7 @@ use Psr\Log\LoggerInterface;
 class SplitAddress implements ObserverInterface
 {
     /**
-     * @var RecipientStreetFactory
+     * @var RecipientStreetInterfaceFactory
      */
     private $recipientStreetFactory;
 
@@ -52,14 +53,15 @@ class SplitAddress implements ObserverInterface
 
     /**
      * SplitAddress constructor.
-     * @param RecipientStreetFactory $recipientStreetFactory
+     *
+     * @param RecipientStreetInterfaceFactory $recipientStreetFactory
      * @param RecipientStreetRepositoryInterface $recipientStreetRepository
      * @param StreetSplitter $streetSplitter
      * @param LoggerInterface $logger
      * @param string[] $carrierCodes
      */
     public function __construct(
-        RecipientStreetFactory $recipientStreetFactory,
+        RecipientStreetInterfaceFactory $recipientStreetFactory,
         RecipientStreetRepositoryInterface $recipientStreetRepository,
         StreetSplitter $streetSplitter,
         LoggerInterface $logger,
@@ -95,8 +97,9 @@ class SplitAddress implements ObserverInterface
         $street = implode(', ', $address->getStreet());
         $addressParts = $this->streetSplitter->splitStreet($street);
 
-        $orderAddress = $this->recipientStreetFactory->create();
-        $orderAddress->setData([
+        /** @var RecipientStreet $recipientStreet */
+        $recipientStreet = $this->recipientStreetFactory->create();
+        $recipientStreet->setData([
             RecipientStreetInterface::ORDER_ADDRESS_ID => $address->getEntityId(),
             RecipientStreetInterface::NAME => $addressParts['street_name'],
             RecipientStreetInterface::NUMBER => $addressParts['street_number'],
@@ -104,7 +107,7 @@ class SplitAddress implements ObserverInterface
         ]);
 
         try {
-            $this->recipientStreetRepository->save($orderAddress);
+            $this->recipientStreetRepository->save($recipientStreet);
         } catch (CouldNotSaveException $exception) {
             $this->logger->error($exception->getLogMessage(), ['exception' => $exception]);
         }

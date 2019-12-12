@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Util;
+namespace Dhl\ShippingCore\Model\Util;
 
 /**
  * Utility for splitting single address line into name, number, supplement

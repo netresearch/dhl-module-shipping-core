@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model;
+namespace Dhl\ShippingCore\Model\SplitAddress;
 
 use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Dhl\ShippingCore\Model\ResourceModel\RecipientStreet as RecipientStreetResource;

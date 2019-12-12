@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Test\Unit\Util;
+namespace Dhl\ShippingCore\Test\Unit\Model\Util;
 
 use Dhl\ShippingCore\Test\Provider\StreetDataProvider;
-use Dhl\ShippingCore\Util\StreetSplitter;
+use Dhl\ShippingCore\Model\Util\StreetSplitter;
 use PHPUnit\Framework\TestCase;
 
 /**

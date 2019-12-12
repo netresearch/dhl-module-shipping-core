@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Plugin\Order;
 
-use Dhl\ShippingCore\Api\RecipientStreetRepositoryInterface;
+use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 use Magento\Sales\Api\Data\OrderAddressExtensionFactory;
 use Magento\Sales\Api\Data\OrderAddressInterface;

@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\AdditionalFee;
 
 use Dhl\ShippingCore\Api\AdditionalFee\TaxConfigInterface;
-use Dhl\ShippingCore\Api\UnitConverterInterface;
+use Dhl\ShippingCore\Api\Util\UnitConverterInterface;
 use Magento\Framework\Phrase;
 use Magento\Quote\Api\Data\ShippingAssignmentInterface;
 use Magento\Quote\Model\Quote;

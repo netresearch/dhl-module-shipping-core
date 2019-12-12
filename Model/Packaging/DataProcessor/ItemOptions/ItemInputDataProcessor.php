@@ -11,9 +11,9 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface;
 use Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
-use Dhl\ShippingCore\Api\ShipmentItemFilterInterface;
 use Dhl\ShippingCore\Model\Packaging\DataProcessor\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\Packaging\ShipmentItemAttributeReader;
+use Dhl\ShippingCore\Model\Util\ShipmentItemFilter;
 use Magento\Catalog\Model\Product\Attribute\Source\Countryofmanufacture;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
@@ -31,7 +31,7 @@ use Magento\Sales\Model\Order\Shipment\Item;
 class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
 {
     /**
-     * @var ShipmentItemFilterInterface
+     * @var ShipmentItemFilter
      */
     private $itemFilter;
 
@@ -63,7 +63,7 @@ class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
     /**
      * ItemInputDataProcessor constructor.
      *
-     * @param ShipmentItemFilterInterface $itemFilter
+     * @param ShipmentItemFilter $itemFilter
      * @param ShipmentItemAttributeReader $itemAttributeReader
      * @param Countryofmanufacture $countrySource
      * @param CommentInterfaceFactory $commentFactory
@@ -71,7 +71,7 @@ class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
      * @param ConfigInterface $config
      */
     public function __construct(
-        ShipmentItemFilterInterface $itemFilter,
+        ShipmentItemFilter $itemFilter,
         ShipmentItemAttributeReader $itemAttributeReader,
         Countryofmanufacture $countrySource,
         CommentInterfaceFactory $commentFactory,

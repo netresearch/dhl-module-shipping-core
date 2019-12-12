@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ResourceModel\RecipientStreet;
 
-use Dhl\ShippingCore\Model\RecipientStreet;
+use Dhl\ShippingCore\Model\SplitAddress\RecipientStreet;
 use Dhl\ShippingCore\Model\ResourceModel\RecipientStreet as RecipientStreetResource;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 

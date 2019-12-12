@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Order;
+namespace Dhl\ShippingCore\Model\ItemAttribute;
 
-use Dhl\ShippingCore\Api\ItemAttributeReaderInterface;
+use Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
 
 /**

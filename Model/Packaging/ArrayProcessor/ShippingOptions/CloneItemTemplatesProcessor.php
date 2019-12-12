@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptions;
 
-use Dhl\ShippingCore\Api\ShipmentItemFilterInterface;
 use Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptionsProcessorInterface;
+use Dhl\ShippingCore\Model\Util\ShipmentItemFilter;
 use Magento\Sales\Model\Order\Shipment;
 
 /**
@@ -19,16 +19,16 @@ use Magento\Sales\Model\Order\Shipment;
 class CloneItemTemplatesProcessor implements ShippingOptionsProcessorInterface
 {
     /**
-     * @var ShipmentItemFilterInterface
+     * @var ShipmentItemFilter
      */
     private $itemFilter;
 
     /**
      * CloneItemTemplatesProcessor constructor.
      *
-     * @param ShipmentItemFilterInterface $itemFilter
+     * @param ShipmentItemFilter $itemFilter
      */
-    public function __construct(ShipmentItemFilterInterface $itemFilter)
+    public function __construct(ShipmentItemFilter $itemFilter)
     {
         $this->itemFilter = $itemFilter;
     }
