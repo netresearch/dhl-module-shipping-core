@@ -39,7 +39,7 @@ class SchemaLocator implements SchemaLocatorInterface
      */
     public function getSchema(): string
     {
-        return $this->moduleReader->getModuleDir(Dir::MODULE_ETC_DIR, 'Dhl_ShippingCore') . '/shipping_options.xsd';
+        return $this->moduleReader->getModuleDir(Dir::MODULE_ETC_DIR, 'Dhl_ShippingCore') . '/shipping_settings.xsd';
     }
 
     /**

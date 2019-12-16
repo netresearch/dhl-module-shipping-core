@@ -276,7 +276,7 @@
             <argument xsi:type="object" name="fileResolver">Dhl\ShippingCore\Model\ShippingOption\Config\FileResolver</argument>
             <argument xsi:type="object" name="schemaLocator">Dhl\ShippingCore\Model\ShippingOption\Config\SchemaLocator</argument>
             <argument xsi:type="object" name="converter">Dhl\ShippingCore\Model\ShippingOption\Config\Converter</argument>
-            <argument xsi:type="string" name="fileName">shipping_options.xml</argument>
+            <argument xsi:type="string" name="fileName">shipping_settings.xml</argument>
             <argument xsi:type="array" name="idAttributes">
                 <item xsi:type="string" name="/carriers/carrier">code</item>
                 <item xsi:type="string" name="/carriers/carrier/packageOptions/shippingOption">code</item>

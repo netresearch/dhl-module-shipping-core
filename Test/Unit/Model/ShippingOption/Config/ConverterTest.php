@@ -20,10 +20,10 @@ class ConverterTest extends TestCase
     {
         $xml = new \DOMDocument();
         $xml->loadXML(
-            file_get_contents(__DIR__ . '/../../../Fixture/shipping_options.xml')
+            file_get_contents(__DIR__ . '/../../../Fixture/shipping_settings.xml')
         );
         $json = \json_decode(
-            file_get_contents(__DIR__ . '/../../../Fixture/shipping_options_expected.json'),
+            file_get_contents(__DIR__ . '/../../../Fixture/shipping_settings_expected.json'),
             true
         );
         return [

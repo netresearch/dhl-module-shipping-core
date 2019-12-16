@@ -88,7 +88,7 @@ class Reader extends Filesystem
     /**
      * Do base configuration post processing and cache the result. Load from cache on successive requests.
      *
-     * You must clear the Magento cache to apply changes to any shipping_options.xml file.
+     * You must clear the Magento cache to apply changes to any shipping_settings.xml file.
      *
      * @param string $scope
      * @return array
