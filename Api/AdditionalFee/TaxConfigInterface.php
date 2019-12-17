@@ -15,6 +15,7 @@ use Magento\Tax\Model\Config;
  * Wrapper around the Magento tax model, as it provides no public API
  *
  * @see Config
+ * @api
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */

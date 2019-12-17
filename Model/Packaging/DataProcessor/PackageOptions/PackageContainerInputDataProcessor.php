@@ -7,13 +7,13 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterfaceFactory;
-use Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterfaceFactory;
-use Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\OptionInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\Package;
-use Dhl\ShippingCore\Model\Packaging\DataProcessor\ShippingOptionsProcessorInterface;
-use Magento\Sales\Model\Order\Shipment;
+use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
  * Class PackageContainerInputDataProcessor
@@ -58,11 +58,11 @@ class PackageContainerInputDataProcessor implements ShippingOptionsProcessorInte
      * Set options and default value for custom container input
      *
      * @param ShippingOptionInterface[] $optionsData
-     * @param Shipment $shipment
+     * @param ShipmentInterface $shipment
      *
      * @return ShippingOptionInterface[]
      */
-    public function process(array $optionsData, Shipment $shipment): array
+    public function process(array $optionsData, ShipmentInterface $shipment): array
     {
         if (!isset(
             $optionsData[self::CONTAINER_OPTION_CODE],
@@ -116,10 +116,10 @@ class PackageContainerInputDataProcessor implements ShippingOptionsProcessorInte
     /**
      * Set default container as default input value
      *
-     * @param Shipment $shipment
+     * @param ShipmentInterface $shipment
      * @param InputInterface $containerInput
      */
-    private function setDefaultContainer(Shipment $shipment, InputInterface $containerInput)
+    private function setDefaultContainer(ShipmentInterface $shipment, InputInterface $containerInput)
     {
         $defaultContainer = $this->config->getOwnPackagesDefault($shipment->getStoreId());
         if ($defaultContainer) {

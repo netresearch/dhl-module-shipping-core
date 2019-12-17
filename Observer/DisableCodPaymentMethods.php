@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Observer;
 
-use Dhl\ShippingCore\Api\CodSupportInterface;
+use Dhl\ShippingCore\Api\PaymentMethod\MethodAvailabilityInterface;
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Observer;
@@ -28,7 +28,7 @@ class DisableCodPaymentMethods implements ObserverInterface
     private $config;
 
     /**
-     * @var CodSupportInterface[]
+     * @var MethodAvailabilityInterface[]
      */
     private $codSupportMap;
 
@@ -36,7 +36,7 @@ class DisableCodPaymentMethods implements ObserverInterface
      * DisableCodPaymentMethods constructor.
      *
      * @param ConfigInterface $config
-     * @param CodSupportInterface[] $codSupportMap
+     * @param MethodAvailabilityInterface[] $codSupportMap
      */
     public function __construct(ConfigInterface $config, array $codSupportMap = [])
     {
@@ -73,7 +73,7 @@ class DisableCodPaymentMethods implements ObserverInterface
         $isCodPaymentMethod = $this->config->isCodPaymentMethod($methodInstance->getCode(), $quote->getStoreId());
 
         if ($isCodPaymentMethod && isset($this->codSupportMap[$carrier])) {
-            $checkResult->setData('is_available', $this->codSupportMap[$carrier]->hasCodSupport($quote));
+            $checkResult->setData('is_available', $this->codSupportMap[$carrier]->isAvailable($quote));
         }
     }
 }

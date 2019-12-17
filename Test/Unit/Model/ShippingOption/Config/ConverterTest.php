@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Unit\Model\ShippingOption\Config;
 
-use Dhl\ShippingCore\Model\ShippingOption\Config\Converter;
+use Dhl\ShippingCore\Model\ShippingSettings\Config\Converter;
 use PHPUnit\Framework\TestCase;
 
 class ConverterTest extends TestCase

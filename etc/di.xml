@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <!-- # service interface preferences -->
-    <preference for="Dhl\ShippingCore\Api\CheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\CheckoutManagement"/>
+    <preference for="Dhl\ShippingCore\Api\AdditionalFee\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
     <preference for="Dhl\ShippingCore\Api\ConfigInterface" type="Dhl\ShippingCore\Model\Config\Config"/>
-    <preference for="Dhl\ShippingCore\Api\GuestCheckoutManagementInterface" type="Dhl\ShippingCore\Model\Webapi\GuestCheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
     <preference for="Dhl\ShippingCore\Api\PackagingOptionReaderInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier\PackagingOptionReader"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Rate\CollectRatesPipeline"/>
@@ -18,22 +17,18 @@
     <preference for="Dhl\ShippingCore\Api\RequestExtractorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestExtractor"/>
     <preference for="Dhl\ShippingCore\Api\RequestModifierInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier"/>
     <preference for="Dhl\ShippingCore\Api\RequestValidatorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Validator\CompositeValidator"/>
-    <preference for="Dhl\ShippingCore\Api\ShipmentItemFilterInterface" type="Dhl\ShippingCore\Model\Shipment\ItemFilter"/>
-    <preference for="Dhl\ShippingCore\Api\AdditionalFee\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
-    <preference for="Dhl\ShippingCore\Api\UnitConverterInterface" type="Dhl\ShippingCore\Util\UnitConverter"/>
+    <preference for="Dhl\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface" type="Dhl\ShippingCore\Model\ShippingSettings\CheckoutManagement"/>
+    <preference for="Dhl\ShippingCore\Api\ShippingSettings\GuestCheckoutManagementInterface" type="Dhl\ShippingCore\Model\ShippingSettings\GuestCheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
     <preference for="Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface" type="Dhl\ShippingCore\Model\ItemAttribute\ItemAttributeReader"/>
     <preference for="Dhl\ShippingCore\Api\Util\PdfCombinatorInterface" type="Dhl\ShippingCore\Model\Util\PdfCombinator"/>
     <preference for="Dhl\ShippingCore\Api\Util\UnitConverterInterface" type="Dhl\ShippingCore\Model\Util\UnitConverter"/>
     <!-- # data interface preferences -->
-    <preference for="Dhl\ShippingCore\Api\Data\CarrierDataInterface" type="Dhl\ShippingCore\Model\Checkout\CarrierData"/>
-    <preference for="Dhl\ShippingCore\Api\Data\FootnoteInterface" type="Dhl\ShippingCore\Model\Checkout\Footnote"/>
-    <preference for="Dhl\ShippingCore\Api\Data\KeyValueObjectInterface" type="Dhl\ShippingCore\Model\Webapi\Data\KeyValueObject"/>
-    <preference for="Dhl\ShippingCore\Api\Data\MetadataInterface" type="Dhl\ShippingCore\Model\Checkout\Metadata"/>
     <preference for="Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface" type="Dhl\ShippingCore\Model\OrderItemAttributes"/>
     <preference for="Dhl\ShippingCore\Api\Data\RecipientStreetInterface" type="Dhl\ShippingCore\Model\SplitAddress\RecipientStreet"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface" type="Dhl\ShippingCore\Model\Webapi\Data\ShippingOption"/>
-    <preference for="Dhl\ShippingCore\Api\Data\Sales\ServiceDataInterface" type="Dhl\ShippingCore\Model\Webapi\Data\ServiceData"/>
+    <preference for="Dhl\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterface" type="Dhl\ShippingCore\Model\OrderExport\Data\KeyValueObject"/>
+    <preference for="Dhl\ShippingCore\Api\Data\OrderExport\ServiceDataInterface" type="Dhl\ShippingCore\Model\OrderExport\Data\ServiceData"/>
+    <preference for="Dhl\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface" type="Dhl\ShippingCore\Model\OrderExport\Data\ShippingOption"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageAdditionalInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\PackageAdditional"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Package"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\PackageItem"/>
@@ -41,23 +36,25 @@
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Shipper"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface" type="Dhl\ShippingCore\Model\ShipmentResponse\LabelResponse"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface" type="Dhl\ShippingCore\Model\ShipmentResponse\ErrorResponse"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingDataInterface" type="Dhl\ShippingCore\Model\Checkout\ShippingData"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\CommentInterface" type="Dhl\ShippingCore\Model\ShippingOption\Comment"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\CompatibilityInterface" type="Dhl\ShippingCore\Model\ShippingOption\Compatibility"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\InputInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ItemShippingOptionsInterface" type="Dhl\ShippingCore\Model\ShippingOption\ItemShippingOptions"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\OptionInterface" type="Dhl\ShippingCore\Model\ShippingOption\Option"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\RouteInterface" type="Dhl\ShippingCore\Model\ShippingOption\Route"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\Selection\SelectionInterface" type="Dhl\ShippingCore\Model\ShippingOption\Selection\Selection"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ShippingOptionInterface" type="Dhl\ShippingCore\Model\ShippingOption\ShippingOption"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValidationRuleInterface" type="Dhl\ShippingCore\Model\ShippingOption\ValidationRule"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ItemCombinationRuleInterface" type="Dhl\ShippingCore\Model\ShippingOption\ItemCombinationRule"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input\InputValue"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input\ValueMap"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\CarrierData"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\FootnoteInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\Footnote"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\MetadataInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\Metadata"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\ShippingData"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\ShippingOption"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\Comment"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\Compatibility"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\Input"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemShippingOptionsInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\ItemShippingOptions"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\OptionInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\Option"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\RouteInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\Route"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\SelectionInterface" type="\Dhl\ShippingCore\Model\ShippingSettings\Data\Selection\Selection"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValidationRuleInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\ValidationRule"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemCombinationRuleInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\ItemCombinationRule"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface" type="Dhl\ShippingCore\Model\TrackRequest\TrackRequest"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackResponse"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackErrorResponse"/>
-
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input\InputValue"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input\ValueMap"/>
 
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\QuoteTableNameIterator\Virtual" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
@@ -271,11 +268,11 @@
     </type>
 
     <!-- shipping option config xml reader -->
-    <type name="Dhl\ShippingCore\Model\ShippingOption\Config\Reader">
+    <type name="Dhl\ShippingCore\Model\ShippingSettings\Config\Reader">
         <arguments>
-            <argument xsi:type="object" name="fileResolver">Dhl\ShippingCore\Model\ShippingOption\Config\FileResolver</argument>
-            <argument xsi:type="object" name="schemaLocator">Dhl\ShippingCore\Model\ShippingOption\Config\SchemaLocator</argument>
-            <argument xsi:type="object" name="converter">Dhl\ShippingCore\Model\ShippingOption\Config\Converter</argument>
+            <argument xsi:type="object" name="fileResolver">Dhl\ShippingCore\Model\ShippingSettings\Config\FileResolver</argument>
+            <argument xsi:type="object" name="schemaLocator">Dhl\ShippingCore\Model\ShippingSettings\Config\SchemaLocator</argument>
+            <argument xsi:type="object" name="converter">Dhl\ShippingCore\Model\ShippingSettings\Config\Converter</argument>
             <argument xsi:type="string" name="fileName">shipping_settings.xml</argument>
             <argument xsi:type="array" name="idAttributes">
                 <item xsi:type="string" name="/carriers/carrier">code</item>
@@ -296,75 +293,75 @@
             </argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\Checkout\CheckoutDataProvider">
+    <type name="\Dhl\ShippingCore\Model\ShippingSettings\CheckoutDataProvider">
         <arguments>
-            <argument xsi:type="object" name="reader">Dhl\ShippingCore\Model\ShippingOption\Config\Reader</argument>
+            <argument xsi:type="object" name="reader">Dhl\ShippingCore\Model\ShippingSettings\Config\Reader</argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\Packaging\PackagingDataProvider">
+    <type name="\Dhl\ShippingCore\Model\ShippingSettings\PackagingDataProvider">
         <arguments>
-            <argument xsi:type="object" name="reader">Dhl\ShippingCore\Model\ShippingOption\Config\Reader</argument>
+            <argument xsi:type="object" name="reader">Dhl\ShippingCore\Model\ShippingSettings\Config\Reader</argument>
         </arguments>
     </type>
 
     <!-- shipping option config processors -->
-    <type name="Dhl\ShippingCore\Model\Checkout\CheckoutDataCompositeProcessor">
+    <type name="Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\CheckoutDataCompositeProcessor">
         <arguments>
             <argument name="serviceOptionsProcessors" xsi:type="array">
-                <item name="dhlRouteProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\RouteProcessor</item>
-                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\TranslationProcessor</item>
-                <item name="dhlSortOrderProcessor" sortOrder="990" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\SortOrderProcessor</item>
+                <item name="dhlRouteProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\RouteProcessor</item>
+                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\TranslationProcessor</item>
+                <item name="dhlSortOrderProcessor" sortOrder="990" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\SortOrderProcessor</item>
             </argument>
             <argument name="metadataProcessors" xsi:type="array">
-                <item name="dhlImageUrlProcessor" sortOrder="970" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\Metadata\ImageUrlProcessor</item>
-                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\Metadata\TranslationProcessor</item>
+                <item name="dhlImageUrlProcessor" sortOrder="970" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Metadata\ImageUrlProcessor</item>
+                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Metadata\TranslationProcessor</item>
             </argument>
             <argument name="compatibilityProcessors" xsi:type="array">
-                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\Compatibility\TranslationProcessor</item>
+                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\TranslationProcessor</item>
             </argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\Checkout\CheckoutArrayCompositeProcessor">
+    <type name="Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ArrayProcessor\CheckoutArrayCompositeProcessor">
         <arguments>
             <argument name="shippingOptionsProcessors" xsi:type="array">
-                <item name="dhlFilterAvailableProcessor" sortOrder="1" xsi:type="object">Dhl\ShippingCore\Model\Checkout\ArrayProcessor\ShippingOptions\FilterAvailableProcessor</item>
+                <item name="dhlFilterAvailableProcessor" sortOrder="1" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ArrayProcessor\FilterAvailableProcessor</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Dhl\ShippingCore\Model\Packaging\PackagingDataCompositeProcessor">
+    <type name="Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\PackagingDataCompositeProcessor">
         <arguments>
             <argument name="checkoutServiceOptionsProcessors" xsi:type="array">
-                <item name="dhlRouteProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\RouteProcessor</item>
-                <item name="dhlTranslationProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\TranslationProcessor</item>
+                <item name="dhlRouteProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\RouteProcessor</item>
+                <item name="dhlTranslationProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\TranslationProcessor</item>
             </argument>
             <argument name="checkoutMetadataProcessors" xsi:type="array">
-                <item name="dhlImageUrlProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\Metadata\ImageUrlProcessor</item>
-                <item name="dhlTranslationProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\Metadata\TranslationProcessor</item>
+                <item name="dhlImageUrlProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Metadata\ImageUrlProcessor</item>
+                <item name="dhlTranslationProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Metadata\TranslationProcessor</item>
             </argument>
             <argument name="checkoutCompatibilityProcessors" xsi:type="array">
-                <item name="dhlTranslationProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\Checkout\DataProcessor\Compatibility\TranslationProcessor</item>
+                <item name="dhlTranslationProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\TranslationProcessor</item>
             </argument>
             <argument name="packagingServiceOptionsProcessors" xsi:type="array">
-                <item name="dhlApplySelectionsProcessor" sortOrder="100" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ServiceOptions\ApplySelectionsProcessor</item>
-                <item name="dhlSortOrderProcessor" sortOrder="400" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ServiceOptions\SortOrderProcessor</item>
+                <item name="dhlApplySelectionsProcessor" sortOrder="100" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ApplySelectionsProcessor</item>
+                <item name="dhlSortOrderProcessor" sortOrder="400" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\SortOrderProcessor</item>
             </argument>
             <argument name="packagingPackageOptionsProcessors" xsi:type="array">
-                <item name="dhlPackageInputDataProcessor" sortOrder="200" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\PackageInputDataProcessor</item>
+                <item name="dhlPackageInputDataProcessor" sortOrder="200" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\PackageInputDataProcessor</item>
                 <item name="dhlPackageContainerInputDataProcessor" sortOrder="210" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\PackageContainerInputDataProcessor</item>
-                <item name="dhlCustomPackageValueMapProcessor" sortOrder="300" xsi:type="object">\Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\CustomPackageValueMapProcessor</item>
+                <item name="dhlCustomPackageValueMapProcessor" sortOrder="300" xsi:type="object">\Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\ShippingBoxValueMapProcessor</item>
             </argument>
             <argument name="packagingItemOptionsProcessors" xsi:type="array">
-                <item name="dhlItemInputDataProcessor" sortOrder="300" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\ItemOptions\ItemInputDataProcessor</item>
+                <item name="dhlItemInputDataProcessor" sortOrder="300" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ItemInputDataProcessor</item>
             </argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\Packaging\PackagingArrayCompositeProcessor">
+    <type name="Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ArrayProcessor\PackagingArrayCompositeProcessor">
         <arguments>
             <argument name="shippingOptionsProcessors" xsi:type="array">
-                <item name="dhlFilterCarriersProcessor" sortOrder="0" xsi:type="object">Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptions\FilterCarriersProcessor</item>
-                <item name="dhlCloneItemTemplatesProcessor" sortOrder="1" xsi:type="object">Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptions\CloneItemTemplatesProcessor</item>
-                <item name="dhlDefaultConfigValueProcessor" sortOrder="2" xsi:type="object">Dhl\ShippingCore\Model\Packaging\ArrayProcessor\ShippingOptions\DefaultConfigValueProcessor</item>
+                <item name="dhlFilterCarriersProcessor" sortOrder="0" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ArrayProcessor\FilterCarriersProcessor</item>
+                <item name="dhlCloneItemTemplatesProcessor" sortOrder="1" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ArrayProcessor\CloneItemTemplatesProcessor</item>
+                <item name="dhlDefaultConfigValueProcessor" sortOrder="2" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ArrayProcessor\DefaultConfigValueProcessor</item>
             </argument>
         </arguments>
     </type>

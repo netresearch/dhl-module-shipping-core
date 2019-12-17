@@ -6,9 +6,9 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier;
 
-use Dhl\ShippingCore\Api\Data\CarrierDataInterface;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface;
 use Dhl\ShippingCore\Api\PackagingOptionReaderInterface;
-use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
+use Dhl\ShippingCore\Model\ShippingSettings\PackagingDataProvider;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order\Shipment;
 

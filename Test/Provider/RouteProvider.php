@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Provider;
 
-use Dhl\ShippingCore\Model\ShippingOption\Route;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\Route;
 
 /**
  * Class RouteProvider

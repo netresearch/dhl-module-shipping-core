@@ -9,6 +9,7 @@ namespace Dhl\ShippingCore\Api\Data\Rate;
 /**
  * Interface MethodAdditionalInfoInterface
  *
+ * @api
  * @package Dhl\ShippingCore\Api\Data
  * @author  Paul Siedler <paul.siedler@netresearch.de>
  * @link    https://www.netresearch.de/

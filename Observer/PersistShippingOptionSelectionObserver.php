@@ -6,11 +6,11 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Observer;
 
-use Dhl\ShippingCore\Api\Data\ShippingOption\Selection\AssignedSelectionInterface;
-use Dhl\ShippingCore\Model\ShippingOption\Selection\OrderSelectionFactory;
-use Dhl\ShippingCore\Model\ShippingOption\Selection\OrderSelectionRepository;
-use Dhl\ShippingCore\Model\ShippingOption\Selection\QuoteSelection;
-use Dhl\ShippingCore\Model\ShippingOption\Selection\QuoteSelectionRepository;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\AssignedSelectionInterface;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\OrderSelectionFactory;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\OrderSelectionRepository;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\QuoteSelection;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\QuoteSelectionRepository;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Framework\Event\Observer;

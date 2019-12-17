@@ -6,9 +6,9 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Model\Packaging;
 
-use Dhl\ShippingCore\Api\Data\ShippingDataInterface;
-use Dhl\ShippingCore\Model\Packaging\PackagingDataProvider;
-use Dhl\ShippingCore\Model\ShippingDataHydrator;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
+use Dhl\ShippingCore\Model\ShippingSettings\PackagingDataProvider;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingDataHydrator;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;

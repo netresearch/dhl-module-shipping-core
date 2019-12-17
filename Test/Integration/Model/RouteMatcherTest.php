@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Test\Integration\Model;
 
 use Dhl\ShippingCore\Model\Config\Config;
-use Dhl\ShippingCore\Model\RouteMatcher;
+use Dhl\ShippingCore\Model\ShippingSettings\RouteMatcher;
 use Dhl\ShippingCore\Test\Provider\RouteProvider;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;

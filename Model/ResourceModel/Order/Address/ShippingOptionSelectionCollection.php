@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ResourceModel\Order\Address;
 
-use Dhl\ShippingCore\Model\ShippingOption\Selection\OrderSelection;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\OrderSelection;
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelection as ServiceSelectionResource;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 

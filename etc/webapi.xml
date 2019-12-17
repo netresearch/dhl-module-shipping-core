@@ -3,14 +3,14 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
 
     <route url="/V1/dhl/checkout-data/get" method="POST">
-        <service class="Dhl\ShippingCore\Api\CheckoutManagementInterface" method="getCheckoutData"/>
+        <service class="Dhl\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface" method="getCheckoutData"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
     </route>
 
     <route url="/V1/carts/mine/dhl/shipping-option/selection/update" method="POST">
-        <service class="Dhl\ShippingCore\Api\CheckoutManagementInterface" method="updateShippingOptionSelections"/>
+        <service class="Dhl\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface" method="updateShippingOptionSelections"/>
         <resources>
             <resource ref="self" />
         </resources>
@@ -20,7 +20,7 @@
     </route>
 
     <route url="/V1/guest-carts/:cartId/dhl/shipping-option/selection/update" method="POST">
-        <service class="Dhl\ShippingCore\Api\GuestCheckoutManagementInterface" method="updateShippingOptionSelections"/>
+        <service class="Dhl\ShippingCore\Api\ShippingSettings\GuestCheckoutManagementInterface" method="updateShippingOptionSelections"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>

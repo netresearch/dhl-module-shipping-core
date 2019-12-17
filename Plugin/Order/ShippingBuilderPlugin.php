@@ -6,15 +6,15 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Plugin\Order;
 
-use Dhl\ShippingCore\Api\Data\KeyValueObjectInterface;
-use Dhl\ShippingCore\Api\Data\KeyValueObjectInterfaceFactory;
-use Dhl\ShippingCore\Api\Data\Sales\ServiceDataInterface;
-use Dhl\ShippingCore\Api\Data\Sales\ServiceDataInterfaceFactory;
-use Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterface;
-use Dhl\ShippingCore\Api\Data\Sales\ShippingOptionInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterface;
+use Dhl\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\OrderExport\ServiceDataInterface;
+use Dhl\ShippingCore\Api\Data\OrderExport\ServiceDataInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface;
+use Dhl\ShippingCore\Api\Data\OrderExport\ShippingOptionInterfaceFactory;
 use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
 use Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\PackageContainerInputDataProcessor;
-use Dhl\ShippingCore\Model\ShippingOption\OrderDataProvider;
+use Dhl\ShippingCore\Model\ShippingSettings\OrderDataProvider;
 use Magento\Sales\Api\Data\ShippingExtensionFactory;
 use Magento\Sales\Api\Data\ShippingInterface;
 use Magento\Sales\Api\Data\TotalExtensionInterfaceFactory;

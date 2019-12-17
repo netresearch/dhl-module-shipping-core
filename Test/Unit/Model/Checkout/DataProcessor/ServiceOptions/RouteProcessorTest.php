@@ -6,11 +6,11 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Unit\Model\Checkout\DataProcessor\ServiceOptions;
 
-use Dhl\ShippingCore\Model\Checkout\DataProcessor\ServiceOptions\RouteProcessor;
+use Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\RouteProcessor;
 use Dhl\ShippingCore\Model\Config\Config;
-use Dhl\ShippingCore\Model\RouteMatcher;
-use Dhl\ShippingCore\Model\ShippingOption\Route;
-use Dhl\ShippingCore\Model\ShippingOption\ShippingOption;
+use Dhl\ShippingCore\Model\ShippingSettings\RouteMatcher;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\Route;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\ShippingOption;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
