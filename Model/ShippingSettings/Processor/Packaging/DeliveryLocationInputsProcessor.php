@@ -13,11 +13,12 @@ use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsPro
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
- * Class ParcelshopFinderInputsProcessor
+ * Class DeliveryLocationInputsProcessor
  *
+ * @package Dhl\Paket\Model
  * @author Max Melzer <max.melzer@netresearch.de>
  */
-class ParcelshopFinderInputsProcessor implements ShippingOptionsProcessorInterface
+class DeliveryLocationInputsProcessor implements ShippingOptionsProcessorInterface
 {
     /**
      * The input type for the shopfinder component.
@@ -45,7 +46,7 @@ class ParcelshopFinderInputsProcessor implements ShippingOptionsProcessorInterfa
     private $inputFactory;
 
     /**
-     * ParcelshopFinderInputsProcessor constructor.
+     * DeliveryLocationInputsProcessor constructor.
      *
      * @param InputInterfaceFactory $inputFactory
      */

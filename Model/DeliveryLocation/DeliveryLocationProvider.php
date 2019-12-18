@@ -4,22 +4,22 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Webapi;
+namespace Dhl\ShippingCore\Model\DeliveryLocation;
 
-use Dhl\ShippingCore\Api\Data\ParcelshopFinder\LocationInterface;
-use Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface;
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface;
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface;
 use Dhl\ShippingCore\Api\LocationProviderInterface;
-use Dhl\ShippingCore\Api\ParcelShopFinderManagementInterface;
+use Dhl\ShippingCore\Api\DeliveryLocationProviderInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Class ParcelShopFinderManagement
+ * Class DeliveryLocationProvider
  *
  * @package Dhl\ShippingCore\Model\Webapi
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */
-class ParcelShopFinderManagement implements ParcelShopFinderManagementInterface
+class DeliveryLocationProvider implements DeliveryLocationProviderInterface
 {
     /**
      * @var LocationProviderInterface[]
@@ -27,7 +27,7 @@ class ParcelShopFinderManagement implements ParcelShopFinderManagementInterface
     private $locationProviders;
 
     /**
-     * ParcelShopFinderManagement constructor.
+     * DeliveryLocationProvider constructor.
      *
      * @param LocationProviderInterface[] $locationProviders
      */
@@ -42,7 +42,7 @@ class ParcelShopFinderManagement implements ParcelShopFinderManagementInterface
      * @return LocationInterface[]
      * @throws LocalizedException
      */
-    public function getLocationByAddress(string $carrierCode, AddressInterface $searchAddress): array
+    public function search(string $carrierCode, AddressInterface $searchAddress): array
     {
         foreach ($this->locationProviders as $provider) {
             if ($provider->getCarrierCode() === $carrierCode) {

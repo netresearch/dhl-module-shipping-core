@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\ParcelshopFinder;
+namespace Dhl\ShippingCore\Model\DeliveryLocation;
 
-use Dhl\ShippingCore\Api\Data\ParcelshopFinder\OpeningHoursInterface;
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface;
 
 /**
  * Class OpeningHours

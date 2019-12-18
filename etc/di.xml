@@ -3,6 +3,7 @@
     <!-- # service interface preferences -->
     <preference for="Dhl\ShippingCore\Api\AdditionalFee\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
     <preference for="Dhl\ShippingCore\Api\ConfigInterface" type="Dhl\ShippingCore\Model\Config\Config"/>
+    <preference for="Dhl\ShippingCore\Api\DeliveryLocationProviderInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\DeliveryLocationProvider"/>
     <preference for="Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
     <preference for="Dhl\ShippingCore\Api\PackagingOptionReaderInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier\PackagingOptionReader"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Rate\CollectRatesPipeline"/>
@@ -23,7 +24,6 @@
     <preference for="Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface" type="Dhl\ShippingCore\Model\ItemAttribute\ItemAttributeReader"/>
     <preference for="Dhl\ShippingCore\Api\Util\PdfCombinatorInterface" type="Dhl\ShippingCore\Model\Util\PdfCombinator"/>
     <preference for="Dhl\ShippingCore\Api\Util\UnitConverterInterface" type="Dhl\ShippingCore\Model\Util\UnitConverter"/>
-    <preference for="Dhl\ShippingCore\Api\ParcelShopFinderManagementInterface" type="Dhl\ShippingCore\Model\Webapi\ParcelShopFinderManagement"/>
     <!-- # data interface preferences -->
     <preference for="Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface" type="Dhl\ShippingCore\Model\OrderItemAttributes"/>
     <preference for="Dhl\ShippingCore\Api\Data\RecipientStreetInterface" type="Dhl\ShippingCore\Model\SplitAddress\RecipientStreet"/>
@@ -56,9 +56,9 @@
     <preference for="Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface" type="Dhl\ShippingCore\Model\TrackRequest\TrackRequest"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackResponse"/>
     <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackErrorResponse"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface" type="Dhl\ShippingCore\Model\ParcelshopFinder\Address"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ParcelshopFinder\LocationInterface" type="Dhl\ShippingCore\Model\ParcelshopFinder\Location"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ParcelshopFinder\OpeningHoursInterface" type="Dhl\ShippingCore\Model\ParcelshopFinder\OpeningHours"/>
+    <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\Address"/>
+    <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\Location"/>
+    <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\OpeningHours"/>
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\QuoteTableNameIterator\Virtual" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>
@@ -346,9 +346,9 @@
                 <item name="dhlTranslationProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\TranslationProcessor</item>
             </argument>
             <argument name="packagingServiceOptionsProcessors" xsi:type="array">
+                <item name="dhlAddDeliveryLocationInputsProcessor" sortOrder="50" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\DeliveryLocationInputsProcessor</item>
                 <item name="dhlApplySelectionsProcessor" sortOrder="100" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ApplySelectionsProcessor</item>
                 <item name="dhlSortOrderProcessor" sortOrder="400" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\SortOrderProcessor</item>
-                <item name="dhlAddParcelshopFinderInputsProcessor" sortOrder="50" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ParcelshopFinderInputsProcessor</item>
             </argument>
             <argument name="packagingPackageOptionsProcessors" xsi:type="array">
                 <item name="dhlPackageInputDataProcessor" sortOrder="200" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\PackageInputDataProcessor</item>

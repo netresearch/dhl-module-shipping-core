@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\ParcelshopFinder;
+namespace Dhl\ShippingCore\Model\DeliveryLocation;
 
-use Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface;
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface;
 
 /**
  * Class Address
@@ -85,7 +85,7 @@ class Address implements AddressInterface
     /**
      * @param string $street
      */
-    public function setStreet(string $street): void
+    public function setStreet(string $street)
     {
         $this->street = $street;
     }
@@ -93,7 +93,7 @@ class Address implements AddressInterface
     /**
      * @param string $city
      */
-    public function setCity(string $city): void
+    public function setCity(string $city)
     {
         $this->city = $city;
     }
@@ -101,7 +101,7 @@ class Address implements AddressInterface
     /**
      * @param string $countryCode
      */
-    public function setCountryCode(string $countryCode): void
+    public function setCountryCode(string $countryCode)
     {
         $this->countryCode = $countryCode;
     }
@@ -109,7 +109,7 @@ class Address implements AddressInterface
     /**
      * @param string $postalCode
      */
-    public function setPostalCode(string $postalCode): void
+    public function setPostalCode(string $postalCode)
     {
         $this->postalCode = $postalCode;
     }
@@ -117,7 +117,7 @@ class Address implements AddressInterface
     /**
      * @param string $company
      */
-    public function setCompany(string $company): void
+    public function setCompany(string $company)
     {
         $this->company = $company;
     }

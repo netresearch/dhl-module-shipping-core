@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api;
 
-use Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface;
-use Dhl\ShippingCore\Api\Data\ParcelshopFinder\LocationInterface;
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface;
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**

@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api;
 
-use Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface;
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface;
 
 /**
  * Interface LocationFinderManagementInterface
@@ -15,13 +15,13 @@ use Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface;
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */
-interface ParcelShopFinderManagementInterface
+interface DeliveryLocationProviderInterface
 {
     /**
      * @param string $carrierCode
-     * @param \Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface $searchAddress
-     * @return \Dhl\ShippingCore\Api\Data\ParcelshopFinder\LocationInterface[]
+     * @param \Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface $searchAddress
+     * @return \Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface[]
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getLocationByAddress(string $carrierCode, AddressInterface $searchAddress): array;
+    public function search(string $carrierCode, AddressInterface $searchAddress): array;
 }

@@ -26,8 +26,8 @@
         </resources>
     </route>
 
-    <route url="/V1/dhl/location-data/get" method="POST">
-        <service class="Dhl\ShippingCore\Api\ParcelShopFinderManagementInterface" method="getLocationByAddress"/>
+    <route url="/V1/dhl/delivery-locations/:carrierCode/search" method="POST">
+        <service class="Dhl\ShippingCore\Api\DeliveryLocationProviderInterface" method="search"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>

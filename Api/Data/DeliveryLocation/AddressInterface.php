@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api\Data\ParcelshopFinder;
+namespace Dhl\ShippingCore\Api\Data\DeliveryLocation;
 
 /**
  * Interface AddressInterface

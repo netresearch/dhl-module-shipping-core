@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api\Data\ParcelshopFinder;
+namespace Dhl\ShippingCore\Api\Data\DeliveryLocation;
 
 /**
  * Interface LocationInterface
@@ -37,12 +37,12 @@ interface LocationInterface
     public function getServices(): array;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface
+     * @return \Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface
      */
     public function getAddress(): AddressInterface;
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\ParcelshopFinder\OpeningHoursInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface[]
      */
     public function getOpeningHours(): array;
 
@@ -91,13 +91,13 @@ interface LocationInterface
     public function setServices(array $services);
 
     /**
-     * @param \Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface $address
+     * @param \Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface $address
      * @return void
      */
     public function setAddress(AddressInterface $address);
 
     /**
-     * @param \Dhl\ShippingCore\Api\Data\ParcelshopFinder\OpeningHoursInterface[] $openingHours
+     * @param \Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface[] $openingHours
      * @return void
      */
     public function setOpeningHours(array $openingHours);

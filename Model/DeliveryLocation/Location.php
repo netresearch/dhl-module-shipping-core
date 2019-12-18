@@ -4,16 +4,16 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\ParcelshopFinder;
+namespace Dhl\ShippingCore\Model\DeliveryLocation;
 
-use Dhl\ShippingCore\Api\Data\ParcelshopFinder\AddressInterface;
-use Dhl\ShippingCore\Api\Data\ParcelshopFinder\LocationInterface;
-use Dhl\ShippingCore\Api\Data\ParcelshopFinder\OpeningHoursInterface;
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface;
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface;
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface;
 
 /**
  * Class Location
  *
- * @package Dhl\ShippingCore\Model\ParcelShopFinder
+ * @package Dhl\ShippingCore\Model\DeliveryLocation
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */
