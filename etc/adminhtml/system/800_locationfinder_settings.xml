@@ -8,9 +8,10 @@
     <group id="locationfinder_settings" translate="label" sortOrder="700" showInDefault="1" showInWebsite="1" showInStore="0">
         <label>Location Finder Settings</label>
         <field id="maptile_api_token" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
-               translate="label comment" type="text">
+               translate="label comment" type="obscure">
             <label>MapBox API Token</label>
             <comment>The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token.</comment>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
         </field>
     </group>
 </include>
