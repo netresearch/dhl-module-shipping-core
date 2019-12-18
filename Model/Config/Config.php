@@ -343,4 +343,43 @@ class Config implements ConfigInterface
             self::CONFIG_PATH_CONTENT_EXPLANATION
         );
     }
+
+    /**
+     * @param mixed $store
+     * @return string
+     */
+    public function getLocationFinderApiToken($store = null): string
+    {
+        return (string) $this->scopeConfig->getValue(
+            self::CONFIG_PATH_LOCATION_FINDER_API_TOKEN,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * @param mixed $store
+     * @return string
+     */
+    public function getLocationFinderMapTileUrl($store = null): string
+    {
+        return (string) $this->scopeConfig->getValue(
+            self::CONFIG_PATH_LOCATION_FINDER_URL,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * @param mixed $store
+     * @return string
+     */
+    public function getLocationFinderMapAttribution($store = null): string
+    {
+        return (string) $this->scopeConfig->getValue(
+            self::CONFIG_PATH_LOCATION_FINDER_ATTRIBUTION,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
 }

@@ -36,6 +36,10 @@ interface ConfigInterface
     const CONFIG_PATH_CONTENT_TYPE        = 'dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_type';
     const CONFIG_PATH_CONTENT_EXPLANATION = 'dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_explanation';
 
+    const CONFIG_PATH_LOCATION_FINDER_API_TOKEN = 'dhlshippingsolutions/dhlglobalwebservices/locationfinder_settings/maptile_api_token';
+    const CONFIG_PATH_LOCATION_FINDER_URL = 'dhlshippingsolutions/dhlglobalwebservices/locationfinder_settings/maptile_url';
+    const CONFIG_PATH_LOCATION_FINDER_ATTRIBUTION= 'dhlshippingsolutions/dhlglobalwebservices/locationfinder_settings/map_copyright_attribution';
+
     /**
      * @return string
      */
@@ -167,4 +171,22 @@ interface ConfigInterface
      * @return string
      */
     public function getDefaultExportContentExplanation(): string;
+
+    /**
+     * @param mixed $store
+     * @return string
+     */
+    public function getLocationFinderApiToken($store = null): string;
+
+    /**
+     * @param mixed $store
+     * @return string
+     */
+    public function getLocationFinderMapTileUrl($store = null): string;
+
+    /**
+     * @param mixed $store
+     * @return string
+     */
+    public function getLocationFinderMapAttribution($store = null): string;
 }

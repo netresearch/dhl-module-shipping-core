@@ -15,6 +15,11 @@
                 <bulk_settings>
                     <cron_order_status>pending,processing</cron_order_status>
                 </bulk_settings>
+                <locationfinder_settings>
+                    <maptile_api_token></maptile_api_token>
+                    <maptile_url>https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={api_token}</maptile_url>
+                    <map_copyright_attribution>www.openstreetmap.org</map_copyright_attribution>
+                </locationfinder_settings>
             </dhlglobalwebservices>
         </dhlshippingsolutions>
     </default>

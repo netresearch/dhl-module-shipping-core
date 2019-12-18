@@ -73,6 +73,8 @@ Height,Height
 "Labels cancelling not supported","Labels cancelling not supported"
 Length,Length
 "Length %1","Length %1"
+"Location Finder Settings","Location Finder Settings"
+"MapBox API Token","MapBox API Token"
 "Module version:","Module version"
 Mon,Mon
 "My Own Packages","My Own Packages"
@@ -127,6 +129,7 @@ Sat,Sat
 "Terms of Trade","Terms of Trade"
 "The DHL Shipping Solutions section provides common configuration options for all subsequent DHL carrier modules.","The DHL Shipping Solutions section provides common configuration options for all subsequent DHL carrier modules."
 "The content description is mandatory if export content type is <em>OTHER</em>.","The content description is mandatory if export content type is <em>OTHER</em>."
+"The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token.","The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token."
 "The item option ""%1"" is not available.","The item option ""%1"" is not available."
 "The package option ""%1"" is not available.","The package option ""%1"" is not available."
 "The service option ""%1"" is not available.","The service option ""%1"" is not available."

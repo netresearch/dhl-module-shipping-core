@@ -26,6 +26,7 @@
                 <include path="Dhl_ShippingCore::system/100_general_settings.xml"/>
                 <include path="Dhl_ShippingCore::system/600_shipment_defaults.xml"/>
                 <include path="Dhl_ShippingCore::system/700_bulk_settings.xml"/>
+                <include path="Dhl_ShippingCore::system/800_locationfinder_settings.xml"/>
             </group>
         </section>
     </system>
