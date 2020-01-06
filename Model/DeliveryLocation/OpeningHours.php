@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\DeliveryLocation;
 
+use Dhl\ShippingCore\Api\Data\DeliveryLocation\TimeFrameInterface;
 use Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface;
 
 /**
@@ -20,25 +21,12 @@ class OpeningHours implements OpeningHoursInterface
     /**
      * @var string
      */
-    private $closes;
-
-    /**
-     * @var string
-     */
     private $dayOfWeek;
 
     /**
-     * @var string
+     * @var TimeFrameInterface[]
      */
-    private $opens;
-
-    /**
-     * @param string $closes
-     */
-    public function setCloses(string $closes)
-    {
-        $this->closes = $closes;
-    }
+    private $timeFrames;
 
     /**
      * @param string $dayOfWeek
@@ -49,19 +37,11 @@ class OpeningHours implements OpeningHoursInterface
     }
 
     /**
-     * @param string $opens
+     * @param TimeFrameInterface[] $timeFrames
      */
-    public function setOpens(string $opens)
+    public function setTimeFrames(array $timeFrames)
     {
-        $this->opens = $opens;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCloses(): string
-    {
-        return $this->closes;
+        $this->timeFrames = $timeFrames;
     }
 
     /**
@@ -73,10 +53,10 @@ class OpeningHours implements OpeningHoursInterface
     }
 
     /**
-     * @return string
+     * @return TimeFrameInterface[]
      */
-    public function getOpens(): string
+    public function getTimeFrames(): array
     {
-        return $this->opens;
+        return  $this->timeFrames;
     }
 }

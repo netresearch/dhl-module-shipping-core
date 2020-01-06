@@ -59,6 +59,7 @@
     <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\Address"/>
     <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\Location"/>
     <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\OpeningHours"/>
+    <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\TimeFrameInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\TimeFrame"/>
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\QuoteTableNameIterator\Virtual" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>

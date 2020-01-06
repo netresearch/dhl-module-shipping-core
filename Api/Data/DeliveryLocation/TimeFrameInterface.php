@@ -7,20 +7,20 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api\Data\DeliveryLocation;
 
 /**
- * Interface OpeningHoursInterface
+ * Interface TimeFrameInterface
  *
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */
-interface OpeningHoursInterface
+interface TimeFrameInterface
 {
     /**
-     * @return \Dhl\ShippingCore\Api\Data\DeliveryLocation\TimeFrameInterface[]
+     * @return string
      */
-    public function getTimeFrames(): array;
+    public function getCloses(): string;
 
     /**
      * @return string
      */
-    public function getDayOfWeek(): string;
+    public function getOpens(): string;
 }
