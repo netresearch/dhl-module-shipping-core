@@ -115,7 +115,7 @@ class Autocreate extends Action
                 $incrementIds['error'][$orderIncrementId] = $orderIncrementId;
                 if ($shipmentResponse instanceof ShipmentErrorResponseInterface) {
                     // add error message if details are available
-                    $this->messageManager->addErrorMessage(__('Order %1: %2.', $orderIncrementId, $shipmentResponse->getErrors()));
+                    $this->messageManager->addErrorMessage(__('Order %1: %2', $orderIncrementId, $shipmentResponse->getErrors()));
                 }
             }
 

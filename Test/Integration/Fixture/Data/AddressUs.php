@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Test\Integration\Fixture\Data;
 
 /**
- * Class RecipientUs
+ * Class AddressUs
  *
  * @package Dhl\Test\Integration\Fixture
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>

@@ -14,20 +14,14 @@ use Magento\Shipping\Model\Shipment\ReturnShipment;
 /**
  * Class NoReturnValidator
  *
+ * Validate that no return shipment label is requested.
+ *
  * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */
 class NoReturnValidator implements RequestValidatorInterface
 {
-    /**
-     * Validate that the shipment request is not meant to be a return shipment.
-     *
-     * @param Request $shipmentRequest
-     * @throws ValidatorException
-     *
-     * @return void
-     */
     public function validate(Request $shipmentRequest)
     {
         if (($shipmentRequest->getData('is_return') || $shipmentRequest instanceof ReturnShipment)) {

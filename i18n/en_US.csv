@@ -83,7 +83,7 @@ Mon,Mon
 "No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3.","No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3."
 "No valid start date.","No valid start date."
 "Options for order item ""%1"" are not available.","Options for order item ""%1"" are not available."
-"Order %1: %2.","Order %1: %2."
+"Order %1: %2","Order %1: %2"
 "Order Cut-off Time","Order Cut-off Time"
 "Order Status","Order Status"
 Other,Other

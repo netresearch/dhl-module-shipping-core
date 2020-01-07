@@ -82,7 +82,7 @@ Mon,Mo
 "No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3.","Keine Bestellungen für die automatische Sendungserstellung mit Status %1 in den Stores %2 für die Carrier %3 gefunden."
 "No valid start date.","Kein gültiges Versanddatum."
 "Options for order item ""%1"" are not available.","Es sind keine Optionen für Order Item ""%1"" verfügbar."
-"Order %1: %2.","Bestellung %1: %2."
+"Order %1: %2","Bestellung %1: %2"
 "Order Cut-off Time",Auftragsabschlusszeit
 "Order Status",Bestell-Status
 Other,Sonstiges

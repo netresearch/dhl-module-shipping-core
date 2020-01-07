@@ -259,7 +259,7 @@ class RequestModifier implements RequestModifierInterface
         $shipmentRequest->setData('packages', $packages);
         $shipmentRequest->setData('package_id', $packageId);
         $shipmentRequest->setData('package_items', $packageItems);
-        $shipmentRequest->setData('package_params', $packageParams);
+        $shipmentRequest->setData('package_params', $this->dataObjectFactory->create(['data' => $packageParams]));
 
         $shipment->setPackages($packages);
     }

@@ -32,14 +32,6 @@ class CompositeValidator implements RequestValidatorInterface
         $this->validators = $validators;
     }
 
-    /**
-     * Validate shipment requests and throw exception on errors.
-     *
-     * @param Request $shipmentRequest
-     * @throws ValidatorException
-     *
-     * @return void
-     */
     public function validate(Request $shipmentRequest)
     {
         foreach ($this->validators as $validator) {
