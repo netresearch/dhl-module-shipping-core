@@ -13,7 +13,6 @@ use Magento\Framework\Model\AbstractModel;
 /**
  * RecipientStreet
  *
- * @package Dhl\ShippingCore\Model
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */

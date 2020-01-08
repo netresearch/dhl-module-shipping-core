@@ -15,7 +15,6 @@ use Magento\Framework\Exception\LocalizedException;
 /**
  * Class DeliveryLocationProvider
  *
- * @package Dhl\ShippingCore\Model\Webapi
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */

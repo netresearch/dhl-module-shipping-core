@@ -13,7 +13,6 @@ use Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
 /**
  * Class ShipmentResponseProcessor
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

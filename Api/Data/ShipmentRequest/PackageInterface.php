@@ -10,7 +10,6 @@ namespace Dhl\ShippingCore\Api\Data\ShipmentRequest;
  * Interface PackageInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface PackageInterface
 {

@@ -12,7 +12,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption;
  * A DTO for an input option, e.g. for a select type input or as part of a radioset.
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface OptionInterface
 {

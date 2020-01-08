@@ -15,7 +15,6 @@ use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
  * Service to cancel shipping labels.
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

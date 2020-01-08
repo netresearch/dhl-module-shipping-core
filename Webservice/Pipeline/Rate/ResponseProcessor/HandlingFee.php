@@ -15,7 +15,6 @@ use Magento\Shipping\Model\Carrier\AbstractCarrier;
 /**
  * A rate processor to append the handling fee based on handling type to the shipping price.
  *
- * @package Dhl\ShippingCore\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

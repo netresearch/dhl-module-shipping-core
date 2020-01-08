@@ -16,7 +16,6 @@ use Magento\Framework\Serialize\Serializer\Json;
 /**
  * Controller Save
  *
- * @package Dhl\ShippingCore\Controller
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -12,7 +12,6 @@ use Magento\Payment\Model\MethodInterface;
 /**
  * Class PaymentData
  *
- * @package Dhl\ShippingCore\Model
  */
 class PaymentData extends Data
 {

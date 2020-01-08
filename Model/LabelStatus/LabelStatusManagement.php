@@ -18,7 +18,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Class LabelStatusManagement
  *
- * @package Dhl\ShippingCore\Model
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */

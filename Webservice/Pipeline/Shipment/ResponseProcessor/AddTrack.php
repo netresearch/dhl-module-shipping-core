@@ -17,7 +17,6 @@ use Magento\Shipping\Model\Order\TrackFactory;
  *
  * Add track entity to shipment after api calls.
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

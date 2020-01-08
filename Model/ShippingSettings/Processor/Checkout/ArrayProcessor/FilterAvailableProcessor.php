@@ -13,7 +13,6 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Class FilterAvailableProcessor
  *
- * @package Dhl\ShippingCore\Model\Checkout\ArrayProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */

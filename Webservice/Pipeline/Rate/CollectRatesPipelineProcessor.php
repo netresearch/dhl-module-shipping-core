@@ -14,7 +14,6 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
 /**
  * Class CollectRatesPipelineProcessor
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

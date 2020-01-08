@@ -20,7 +20,6 @@ use Magento\Store\Model\ScopeInterface;
 
 /**
  * Class RequestModifier
- * @package Dhl\ShippingCore\Model\ShipmentRequest
  */
 class RequestModifier implements RequestModifierInterface
 {

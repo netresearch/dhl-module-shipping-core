@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 /**
  * Class ShippingOption
  *
- * @package Dhl\ShippingCore\Model
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class ShippingOption implements ShippingOptionInterface

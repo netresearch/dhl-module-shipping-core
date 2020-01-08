@@ -20,7 +20,6 @@ use Psr\Log\LoggerInterface;
 /**
  * SplitAddress Observer
  *
- * @package Dhl\ShippingCore\Observer
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */

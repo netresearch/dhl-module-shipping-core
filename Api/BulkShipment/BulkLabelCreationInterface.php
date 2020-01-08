@@ -15,7 +15,6 @@ use Magento\Shipping\Model\Shipment\Request;
  * Service to create shipping labels.
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de/
  */

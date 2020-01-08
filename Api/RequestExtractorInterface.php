@@ -22,7 +22,6 @@ use Magento\Sales\Model\Order\Shipment;
  * isolates the toxic part of extracting unstructured array data from the shipment request.
  *
  * @api
- * @package Dhl\ShippingCore\Api
  */
 interface RequestExtractorInterface
 {

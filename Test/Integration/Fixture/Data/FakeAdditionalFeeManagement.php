@@ -10,7 +10,6 @@ use Dhl\ShippingCore\Model\AdditionalFee\AdditionalFeeManagement;
 /**
  * Class FakeAdditionalFeeManagement
  *
- * @package Dhl\ShippingCore\Test\Integration\Fixture\Data
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class FakeAdditionalFeeManagement extends AdditionalFeeManagement

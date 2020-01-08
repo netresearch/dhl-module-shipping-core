@@ -11,7 +11,6 @@ use Magento\Framework\DataObject;
 /**
  * Class Package
  *
- * @package Dhl\ShippingCore\Model
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de/
  */

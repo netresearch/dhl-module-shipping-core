@@ -21,7 +21,6 @@ use Magento\Ui\Component\MassAction\Filter;
 /**
  * Controller Autocreate
  *
- * @package Dhl\ShippingCore\Controller
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
 

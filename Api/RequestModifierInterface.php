@@ -12,7 +12,6 @@ use Magento\Shipping\Model\Shipment\Request;
 /**
  * Interface RequestModifierInterface
  *
- * @package Dhl\ShippingCore\Api
  */
 interface RequestModifierInterface
 {

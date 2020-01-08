@@ -16,7 +16,6 @@ use Magento\Sales\Model\Order\Shipment\Item;
  *
  * Read additional attributes from shipment items.
  *
- * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link    https://www.netresearch.de/

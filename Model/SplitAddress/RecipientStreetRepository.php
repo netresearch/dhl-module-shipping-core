@@ -17,7 +17,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 /**
  * RecipientStreetRepository
  *
- * @package Dhl\ShippingCore\Model
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */

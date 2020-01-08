@@ -18,7 +18,6 @@ use Magento\Eav\Setup\EavSetup;
 /**
  * Class DataInstaller
  *
- * @package Dhl\ShippingCore\Setup
  */
 class DataInstaller
 {

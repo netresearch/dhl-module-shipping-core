@@ -10,7 +10,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption;
  * Interface CompatibilityInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface CompatibilityInterface
 {

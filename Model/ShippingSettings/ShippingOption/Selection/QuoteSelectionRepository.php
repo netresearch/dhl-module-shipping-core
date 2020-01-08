@@ -17,7 +17,6 @@ use Magento\Framework\Exception\CouldNotSaveException;
 /**
  * Class QuoteServiceSelectionRepository
  *
- * @package Dhl\ShippingCore\Model
  */
 class QuoteSelectionRepository
 {

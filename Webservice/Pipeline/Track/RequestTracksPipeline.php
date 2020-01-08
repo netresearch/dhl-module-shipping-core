@@ -15,7 +15,6 @@ use Dhl\ShippingCore\Api\Pipeline\RequestTracksStageInterface;
 /**
  * Class DeleteShipmentsPipeline
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

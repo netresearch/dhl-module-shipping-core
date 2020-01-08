@@ -16,7 +16,6 @@ use Magento\Shipping\Model\Shipment\ReturnShipment;
  *
  * Validate that no return shipment label is requested.
  *
- * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

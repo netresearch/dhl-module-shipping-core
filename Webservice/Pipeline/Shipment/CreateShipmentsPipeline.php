@@ -15,7 +15,6 @@ use Magento\Shipping\Model\Shipment\Request;
 /**
  * Class CreateShipmentsPipeline
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

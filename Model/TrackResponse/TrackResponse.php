@@ -14,7 +14,6 @@ use Magento\Sales\Api\Data\ShipmentTrackInterface;
 /**
  * TrackResponse
  *
- * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

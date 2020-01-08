@@ -15,7 +15,6 @@ use Magento\Sales\Model\Order;
 /**
  * AfterOrder Observer.
  *
- * @package  Dhl\ShippingCore\Observer
  * @author   Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link     https://www.netresearch.de/
  */

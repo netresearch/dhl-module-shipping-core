@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\Selectio
 /**
  * Class Selection
  *
- * @package Dhl\ShippingCore\Api\Data
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class Selection implements SelectionInterface

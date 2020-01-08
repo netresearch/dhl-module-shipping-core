@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface;
 /**
  * Interface LocationFinderManagementInterface
  *
- * @package Dhl\ShippingCore\Api
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */

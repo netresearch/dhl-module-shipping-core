@@ -12,7 +12,6 @@ use Magento\Config\Model\Config\Backend\Serialized\ArraySerialized;
 /**
  * Class Packages
  *
- * @package Dhl\ShippingCore\Model\Config\Backend
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de/
  */

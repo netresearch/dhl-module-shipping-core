@@ -13,7 +13,6 @@ use Magento\Shipping\Model\Rate\Result;
  * Class RateRequestEmulationInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Paul Siedler <paul.siedler@netresearch.de>
  * @link    https://www.netresearch.de/
  */

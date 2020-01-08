@@ -10,7 +10,6 @@ namespace Dhl\ShippingCore\Api\ShipmentDate;
  * Day validator interface.
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface DayValidatorInterface

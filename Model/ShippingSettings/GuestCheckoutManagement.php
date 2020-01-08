@@ -17,7 +17,6 @@ use Magento\Quote\Model\GuestCart\GuestShippingAddressManagementInterface;
 /**
  * Class GuestCheckoutManagement
  *
- * @package Dhl\ShippingCore\Model\Rest
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

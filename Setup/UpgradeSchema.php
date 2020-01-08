@@ -14,7 +14,6 @@ use Magento\Framework\Setup\UpgradeSchemaInterface;
 /**
  * UpgradeSchema
  *
- * @package Dhl\ShippingCore\Setup
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */

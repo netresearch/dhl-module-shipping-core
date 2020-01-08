@@ -17,7 +17,6 @@ use Magento\Framework\Setup\UpgradeDataInterface;
 /**
  * Class UpgradeData
  *
- * @package Dhl\ShippingCore\Setup
  */
 class UpgradeData implements UpgradeDataInterface
 {

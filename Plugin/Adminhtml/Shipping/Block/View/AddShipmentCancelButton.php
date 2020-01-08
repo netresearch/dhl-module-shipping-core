@@ -14,7 +14,6 @@ use Magento\Shipping\Block\Adminhtml\View;
 /**
  * Class AddShipmentCancelButton
  *
- * @package Dhl\ShippingCore\Plugin
  */
 class AddShipmentCancelButton
 {

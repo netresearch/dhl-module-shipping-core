@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\RecipientInterface;
 /**
  * Class Recipient
  *
- * @package Dhl\ShippingCore\Model
  */
 class Recipient implements RecipientInterface
 {

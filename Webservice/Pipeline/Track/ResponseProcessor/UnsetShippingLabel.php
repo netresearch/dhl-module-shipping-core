@@ -15,7 +15,6 @@ use Magento\Sales\Model\ResourceModel\Order\Shipment;
 /**
  * Class UnsetShippingLabel
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -22,7 +22,6 @@ use Magento\Sales\Model\Order\Address;
  *
  * For loading a list of addresses see `AddRecipientStreetToAddressCollection`.
  *
- * @package Dhl\ShippingCore\Plugin
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link    https://www.netresearch.de/
  */

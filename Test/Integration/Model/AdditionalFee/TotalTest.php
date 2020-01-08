@@ -22,7 +22,6 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class TotalsTest
  *
- * @package Dhl\ShippingCore\Test\Integration\Model\AdditionalFee
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class TotalTest extends TestCase

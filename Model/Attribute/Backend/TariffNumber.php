@@ -13,7 +13,6 @@ use Magento\Framework\Exception\LocalizedException;
 /**
  * Class TariffNumber
  *
- * @package Dhl\ShippingCore\Model
  */
 class TariffNumber extends AbstractBackend
 {

@@ -12,7 +12,6 @@ use Magento\Store\Model\StoresConfig;
 /**
  * Class CronConfig
  *
- * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -13,7 +13,6 @@ use Magento\Framework\Webapi\ServiceOutputProcessor;
 /**
  * Class ShippingDataHydrator
  *
- * @package Dhl\ShippingCore\Model\Checkout
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class ShippingDataHydrator

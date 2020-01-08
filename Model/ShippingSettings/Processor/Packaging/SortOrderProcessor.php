@@ -14,7 +14,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 /**
  * Class SortOrderProcessor
  *
- * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
 class SortOrderProcessor implements ShippingOptionsProcessorInterface

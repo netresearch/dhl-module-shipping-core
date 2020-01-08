@@ -17,7 +17,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
  * as well as to persist customer selections for shipping options.
  *
  * @api
- * @package Dhl\Shipping\Api
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/

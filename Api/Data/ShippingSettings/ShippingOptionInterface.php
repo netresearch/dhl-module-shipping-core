@@ -12,7 +12,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings;
  * A DTO with the rendering information for an individual shipping option with potentially multiple inputs.
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface ShippingOptionInterface
 {

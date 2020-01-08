@@ -12,7 +12,6 @@ use Magento\Framework\Phrase;
  * Interface ErrorResponseInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface TrackErrorResponseInterface extends TrackResponseInterface
 {

@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
 /**
  * Class Shipper
  *
- * @package Dhl\ShippingCore\Model
  */
 class Shipper implements ShipperInterface
 {

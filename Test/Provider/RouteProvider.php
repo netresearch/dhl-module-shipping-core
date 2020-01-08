@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Model\ShippingSettings\Data\Route;
 /**
  * Class RouteProvider
  *
- * @package Dhl\ShippingCore\Test
  * @author   Andreas Müller <andreas.mueller@netresearch.de>
  */
 class RouteProvider

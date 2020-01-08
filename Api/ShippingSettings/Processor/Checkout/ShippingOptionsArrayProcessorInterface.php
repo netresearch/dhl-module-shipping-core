@@ -10,7 +10,6 @@ namespace Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout;
  * Class ShippingOptionsArrayProcessorInterface
  *
  * @api
- * @package Dhl\ShippingCore\Model\Checkout\ArrayProcessor
  * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface ShippingOptionsArrayProcessorInterface

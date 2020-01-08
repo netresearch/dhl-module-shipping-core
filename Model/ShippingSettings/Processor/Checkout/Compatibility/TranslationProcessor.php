@@ -12,7 +12,6 @@ use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\CompatibilityProces
 /**
  * Class TranslationProcessor
  *
- * @package Dhl\ShippingCore\Model\Checkout\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */

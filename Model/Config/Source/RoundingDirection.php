@@ -13,7 +13,6 @@ use Magento\Framework\Data\OptionSourceInterface;
  *
  * Provide available rounding directions.
  *
- * @package Dhl\ShippingCore\Model
  * @author  Ronny Gertler <ronny.gertler@netresearch.de>
  * @link    https://www.netresearch.de/
  */

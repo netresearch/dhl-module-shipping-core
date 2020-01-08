@@ -16,7 +16,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class MigrateAttributes
- * @package Dhl\ShippingCore\Command
  */
 class MigrateAttributes extends Command
 {

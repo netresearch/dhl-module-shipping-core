@@ -13,7 +13,6 @@ use Magento\Framework\Model\AbstractModel;
 
 /**
  * Class QuoteSelection
- * @package Dhl\ShippingCore\Model
  */
 class QuoteSelection extends AbstractModel implements AssignedSelectionInterface
 {

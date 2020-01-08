@@ -13,7 +13,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 /**
  * Class CloneItemTemplatesProcessor
  *
- * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class CloneItemTemplatesProcessor implements ShippingOptionsArrayProcessorInterface

@@ -12,7 +12,6 @@ use Dhl\ShippingCore\Model\Config\Config;
 /**
  * Class RouteMatcher
  *
- * @package Dhl\ShippingCore\Model
  * @author   Andreas Müller <andreas.mueller@netresearch.de>
  */
 class RouteMatcher

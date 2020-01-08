@@ -13,7 +13,6 @@ use Magento\Sales\Api\Data\ShipmentTrackInterface;
 /**
  * Class Package
  *
- * @package Dhl\ShippingCore\Model
  */
 class TrackRequest implements TrackRequestInterface
 {

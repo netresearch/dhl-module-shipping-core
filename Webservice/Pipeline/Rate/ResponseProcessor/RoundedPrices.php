@@ -16,7 +16,6 @@ use Magento\Quote\Model\Quote\Address\RateResult\Method;
 /**
  * A rate processor to round prices.
  *
- * @package Dhl\ShippingCore\Model
  * @author  Ronny Gertler <ronny.gertler@netresearch.de>
  * @link    https://www.netresearch.de/
  */

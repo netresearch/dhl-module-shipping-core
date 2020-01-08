@@ -13,7 +13,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
  * Class MetadataProcessorInterface
  *
  * @api
- * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface MetadataProcessorInterface

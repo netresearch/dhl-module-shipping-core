@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class RouteMatcherTest
  *
- * @package Dhl\ShippingCore\Test\Integration
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de
  */

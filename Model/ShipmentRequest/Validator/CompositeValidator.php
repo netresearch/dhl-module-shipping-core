@@ -13,7 +13,6 @@ use Magento\Shipping\Model\Shipment\Request;
 /**
  * Class CompositeValidator
  *
- * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

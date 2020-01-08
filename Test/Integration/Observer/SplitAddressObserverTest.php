@@ -22,7 +22,6 @@ use Psr\Log\LoggerInterface;
  *
  * @magentoAppIsolation enabled
  *
- * @package Dhl\ShippingCore\Test\Integration
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link    https://www.netresearch.de/
  */

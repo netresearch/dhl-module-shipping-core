@@ -13,7 +13,6 @@ use Magento\TestFramework\ObjectManager;
 /**
  * RoundedPricesTest
  *
- * @package Dhl\ShippingCore\Test\Integration
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

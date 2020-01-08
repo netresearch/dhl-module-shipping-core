@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\FootnoteInterface;
 /**
  * Class Footnote
  *
- * @package Dhl\ShippingCore\Model\Checkout
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

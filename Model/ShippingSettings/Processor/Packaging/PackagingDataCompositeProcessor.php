@@ -23,7 +23,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 /**
  * Class PackagingDataCompositeProcessor
  *
- * @package Dhl\ShippingCore\Model\Packaging
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class PackagingDataCompositeProcessor

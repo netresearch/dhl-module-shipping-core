@@ -24,7 +24,6 @@ use PHPUnit\Framework\TestCase;
  * In this test, the observer is not directly invoked.
  * It is invoked by saving an order address instead.
  *
- * @package Dhl\ShippingCore\Test\Integration
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link    https://www.netresearch.de/
  */

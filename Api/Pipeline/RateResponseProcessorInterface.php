@@ -19,7 +19,6 @@ use Magento\Quote\Model\Quote\Address\RateResult\Method;
  * @see CollectRatesPipelineInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Paul Siedler <paul.siedler@netresearch.de>
  * @link    https://www.netresearch.de/
  */

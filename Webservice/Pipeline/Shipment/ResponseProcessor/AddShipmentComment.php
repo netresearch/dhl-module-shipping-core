@@ -20,7 +20,6 @@ use Psr\Log\LoggerInterface;
  *
  * Add order comment if bulk label creation gave an error.
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

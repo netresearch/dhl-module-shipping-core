@@ -17,7 +17,6 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class RouteProcessorTest
  *
- * @package Dhl\ShippingCore\Test\Unit
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

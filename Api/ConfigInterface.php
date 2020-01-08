@@ -15,7 +15,6 @@ use Magento\Store\Model\ScopeInterface;
  * Interface ConfigInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Paul Siedler <paul.siedler@netresearch.de>
  * @link    https://www.netresearch.de/
  */

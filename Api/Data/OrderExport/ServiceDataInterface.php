@@ -12,7 +12,6 @@ namespace Dhl\ShippingCore\Api\Data\OrderExport;
  * A DTO with package parameter service rendering data for carriers that support it
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data\Package
  */
 interface ServiceDataInterface
 {

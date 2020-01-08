@@ -12,7 +12,6 @@ use Magento\Quote\Model\Quote;
 /**
  * Class FakeAdditionalFeeConfiguration
  *
- * @package Dhl\ShippingCore\Test\Integration\Fixture\Data
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class FakeAdditionalFeeConfiguration implements AdditionalFeeConfigurationInterface

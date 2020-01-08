@@ -10,7 +10,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings;
  * Interface MetadataInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface MetadataInterface
 {

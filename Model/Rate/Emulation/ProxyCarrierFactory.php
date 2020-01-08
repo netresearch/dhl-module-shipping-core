@@ -16,7 +16,6 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 /**
  * Class ProxyCarrierFactory
  *
- * @package Dhl\ShippingCore\Model\Emulation
  * @author  Paul Siedler <paul.siedler@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -13,7 +13,6 @@ use Magento\Shipping\Model\Shipment\Request;
  * Interface RequestValidatorInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

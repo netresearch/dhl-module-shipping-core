@@ -14,7 +14,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\MetadataInterface;
  * A DTO for carrier-specific data for rendering additional shipping options.
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface CarrierDataInterface
 {

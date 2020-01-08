@@ -13,7 +13,6 @@ use Magento\Quote\Model\Quote;
  * Interface AdditionalFeeConfigurationInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link    https://www.netresearch.de/
  */

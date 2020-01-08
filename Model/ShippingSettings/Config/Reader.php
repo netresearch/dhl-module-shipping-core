@@ -19,7 +19,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Class Reader
  *
- * @package Dhl\ShippingCore\Model\ShippingOption\Config
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class Reader extends Filesystem

@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsArra
 /**
  * Class CheckoutArrayCompositeProcessor
  *
- * @package Dhl\ShippingCore\Model\Checkout
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
 class CheckoutArrayCompositeProcessor

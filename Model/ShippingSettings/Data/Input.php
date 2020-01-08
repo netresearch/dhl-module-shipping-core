@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface;
 /**
  * Class Input
  *
- * @package Dhl\ShippingCore\Model
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

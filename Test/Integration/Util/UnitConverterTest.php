@@ -11,7 +11,6 @@ use Magento\TestFramework\ObjectManager;
 /**
  * HandlingFeeTest
  *
- * @package Dhl\ShippingCore\Test\Integration
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link    https://www.netresearch.de/
  */

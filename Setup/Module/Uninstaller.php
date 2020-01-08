@@ -19,7 +19,6 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 /**
  * Class Uninstaller
  *
- * @package Dhl\ShippingCore\Setup
  */
 class Uninstaller
 {

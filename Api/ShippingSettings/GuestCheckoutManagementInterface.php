@@ -17,7 +17,6 @@ use Dhl\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface;
  * @see CheckoutManagementInterface
  *
  * @api
- * @package Dhl\Shipping\Api
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/

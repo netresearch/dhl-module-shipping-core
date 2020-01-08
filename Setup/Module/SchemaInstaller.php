@@ -20,7 +20,6 @@ use Magento\Sales\Api\Data\OrderItemInterface;
 /**
  * Setup
  *
- * @package Dhl\ShippingCore\Setup
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */

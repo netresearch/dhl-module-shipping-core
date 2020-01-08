@@ -11,7 +11,6 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 /**
  * Class Selection
- * @package Dhl\ShippingCore\Model\ResourceModel
  */
 class ShippingOptionSelection extends AbstractDb
 {

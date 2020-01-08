@@ -12,7 +12,6 @@ use Magento\Framework\Data\OptionSourceInterface;
 /**
  * Class OfflineCarriers
  *
- * @package Dhl\ShippingCore\Model\Backend\Config\Source
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */

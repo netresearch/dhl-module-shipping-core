@@ -14,7 +14,6 @@ use Dhl\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface;
  * A DTO with rendering information for shipping option footnotes.
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface FootnoteInterface
 {

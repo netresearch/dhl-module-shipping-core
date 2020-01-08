@@ -10,7 +10,6 @@ namespace Dhl\ShippingCore\Api\Data;
  * OrderItemAttributesInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -10,7 +10,6 @@ use Magento\TestFramework\Helper\Bootstrap;
 /**
  * ConfigTest
  *
- * @package Dhl\ShippingCore\Test\Integration
  * @author  Ronny Gertler <ronny.gertler@netresearch.de>
  * @link    https://www.netresearch.de/
  */

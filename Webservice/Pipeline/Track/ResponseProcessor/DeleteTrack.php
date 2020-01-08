@@ -16,7 +16,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Class DeleteTrack
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

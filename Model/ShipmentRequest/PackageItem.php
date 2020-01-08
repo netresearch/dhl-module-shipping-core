@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface;
 /**
  * Class PackageItem
  *
- * @package Dhl\ShippingCore\Model
  */
 class PackageItem implements PackageItemInterface
 {

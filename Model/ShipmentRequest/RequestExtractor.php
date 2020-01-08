@@ -33,7 +33,6 @@ use Magento\Shipping\Model\Shipment\Request;
  * The extractor and its subtypes offer a well-defined interface to extract the request data and
  * isolates the toxic part of extracting unstructured array data from the shipment request.
  *
- * @package Dhl\ShippingCore\Model
  */
 class RequestExtractor implements RequestExtractorInterface
 {

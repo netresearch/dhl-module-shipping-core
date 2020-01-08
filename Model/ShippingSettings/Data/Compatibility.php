@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInter
 /**
  * Class Compatibility
  *
- * @package Dhl\ShippingCore\Model
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class Compatibility implements CompatibilityInterface

@@ -23,7 +23,6 @@ use Magento\Shipping\Model\Shipment\Request;
  * @see ShipmentResponseProcessorInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

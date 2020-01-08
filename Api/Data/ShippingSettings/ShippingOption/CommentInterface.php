@@ -12,7 +12,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption;
  * A DTO that represents a comment to be rendered in a shipping options area.
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface CommentInterface
 {

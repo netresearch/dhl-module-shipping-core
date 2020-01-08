@@ -24,7 +24,6 @@ use Magento\Sales\Model\Order\ShippingBuilder;
 /**
  * Class ShippingBuilderPlugin
  *
- * @package Dhl\ShippingCore\Plugin\Order
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

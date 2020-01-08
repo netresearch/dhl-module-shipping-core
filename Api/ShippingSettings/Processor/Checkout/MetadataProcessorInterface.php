@@ -12,7 +12,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\MetadataInterface;
  * Class MetadataProcessorInterface
  *
  * @api
- * @package Dhl\ShippingCore\Model\Checkout\DataProcessor
  * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface MetadataProcessorInterface

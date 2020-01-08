@@ -16,7 +16,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Class ShipmentCollectionLoader
  *
- * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -13,7 +13,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
  * Class CompatibilityProcessorInterface
  *
  * @api
- * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface CompatibilityProcessorInterface

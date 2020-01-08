@@ -11,7 +11,6 @@ use Magento\Framework\Exception\LocalizedException;
 /**
  * Class AutoCreateDisabledException
  *
- * @package Dhl\ShippingCore\Cron
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

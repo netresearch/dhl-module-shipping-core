@@ -13,7 +13,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption;
  * is related to an item's item level input values.
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface ItemCombinationRuleInterface
 {

@@ -26,7 +26,6 @@ use Magento\Sales\Model\Order\Shipment\Item;
  * - a set of possible options (e.g. country list)
  * - predefined catalog data (e.g. item weight, country of manufacture)
  *
- * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class ItemInputDataProcessor implements ShippingOptionsProcessorInterface

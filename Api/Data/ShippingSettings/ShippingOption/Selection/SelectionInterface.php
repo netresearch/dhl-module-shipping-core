@@ -12,7 +12,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection;
  * A DTO that represents a customer's selection of an individual shipping option value.
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface SelectionInterface
 {

@@ -12,7 +12,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings;
  * A DTO with shipping options rendering data for carriers that support it
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface ShippingDataInterface
 {

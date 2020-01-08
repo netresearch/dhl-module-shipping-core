@@ -13,7 +13,6 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class StreetSplitterTest
  *
- * @package Dhl\ShippingCore\Test\Unit
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de/
  */

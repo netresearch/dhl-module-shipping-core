@@ -11,7 +11,6 @@ use Magento\Framework\Exception\RuntimeException;
 /**
  * Utility for merging PDF pages into a single PDF binary.
  *
- * @package Dhl\ShippingCore\Api
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

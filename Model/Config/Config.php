@@ -21,7 +21,6 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Class Config
  *
- * @package Dhl\ShippingCore\Model\Config
  */
 class Config implements ConfigInterface
 {

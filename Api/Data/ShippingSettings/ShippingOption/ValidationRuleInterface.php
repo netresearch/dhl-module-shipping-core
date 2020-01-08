@@ -12,7 +12,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption;
  * A DTO to represent a validation rule to be used at runtime to validate user input.
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface ValidationRuleInterface
 {

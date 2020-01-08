@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface;
 /**
  * Class Address
  *
- * @package Dhl\ShippingCore\Model
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */

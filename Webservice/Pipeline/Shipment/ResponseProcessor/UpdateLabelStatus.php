@@ -22,7 +22,6 @@ use Magento\Sales\Model\Order\Shipment;
 /**
  * Class UpdateLabelStatus
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

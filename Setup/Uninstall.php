@@ -15,7 +15,6 @@ use Magento\Framework\Setup\UninstallInterface;
 /**
  * Uninstall
  *
- * @package Dhl\ShippingCore\Setup
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */

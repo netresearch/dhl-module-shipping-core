@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface;
 /**
  * Class Comment
  *
- * @package Dhl\ShippingCore\Model\ShippingOption
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class Comment implements CommentInterface

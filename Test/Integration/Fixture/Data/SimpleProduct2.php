@@ -14,7 +14,6 @@ use Magento\Catalog\Model\Product\Type;
 /**
  * Class SimpleProduct2
  *
- * @package Dhl\Test\Integration\Fixture
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

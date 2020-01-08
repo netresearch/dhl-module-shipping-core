@@ -13,7 +13,6 @@ use Magento\Framework\Exception\LocalizedException;
 /**
  * Class ExportDescription
  *
- * @package Dhl\ShippingCore\Model
  */
 class ExportDescription extends AbstractBackend
 {

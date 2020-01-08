@@ -14,7 +14,6 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Class DefaultConfigValueProcessor
  *
- * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
 class DefaultConfigValueProcessor implements ShippingOptionsArrayProcessorInterface

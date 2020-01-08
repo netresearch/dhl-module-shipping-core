@@ -20,7 +20,6 @@ use Magento\Store\Model\StoreManagerInterface;
 /**
  * Class CheckoutManagement
  *
- * @package Dhl\ShippingCore\Model\Rest
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

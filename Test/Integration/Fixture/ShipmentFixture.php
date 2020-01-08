@@ -15,7 +15,6 @@ use Magento\TestFramework\Helper\Bootstrap;
 /**
  * Class ShipmentFixture
  *
- * @package Dhl\Test\Integration\Fixture
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

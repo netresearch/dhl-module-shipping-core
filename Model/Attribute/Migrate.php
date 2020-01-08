@@ -18,7 +18,6 @@ use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 /**
  * Class Migrate
  *
- * @package Dhl\ShippingCore\Setup
  */
 class Migrate
 {

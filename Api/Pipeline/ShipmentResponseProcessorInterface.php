@@ -19,7 +19,6 @@ use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
  * @see CreateShipmentsPipelineInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -16,7 +16,6 @@ use Magento\Framework\Controller\ResultInterface;
 /**
  * Class Cancel
  *
- * @package Dhl\ShippingCore\Controller
  */
 class Cancel extends Action
 {

@@ -27,7 +27,6 @@ use Dhl\ShippingCore\Model\Payment\PaymentData;
  * @link https://github.com/magento/magento2/issues/13460
  * @link https://bugs.nr/DHLVM2-197
  *
- * @package  Dhl\ShippingCore\Model\Config\Source
  * @author   Ronny gertler <ronny.gertler@netresearch.de>
  * @link     https://www.netresearch.de/
  */

@@ -12,7 +12,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection;
  * A shipping option selection that has been assigned to a specific Quote or Order address id.
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface AssignedSelectionInterface extends SelectionInterface
 {

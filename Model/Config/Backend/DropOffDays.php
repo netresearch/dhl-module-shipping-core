@@ -13,7 +13,6 @@ use Magento\Framework\Exception\LocalizedException;
  * This class throws an exception if the user selects all entries from the drop off day list.
  * At least one entry must not be selected.
  *
- * @package Dhl\ShippingCore\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

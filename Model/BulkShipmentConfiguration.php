@@ -17,7 +17,6 @@ use Magento\Framework\Exception\LocalizedException;
  *
  * Composite configuration accessor for handling bulk shipment actions (create, cancel).
  *
- * @package Dhl\ShippingCore\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

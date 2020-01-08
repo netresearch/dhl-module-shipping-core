@@ -23,7 +23,6 @@ use Magento\Shipping\Controller\Adminhtml\Order\Shipment\RemoveTrack;
  *
  * DHLGW tracks must not be deleted without cancelling the shipment.
  *
- * @package Dhl\ShippingCore\Observer
  */
 class PreventTrackDeletion implements ObserverInterface
 {

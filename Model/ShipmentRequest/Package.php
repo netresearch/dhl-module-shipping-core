@@ -12,7 +12,6 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface;
 /**
  * Class Package
  *
- * @package Dhl\ShippingCore\Model
  */
 class Package implements PackageInterface
 {

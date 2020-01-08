@@ -12,7 +12,6 @@ use Magento\Framework\DataObject;
 /**
  * Class MethodAdditionalInfo
  *
- * @package Dhl\ShippingCore\Model\Method
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */

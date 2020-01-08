@@ -14,7 +14,6 @@ use Magento\Framework\Model\AbstractModel;
 /**
  * Class OrderSelection
  *
- * @package Dhl\ShippingCore\Model
  */
 class OrderSelection extends AbstractModel implements AssignedSelectionInterface
 {

@@ -17,7 +17,6 @@ use Magento\Sales\Api\Data\OrderInterface;
 /**
  * Class LabelStatusJoinProcessor
  *
- * @package Dhl\ShippingCore\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

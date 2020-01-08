@@ -16,7 +16,6 @@ use Magento\Quote\Model\Quote;
 /**
  * Class DisableCodPaymentMethods
  *
- * @package Dhl\ShippingCore\Model\Observer
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */

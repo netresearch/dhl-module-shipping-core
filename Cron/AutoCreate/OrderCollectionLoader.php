@@ -19,7 +19,6 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 /**
  * Class OrderCollectionLoader
  *
- * @package Dhl\ShippingCore\Cron
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -11,7 +11,6 @@ use Magento\Framework\Exception\LocalizedException;
 /**
  * Interface PackagingOptionReaderInterface
  *
- * @package Dhl\ShippingCore\Api
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

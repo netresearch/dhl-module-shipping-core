@@ -11,7 +11,6 @@ use Magento\Framework\Data\OptionSourceInterface;
 /**
  * The available drop off days configuration options.
  *
- * @package Dhl\ShippingCore\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

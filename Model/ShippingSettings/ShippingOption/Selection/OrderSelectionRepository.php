@@ -17,7 +17,6 @@ use Magento\Framework\Exception\CouldNotSaveException;
 /**
  * Class OrderServiceSelectionRepository
  *
- * @package Dhl\ShippingCore\Model
  */
 class OrderSelectionRepository
 {

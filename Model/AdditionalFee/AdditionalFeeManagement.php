@@ -13,7 +13,6 @@ use Magento\Quote\Model\Quote;
 /**
  * Class AdditionalFeeManagement
  *
- * @package Dhl\ShippingCore\Model
  * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  */
 class AdditionalFeeManagement

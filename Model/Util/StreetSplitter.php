@@ -9,7 +9,6 @@ namespace Dhl\ShippingCore\Model\Util;
 /**
  * Utility for splitting single address line into name, number, supplement
  *
- * @package Dhl\ShippingCore\Util
  * @author  Benjamin Heuer <benjamin.heuer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

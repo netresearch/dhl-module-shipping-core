@@ -12,7 +12,6 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption;
  * A DTO that acts as a container for shipping options that apply to a specific shipment item.
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface ItemShippingOptionsInterface
 {

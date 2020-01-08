@@ -14,7 +14,6 @@ use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
 /**
  * RecipientStreet ResourceModel
  *
- * @package Dhl\ShippingCore\Model\ResourceModel
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */

@@ -20,7 +20,6 @@ use Magento\Sales\Model\ResourceModel\Order\Address\Collection;
  *
  * For loading a single address see `AddRecipientStreetToAddress`.
  *
- * @package Dhl\ShippingCore\Plugin
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link    https://www.netresearch.de/
  */

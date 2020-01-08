@@ -14,7 +14,6 @@ use Magento\Framework\Controller\ResultInterface;
 /**
  * Edit Controller
  *
- * @package Dhl\ShippingCore\Controller\Recipient\Street
  * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
  * @link https://www.netresearch.de/
  */

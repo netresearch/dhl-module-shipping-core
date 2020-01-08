@@ -16,7 +16,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
  *
  * @method \Magento\Framework\Data\Form\Element\AbstractElement getElement
  *
- * @package Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de/
  */

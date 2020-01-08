@@ -16,7 +16,6 @@ use Magento\Framework\View\DesignInterface;
 /**
  * Class ImageUrlProcessor
  *
- * @package Dhl\ShippingCore\Model\Checkout\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */

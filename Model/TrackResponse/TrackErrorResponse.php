@@ -12,7 +12,6 @@ use Magento\Framework\Phrase;
 /**
  * TrackErrorResponse
  *
- * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

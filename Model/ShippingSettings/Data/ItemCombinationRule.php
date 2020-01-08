@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemCombinationRul
 /**
  * Class ItemCombinationRule
  *
- * @package Dhl\ShippingCore\Model
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -9,7 +9,6 @@ namespace Dhl\ShippingCore\Setup\Module;
 /**
  * Class Constants
  *
- * @package Dhl\ShippingCore\Setup
  */
 class Constants
 {

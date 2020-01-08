@@ -10,7 +10,6 @@ namespace Dhl\ShippingCore\Api\Data\ShipmentResponse;
  * Interface LabelResponseInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface LabelResponseInterface extends ShipmentResponseInterface
 {

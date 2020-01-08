@@ -15,7 +15,6 @@ use Magento\Sales\Model\Order\Shipment;
 /**
  * Class PackagingOptionReader
  *
- * @package Dhl\ShippingCore\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -22,7 +22,6 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Class PersistShippingOptionSelectionObserver
- * @package Dhl\ShippingCore\Observer
  */
 class PersistShippingOptionSelectionObserver implements ObserverInterface
 {

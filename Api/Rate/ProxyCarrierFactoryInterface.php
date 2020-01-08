@@ -13,7 +13,6 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
  * Interface ProxyCarrierFactoryInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Paul Siedler <paul.siedler@netresearch.de>
  * @link    https://www.netresearch.de/
  */

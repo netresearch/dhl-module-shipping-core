@@ -11,7 +11,6 @@ use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
 
 /**
  * Class Selection
- * @package Model\ResourceModel\Quote\Address
  */
 class ShippingOptionSelection extends AbstractDb
 {

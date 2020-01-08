@@ -11,7 +11,6 @@ use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
 /**
  * Class DGCategory
  *
- * @package Dhl\ShippingCore\Model
  */
 class DGCategory extends AbstractSource
 {

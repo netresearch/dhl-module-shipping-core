@@ -24,7 +24,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Class BulkShipmentManagement
  *
- * @package Dhl\ShippingCore\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

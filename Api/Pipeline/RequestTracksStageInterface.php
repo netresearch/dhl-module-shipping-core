@@ -19,7 +19,6 @@ use Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface;
  * @see ArtifactsContainerInterface
  * @see RequestTracksPipelineInterface
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

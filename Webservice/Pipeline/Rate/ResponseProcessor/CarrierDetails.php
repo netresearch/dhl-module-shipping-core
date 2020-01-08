@@ -13,7 +13,6 @@ use Magento\Quote\Model\Quote\Address\RateResult\Method;
 /**
  * Class CarrierDetails
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

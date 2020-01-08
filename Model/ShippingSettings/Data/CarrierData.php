@@ -12,7 +12,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\MetadataInterface;
 /**
  * Class CarrierData
  *
- * @package Dhl\ShippingCore\Model\Checkout
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

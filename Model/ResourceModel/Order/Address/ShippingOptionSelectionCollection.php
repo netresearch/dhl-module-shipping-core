@@ -12,7 +12,6 @@ use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 /**
  * Class ServiceSelectionCollection
- * @package Dhl\ShippingCore\Model\ResourceModel
  */
 class ShippingOptionSelectionCollection extends AbstractCollection
 {

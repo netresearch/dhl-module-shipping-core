@@ -12,7 +12,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
  * Class ShippingOptionsProcessorInterface
  *
  * @api
- * @package Dhl\ShippingCore\Model\Checkout\DataProcessor
  * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface ShippingOptionsProcessorInterface

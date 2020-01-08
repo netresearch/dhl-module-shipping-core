@@ -18,7 +18,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Class TotalsManager
  *
- * @package Dhl\ShippingCore\Model\AdditionalFee
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class TotalsManager

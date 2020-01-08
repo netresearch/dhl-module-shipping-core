@@ -12,7 +12,6 @@ use Magento\Sales\Api\Data\OrderItemInterface;
  * Interface ItemAttributeReaderInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */

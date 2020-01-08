@@ -17,7 +17,6 @@ use Psr\Log\LoggerInterface;
  *
  * Add shipping label to shipment after api calls.
  *
- * @package Dhl\ShippingCore\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

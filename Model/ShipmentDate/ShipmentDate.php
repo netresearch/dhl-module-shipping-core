@@ -14,7 +14,6 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 /**
  * The class ShipmentDate calculates the next available shipment date.
  *
- * @package Dhl\ShippingCore\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
 class ShipmentDate

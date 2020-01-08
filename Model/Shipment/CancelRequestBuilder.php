@@ -22,7 +22,6 @@ use Magento\Sales\Model\ResourceModel\Order\Shipment\Track\Collection;
  *
  * For a given shipment, create one cancel request per associated track (=DHLGW shipment number).
  *
- * @package Dhl\ShippingCore\Model
  * @author Paul Siedler <paul.siedler@netresearch.de>
  * @link https://www.netresearch.de/
  */

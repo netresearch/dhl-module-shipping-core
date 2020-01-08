@@ -12,7 +12,6 @@ use Dhl\ShippingCore\Api\Data\OrderExport\ServiceDataInterface;
 /**
  * Class ServiceData
  *
- * @package Dhl\ShippingCore\Model\WebApi\Data
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

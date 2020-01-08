@@ -19,7 +19,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 /**
  * Class PackageInputDataProcessor
  *
- * @package Dhl\ShippingCore\Model\Packaging\DataProcessor
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class PackageInputDataProcessor implements ShippingOptionsProcessorInterface

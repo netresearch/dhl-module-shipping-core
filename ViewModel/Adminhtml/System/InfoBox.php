@@ -12,7 +12,6 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 /**
  * Class InfoBox
  *
- * @package Dhl\Express\ViewModel
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */

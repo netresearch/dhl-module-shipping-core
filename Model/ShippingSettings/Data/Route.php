@@ -11,7 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\RouteInterface;
 /**
  * Class Route
  *
- * @package Dhl\ShippingCore\Model
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class Route implements RouteInterface

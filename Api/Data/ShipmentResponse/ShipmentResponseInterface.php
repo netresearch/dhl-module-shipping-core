@@ -12,7 +12,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
  * Interface ShipmentResponseInterface
  *
  * @api
- * @package Dhl\ShippingCore\Api\Data
  */
 interface ShipmentResponseInterface
 {

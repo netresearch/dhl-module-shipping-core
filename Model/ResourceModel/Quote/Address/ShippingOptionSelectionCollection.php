@@ -13,7 +13,6 @@ use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 /**
  * Class ShippingOptionSelectionCollection
  *
- * @package Dhl\ShippingCore\Model
  */
 class ShippingOptionSelectionCollection extends AbstractCollection
 {

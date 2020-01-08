@@ -11,7 +11,6 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * Class StreetDataProvider
  *
- * @package Dhl\ShippingCore\Test
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de/
  */
