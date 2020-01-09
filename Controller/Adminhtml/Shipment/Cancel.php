@@ -8,7 +8,7 @@ namespace Dhl\ShippingCore\Controller\Adminhtml\Shipment;
 
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface;
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
-use Dhl\ShippingCore\Model\BulkShipmentManagement;
+use Dhl\ShippingCore\Model\BulkShipment\BulkShipmentManagement;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultInterface;

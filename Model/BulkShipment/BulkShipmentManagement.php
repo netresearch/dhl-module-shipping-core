@@ -4,16 +4,13 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model;
+namespace Dhl\ShippingCore\Model\BulkShipment;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
 use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
 use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Model\LabelStatus\LabelStatusProvider;
-use Dhl\ShippingCore\Model\BulkShipment\OrderCollectionLoader;
-use Dhl\ShippingCore\Model\BulkShipment\ShipmentCollectionLoader;
-use Dhl\ShippingCore\Model\Shipment\CancelRequestBuilder;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\ShipOrderInterface;

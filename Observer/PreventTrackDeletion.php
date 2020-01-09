@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Observer;
 
-use Dhl\ShippingCore\Model\BulkShipmentConfiguration;
+use Dhl\ShippingCore\Model\BulkShipment\BulkShipmentConfiguration;
 use Magento\Framework\App\ActionFlag;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\Response\Http;

@@ -9,7 +9,7 @@ namespace Dhl\ShippingCore\Controller\Adminhtml\Shipment;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
-use Dhl\ShippingCore\Model\BulkShipmentManagement;
+use Dhl\ShippingCore\Model\BulkShipment\BulkShipmentManagement;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultInterface;

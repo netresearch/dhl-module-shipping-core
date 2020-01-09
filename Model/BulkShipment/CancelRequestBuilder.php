@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\Shipment;
+namespace Dhl\ShippingCore\Model\BulkShipment;
 
 use Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface;
 use Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterfaceFactory;

@@ -219,11 +219,6 @@
             </argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\BulkShipmentManagement">
-        <arguments>
-            <argument name="orderRepository" xsi:type="object">Dhl\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
-        </arguments>
-    </type>
     <type name="Dhl\ShippingCore\Model\AdditionalFee\Total">
         <arguments>
             <argument name="taxHelper" xsi:type="object">Magento\Tax\Helper\Data\Proxy</argument>
