@@ -7,7 +7,7 @@
     </carrier>
     <carrier code="dhlpaket">
         <serviceOptions>
-            <shippingOption code="parcelAnnouncement" available="dhlshippingsolutions/dhlpaket/additional_services/services_group/parcelannouncement">
+            <shippingOption code="\Dhl\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConverterTest::CODE_PARCEL_ANNOUNCEMENT" available="dhlshippingsolutions/dhlpaket/additional_services/services_group/parcelannouncement">
                 <label>Parcel Announcement</label>
                 <sortOrder>10</sortOrder>
                 <inputs>

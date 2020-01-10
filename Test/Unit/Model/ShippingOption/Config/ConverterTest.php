@@ -7,10 +7,13 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Test\Unit\Model\ShippingOption\Config;
 
 use Dhl\ShippingCore\Model\ShippingSettings\Config\Converter;
+use Dhl\ShippingCore\Model\Util\ConstantResolver;
 use PHPUnit\Framework\TestCase;
 
 class ConverterTest extends TestCase
 {
+    const CODE_PARCEL_ANNOUNCEMENT = 'parcelAnnouncement';
+
     /**
      * @var string[]
      */
@@ -39,7 +42,7 @@ class ConverterTest extends TestCase
      */
     public function testConvert(\DOMDocument $xml, array $expectedJson)
     {
-        $subject = new Converter();
+        $subject = new Converter(new ConstantResolver());
 
         $result = $subject->convert($xml);
 

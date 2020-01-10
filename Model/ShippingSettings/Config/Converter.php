@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\ShippingSettings\Config;
 
 use Dhl\ShippingCore\Model\ShippingSettings\PackagingDataProvider;
+use Dhl\ShippingCore\Model\Util\ConstantResolver;
 use Magento\Framework\Config\ConverterInterface;
 
 /**
@@ -40,6 +41,21 @@ class Converter implements ConverterInterface
         PackagingDataProvider::GROUP_ITEM,
         PackagingDataProvider::GROUP_PACKAGE,
     ];
+
+    /**
+     * @var ConstantResolver
+     */
+    private $constantResolver;
+
+    /**
+     * Converter constructor.
+     *
+     * @param ConstantResolver $constantResolver
+     */
+    public function __construct(ConstantResolver $constantResolver)
+    {
+        $this->constantResolver = $constantResolver;
+    }
 
     /**
      * Convert configuration
@@ -105,7 +121,8 @@ class Converter implements ConverterInterface
         } elseif ((string) $xmlElement === '0' || (int) (string) $xmlElement !== 0) {
             $value = (int) (string) $xmlElement;
         } else {
-            $value = trim((string) $xmlElement);
+            $value = trim((string)$xmlElement);
+            $value = $this->constantResolver->resolve($value) ?: $value;
         }
 
         return $value;
@@ -134,7 +151,7 @@ class Converter implements ConverterInterface
 
         foreach ($childElement->attributes() as $attribute) {
             $key = $attribute->getName();
-            $value = (string) $attribute;
+            $value = $this->toScalar($attribute);
 
             $attributes[$key] = $value;
         }
