@@ -14,6 +14,7 @@
     <preference for="Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Dhl\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface" type="Dhl\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory"/>
     <preference for="Dhl\ShippingCore\Api\Rate\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Rate\Emulation\RateRequestService"/>
+    <preference for="Dhl\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface" type="Dhl\ShippingCore\Model\SplitAddress\RecipientStreetLoader"/>
     <preference for="Dhl\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface" type="Dhl\ShippingCore\Model\SplitAddress\RecipientStreetRepository"/>
     <preference for="Dhl\ShippingCore\Api\RequestExtractorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestExtractor"/>
     <preference for="Dhl\ShippingCore\Api\RequestModifierInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier"/>
@@ -60,6 +61,7 @@
     <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\Location"/>
     <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\OpeningHours"/>
     <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\TimeFrameInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\TimeFrame"/>
+
     <!-- # virtual types -->
     <virtualType name="Dhl\ShippingCore\QuoteTableNameIterator\Virtual" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>

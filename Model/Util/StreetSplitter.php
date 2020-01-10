@@ -29,7 +29,7 @@ class StreetSplitter
      * @param string $street
      * @return string[]
      */
-    public function splitStreet($street)
+    public function splitStreet(string $street)
     {
         $result = [
             'street_name'   => $street,
