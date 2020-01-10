@@ -8,6 +8,8 @@ namespace Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest;
 
 use Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifier\PackagingOptionReaderInterfaceFactory;
 use Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface;
+use Dhl\ShippingCore\Api\PackagingOptionReaderInterface;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Dhl\ShippingCore\Model\Util\ShipmentItemFilter;
 use Magento\Directory\Model\RegionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -202,25 +204,43 @@ class RequestModifier implements RequestModifierInterface
         $packagingOptionReader = $this->packagingOptionReaderFactory->create(['shipment' => $shipment]);
 
         $customs = $packagingOptionReader->getPackageCustomsValues();
-        $customsValue = $customs['customsValue']?? '';
-        $contentType = $customs['contentType'] ?? '';
-        $explanation = $customs['explanation'] ?? '';
+        $customsValue = $customs[Codes::PACKAGING_INPUT_CUSTOMS_VALUE]?? '';
+        $contentType = $customs[Codes::PACKAGING_INPUT_CONTENT_TYPE] ?? '';
+        $explanation = $customs[Codes::PACKAGING_INPUT_EXPLANATION] ?? '';
         unset(
-            $customs['customsValue'],
-            $customs['contentType'],
-            $customs['explanation']
+            $customs[Codes::PACKAGING_INPUT_CUSTOMS_VALUE],
+            $customs[Codes::PACKAGING_INPUT_CONTENT_TYPE],
+            $customs[Codes::PACKAGING_INPUT_EXPLANATION]
         );
 
         $packageItems = [];
         $packageParams = [
             'shipping_product' => $shipmentRequest->getShippingMethod(),
             'container' => '',
-            'weight' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'weight'),
-            'weight_units' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'weightUnit'),
-            'length' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'length'),
-            'width' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'width'),
-            'height' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'height'),
-            'dimension_units' => $packagingOptionReader->getPackageOptionValue('packageDetails', 'sizeUnit'),
+            'weight' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_PACKAGE_DETAILS,
+                Codes::PACKAGING_INPUT_WEIGHT
+            ),
+            'weight_units' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_PACKAGE_DETAILS,
+                Codes::PACKAGING_INPUT_WEIGHT_UNIT
+            ),
+            'length' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_PACKAGE_DETAILS,
+                Codes::PACKAGING_INPUT_LENGTH
+            ),
+            'width' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_PACKAGE_DETAILS,
+                Codes::PACKAGING_INPUT_WIDTH
+            ),
+            'height' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_PACKAGE_DETAILS,
+                Codes::PACKAGING_INPUT_HEIGHT
+            ),
+            'dimension_units' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_PACKAGE_DETAILS,
+                Codes::PACKAGING_INPUT_SIZE_UNIT
+            ),
             'content_type' => $contentType,
             'content_type_other' => $explanation,
             'customs_value' => $customsValue,

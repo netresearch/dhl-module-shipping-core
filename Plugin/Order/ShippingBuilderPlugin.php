@@ -13,8 +13,8 @@ use Dhl\ShippingCore\Api\Data\OrderExport\ServiceDataInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\Data\OrderExport\ShippingOptionInterfaceFactory;
 use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
-use Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\PackageContainerInputDataProcessor;
 use Dhl\ShippingCore\Model\ShippingSettings\OrderDataProvider;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Sales\Api\Data\ShippingExtensionFactory;
 use Magento\Sales\Api\Data\ShippingInterface;
 use Magento\Sales\Api\Data\TotalExtensionInterfaceFactory;
@@ -134,7 +134,7 @@ class ShippingBuilderPlugin
                 foreach ($shippingOption->getInputs() as $input) {
                     // drop empty default values (meaning there was no preconfigured value)
                     if (empty($input->getDefaultValue())
-                        || $input->getCode() === PackageContainerInputDataProcessor::CONTAINER_INPUT_CODE
+                        || $input->getCode() === Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID
                     ) {
                         continue;
                     }

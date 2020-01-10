@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShippingSettings\Config;
 
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\Config\ConverterInterface;
 use Magento\Framework\Config\Dom;
@@ -125,12 +126,12 @@ class Reader extends Filesystem
      */
     private function applyBaseConfiguration(array $result): array
     {
-        if (!isset($result['carriers']['base'])) {
+        if (!isset($result['carriers'][Codes::CARRIER_BASE])) {
             return $result;
         }
 
-        $baseCarrier = $result['carriers']['base'];
-        unset($result['carriers']['base']);
+        $baseCarrier = $result['carriers'][Codes::CARRIER_BASE];
+        unset($result['carriers'][Codes::CARRIER_BASE]);
 
         foreach ($result['carriers'] as $carrierCode => $carrier) {
             $result['carriers'][$carrierCode] = $this->extendRecursive($baseCarrier, $carrier);

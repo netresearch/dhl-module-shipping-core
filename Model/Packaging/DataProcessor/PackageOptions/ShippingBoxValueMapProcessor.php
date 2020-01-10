@@ -13,6 +13,7 @@ use Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\ShippingBox\Package;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
@@ -26,13 +27,11 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 class ShippingBoxValueMapProcessor implements ShippingOptionsProcessorInterface
 {
     const INPUT_CODES_MAP = [
-        'weight' => 'packagingWeight',
-        'width' => 'width',
-        'height' => 'height',
-        'length' => 'length'
+        'weight' => Codes::PACKAGING_INPUT_PACKAGING_WEIGHT,
+        'width' => Codes::PACKAGING_INPUT_WIDTH,
+        'height' => Codes::PACKAGING_INPUT_HEIGHT,
+        'length' => Codes::PACKAGING_INPUT_LENGTH,
     ];
-    const CONTAINER_OPTION_CODE = 'packageDetails';
-    const CONTAINER_INPUT_CODE = 'customPackageId';
 
     /**
      * @var ConfigInterface
@@ -81,7 +80,7 @@ class ShippingBoxValueMapProcessor implements ShippingOptionsProcessorInterface
             $inputValues = [];
             foreach (self::INPUT_CODES_MAP as $dataKey => $inputCode) {
                 $inputValue = $this->inputValueFactory->create();
-                $inputValue->setCode(self::CONTAINER_OPTION_CODE . '.' . $inputCode);
+                $inputValue->setCode(Codes::PACKAGING_OPTION_PACKAGE_DETAILS . '.' . $inputCode);
                 $inputValue->setValue((string) $package->getData($dataKey));
                 $inputValues[] = $inputValue;
             }
@@ -104,13 +103,15 @@ class ShippingBoxValueMapProcessor implements ShippingOptionsProcessorInterface
     public function process(array $optionsData, ShipmentInterface $shipment): array
     {
         if (!isset(
-            $optionsData[self::CONTAINER_OPTION_CODE],
-            $optionsData[self::CONTAINER_OPTION_CODE]->getInputs()[self::CONTAINER_INPUT_CODE]
+            $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS],
+            $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS]
+                ->getInputs()[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID]
         )) {
             return $optionsData;
         }
 
-        $input = $optionsData[self::CONTAINER_OPTION_CODE]->getInputs()[self::CONTAINER_INPUT_CODE];
+        $input = $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS]
+            ->getInputs()[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID];
 
         $input->setValueMaps($this->buildValueMaps($shipment->getStoreId()));
 

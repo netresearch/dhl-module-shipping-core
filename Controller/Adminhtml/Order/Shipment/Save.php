@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Controller\Adminhtml\Order\Shipment;
 
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Forward;
@@ -63,23 +64,24 @@ class Save extends Action
         foreach ($data as $packageDetails) {
             $packageItems = [];
 
+            $itemCustomsKey = Codes::ITEM_OPTION_ITEM_CUSTOMS;
             foreach ($packageDetails['items'] as $itemId => $itemDetails) {
-                if (isset($itemDetails['itemCustoms'], $itemDetails['itemCustoms']['customsValue'])) {
-                    $itemCustomsValue = $itemDetails['itemCustoms']['customsValue'];
-                    unset($itemDetails['itemCustoms']['customsValue']);
-                } else {
-                    $itemCustomsValue = '';
+                $itemCustomsValue = '';
+                if (isset($itemDetails[$itemCustomsKey][Codes::ITEM_INPUT_CUSTOMS_VALUE])) {
+                    $itemCustomsValue = $itemDetails[$itemCustomsKey][Codes::ITEM_INPUT_CUSTOMS_VALUE];
+                    unset($itemDetails[$itemCustomsKey][Codes::ITEM_INPUT_CUSTOMS_VALUE]);
                 }
 
+                $detailsKey = Codes::ITEM_OPTION_DETAILS;
                 $packageItem = [
-                    'qty' => $itemDetails['details']['qty'] ?? '1',
+                    'qty' => $itemDetails[$detailsKey][Codes::ITEM_INPUT_QTY] ?? '1',
                     'customs_value' => $itemCustomsValue,
-                    'price' => $itemDetails['details']['price'] ?? '',
-                    'name' => $itemDetails['details']['productName'] ?? '',
-                    'weight' => $itemDetails['details']['weight'] ?? '',
-                    'product_id' => $itemDetails['details']['productId'] ?? '',
+                    'price' => $itemDetails[$detailsKey][Codes::ITEM_INPUT_PRICE] ?? '',
+                    'name' => $itemDetails[$detailsKey][Codes::ITEM_INPUT_PRODUCT_NAME] ?? '',
+                    'weight' => $itemDetails[$detailsKey][Codes::ITEM_INPUT_WEIGHT] ?? '',
+                    'product_id' => $itemDetails[$detailsKey][Codes::ITEM_INPUT_PRODUCT_ID] ?? '',
                     'order_item_id' => $itemId,
-                    'customs' => $itemDetails['itemCustoms'] ?? [],
+                    'customs' => $itemDetails[$itemCustomsKey] ?? [],
                 ];
 
                 $packageItems[$itemId] = $packageItem;
@@ -92,29 +94,31 @@ class Save extends Action
 
             $packageParams = $packageDetails['package'];
             // set to orig packaging popup property names and unset them from customs array
-            $customsValue = $packageParams['packageCustoms']['customsValue'] ?? '';
-            $contentType = $packageParams['packageCustoms']['contentType'] ?? '';
-            $contentTypeOther = $packageParams['packageCustoms']['explanation'] ?? '';
+            $customsKey = Codes::PACKAGING_OPTION_PACKAGE_CUSTOMS;
+            $customsValue = $packageParams[$customsKey][Codes::PACKAGING_INPUT_CUSTOMS_VALUE] ?? '';
+            $contentType = $packageParams[$customsKey][Codes::PACKAGING_INPUT_CONTENT_TYPE] ?? '';
+            $contentTypeOther = $packageParams[$customsKey][Codes::PACKAGING_INPUT_EXPLANATION] ?? '';
             unset(
-                $packageParams['packageCustoms']['customsValue'],
-                $packageParams['packageCustoms']['contentType'],
-                $packageParams['packageCustoms']['explanation']
+                $packageParams[$customsKey][Codes::PACKAGING_INPUT_CUSTOMS_VALUE],
+                $packageParams[$customsKey][Codes::PACKAGING_INPUT_CONTENT_TYPE],
+                $packageParams[$customsKey][Codes::PACKAGING_INPUT_EXPLANATION]
             );
 
+            $detailsKey = Codes::PACKAGING_OPTION_PACKAGE_DETAILS;
             $packages[$packageDetails['packageId']] = [
                 'params' => [
-                    'shipping_product' => $packageParams['packageDetails']['productCode'] ?? '',
+                    'shipping_product' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_PRODUCT_CODE] ?? '',
                     'container' => '',
-                    'weight' => $packageParams['packageDetails']['weight'] ?? '',
-                    'weight_units' => $packageParams['packageDetails']['weightUnit'] ?? '',
-                    'length' => $packageParams['packageDetails']['length'] ?? '',
-                    'width' => $packageParams['packageDetails']['width'] ?? '',
-                    'height' => $packageParams['packageDetails']['height'] ?? '',
-                    'dimension_units' => $packageParams['packageDetails']['sizeUnit'] ?? '',
+                    'weight' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_WEIGHT] ?? '',
+                    'weight_units' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_WEIGHT_UNIT] ?? '',
+                    'length' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_LENGTH] ?? '',
+                    'width' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_WIDTH] ?? '',
+                    'height' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_HEIGHT] ?? '',
+                    'dimension_units' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_SIZE_UNIT] ?? '',
                     'content_type' => $contentType,
                     'content_type_other' => $contentTypeOther,
                     'customs_value' => $customsValue,
-                    'customs' => $packageParams['packageCustoms'] ?? [],
+                    'customs' => $packageParams[Codes::PACKAGING_OPTION_PACKAGE_CUSTOMS] ?? [],
                     'services' => $packageDetails['service'] ?? [],
                 ],
                 'items' => $packageItems,

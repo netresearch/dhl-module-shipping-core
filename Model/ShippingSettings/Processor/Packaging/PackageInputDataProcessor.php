@@ -14,6 +14,7 @@ use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsPro
 use Dhl\ShippingCore\Model\Config\Source\ExportContentType;
 use Dhl\ShippingCore\Model\Config\Source\TermsOfTrade;
 use Dhl\ShippingCore\Model\ItemAttribute\ShipmentItemAttributeReader;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
@@ -92,7 +93,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
         foreach ($shippingOption->getInputs() as $input) {
             switch ($input->getCode()) {
                 // shipping product
-                case 'productCode':
+                case Codes::PACKAGING_INPUT_PRODUCT_CODE:
                     $option = $this->optionFactory->create();
                     $value = substr(strrchr((string) $shipment->getOrder()->getShippingMethod(), '_'), 1);
                     $option->setValue($value);
@@ -103,7 +104,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setDefaultValue($value);
                     break;
 
-                case 'packagingWeight':
+                case Codes::PACKAGING_INPUT_PACKAGING_WEIGHT:
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->config->getWeightUnit($shipment->getStoreId()));
                     $input->setComment($comment);
@@ -111,7 +112,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     break;
 
                 // weight
-                case 'weight':
+                case Codes::PACKAGING_INPUT_WEIGHT:
                     $itemTotalWeight = $this->itemAttributeReader->getTotalWeight($shipment);
                     $packagingWeight = $defaultPackage ? $defaultPackage->getWeight() : 0;
                     $totalWeight = $itemTotalWeight + $packagingWeight;
@@ -121,7 +122,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setDefaultValue((string) $totalWeight);
                     break;
 
-                case 'weightUnit':
+                case Codes::PACKAGING_INPUT_WEIGHT_UNIT:
                     $weightUnit = $this->config->getWeightUnit($shipment->getStoreId()) === 'kg'
                         ? \Zend_Measure_Weight::KILOGRAM
                         : \Zend_Measure_Weight::POUND;
@@ -129,28 +130,28 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     break;
 
                 // dimensions
-                case 'width':
+                case Codes::PACKAGING_INPUT_WIDTH:
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->config->getDimensionUnit($shipment->getStoreId()));
                     $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getWidth() : '');
                     break;
 
-                case 'height':
+                case Codes::PACKAGING_INPUT_HEIGHT:
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->config->getDimensionUnit($shipment->getStoreId()));
                     $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getHeight() : '');
                     break;
 
-                case 'length':
+                case Codes::PACKAGING_INPUT_LENGTH:
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->config->getDimensionUnit($shipment->getStoreId()));
                     $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getLength() : '');
                     break;
 
-                case 'sizeUnit':
+                case Codes::PACKAGING_INPUT_SIZE_UNIT:
                     $dimensionsUnit = $this->config->getDimensionUnit($shipment->getStoreId()) === 'cm'
                         ? \Zend_Measure_Length::CENTIMETER
                         : \Zend_Measure_Length::INCH;
@@ -158,7 +159,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     break;
 
                 // customs
-                case 'customsValue':
+                case Codes::PACKAGING_INPUT_CUSTOMS_VALUE:
                     $price = $this->itemAttributeReader->getTotalPrice($shipment);
                     $currency = $shipment->getStore()->getBaseCurrency();
                     $currencySymbol = $currency->getCurrencySymbol() ?: $currency->getCode();
@@ -168,7 +169,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setDefaultValue((string) $price);
                     break;
 
-                case 'exportDescription':
+                case Codes::PACKAGING_INPUT_EXPORT_DESCRIPTION:
                     $exportDescriptions = $this->itemAttributeReader->getPackageExportDescriptions($shipment);
                     $exportDescription = implode(' ', $exportDescriptions);
                     $input->setDefaultValue(substr($exportDescription, 0, 80));
@@ -179,7 +180,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setDefaultValue(implode(', ', $dgCategories));
                     break;
 
-                case 'termsOfTrade':
+                case Codes::PACKAGING_INPUT_TERMS_OF_TRADE:
                     $input->setOptions(
                         array_map(
                             function ($optionArray) {
@@ -193,7 +194,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     );
                     break;
 
-                case 'contentType':
+                case Codes::PACKAGING_INPUT_CONTENT_TYPE:
                     $input->setOptions(
                         array_map(
                             function ($optionArray) {

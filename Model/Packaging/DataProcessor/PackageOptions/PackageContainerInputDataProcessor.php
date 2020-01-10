@@ -13,6 +13,7 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\OptionInterfaceFac
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\ShippingBox\Package;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
@@ -25,9 +26,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
  */
 class PackageContainerInputDataProcessor implements ShippingOptionsProcessorInterface
 {
-    const CONTAINER_OPTION_CODE = 'packageDetails';
-    const CONTAINER_INPUT_CODE = 'customPackageId';
-
     /**
      * @var ConfigInterface
      */
@@ -65,13 +63,13 @@ class PackageContainerInputDataProcessor implements ShippingOptionsProcessorInte
     public function process(array $optionsData, ShipmentInterface $shipment): array
     {
         if (!isset(
-            $optionsData[self::CONTAINER_OPTION_CODE],
-            $optionsData[self::CONTAINER_OPTION_CODE]->getInputs()[self::CONTAINER_INPUT_CODE]
+            $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS],
+            $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS]->getInputs()[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID]
         )) {
             return $optionsData;
         }
 
-        $shippingOption = $optionsData[self::CONTAINER_OPTION_CODE];
+        $shippingOption = $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS];
         $customContainers = $this->config->getOwnPackages($shipment->getStoreId())->getIterator()->getArrayCopy();
 
         if (empty($customContainers)) {
@@ -79,12 +77,12 @@ class PackageContainerInputDataProcessor implements ShippingOptionsProcessorInte
              * If there are no custom containers configured, remove the input entirely
              */
             $inputs = $shippingOption->getInputs();
-            unset($inputs[self::CONTAINER_INPUT_CODE]);
+            unset($inputs[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID]);
             $shippingOption->setInputs($inputs);
             return $optionsData;
         }
 
-        $containerInput = $shippingOption->getInputs()[self::CONTAINER_INPUT_CODE];
+        $containerInput = $shippingOption->getInputs()[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID];
         $this->setInputOptions($containerInput, $customContainers);
         $this->setDefaultContainer($shipment, $containerInput);
 

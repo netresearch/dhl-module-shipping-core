@@ -10,6 +10,7 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
@@ -19,24 +20,19 @@ use Magento\Sales\Api\Data\ShipmentInterface;
  */
 class DeliveryLocationInputsProcessor implements ShippingOptionsProcessorInterface
 {
-    /**
-     * The input type for the shopfinder component.
-     */
-    const INPUT_TYPE_SHOPFINDER = 'shopfinder';
-
     /*
      * The virtual input's codes that will be added
      * to the shipping option with the shopfinder input.
      */
     const INPUT_CODES = [
-        'company',
-        'locationType',
-        'locationNumber',
-        'locationId',
-        'street',
-        'postalCode',
-        'city',
-        'countryCode',
+        Codes::SHOPFINDER_INPUT_COMPANY,
+        Codes::SHOPFINDER_INPUT_LOCATION_TYPE,
+        Codes::SHOPFINDER_INPUT_LOCATION_NUMBER,
+        Codes::SHOPFINDER_INPUT_LOCATION_ID,
+        Codes::SHOPFINDER_INPUT_STREET,
+        Codes::SHOPFINDER_INPUT_POSTAL_CODE,
+        Codes::SHOPFINDER_INPUT_CITY,
+        Codes::SHOPFINDER_INPUT_COUNTRY_CODE,
     ];
 
     /**
@@ -67,7 +63,7 @@ class DeliveryLocationInputsProcessor implements ShippingOptionsProcessorInterfa
         $shopFinder = null;
         foreach ($optionsData as $key => $option) {
             foreach ($option->getInputs() as $input) {
-                if ($input->getInputType() === self::INPUT_TYPE_SHOPFINDER) {
+                if ($input->getInputType() === Codes::INPUT_TYPE_SHOPFINDER) {
                     $index = $key;
                     $shopFinder = $option;
                     break 2;

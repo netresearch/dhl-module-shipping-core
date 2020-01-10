@@ -13,10 +13,10 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\OptionInterfaceFac
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\ItemAttribute\ShipmentItemAttributeReader;
+use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Dhl\ShippingCore\Model\Util\ShipmentItemFilter;
 use Magento\Catalog\Model\Product\Attribute\Source\Countryofmanufacture;
 use Magento\Sales\Api\Data\ShipmentInterface;
-use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
 
 /**
@@ -114,15 +114,15 @@ class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
         foreach ($shippingOption->getInputs() as $input) {
             switch ($input->getCode()) {
                 // details
-                case 'productId':
+                case Codes::ITEM_INPUT_PRODUCT_ID:
                     $input->setDefaultValue((string) $shipmentItem->getProductId());
                     break;
 
-                case 'productName':
+                case Codes::ITEM_INPUT_PRODUCT_NAME:
                     $input->setDefaultValue((string) $shipmentItem->getName());
                     break;
 
-                case 'price':
+                case Codes::ITEM_INPUT_PRICE:
                     $totalAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
                         - $shipmentItem->getOrderItem()->getBaseDiscountAmount()
                         + $shipmentItem->getOrderItem()->getBaseTaxAmount()
@@ -132,23 +132,23 @@ class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setDefaultValue((string) $itemPrice);
                     break;
 
-                case 'weight':
+                case Codes::ITEM_INPUT_WEIGHT:
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->config->getWeightUnit($shipmentItem->getShipment()->getStoreId()));
                     $input->setComment($comment);
                     $input->setDefaultValue((string) $shipmentItem->getWeight());
                     break;
 
-                case 'qtyToShip':
+                case Codes::ITEM_INPUT_QTY_TO_SHIP:
                     $input->setDefaultValue((string) $shipmentItem->getOrderItem()->getQtyOrdered());
                     break;
 
-                case 'qty':
+                case Codes::ITEM_INPUT_QTY:
                     $input->setDefaultValue((string) $shipmentItem->getQty());
                     break;
 
                 // customs
-                case 'hsCode':
+                case Codes::ITEM_INPUT_HS_CODE:
                     $input->setDefaultValue($this->itemAttributeReader->getHsCode($shipmentItem));
                     break;
 
@@ -156,11 +156,11 @@ class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setDefaultValue($this->itemAttributeReader->getDgCategory($shipmentItem));
                     break;
 
-                case 'exportDescription':
+                case Codes::ITEM_INPUT_EXPORT_DESCRIPTION:
                     $input->setDefaultValue($this->itemAttributeReader->getExportDescription($shipmentItem));
                     break;
 
-                case 'customsValue':
+                case Codes::ITEM_INPUT_CUSTOMS_VALUE:
                     $totalAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
                         - $shipmentItem->getOrderItem()->getBaseDiscountAmount()
                         + $shipmentItem->getOrderItem()->getBaseTaxAmount()
@@ -175,7 +175,7 @@ class ItemInputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setComment($comment);
                     break;
 
-                case 'countryOfOrigin':
+                case Codes::ITEM_INPUT_COUNTRY_OF_ORIGIN:
                     $input->setOptions(array_map(
                         function ($optionArray) {
                             $option = $this->optionFactory->create();
