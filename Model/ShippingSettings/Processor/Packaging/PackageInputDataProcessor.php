@@ -13,7 +13,7 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\Config\Source\ExportContentType;
 use Dhl\ShippingCore\Model\Config\Source\TermsOfTrade;
-use Dhl\ShippingCore\Model\Packaging\ShipmentItemAttributeReader;
+use Dhl\ShippingCore\Model\ItemAttribute\ShipmentItemAttributeReader;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**

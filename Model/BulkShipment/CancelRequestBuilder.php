@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\BulkShipment;
 
-use Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface;
-use Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\Pipeline\TrackRequest\TrackRequestInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\TrackRequest\TrackRequestInterfaceFactory;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Framework\Exception\LocalizedException;

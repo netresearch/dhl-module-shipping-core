@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api;
 
-use Dhl\ShippingCore\Model\Package;
-use Dhl\ShippingCore\Model\PackageCollection;
+use Dhl\ShippingCore\Model\ShippingBox\Package;
+use Dhl\ShippingCore\Model\ShippingBox\PackageCollection;
 use Magento\Shipping\Model\Config;
 use Magento\Store\Model\ScopeInterface;
 

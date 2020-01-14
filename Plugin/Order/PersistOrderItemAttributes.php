@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Plugin\Order;
 
 use Dhl\ShippingCore\Api\Data\OrderItemAttributesInterfaceFactory;
-use Dhl\ShippingCore\Model\OrderItemAttributesRepository;
+use Dhl\ShippingCore\Model\ItemAttribute\OrderItemAttributesRepository;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Api\OrderItemRepositoryInterface;

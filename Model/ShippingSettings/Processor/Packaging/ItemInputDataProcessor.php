@@ -12,7 +12,7 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemShippingOption
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\OptionInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface;
-use Dhl\ShippingCore\Model\Packaging\ShipmentItemAttributeReader;
+use Dhl\ShippingCore\Model\ItemAttribute\ShipmentItemAttributeReader;
 use Dhl\ShippingCore\Model\Util\ShipmentItemFilter;
 use Magento\Catalog\Model\Product\Attribute\Source\Countryofmanufacture;
 use Magento\Sales\Api\Data\ShipmentInterface;

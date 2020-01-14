@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Webservice\Pipeline\Rate\ResponseProcessor;
+namespace Dhl\ShippingCore\Model\Pipeline\Rate\ResponseProcessor;
 
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;

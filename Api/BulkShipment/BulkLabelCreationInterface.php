@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api\BulkShipment;
 
-use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentResponseInterface;
 use Magento\Shipping\Model\Shipment\Request;
 
 /**

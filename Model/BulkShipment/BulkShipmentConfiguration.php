@@ -9,7 +9,7 @@ namespace Dhl\ShippingCore\Model\BulkShipment;
 use Dhl\ShippingCore\Api\BulkShipment\BulkLabelCancellationInterface;
 use Dhl\ShippingCore\Api\BulkShipment\BulkLabelCreationInterface;
 use Dhl\ShippingCore\Api\BulkShipment\BulkShipmentConfigurationInterface;
-use Dhl\ShippingCore\Api\RequestModifierInterface;
+use Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**

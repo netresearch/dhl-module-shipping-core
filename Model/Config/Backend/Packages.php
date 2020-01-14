@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Config\Backend;
 
-use Dhl\ShippingCore\Model\Package;
+use Dhl\ShippingCore\Model\ShippingBox\Package;
 use Magento\Config\Model\Config\Backend\Serialized\ArraySerialized;
 
 /**

@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api\Pipeline;
 
-use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
-use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface;
 
 /**
  * Post-process shipping labels and label errors as retrieved from the create shipments pipeline.

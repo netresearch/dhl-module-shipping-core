@@ -93,7 +93,7 @@ class ShippingBuilderPlugin
      * @param ShippingInterface $shipping
      *
      * @return ShippingInterface
-     * @see \Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier::modifyPackage for package/data structure
+     * @see \Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestModifier::modifyPackage for package/data structure
      *
      */
     public function afterCreate(

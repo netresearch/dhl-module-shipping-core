@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api\Pipeline;
 
-use Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface;
-use Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackErrorResponseInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface;
 
 /**
  * Post-process tracks and errors as retrieved from the request tracks pipeline.

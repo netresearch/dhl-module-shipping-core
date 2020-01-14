@@ -6,9 +6,9 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Cron;
 
-use Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface;
-use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface;
-use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentResponseInterface;
 use Dhl\ShippingCore\Cron\AutoCreate\OrderCollectionLoader;
 use Dhl\ShippingCore\Cron\AutoCreate\OrderCollectionLoader\AutoCreateDisabledException;
 use Dhl\ShippingCore\Model\BulkShipment\BulkShipmentConfiguration;

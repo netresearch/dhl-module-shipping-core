@@ -8,9 +8,9 @@ namespace Dhl\ShippingCore\Model\Config;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Util\UnitConverterInterface;
-use Dhl\ShippingCore\Model\Package;
-use Dhl\ShippingCore\Model\PackageCollection;
-use Dhl\ShippingCore\Model\PackageCollectionFactory;
+use Dhl\ShippingCore\Model\ShippingBox\Package;
+use Dhl\ShippingCore\Model\ShippingBox\PackageCollection;
+use Dhl\ShippingCore\Model\ShippingBox\PackageCollectionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
@@ -253,7 +253,7 @@ class Config implements ConfigInterface
 
         ksort($configValue);
         $default = array_pop($configValue);
-        /** @var PackageCollection $collection */
+
         $collection = $this->packageCollectionFactory->create();
         foreach ($configValue as $key => $packageData) {
             $packageData[Package::KEY_IS_DEFAULT] = $key === $default;

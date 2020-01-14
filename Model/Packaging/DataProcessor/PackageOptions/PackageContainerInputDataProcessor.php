@@ -12,7 +12,7 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\OptionInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface;
-use Dhl\ShippingCore\Model\Package;
+use Dhl\ShippingCore\Model\ShippingBox\Package;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**

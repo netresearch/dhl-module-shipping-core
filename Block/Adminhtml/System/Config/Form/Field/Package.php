@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Block\Adminhtml\System\Config\Form\Field;
 
-use Dhl\ShippingCore\Model\Package as PackageModel;
+use Dhl\ShippingCore\Model\ShippingBox\Package as PackageModel;
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\App\Config\ScopeConfigInterface;

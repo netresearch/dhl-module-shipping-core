@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api\BulkShipment;
 
-use Dhl\ShippingCore\Api\RequestModifierInterface;
+use Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**

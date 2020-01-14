@@ -5,20 +5,20 @@
     <preference for="Dhl\ShippingCore\Api\ConfigInterface" type="Dhl\ShippingCore\Model\Config\Config"/>
     <preference for="Dhl\ShippingCore\Api\DeliveryLocationProviderInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\DeliveryLocationProvider"/>
     <preference for="Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
-    <preference for="Dhl\ShippingCore\Api\PackagingOptionReaderInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier\PackagingOptionReader"/>
-    <preference for="Dhl\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Rate\CollectRatesPipeline"/>
-    <preference for="Dhl\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\CreateShipmentsPipeline"/>
-    <preference for="Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Rate\RateResponseProcessor"/>
-    <preference for="Dhl\ShippingCore\Api\Pipeline\RequestTracksPipelineInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Track\RequestTracksPipeline"/>
-    <preference for="Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor"/>
-    <preference for="Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Dhl\ShippingCore\Webservice\Pipeline\Track\TrackResponseProcessor"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Dhl\ShippingCore\Model\Pipeline\Rate\CollectRatesPipeline"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\CreateShipmentsPipeline"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface" type="Dhl\ShippingCore\Model\Pipeline\Rate\RateResponseProcessor"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\RequestTracksPipelineInterface" type="Dhl\ShippingCore\Model\Pipeline\Track\RequestTracksPipeline"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractorInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestExtractor"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestModifier"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifier\PackagingOptionReaderInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestModifier\PackagingOptionReader"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestValidatorInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Validator\CompositeValidator"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor"/>
+    <preference for="Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Dhl\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Dhl\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface" type="Dhl\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory"/>
     <preference for="Dhl\ShippingCore\Api\Rate\RateRequestEmulationInterface" type="Dhl\ShippingCore\Model\Rate\Emulation\RateRequestService"/>
     <preference for="Dhl\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface" type="Dhl\ShippingCore\Model\SplitAddress\RecipientStreetLoader"/>
     <preference for="Dhl\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface" type="Dhl\ShippingCore\Model\SplitAddress\RecipientStreetRepository"/>
-    <preference for="Dhl\ShippingCore\Api\RequestExtractorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestExtractor"/>
-    <preference for="Dhl\ShippingCore\Api\RequestModifierInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\RequestModifier"/>
-    <preference for="Dhl\ShippingCore\Api\RequestValidatorInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Validator\CompositeValidator"/>
     <preference for="Dhl\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface" type="Dhl\ShippingCore\Model\ShippingSettings\CheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\ShippingSettings\GuestCheckoutManagementInterface" type="Dhl\ShippingCore\Model\ShippingSettings\GuestCheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
@@ -26,18 +26,21 @@
     <preference for="Dhl\ShippingCore\Api\Util\PdfCombinatorInterface" type="Dhl\ShippingCore\Model\Util\PdfCombinator"/>
     <preference for="Dhl\ShippingCore\Api\Util\UnitConverterInterface" type="Dhl\ShippingCore\Model\Util\UnitConverter"/>
     <!-- # data interface preferences -->
-    <preference for="Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface" type="Dhl\ShippingCore\Model\OrderItemAttributes"/>
+    <preference for="Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface" type="Dhl\ShippingCore\Model\ItemAttribute\OrderItemAttributes"/>
     <preference for="Dhl\ShippingCore\Api\Data\RecipientStreetInterface" type="Dhl\ShippingCore\Model\SplitAddress\RecipientStreet"/>
     <preference for="Dhl\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterface" type="Dhl\ShippingCore\Model\OrderExport\Data\KeyValueObject"/>
     <preference for="Dhl\ShippingCore\Api\Data\OrderExport\ServiceDataInterface" type="Dhl\ShippingCore\Model\OrderExport\Data\ServiceData"/>
     <preference for="Dhl\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface" type="Dhl\ShippingCore\Model\OrderExport\Data\ShippingOption"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageAdditionalInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\PackageAdditional"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Package"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\PackageItem"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\RecipientInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Recipient"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface" type="Dhl\ShippingCore\Model\ShipmentRequest\Shipper"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShipmentResponse\LabelResponseInterface" type="Dhl\ShippingCore\Model\ShipmentResponse\LabelResponse"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentErrorResponseInterface" type="Dhl\ShippingCore\Model\ShipmentResponse\ErrorResponse"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageAdditionalInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\PackageAdditional"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\Package"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\PackageItem"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\RecipientInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\Recipient"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\Shipper"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentResponse\LabelResponse"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentResponse\ErrorResponse"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Pipeline\TrackRequest\TrackRequestInterface" type="Dhl\ShippingCore\Model\Pipeline\Track\TrackRequest\TrackRequest"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackErrorResponseInterface" type="Dhl\ShippingCore\Model\Pipeline\Track\TrackResponse\TrackErrorResponse"/>
+    <preference for="Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface" type="Dhl\ShippingCore\Model\Pipeline\Track\TrackResponse\TrackResponse"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input\InputValue"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input\ValueMap"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\CarrierData"/>
@@ -54,9 +57,6 @@
     <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\SelectionInterface" type="\Dhl\ShippingCore\Model\ShippingSettings\Data\Selection\Selection"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValidationRuleInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\ValidationRule"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemCombinationRuleInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\ItemCombinationRule"/>
-    <preference for="Dhl\ShippingCore\Api\Data\TrackRequest\TrackRequestInterface" type="Dhl\ShippingCore\Model\TrackRequest\TrackRequest"/>
-    <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackResponse"/>
-    <preference for="Dhl\ShippingCore\Api\Data\TrackResponse\TrackErrorResponseInterface" type="Dhl\ShippingCore\Model\TrackResponse\TrackErrorResponse"/>
     <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\Address"/>
     <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\Location"/>
     <preference for="Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\OpeningHours"/>
@@ -80,21 +80,21 @@
             </argument>
         </arguments>
     </virtualType>
-    <virtualType name="Dhl\ShippingCore\Webservice\Pipeline\BulkShipment\CreateLabelResponseProcessor\Virtual" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor">
+    <virtualType name="Dhl\ShippingCore\Model\Pipeline\BulkShipment\CreateLabelResponseProcessor\Virtual" type="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="addLabel" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\AddShippingLabel</item>
-                <item name="addTrack" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\AddTrack</item>
-                <item name="addComment" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\AddShipmentComment</item>
+                <item name="addLabel" xsi:type="object">Dhl\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\AddShippingLabel</item>
+                <item name="addTrack" xsi:type="object">Dhl\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\AddTrack</item>
+                <item name="addComment" xsi:type="object">Dhl\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\AddShipmentComment</item>
             </argument>
         </arguments>
     </virtualType>
-    <virtualType name="Dhl\ShippingCore\Webservice\Pipeline\BulkShipment\CancelLabelResponseProcessor\Virtual" type="Dhl\ShippingCore\Webservice\Pipeline\Track\TrackResponseProcessor">
+    <virtualType name="Dhl\ShippingCore\Model\Pipeline\BulkShipment\CancelLabelResponseProcessor\Virtual" type="Dhl\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="deleteTrack" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Track\ResponseProcessor\DeleteTrack</item>
-                <item name="unsetLabel" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Track\ResponseProcessor\UnsetShippingLabel</item>
-                <item name="updateLabelStatus" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Track\ResponseProcessor\UpdateLabelStatus</item>
+                <item name="deleteTrack" xsi:type="object">Dhl\ShippingCore\Model\Pipeline\Track\ResponseProcessor\DeleteTrack</item>
+                <item name="unsetLabel" xsi:type="object">Dhl\ShippingCore\Model\Pipeline\Track\ResponseProcessor\UnsetShippingLabel</item>
+                <item name="updateLabelStatus" xsi:type="object">Dhl\ShippingCore\Model\Pipeline\Track\ResponseProcessor\UpdateLabelStatus</item>
             </argument>
         </arguments>
     </virtualType>
@@ -179,17 +179,17 @@
             <argument name="connectionName" xsi:type="const">Dhl\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\ShipmentRequest\Validator\CompositeValidator">
+    <type name="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Validator\CompositeValidator">
         <arguments>
             <argument name="validators" xsi:type="array">
-                <item name="noReturnShipment" xsi:type="object">Dhl\ShippingCore\Model\ShipmentRequest\Validator\NoReturnValidator</item>
+                <item name="noReturnShipment" xsi:type="object">Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Validator\NoReturnValidator</item>
             </argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Webservice\Pipeline\Shipment\ShipmentResponseProcessor">
+    <type name="Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="updateLabelStatus" xsi:type="object">Dhl\ShippingCore\Webservice\Pipeline\Shipment\ResponseProcessor\UpdateLabelStatus</item>
+                <item name="updateLabelStatus" xsi:type="object">Dhl\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\UpdateLabelStatus</item>
             </argument>
         </arguments>
     </type>
