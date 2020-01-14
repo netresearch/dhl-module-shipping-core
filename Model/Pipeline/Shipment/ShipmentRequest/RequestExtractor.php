@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest;
 
-use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageAdditionalInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageInterface;
 use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageInterfaceFactory;
@@ -50,11 +49,6 @@ class RequestExtractor implements RequestExtractorInterface
      * @var RecipientStreetRepository
      */
     private $recipientStreetRepository;
-
-    /**
-     * @var ConfigInterface
-     */
-    private $config;
 
     /**
      * @var ShipperInterfaceFactory
@@ -117,7 +111,6 @@ class RequestExtractor implements RequestExtractorInterface
      * @param PackageInterfaceFactory $packageFactory
      * @param PackageAdditionalInterfaceFactory $packageAdditionalFactory
      * @param PackageItemInterfaceFactory $packageItemFactory
-     * @param ConfigInterface $config
      * @param ShipmentDate $shipmentDate
      */
     public function __construct(
@@ -129,7 +122,6 @@ class RequestExtractor implements RequestExtractorInterface
         PackageInterfaceFactory $packageFactory,
         PackageAdditionalInterfaceFactory $packageAdditionalFactory,
         PackageItemInterfaceFactory $packageItemFactory,
-        ConfigInterface $config,
         ShipmentDate $shipmentDate
     ) {
         $this->shipmentRequest = $shipmentRequest;
@@ -140,7 +132,6 @@ class RequestExtractor implements RequestExtractorInterface
         $this->packageFactory = $packageFactory;
         $this->packageAdditionalFactory = $packageAdditionalFactory;
         $this->packageItemFactory = $packageItemFactory;
-        $this->config = $config;
         $this->shipmentDate = $shipmentDate;
     }
 
@@ -404,10 +395,9 @@ class RequestExtractor implements RequestExtractorInterface
      */
     public function isCashOnDelivery(): bool
     {
-        $storeId = $this->getStoreId();
-        $order = $this->getOrder();
-
-        return $this->config->isCodPaymentMethod($order->getPayment()->getMethod(), $storeId);
+        $packages = $this->shipmentRequest->getData('packages');
+        $packageId = $this->shipmentRequest->getData('package_id');
+        return (bool) ($packages[$packageId]['params']['services']['cashOnDelivery']['enabled'] ?? false);
     }
 
     /**

@@ -18,7 +18,8 @@ interface ValidationRuleInterface
     /**
      * Name of the validation rule.
      *
-     * @file /view/js/mixin/validation.js for custom validation rules.
+     * @file dhl/module-ui/view/base/web/js/mixin/validator.js for custom validation rules.
+     * @file magento/module-ui/view/base/web/js/lib/validation/rules.js for core validation rules
      * @return string
      */
     public function getName(): string;

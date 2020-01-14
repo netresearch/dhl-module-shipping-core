@@ -21,9 +21,9 @@ use Magento\Sales\Model\Order;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class PersistShippingOptionSelectionObserver
+ * Class PersistShippingOptionSelection
  */
-class PersistShippingOptionSelectionObserver implements ObserverInterface
+class PersistShippingOptionSelection implements ObserverInterface
 {
     /**
      * @var SearchCriteriaBuilderFactory
@@ -56,7 +56,7 @@ class PersistShippingOptionSelectionObserver implements ObserverInterface
     private $logger;
 
     /**
-     * PersistShippingOptionSelectionObserver constructor.
+     * PersistShippingOptionSelection constructor.
      *
      * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
      * @param FilterBuilder $filterBuilder
@@ -122,10 +122,12 @@ class PersistShippingOptionSelectionObserver implements ObserverInterface
                 $this->orderShippingOptionSelectionRepository->save($model);
             } catch (CouldNotSaveException $exception) {
                 // observers do not throw exceptions, no exception must be thrown during order placement.
-                $this->logger->error(
-                    'An error occurred while copying selected services to the order',
-                    ['exception' => $exception]
+                $message = sprintf(
+                    'Could not save %s service for order %s.',
+                    $selection->getShippingOptionCode(),
+                    $order->getEntityId()
                 );
+                $this->logger->error($message, ['exception' => $exception]);
             }
         }
     }

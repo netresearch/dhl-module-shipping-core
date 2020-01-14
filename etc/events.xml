@@ -15,7 +15,8 @@
         <observer name="dhlgw_split_shipping_address" instance="Dhl\ShippingCore\Observer\SplitAddress"/>
     </event>
     <event name="sales_model_service_quote_submit_success">
-        <observer name="dhlgw_persist_service_selection" instance="Dhl\ShippingCore\Observer\PersistShippingOptionSelectionObserver" />
+        <observer name="dhlgw_persist_service_selection" instance="Dhl\ShippingCore\Observer\PersistShippingOptionSelection" />
+        <observer name="dhlgw_persist_cod_selection" instance="Dhl\ShippingCore\Observer\PersistCodShippingOptionSelection" />
     </event>
     <!-- Service Charges -->
     <event name="sales_model_service_quote_submit_before">
