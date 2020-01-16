@@ -37,7 +37,7 @@
     "magento/module-shipping": "^100.2.0",
     "magento/module-store": "^100.2.0|^101.0.0",
     "magento/zendframework1": "^1.13.0",
-    "netresearch/config-fields-m2": "^1.0.0",
+    "netresearch/config-fields-m2": "^1.1.0",
     "php-http/curl-client": "^1.7.0",
     "azuyalabs/yasumi": "^1.8.0"
   },
