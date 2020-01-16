@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\DeliveryLocation;
 
 use Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface;
 use Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface;
@@ -13,8 +13,9 @@ use Magento\Framework\Exception\LocalizedException;
 /**
  * Interface LocationProviderInterface
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @api
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 interface LocationProviderInterface
 {

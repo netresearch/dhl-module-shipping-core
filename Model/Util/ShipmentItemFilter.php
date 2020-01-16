@@ -15,7 +15,7 @@ use Magento\Sales\Model\Order\Shipment\Item;
  * Extract shippable items from a list of shipment items.
  *
  * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://netresearch.de
+ * @link   https://www.netresearch.de/
  */
 class ShipmentItemFilter
 {

@@ -10,8 +10,8 @@ namespace Dhl\ShippingCore\Api\Data\DeliveryLocation;
  * Interface AddressInterface
  *
  * @api
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 interface AddressInterface
 {

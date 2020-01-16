@@ -4,17 +4,18 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api;
+namespace Dhl\ShippingCore\Api\DeliveryLocation;
 
 use Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface;
 
 /**
- * Interface LocationFinderManagementInterface
+ * Interface SearchInterface
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @api
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
-interface DeliveryLocationProviderInterface
+interface SearchInterface
 {
     /**
      * @param string $carrierCode

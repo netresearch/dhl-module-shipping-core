@@ -8,49 +8,30 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Metadata;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\MetadataInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\MetadataProcessorInterface;
-use Magento\Framework\App\Area;
-use Magento\Framework\View\Asset\Repository;
-use Magento\Framework\View\Design\Theme\ThemeProviderInterface;
-use Magento\Framework\View\DesignInterface;
+use Dhl\ShippingCore\Api\Util\AssetUrlInterface;
 
 /**
  * Class ImageUrlProcessor
  *
  * @author Max Melzer <max.melzer@netresearch.de>
  * @author Rico Sonntag <rico.sonntag@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class ImageUrlProcessor implements MetadataProcessorInterface
 {
     /**
-     * @var DesignInterface
+     * @var AssetUrlInterface
      */
-    private $design;
-
-    /**
-     * @var ThemeProviderInterface
-     */
-    private $themeProvider;
-
-    /**
-     * @var Repository
-     */
-    private $assetRepo;
+    private $assetUrl;
 
     /**
      * ImageUrlProcessor constructor.
      *
-     * @param DesignInterface $design
-     * @param ThemeProviderInterface $themeProvider
-     * @param Repository $assetRepo
+     * @param AssetUrlInterface $assetUrl
      */
-    public function __construct(
-        DesignInterface $design,
-        ThemeProviderInterface $themeProvider,
-        Repository $assetRepo
-    ) {
-        $this->design = $design;
-        $this->themeProvider = $themeProvider;
-        $this->assetRepo = $assetRepo;
+    public function __construct(AssetUrlInterface $assetUrl)
+    {
+        $this->assetUrl = $assetUrl;
     }
 
     /**
@@ -71,24 +52,11 @@ class ImageUrlProcessor implements MetadataProcessorInterface
     public function process(MetadataInterface $metadata, int $storeId = null): MetadataInterface
     {
         $imageId = $metadata->getImageUrl();
-
         if (!$imageId) {
             return $metadata;
         }
 
-        $params = [];
-
-        if (!in_array($this->design->getArea(), [Area::AREA_FRONTEND, Area::AREA_ADMINHTML], true)) {
-            $themeId = $this->design->getConfigurationDesignTheme(Area::AREA_FRONTEND);
-            $params = [
-                'area' => Area::AREA_FRONTEND,
-                'themeModel' => $this->themeProvider->getThemeById($themeId),
-            ];
-        }
-
-        $imageUrl = $this->assetRepo->getUrlWithParams($imageId, $params);
-        $metadata->setImageUrl($imageUrl);
-
+        $metadata->setImageUrl($this->assetUrl->get($imageId));
         return $metadata;
     }
 }

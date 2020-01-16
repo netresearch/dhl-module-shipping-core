@@ -9,8 +9,8 @@ namespace Dhl\ShippingCore\Api\Data\DeliveryLocation;
 /**
  * Interface TimeFrameInterface
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 interface TimeFrameInterface
 {

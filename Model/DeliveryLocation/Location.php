@@ -13,8 +13,8 @@ use Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface;
 /**
  * Class Location
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class Location implements LocationInterface
 {

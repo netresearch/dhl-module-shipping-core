@@ -8,17 +8,17 @@ namespace Dhl\ShippingCore\Model\DeliveryLocation;
 
 use Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface;
 use Dhl\ShippingCore\Api\Data\DeliveryLocation\AddressInterface;
-use Dhl\ShippingCore\Api\LocationProviderInterface;
-use Dhl\ShippingCore\Api\DeliveryLocationProviderInterface;
+use Dhl\ShippingCore\Api\DeliveryLocation\LocationProviderInterface;
+use Dhl\ShippingCore\Api\DeliveryLocation\SearchInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Class DeliveryLocationProvider
+ * Class Search
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
-class DeliveryLocationProvider implements DeliveryLocationProviderInterface
+class Search implements SearchInterface
 {
     /**
      * @var LocationProviderInterface[]
@@ -26,7 +26,7 @@ class DeliveryLocationProvider implements DeliveryLocationProviderInterface
     private $locationProviders;
 
     /**
-     * DeliveryLocationProvider constructor.
+     * Search constructor.
      *
      * @param LocationProviderInterface[] $locationProviders
      */

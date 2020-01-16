@@ -13,7 +13,7 @@ use Magento\Sales\Model\Order\Creditmemo\Total\AbstractTotal;
  * Creditmemo Total.
  *
  * @author   Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link     https://www.netresearch.de/<
+ * @link     https://www.netresearch.de/
  */
 class CreditmemoTotal extends AbstractTotal
 {

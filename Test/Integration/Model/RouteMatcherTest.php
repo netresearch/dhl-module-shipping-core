@@ -16,8 +16,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class RouteMatcherTest
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class RouteMatcherTest extends TestCase
 {

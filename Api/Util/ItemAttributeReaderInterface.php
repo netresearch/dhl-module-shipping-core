@@ -12,8 +12,8 @@ use Magento\Sales\Api\Data\OrderItemInterface;
  * Interface ItemAttributeReaderInterface
  *
  * @api
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 interface ItemAttributeReaderInterface
 {

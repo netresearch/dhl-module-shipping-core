@@ -3,7 +3,7 @@
     <!-- # service interface preferences -->
     <preference for="Dhl\ShippingCore\Api\AdditionalFee\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
     <preference for="Dhl\ShippingCore\Api\ConfigInterface" type="Dhl\ShippingCore\Model\Config\Config"/>
-    <preference for="Dhl\ShippingCore\Api\DeliveryLocationProviderInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\DeliveryLocationProvider"/>
+    <preference for="Dhl\ShippingCore\Api\DeliveryLocation\SearchInterface" type="Dhl\ShippingCore\Model\DeliveryLocation\Search"/>
     <preference for="Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Dhl\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Dhl\ShippingCore\Model\Pipeline\Rate\CollectRatesPipeline"/>
     <preference for="Dhl\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface" type="Dhl\ShippingCore\Model\Pipeline\Shipment\CreateShipmentsPipeline"/>
@@ -22,6 +22,7 @@
     <preference for="Dhl\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface" type="Dhl\ShippingCore\Model\ShippingSettings\CheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\ShippingSettings\GuestCheckoutManagementInterface" type="Dhl\ShippingCore\Model\ShippingSettings\GuestCheckoutManagement"/>
     <preference for="Dhl\ShippingCore\Api\TaxConfigInterface" type="Dhl\ShippingCore\Model\Config\TaxConfig"/>
+    <preference for="Dhl\ShippingCore\Api\Util\AssetUrlInterface" type="Dhl\ShippingCore\Model\Util\AssetUrl"/>
     <preference for="Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface" type="Dhl\ShippingCore\Model\ItemAttribute\ItemAttributeReader"/>
     <preference for="Dhl\ShippingCore\Api\Util\PdfCombinatorInterface" type="Dhl\ShippingCore\Model\Util\PdfCombinator"/>
     <preference for="Dhl\ShippingCore\Api\Util\UnitConverterInterface" type="Dhl\ShippingCore\Model\Util\UnitConverter"/>
