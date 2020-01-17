@@ -9,7 +9,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
 use Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ArrayProcessor\PackagingArrayCompositeProcessor;
 use Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\PackagingDataCompositeProcessor;
-use Dhl\ShippingCore\Model\ShippingSettings\ShippingDataHydrator;
 use Magento\Framework\Config\ReaderInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
 

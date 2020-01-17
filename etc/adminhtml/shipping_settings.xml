@@ -28,9 +28,9 @@
                             <rule name="validate-greater-than-zero"/>
                         </validationRules>
                         <itemCombinationRule>
-                            <sourceItemInputCode>details.weight</sourceItemInputCode>
+                            <sourceItemInputCode>Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_OPTION_DETAILS.weight</sourceItemInputCode>
                             <additionalSourceInputCodes>
-                                <input>packageDetails.packagingWeight</input>
+                                <input>Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_OPTION_PACKAGE_DETAILS.packagingWeight</input>
                             </additionalSourceInputCodes>
                             <action>add</action>
                         </itemCombinationRule>
@@ -87,7 +87,7 @@
                             <rule name="validate-number"/>
                         </validationRules>
                         <itemCombinationRule>
-                            <sourceItemInputCode>itemCustoms.customsValue</sourceItemInputCode>
+                            <sourceItemInputCode>\Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_OPTION_ITEM_CUSTOMS.customsValue</sourceItemInputCode>
                             <action>add</action>
                         </itemCombinationRule>
                     </input>
@@ -96,19 +96,19 @@
                         <label>Package Description</label>
                         <inputType>textarea</inputType>
                         <itemCombinationRule>
-                            <sourceItemInputCode>itemCustoms.exportDescription</sourceItemInputCode>
+                            <sourceItemInputCode>\Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_OPTION_ITEM_CUSTOMS.exportDescription</sourceItemInputCode>
                             <action>concat</action>
                         </itemCombinationRule>
                     </input>
-                    <input code="\Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_TERMS_OF_TRADE" defaultConfigValue="dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/terms_of_trade">
+                    <input code="\Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_TERMS_OF_TRADE" defaultConfigValue="\Dhl\ShippingCore\Api\ConfigInterface::CONFIG_PATH_TERMS_OF_TRADE">
                         <label>Terms of Trade</label>
                         <inputType>select</inputType>
                     </input>
-                    <input code="\Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_CONTENT_TYPE" defaultConfigValue="dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_type">
+                    <input code="\Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_CONTENT_TYPE" defaultConfigValue="\Dhl\ShippingCore\Api\ConfigInterface::CONFIG_PATH_CONTENT_TYPE">
                         <label>Export Content Type</label>
                         <inputType>select</inputType>
                     </input>
-                    <input code="\Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_EXPLANATION" defaultConfigValue="dhlshippingsolutions/dhlglobalwebservices/shipment_defaults/export_content_explanation">
+                    <input code="\Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_EXPLANATION" defaultConfigValue="\Dhl\ShippingCore\Api\ConfigInterface::CONFIG_PATH_CONTENT_EXPLANATION">
                         <label>Export Content Explanation</label>
                         <inputType>text</inputType>
                         <validationRules>
@@ -218,12 +218,12 @@
         <compatibilityData>
             <rule id="contentTypeDependency">
                 <masters>
-                    <master>packageCustoms.contentType</master>
+                    <master>Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_OPTION_PACKAGE_CUSTOMS.contentType</master>
                 </masters>
                 <triggerValue>OTHER</triggerValue>
                 <action>show</action>
                 <subjects>
-                    <subject>packageCustoms.explanation</subject>
+                    <subject>Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_OPTION_PACKAGE_CUSTOMS.explanation</subject>
                 </subjects>
             </rule>
         </compatibilityData>

@@ -22,22 +22,29 @@ class ConstantResolver
      * Turns the reference to a PHP class constant into the value of that constant using Reflection
      *
      * @param string $constantReference
-     * @return string|false
+     * @return string
+     * @throws \RuntimeException
      */
-    public function resolve(string $constantReference)
+    public function resolve(string $constantReference): string
     {
-        if (preg_match(self::PHP_CONSTANT_PATTERN, $constantReference) === 1) {
-            list($className, $constName) = explode('::', $constantReference);
-            try {
-                $reflection = new \ReflectionClass($className);
-            } catch (\ReflectionException $exception) {
-                return false;
+        $references = explode('.', $constantReference);
+        $resolvedReferences = array_map(function (string $reference) {
+            if (preg_match(self::PHP_CONSTANT_PATTERN, $reference) === 1) {
+                list($className, $constName) = explode('::', $reference);
+                try {
+                    $reflection = new \ReflectionClass($className);
+                } catch (\ReflectionException $exception) {
+                    throw new \RuntimeException("Invalid constant '$reference' referenced in shipping_settings.xml");
+                }
+                if (isset($reflection->getConstants()[$constName])) {
+                    return $reflection->getConstants()[$constName];
+                }
+                throw new \RuntimeException("Invalid constant '$reference' referenced in shipping_settings.xml");
             }
-            if (isset($reflection->getConstants()[$constName])) {
-                return $reflection->getConstants()[$constName];
-            }
-        }
 
-        return false;
+            return $reference;
+        }, $references);
+
+        return implode('.', $resolvedReferences);
     }
 }

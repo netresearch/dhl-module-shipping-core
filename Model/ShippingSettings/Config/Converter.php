@@ -62,6 +62,7 @@ class Converter implements ConverterInterface
      *
      * @param \DOMDocument|null $source
      * @return mixed[]
+     * @throws \RuntimeException
      */
     public function convert($source): array
     {
@@ -78,6 +79,7 @@ class Converter implements ConverterInterface
      *
      * @param \SimpleXMLElement $xmlElement
      * @return string[]|string
+     * @throws \RuntimeException
      */
     private function toArray(\SimpleXMLElement $xmlElement)
     {
@@ -111,6 +113,7 @@ class Converter implements ConverterInterface
      *
      * @param \SimpleXMLElement $xmlElement
      * @return bool|int|string
+     * @throws \RuntimeException
      */
     private function toScalar(\SimpleXMLElement $xmlElement)
     {
@@ -122,7 +125,7 @@ class Converter implements ConverterInterface
             $value = (int) (string) $xmlElement;
         } else {
             $value = trim((string)$xmlElement);
-            $value = $this->constantResolver->resolve($value) ?: $value;
+            $value = $this->constantResolver->resolve($value);
         }
 
         return $value;
@@ -143,6 +146,7 @@ class Converter implements ConverterInterface
      *
      * @param \SimpleXMLElement $childElement
      * @return array
+     * @throws \RuntimeException
      */
     private function handleAttributes(\SimpleXMLElement $childElement): array
     {
