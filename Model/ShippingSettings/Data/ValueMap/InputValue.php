@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\ShippingOption\Input;
+namespace Dhl\ShippingCore\Model\ShippingSettings\Data\ValueMap;
 
-use Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface;
 
 /**
  * Class InputValue

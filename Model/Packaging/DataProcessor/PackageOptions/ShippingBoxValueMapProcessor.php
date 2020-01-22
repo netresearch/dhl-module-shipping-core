@@ -7,9 +7,9 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterfaceFactory;
-use Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface;
-use Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface;
 use Dhl\ShippingCore\Model\ShippingBox\Package;

@@ -42,8 +42,8 @@
     <preference for="Dhl\ShippingCore\Api\Data\Pipeline\TrackRequest\TrackRequestInterface" type="Dhl\ShippingCore\Model\Pipeline\Track\TrackRequest\TrackRequest"/>
     <preference for="Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackErrorResponseInterface" type="Dhl\ShippingCore\Model\Pipeline\Track\TrackResponse\TrackErrorResponse"/>
     <preference for="Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface" type="Dhl\ShippingCore\Model\Pipeline\Track\TrackResponse\TrackResponse"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input\InputValue"/>
-    <preference for="Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface" type="Dhl\ShippingCore\Model\ShippingOption\Input\ValueMap"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\ValueMap\InputValue"/>
+    <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\ValueMap"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\CarrierData"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\FootnoteInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\Footnote"/>
     <preference for="Dhl\ShippingCore\Api\Data\ShippingSettings\MetadataInterface" type="Dhl\ShippingCore\Model\ShippingSettings\Data\Metadata"/>

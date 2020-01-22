@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\ShippingOption\Input;
+namespace Dhl\ShippingCore\Model\ShippingSettings\Data;
 
-use Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface;
+use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface;
 
 /**
  * Class ValueMap
@@ -26,7 +26,7 @@ class ValueMap implements ValueMapInterface
     private $sourceValue;
 
     /**
-     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface[]
      */
     private $inputValues = [];
 
@@ -47,7 +47,7 @@ class ValueMap implements ValueMapInterface
     }
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface[]
      */
     public function getInputValues(): array
     {
@@ -55,7 +55,7 @@ class ValueMap implements ValueMapInterface
     }
 
     /**
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface[] $inputValues
+     * @param \Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface[] $inputValues
      */
     public function setInputValues(array $inputValues)
     {

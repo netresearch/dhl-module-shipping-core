@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api\Data\ShippingOption;
+namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption;
 
 /**
  * Interface ValueMapInterface
@@ -29,7 +29,7 @@ interface ValueMapInterface
      * Get the mappings of input codes to values.
      * This is applied when the input source value matches self::getSourceValue()
      *
-     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface[]
      */
     public function getInputValues(): array;
 
@@ -41,7 +41,7 @@ interface ValueMapInterface
     public function setSourceValue(string $sourceValue);
 
     /**
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap\InputValueInterface[] $inputValues
+     * @param \Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface[] $inputValues
      *
      * @return void
      */

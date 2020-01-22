@@ -82,7 +82,7 @@ class Input implements InputInterface
     private $itemCombinationRule;
 
     /**
-     * @var \Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface[]
+     * @var \Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface[]
      */
     private $valueMaps = [];
 
@@ -191,7 +191,7 @@ class Input implements InputInterface
     }
 
     /**
-     * @return \Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface[]
+     * @return \Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface[]
      */
     public function getValueMaps(): array
     {
@@ -303,7 +303,7 @@ class Input implements InputInterface
     }
 
     /**
-     * @param \Dhl\ShippingCore\Api\Data\ShippingOption\ValueMapInterface[] $valueMaps
+     * @param \Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface[] $valueMaps
      */
     public function setValueMaps(array $valueMaps)
     {

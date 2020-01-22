@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Api\Data\ShippingOption\ValueMap;
+namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap;
 
 /**
  * Interface InputValueInterface
