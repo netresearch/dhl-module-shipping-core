@@ -12,12 +12,12 @@ use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
 use Magento\Catalog\Model\Product\Type;
 
 /**
- * Regular simple product with qty=1.
+ * Simple product with excessive weight.
  *
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */
-class SimpleProduct implements ProductInterface
+class SimpleProduct3 implements ProductInterface
 {
     public function getType(): string
     {
@@ -26,35 +26,35 @@ class SimpleProduct implements ProductInterface
 
     public function getSku(): string
     {
-        return 'DHL-01';
+        return 'DHL-03';
     }
 
     public function getPrice(): float
     {
-        return 24.99;
+        return 103.99;
     }
 
     public function getWeight(): float
     {
-        return 2.4;
+        return 33.303;
     }
 
     public function getCustomAttributes(): array
     {
         return [
             DGCategory::CODE => null,
-            ExportDescription::CODE => 'Export description of a simple product.',
-            TariffNumber::CODE => '12345678',
+            ExportDescription::CODE => 'Export description of a third simple product.',
+            TariffNumber::CODE => '876543',
         ];
     }
 
     public function getCheckoutQty(): int
     {
-        return 2;
+        return 3;
     }
 
     public function getDescription(): string
     {
-        return 'Test Product Description';
+        return 'Test Product 3 Description';
     }
 }

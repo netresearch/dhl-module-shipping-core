@@ -6,16 +6,16 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Fixture;
 
-use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressInterface;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Type;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use Magento\Sales\Api\ShipOrderInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use TddWizard\Fixtures\Catalog\ProductBuilder;
 use TddWizard\Fixtures\Catalog\ProductFixture;
@@ -37,39 +37,41 @@ class OrderFixture
         'products' => [],
         'customers' => [],
         'orders' => [],
-        'selections' => []
+        'selections' => [],
     ];
 
     /**
+     * Creates a single order
+     *
      * @param AddressInterface $recipientData
      * @param ProductInterface[] $productData
-     * @param string $carrierCode
+     * @param string $shippingMethod
      * @return OrderInterface
      * @throws \Exception
      */
     public static function createOrder(
         AddressInterface $recipientData,
         array $productData,
-        string $carrierCode
+        string $shippingMethod
     ): OrderInterface {
 
         // set up logged-in customer
-        $shippingAddressBuilder = AddressBuilder::anAddress()
-                                                ->withFirstname('François')
-                                                ->withLastname('Češković')
-                                                ->withCompany(null)
-                                                ->withCountryId($recipientData->getCountryId())
-                                                ->withRegionId($recipientData->getRegionId())
-                                                ->withCity($recipientData->getCity())
-                                                ->withPostcode($recipientData->getPostcode())
-                                                ->withStreet($recipientData->getStreet());
+        $addressBuilder = AddressBuilder::anAddress()
+                                        ->withFirstname('François')
+                                        ->withLastname('Češković')
+                                        ->withCompany(null)
+                                        ->withCountryId($recipientData->getCountryId())
+                                        ->withRegionId($recipientData->getRegionId())
+                                        ->withCity($recipientData->getCity())
+                                        ->withPostcode($recipientData->getPostcode())
+                                        ->withStreet($recipientData->getStreet());
 
         $customer = CustomerBuilder::aCustomer()
                                    ->withFirstname('François')
                                    ->withLastname('Češković')
                                    ->withAddresses(
-                                       $shippingAddressBuilder->asDefaultBilling(),
-                                       $shippingAddressBuilder->asDefaultShipping()
+                                       $addressBuilder->asDefaultBilling(),
+                                       $addressBuilder->asDefaultShipping()
                                    )
                                    ->build();
 
@@ -84,7 +86,7 @@ class OrderFixture
         $checkout = CustomerCheckout::fromCart($cart);
 
         $order = $checkout
-            ->withShippingMethodCode($carrierCode)
+            ->withShippingMethodCode($shippingMethod)
             ->placeOrder();
 
         self::$createdEntities['orders'][] = $order;
@@ -95,33 +97,30 @@ class OrderFixture
     }
 
     /**
+     * Create an order with shipment but no label. Set label status "failed".
+     *
      * @param AddressInterface $recipientData
      * @param ProductInterface[] $productData
      * @param string $carrierCode
      * @return OrderInterface
      * @throws \Exception
+     * @deprecated Use ShipmentFixture::createFailedShipment instead
      */
     public static function createProcessedOrder(
         AddressInterface $recipientData,
         array $productData,
         string $carrierCode
     ) {
-        $order = self::createOrder($recipientData, $productData, $carrierCode);
-        /** @var ShipOrderInterface $shipOrder */
-        $shipOrder = Bootstrap::getObjectManager()->get(ShipOrderInterface::class);
-        $shipOrder->execute($order->getEntityId(), [], false);
-        /** @var LabelStatusManagementInterface $labelStatusMgmnt */
-        $labelStatusMgmnt = Bootstrap::getObjectManager()->get(LabelStatusManagementInterface::class);
-        $labelStatusMgmnt->setLabelStatusFailed($order);
+        $shipment = ShipmentFixture::createFailedShipment($recipientData, $productData, $carrierCode);
 
-        return $order;
+        return $shipment->getOrder();
     }
 
     /**
      * Rollback for created order, customer and product entities
      *
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
      * @throws \Magento\Framework\Exception\StateException
      */
     public static function rollbackFixtureEntities()

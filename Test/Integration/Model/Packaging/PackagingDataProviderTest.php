@@ -13,40 +13,54 @@ use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct;
 use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;
 use Dhl\ShippingCore\Test\Integration\Fixture\FakeReader;
+use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
 use Dhl\ShippingCore\Test\Integration\Fixture\ShipmentFixture;
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\Order;
-use Magento\TestFramework\ObjectManager;
+use Magento\Sales\Model\ResourceModel\Order\Shipment\Collection;
+use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 
 class PackagingDataProviderTest extends TestCase
 {
+    /**
+     * @return ShipmentInterface[][]
+     * @throws \Exception
+     */
     public function dataProvider(): array
     {
+        $shipment = ShipmentFixture::createFailedShipment(
+            new AddressDe(),
+            [new SimpleProduct(), new SimpleProduct2()],
+            'flatrate_flatrate'
+        );
+        $order = $shipment->getOrder();
+
+        // force items reload, they are not properly indexed after "checkout"
+        $order->setItems(null);
+
+        /** @var Collection $shipmentCollection */
+        $shipmentCollection = Bootstrap::getObjectManager()->create(Collection::class);
+        $shipmentCollection->setOrderFilter($order);
+
         return [
-            'shipment 1' => ['shipment' => ShipmentFixture::createShipment(
-                new AddressDe(),
-                [new SimpleProduct(), new SimpleProduct2()],
-                'flatrate_flatrate'
-            )]
+            $shipmentCollection->getItems()
         ];
     }
 
     /**
      * @param Order\Shipment $shipment
      * @dataProvider dataProvider
-     * @throws LocalizedException
      */
     public function testGetData(Order\Shipment $shipment)
     {
-        $objectManager = ObjectManager::getInstance();
         /** @var PackagingDataProvider $subject */
-        $subject = $objectManager->create(PackagingDataProvider::class, ['reader' => new FakeReader()]);
+        $subject = Bootstrap::getObjectManager()->create(PackagingDataProvider::class, ['reader' => new FakeReader()]);
         $packagingData = $subject->getData($shipment);
         self::assertInstanceOf(ShippingDataInterface::class, $packagingData);
 
         /** @var ShippingDataHydrator $hydrator */
-        $hydrator = $objectManager->create(ShippingDataHydrator::class);
+        $hydrator = Bootstrap::getObjectManager()->create(ShippingDataHydrator::class);
 
         $data = $hydrator->toArray($packagingData);
 

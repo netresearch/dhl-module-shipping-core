@@ -12,7 +12,7 @@ use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
 use Magento\Catalog\Model\Product\Type;
 
 /**
- * Class SimpleProduct2
+ * Regular simple product with qty=2.
  *
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
