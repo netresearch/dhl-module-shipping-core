@@ -6,50 +6,6 @@
 -->
 <actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
-    <!-- Open the category page -->
-    <actionGroup name="NavigateToStorefrontCategoryPageActionGroup">
-        <amOnPage url="{{StorefrontCategoryPage.url($$SimpleCategory.name$$)}}" stepKey="navigateToStorefrontCategoryPage"/>
-        <waitForPageLoad stepKey="waitForStorefrontCategoryPageLoad"/>
-    </actionGroup>
-
-    <!-- Add a single product to the cart -->
-    <actionGroup name="AddProductToCartActionGroup">
-        <arguments>
-            <argument name="product"/>
-        </arguments>
-
-        <moveMouseOver selector="{{StorefrontCategoryMainSection.ProductItemInfo}}" stepKey="moveMouseOverProduct"/>
-        <click selector="{{StorefrontCategoryMainSection.AddToCartBtn}}" stepKey="addProductToCart"/>
-        <waitForLoadingMaskToDisappear stepKey="waitForLoadingMaskToDisappear1"/>
-        <waitForElementVisible selector="{{StorefrontCategoryMainSection.SuccessMsg}}" time="30" stepKey="waitForProductAdded"/>
-        <see selector="{{StorefrontCategoryMainSection.SuccessMsg}}" userInput="You added {{product.name}} to your shopping cart." stepKey="seeAddedToCartMessage"/>
-        <waitForLoadingMaskToDisappear stepKey="waitForLoadingMaskToDisappear"/>
-        <see selector="{{StorefrontMinicartSection.quantity}}" userInput="1" stepKey="seeCartQuantity"/>
-    </actionGroup>
-
-    <!-- Add a product with quantity to the cart -->
-    <actionGroup name="AddProductWithQuantityToCartActionGroup">
-        <arguments>
-            <argument name="product"/>
-            <argument name="quantity" type="string" defaultValue="1"/>
-        </arguments>
-
-        <click selector="{{StorefrontCategoryMainSection.specifiedProductItemInfo(product.product[name])}}" stepKey="openProductPage"/>
-        <waitForAjaxLoad stepKey="waitForImageLoader"/>
-        <fillField selector="{{StorefrontProductPageSection.qtyInput}}" userInput="{{quantity}}" stepKey="fillCorrectQuantity"/>
-        <click selector="{{StorefrontProductPageSection.addToCartBtn}}" stepKey="addProductToCart"/>
-        <waitForElementVisible selector="{{StorefrontProductPageSection.successMsg}}" time="30" stepKey="waitForProductAdded"/>
-        <see selector="{{StorefrontCategoryMainSection.SuccessMsg}}" userInput="You added {{product.name}} to your shopping cart." stepKey="seeAddedToCartMessage"/>
-    </actionGroup>
-
-    <!-- Go to checkout from mini cart -->
-    <actionGroup name="NavigateToCheckoutActionGroup">
-        <waitForElementNotVisible selector="{{StorefrontCheckoutSection.miniCartEmptyCartQuantityCounter}}" stepKey="waitUpdateQuantity"/>
-        <click selector="{{StorefrontMinicartSection.showCart}}" stepKey="clickCart"/>
-        <waitForLoadingMaskToDisappear stepKey="waitForLoadingMask"/>
-        <click selector="{{StorefrontCheckoutSection.miniCartCheckoutButton}}" stepKey="goToCheckout"/>
-    </actionGroup>
-
     <!-- Go to checkout and validate shipping price and method -->
     <actionGroup name="GuestCheckoutValidateMethodAndPriceActionGroup"
                  extends="GuestCheckoutFillingShippingSectionWithoutRegionActionGroup">
