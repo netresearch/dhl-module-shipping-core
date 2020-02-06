@@ -36,60 +36,41 @@ class UnsetShippingLabel implements TrackResponseProcessorInterface
     }
 
     /**
-     * Collect shipments where some tracks could not be cancelled.
+     * Collect shipments which had at least one track successfully cancelled.
      *
-     * @param TrackErrorResponseInterface[] $errorResponses Shipment cancellation errors
-     * @return ShipmentInterface[]
-     */
-    private function getFailedShipments(array $errorResponses): array
-    {
-        $failedShipments = [];
-
-        foreach ($errorResponses as $errorResponse) {
-            $shipment = $errorResponse->getSalesShipment();
-            if ($shipment !== null) {
-                $failedShipments[$shipment->getEntityId()] = $shipment;
-            }
-        }
-
-        return $failedShipments;
-    }
-
-    /**
-     * Collect shipments where some tracks were cancelled.
-     *
-     * @param TrackResponseInterface[] $trackResponses Shipment cancellation responses
+     * @param TrackResponseInterface[] $trackResponses
      * @return ShipmentInterface[]
      */
     private function getCancelledShipments(array $trackResponses): array
     {
-        $cancelledShipments = [];
+        $shipments = [];
 
         foreach ($trackResponses as $trackResponse) {
             $shipment = $trackResponse->getSalesShipment();
             if ($shipment !== null) {
-                $cancelledShipments[$shipment->getEntityId()] = $shipment;
+                $shipments[$shipment->getEntityId()] = $shipment;
             }
         }
 
-        return $cancelledShipments;
+        return $shipments;
     }
 
     /**
-     * Delete label properties for successfully cancelled shipments.
+     * Unset labels.
      *
-     * @param TrackResponseInterface[] $trackResponses Shipment cancellation responses
-     * @param TrackErrorResponseInterface[] $errorResponses Shipment cancellation errors
+     * Do not only remove labels of shipments which had all tracks deleted
+     * but also of shipments which had the tracks only partially cancelled.
+     * This is necessary because packages cannot be recreated individually.
+     *
+     * @param TrackResponseInterface[] $trackResponses
+     * @param TrackErrorResponseInterface[] $errorResponses
      */
     public function processResponse(array $trackResponses, array $errorResponses)
     {
         $cancelledShipments = $this->getCancelledShipments($trackResponses);
-        $failedShipments = $this->getFailedShipments($errorResponses);
 
-        // collect shipments which had no errors, unset labels
-        $shipments = array_diff_key($cancelledShipments, $failedShipments);
         array_walk(
-            $shipments,
+            $cancelledShipments,
             function (ShipmentInterface $shipment) {
                 /** @var \Magento\Sales\Model\Order\Shipment $shipment */
                 $shipment->setShippingLabel(null);
