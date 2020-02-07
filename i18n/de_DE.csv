@@ -34,7 +34,7 @@ Container,Container
 "DHL Dangerous Goods Category",DHL-Gefahrgutklasse
 "DHL Item Description",DHL-Artikelbeschreibung
 "DHL Preferred Delivery","DHL Wunschpaket"
-"DHL Shipping Solutions","Versenden mit DHL"
+"DHL Shipping","Versenden mit DHL"
 "DHL Tariff Number (HS Code)","DHL-Zolltarifnummer (HS Code)"
 "Decimal Value",Dezimalwert
 "Deleting a single tracking number is not supported. Please use the ""Cancel Shipment"" button on the shipment details page to cancel labels and tracks.","Das Löschen einer einzelnen Sendungsnummer wird nicht unterstützt. Bitte verwenden Sie den Button ""Versandaufträge stornieren"" auf der Sendungsansichtseite, um Versandaufträge zu stornieren und Sendungsnummern zu löschen."
@@ -125,7 +125,7 @@ Sat,Sa
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Versandetiketten für die Bestellung(en) %1 konnten nicht abgerufen werden. Bitte prüfen Sie die Lieferscheinkommentare."
 "Shipping label(s) for the order(s) %1 were successfully created.","Versandetiketten für die Bestellung(en) %1 wurden erfolgreich erstellt."
 "Terms of Trade",Handelsklauseln
-"The DHL Shipping Solutions section provides common configuration options for all subsequent DHL carrier modules.","Der Abschnitt ""Allgemeine Konfiguration"" bietet gemeinsame Konfigurationseinstellungen für sämtliche DHL Versandmethoden."
+"This section provides common configuration options for all subsequent DHL carrier modules.","Dieser Abschnitt enthält gemeinsame Konfigurationseinstellungen für alle nachfolgenden DHL Versandmethoden."
 "Tare weight",Leergewicht
 "The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token.","Die Abholort-Suche im Checkout verwendet den Dienst MapBox, um eine interaktive Karte anzuzeigen. Wenn Sie diese Funktion nutzen möchten, erstellen Sie bitte ein API-Token auf mapbox.com."
 "The content description is mandatory if export content type is <em>OTHER</em>.","Eine Inhaltsbeschreibung ist vorgeschrieben, wenn die Inhaltskategorie <em>SONSTIGES</em> ist."
