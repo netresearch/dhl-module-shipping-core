@@ -9,7 +9,7 @@
         <label>Bulk / Cron Settings</label>
 
         <field id="cron_enabled" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
-               translate="label comment" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+               translate="label comment button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
             <label>Enable Automatic Label Retrieval</label>
             <button_label>Create shipments and retrieve labels via cron job.</button_label>
         </field>

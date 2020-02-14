@@ -1,12 +1,9 @@
 "A confirmation email will be sent to the customer when the shipment was successfully created.","Nach erfolgreicher Erstellung des Lieferscheins wird dem Kunden eine Versandbestätigung per E-Mail zugesandt."
-Action,Aktion
 "Ad hoc pickup or service point drop-off","Ad-hoc-Abholung oder Abgabe am Servicepunkt"
 "Add Package","Paket hinzufügen"
 "Add markup to shipping price","Aufschlag zum Versandpreis hinzufügen"
 "Additional Fee",Zusatzkosten
 "All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website","Es wird davon ausgegangen, dass alle Bestellungen, die nach dem konfigurierten Zeitpunkt aufgegeben werden, am nächsten Geschäftstag an den jeweiligen Spediteur übergeben werden. Alle Bestellungen, die vor diesem Zeitpunkt aufgegeben werden, werden voraussichtlich am selben Tag an den jeweiligen Spediteur übergeben. Der Wert wird nach der für die aktuelle Website konfigurierten Zeitzone interpretiert."
-"Allowed Domestic Products","Erlaubte inländische Produkte"
-"Allowed International Products","Erlaubte internationale Produkte"
 "An error occurred while updating the recipient street.","Beim Aktualisieren der Empfängeradresse ist ein Fehler aufgetreten."
 "Apply rounding to shipping price","Versandkosten runden"
 "Automatic label creation failed: %1","Die automatische Sendungserstellung ist fehlgeschlagen: %1"
@@ -31,11 +28,7 @@ Container,Container
 "Customs Data",Zolldaten
 "Customs Value",Zollwert
 "DHL & Magento","DHL & Magento"
-"DHL Dangerous Goods Category",DHL-Gefahrgutklasse
-"DHL Item Description",DHL-Artikelbeschreibung
-"DHL Preferred Delivery","DHL Wunschpaket"
 "DHL Shipping","Versenden mit DHL"
-"DHL Tariff Number (HS Code)","DHL-Zolltarifnummer (HS Code)"
 "Decimal Value",Dezimalwert
 "Deleting a single tracking number is not supported. Please use the ""Cancel Shipment"" button on the shipment details page to cancel labels and tracks.","Das Löschen einer einzelnen Sendungsnummer wird nicht unterstützt. Bitte verwenden Sie den Button ""Versandaufträge stornieren"" auf der Sendungsansichtseite, um Versandaufträge zu stornieren und Sendungsnummern zu löschen."
 "Depends on chosen product. Its only mandatory for international, non EU shipments.","Hängt vom gewählten Produkt ab. Dies ist nur für internationale Sendungen außerhalb der EU vorgeschrieben."
@@ -50,7 +43,6 @@ Document,Dokument
 "Export Content Explanation","Beschreibung des Inhalts"
 "Export Content Type",Inhaltskategorie
 "Export Description",Exportbeschreibung
-Fixed,Fest
 "Fixed amount",Festbetrag
 "For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount","Geben Sie z.B. 20 ein, um einen Aufschlag von 20% in der konfigurierten Währung anzuwenden. Geben Sie -20 ein, um einen Rabatt von 20% zu gewähren."
 Fri,Fr
@@ -62,14 +54,11 @@ Height,Höhe
 "Height %1","Höhe %1"
 "Here you can globally configure settings that apply to all available DHL shipping methods, such as order cut-off times and your custom package types.","Hier können Sie systemweite Einstellungen setzen die alle verfügbaren DHL Versandmethoden betreffen, etwa die Auftragsabschlusszeit oder ihre selbst definierten Pakettypen."
 "Hide this shipping method in checkout","Diese Versandart im Checkout ausblenden"
-"Hier können Sie verfügbare ",
 "I will pay duties and taxes (DDP)","Ich zahle Zölle und Steuern (DDP)"
 "If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.","Ist die automatische Wiederholung deaktiviert, so müssen alle zuvor fehlgeschlagenen Versandetiketten nach Korrektur der Versanddaten manuell angefordert werden. Ist sie aktiviert, dann wird wiederholt versucht, Versandetiketten vom Webservice abzurufen – auch wenn noch keine Korrektur der Sendungsdaten vorgenommen wurde. Dies mag komfortabel erscheinen, kann die Anzahl der Versandetikettenanfragen und damit die Last der automatischen Verarbeitung aber drastisch erhöhen."
 "Include orders with the given status for automatic label retrieval.","Führen Sie die automatische Sendungserstellung für Bestellungen mit angegebenem Status durch."
 "International Shipping","Internationaler Versand"
-"International shipping price markup","Preisaufschlag für internationalen Versand"
 "Item Details",Artikeldetails
-"Labels cancelling not supported","Labelstornierung nicht unterstützt"
 Length,Länge
 "Length %1","Länge %1"
 "Location Finder Settings","Einstellungen für Abholort-Suche"
@@ -80,7 +69,6 @@ Mon,Mo
 "No additional attributes found for order item %1.","Es wurden keine Zusatzattribute für Artikel %1 gefunden."
 "No orders found (automatic label retrieval is not enabled).","Keine Bestellungen gefunden (automatische Sendungserstellung ist nicht aktiviert)."
 "No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3.","Keine Bestellungen für die automatische Sendungserstellung mit Status %1 in den Stores %2 für die Carrier %3 gefunden."
-"No valid start date.","Kein gültiges Versanddatum."
 "Options for order item ""%1"" are not available.","Es sind keine Optionen für Order Item ""%1"" verfügbar."
 "Order %1: %2","Bestellung %1: %2"
 "Order Cut-off Time",Auftragsabschlusszeit
@@ -89,7 +77,6 @@ Other,Sonstiges
 "Package #%1 not found in shipment request.","Paket #%1 konnte nicht gefunden werden."
 "Package Description",Paketbeschreibung
 "Package Details",Paket-Details
-Percent,Prozentual
 Percentage,Prozentsatz
 Present,Geschenk
 "Processing of shipments with <em>Label Status: Failed</em> will automatically be retried.","Die Verarbeitung von Sendungen mit <em>Label Status: Fehlgeschlagen</em> wird automatisch erneut ausgeführt."
@@ -111,15 +98,11 @@ Quantity,Menge
 "Rounding Format",Rundungsformat
 "Rounding Rules",Rundungsregeln
 Sat,Sa
-"Select delivery payment methods.","Wählen Sie die Zahlungsmethoden für die Lieferung aus."
-"Select the terms of trade.","Wählen Sie die Handelsklauseln aus."
 "Select whether duties and taxes for the shipment are paid by the shipper or not.","Wählen Sie aus, ob Zölle und Steuern für die Sendung vom Versender bezahlt werden oder nicht."
 "Selected payment methods will be treated as CoD methods during shipment order creation.","Die ausgewählten Zahlungsmethoden werden bei der Erstellung des Versandauftrags als Nachnahmemethoden behandelt."
 "Set Default","Als Standard festlegen"
 "Shipment Defaults","Standardeinstellungen für Versandetiketten"
 "Shipment(s) for the order(s) %1 could not be created.","Lieferschein(e) für die Bestellung(en) %1 konnten nicht erstellt werden."
-"Shipping Markup",Versandaufschlag
-"Shipping Preferences",Versandeinstellungen
 "Shipping Product",Versandprodukt
 "Shipping label(s) for the order(s) %1 could not be created.","Versandetiketten für die Bestellung(en) %1 konnten nicht erstellt werden."
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Versandetiketten für die Bestellung(en) %1 konnten nicht abgerufen werden. Bitte prüfen Sie die Lieferscheinkommentare."
@@ -139,7 +122,6 @@ Sat,Sa
 "The value of attribute ""%1"" must be numeric.","Der Wert des Attributes ""%1"" muss numerisch sein."
 "The value of attribute ""%1"" must not be longer than %2 characters.","Der Wert des Attributes ""%1"" darf nicht länger als %2 Zeichen sein."
 "This section configures information about the exported goods relevant for customs for international shipments.","In diesem Abschnitt werden Informationen zu den für internationale Sendungen zollrelevanten Exportgütern konfiguriert."
-"This shipping method is not available. To use this shipping method, please contact us.","Diese Versandart ist nicht verfügbar. Bitte kontaktieren Sie uns um diese Versandart dennoch zu verwenden."
 Thu,Do
 Title,Titel
 "Total Weight",Gesamtgewicht
@@ -158,6 +140,5 @@ Weight,Gewicht
 "Weight %1","Gewicht %1"
 Width,Breite
 "Width %1","Breite %1"
-Width,Breite
 "You can configure your preset package sizes in the system configuration","Ihre voreingestellten Paketgrößen können Sie in der Systemkonfiguration konfigurieren"
 "You need to have at least one drop off day.","Sie müssen mindestens einen Tag für die Paketübergabe angeben."

@@ -1,12 +1,9 @@
 "A confirmation email will be sent to the customer when the shipment was successfully created.","A confirmation email will be sent to the customer when the shipment was successfully created."
-Action,Action
 "Ad hoc pickup or service point drop-off","Ad hoc pickup or service point drop-off"
 "Add Package","Add Package"
 "Add markup to shipping price","Add markup to shipping price"
 "Additional Fee","Additional Fee"
 "All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website","All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website"
-"Allowed Domestic Products","Allowed Domestic Products"
-"Allowed International Products","Allowed International Products"
 "An error occurred while updating the recipient street.","An error occurred while updating the recipient street."
 "Apply rounding to shipping price","Apply rounding to shipping price"
 "Automatic label creation failed: %1","Automatic label creation failed: %1"
@@ -18,7 +15,7 @@ Action,Action
 "Cash On Delivery Payment Methods","Cash On Delivery Payment Methods"
 "Checkout Presentation","Checkout Presentation"
 "Commercial Sample","Commercial Sample"
-"Container","Container"
+Container,Container
 "Cost and estimated delivery dates","Cost and estimated delivery dates"
 "Cost only","Cost only"
 "Could not delete service selection.","Could not delete service selection."
@@ -31,13 +28,8 @@ Action,Action
 "Customs Data","Customs Data"
 "Customs Value","Customs Value"
 "DHL & Magento","DHL & Magento"
-"DHL Dangerous Goods Category","DHL Dangerous Goods Category"
-"DHL Item Description","DHL Item Description"
-"DHL Preferred Delivery","DHL Preferred Delivery"
 "DHL Shipping","DHL Shipping"
-"DHL Tariff Number (HS Code)","DHL Tariff Number (HS Code)"
 "Decimal Value","Decimal Value"
-"Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks.","Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks."
 "Deleting a single tracking number is not supported. Please use the ""Cancel Shipment"" button on the shipment details page to cancel labels and tracks.","Deleting a single tracking number is not supported. Please use the ""Cancel Shipment"" button on the shipment details page to cancel labels and tracks."
 "Depends on chosen product. Its only mandatory for international, non EU shipments.","Depends on chosen product. Its only mandatory for international, non EU shipments."
 "Display customized message","Display customized message"
@@ -51,7 +43,6 @@ Document,Document
 "Export Content Explanation","Export Content Explanation"
 "Export Content Type","Export Content Type"
 "Export Description","Export Description"
-Fixed,Fixed
 "Fixed amount","Fixed amount"
 "For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount","For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount"
 Fri,Fri
@@ -67,10 +58,7 @@ Height,Height
 "If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.","If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general."
 "Include orders with the given status for automatic label retrieval.","Include orders with the given status for automatic label retrieval."
 "International Shipping","International Shipping"
-"International shipping price markup","International shipping price markup"
-"It allows you to globally configure the available payment methods, the order cut off times or specify your own package types.","It allows you to globally configure the available payment methods, the order cut off times or specify your own package types."
 "Item Details","Item Details"
-"Labels cancelling not supported","Labels cancelling not supported"
 Length,Length
 "Length %1","Length %1"
 "Location Finder Settings","Location Finder Settings"
@@ -81,7 +69,6 @@ Mon,Mon
 "No additional attributes found for order item %1.","No additional attributes found for order item %1."
 "No orders found (automatic label retrieval is not enabled).","No orders found (automatic label retrieval is not enabled)."
 "No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3.","No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3."
-"No valid start date.","No valid start date."
 "Options for order item ""%1"" are not available.","Options for order item ""%1"" are not available."
 "Order %1: %2","Order %1: %2"
 "Order Cut-off Time","Order Cut-off Time"
@@ -90,7 +77,6 @@ Other,Other
 "Package #%1 not found in shipment request.","Package #%1 not found in shipment request."
 "Package Description","Package Description"
 "Package Details","Package Details"
-Percent,Percent
 Percentage,Percentage
 Present,Present
 "Processing of shipments with <em>Label Status: Failed</em> will automatically be retried.","Processing of shipments with <em>Label Status: Failed</em> will automatically be retried."
@@ -112,15 +98,11 @@ Quantity,Quantity
 "Rounding Format","Rounding Format"
 "Rounding Rules","Rounding Rules"
 Sat,Sat
-"Select delivery payment methods.","Select delivery payment methods."
-"Select the terms of trade.","Select the terms of trade."
 "Select whether duties and taxes for the shipment are paid by the shipper or not.","Select whether duties and taxes for the shipment are paid by the shipper or not."
 "Selected payment methods will be treated as CoD methods during shipment order creation.","Selected payment methods will be treated as CoD methods during shipment order creation."
 "Set Default","Set Default"
 "Shipment Defaults","Shipment Defaults"
 "Shipment(s) for the order(s) %1 could not be created.","Shipment(s) for the order(s) %1 could not be created."
-"Shipping Markup","Shipping Markup"
-"Shipping Preferences","Shipping Preferences"
 "Shipping Product","Shipping Product"
 "Shipping label(s) for the order(s) %1 could not be created.","Shipping label(s) for the order(s) %1 could not be created."
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments."
@@ -140,7 +122,6 @@ Sat,Sat
 "The value of attribute ""%1"" must be numeric.","The value of attribute ""%1"" must be numeric."
 "The value of attribute ""%1"" must not be longer than %2 characters.","The value of attribute ""%1"" must not be longer than %2 characters."
 "This section configures information about the exported goods relevant for customs for international shipments.","This section configures information about the exported goods relevant for customs for international shipments."
-"This shipping method is not available. To use this shipping method, please contact us.","This shipping method is not available. To use this shipping method, please contact us."
 Thu,Thu
 Title,Title
 "Total Weight","Total Weight"
@@ -159,6 +140,5 @@ Weight,Weight
 "Weight %1","Weight %1"
 Width,Width
 "Width %1","Width %1"
-"Width","Width"
 "You can configure your preset package sizes in the system configuration","You can configure your preset package sizes in the system configuration"
 "You need to have at least one drop off day.","You need to have at least one drop off day."
