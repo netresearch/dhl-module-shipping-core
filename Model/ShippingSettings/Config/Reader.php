@@ -90,10 +90,10 @@ class Reader extends Filesystem
      *
      * You must clear the Magento cache to apply changes to any shipping_settings.xml file.
      *
-     * @param string $scope
+     * @param string|null $scope
      * @return array
      */
-    public function read($scope = ''): array
+    public function read($scope = null): array
     {
         $data = $this->cache->load(self::CACHE_KEY_SHIPPING_OPTIONS_CONFIG . $scope);
 

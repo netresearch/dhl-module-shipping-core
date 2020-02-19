@@ -78,11 +78,11 @@ class CheckoutDataCompositeProcessor
             }
 
             foreach ($this->metadataProcessors as $processor) {
-                /** @var MetadataProcessorInterface $processor */
-                $processor->process(
-                    $carrierData->getMetadata(),
-                    $storeId
-                );
+                $metadata = $carrierData->getMetadata();
+                if ($metadata) {
+                    /** @var MetadataProcessorInterface $processor */
+                    $processor->process($metadata, $storeId);
+                }
             }
 
             foreach ($this->compatibilityProcessors as $processor) {
