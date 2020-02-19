@@ -4,19 +4,19 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Observer;
+namespace Dhl\ShippingCore\Test\Integration\Observer;
 
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;
-use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
+use Dhl\ShippingCore\Observer\SplitAddress;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\AddressRepository;
 use Magento\TestFramework\Helper\Bootstrap;
-use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\TestCase;
+use TddWizard\Fixtures\Sales\OrderBuilder;
+use TddWizard\Fixtures\Sales\OrderFixture;
+use TddWizard\Fixtures\Sales\OrderFixtureRollback;
 
 /**
  * SaveSplitAddressTest
@@ -33,20 +33,6 @@ class SaveSplitAddressTest extends TestCase
      * @var Order
      */
     private static $order;
-
-    /**
-     * Set the carrier code that requires street splitting. Make sure a fresh observer instance gets created.
-     *
-     * Note: "shared=false" object manager config has no effect on observers.
-     *
-     * @param string $carrierCode
-     */
-    private static function updateCarrierCode(string $carrierCode)
-    {
-        $observerArgs = ['carrierCodes' => [$carrierCode => $carrierCode]];
-        Bootstrap::getObjectManager()->configure([SplitAddress::class => ['arguments' => $observerArgs]]);
-        Bootstrap::getObjectManager()->removeSharedInstance(SplitAddress::class);
-    }
 
     /**
      * @return string[][]
@@ -90,6 +76,20 @@ class SaveSplitAddressTest extends TestCase
     }
 
     /**
+     * Set the carrier code that requires street splitting. Make sure a fresh observer instance gets created.
+     *
+     * Note: "shared=false" object manager config has no effect on observers.
+     *
+     * @param string $carrierCode
+     */
+    private static function updateCarrierCode(string $carrierCode)
+    {
+        $observerArgs = ['carrierCodes' => [$carrierCode => $carrierCode]];
+        Bootstrap::getObjectManager()->configure([SplitAddress::class => ['arguments' => $observerArgs]]);
+        Bootstrap::getObjectManager()->removeSharedInstance(SplitAddress::class);
+    }
+
+    /**
      * Make sure the fixture order address gets not split. All splitting behaviour testing happens in actual test.
      *
      * @throws \Exception
@@ -97,16 +97,18 @@ class SaveSplitAddressTest extends TestCase
     public static function createOrder()
     {
         self::updateCarrierCode('foobar');
-        self::$order = OrderFixture::createOrder(new AddressDe(), [new SimpleProduct2()], 'flatrate_flatrate');
+        self::$order = OrderBuilder::anOrder()->withShippingMethod('flatrate_flatrate')->build();
     }
 
     /**
-     * @throws \Exception
+     * Roll back fixture.
+     *
+     * @throws LocalizedException
      */
     public static function createOrderRollback()
     {
         try {
-            OrderFixture::rollbackFixtureEntities();
+            OrderFixtureRollback::create()->execute(new OrderFixture(self::$order));
         } catch (\Exception $exception) {
             $argv = $_SERVER['argv'] ?? [];
             if (in_array('--verbose', $argv, true)) {

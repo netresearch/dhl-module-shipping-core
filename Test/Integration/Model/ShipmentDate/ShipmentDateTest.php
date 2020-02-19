@@ -7,17 +7,18 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Test\Integration\Model\ShipmentDate;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
-use Dhl\ShippingCore\Model\ShipmentDate\Validator\NoHoliday;
 use Dhl\ShippingCore\Model\ShipmentDate\ShipmentDate;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;
-use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
+use Dhl\ShippingCore\Model\ShipmentDate\Validator\NoHoliday;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use TddWizard\Fixtures\Sales\OrderBuilder;
+use TddWizard\Fixtures\Sales\OrderFixture;
+use TddWizard\Fixtures\Sales\OrderFixtureRollback;
 
 /**
  * Class ShipmentDateTest
@@ -52,16 +53,18 @@ class ShipmentDateTest extends TestCase
      */
     public static function createOrder()
     {
-        self::$order = OrderFixture::createOrder(new AddressDe(), [new SimpleProduct2()], 'flatrate_flatrate');
+        self::$order = OrderBuilder::anOrder()->withShippingMethod('flatrate_flatrate')->build();
     }
 
     /**
-     * @throws \Exception
+     * Roll back fixture.
+     *
+     * @throws LocalizedException
      */
     public static function createOrderRollback()
     {
         try {
-            OrderFixture::rollbackFixtureEntities();
+            OrderFixtureRollback::create()->execute(new OrderFixture(self::$order));
         } catch (\Exception $exception) {
             $argv = $_SERVER['argv'] ?? [];
             if (in_array('--verbose', $argv, true)) {

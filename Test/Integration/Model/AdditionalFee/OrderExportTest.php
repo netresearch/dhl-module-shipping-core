@@ -9,16 +9,15 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Test\Integration\Model\AdditionalFee;
 
 use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;
-use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
+use Dhl\ShippingCore\Test\Integration\Fixture\OrderBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+use TddWizard\Fixtures\Sales\OrderFixture;
+use TddWizard\Fixtures\Sales\OrderFixtureRollback;
 
 /**
  * Class OrderExportTest
@@ -57,19 +56,15 @@ class OrderExportTest extends TestCase
      */
     public static function createOrder()
     {
-        /** @var \Magento\Sales\Model\Order $orderWithFee */
-        $order = OrderFixture::createOrder(new AddressDe(), [new SimpleProduct()], 'flatrate_flatrate');
-        self::$order = $order;
+        self::$order = OrderBuilder::anOrder()->withShippingMethod('flatrate_flatrate')->build();
 
-        /** @var \Magento\Sales\Model\Order $orderWithFee */
-        $orderWithFee = OrderFixture::createOrder(new AddressDe(), [new SimpleProduct2()], 'flatrate_flatrate');
-        $orderWithFee->addData(self::$additionalFees);
+        /** @var OrderBuilder $orderBuilder */
+        $orderBuilder = OrderBuilder::anOrder()->withShippingMethod('flatrate_flatrate');
+        foreach (self::$additionalFees as $code => $value) {
+            $orderBuilder = $orderBuilder->withAdditionalFee($code, $value);
+        }
 
-        /** @var \Magento\Sales\Model\ResourceModel\Order $resource */
-        $resource = Bootstrap::getObjectManager()->create(\Magento\Sales\Model\ResourceModel\Order::class);
-        $resource->save($orderWithFee);
-
-        self::$orderWithFee = $orderWithFee;
+        self::$orderWithFee = $orderBuilder->build();
     }
 
     /**
@@ -78,7 +73,10 @@ class OrderExportTest extends TestCase
     public static function createOrderRollback()
     {
         try {
-            OrderFixture::rollbackFixtureEntities();
+            OrderFixtureRollback::create()->execute(
+                new OrderFixture(self::$order),
+                new OrderFixture(self::$orderWithFee)
+            );
         } catch (\Exception $exception) {
             $argv = $_SERVER['argv'] ?? [];
             if (in_array('--verbose', $argv, true)) {

@@ -9,17 +9,17 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Test\Integration\Model\AdditionalFee;
 
 use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;
-use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
+use Dhl\ShippingCore\Test\Integration\Fixture\OrderBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Api\Data\InvoiceInterface;
+use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\InvoiceRepositoryInterface;
 use Magento\Sales\Model\Order\Invoice;
-use Magento\Sales\Model\Service\InvoiceService;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+use TddWizard\Fixtures\Sales\InvoiceBuilder;
+use TddWizard\Fixtures\Sales\OrderFixture;
+use TddWizard\Fixtures\Sales\OrderFixtureRollback;
 
 /**
  * Class InvoiceExportTest
@@ -33,6 +33,11 @@ use PHPUnit\Framework\TestCase;
  */
 class InvoiceExportTest extends TestCase
 {
+    /**
+     * @var OrderInterface[]
+     */
+    private static $orders = [];
+
     /**
      * @var Invoice
      */
@@ -58,22 +63,18 @@ class InvoiceExportTest extends TestCase
      */
     public static function createInvoice()
     {
-        /** @var \Magento\Sales\Model\ResourceModel\Order\Invoice $resource */
-        $resource = Bootstrap::getObjectManager()->create(\Magento\Sales\Model\ResourceModel\Order\Invoice::class);
+        $order = OrderBuilder::anOrder()->withShippingMethod('flatrate_flatrate')->build();
+        self::$invoice = InvoiceBuilder::forOrder($order)->build();
 
-        /** @var InvoiceService $invoiceService */
-        $invoiceService = Bootstrap::getObjectManager()->create(InvoiceService::class);
+        /** @var OrderBuilder $orderBuilder */
+        $orderBuilder = OrderBuilder::anOrder()->withShippingMethod('flatrate_flatrate');
+        foreach (self::$additionalFees as $code => $value) {
+            $orderBuilder = $orderBuilder->withAdditionalFee($code, $value);
+        }
+        $orderWithFee = $orderBuilder->build();
+        self::$invoiceWithFee = InvoiceBuilder::forOrder($orderWithFee)->build();
 
-        /** @var \Magento\Sales\Model\Order $order */
-        $order = OrderFixture::createOrder(new AddressDe(), [new SimpleProduct()], 'flatrate_flatrate');
-        self::$invoice = $invoiceService->prepareInvoice($order);
-        $resource->save(self::$invoice);
-
-        /** @var \Magento\Sales\Model\Order $orderWithFee */
-        $orderWithFee = OrderFixture::createOrder(new AddressDe(), [new SimpleProduct2()], 'flatrate_flatrate');
-        $orderWithFee->addData(self::$additionalFees);
-        self::$invoiceWithFee = $invoiceService->prepareInvoice($orderWithFee);
-        $resource->save(self::$invoiceWithFee);
+        self::$orders = [$order, $orderWithFee];
     }
 
     /**
@@ -82,7 +83,14 @@ class InvoiceExportTest extends TestCase
     public static function createInvoiceRollback()
     {
         try {
-            OrderFixture::rollbackFixtureEntities();
+            $orderFixtures = array_map(
+                static function (OrderInterface $order) {
+                    return new OrderFixture($order);
+                },
+                self::$orders
+            );
+
+            OrderFixtureRollback::create()->execute(...$orderFixtures);
         } catch (\Exception $exception) {
             $argv = $_SERVER['argv'] ?? [];
             if (in_array('--verbose', $argv, true)) {

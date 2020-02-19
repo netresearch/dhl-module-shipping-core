@@ -9,19 +9,17 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Test\Integration\Model\AdditionalFee;
 
 use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;
-use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
+use Dhl\ShippingCore\Test\Integration\Fixture\OrderBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\CreditmemoRepositoryInterface;
 use Magento\Sales\Api\Data\CreditmemoInterface;
+use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Model\Order\Creditmemo;
-use Magento\Sales\Model\Order\CreditmemoFactory;
-use Magento\Sales\Model\Order\CreditmemoRepository;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+use TddWizard\Fixtures\Sales\CreditmemoBuilder;
+use TddWizard\Fixtures\Sales\OrderFixture;
+use TddWizard\Fixtures\Sales\OrderFixtureRollback;
 
 /**
  * Class CreditmemoExportTest
@@ -35,6 +33,11 @@ use PHPUnit\Framework\TestCase;
  */
 class CreditmemoExportTest extends TestCase
 {
+    /**
+     * @var OrderInterface[]
+     */
+    private static $orders = [];
+
     /**
      * @var Creditmemo
      */
@@ -60,22 +63,18 @@ class CreditmemoExportTest extends TestCase
      */
     public static function createCreditMemo()
     {
-        /** @var \Magento\Sales\Model\ResourceModel\Order\Creditmemo $resource */
-        $resource = Bootstrap::getObjectManager()->create(\Magento\Sales\Model\ResourceModel\Order\Creditmemo::class);
+        $order = OrderBuilder::anOrder()->withShippingMethod('flatrate_flatrate')->build();
+        self::$creditMemo = CreditmemoBuilder::forOrder($order)->build();
 
-        /** @var CreditmemoFactory $creditMemoFactory */
-        $creditMemoFactory = Bootstrap::getObjectManager()->create(CreditmemoFactory::class);
+        /** @var OrderBuilder $orderBuilder */
+        $orderBuilder = OrderBuilder::anOrder()->withShippingMethod('flatrate_flatrate');
+        foreach (self::$additionalFees as $code => $value) {
+            $orderBuilder = $orderBuilder->withAdditionalFee($code, $value);
+        }
+        $orderWithFee = $orderBuilder->build();
+        self::$creditMemoWithFee = CreditmemoBuilder::forOrder($orderWithFee)->build();
 
-        /** @var \Magento\Sales\Model\Order $order */
-        $order = OrderFixture::createOrder(new AddressDe(), [new SimpleProduct()], 'flatrate_flatrate');
-        self::$creditMemo = $creditMemoFactory->createByOrder($order);
-        $resource->save(self::$creditMemo);
-
-        /** @var \Magento\Sales\Model\Order $orderWithFee */
-        $orderWithFee = OrderFixture::createOrder(new AddressDe(), [new SimpleProduct2()], 'flatrate_flatrate');
-        $orderWithFee->addData(self::$additionalFees);
-        self::$creditMemoWithFee = $creditMemoFactory->createByOrder($orderWithFee);
-        $resource->save(self::$creditMemoWithFee);
+        self::$orders = [$order, $orderWithFee];
     }
 
     /**
@@ -84,7 +83,14 @@ class CreditmemoExportTest extends TestCase
     public static function createCreditMemoRollback()
     {
         try {
-            OrderFixture::rollbackFixtureEntities();
+            $orderFixtures = array_map(
+                static function (OrderInterface $order) {
+                    return new OrderFixture($order);
+                },
+                self::$orders
+            );
+
+            OrderFixtureRollback::create()->execute(...$orderFixtures);
         } catch (\Exception $exception) {
             $argv = $_SERVER['argv'] ?? [];
             if (in_array('--verbose', $argv, true)) {

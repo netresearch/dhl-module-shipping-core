@@ -6,13 +6,12 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Model\Webapi;
 
-use Dhl\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\AssignedSelectionInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\SelectionInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface;
+use Dhl\ShippingCore\Model\ShippingSettings\CheckoutManagement;
 use Dhl\ShippingCore\Model\ShippingSettings\Data\ShippingData;
 use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\QuoteSelectionRepository;
-use Dhl\ShippingCore\Model\ShippingSettings\CheckoutManagement;
-use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
 use Dhl\ShippingCore\Test\Integration\Fixture\QuoteFixture;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilder;

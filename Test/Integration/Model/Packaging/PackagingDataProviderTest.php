@@ -7,56 +7,73 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Test\Integration\Model\Packaging;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
+use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Model\ShippingSettings\PackagingDataProvider;
 use Dhl\ShippingCore\Model\ShippingSettings\ShippingDataHydrator;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\AddressDe;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct;
-use Dhl\ShippingCore\Test\Integration\Fixture\Data\SimpleProduct2;
 use Dhl\ShippingCore\Test\Integration\Fixture\FakeReader;
-use Dhl\ShippingCore\Test\Integration\Fixture\OrderFixture;
-use Dhl\ShippingCore\Test\Integration\Fixture\ShipmentFixture;
+use Dhl\ShippingCore\Test\Integration\Fixture\OrderBuilder;
+use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
-use Magento\Sales\Model\Order;
-use Magento\Sales\Model\ResourceModel\Order\Shipment\Collection;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+use TddWizard\Fixtures\Sales\OrderFixture;
+use TddWizard\Fixtures\Sales\OrderFixtureRollback;
+use TddWizard\Fixtures\Sales\ShipmentBuilder;
 
 class PackagingDataProviderTest extends TestCase
 {
     /**
-     * @return ShipmentInterface[][]
+     * @var OrderInterface
+     */
+    private static $order;
+
+    /**
+     * @var ShipmentInterface
+     */
+    private static $shipment;
+
+    /**
+     * Create order fixture for DE recipient address with shipment and label status "Failed".
+     *
      * @throws \Exception
      */
-    public function dataProvider(): array
+    public static function createFailedShipment()
     {
-        $shipment = ShipmentFixture::createFailedShipment(
-            new AddressDe(),
-            [new SimpleProduct(), new SimpleProduct2()],
-            'flatrate_flatrate'
-        );
-        $order = $shipment->getOrder();
+        self::$order = OrderBuilder::anOrder()
+             ->withShippingMethod('flatrate_flatrate')
+             ->withLabelStatus(LabelStatusManagementInterface::LABEL_STATUS_FAILED)
+             ->build();
 
-        // force items reload, they are not properly indexed after "checkout"
-        $order->setItems(null);
+        // force items reload. order items are indexed consecutively, not by item id after "checkout"
+        self::$order->setItems(null);
 
-        /** @var Collection $shipmentCollection */
-        $shipmentCollection = Bootstrap::getObjectManager()->create(Collection::class);
-        $shipmentCollection->setOrderFilter($order);
-
-        return [
-            $shipmentCollection->getItems()
-        ];
+        self::$shipment = ShipmentBuilder::forOrder(self::$order)->build();
     }
 
     /**
-     * @param Order\Shipment $shipment
-     * @dataProvider dataProvider
+     * @throws \Exception
      */
-    public function testGetData(Order\Shipment $shipment)
+    public static function createFailedShipmentRollback()
+    {
+        try {
+            OrderFixtureRollback::create()->execute(new OrderFixture(self::$order));
+        } catch (\Exception $exception) {
+            $argv = $_SERVER['argv'] ?? [];
+            if (in_array('--verbose', $argv, true)) {
+                $message = sprintf("Error during rollback: %s%s", $exception->getMessage(), PHP_EOL);
+                register_shutdown_function('fwrite', STDERR, $message);
+            }
+        }
+    }
+
+    /**
+     * @magentoDataFixture createFailedShipment
+     */
+    public function testGetData()
     {
         /** @var PackagingDataProvider $subject */
         $subject = Bootstrap::getObjectManager()->create(PackagingDataProvider::class, ['reader' => new FakeReader()]);
-        $packagingData = $subject->getData($shipment);
+        $packagingData = $subject->getData(self::$shipment);
         self::assertInstanceOf(ShippingDataInterface::class, $packagingData);
 
         /** @var ShippingDataHydrator $hydrator */

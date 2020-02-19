@@ -4,10 +4,11 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Observer;
+namespace Dhl\ShippingCore\Test\Integration\Observer;
 
-use Dhl\ShippingCore\Model\SplitAddress\RecipientStreet;
 use Dhl\ShippingCore\Model\ResourceModel\RecipientStreet as RecipientStreetResource;
+use Dhl\ShippingCore\Model\SplitAddress\RecipientStreet;
+use Dhl\ShippingCore\Observer\SplitAddress;
 use Dhl\ShippingCore\Test\Provider\StreetDataProvider;
 use Magento\Framework\Event\InvokerInterface;
 use Magento\Framework\Event\Observer;
