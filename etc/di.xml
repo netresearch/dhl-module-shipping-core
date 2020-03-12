@@ -353,6 +353,7 @@
                 <item name="dhlPackageInputDataProcessor" sortOrder="200" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\PackageInputDataProcessor</item>
                 <item name="dhlPackageContainerInputDataProcessor" sortOrder="210" xsi:type="object">Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\PackageContainerInputDataProcessor</item>
                 <item name="dhlCustomPackageValueMapProcessor" sortOrder="300" xsi:type="object">\Dhl\ShippingCore\Model\Packaging\DataProcessor\PackageOptions\ShippingBoxValueMapProcessor</item>
+                <item name="dhlSortOrderProcessor" sortOrder="400" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\SortOrderProcessor</item>
             </argument>
             <argument name="packagingItemOptionsProcessors" xsi:type="array">
                 <item name="dhlItemInputDataProcessor" sortOrder="300" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ItemInputDataProcessor</item>
