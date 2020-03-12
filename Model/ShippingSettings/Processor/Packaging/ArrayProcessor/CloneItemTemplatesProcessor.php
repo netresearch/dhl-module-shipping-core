@@ -45,24 +45,26 @@ class CloneItemTemplatesProcessor implements ShippingOptionsArrayProcessorInterf
     {
         $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
 
-        foreach ($shippingData['carriers'] as $carrierCode => $carrier) {
-            $newData = [];
+        $itemOptions = [];
+        foreach ($items as $item) {
+            $itemId = (int)$item->getOrderItemId();
+            $itemOptions[$itemId] = [
+                'itemId' => $itemId,
+                'shippingOptions' => [],
+            ];
+        }
 
-            foreach ($items as $item) {
-                $itemId = (int) $item->getOrderItemId();
-                $newItem = [
-                    'itemId' => $itemId,
-                    'shippingOptions' => [],
-                ];
-
-                foreach ($carrier['itemOptions'] as $itemOptions) {
-                    $newItem['shippingOptions'] += $itemOptions['shippingOptions'];
+        foreach ($shippingData['carriers'] as $carrierCode => &$carrier) {
+            if (isset($carrier['itemOptions']) && is_array($carrier['itemOptions'])) {
+                // add carrier's shipping options to item's shipping options
+                foreach ($carrier['itemOptions'] as $carrierItemOption) {
+                    foreach ($itemOptions as &$itemOption) {
+                        $itemOption['shippingOptions'] += $carrierItemOption['shippingOptions'];
+                    }
                 }
-
-                $newData[$itemId] = $newItem;
             }
 
-            $shippingData['carriers'][$carrierCode]['itemOptions'] = $newData;
+            $carrier['itemOptions'] = $itemOptions;
         }
 
         return $shippingData;
