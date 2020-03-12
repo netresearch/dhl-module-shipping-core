@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Model\ItemAttribute;
 
 use Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface;
 use Dhl\ShippingCore\Model\Util\ShipmentItemFilter;
+use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
 
@@ -97,10 +98,10 @@ class ShipmentItemAttributeReader
     /**
      * Add together all items' weight multiplied by quantity to ship.
      *
-     * @param Shipment $shipment
+     * @param ShipmentInterface|Shipment $shipment
      * @return float
      */
-    public function getTotalWeight(Shipment $shipment): float
+    public function getTotalWeight(ShipmentInterface $shipment): float
     {
         $fnAdd = function ($totalWeight, Item $shipmentItem) {
             $totalWeight += $shipmentItem->getWeight() * $shipmentItem->getQty();
@@ -114,10 +115,10 @@ class ShipmentItemAttributeReader
     /**
      * Add together all items' price multiplied by quantity to ship.
      *
-     * @param Shipment $shipment
+     * @param ShipmentInterface|Shipment $shipment
      * @return float
      */
-    public function getTotalPrice(Shipment $shipment): float
+    public function getTotalPrice(ShipmentInterface $shipment): float
     {
         $fnAdd = function ($price, Item $shipmentItem) {
             $totalAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
@@ -138,10 +139,10 @@ class ShipmentItemAttributeReader
     /**
      * Obtain all items' export description.
      *
-     * @param Shipment $shipment
+     * @param ShipmentInterface|Shipment $shipment
      * @return string[]
      */
-    public function getPackageExportDescriptions(Shipment $shipment): array
+    public function getPackageExportDescriptions(ShipmentInterface $shipment): array
     {
         $fnCollect = function (Item $shipmentItem) {
             $itemExportDescription = $this->getExportDescription($shipmentItem);
@@ -163,10 +164,10 @@ class ShipmentItemAttributeReader
     /**
      * Obtain all items' dangerous goods categories.
      *
-     * @param Shipment $shipment
+     * @param ShipmentInterface|Shipment $shipment
      * @return string[]
      */
-    public function getPackageDgCategories(Shipment $shipment): array
+    public function getPackageDgCategories(ShipmentInterface $shipment): array
     {
         $fnCollect = function (Item $shipmentItem) {
             return $this->getDgCategory($shipmentItem);

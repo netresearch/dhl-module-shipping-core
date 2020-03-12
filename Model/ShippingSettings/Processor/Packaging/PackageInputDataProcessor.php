@@ -175,7 +175,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setDefaultValue(substr($exportDescription, 0, 80));
                     break;
 
-                case 'dgCategory':
+                case Codes::PACKAGING_INPUT_DG_CATEGORY:
                     $dgCategories = $this->itemAttributeReader->getPackageDgCategories($shipment);
                     $input->setDefaultValue(implode(', ', $dgCategories));
                     break;

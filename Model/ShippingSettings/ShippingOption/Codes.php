@@ -43,6 +43,7 @@ class Codes
     const PACKAGING_INPUT_TERMS_OF_TRADE = 'termsOfTrade';
     const PACKAGING_INPUT_CONTENT_TYPE = 'contentType';
     const PACKAGING_INPUT_EXPLANATION = 'explanation';
+    const PACKAGING_INPUT_DG_CATEGORY = 'dgCategory';
 
     const ITEM_OPTION_DETAILS = 'details';
     const ITEM_INPUT_PRODUCT_ID = 'productId';
