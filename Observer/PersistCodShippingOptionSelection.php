@@ -8,6 +8,7 @@ namespace Dhl\ShippingCore\Observer;
 
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\AssignedSelectionInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\CodSelectorInterface;
 use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\OrderSelectionFactory;
 use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\OrderSelectionRepository;
 use Magento\Framework\Event\Observer;
@@ -45,26 +46,38 @@ class PersistCodShippingOptionSelection implements ObserverInterface
     private $logger;
 
     /**
+     * @var CodSelectorInterface[]
+     */
+    private $codSelectors;
+
+    /**
      * PersistCodShippingOptionSelection constructor.
      *
      * @param ConfigInterface $config
      * @param OrderSelectionRepository $orderSelectionRepository
      * @param OrderSelectionFactory $optionSelectionFactory
      * @param LoggerInterface $logger
+     * @param CodSelectorInterface[] $codSelectors
      */
     public function __construct(
         ConfigInterface $config,
         OrderSelectionRepository $orderSelectionRepository,
         OrderSelectionFactory $optionSelectionFactory,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        array $codSelectors = []
     ) {
         $this->config = $config;
         $this->orderSelectionRepository = $orderSelectionRepository;
         $this->optionSelectionFactory = $optionSelectionFactory;
         $this->logger = $logger;
+        $this->codSelectors = $codSelectors;
     }
 
     /**
+     * If CoD payment was chosen during checkout, persist the service selection.
+     *
+     * Selection data population (option code, input code, input value) is delegated to the carrier.
+     *
      * @param Observer $observer
      * @return void
      */
@@ -76,21 +89,19 @@ class PersistCodShippingOptionSelection implements ObserverInterface
             return;
         }
 
-        $paymentMethod = $order->getPayment()->getMethod();
-        if (!$this->config->isCodPaymentMethod($paymentMethod, $order->getStoreId())) {
+        $isCodPayment = $this->config->isCodPaymentMethod($order->getPayment()->getMethod(), $order->getStoreId());
+        $carrierCode = strtok((string) $order->getShippingMethod(), '_');
+
+        if (!$isCodPayment || !isset($this->codSelectors[$carrierCode])) {
             return;
         }
 
-        $model = $this->optionSelectionFactory->create();
-        $model->setData([
-            AssignedSelectionInterface::PARENT_ID => $order->getShippingAddress()->getId(),
-            AssignedSelectionInterface::SHIPPING_OPTION_CODE => 'cashOnDelivery',
-            AssignedSelectionInterface::INPUT_CODE => 'enabled',
-            AssignedSelectionInterface::INPUT_VALUE => true
-        ]);
+        $selection = $this->optionSelectionFactory->create();
+        $selection->setData([AssignedSelectionInterface::PARENT_ID => $order->getShippingAddress()->getId()]);
+        $this->codSelectors[$carrierCode]->assignCodSelection($selection);
 
         try {
-            $this->orderSelectionRepository->save($model);
+            $this->orderSelectionRepository->save($selection);
         } catch (CouldNotSaveException $exception) {
             // observers do not throw exceptions, no exception must be thrown during order placement.
             $message = sprintf('Could not save Cash on Delivery service for order %s.', $order->getEntityId());

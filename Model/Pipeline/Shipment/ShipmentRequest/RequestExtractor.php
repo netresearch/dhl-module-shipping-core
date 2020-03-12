@@ -389,18 +389,6 @@ class RequestExtractor implements RequestExtractorInterface
     }
 
     /**
-     * Check if "cash on delivery" was chosen for the current shipment request.
-     *
-     * @return bool
-     */
-    public function isCashOnDelivery(): bool
-    {
-        $packages = $this->shipmentRequest->getData('packages');
-        $packageId = $this->shipmentRequest->getData('package_id');
-        return (bool) ($packages[$packageId]['params']['services']['cashOnDelivery']['enabled'] ?? false);
-    }
-
-    /**
      * Obtain shipment date. This currently does not check for holidays or weekends.
      *
      * @return \DateTime

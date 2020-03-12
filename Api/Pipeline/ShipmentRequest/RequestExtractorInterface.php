@@ -104,13 +104,6 @@ interface RequestExtractorInterface
     public function getPackageItems(): array;
 
     /**
-     * Check if "cash on delivery" was chosen for the current shipment request.
-     *
-     * @return bool
-     */
-    public function isCashOnDelivery(): bool;
-
-    /**
      * Obtain shipment date.
      *
      * @return \DateTime

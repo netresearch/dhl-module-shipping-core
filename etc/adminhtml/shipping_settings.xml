@@ -201,20 +201,6 @@
                 </shippingOptions>
             </itemShippingOptions>
         </itemOptions>
-        <serviceOptions>
-            <shippingOption code="cashOnDelivery">
-                <sortOrder>1000</sortOrder>
-                <label>Cash on Delivery</label>
-                <inputs>
-                    <input code="enabled">
-                        <label>Cash on Delivery</label>
-                        <inputType>checkbox</inputType>
-                        <disabled>true</disabled>
-                        <defaultValue>false</defaultValue>
-                    </input>
-                </inputs>
-            </shippingOption>
-        </serviceOptions>
         <compatibilityData>
             <rule id="contentTypeDependency">
                 <masters>
