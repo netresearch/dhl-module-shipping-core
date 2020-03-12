@@ -8,7 +8,6 @@ namespace Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest;
 
 use Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifier\PackagingOptionReaderInterfaceFactory;
 use Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface;
-use Dhl\ShippingCore\Api\PackagingOptionReaderInterface;
 use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Dhl\ShippingCore\Model\Util\ShipmentItemFilter;
 use Magento\Directory\Model\RegionFactory;
@@ -204,7 +203,7 @@ class RequestModifier implements RequestModifierInterface
         $packagingOptionReader = $this->packagingOptionReaderFactory->create(['shipment' => $shipment]);
 
         $customs = $packagingOptionReader->getPackageCustomsValues();
-        $customsValue = $customs[Codes::PACKAGING_INPUT_CUSTOMS_VALUE]?? '';
+        $customsValue = $customs[Codes::PACKAGING_INPUT_CUSTOMS_VALUE] ?? null;
         $contentType = $customs[Codes::PACKAGING_INPUT_CONTENT_TYPE] ?? '';
         $explanation = $customs[Codes::PACKAGING_INPUT_EXPLANATION] ?? '';
         unset(
@@ -252,7 +251,7 @@ class RequestModifier implements RequestModifierInterface
         foreach ($items as $item) {
             $orderItemId = (int) $item->getOrderItemId();
             $itemCustoms = $packagingOptionReader->getItemCustomsValues($orderItemId);
-            $itemCustomsValue = $itemCustoms['customsValue'] ?? '';
+            $itemCustomsValue = $itemCustoms['customsValue'] ?? null;
             $packageItem = [
                 'qty' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'qty'),
                 'price' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'price'),

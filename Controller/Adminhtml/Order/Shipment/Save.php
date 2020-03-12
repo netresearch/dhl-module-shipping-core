@@ -66,7 +66,7 @@ class Save extends Action
 
             $itemCustomsKey = Codes::ITEM_OPTION_ITEM_CUSTOMS;
             foreach ($packageDetails['items'] as $itemId => $itemDetails) {
-                $itemCustomsValue = '';
+                $itemCustomsValue = null;
                 if (isset($itemDetails[$itemCustomsKey][Codes::ITEM_INPUT_CUSTOMS_VALUE])) {
                     $itemCustomsValue = $itemDetails[$itemCustomsKey][Codes::ITEM_INPUT_CUSTOMS_VALUE];
                     unset($itemDetails[$itemCustomsKey][Codes::ITEM_INPUT_CUSTOMS_VALUE]);
@@ -95,7 +95,7 @@ class Save extends Action
             $packageParams = $packageDetails['package'];
             // set to orig packaging popup property names and unset them from customs array
             $customsKey = Codes::PACKAGING_OPTION_PACKAGE_CUSTOMS;
-            $customsValue = $packageParams[$customsKey][Codes::PACKAGING_INPUT_CUSTOMS_VALUE] ?? '';
+            $customsValue = $packageParams[$customsKey][Codes::PACKAGING_INPUT_CUSTOMS_VALUE] ?? null;
             $contentType = $packageParams[$customsKey][Codes::PACKAGING_INPUT_CONTENT_TYPE] ?? '';
             $contentTypeOther = $packageParams[$customsKey][Codes::PACKAGING_INPUT_EXPLANATION] ?? '';
             unset(
