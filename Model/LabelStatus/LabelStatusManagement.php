@@ -90,11 +90,18 @@ class LabelStatusManagement implements LabelStatusManagementInterface
     /**
      * Update label status in persistent storage and sales order grid.
      *
+     * @param OrderInterface|Order $order
      * @param LabelStatus $labelStatus
      * @return bool
      */
-    private function updateLabelStatus(LabelStatus $labelStatus): bool
+    private function updateLabelStatus(OrderInterface $order, LabelStatus $labelStatus): bool
     {
+        $shippingMethod = strtok((string) $order->getShippingMethod(), '_');
+        if (!in_array($shippingMethod, $this->carrierCodes, true)) {
+            // carrier does not support label status
+            return false;
+        }
+
         try {
             $this->labelStatusRepository->save($labelStatus);
 
@@ -119,17 +126,11 @@ class LabelStatusManagement implements LabelStatusManagementInterface
      *
      * @see \Dhl\ShippingCore\Observer\SetInitialLabelStatus::execute
      *
-     * @param OrderInterface|Order $order
+     * @param OrderInterface $order
      * @return bool
      */
     public function setInitialStatus(OrderInterface $order): bool
     {
-        $shippingMethod = strtok((string) $order->getShippingMethod(), '_');
-        if (!in_array($shippingMethod, $this->carrierCodes, true)) {
-            // carrier does not support label status
-            return false;
-        }
-
         $labelStatusCollection = $this->labelStatusCollectionFactory->create();
         $labelStatusCollection->addFieldToFilter('order_id', $order->getEntityId());
         if ($labelStatusCollection->getSize() > 0) {
@@ -143,7 +144,7 @@ class LabelStatusManagement implements LabelStatusManagementInterface
     /**
      * Set the order's label status to "pending".
      *
-     * @param OrderInterface|Order $order
+     * @param OrderInterface $order
      * @return bool
      */
     public function setLabelStatusPending(OrderInterface $order): bool
@@ -154,13 +155,13 @@ class LabelStatusManagement implements LabelStatusManagementInterface
             LabelStatus::STATUS_CODE => self::LABEL_STATUS_PENDING
         ]);
 
-        return $this->updateLabelStatus($labelStatus);
+        return $this->updateLabelStatus($order, $labelStatus);
     }
 
     /**
      * Set the order's label status to "processed".
      *
-     * @param OrderInterface|Order $order
+     * @param OrderInterface $order
      * @return bool
      */
     public function setLabelStatusProcessed(OrderInterface $order): bool
@@ -171,13 +172,13 @@ class LabelStatusManagement implements LabelStatusManagementInterface
             LabelStatus::STATUS_CODE => self::LABEL_STATUS_PROCESSED
         ]);
 
-        return $this->updateLabelStatus($labelStatus);
+        return $this->updateLabelStatus($order, $labelStatus);
     }
 
     /**
      * Set the order's label status to "failed".
      *
-     * @param OrderInterface|Order $order
+     * @param OrderInterface $order
      * @return bool
      */
     public function setLabelStatusFailed(OrderInterface $order): bool
@@ -188,13 +189,13 @@ class LabelStatusManagement implements LabelStatusManagementInterface
             LabelStatus::STATUS_CODE => self::LABEL_STATUS_FAILED
         ]);
 
-        return $this->updateLabelStatus($labelStatus);
+        return $this->updateLabelStatus($order, $labelStatus);
     }
 
     /**
      * Set the order's label status to "partial".
      *
-     * @param OrderInterface|Order $order
+     * @param OrderInterface $order
      * @return bool
      */
     public function setLabelStatusPartial(OrderInterface $order): bool
@@ -205,6 +206,6 @@ class LabelStatusManagement implements LabelStatusManagementInterface
             LabelStatus::STATUS_CODE => self::LABEL_STATUS_PARTIAL
         ]);
 
-        return $this->updateLabelStatus($labelStatus);
+        return $this->updateLabelStatus($order, $labelStatus);
     }
 }
