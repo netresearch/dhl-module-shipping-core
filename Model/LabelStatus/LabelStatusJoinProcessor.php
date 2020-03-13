@@ -61,15 +61,11 @@ class LabelStatusJoinProcessor implements CollectionProcessorInterface
             []
         );
 
-        // Add status_code filters as one OR group
         $collection->addFieldToFilter(
+            'status_table.' . LabelStatus::STATUS_CODE,
             [
-                'status_table1' => 'status_table.' . LabelStatus::STATUS_CODE,
-                'status_table2' => 'status_table.' . LabelStatus::STATUS_CODE,
-            ],
-            [
-                'status_table1' => ['neq' => LabelStatusManagementInterface::LABEL_STATUS_PROCESSED],
-                'status_table2' => ['null' => null],
+                ['neq' => LabelStatusManagementInterface::LABEL_STATUS_PROCESSED],
+                ['null' => true],
             ]
         );
     }
