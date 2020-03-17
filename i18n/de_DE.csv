@@ -49,10 +49,9 @@ Fri,Fr
 "General Configuration","Allgemeine Konfiguration"
 "General Settings","Allgemeine Einstellungen"
 "HS Code",HS-Code
-"Having issues configuring the extension? Contact your DHL account representative who will facilitate technical assistance.","Haben Sie Probleme beim Konfigurieren der Erweiterung? Wenden Sie sich an Ihren DHL Paket-Kundenbetreuer, um technische Unterstützung zu erhalten."
+"Having issues configuring the extension? Contact our support desk: ","Haben Sie Probleme beim Konfigurieren der Extension? Wenden Sie sich an unser Support-Team: "
 Height,Höhe
 "Height %1","Höhe %1"
-"Here you can globally configure settings that apply to all available DHL shipping methods, such as order cut-off times and your custom package types.","Hier können Sie systemweite Einstellungen setzen die alle verfügbaren DHL Versandmethoden betreffen, etwa die Auftragsabschlusszeit oder ihre selbst definierten Pakettypen."
 "Hide this shipping method in checkout","Diese Versandart im Checkout ausblenden"
 "I will pay duties and taxes (DDP)","Ich zahle Zölle und Steuern (DDP)"
 "If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.","Ist die automatische Wiederholung deaktiviert, so müssen alle zuvor fehlgeschlagenen Versandetiketten nach Korrektur der Versanddaten manuell angefordert werden. Ist sie aktiviert, dann wird wiederholt versucht, Versandetiketten vom Webservice abzurufen – auch wenn noch keine Korrektur der Sendungsdaten vorgenommen wurde. Dies mag komfortabel erscheinen, kann die Anzahl der Versandetikettenanfragen und damit die Last der automatischen Verarbeitung aber drastisch erhöhen."
@@ -107,12 +106,12 @@ Sat,Sa
 "Shipping label(s) for the order(s) %1 could not be created.","Versandetiketten für die Bestellung(en) %1 konnten nicht erstellt werden."
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Versandetiketten für die Bestellung(en) %1 konnten nicht abgerufen werden. Bitte prüfen Sie die Lieferscheinkommentare."
 "Shipping label(s) for the order(s) %1 were successfully created.","Versandetiketten für die Bestellung(en) %1 wurden erfolgreich erstellt."
-"Terms of Trade",Handelsklauseln
-"This section provides common configuration options for all subsequent DHL carrier modules.","Dieser Abschnitt enthält gemeinsame Konfigurationseinstellungen für alle nachfolgenden DHL Versandmethoden."
 "Tare weight",Leergewicht
+"Terms of Trade",Handelsklauseln
 "The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token.","Die Abholort-Suche im Checkout verwendet den Dienst MapBox, um eine interaktive Karte anzuzeigen. Wenn Sie diese Funktion nutzen möchten, erstellen Sie bitte ein API-Token auf mapbox.com."
 "The content description is mandatory if export content type is <em>OTHER</em>.","Eine Inhaltsbeschreibung ist vorgeschrieben, wenn die Inhaltskategorie <em>SONSTIGES</em> ist."
 "The item option ""%1"" is not available.","Die Artikeloption ""%1"" ist nicht verfügbar."
+"The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials.","Die neue DHL Shipping Extension umfasst alle verfügbaren DHL Optionen für Ihren Magento 2 Store. Sie vereinigt alle DHL Funktionalitäten in einer Lösung, die mit Hilfe Ihrer DHL Kundennummer aktiviert werden können."
 "The package option ""%1"" is not available.","Die Paketoption ""%1"" ist nicht verfügbar."
 "The service option ""%1"" is not available.","Die Service-Option ""%1"" ist nicht verfügbar."
 "The shipment was successfully cancelled.","Die Lieferung wurde erfolgreich storniert."
@@ -140,5 +139,7 @@ Weight,Gewicht
 "Weight %1","Gewicht %1"
 Width,Breite
 "Width %1","Breite %1"
+"You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.","Sie können hier alle Einstellungen für die verfügbaren DHL Versandmethoden konfigurieren, wie zum Beispiel Versandoptionen, Checkout-Services und Retourenlösungen."
 "You can configure your preset package sizes in the system configuration","Ihre voreingestellten Paketgrößen können Sie in der Systemkonfiguration konfigurieren"
 "You need to have at least one drop off day.","Sie müssen mindestens einen Tag für die Paketübergabe angeben."
+dhl.support@netresearch.de,"dhl.support@netresearch.de"

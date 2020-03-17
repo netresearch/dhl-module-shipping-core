@@ -49,10 +49,9 @@ Fri,Fri
 "General Configuration","General Configuration"
 "General Settings","General Settings"
 "HS Code","HS Code"
-"Having issues configuring the extension? Contact your DHL account representative who will facilitate technical assistance.","Having issues configuring the extension? Contact your DHL account representative who will facilitate technical assistance."
+"Having issues configuring the extension? Contact our support desk: ","Having issues configuring the extension? Contact our support desk: "
 Height,Height
 "Height %1","Height %1"
-"Here you can globally configure settings that apply to all available DHL shipping methods, such as order cut-off times and your custom package types.","Here you can globally configure settings that apply to all available DHL shipping methods, such as order cut-off times and your custom package types."
 "Hide this shipping method in checkout","Hide this shipping method in checkout"
 "I will pay duties and taxes (DDP)","I will pay duties and taxes (DDP)"
 "If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.","If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general."
@@ -109,10 +108,10 @@ Sat,Sat
 "Shipping label(s) for the order(s) %1 were successfully created.","Shipping label(s) for the order(s) %1 were successfully created."
 "Tare weight","Tare weight"
 "Terms of Trade","Terms of Trade"
-"This section provides common configuration options for all subsequent DHL carrier modules.","This section provides common configuration options for all subsequent DHL carrier modules."
-"The content description is mandatory if export content type is <em>OTHER</em>.","The content description is mandatory if export content type is <em>OTHER</em>."
 "The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token.","The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token."
+"The content description is mandatory if export content type is <em>OTHER</em>.","The content description is mandatory if export content type is <em>OTHER</em>."
 "The item option ""%1"" is not available.","The item option ""%1"" is not available."
+"The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials.","The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials."
 "The package option ""%1"" is not available.","The package option ""%1"" is not available."
 "The service option ""%1"" is not available.","The service option ""%1"" is not available."
 "The shipment was successfully cancelled.","The shipment was successfully cancelled."
@@ -140,5 +139,7 @@ Weight,Weight
 "Weight %1","Weight %1"
 Width,Width
 "Width %1","Width %1"
+"You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.","You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions."
 "You can configure your preset package sizes in the system configuration","You can configure your preset package sizes in the system configuration"
 "You need to have at least one drop off day.","You need to have at least one drop off day."
+dhl.support@netresearch.de,dhl.support@netresearch.de

@@ -6,10 +6,10 @@
 ?>
 <div class="col content">
     <p>
-        <?= $block->escapeHtml(__('This section provides common configuration options for all subsequent DHL carrier modules.')) ?>
+        <?= $block->escapeHtml(__('The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials.')) ?>
     </p>
     <p>
-        <?= $block->escapeHtml(__('Here you can globally configure settings that apply to all available DHL shipping methods, such as order cut-off times and your custom package types.')) ?>
+        <?= $block->escapeHtml(__('You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.')) ?>
     </p>
 </div>
 <div class="col side">
@@ -17,7 +17,10 @@
         <div class="section">
             <h3><?= $block->escapeHtml(__('DHL & Magento')) ?></h3>
             <p>
-                <?= $block->escapeHtml(__('Having issues configuring the extension? Contact your DHL account representative who will facilitate technical assistance.')) ?>
+                <?= $block->escapeHtml(__('Having issues configuring the extension? Contact our support desk: ')) ?>
+                <a href="mailto:<?= $block->escapeHtml(__('dhl.support@netresearch.de'))?>">
+                    <?= $block->escapeHtml(__('dhl.support@netresearch.de'))?>
+                </a>
             </p>
         </div>
     </aside>
