@@ -171,7 +171,7 @@ class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
 
                 case Codes::PACKAGING_INPUT_EXPORT_DESCRIPTION:
                     $exportDescriptions = $this->itemAttributeReader->getPackageExportDescriptions($shipment);
-                    $exportDescription = implode(' ', $exportDescriptions);
+                    $exportDescription = implode(', ', $exportDescriptions);
                     $input->setDefaultValue(substr($exportDescription, 0, 80));
                     break;
 
