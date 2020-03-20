@@ -1,61 +1,65 @@
 {
-  "name": "dhl/module-shipping-core",
-  "version": "0.5.0",
-  "type": "magento2-module",
-  "description": "DHL component providing utilities and frameworks for advanced shipping features",
-  "license": "OSL-3.0",
-  "authors": [
-    {
-      "email": "paul.siedler@netresearch.de",
-      "name": "Paul Siedler"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Dhl\\ShippingCore\\": ""
+    "name": "dhl/module-shipping-core",
+    "version": "0.5.0",
+    "type": "magento2-module",
+    "description": "DHL component providing utilities and frameworks for advanced shipping features",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "email": "paul.siedler@netresearch.de",
+            "name": "Paul Siedler"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Dhl\\ShippingCore\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
     },
-    "files": [
-      "registration.php"
-    ]
-  },
-  "require": {
-    "php": "~7.0.6 || ~7.1.3 || ~7.2.0 || ~7.3.0",
-    "ext-dom": "*",
-    "ext-intl": "*",
-    "ext-simplexml": "*",
-    "magento/framework": "^101.0.0 || ^102.0.0",
-    "magento/module-backend": "^100.2.0 || ^101.0.0",
-    "magento/module-bundle": "^100.2.5",
-    "magento/module-catalog": "^102.0.0 || ^103.0.0",
-    "magento/module-config": "^101.0.0",
-    "magento/module-configurable-product": "^100.2.0",
-    "magento/module-directory": "^100.2.0",
-    "magento/module-eav": "^101.0.0 || ^102.0.0",
-    "magento/module-payment": "^100.2.4",
-    "magento/module-quote": "^101.0.0",
-    "magento/module-sales": "^101.0.0 || ^102.0.0",
-    "magento/module-shipping": "^100.2.0",
-    "magento/module-store": "^100.2.0 || ^101.0.0",
-    "magento/zendframework1": "^1.13.0",
-    "netresearch/config-fields-m2": "^1.1.0",
-    "nyholm/psr7": "^0.2.0 || ^1.2.0",
-    "php-http/curl-client": "^1.7.0 || ^2.0.0",
-    "azuyalabs/yasumi": "^1.8.0"
-  },
-  "require-dev": {
-    "magento/module-customer": "^101.0.0 || ^102.0.0",
-    "magento/module-offline-shipping": "^100.2.0",
-    "phpunit/phpunit": "~6.2.0",
-    "symfony/yaml": "^3.3.0 || ^4.0.0",
-    "tddwizard/magento2-fixtures": "^0.8.0"
-  },
-  "suggest": {
-    "magento/module-scalable-checkout": "^100.2.0",
-    "magento/module-scalable-oms": "^100.2.0"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-develop": "0.5.9.x-dev"
+    "require": {
+        "php": "~7.0.6 || ~7.1.3 || ~7.2.0 || ~7.3.0",
+        "ext-dom": "*",
+        "ext-intl": "*",
+        "ext-simplexml": "*",
+        "magento/zendframework1": "^1.13.0",
+        "netresearch/config-fields-m2": "^1.1.0",
+        "nyholm/psr7": "^0.2.0 || ^1.2.0",
+        "php-http/curl-client": "^1.7.0 || ^2.0.0",
+        "azuyalabs/yasumi": "^1.8.0",
+        "magento/module-backend": "^100.2.6 || ^101.0.0",
+        "magento/module-bundle": "^100.2.5",
+        "magento/module-configurable-product": "^100.2.6",
+        "magento/module-eav": "^101.0.5 || ^102.0.0",
+        "magento/module-payment": "^100.2.4",
+        "magento/module-tax": "^100.2.6",
+        "magento/module-ui": "^101.0.6",
+        "magento/module-cron": "^100.2.4",
+        "magento/module-webapi": "^100.2.4",
+        "magento/module-catalog": "^102.0.6 || ^103.0.0",
+        "magento/module-config": "^101.0.6",
+        "magento/module-directory": "^100.2.5",
+        "magento/framework": "^101.0.6 || ^102.0.0",
+        "magento/module-quote": "^101.0.5",
+        "magento/module-sales": "^101.0.5 || ^102.0.0",
+        "magento/module-shipping": "^100.2.6",
+        "magento/module-store": "^100.2.5 || ^101.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.2.0",
+        "symfony/yaml": "^3.3.0 || ^4.0.0",
+        "tddwizard/magento2-fixtures": "^0.8.0",
+        "magento/module-catalog-inventory": "^100.2.5",
+        "magento/module-customer": "^101.0.6 || ^102.0.0"
+    },
+    "suggest": {
+        "magento/module-scalable-checkout": "^100.2.0",
+        "magento/module-scalable-oms": "^100.2.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "0.5.9.x-dev"
+        }
     }
-  }
 }
