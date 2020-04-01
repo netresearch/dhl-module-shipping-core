@@ -35,7 +35,9 @@ class ApiLogHandler extends Base
 
     /**
      * ApiLogHandler constructor.
+     *
      * @param DriverInterface $filesystem
+     * @param ApiLogAnonymizer $anonymizer
      * @param string $logEnabledConfigPath
      * @param string $logLevelConfigPath
      * @param ScopeConfigInterface $scopeConfig
@@ -45,6 +47,7 @@ class ApiLogHandler extends Base
      */
     public function __construct(
         DriverInterface $filesystem,
+        ApiLogAnonymizer $anonymizer,
         string $logEnabledConfigPath,
         string $logLevelConfigPath,
         ScopeConfigInterface $scopeConfig,
@@ -56,6 +59,8 @@ class ApiLogHandler extends Base
         $this->logEnabledConfigPath = $logEnabledConfigPath;
         $this->logLevelConfigPath = $logLevelConfigPath;
         $this->scopeConfig = $scopeConfig;
+
+        $this->pushProcessor($anonymizer);
     }
 
     /**
