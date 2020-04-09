@@ -3,28 +3,26 @@
     <carrier code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::CARRIER_BASE">
         <packageOptions>
             <shippingOption code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_OPTION_PACKAGE_DETAILS">
-                <label>Package Details</label>
+                <label translate="true">Package Details</label>
                 <inputs>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_PRODUCT_CODE">
-                        <label>Shipping Product</label>
+                        <label translate="true">Shipping Product</label>
                         <inputType>radioset</inputType>
                         <sortOrder>10</sortOrder>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID">
-                        <label>Container</label>
+                        <label translate="true">Container</label>
                         <inputType>select</inputType>
                         <sortOrder>20</sortOrder>
-                        <tooltip>
-                            You can configure your preset package sizes in the system configuration
-                        </tooltip>
+                        <tooltip translate="true">You can configure your preset package sizes in the system configuration</tooltip>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_PACKAGING_WEIGHT">
-                        <label>Tare weight</label>
+                        <label translate="true">Tare weight</label>
                         <inputType>prefixed</inputType>
                         <sortOrder>30</sortOrder>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_WEIGHT">
-                        <label>Total Weight</label>
+                        <label translate="true">Total Weight</label>
                         <inputType>prefixed</inputType>
                         <sortOrder>40</sortOrder>
                         <validationRules>
@@ -44,7 +42,7 @@
                         <sortOrder>50</sortOrder>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_WIDTH">
-                        <label>Width</label>
+                        <label translate="true">Width</label>
                         <inputType>prefixed</inputType>
                         <sortOrder>60</sortOrder>
                         <validationRules>
@@ -52,7 +50,7 @@
                         </validationRules>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_HEIGHT">
-                        <label>Height</label>
+                        <label translate="true">Height</label>
                         <inputType>prefixed</inputType>
                         <sortOrder>70</sortOrder>
                         <validationRules>
@@ -60,7 +58,7 @@
                         </validationRules>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_LENGTH">
-                        <label>Length</label>
+                        <label translate="true">Length</label>
                         <inputType>prefixed</inputType>
                         <sortOrder>80</sortOrder>
                         <validationRules>
@@ -74,7 +72,7 @@
                 </inputs>
             </shippingOption>
             <shippingOption code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_OPTION_PACKAGE_CUSTOMS">
-                <label>Customs Data</label>
+                <label translate="true">Customs Data</label>
                 <routes>
                     <route>
                         <excludeDestinations>
@@ -90,7 +88,7 @@
                 </routes>
                 <inputs>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_CUSTOMS_VALUE">
-                        <label>Customs Value</label>
+                        <label translate="true">Customs Value</label>
                         <inputType>prefixed</inputType>
                         <sortOrder>10</sortOrder>
                         <validationRules>
@@ -102,17 +100,17 @@
                         </itemCombinationRule>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_TERMS_OF_TRADE" defaultConfigValue="Dhl\ShippingCore\Api\ConfigInterface::CONFIG_PATH_TERMS_OF_TRADE">
-                        <label>Terms of Trade</label>
+                        <label translate="true">Terms of Trade</label>
                         <inputType>select</inputType>
                         <sortOrder>20</sortOrder>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_CONTENT_TYPE" defaultConfigValue="Dhl\ShippingCore\Api\ConfigInterface::CONFIG_PATH_CONTENT_TYPE">
-                        <label>Export Content Type</label>
+                        <label translate="true">Export Content Type</label>
                         <inputType>select</inputType>
                         <sortOrder>30</sortOrder>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_EXPLANATION" defaultConfigValue="Dhl\ShippingCore\Api\ConfigInterface::CONFIG_PATH_CONTENT_EXPLANATION">
-                        <label>Export Content Explanation</label>
+                        <label translate="true">Export Content Explanation</label>
                         <inputType>text</inputType>
                         <sortOrder>40</sortOrder>
                         <validationRules>
@@ -120,7 +118,7 @@
                         </validationRules>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_EXPORT_DESCRIPTION">
-                        <label>Package Description</label>
+                        <label translate="true">Package Description</label>
                         <inputType>textarea</inputType>
                         <sortOrder>50</sortOrder>
                         <itemCombinationRule>
@@ -135,17 +133,17 @@
             <itemShippingOptions itemId="0">
                 <shippingOptions>
                     <shippingOption code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_OPTION_DETAILS">
-                        <label>Item Details</label>
+                        <label translate="true">Item Details</label>
                         <inputs>
                             <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_QTY_TO_SHIP">
                                 <sortOrder>10</sortOrder>
-                                <label>Quantity to Ship</label>
+                                <label translate="true">Quantity to Ship</label>
                                 <inputType>static</inputType>
                                 <disabled>true</disabled>
                             </input>
                             <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_QTY">
                                 <sortOrder>20</sortOrder>
-                                <label>Quantity</label>
+                                <label translate="true">Quantity</label>
                                 <inputType>text</inputType>
                                 <validationRules>
                                     <rule name="validate-number"/>
@@ -153,7 +151,7 @@
                             </input>
                             <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_WEIGHT">
                                 <sortOrder>30</sortOrder>
-                                <label>Weight</label>
+                                <label translate="true">Weight</label>
                                 <inputType>prefixed</inputType>
                                 <validationRules>
                                     <rule name="validate-number"/>
@@ -174,7 +172,7 @@
                         </inputs>
                     </shippingOption>
                     <shippingOption code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_OPTION_ITEM_CUSTOMS">
-                        <label>Customs Data</label>
+                        <label translate="true">Customs Data</label>
                         <routes>
                             <route>
                                 <excludeDestinations>
@@ -191,7 +189,7 @@
                         <inputs>
                             <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_CUSTOMS_VALUE">
                                 <sortOrder>10</sortOrder>
-                                <label>Customs Value</label>
+                                <label translate="true">Customs Value</label>
                                 <inputType>prefixed</inputType>
                                 <validationRules>
                                     <rule name="validate-number"/>
@@ -199,17 +197,17 @@
                             </input>
                             <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_HS_CODE">
                                 <sortOrder>20</sortOrder>
-                                <label>HS Code</label>
+                                <label translate="true">HS Code</label>
                                 <inputType>text</inputType>
                             </input>
                             <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_COUNTRY_OF_ORIGIN">
                                 <sortOrder>30</sortOrder>
-                                <label>Country of Origin</label>
+                                <label translate="true">Country of Origin</label>
                                 <inputType>select</inputType>
                             </input>
                             <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_EXPORT_DESCRIPTION">
                                 <sortOrder>100</sortOrder>
-                                <label>Export Description</label>
+                                <label translate="true">Export Description</label>
                                 <inputType>textarea</inputType>
                             </input>
                         </inputs>

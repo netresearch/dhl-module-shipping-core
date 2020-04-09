@@ -117,7 +117,9 @@ class Converter implements ConverterInterface
      */
     private function toScalar(\SimpleXMLElement $xmlElement)
     {
-        if ((string) $xmlElement === 'true') {
+        if ((bool)$xmlElement->attributes()['translate']) {
+            $value = __(trim((string)$xmlElement))->render();
+        } elseif ((string) $xmlElement === 'true') {
             $value = true;
         } elseif ((string) $xmlElement === 'false') {
             $value = false;

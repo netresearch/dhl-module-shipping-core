@@ -311,15 +311,10 @@
         <arguments>
             <argument name="serviceOptionsProcessors" xsi:type="array">
                 <item name="dhlRouteProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\RouteProcessor</item>
-                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\TranslationProcessor</item>
                 <item name="dhlSortOrderProcessor" sortOrder="990" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\SortOrderProcessor</item>
             </argument>
             <argument name="metadataProcessors" xsi:type="array">
                 <item name="dhlImageUrlProcessor" sortOrder="970" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Metadata\ImageUrlProcessor</item>
-                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Metadata\TranslationProcessor</item>
-            </argument>
-            <argument name="compatibilityProcessors" xsi:type="array">
-                <item name="dhlTranslationProcessor" sortOrder="980" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\TranslationProcessor</item>
             </argument>
         </arguments>
     </type>
@@ -335,14 +330,9 @@
         <arguments>
             <argument name="checkoutServiceOptionsProcessors" xsi:type="array">
                 <item name="dhlRouteProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\RouteProcessor</item>
-                <item name="dhlTranslationProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\TranslationProcessor</item>
             </argument>
             <argument name="checkoutMetadataProcessors" xsi:type="array">
                 <item name="dhlImageUrlProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Metadata\ImageUrlProcessor</item>
-                <item name="dhlTranslationProcessor" sortOrder="960" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Metadata\TranslationProcessor</item>
-            </argument>
-            <argument name="checkoutCompatibilityProcessors" xsi:type="array">
-                <item name="dhlTranslationProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\TranslationProcessor</item>
             </argument>
             <argument name="packagingServiceOptionsProcessors" xsi:type="array">
                 <item name="dhlAddDeliveryLocationInputsProcessor" sortOrder="50" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\DeliveryLocationInputsProcessor</item>
