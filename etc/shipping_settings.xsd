@@ -277,7 +277,7 @@
     <xs:complexType name="string_translatable">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute type="xs:boolean" name="translate" fixed="true"/>
+                <xs:attribute type="xs:boolean" name="translate" default="false"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
