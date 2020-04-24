@@ -13,9 +13,15 @@ namespace Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption;
  */
 interface CompatibilityInterface
 {
+    const ACTION_HIDE = 'hide';
+    const ACTION_SHOW = 'show';
+    const ACTION_ENABLE = 'enable';
+    const ACTION_DISABLE = 'disable';
+    const ACTION_REQUIRE = 'require';
+    const ACTION_UNREQUIRE = 'unrequire';
+
     /**
-     * May return the unique ID of the compatibility rule.
-     * If the rule does not have a unique id, it will return ''.
+     * The unique ID of the compatibility rule.
      *
      * @return string
      */
@@ -69,7 +75,7 @@ interface CompatibilityInterface
     public function getTriggerValue(): string;
 
     /**
-     * Will return one of show|hide|enable|disable.
+     * Will return one of ACTION_* constants.
      * This decides what action to take if a master has the designated triggerValue.
      * If there is no match, the opposite action will be applied.
      *
