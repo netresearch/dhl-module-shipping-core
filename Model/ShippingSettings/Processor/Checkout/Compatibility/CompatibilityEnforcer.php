@@ -4,27 +4,17 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\ShippingSettings;
+namespace Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
-use Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\PreProcessor;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\GlobalProcessorInterface;
 use Magento\Framework\Exception\LocalizedException;
 
-class CompatibilityEnforcer
+class CompatibilityEnforcer implements GlobalProcessorInterface
 {
-    /**
-     * @var PreProcessor
-     */
-    private $preProcessor;
-
-    public function __construct(PreProcessor $preProcessor)
-    {
-        $this->preProcessor = $preProcessor;
-    }
-
     /**
      * Applies all compatibility rules.
      *
@@ -39,9 +29,8 @@ class CompatibilityEnforcer
      * @throws LocalizedException           Thrown if a required input is missing a value
      * @throws \InvalidArgumentException    Thrown if configured rules override each other or are otherwise invalid
      */
-    public function enforce(CarrierDataInterface $carrierData): CarrierDataInterface
+    public function process(CarrierDataInterface $carrierData): CarrierDataInterface
     {
-        $carrierData = $this->preProcessor->process($carrierData);
         for ($iteration = 0; $iteration <= 5; $iteration++) {
             $inputsModified = $this->processRules($carrierData);
             if (!$inputsModified) {

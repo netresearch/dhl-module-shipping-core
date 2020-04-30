@@ -9,6 +9,7 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\CompatibilityProcessorInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\MetadataProcessorInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\GlobalProcessorInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsProcessorInterface;
 
 /**
@@ -34,20 +35,28 @@ class CheckoutDataCompositeProcessor
     private $compatibilityProcessors;
 
     /**
+     * @var GlobalProcessorInterface[]
+     */
+    private $globalProcessors;
+
+    /**
      * CheckoutDataCompositeProcessor constructor.
      *
      * @param ShippingOptionsProcessorInterface[] $serviceOptionsProcessors
      * @param MetadataProcessorInterface[] $metadataProcessors
      * @param CompatibilityProcessorInterface[] $compatibilityProcessors
+     * @param GlobalProcessorInterface[] $globalProcessors
      */
     public function __construct(
         array $serviceOptionsProcessors = [],
         array $metadataProcessors = [],
-        array $compatibilityProcessors = []
+        array $compatibilityProcessors = [],
+        array $globalProcessors = []
     ) {
         $this->serviceOptionsProcessors = $serviceOptionsProcessors;
         $this->metadataProcessors       = $metadataProcessors;
         $this->compatibilityProcessors  = $compatibilityProcessors;
+        $this->globalProcessors         = $globalProcessors;
     }
 
     /**
@@ -92,6 +101,10 @@ class CheckoutDataCompositeProcessor
                         $carrierData->getCompatibilityData()
                     )
                 );
+            }
+
+            foreach ($this->globalProcessors as $processor) {
+                $processor->process($carrierData);
             }
         }
 

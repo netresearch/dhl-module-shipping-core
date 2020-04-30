@@ -3,14 +3,13 @@
  * See LICENSE.md for license details.
  */
 
-namespace Dhl\ShippingCore\Test\Unit\Model\ShippingSettings\ShippingOption;
+namespace Dhl\ShippingCore\Test\Unit\Model\ShippingSettings\Processor\Checkout\Compatibility;
 
-use Dhl\ShippingCore\Model\ShippingSettings\CompatibilityEnforcer;
 use Dhl\ShippingCore\Model\ShippingSettings\Data\CarrierData;
 use Dhl\ShippingCore\Model\ShippingSettings\Data\Compatibility;
 use Dhl\ShippingCore\Model\ShippingSettings\Data\Input;
 use Dhl\ShippingCore\Model\ShippingSettings\Data\ShippingOption;
-use Dhl\ShippingCore\Test\Unit\PreProcessorMock;
+use Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\CompatibilityEnforcer;
 use Magento\Framework\Exception\LocalizedException;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +17,7 @@ class CompatibilityEnforcerTest extends TestCase
 {
     public function testEnforce()
     {
-        $subject = new CompatibilityEnforcer(new PreProcessorMock());
+        $subject = new CompatibilityEnforcer();
 
         $masterInput = new Input();
         $masterInput->setCode('masterInput');
@@ -47,7 +46,7 @@ class CompatibilityEnforcerTest extends TestCase
         $carrier->setServiceOptions([$subjectOption]);
         $carrier->setCompatibilityData([$compatibility]);
 
-        $result = $subject->enforce($carrier);
+        $result = $subject->process($carrier);
 
         // The subject input should be disabled and have a value of ""
         self::assertTrue(
@@ -73,7 +72,7 @@ class CompatibilityEnforcerTest extends TestCase
 
     public function testEnforceException()
     {
-        $subject = new CompatibilityEnforcer(new PreProcessorMock());
+        $subject = new CompatibilityEnforcer();
 
         $masterInput = new Input();
         $masterInput->setCode('masterInput');
@@ -105,6 +104,6 @@ class CompatibilityEnforcerTest extends TestCase
 
         $this->expectException(LocalizedException::class);
         $this->expectExceptionMessage('expectedErrorMessage');
-        $subject->enforce($carrier);
+        $subject->process($carrier);
     }
 }

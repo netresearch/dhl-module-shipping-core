@@ -11,18 +11,24 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemShippingOptionsInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
-use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\CompatibilityProcessorInterface as CheckoutCompatibilityProcessorInterface;
-use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\MetadataProcessorInterface as CheckoutMetadataProcessorInterface;
-use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsProcessorInterface as CheckoutShippingOptionsProcessorInterface;
-use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\MetadataProcessorInterface as PackagingMetadataProcessorInterface;
-use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface as PackagingShippingOptionsProcessorInterface;
-use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\CompatibilityProcessorInterface as PackagingCompatibilityProcessorInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\CompatibilityProcessorInterface
+    as CheckoutCompatibilityProcessorInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\GlobalProcessorInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\MetadataProcessorInterface
+    as CheckoutMetadataProcessorInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsProcessorInterface
+    as CheckoutShippingOptionsProcessorInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\CompatibilityProcessorInterface
+    as PackagingCompatibilityProcessorInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ItemShippingOptionsProcessorInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\MetadataProcessorInterface
+    as PackagingMetadataProcessorInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsProcessorInterface
+    as PackagingShippingOptionsProcessorInterface;
 use Magento\Sales\Api\Data\OrderAddressInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
- * Class PackagingDataCompositeProcessor
- *
  * @author Max Melzer <max.melzer@netresearch.de>
  */
 class PackagingDataCompositeProcessor
@@ -53,7 +59,7 @@ class PackagingDataCompositeProcessor
     private $packagingPackageOptionsProcessors;
 
     /**
-     * @var PackagingShippingOptionsProcessorInterface[]
+     * @var ItemShippingOptionsProcessorInterface[]
      */
     private $packagingItemOptionsProcessors;
 
@@ -68,17 +74,10 @@ class PackagingDataCompositeProcessor
     private $packagingCompatibilityProcessors;
 
     /**
-     * CheckoutDataCompositeProcessor constructor.
-     *
-     * @param CheckoutShippingOptionsProcessorInterface[] $checkoutServiceOptionsProcessors
-     * @param CheckoutMetadataProcessorInterface[] $checkoutMetadataProcessors
-     * @param CheckoutCompatibilityProcessorInterface[] $checkoutCompatibilityProcessors
-     * @param PackagingShippingOptionsProcessorInterface[] $packagingServiceOptionsProcessors
-     * @param PackagingShippingOptionsProcessorInterface[] $packagingPackageOptionsProcessors
-     * @param PackagingShippingOptionsProcessorInterface[] $packagingItemOptionsProcessors
-     * @param PackagingMetadataProcessorInterface[] $packagingMetadataProcessors
-     * @param PackagingCompatibilityProcessorInterface[] $packagingCompatibilityProcessors
+     * @var GlobalProcessorInterface[]
      */
+    private $globalProcessors;
+
     public function __construct(
         array $checkoutServiceOptionsProcessors = [],
         array $checkoutMetadataProcessors = [],
@@ -87,7 +86,8 @@ class PackagingDataCompositeProcessor
         array $packagingPackageOptionsProcessors = [],
         array $packagingItemOptionsProcessors = [],
         array $packagingMetadataProcessors = [],
-        array $packagingCompatibilityProcessors = []
+        array $packagingCompatibilityProcessors = [],
+        array $globalProcessors = []
     ) {
         $this->checkoutServiceOptionsProcessors = $checkoutServiceOptionsProcessors;
         $this->checkoutMetadataProcessors = $checkoutMetadataProcessors;
@@ -97,6 +97,7 @@ class PackagingDataCompositeProcessor
         $this->packagingItemOptionsProcessors = $packagingItemOptionsProcessors;
         $this->packagingMetadataProcessors = $packagingMetadataProcessors;
         $this->packagingCompatibilityProcessors = $packagingCompatibilityProcessors;
+        $this->globalProcessors = $globalProcessors;
     }
 
     /**
@@ -145,6 +146,10 @@ class PackagingDataCompositeProcessor
                     )
                 );
             }
+
+            foreach ($this->globalProcessors as $processor) {
+                $processor->process($carrierData);
+            }
         }
 
         return $packagingData;
@@ -163,16 +168,14 @@ class PackagingDataCompositeProcessor
         /** @var OrderAddressInterface $shippingAddress */
         $shippingAddress = $shipment->getShippingAddress();
 
-        /** @var CheckoutShippingOptionsProcessorInterface $processor */
         foreach ($this->checkoutServiceOptionsProcessors as $processor) {
             $optionsData = $processor->process(
                 $optionsData,
                 $shippingAddress->getCountryId(),
                 $shippingAddress->getPostcode(),
-                (int) $shipment->getStoreId()
+                (int)$shipment->getStoreId()
             );
         }
-        /** @var PackagingShippingOptionsProcessorInterface $processor */
         foreach ($this->packagingPackageOptionsProcessors as $processor) {
             $optionsData = $processor->process(
                 $optionsData,
@@ -194,18 +197,16 @@ class PackagingDataCompositeProcessor
         ShipmentInterface $shipment
     ): array {
         if ($shipment->getShippingAddress()) {
-            /** @var CheckoutShippingOptionsProcessorInterface $processor */
             foreach ($this->checkoutServiceOptionsProcessors as $processor) {
                 $optionsData = $processor->process(
                     $optionsData,
                     $shipment->getShippingAddress()->getCountryId(),
                     $shipment->getShippingAddress()->getPostcode(),
-                    (int) $shipment->getStoreId()
+                    (int)$shipment->getStoreId()
                 );
             }
         }
 
-        /** @var PackagingShippingOptionsProcessorInterface $processor */
         foreach ($this->packagingServiceOptionsProcessors as $processor) {
             $optionsData = $processor->process(
                 $optionsData,
@@ -224,7 +225,6 @@ class PackagingDataCompositeProcessor
      */
     private function processItemOptions(array $itemData, ShipmentInterface $shipment): array
     {
-        /** @var PackagingShippingOptionsProcessorInterface $processor */
         foreach ($this->packagingItemOptionsProcessors as $processor) {
             $itemData = $processor->process($itemData, $shipment);
         }
@@ -234,7 +234,6 @@ class PackagingDataCompositeProcessor
 
         // Apply checkout processors to item based shipping options as well
         if ($shippingAddress) {
-            /** @var CheckoutShippingOptionsProcessorInterface $processor */
             foreach ($this->checkoutServiceOptionsProcessors as $processor) {
                 foreach ($itemData as $item) {
                     $item->setShippingOptions(
@@ -242,7 +241,7 @@ class PackagingDataCompositeProcessor
                             $item->getShippingOptions(),
                             $shippingAddress->getCountryId(),
                             $shippingAddress->getPostcode(),
-                            (int) $shipment->getStoreId()
+                            (int)$shipment->getStoreId()
                         )
                     );
                 }
@@ -291,7 +290,6 @@ class PackagingDataCompositeProcessor
         ShipmentInterface $shipment
     ): array {
         if ($shipment->getShippingAddress()) {
-            /** @var CheckoutCompatibilityProcessorInterface $processor */
             foreach ($this->checkoutCompatibilityProcessors as $processor) {
                 $compatibilityData = $processor->process($compatibilityData);
             }

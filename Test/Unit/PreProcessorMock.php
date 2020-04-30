@@ -6,9 +6,9 @@
 namespace Dhl\ShippingCore\Test\Unit;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface;
-use Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\PreProcessor;
+use Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\CompatibilityPreProcessor;
 
-class PreProcessorMock extends PreProcessor
+class PreProcessorMock extends CompatibilityPreProcessor
 {
     public function __construct()
     {}

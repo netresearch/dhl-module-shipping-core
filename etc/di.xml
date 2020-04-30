@@ -309,6 +309,9 @@
     <!-- shipping option config processors -->
     <type name="Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\CheckoutDataCompositeProcessor">
         <arguments>
+            <argument name="globalProcessors" xsi:type="array">
+                <item name="dhlCompatibility" sortOrder="999" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\CompatibilityPreProcessor</item>
+            </argument>
             <argument name="serviceOptionsProcessors" xsi:type="array">
                 <item name="dhlRouteProcessor" sortOrder="10" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\RouteProcessor</item>
                 <item name="dhlSortOrderProcessor" sortOrder="990" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\SortOrderProcessor</item>
@@ -328,6 +331,10 @@
 
     <type name="Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\PackagingDataCompositeProcessor">
         <arguments>
+            <argument name="globalProcessors" xsi:type="array">
+                <item name="dhlCompatibilityPre" sortOrder="998" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\CompatibilityPreProcessor</item>
+                <item name="dhlCompatibilityEnforcer" sortOrder="999" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\CompatibilityEnforcer</item>
+            </argument>
             <argument name="checkoutServiceOptionsProcessors" xsi:type="array">
                 <item name="dhlRouteProcessor" sortOrder="950" xsi:type="object">Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions\RouteProcessor</item>
             </argument>

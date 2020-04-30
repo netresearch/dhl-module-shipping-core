@@ -11,7 +11,7 @@ use Dhl\ShippingCore\Model\ShippingSettings\Data\CarrierData;
 use Dhl\ShippingCore\Model\ShippingSettings\Data\Compatibility;
 use Dhl\ShippingCore\Model\ShippingSettings\Data\Input;
 use Dhl\ShippingCore\Model\ShippingSettings\Data\ShippingOption;
-use Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\PreProcessor;
+use Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibility\CompatibilityPreProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -68,7 +68,7 @@ class PreProcessorTest extends TestCase
         $carrier->setServiceOptions([$subjectOption]);
         $carrier->setCompatibilityData([$compatibility]);
 
-        $subject = new PreProcessor($this->mockCompatibilityFactory);
+        $subject = new CompatibilityPreProcessor($this->mockCompatibilityFactory);
 
         $result = $subject->process($carrier);
 
@@ -132,7 +132,7 @@ class PreProcessorTest extends TestCase
         $carrier->setServiceOptions([$subjectOption]);
         $carrier->setCompatibilityData([$compatibility]);
 
-        $subject = new PreProcessor($this->mockCompatibilityFactory);
+        $subject = new CompatibilityPreProcessor($this->mockCompatibilityFactory);
 
         $result = $subject->process($carrier);
 
@@ -213,7 +213,7 @@ class PreProcessorTest extends TestCase
         $carrier->setServiceOptions([$subjectOption]);
         $carrier->setCompatibilityData([$compatibility]);
 
-        $subject = new PreProcessor($this->mockCompatibilityFactory);
+        $subject = new CompatibilityPreProcessor($this->mockCompatibilityFactory);
 
         $this->expectException(\InvalidArgumentException::class);
 

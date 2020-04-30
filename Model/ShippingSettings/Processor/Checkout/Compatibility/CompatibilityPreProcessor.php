@@ -9,8 +9,12 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\Compatibili
 use Dhl\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
+use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\GlobalProcessorInterface;
 
-class PreProcessor
+/**
+ * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
+ */
+class CompatibilityPreProcessor implements GlobalProcessorInterface
 {
     /**
      * @var CompatibilityInterfaceFactory
