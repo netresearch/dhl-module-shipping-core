@@ -15,7 +15,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\OrderAddressInterface;
 
 /**
- * RecipientStreetLoader
+ * Load a DHL recipient street by given address.
  *
  * @author Christoph Aßmann <chritsoph.assmann@netresearch.de>
  * @link   https://www.netresearch.de/
