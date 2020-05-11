@@ -48,7 +48,16 @@ class CompatibilityPreProcessor implements GlobalProcessorInterface
 
         foreach ($carrierData->getCompatibilityData() as $rule) {
             $masters = $this->convertToCompoundCodes($rule->getMasters(), $shippingOptions);
+            if (empty($masters) && !empty($rule->getMasters())) {
+                // This rule has none of its masters available at runtime. We remove it so it does not get turned
+                // into a masterless rule and changes its semantics in unexpected ways.
+                continue;
+            }
             $subjects = $this->convertToCompoundCodes($rule->getSubjects(), $shippingOptions);
+            if (empty($subjects)) {
+                // A rule without any available subjects can do nothing. We remove it to improve performance.
+                continue;
+            }
 
             foreach ($masters as $master) {
                 if (in_array($master, $subjects)) {
