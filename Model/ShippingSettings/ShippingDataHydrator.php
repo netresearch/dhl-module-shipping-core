@@ -7,7 +7,17 @@ namespace Dhl\ShippingCore\Model\ShippingSettings;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterfaceFactory;
 use Dhl\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface;
-use Magento\Framework\Webapi\ServiceInputProcessor;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\CarrierData;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\Comment;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\Compatibility;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\Input;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\ItemCombinationRule;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\ItemShippingOptions;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\Metadata;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\Option;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\Route;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\ShippingOption;
+use Dhl\ShippingCore\Model\ShippingSettings\Data\ValidationRule;
 use Magento\Framework\Webapi\ServiceOutputProcessor;
 
 /**
@@ -17,15 +27,73 @@ use Magento\Framework\Webapi\ServiceOutputProcessor;
  */
 class ShippingDataHydrator
 {
+    const CLASSMAP = [
+        'carriers' => [
+            'type' => 'array',
+            'className' => CarrierData::class,
+        ],
+        'metadata' => [
+            'type' => 'object',
+            'className' => Metadata::class,
+        ],
+        'commentsBefore' => [
+            'type' => 'array',
+            'className' => Comment::class,
+        ],
+        'commentsAfter' => [
+            'type' => 'array',
+            'className' => Comment::class,
+        ],
+        'comment' => [
+            'type' => 'object',
+            'className' => Comment::class,
+        ],
+        'packageOptions' => [
+            'type' => 'array',
+            'className' => ShippingOption::class,
+        ],
+        'serviceOptions' => [
+            'type' => 'array',
+            'className' => ShippingOption::class,
+        ],
+        'shippingOptions' => [
+            'type' => 'array',
+            'className' => ShippingOption::class,
+        ],
+        'itemOptions' => [
+            'type' => 'array',
+            'className' => ItemShippingOptions::class,
+        ],
+        'inputs' => [
+            'type' => 'array',
+            'className' => Input::class,
+        ],
+        'options' => [
+            'type' => 'array',
+            'className' => Option::class,
+        ],
+        'validationRules' => [
+            'type' => 'array',
+            'className' => ValidationRule::class,
+        ],
+        'itemCombinationRule' => [
+            'type' => 'object',
+            'className' => ItemCombinationRule::class,
+        ],
+        'routes' => [
+            'type' => 'array',
+            'className' => Route::class,
+        ],
+        'compatibilityData' => [
+            'type' => 'array',
+            'className' => Compatibility::class,
+        ]
+    ];
+
     /**
      * @var ShippingDataInterfaceFactory
      */
     private $shippingDataFactory;
-
-    /**
-     * @var ServiceInputProcessor
-     */
-    private $inputProcessor;
 
     /**
      * @var ServiceOutputProcessor
@@ -36,16 +104,13 @@ class ShippingDataHydrator
      * ShippingDataHydrator constructor.
      *
      * @param ShippingDataInterfaceFactory $shippingDataFactory
-     * @param ServiceInputProcessor $inputProcessor
      * @param ServiceOutputProcessor $outputProcessor
      */
     public function __construct(
         ShippingDataInterfaceFactory $shippingDataFactory,
-        ServiceInputProcessor $inputProcessor,
         ServiceOutputProcessor $outputProcessor
     ) {
         $this->shippingDataFactory = $shippingDataFactory;
-        $this->inputProcessor = $inputProcessor;
         $this->outputProcessor = $outputProcessor;
     }
 
@@ -61,17 +126,9 @@ class ShippingDataHydrator
      */
     public function toObject(array $data): ShippingDataInterface
     {
-        try {
-            $carrierData = $this->inputProcessor->process(
-                ShippingDataInterface::class,
-                'setCarriers',
-                $data
-            );
-
-            return $this->shippingDataFactory->create(['carriers' => array_shift($carrierData)]);
-        } catch (\Exception $exception) {
-            throw new \RuntimeException('ShippingData object generation failed.', $exception);
-        }
+        return $this->shippingDataFactory->create(
+            ['carriers' => $this->recursiveToObject('carriers', $data['carriers'])]
+        );
     }
 
     /**
@@ -87,5 +144,41 @@ class ShippingDataHydrator
             CheckoutManagementInterface::class,
             'getCheckoutData'
         );
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $data
+     * @return mixed
+     */
+    private function recursiveToObject(string $key, $data)
+    {
+        if (array_key_exists($key, self::CLASSMAP)) {
+            $className = self::CLASSMAP[$key]['className'];
+            $type = self::CLASSMAP[$key]['type'];
+
+            if ($type === 'array') {
+                $result = [];
+                foreach ($data as $arrayKey => $arrayItem) {
+                    $result[$arrayKey] = new $className();
+                    foreach ($arrayItem as $property => $value) {
+                        $result[$arrayKey]->{'set' . ucfirst($property)}(
+                            $this->recursiveToObject($property, $value)
+                        );
+                    }
+                }
+            } else {
+                $result = new $className();
+                foreach ($data as $property => $value) {
+                    $result->{'set' . ucfirst($property)}(
+                        $this->recursiveToObject($property, $value)
+                    );
+                }
+            }
+        } else {
+            $result = $data;
+        }
+
+        return $result;
     }
 }
