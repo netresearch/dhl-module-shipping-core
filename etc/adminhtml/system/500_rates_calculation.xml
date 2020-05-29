@@ -1,4 +1,8 @@
 <?xml version="1.0" ?>
+<!--
+    This is a template for configurations used in the Rate processors, @see \Dhl\ShippingCore\Model\Config\RateConfig
+    and usages. You can either directly include this file or copy it into your module for adjustments.
+ -->
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <group id="rates_calculation" translate="label" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="0">
         <label>Rates Calculation</label>

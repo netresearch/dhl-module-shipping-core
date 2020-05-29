@@ -13,7 +13,6 @@
 "Cannot initialize packaging data, please provide shipment.","Paketdaten konnten nicht geladen werden. Stellen Sie ein Shipment bereit."
 "Carrier ""%1"" not found.","Carrier ""%1"" konnte nicht gefunden werden."
 "Cash On Delivery Payment Methods",Nachnahmezahlungsmethoden
-"Checkout Presentation",Checkout-Darstellung
 "Commercial Sample",Warenmuster
 Container,Container
 "Cost and estimated delivery dates","Kosten und voraussichtliche Liefertermine"
@@ -142,4 +141,4 @@ Width,Breite
 "You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.","Sie können hier alle Einstellungen für die verfügbaren DHL Versandmethoden konfigurieren, wie zum Beispiel Versandoptionen, Checkout-Services und Retourenlösungen."
 "You can configure your preset package sizes in the system configuration","Ihre voreingestellten Paketgrößen können Sie in der Systemkonfiguration konfigurieren"
 "You need to have at least one drop off day.","Sie müssen mindestens einen Tag für die Paketübergabe angeben."
-dhl.support@netresearch.de,"dhl.support@netresearch.de"
+dhl.support@netresearch.de,dhl.support@netresearch.de
