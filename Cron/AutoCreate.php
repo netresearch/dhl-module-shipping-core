@@ -106,7 +106,7 @@ class AutoCreate
         }
 
         // create labels and tracks for above shipments
-        $result = $this->bulkShipmentManagement->createLabels($shipmentIds);
+        $result = $this->bulkShipmentManagement->createLabels(array_reduce($shipmentIds, 'array_merge', []));
 
         // check result, inform about created and failed labels/tracks
         $processResult = function (array $incrementIds, ShipmentResponseInterface $shipmentResponse) {
