@@ -262,9 +262,6 @@
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddTotalsAsExtensionAttributes"/>
     </type>
-    <type name="Magento\Sales\Model\Order\ShippingBuilder">
-        <plugin name="exportShippingOptions" type="Dhl\ShippingCore\Plugin\Order\ShippingBuilderPlugin"/>
-    </type>
     <type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
         <plugin name="addSplitAddressAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddRecipientStreetToAddressCollection"/>
     </type>

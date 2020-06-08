@@ -15,18 +15,13 @@ use Dhl\ShippingCore\Api\Data\OrderExport\ShippingOptionInterfaceFactory;
 use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
 use Dhl\ShippingCore\Model\ShippingSettings\OrderDataProvider;
 use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
+use Magento\Framework\App\State;
 use Magento\Sales\Api\Data\ShippingExtensionFactory;
 use Magento\Sales\Api\Data\ShippingInterface;
 use Magento\Sales\Api\Data\TotalExtensionInterfaceFactory;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\ShippingBuilder;
 
-/**
- * Class ShippingBuilderPlugin
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ShippingBuilderPlugin
 {
     /**
@@ -60,15 +55,10 @@ class ShippingBuilderPlugin
     private $totalExtensionFactory;
 
     /**
-     * ShippingBuilderPlugin constructor.
-     *
-     * @param ShippingExtensionFactory $shippingExtensionFactory
-     * @param ServiceDataInterfaceFactory $serviceDataFactory
-     * @param ShippingOptionInterfaceFactory $packageDataFactory
-     * @param KeyValueObjectInterfaceFactory $keyValueObjectFactory
-     * @param OrderDataProvider $orderDataProvider
-     * @param TotalExtensionInterfaceFactory $totalExtensionFactory
+     * @var State
      */
+    private $appState;
+
     public function __construct(
         ShippingExtensionFactory $shippingExtensionFactory,
         ServiceDataInterfaceFactory $serviceDataFactory,
@@ -93,7 +83,8 @@ class ShippingBuilderPlugin
      * @param ShippingInterface $shipping
      *
      * @return ShippingInterface
-     * @see \Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestModifier::modifyPackage for package/data structure
+     * @see \Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestModifier::modifyPackage for package/data
+     *     structure
      *
      */
     public function afterCreate(
