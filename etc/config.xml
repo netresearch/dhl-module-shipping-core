@@ -1,8 +1,8 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <dhlshippingsolutions>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <dhlglobalwebservices>
                 <cut_off_time>00,00,00</cut_off_time>
                 <package_dimension>[]</package_dimension>
