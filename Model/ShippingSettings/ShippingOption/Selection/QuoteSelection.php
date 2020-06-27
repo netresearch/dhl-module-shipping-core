@@ -11,9 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\Selectio
 use Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ShippingOptionSelection;
 use Magento\Framework\Model\AbstractModel;
 
-/**
- * Class QuoteSelection
- */
 class QuoteSelection extends AbstractModel implements AssignedSelectionInterface
 {
     /**

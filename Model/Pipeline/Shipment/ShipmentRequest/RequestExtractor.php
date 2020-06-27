@@ -26,12 +26,11 @@ use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Model\Shipment\Request;
 
 /**
- * Class RequestExtractor
+ * Request Extractor
  *
  * The original shipment request is a rather limited DTO with unstructured data (DataObject, array).
  * The extractor and its subtypes offer a well-defined interface to extract the request data and
  * isolates the toxic part of extracting unstructured array data from the shipment request.
- *
  */
 class RequestExtractor implements RequestExtractorInterface
 {

@@ -16,9 +16,6 @@ use Magento\Sales\Api\Data\OrderAddressInterface;
 
 /**
  * Load a DHL recipient street by given address.
- *
- * @author Christoph Aßmann <chritsoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class RecipientStreetLoader implements RecipientStreetLoaderInterface
 {

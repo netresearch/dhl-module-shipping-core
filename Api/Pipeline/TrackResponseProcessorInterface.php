@@ -19,8 +19,6 @@ use Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface;
  * @see RequestTracksPipelineInterface
  *
  * @api
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface TrackResponseProcessorInterface
 {

@@ -11,9 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInter
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\GlobalProcessorInterface;
 
-/**
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- */
 class CompatibilityPreProcessor implements GlobalProcessorInterface
 {
     /**

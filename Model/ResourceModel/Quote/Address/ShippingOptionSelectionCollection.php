@@ -10,10 +10,6 @@ use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\QuoteSelect
 use Dhl\ShippingCore\Model\ResourceModel\Quote\Address\ShippingOptionSelection as ShippingOptionSelectionResource;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
-/**
- * Class ShippingOptionSelectionCollection
- *
- */
 class ShippingOptionSelectionCollection extends AbstractCollection
 {
     /**

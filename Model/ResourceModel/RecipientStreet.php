@@ -11,12 +11,6 @@ use Dhl\ShippingCore\Setup\Module\Constants;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
 
-/**
- * RecipientStreet ResourceModel
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class RecipientStreet extends AbstractDb
 {
     /**

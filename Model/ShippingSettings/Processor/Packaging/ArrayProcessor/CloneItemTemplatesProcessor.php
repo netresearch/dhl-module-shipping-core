@@ -10,11 +10,6 @@ use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsArr
 use Dhl\ShippingCore\Model\Util\ShipmentItemFilter;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
-/**
- * Class CloneItemTemplatesProcessor
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class CloneItemTemplatesProcessor implements ShippingOptionsArrayProcessorInterface
 {
     /**

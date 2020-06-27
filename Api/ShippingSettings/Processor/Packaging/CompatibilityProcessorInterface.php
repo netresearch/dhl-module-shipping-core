@@ -10,10 +10,7 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInter
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
- * Class CompatibilityProcessorInterface
- *
  * @api
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface CompatibilityProcessorInterface
 {

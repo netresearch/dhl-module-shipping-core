@@ -16,15 +16,12 @@ use Magento\Sales\Api\Data\CreditmemoSearchResultInterface;
 use Magento\Sales\Model\Order\Creditmemo;
 
 /**
- * Class AddTotalsAsExtensionAttributes
+ * Add totals to credit memo extension attributes.
  *
  * The additional totals columns in `sales_creditmemo` are necessary
  * for totals calculations but are not part of the `CreditmemoInterface`.
  * In order to make the totals available for reading, this class shifts
  * them to extension attributes.
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class AddTotalsAsExtensionAttributes
 {

@@ -9,11 +9,7 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Data\ValueMap;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface;
 
 /**
- * Class InputValue
- *
- * A Map of an input code to a value.
- *
- * @author Max Melzer <max.melzer@netresearch.de>
+ * A map of an input code to a value.
  */
 class InputValue implements InputValueInterface
 {

@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterface;
 use Dhl\ShippingCore\Api\Data\OrderExport\ServiceDataInterface;
 use Dhl\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface;
 
-/**
- * Class ShippingOption
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class ShippingOption implements ShippingOptionInterface
 {
     /**

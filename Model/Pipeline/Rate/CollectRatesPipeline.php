@@ -13,12 +13,6 @@ use Dhl\ShippingCore\Api\Pipeline\CollectRatesStageInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 
-/**
- * Class CollectRatesPipeline
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class CollectRatesPipeline implements CollectRatesPipelineInterface
 {
     /**

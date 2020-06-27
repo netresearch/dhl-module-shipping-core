@@ -13,12 +13,7 @@ use Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
 use Magento\Shipping\Model\Order\TrackFactory;
 
 /**
- * Class AddTrack
- *
  * Add track entity to shipment after api calls.
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class AddTrack implements ShipmentResponseProcessorInterface
 {

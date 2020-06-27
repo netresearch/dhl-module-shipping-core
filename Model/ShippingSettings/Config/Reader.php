@@ -17,11 +17,6 @@ use Magento\Framework\Config\ValidationStateInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class Reader
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class Reader extends Filesystem
 {
     const CACHE_KEY_SHIPPING_OPTIONS_CONFIG = 'dhl_shipping_option_config';

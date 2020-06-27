@@ -6,10 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Setup\Module;
 
-/**
- * Class Constants
- *
- */
 class Constants
 {
     const CHECKOUT_CONNECTION_NAME = 'checkout';

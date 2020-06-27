@@ -14,10 +14,6 @@ use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 
-/**
- * Class QuoteServiceSelectionRepository
- *
- */
 class QuoteSelectionRepository
 {
     /**

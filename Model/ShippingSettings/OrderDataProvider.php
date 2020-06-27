@@ -11,14 +11,6 @@ use Dhl\ShippingCore\Model\ShippingSettings\PackagingDataProvider;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\ShipmentFactory;
 
-/**
- * Class OrderDataProvider
- *
- * Allows pregeneration expected shipping options for an order
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class OrderDataProvider
 {
     /**

@@ -6,16 +6,10 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Unit\Model\Util;
 
-use Dhl\ShippingCore\Test\Provider\StreetDataProvider;
 use Dhl\ShippingCore\Model\Util\StreetSplitter;
+use Dhl\ShippingCore\Test\Provider\StreetDataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class StreetSplitterTest
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class StreetSplitterTest extends TestCase
 {
     /**

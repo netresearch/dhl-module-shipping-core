@@ -10,11 +10,7 @@ use Magento\Framework\Exception\NotFoundException;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 
 /**
- * Interface ProxyCarrierFactoryInterface
- *
  * @api
- * @author  Paul Siedler <paul.siedler@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface ProxyCarrierFactoryInterface
 {

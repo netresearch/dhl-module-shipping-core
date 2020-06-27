@@ -9,11 +9,7 @@ namespace Dhl\ShippingCore\Api\PaymentMethod;
 use Magento\Quote\Model\Quote;
 
 /**
- * Interface MethodAvailabilityInterface
- *
  * @api
- * @author  Paul Siedler <paul.siedler@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface MethodAvailabilityInterface
 {

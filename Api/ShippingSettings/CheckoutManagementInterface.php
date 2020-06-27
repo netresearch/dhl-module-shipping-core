@@ -9,17 +9,12 @@ namespace Dhl\ShippingCore\Api\ShippingSettings;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
 
 /**
- * Interface CheckoutManagementInterface
- *
  * A service for exchanging data for DHL Shipping methods during the checkout process.
  *
  * Use this service to retrieve any shipping options and other checkout data,
  * as well as to persist customer selections for shipping options.
  *
  * @api
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface CheckoutManagementInterface
 {

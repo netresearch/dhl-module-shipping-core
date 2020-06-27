@@ -10,11 +10,7 @@ use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Magento\Sales\Api\Data\OrderAddressInterface;
 
 /**
- * RecipientStreetLoaderInterface
- *
  * @api
- * @author Christoph Aßmann <chritsoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface RecipientStreetLoaderInterface
 {

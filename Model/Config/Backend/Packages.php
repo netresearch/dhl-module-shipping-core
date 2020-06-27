@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\Config\Backend;
 use Dhl\ShippingCore\Model\ShippingBox\Package;
 use Magento\Config\Model\Config\Backend\Serialized\ArraySerialized;
 
-/**
- * Class Packages
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class Packages extends ArraySerialized
 {
     /**

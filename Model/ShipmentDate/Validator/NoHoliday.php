@@ -14,8 +14,6 @@ use Yasumi\Yasumi;
 
 /**
  * NoHoliday validator class. This class checks if the given date/time is NOT a holiday.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
 class NoHoliday implements DayValidatorInterface
 {

@@ -10,7 +10,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface;
 
 /**
  * @api
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  */
 interface GlobalProcessorInterface
 {

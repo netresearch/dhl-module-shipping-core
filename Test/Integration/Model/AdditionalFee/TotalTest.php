@@ -19,11 +19,6 @@ use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class TotalsTest
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class TotalTest extends TestCase
 {
     const TEST_SHIPPING_METHOD_CODE = 'test';

@@ -14,8 +14,6 @@ namespace Dhl\ShippingCore\Api\Data\Pipeline;
  * Artifacts containers need to be implemented with getters and setters depending on the data to share.
  *
  * @api
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface ArtifactsContainerInterface
 {

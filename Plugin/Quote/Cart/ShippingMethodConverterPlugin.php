@@ -15,12 +15,6 @@ use Magento\Quote\Model\Quote\Address\Rate;
 use Magento\Quote\Model\Quote\Address\RateResult\AbstractResult;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 
-/**
- * Class ShippingMethodConverterPlugin
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class ShippingMethodConverterPlugin
 {
     /**

@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Dhl\ShippingCore\Model\ResourceModel\RecipientStreet as RecipientStreetResource;
 use Magento\Framework\Model\AbstractModel;
 
-/**
- * RecipientStreet
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class RecipientStreet extends AbstractModel implements RecipientStreetInterface
 {
     /**

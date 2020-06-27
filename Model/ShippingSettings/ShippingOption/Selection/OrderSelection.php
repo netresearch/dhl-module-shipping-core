@@ -11,10 +11,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\Selectio
 use Dhl\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelection;
 use Magento\Framework\Model\AbstractModel;
 
-/**
- * Class OrderSelection
- *
- */
 class OrderSelection extends AbstractModel implements AssignedSelectionInterface
 {
     /**

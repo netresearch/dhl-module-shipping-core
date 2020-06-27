@@ -11,11 +11,7 @@ use Dhl\ShippingCore\Api\Data\DeliveryLocation\LocationInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Interface LocationProviderInterface
- *
  * @api
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface LocationProviderInterface
 {

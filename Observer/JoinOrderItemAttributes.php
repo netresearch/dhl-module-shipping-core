@@ -11,12 +11,6 @@ use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
-/**
- * JoinOrderItemAttributes Observer
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class JoinOrderItemAttributes implements ObserverInterface
 {
     /**

@@ -10,9 +10,6 @@ use Magento\Framework\Config\FileIterator;
 use Magento\Framework\Config\FileResolverInterface;
 use Magento\Framework\Module\Dir\Reader as DirReader;
 
-/**
- * Class FileResolver
- */
 class FileResolver implements FileResolverInterface
 {
     /**

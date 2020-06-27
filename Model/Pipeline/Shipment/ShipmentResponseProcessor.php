@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface;
 use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface;
 use Dhl\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
 
-/**
- * Class ShipmentResponseProcessor
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ShipmentResponseProcessor implements ShipmentResponseProcessorInterface
 {
     /**

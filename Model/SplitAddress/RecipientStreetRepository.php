@@ -14,12 +14,6 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
-/**
- * RecipientStreetRepository
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class RecipientStreetRepository implements RecipientStreetRepositoryInterface
 {
     /**

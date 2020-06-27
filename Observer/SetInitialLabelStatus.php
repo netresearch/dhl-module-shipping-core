@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
-/**
- * Class SetLabelStatusObserver
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class SetInitialLabelStatus implements ObserverInterface
 {
     /**

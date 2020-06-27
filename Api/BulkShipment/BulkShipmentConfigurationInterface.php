@@ -10,11 +10,7 @@ use Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Interface BulkShipmentConfigurationInterface
- *
  * @api
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface BulkShipmentConfigurationInterface
 {

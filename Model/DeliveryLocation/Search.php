@@ -12,12 +12,6 @@ use Dhl\ShippingCore\Api\DeliveryLocation\LocationProviderInterface;
 use Dhl\ShippingCore\Api\DeliveryLocation\SearchInterface;
 use Magento\Framework\Exception\LocalizedException;
 
-/**
- * Class Search
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class Search implements SearchInterface
 {
     /**

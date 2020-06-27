@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Data;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\MetadataInterface;
 
-/**
- * Class CarrierData
- *
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class CarrierData implements CarrierDataInterface
 {
     /**

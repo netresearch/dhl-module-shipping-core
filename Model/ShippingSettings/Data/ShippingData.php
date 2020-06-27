@@ -8,12 +8,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Data;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
 
-/**
- * Class ShippingData
- *
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ShippingData implements ShippingDataInterface
 {
     /**

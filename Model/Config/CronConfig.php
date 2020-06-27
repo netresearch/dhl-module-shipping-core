@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\StoresConfig;
 
-/**
- * Class CronConfig
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class CronConfig
 {
     const CONFIG_PATH_CRON_ENABLED = 'dhlshippingsolutions/dhlglobalwebservices/bulk_settings/cron_enabled';

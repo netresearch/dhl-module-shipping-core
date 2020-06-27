@@ -13,10 +13,6 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultInterface;
 
-/**
- * Class Cancel
- *
- */
 class Cancel extends Action
 {
     /**

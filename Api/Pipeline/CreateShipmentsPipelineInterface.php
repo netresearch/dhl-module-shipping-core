@@ -23,8 +23,6 @@ use Magento\Shipping\Model\Shipment\Request;
  * @see ShipmentResponseProcessorInterface
  *
  * @api
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface CreateShipmentsPipelineInterface
 {

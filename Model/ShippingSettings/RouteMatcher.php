@@ -9,11 +9,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\RouteInterface;
 use Dhl\ShippingCore\Model\Config\Config;
 
-/**
- * Class RouteMatcher
- *
- * @author   Andreas Müller <andreas.mueller@netresearch.de>
- */
 class RouteMatcher
 {
     const ORIGIN = 'origin';

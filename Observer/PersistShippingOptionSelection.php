@@ -20,9 +20,6 @@ use Magento\Quote\Model\Quote;
 use Magento\Sales\Model\Order;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class PersistShippingOptionSelection
- */
 class PersistShippingOptionSelection implements ObserverInterface
 {
     /**

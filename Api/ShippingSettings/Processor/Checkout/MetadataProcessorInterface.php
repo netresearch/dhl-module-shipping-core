@@ -9,10 +9,7 @@ namespace Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\MetadataInterface;
 
 /**
- * Class MetadataProcessorInterface
- *
  * @api
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface MetadataProcessorInterface
 {

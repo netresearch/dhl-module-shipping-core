@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\LabelStatus;
 use Dhl\ShippingCore\Model\ResourceModel\LabelStatus\CollectionFactory;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class LabelStatusProvider
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class LabelStatusProvider
 {
     /**

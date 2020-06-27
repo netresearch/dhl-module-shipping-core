@@ -12,12 +12,6 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Sales\Model\Order;
 
-/**
- * AfterOrder Observer.
- *
- * @author   Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link     https://www.netresearch.de/
- */
 class AddAdditionalFeeToOrder implements ObserverInterface
 {
     /**

@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\DeliveryLocation;
 use Dhl\ShippingCore\Api\Data\DeliveryLocation\TimeFrameInterface;
 use Dhl\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface;
 
-/**
- * Class OpeningHours
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class OpeningHours implements OpeningHoursInterface
 {
     /**

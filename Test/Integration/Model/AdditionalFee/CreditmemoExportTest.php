@@ -22,12 +22,10 @@ use TddWizard\Fixtures\Sales\OrderFixture;
 use TddWizard\Fixtures\Sales\OrderFixtureRollback;
 
 /**
- * Class CreditmemoExportTest
+ * Credit memo export
  *
  * Assert that additional fee totals are contained in the totals
  * when reading the credit memo, e.g. via REST API calls.
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  *
  * @magentoAppIsolation enabled
  */

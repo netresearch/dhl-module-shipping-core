@@ -19,10 +19,7 @@ use Magento\Sales\Model\Order\Shipment\TrackRepository;
 use Magento\Shipping\Controller\Adminhtml\Order\Shipment\RemoveTrack;
 
 /**
- * Class PreventTrackDeletion
- *
- * DHLGW tracks must not be deleted without cancelling the shipment.
- *
+ * Prevent DHLGW tracks being deleted without cancelling the shipment.
  */
 class PreventTrackDeletion implements ObserverInterface
 {
@@ -97,7 +94,7 @@ class PreventTrackDeletion implements ObserverInterface
         $this->actionFlag->set('', ActionInterface::FLAG_NO_DISPATCH, true);
         $response = $this->serializer->serialize([
             'error' => true,
-            'message' => __('Deleting a single tracking number is not supported. Please use the "Cancel Shipment" button on the shipment details page to cancel labels and tracks.')
+            'message' => __('Deleting a single tracking number is not supported. Please use the "Cancel Labels" button on the shipment details page to cancel labels and tracks.')
         ]);
 
         /** @var RemoveTrack $controller */

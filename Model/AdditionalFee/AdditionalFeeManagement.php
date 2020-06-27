@@ -10,11 +10,6 @@ use Dhl\ShippingCore\Api\AdditionalFee\AdditionalFeeConfigurationInterface;
 use Magento\Framework\Phrase;
 use Magento\Quote\Model\Quote;
 
-/**
- * Class AdditionalFeeManagement
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- */
 class AdditionalFeeManagement
 {
     /**

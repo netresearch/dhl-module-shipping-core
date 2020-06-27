@@ -7,8 +7,6 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest;
 
 /**
- * Interface ShipperInterface
- *
  * @api
  */
 interface ShipperInterface

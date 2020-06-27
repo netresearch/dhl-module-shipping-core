@@ -13,12 +13,7 @@ use Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Class BulkShipmentConfiguration
- *
  * Composite configuration accessor for handling bulk shipment actions (create, cancel).
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class BulkShipmentConfiguration
 {

@@ -9,9 +9,6 @@ namespace Dhl\ShippingCore\Model\ResourceModel\Order\Address;
 use Dhl\ShippingCore\Setup\Module\Constants;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
-/**
- * Class Selection
- */
 class ShippingOptionSelection extends AbstractDb
 {
     /**

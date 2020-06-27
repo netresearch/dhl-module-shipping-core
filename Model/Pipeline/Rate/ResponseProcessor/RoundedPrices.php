@@ -15,9 +15,6 @@ use Magento\Quote\Model\Quote\Address\RateResult\Method;
 
 /**
  * A rate processor to round prices.
- *
- * @author  Ronny Gertler <ronny.gertler@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class RoundedPrices implements RateResponseProcessorInterface
 {

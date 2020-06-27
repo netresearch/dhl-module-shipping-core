@@ -25,8 +25,6 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
  * @see RateResponseProcessorInterface
  *
  * @api
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface CollectRatesPipelineInterface
 {

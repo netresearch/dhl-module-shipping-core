@@ -17,12 +17,10 @@ use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
- * Class PackageContainerInputDataProcessor
+ * Package container input data processor
  *
  * This class is hooked into the shipping option data creation via di.xml.
  * It sets dynamic options for the "Container" input in the packaging popup
- *
- * @author Max Melzer <max.melzer@netresearch.de>
  */
 class PackageContainerInputDataProcessor implements ShippingOptionsProcessorInterface
 {

@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\Config\Source;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class OfflineCarriers
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class OfflineCarriers implements OptionSourceInterface
 {
     /**

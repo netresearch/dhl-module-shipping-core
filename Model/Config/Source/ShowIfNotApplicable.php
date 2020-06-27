@@ -8,12 +8,6 @@ namespace Dhl\ShippingCore\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class ShowIfNotApplicable
- *
- * @author    Max Melzer <max.melzer@netresearch.de>
- * @link      https://www.netresearch.de/
- */
 class ShowIfNotApplicable implements OptionSourceInterface
 {
     /**

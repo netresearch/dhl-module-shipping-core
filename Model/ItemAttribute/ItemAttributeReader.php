@@ -10,13 +10,7 @@ use Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
 
 /**
- * Class ItemAttributeReader
- *
  * Read product attributes from order items.
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class ItemAttributeReader implements ItemAttributeReaderInterface
 {

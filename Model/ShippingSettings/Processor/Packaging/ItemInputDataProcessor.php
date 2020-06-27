@@ -20,13 +20,11 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\Order\Shipment\Item;
 
 /**
- * Class ItemInputDataProcessor
+ * Item input data processor
  *
  * Prefill item level inputs with
  * - a set of possible options (e.g. country list)
  * - predefined catalog data (e.g. item weight, country of manufacture)
- *
- * @author Max Melzer <max.melzer@netresearch.de>
  */
 class ItemInputDataProcessor implements ItemShippingOptionsProcessorInterface
 {

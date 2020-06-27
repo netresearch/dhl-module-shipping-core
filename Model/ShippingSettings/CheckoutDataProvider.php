@@ -11,12 +11,6 @@ use Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ArrayProcessor\Ch
 use Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\CheckoutDataCompositeProcessor;
 use Magento\Framework\Config\ReaderInterface;
 
-/**
- * Class CheckoutDataProvider
- *
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class CheckoutDataProvider
 {
     /**

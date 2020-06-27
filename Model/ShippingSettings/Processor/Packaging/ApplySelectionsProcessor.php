@@ -13,11 +13,6 @@ use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\OrderSelect
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
-/**
- * Class ApplySelectionsProcessor
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class ApplySelectionsProcessor implements ShippingOptionsProcessorInterface
 {
     /**

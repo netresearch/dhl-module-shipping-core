@@ -16,12 +16,6 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderSearchResultInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 
-/**
- * Class OrderCollectionLoader
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class OrderCollectionLoader
 {
     /**

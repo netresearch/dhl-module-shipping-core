@@ -9,8 +9,6 @@ namespace Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse;
 use Magento\Framework\Phrase;
 
 /**
- * Interface TrackErrorResponseInterface
- *
  * @api
  */
 interface TrackErrorResponseInterface extends TrackResponseInterface

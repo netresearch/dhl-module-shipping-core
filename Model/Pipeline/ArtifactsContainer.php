@@ -8,12 +8,6 @@ namespace Dhl\ShippingCore\Model\Pipeline;
 
 use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 
-/**
- * Class ArtifactsContainer
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ArtifactsContainer implements ArtifactsContainerInterface
 {
     /**

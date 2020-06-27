@@ -10,13 +10,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\MetadataInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\MetadataProcessorInterface;
 use Dhl\ShippingCore\Api\Util\AssetUrlInterface;
 
-/**
- * Class ImageUrlProcessor
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ImageUrlProcessor implements MetadataProcessorInterface
 {
     /**

@@ -20,12 +20,10 @@ use TddWizard\Fixtures\Sales\OrderFixture;
 use TddWizard\Fixtures\Sales\OrderFixtureRollback;
 
 /**
- * Class OrderExportTest
+ * Order export
  *
  * Assert that additional fee totals are contained in the totals
  * when reading the order, e.g. via REST API calls.
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
  *
  * @magentoAppIsolation enabled
  */

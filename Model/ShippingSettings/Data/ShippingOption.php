@@ -8,11 +8,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Data;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 
-/**
- * Class ShippingOption
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class ShippingOption implements ShippingOptionInterface
 {
     /**

@@ -10,11 +10,7 @@ use Magento\Framework\Exception\ValidatorException;
 use Magento\Shipping\Model\Shipment\Request;
 
 /**
- * Interface RequestValidatorInterface
- *
  * @api
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface RequestValidatorInterface
 {

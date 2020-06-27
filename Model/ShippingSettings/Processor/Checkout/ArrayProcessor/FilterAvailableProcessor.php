@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsArra
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Class FilterAvailableProcessor
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
- */
 class FilterAvailableProcessor implements ShippingOptionsArrayProcessorInterface
 {
     /**

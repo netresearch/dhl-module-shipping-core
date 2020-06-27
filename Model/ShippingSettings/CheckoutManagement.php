@@ -17,12 +17,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\ShippingAddressManagementInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-/**
- * Class CheckoutManagement
- *
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class CheckoutManagement implements CheckoutManagementInterface
 {
     /**

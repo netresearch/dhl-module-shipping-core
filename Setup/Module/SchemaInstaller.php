@@ -17,12 +17,6 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Sales\Api\Data\OrderAddressInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
 
-/**
- * Setup
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class SchemaInstaller
 {
     /**

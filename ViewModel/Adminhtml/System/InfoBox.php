@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\ViewModel\Adminhtml\System;
 use Dhl\ShippingCore\Model\Config\Config;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
-/**
- * Class InfoBox
- *
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class InfoBox implements ArgumentInterface
 {
     /**

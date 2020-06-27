@@ -14,12 +14,6 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
-/**
- * OrderItemAttributesRepository
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class OrderItemAttributesRepository
 {
     /**

@@ -7,10 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api\Data\DeliveryLocation;
 
 /**
- * Interface TimeFrameInterface
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
+ * @api
  */
 interface TimeFrameInterface
 {

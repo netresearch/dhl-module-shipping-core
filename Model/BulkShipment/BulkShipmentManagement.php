@@ -18,12 +18,6 @@ use Magento\Sales\Model\Order;
 use Magento\Shipping\Model\Shipment\RequestFactory;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class BulkShipmentManagement
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class BulkShipmentManagement
 {
     /**

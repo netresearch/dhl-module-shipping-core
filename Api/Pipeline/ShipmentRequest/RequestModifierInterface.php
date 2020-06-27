@@ -10,8 +10,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Shipping\Model\Shipment\Request;
 
 /**
- * Interface RequestModifierInterface
- *
  * @api
  */
 interface RequestModifierInterface

@@ -12,9 +12,6 @@ use Magento\Shipping\Model\Shipping\LabelGenerator;
 
 /**
  * Utility for merging PDF pages into a single PDF binary.
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class PdfCombinator implements PdfCombinatorInterface
 {

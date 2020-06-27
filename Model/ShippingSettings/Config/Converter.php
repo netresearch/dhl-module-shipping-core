@@ -10,9 +10,6 @@ use Dhl\ShippingCore\Model\ShippingSettings\PackagingDataProvider;
 use Dhl\ShippingCore\Model\Util\ConstantResolver;
 use Magento\Framework\Config\ConverterInterface;
 
-/**
- * Class Converter
- */
 class Converter implements ConverterInterface
 {
     /**

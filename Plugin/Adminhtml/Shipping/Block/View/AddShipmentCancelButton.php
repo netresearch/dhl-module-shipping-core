@@ -11,10 +11,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\ShipmentTrackInterface;
 use Magento\Shipping\Block\Adminhtml\View;
 
-/**
- * Class AddShipmentCancelButton
- *
- */
 class AddShipmentCancelButton
 {
     /**

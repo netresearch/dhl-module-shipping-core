@@ -20,11 +20,6 @@ use Dhl\ShippingCore\Model\ShippingSettings\Data\ShippingOption;
 use Dhl\ShippingCore\Model\ShippingSettings\Data\ValidationRule;
 use Magento\Framework\Webapi\ServiceOutputProcessor;
 
-/**
- * Class ShippingDataHydrator
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class ShippingDataHydrator
 {
     const CLASSMAP = [

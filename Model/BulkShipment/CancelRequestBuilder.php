@@ -18,12 +18,7 @@ use Magento\Sales\Model\Order\Shipment\TrackRepository;
 use Magento\Sales\Model\ResourceModel\Order\Shipment\Track\Collection;
 
 /**
- * Class CancelRequestBuilder
- *
- * For a given shipment, create one cancel request per associated track (=DHLGW shipment number).
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
+ * For a given shipment, create one cancel request per associated track (= DHLGW shipment number).
  */
 class CancelRequestBuilder
 {

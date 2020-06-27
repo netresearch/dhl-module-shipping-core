@@ -14,12 +14,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\Order\Shipment\TrackRepository;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class DeleteTrack
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class DeleteTrack implements TrackResponseProcessorInterface
 {
     /**

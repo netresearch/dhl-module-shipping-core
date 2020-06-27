@@ -10,12 +10,6 @@ use Magento\Quote\Model\Quote\Address\RateResult\Method;
 use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
 use Magento\TestFramework\ObjectManager;
 
-/**
- * RoundedPricesTest
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class RoundedPricesTest extends \PHPUnit\Framework\TestCase
 {
     /**

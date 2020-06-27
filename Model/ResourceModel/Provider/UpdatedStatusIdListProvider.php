@@ -15,9 +15,6 @@ use Psr\Log\LoggerInterface;
  *
  * In asynchronous mode, grid entries are added or updated in a batch.
  * To do so, the update process needs a list of entity IDs which require an update.
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
  */
 class UpdatedStatusIdListProvider implements NotSyncedDataProviderInterface
 {

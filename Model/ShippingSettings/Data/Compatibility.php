@@ -8,11 +8,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Data;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterface;
 
-/**
- * Class Compatibility
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class Compatibility implements CompatibilityInterface
 {
     /**

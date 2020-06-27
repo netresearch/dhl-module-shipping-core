@@ -14,16 +14,13 @@ use Magento\Sales\Api\OrderAddressRepositoryInterface;
 use Magento\Sales\Model\Order\Address;
 
 /**
- * Class AddRecipientStreetToEntity
+ * Add recipient street as order address extension attributes.
  *
  * DHL uses street name and street number as separate fields. These fields are persisted as
  * extension attributes to the shipping address. In cases where a single entity gets loaded
  * through the repository, additional fields are added here.
  *
  * For loading a list of addresses see `AddRecipientStreetToAddressCollection`.
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class AddRecipientStreetToAddress
 {

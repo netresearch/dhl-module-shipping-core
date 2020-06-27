@@ -6,11 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Util;
 
-/**
- * Class ConstantResolver
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class ConstantResolver
 {
     /**

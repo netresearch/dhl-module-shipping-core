@@ -12,12 +12,6 @@ use Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\ResourceModel\Order\Shipment;
 
-/**
- * Class UnsetShippingLabel
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class UnsetShippingLabel implements TrackResponseProcessorInterface
 {
     /**

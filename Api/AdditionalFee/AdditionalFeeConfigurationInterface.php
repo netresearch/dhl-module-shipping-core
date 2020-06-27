@@ -10,11 +10,7 @@ use Magento\Framework\Phrase;
 use Magento\Quote\Model\Quote;
 
 /**
- * Interface AdditionalFeeConfigurationInterface
- *
  * @api
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface AdditionalFeeConfigurationInterface
 {

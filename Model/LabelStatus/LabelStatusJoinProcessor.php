@@ -14,12 +14,6 @@ use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Sales\Api\Data\OrderInterface;
 
-/**
- * Class LabelStatusJoinProcessor
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class LabelStatusJoinProcessor implements CollectionProcessorInterface
 {
     /**

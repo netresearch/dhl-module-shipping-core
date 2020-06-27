@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\AdditionalFee\TaxConfigInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Class TaxConfig
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class TaxConfig implements TaxConfigInterface
 {
 

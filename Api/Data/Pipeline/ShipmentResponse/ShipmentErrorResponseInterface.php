@@ -9,8 +9,6 @@ namespace Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse;
 use Magento\Framework\Phrase;
 
 /**
- * Interface ShipmentErrorResponseInterface
- *
  * @api
  */
 interface ShipmentErrorResponseInterface extends ShipmentResponseInterface

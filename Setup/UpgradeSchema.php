@@ -11,12 +11,6 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\Setup\UpgradeSchemaInterface;
 
-/**
- * UpgradeSchema
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class UpgradeSchema implements UpgradeSchemaInterface
 {
     /**

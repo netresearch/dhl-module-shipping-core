@@ -12,12 +12,6 @@ use Dhl\ShippingCore\Model\ShippingSettings\PackagingDataProvider;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order\Shipment;
 
-/**
- * Class PackagingOptionReader
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class PackagingOptionReader implements PackagingOptionReaderInterface
 {
     /**

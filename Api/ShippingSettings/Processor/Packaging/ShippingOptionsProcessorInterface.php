@@ -10,10 +10,7 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
- * Class ShippingOptionsProcessorInterface
- *
  * @api
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface ShippingOptionsProcessorInterface
 {

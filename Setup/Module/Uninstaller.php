@@ -16,10 +16,6 @@ use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Module\Setup;
 use Magento\Framework\Setup\SchemaSetupInterface;
 
-/**
- * Class Uninstaller
- *
- */
 class Uninstaller
 {
     /**

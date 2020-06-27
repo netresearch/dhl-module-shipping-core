@@ -17,12 +17,6 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Sales\Model\Order\Address;
 use Psr\Log\LoggerInterface;
 
-/**
- * SplitAddress Observer
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class SplitAddress implements ObserverInterface
 {
     /**

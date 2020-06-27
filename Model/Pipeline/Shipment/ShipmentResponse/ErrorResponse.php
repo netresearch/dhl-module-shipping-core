@@ -12,14 +12,9 @@ use Magento\Framework\Phrase;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
- * ErrorResponse
- *
  * The response type consumed by the core carrier to identify errors during the shipment request.
  *
  * @see \Magento\Shipping\Model\Carrier\AbstractCarrierOnline::requestToShipment
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class ErrorResponse extends DataObject implements ShipmentErrorResponseInterface
 {

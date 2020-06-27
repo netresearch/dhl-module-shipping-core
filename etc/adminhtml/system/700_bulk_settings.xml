@@ -5,7 +5,7 @@
  */
 -->
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
-    <group id="bulk_settings" translate="label" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
+    <group id="bulk_settings" translate="label" sortOrder="700" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>Bulk / Cron Settings</label>
 
         <field id="cron_enabled" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"

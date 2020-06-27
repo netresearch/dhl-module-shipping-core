@@ -17,12 +17,6 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Sales\Model\Order;
 use Psr\Log\LoggerInterface;
 
-/**
- * PersistCodShippingOptionSelection Observer.
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class PersistCodShippingOptionSelection implements ObserverInterface
 {
     /**

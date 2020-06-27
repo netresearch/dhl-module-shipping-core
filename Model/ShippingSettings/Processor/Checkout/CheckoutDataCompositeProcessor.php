@@ -12,11 +12,6 @@ use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\MetadataProcessorIn
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\GlobalProcessorInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsProcessorInterface;
 
-/**
- * Class CheckoutDataCompositeProcessor
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class CheckoutDataCompositeProcessor
 {
     /**

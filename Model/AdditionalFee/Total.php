@@ -17,12 +17,6 @@ use Magento\Tax\Api\TaxCalculationInterface;
 use Magento\Tax\Helper\Data as TaxHelper;
 use Magento\Tax\Model\Sales\Total\Quote\CommonTaxCollector;
 
-/**
- * Sales Order Total.
- *
- * @author   Max Melzer <max.melzer@netresearch.de>
- * @link     https://www.netresearch.de/
- */
 class Total extends Address\Total\AbstractTotal
 {
     const SERVICE_CHARGE_TOTAL_CODE = 'dhlgw_additional_fee';

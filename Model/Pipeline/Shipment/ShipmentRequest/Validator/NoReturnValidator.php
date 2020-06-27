@@ -12,12 +12,7 @@ use Magento\Shipping\Model\Shipment\Request;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
 /**
- * Class NoReturnValidator
- *
  * Validate that no return shipment label is requested.
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class NoReturnValidator implements RequestValidatorInterface
 {

@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 
-/**
- * Class FreeShipping
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class FreeShipping implements RateResponseProcessorInterface
 {
     /**

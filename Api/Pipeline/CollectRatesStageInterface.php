@@ -19,9 +19,6 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
  *
  * @see ArtifactsContainerInterface
  * @see CollectRatesPipelineInterface
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface CollectRatesStageInterface
 {

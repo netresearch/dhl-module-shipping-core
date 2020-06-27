@@ -13,9 +13,6 @@ use Magento\Catalog\Model\Product\Type;
 
 /**
  * Regular simple product with qty=1.
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class SimpleProduct implements ProductInterface
 {

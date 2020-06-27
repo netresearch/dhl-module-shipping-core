@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\Rate\Data;
 use Dhl\ShippingCore\Api\Data\Rate\MethodAdditionalInfoInterface;
 use Magento\Framework\DataObject;
 
-/**
- * Class MethodAdditionalInfo
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class MethodAdditionalInfo extends DataObject implements MethodAdditionalInfoInterface
 {
     public function getDeliveryDate(): string

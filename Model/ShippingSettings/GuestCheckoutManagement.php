@@ -14,12 +14,6 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\GuestCart\GuestShippingAddressManagementInterface;
 
-/**
- * Class GuestCheckoutManagement
- *
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class GuestCheckoutManagement implements GuestCheckoutManagementInterface
 {
     /**

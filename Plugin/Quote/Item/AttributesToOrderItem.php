@@ -20,12 +20,7 @@ use Magento\Sales\Api\Data\OrderItemExtensionInterfaceFactory;
 use Magento\Sales\Api\Data\OrderItemInterface;
 
 /**
- * Class AttributesToOrderItem
- *
- * Add our custom product attributes to order item.
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
+ * Add custom product attributes to order item.
  */
 class AttributesToOrderItem
 {
@@ -61,7 +56,7 @@ class AttributesToOrderItem
             $children = $quoteItem->getChildren();
             $childItem = current($children);
 
-            $value = $childItem->getProduct() ? (string) $childItem->getProduct()->getData($attributeCode) : '';
+            $value = $childItem->getProduct() ? (string)$childItem->getProduct()->getData($attributeCode) : '';
             if ($value) {
                 return $value;
             }
@@ -69,11 +64,11 @@ class AttributesToOrderItem
 
         // then check the quote item itself
         if ($quoteItem->hasData($attributeCode)) {
-            return (string) $quoteItem->getData($attributeCode);
+            return (string)$quoteItem->getData($attributeCode);
         }
 
         // at last, check the product of the quote item if the attribute is available there.
-        return $quoteItem->getProduct() ? (string) $quoteItem->getProduct()->getData($attributeCode) : '';
+        return $quoteItem->getProduct() ? (string)$quoteItem->getProduct()->getData($attributeCode) : '';
     }
 
     /**
@@ -106,7 +101,7 @@ class AttributesToOrderItem
 
         if ($item->getParentItem() && $item->getParentItem()->getProductType() === Type::TYPE_CODE) {
             $parentOrderItem = $orderItem->getParentItem();
-            $shipmentType = (int) $parentOrderItem->getProductOptionByCode('shipment_type');
+            $shipmentType = (int)$parentOrderItem->getProductOptionByCode('shipment_type');
             if ($shipmentType === AbstractType::SHIPMENT_TOGETHER) {
                 // children of a bundle (shipped together) are not shipped, ignore.
                 return $orderItem;
@@ -114,7 +109,7 @@ class AttributesToOrderItem
         }
 
         if ($item->getProductType() === Type::TYPE_CODE) {
-            $shipmentType = (int) $orderItem->getProductOptionByCode('shipment_type');
+            $shipmentType = (int)$orderItem->getProductOptionByCode('shipment_type');
             if ($shipmentType === AbstractType::SHIPMENT_SEPARATELY) {
                 // a bundle with children (shipped separately) is not shipped, ignore.
                 return $orderItem;

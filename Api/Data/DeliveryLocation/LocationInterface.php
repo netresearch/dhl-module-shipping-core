@@ -7,11 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api\Data\DeliveryLocation;
 
 /**
- * Interface LocationInterface
- *
  * @api
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface LocationInterface
 {

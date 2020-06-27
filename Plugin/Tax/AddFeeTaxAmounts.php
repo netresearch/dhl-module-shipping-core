@@ -13,12 +13,7 @@ use Magento\Tax\Api\Data\OrderTaxDetailsItemInterface;
 use Magento\Tax\Api\OrderTaxManagementInterface;
 
 /**
- * Class AddFeeTaxAmounts
- *
  * For invoice handling fix the tax amounts from the service fee.
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 class AddFeeTaxAmounts
 {

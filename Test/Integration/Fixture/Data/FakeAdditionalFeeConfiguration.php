@@ -9,11 +9,6 @@ use Dhl\ShippingCore\Api\AdditionalFee\AdditionalFeeConfigurationInterface;
 use Magento\Framework\Phrase;
 use Magento\Quote\Model\Quote;
 
-/**
- * Class FakeAdditionalFeeConfiguration
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class FakeAdditionalFeeConfiguration implements AdditionalFeeConfigurationInterface
 {
     const CARRIERCODE = 'testcarrier';

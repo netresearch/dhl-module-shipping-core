@@ -8,12 +8,6 @@ namespace Dhl\ShippingCore\Model\DeliveryLocation;
 
 use Dhl\ShippingCore\Api\Data\DeliveryLocation\TimeFrameInterface;
 
-/**
- * Class TimeFrame
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class TimeFrame implements TimeFrameInterface
 {
     /**

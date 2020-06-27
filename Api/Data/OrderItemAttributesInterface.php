@@ -7,11 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api\Data;
 
 /**
- * OrderItemAttributesInterface
- *
  * @api
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface OrderItemAttributesInterface
 {

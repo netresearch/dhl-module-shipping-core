@@ -10,13 +10,9 @@ use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentResponseInterfac
 use Magento\Shipping\Model\Shipment\Request;
 
 /**
- * Interface BulkLabelCreationInterface
- *
  * Service to create shipping labels.
  *
  * @api
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface BulkLabelCreationInterface
 {

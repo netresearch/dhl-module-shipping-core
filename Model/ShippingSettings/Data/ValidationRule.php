@@ -8,11 +8,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Data;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValidationRuleInterface;
 
-/**
- * Class ValidationRule
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class ValidationRule implements ValidationRuleInterface
 {
     /**

@@ -11,7 +11,7 @@ use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\ResourceModel\Order\Address\Collection;
 
 /**
- * Class AddRecipientStreetToAddressCollection
+ * Add recipient street as order address extension attributes.
  *
  * DHL uses street name and street number as separate fields. These fields are persisted as
  * extension attributes to the shipping address. Magento does not load the address through
@@ -19,9 +19,6 @@ use Magento\Sales\Model\ResourceModel\Order\Address\Collection;
  * address collection loading to have the additional fields added.
  *
  * For loading a single address see `AddRecipientStreetToAddress`.
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class AddRecipientStreetToAddressCollection
 {

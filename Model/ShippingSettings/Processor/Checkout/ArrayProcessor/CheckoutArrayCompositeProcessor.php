@@ -8,11 +8,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ArrayProces
 
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsArrayProcessorInterface;
 
-/**
- * Class CheckoutArrayCompositeProcessor
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- */
 class CheckoutArrayCompositeProcessor
 {
     /**

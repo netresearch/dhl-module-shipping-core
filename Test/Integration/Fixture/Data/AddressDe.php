@@ -6,12 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Fixture\Data;
 
-/**
- * Class AddressDe
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class AddressDe implements AddressInterface
 {
     public function getStreet(): string

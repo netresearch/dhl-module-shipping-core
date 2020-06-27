@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\LabelStatus;
 use Dhl\ShippingCore\Model\ResourceModel;
 use Magento\Framework\Exception\CouldNotSaveException;
 
-/**
- * LabelStatusRepository
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class LabelStatusRepository
 {
     /**

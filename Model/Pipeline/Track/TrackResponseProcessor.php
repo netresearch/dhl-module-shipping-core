@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackErrorResponseInterface
 use Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface;
 use Dhl\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface;
 
-/**
- * Class TrackResponseProcessor
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class TrackResponseProcessor implements TrackResponseProcessorInterface
 {
     /**

@@ -16,12 +16,7 @@ use Magento\Sales\Api\ShipmentCommentRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class AddShipmentComment
- *
  * Add order comment if bulk label creation gave an error.
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class AddShipmentComment implements ShipmentResponseProcessorInterface
 {

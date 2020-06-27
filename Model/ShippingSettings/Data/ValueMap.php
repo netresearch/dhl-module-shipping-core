@@ -9,14 +9,10 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Data;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface;
 
 /**
- * Class ValueMap
- *
  * Maps a source input value to a list of "input code" => "value" maps
  *
  * This can is used to let an input directly change the values of other inputs,
  * for example updating the package dimensions when selecting a package type.
- *
- * @author Max Melzer <max.melzer@netresearch.de>
  */
 class ValueMap implements ValueMapInterface
 {

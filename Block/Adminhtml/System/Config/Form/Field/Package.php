@@ -12,12 +12,7 @@ use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
 /**
- * Class Package
- *
  * @method \Magento\Framework\Data\Form\Element\AbstractElement getElement
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class Package extends AbstractFieldArray
 {

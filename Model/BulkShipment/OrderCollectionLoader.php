@@ -15,12 +15,6 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Zend_Db_Exception;
 
-/**
- * Class OrderCollectionLoader
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class OrderCollectionLoader
 {
     /**

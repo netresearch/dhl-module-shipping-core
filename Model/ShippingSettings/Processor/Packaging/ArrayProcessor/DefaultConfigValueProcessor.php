@@ -11,11 +11,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Class DefaultConfigValueProcessor
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- */
 class DefaultConfigValueProcessor implements ShippingOptionsArrayProcessorInterface
 {
     /**

@@ -8,12 +8,6 @@ namespace Dhl\ShippingCore\Test\Provider;
 
 use Symfony\Component\Yaml\Yaml;
 
-/**
- * Class StreetDataProvider
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class StreetDataProvider
 {
     /**

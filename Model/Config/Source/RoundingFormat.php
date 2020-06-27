@@ -8,14 +8,6 @@ namespace Dhl\ShippingCore\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class RoundingFormat.
- *
- * Provide available rounding formats.
- *
- * @author  Ronny Gertler <ronny.gertler@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class RoundingFormat implements OptionSourceInterface
 {
     const INTEGER = 'integer';

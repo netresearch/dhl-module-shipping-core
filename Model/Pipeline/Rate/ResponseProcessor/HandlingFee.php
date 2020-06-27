@@ -14,9 +14,6 @@ use Magento\Shipping\Model\Carrier\AbstractCarrier;
 
 /**
  * A rate processor to append the handling fee based on handling type to the shipping price.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class HandlingFee implements RateResponseProcessorInterface
 {

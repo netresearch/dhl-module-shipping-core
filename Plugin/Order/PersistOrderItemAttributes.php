@@ -14,12 +14,7 @@ use Magento\Sales\Api\OrderItemRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class PersistOrderItemAttributes
- *
- * Persist our custom product attributes.
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
+ * Persist custom product attributes.
  */
 class PersistOrderItemAttributes
 {

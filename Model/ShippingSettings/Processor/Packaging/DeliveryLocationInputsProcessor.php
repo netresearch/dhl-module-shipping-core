@@ -13,11 +13,6 @@ use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsPro
 use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
-/**
- * Class DeliveryLocationInputsProcessor
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class DeliveryLocationInputsProcessor implements ShippingOptionsProcessorInterface
 {
     /*

@@ -10,11 +10,7 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Rate\Result;
 
 /**
- * Class RateRequestEmulationInterface
- *
  * @api
- * @author  Paul Siedler <paul.siedler@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface RateRequestEmulationInterface
 {

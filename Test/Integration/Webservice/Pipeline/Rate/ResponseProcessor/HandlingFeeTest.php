@@ -10,12 +10,6 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
 use Magento\TestFramework\ObjectManager;
 
-/**
- * HandlingFeeTest
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class HandlingFeeTest extends \PHPUnit\Framework\TestCase
 {
     /**

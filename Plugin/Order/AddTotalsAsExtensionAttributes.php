@@ -13,15 +13,12 @@ use Magento\Sales\Api\Data\OrderSearchResultInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 
 /**
- * Class AddTotalsAsExtensionAttributes
+ * Add totals to order extension attributes.
  *
  * The additional totals columns in `sales_order` are necessary
  * for totals calculations but are not part of the `OrderInterface`.
  * In order to make the totals available for reading, this class shifts
  * them to extension attributes.
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class AddTotalsAsExtensionAttributes
 {

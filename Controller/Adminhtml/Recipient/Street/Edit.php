@@ -11,12 +11,6 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 
-/**
- * Edit Controller
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class Edit extends Action
 {
     const ADMIN_RESOURCE = 'Magento_Sales::actions_edit';

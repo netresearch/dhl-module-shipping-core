@@ -9,10 +9,7 @@ namespace Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterface;
 
 /**
- * Class CompatibilityProcessorInterface
- *
  * @api
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface CompatibilityProcessorInterface
 {

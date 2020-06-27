@@ -8,17 +8,8 @@ namespace Dhl\ShippingCore\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class PickupType
- *
- * @author    Max Melzer <max.melzer@netresearch.de>
- * @link      https://www.netresearch.de/
- */
 class PickupType implements OptionSourceInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function toOptionArray(): array
     {
         return [

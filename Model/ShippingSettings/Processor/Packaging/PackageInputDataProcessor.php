@@ -17,11 +17,6 @@ use Dhl\ShippingCore\Model\ItemAttribute\ShipmentItemAttributeReader;
 use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
-/**
- * Class PackageInputDataProcessor
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class PackageInputDataProcessor implements ShippingOptionsProcessorInterface
 {
     /**

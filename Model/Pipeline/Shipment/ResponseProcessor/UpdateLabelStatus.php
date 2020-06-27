@@ -19,12 +19,6 @@ use Magento\Sales\Api\ShipmentRepositoryInterface;
 use Magento\Sales\Model\Order\Item;
 use Magento\Sales\Model\Order\Shipment;
 
-/**
- * Class UpdateLabelStatus
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class UpdateLabelStatus implements ShipmentResponseProcessorInterface
 {
     /**

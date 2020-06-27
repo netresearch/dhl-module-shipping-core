@@ -7,8 +7,6 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse;
 
 /**
- * Interface LabelResponseInterface
- *
  * @api
  */
 interface LabelResponseInterface extends ShipmentResponseInterface

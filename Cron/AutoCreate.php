@@ -20,9 +20,6 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Cron entry point for automatic shipment creation and label retrieval.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class AutoCreate
 {

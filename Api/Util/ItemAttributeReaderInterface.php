@@ -9,11 +9,7 @@ namespace Dhl\ShippingCore\Api\Util;
 use Magento\Sales\Api\Data\OrderItemInterface;
 
 /**
- * Interface ItemAttributeReaderInterface
- *
  * @api
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface ItemAttributeReaderInterface
 {

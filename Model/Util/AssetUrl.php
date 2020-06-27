@@ -12,12 +12,6 @@ use Magento\Framework\View\Asset\Repository;
 use Magento\Framework\View\Design\Theme\ThemeProviderInterface;
 use Magento\Framework\View\DesignInterface;
 
-/**
- * Class AssetUrl
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class AssetUrl implements AssetUrlInterface
 {
     /**

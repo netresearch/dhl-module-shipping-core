@@ -8,12 +8,6 @@ use Dhl\ShippingCore\Api\Util\UnitConverterInterface;
 use Magento\Directory\Model\CurrencyFactory;
 use Magento\TestFramework\ObjectManager;
 
-/**
- * HandlingFeeTest
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class UnitConverterTest extends \PHPUnit\Framework\TestCase
 {
     /**

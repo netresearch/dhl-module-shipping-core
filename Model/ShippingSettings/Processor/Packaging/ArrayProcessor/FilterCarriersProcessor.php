@@ -9,11 +9,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Processor\Packaging\ArrayProce
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsArrayProcessorInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
-/**
- * Class FilterCarriersProcessor
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class FilterCarriersProcessor implements ShippingOptionsArrayProcessorInterface
 {
     /**

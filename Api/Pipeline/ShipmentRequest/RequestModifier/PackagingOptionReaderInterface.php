@@ -9,10 +9,7 @@ namespace Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifier;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Interface PackagingOptionReaderInterface
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
+ * @api
  */
 interface PackagingOptionReaderInterface
 {

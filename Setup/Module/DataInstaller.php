@@ -15,10 +15,6 @@ use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetup;
 
-/**
- * Class DataInstaller
- *
- */
 class DataInstaller
 {
     /**

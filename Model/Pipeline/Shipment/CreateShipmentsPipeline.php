@@ -12,12 +12,6 @@ use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface;
 use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
 use Magento\Shipping\Model\Shipment\Request;
 
-/**
- * Class CreateShipmentsPipeline
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class CreateShipmentsPipeline implements CreateShipmentsPipelineInterface
 {
     /**

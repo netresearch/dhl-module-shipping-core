@@ -17,12 +17,7 @@ use Magento\Quote\Api\Data\TotalsInterface;
 use Magento\Quote\Model\Quote;
 
 /**
- * Class AddTotalSegmentExtensionAttributes
- *
  * Add additional data to the service charge total segment of the quote
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 class AddTotalSegmentExtensionAttributes
 {

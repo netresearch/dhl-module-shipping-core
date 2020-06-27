@@ -8,12 +8,6 @@ namespace Dhl\ShippingCore\Model\OrderExport\Data;
 
 use Dhl\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterface;
 
-/**
- * Class KeyValueObject
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class KeyValueObject implements KeyValueObjectInterface
 {
 

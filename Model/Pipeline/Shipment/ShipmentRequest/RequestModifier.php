@@ -18,9 +18,6 @@ use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Model\Shipment\Request;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Class RequestModifier
- */
 class RequestModifier implements RequestModifierInterface
 {
     /**

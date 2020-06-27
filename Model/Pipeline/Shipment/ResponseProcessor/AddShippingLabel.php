@@ -13,12 +13,7 @@ use Magento\Shipping\Model\Shipping\LabelGenerator;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class AddShippingLabel
- *
  * Add shipping label to shipment after api calls.
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class AddShippingLabel implements ShipmentResponseProcessorInterface
 {

@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Model\LabelStatus\LabelStatus;
 use Dhl\ShippingCore\Model\ResourceModel\LabelStatus as LabelStatusResource;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
-/**
- * Collection
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class Collection extends AbstractCollection
 {
     /**

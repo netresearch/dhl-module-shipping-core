@@ -13,12 +13,6 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Quote\Model\Quote;
 
-/**
- * Class DisableCodPaymentMethods
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class DisableCodPaymentMethods implements ObserverInterface
 {
     /**

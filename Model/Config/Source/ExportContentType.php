@@ -8,12 +8,6 @@ namespace Dhl\ShippingCore\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class ExportContentType
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ExportContentType implements OptionSourceInterface
 {
     const TYPE_COMMERCIAL_SAMPLE = 'COMMERCIAL_SAMPLE';

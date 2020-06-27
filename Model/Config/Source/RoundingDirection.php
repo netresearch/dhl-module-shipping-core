@@ -8,14 +8,6 @@ namespace Dhl\ShippingCore\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class RoundingDirection.
- *
- * Provide available rounding directions.
- *
- * @author  Ronny Gertler <ronny.gertler@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class RoundingDirection implements OptionSourceInterface
 {
     const UP = 'up';

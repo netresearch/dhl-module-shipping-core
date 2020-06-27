@@ -9,19 +9,12 @@ namespace Dhl\ShippingCore\Model\Rate\Emulation;
 use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 use Dhl\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface;
 use Dhl\ShippingCore\Api\Rate\RateRequestEmulationInterface;
-use Dhl\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Rate\Result;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class RateRequestService
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class RateRequestService implements RateRequestEmulationInterface
 {
     /**

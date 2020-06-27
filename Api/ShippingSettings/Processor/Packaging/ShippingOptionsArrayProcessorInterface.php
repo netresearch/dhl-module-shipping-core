@@ -9,10 +9,7 @@ namespace Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
- * Class ShippingOptionsArrayProcessorInterface
- *
  * @api
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
  */
 interface ShippingOptionsArrayProcessorInterface
 {

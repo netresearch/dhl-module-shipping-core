@@ -11,12 +11,6 @@ use Magento\Framework\DataObject;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\Data\ShipmentTrackInterface;
 
-/**
- * TrackResponse
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class TrackResponse extends DataObject implements TrackResponseInterface
 {
     /**

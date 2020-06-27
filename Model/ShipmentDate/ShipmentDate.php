@@ -6,15 +6,12 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShipmentDate;
 
-use Dhl\ShippingCore\Api\ShipmentDate\DayValidatorInterface;
 use Dhl\ShippingCore\Api\ConfigInterface;
-use Magento\Framework\Exception\LocalizedException;
+use Dhl\ShippingCore\Api\ShipmentDate\DayValidatorInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
 /**
  * The class ShipmentDate calculates the next available shipment date.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  */
 class ShipmentDate
 {

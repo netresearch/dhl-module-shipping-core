@@ -9,11 +9,7 @@ namespace Dhl\ShippingCore\Api\LabelStatus;
 use Magento\Sales\Api\Data\OrderInterface;
 
 /**
- * Interface LabelStatusManagementInterface
- *
  * @api
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
  */
 interface LabelStatusManagementInterface
 {

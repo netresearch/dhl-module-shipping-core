@@ -9,8 +9,6 @@ namespace Dhl\ShippingCore\Api\ShippingSettings;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\AssignedSelectionInterface;
 
 /**
- * Interface CodSelectorInterface
- *
  * Populate Cash on Delivery selection data.
  *
  * @api

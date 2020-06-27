@@ -10,12 +10,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\Logger\Handler\Base;
 
-/**
- * Class ApiLogHandler
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ApiLogHandler extends Base
 {
     /**

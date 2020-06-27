@@ -10,13 +10,9 @@ use Dhl\ShippingCore\Api\Data\Pipeline\TrackRequest\TrackRequestInterface;
 use Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface;
 
 /**
- * Interface BulkLabelCancellationInterface
- *
  * Service to cancel shipping labels.
  *
  * @api
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface BulkLabelCancellationInterface
 {

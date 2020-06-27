@@ -12,12 +12,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Locale\FormatInterface;
 use Magento\Shipping\Helper\Carrier;
 
-/**
- * UnitConverter
- *
- * @author   Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link     https://www.netresearch.de/
- */
 class UnitConverter implements UnitConverterInterface
 {
     /**

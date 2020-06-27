@@ -13,13 +13,7 @@ use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
 
 /**
- * Class ShipmentItemAttributeReader
- *
  * Read additional attributes from shipment items.
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class ShipmentItemAttributeReader
 {

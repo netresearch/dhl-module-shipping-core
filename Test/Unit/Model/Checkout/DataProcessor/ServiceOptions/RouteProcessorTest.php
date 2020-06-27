@@ -14,12 +14,6 @@ use Dhl\ShippingCore\Model\ShippingSettings\Data\ShippingOption;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class RouteProcessorTest
- *
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class RouteProcessorTest extends TestCase
 {
     /**

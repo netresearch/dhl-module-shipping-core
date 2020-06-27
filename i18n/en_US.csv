@@ -29,7 +29,7 @@ Container,Container
 "DHL & Magento","DHL & Magento"
 "DHL Shipping","DHL Shipping"
 "Decimal Value","Decimal Value"
-"Deleting a single tracking number is not supported. Please use the ""Cancel Shipment"" button on the shipment details page to cancel labels and tracks.","Deleting a single tracking number is not supported. Please use the ""Cancel Shipment"" button on the shipment details page to cancel labels and tracks."
+"Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks.","Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks."
 "Depends on chosen product. Its only mandatory for international, non EU shipments.","Depends on chosen product. Its only mandatory for international, non EU shipments."
 "Display customized message","Display customized message"
 Document,Document

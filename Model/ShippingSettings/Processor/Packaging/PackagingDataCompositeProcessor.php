@@ -28,9 +28,6 @@ use Dhl\ShippingCore\Api\ShippingSettings\Processor\Packaging\ShippingOptionsPro
 use Magento\Sales\Api\Data\OrderAddressInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
-/**
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class PackagingDataCompositeProcessor
 {
     /**

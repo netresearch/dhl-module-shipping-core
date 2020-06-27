@@ -7,12 +7,6 @@ namespace Dhl\ShippingCore\Model\Config;
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 
-/**
- * ConfigTest
- *
- * @author  Ronny Gertler <ronny.gertler@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ConfigTest extends \PHPUnit\Framework\TestCase
 {
     /**

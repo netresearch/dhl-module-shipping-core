@@ -8,10 +8,6 @@ namespace Dhl\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data;
 
 use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageAdditionalInterface;
 
-/**
- * Class PackageAdditional
- *
- */
 class PackageAdditional implements PackageAdditionalInterface
 {
     /**

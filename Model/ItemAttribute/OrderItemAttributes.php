@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\Data\OrderItemAttributesInterface;
 use Dhl\ShippingCore\Model\ResourceModel\OrderItemAttributes as OrderItemAttributesResource;
 use Magento\Framework\Model\AbstractModel;
 
-/**
- * OrderItemAttributes
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class OrderItemAttributes extends AbstractModel implements OrderItemAttributesInterface
 {
     /**

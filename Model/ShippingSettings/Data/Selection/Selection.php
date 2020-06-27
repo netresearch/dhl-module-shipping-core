@@ -8,11 +8,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Data\Selection;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\SelectionInterface;
 
-/**
- * Class Selection
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class Selection implements SelectionInterface
 {
     /**

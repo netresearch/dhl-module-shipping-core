@@ -8,11 +8,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Data;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface;
 
-/**
- * Class Comment
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class Comment implements CommentInterface
 {
     /**

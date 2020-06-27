@@ -11,12 +11,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Class RateConfig
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class RateConfig
 {
     // rounding

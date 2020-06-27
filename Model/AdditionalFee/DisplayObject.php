@@ -9,12 +9,7 @@ namespace Dhl\ShippingCore\Model\AdditionalFee;
 use Magento\Framework\DataObject;
 
 /**
- * Class DisplayObject
- *
  * Bundle data for display purposes
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 class DisplayObject extends DataObject
 {

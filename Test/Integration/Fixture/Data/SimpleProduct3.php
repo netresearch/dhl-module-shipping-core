@@ -13,9 +13,6 @@ use Magento\Catalog\Model\Product\Type;
 
 /**
  * Simple product with excessive weight.
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class SimpleProduct3 implements ProductInterface
 {

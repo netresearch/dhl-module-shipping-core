@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\OrderExport\Data;
 use Dhl\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterface;
 use Dhl\ShippingCore\Api\Data\OrderExport\ServiceDataInterface;
 
-/**
- * Class ServiceData
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ServiceData implements ServiceDataInterface
 {
     /**

@@ -10,9 +10,6 @@ use Magento\Framework\Config\SchemaLocatorInterface;
 use Magento\Framework\Module\Dir;
 use Magento\Framework\Module\Dir\Reader;
 
-/**
- * Class SchemaLocator
- */
 class SchemaLocator implements SchemaLocatorInterface
 {
     /**

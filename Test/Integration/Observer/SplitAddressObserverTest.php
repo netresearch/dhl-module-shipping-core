@@ -19,12 +19,7 @@ use Magento\TestFramework\ObjectManager;
 use Psr\Log\LoggerInterface;
 
 /**
- * SplitAddressObserverTest
- *
  * @magentoAppIsolation enabled
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class SplitAddressObserverTest extends \PHPUnit\Framework\TestCase
 {

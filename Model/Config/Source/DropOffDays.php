@@ -10,9 +10,6 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 /**
  * The available drop off days configuration options.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class DropOffDays implements OptionSourceInterface
 {

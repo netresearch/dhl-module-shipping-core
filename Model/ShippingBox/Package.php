@@ -8,12 +8,6 @@ namespace Dhl\ShippingCore\Model\ShippingBox;
 
 use Magento\Framework\DataObject;
 
-/**
- * Class Package
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class Package extends DataObject
 {
     const KEY_HEIGHT = 'height';

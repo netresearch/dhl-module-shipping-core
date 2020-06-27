@@ -8,11 +8,6 @@ namespace Dhl\ShippingCore\Test\Provider;
 
 use Dhl\ShippingCore\Model\ShippingSettings\Data\Route;
 
-/**
- * Class RouteProvider
- *
- * @author   Andreas Müller <andreas.mueller@netresearch.de>
- */
 class RouteProvider
 {
     /**

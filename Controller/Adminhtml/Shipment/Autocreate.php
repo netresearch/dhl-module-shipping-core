@@ -18,13 +18,6 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 use Magento\Ui\Component\MassAction\Filter;
 
-/**
- * Controller Autocreate
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
-
- */
 class Autocreate extends Action
 {
     /**

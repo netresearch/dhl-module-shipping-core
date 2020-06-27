@@ -12,8 +12,6 @@ namespace Dhl\ShippingCore\Api\Util;
  * Utility for loading a static view file URL
  *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface AssetUrlInterface
 {

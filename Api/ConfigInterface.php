@@ -12,11 +12,7 @@ use Magento\Shipping\Model\Config;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Interface ConfigInterface
- *
  * @api
- * @author  Paul Siedler <paul.siedler@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 interface ConfigInterface
 {

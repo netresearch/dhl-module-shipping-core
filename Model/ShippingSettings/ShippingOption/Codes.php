@@ -7,12 +7,7 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\ShippingSettings\ShippingOption;
 
 /**
- * Class Codes
- *
- * This is the source of all carrier codes, option codes and input codes
- * defined in the ShippingCore shipping_settings.xml files.
- *
- * @author Max Melzer <max.melzer@netresearch.de>
+ * Carrier code, option code, and input code definitions for use in the shipping_settings.xml files.
  */
 class Codes
 {

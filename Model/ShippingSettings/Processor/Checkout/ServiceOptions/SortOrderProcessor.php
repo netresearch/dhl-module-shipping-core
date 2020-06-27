@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsProcessorInterface;
 
-/**
- * Class SortOrderProcessor
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
- */
 class SortOrderProcessor implements ShippingOptionsProcessorInterface
 {
     /**

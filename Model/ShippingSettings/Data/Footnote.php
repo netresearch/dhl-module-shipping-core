@@ -8,12 +8,6 @@ namespace Dhl\ShippingCore\Model\ShippingSettings\Data;
 
 use Dhl\ShippingCore\Api\Data\ShippingSettings\FootnoteInterface;
 
-/**
- * Class Footnote
- *
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class Footnote implements FootnoteInterface
 {
     /**

@@ -20,12 +20,6 @@ use TddWizard\Fixtures\Sales\OrderBuilder;
 use TddWizard\Fixtures\Sales\OrderFixture;
 use TddWizard\Fixtures\Sales\OrderFixtureRollback;
 
-/**
- * Class ShipmentDateTest
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
- */
 class ShipmentDateTest extends TestCase
 {
     /**

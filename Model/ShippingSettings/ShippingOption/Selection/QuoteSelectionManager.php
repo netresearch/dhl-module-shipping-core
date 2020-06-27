@@ -14,11 +14,6 @@ use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 
-/**
- * Class QuoteSelectionManager
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class QuoteSelectionManager
 {
     /**

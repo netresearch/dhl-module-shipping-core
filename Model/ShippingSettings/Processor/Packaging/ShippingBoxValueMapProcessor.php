@@ -17,12 +17,7 @@ use Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
- * Class ShippingBoxValueMapProcessor
- *
- * This class adds dynamic value mappings for the different available
- * "My own package" presets to the "Container" input
- *
- * @author Max Melzer <max.melzer@netresearch.de>
+ * Adds dynamic value mappings for the different available "My own package" presets to the "Container" input.
  */
 class ShippingBoxValueMapProcessor implements ShippingOptionsProcessorInterface
 {

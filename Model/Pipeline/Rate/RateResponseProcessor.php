@@ -10,12 +10,6 @@ use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 
-/**
- * Class RateResponseProcessor
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class RateResponseProcessor implements RateResponseProcessorInterface
 {
     /**

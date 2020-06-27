@@ -8,12 +8,6 @@ namespace Dhl\ShippingCore\Model\Rate\Emulation;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
-/**
- * Class ProxyScopeConfig
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class ProxyScopeConfig implements ScopeConfigInterface
 {
     /**

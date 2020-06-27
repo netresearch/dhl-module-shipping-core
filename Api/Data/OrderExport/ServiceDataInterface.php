@@ -7,8 +7,6 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Api\Data\OrderExport;
 
 /**
- * Interface ServiceDataInterface
- *
  * A DTO with package parameter service rendering data for carriers that support it
  *
  * @api

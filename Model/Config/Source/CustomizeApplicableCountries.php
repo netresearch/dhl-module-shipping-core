@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\Config\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\UrlInterface;
 
-/**
- * Class CustomizeApplicableCountries
- *
- * @author    Max Melzer <max.melzer@netresearch.de>
- * @link      https://www.netresearch.de/
- */
 class CustomizeApplicableCountries implements OptionSourceInterface
 {
     /**

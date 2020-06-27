@@ -6,12 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShippingSettings;
 
-/**
- * Class PackagingPopup
- *
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class PackagingPopup
 {
     /**

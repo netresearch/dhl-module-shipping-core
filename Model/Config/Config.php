@@ -18,10 +18,6 @@ use Magento\Shipping\Helper\Carrier;
 use Magento\Shipping\Model\Config as ShippingConfig;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Class Config
- *
- */
 class Config implements ConfigInterface
 {
     /**

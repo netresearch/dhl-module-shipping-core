@@ -8,16 +8,9 @@ namespace Dhl\ShippingCore\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class TermsOfTrade
- *
- * @author    Rico Sonntag <rico.sonntag@netresearch.de>
- * @link      https://www.netresearch.de/
- */
 class TermsOfTrade implements OptionSourceInterface
 {
     const DDP = 'DDP';
-
     const DDU = 'DDU';
 
     /**

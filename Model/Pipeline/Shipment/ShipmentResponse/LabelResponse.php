@@ -11,14 +11,9 @@ use Magento\Framework\DataObject;
 use Magento\Sales\Api\Data\ShipmentInterface;
 
 /**
- * LabelResponse
- *
  * The response type consumed by the core carrier to persist label binary and tracking number.
  *
  * @see \Magento\Shipping\Model\Carrier\AbstractCarrierOnline::requestToShipment
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class LabelResponse extends DataObject implements LabelResponseInterface
 {

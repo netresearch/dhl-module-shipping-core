@@ -14,12 +14,6 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 
-/**
- * Controller Save
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class Save extends Action
 {
     /**

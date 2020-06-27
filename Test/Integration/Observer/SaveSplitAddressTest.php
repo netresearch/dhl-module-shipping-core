@@ -23,9 +23,6 @@ use TddWizard\Fixtures\Sales\OrderFixtureRollback;
  *
  * In this test, the observer is not directly invoked.
  * It is invoked by saving an order address instead.
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class SaveSplitAddressTest extends TestCase
 {

@@ -10,10 +10,6 @@ use Dhl\ShippingCore\Api\Data\Pipeline\TrackRequest\TrackRequestInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\Data\ShipmentTrackInterface;
 
-/**
- * Class Package
- *
- */
 class TrackRequest implements TrackRequestInterface
 {
     /**

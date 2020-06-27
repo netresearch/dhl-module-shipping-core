@@ -7,15 +7,8 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Model\ShippingBox;
 
 use Countable;
-use Dhl\ShippingCore\Model\ShippingBox\PackageFactory;
 use IteratorAggregate;
 
-/**
- * Class PackageCollection
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class PackageCollection implements IteratorAggregate, Countable
 {
     /**

@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\AdditionalFee;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Invoice\Total\AbstractTotal;
 
-/**
- * Invoice Total.
- *
- * @author   Max Melzer <max.melzer@netresearch.de>
- * @link     https://www.netresearch.de/
- */
 class InvoiceTotal extends AbstractTotal
 {
     /**

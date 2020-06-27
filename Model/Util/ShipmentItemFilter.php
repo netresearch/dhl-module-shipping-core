@@ -10,12 +10,7 @@ use Magento\Sales\Api\Data\ShipmentItemInterface;
 use Magento\Sales\Model\Order\Shipment\Item;
 
 /**
- * Class ShipmentItemFilter
- *
  * Extract shippable items from a list of shipment items.
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class ShipmentItemFilter
 {

@@ -15,12 +15,6 @@ use Magento\Sales\Model\Order;
 use Magento\Sales\Model\ResourceModel\GridInterface;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class LabelStatusManagement
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class LabelStatusManagement implements LabelStatusManagementInterface
 {
     /**

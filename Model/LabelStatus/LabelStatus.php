@@ -9,12 +9,6 @@ namespace Dhl\ShippingCore\Model\LabelStatus;
 use Dhl\ShippingCore\Model\ResourceModel;
 use Magento\Framework\Model\AbstractModel;
 
-/**
- * LabelStatus
- *
- * @author Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link https://www.netresearch.de/
- */
 class LabelStatus extends AbstractModel
 {
     const ORDER_ID = 'order_id';

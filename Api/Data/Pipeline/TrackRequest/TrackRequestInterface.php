@@ -10,8 +10,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\Data\ShipmentTrackInterface;
 
 /**
- * Interface TrackRequestInterface
- *
  * @api
  */
 interface TrackRequestInterface

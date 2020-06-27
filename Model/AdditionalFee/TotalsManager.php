@@ -15,11 +15,6 @@ use Magento\Sales\Model\Order\Creditmemo;
 use Magento\Sales\Model\Order\Invoice;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class TotalsManager
- *
- * @author Max Melzer <max.melzer@netresearch.de>
- */
 class TotalsManager
 {
     const ADDITIONAL_FEE_FIELD_NAME = 'dhlgw_additional_fee';
