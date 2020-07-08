@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="DhlShippingCoreConfigureCodMethodsTest">
+        <annotations>
+            <features value="Configuration"/>
+            <stories value="CoD Payment method configuration"/>
+            <title value="CoD Payment method configuration"/>
+            <description value="Verify that cash on delivery payment methods can be configured"/>
+            <severity value="CRITICAL"/>
+            <group value="dhlgw-configuration"/>
+        </annotations>
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+            <actionGroup ref="NavigateToShippingCoreSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
+            <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShippingCoreGroup">
+                <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}"/>
+                <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroupExpanded}}"/>
+            </actionGroup>
+        </before>
+        <after>
+            <createData entity="ShippingCoreConfigDefault" stepKey="resetConfiguration"/>
+            <actionGroup ref="logout" stepKey="logout"/>
+        </after>
+
+        <comment userInput="-> Perform actual test" stepKey="runTestComment"/>
+
+        <!-- Scroll to subgroup and expand it -->
+        <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToGeneralSettingsGroup">
+            <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.generalSettingsGroup}}"/>
+            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.generalSettingsGroupExpanded}}"/>
+        </actionGroup>
+
+        <!-- Select payment methods and save -->
+        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.codPaymentMethodSelection}}" stepKey="scrollToCodPaymentMethodSelection" x="0" y="-85"/>
+        <selectOption selector="{{AdminSystemConfigShippingCoreSection.codPaymentMethodSelection}}"
+                      parameterArray="[{{ShippingCorePaymentMethods.cashOnDelivery}}, {{ShippingCorePaymentMethods.checkMoneyOrder}}]"
+                      stepKey="selectCodPaymentMethods"/>
+
+        <actionGroup ref="SaveAdminSystemConfigSectionActionGroup" stepKey="saveAdminConfigSection"/>
+
+        <!-- Confirm selection is persisted -->
+
+        <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShippingCoreGroupAfterSave">
+            <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}"/>
+            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroupExpanded}}"/>
+        </actionGroup>
+
+        <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToGeneralSettingsGroupAfterSave">
+            <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.generalSettingsGroup}}"/>
+            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.generalSettingsGroupExpanded}}"/>
+        </actionGroup>
+
+        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.codPaymentMethodSelection}}" stepKey="scrollToCodPaymentMethodSelectionAfterSave" x="0" y="-85"/>
+        <grabMultiple stepKey="fetchPaymentMethods" selector="{{AdminSystemConfigShippingCoreSection.codPaymentMethodActiveSelection}}"/>
+        <assertCount stepKey="validateSavedPaymentMethodsCount">
+            <expectedResult type="const">2</expectedResult>
+            <actualResult type="variable">fetchPaymentMethods</actualResult>
+        </assertCount>
+        <assertContains stepKey="validateSavedPaymentMethodsA">
+            <expectedResult type="string">{{ShippingCorePaymentMethods.checkMoneyOrder}}</expectedResult>
+            <actualResult type="variable">fetchPaymentMethods</actualResult>
+        </assertContains>
+        <assertContains stepKey="validateSavedPaymentMethodsB">
+            <expectedResult type="string">{{ShippingCorePaymentMethods.cashOnDelivery}}</expectedResult>
+            <actualResult type="variable">fetchPaymentMethods</actualResult>
+        </assertContains>
+    </test>
+</tests>

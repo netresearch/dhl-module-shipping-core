@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <section name="AdminShipmentDetailShipAndTrackInfoSection">
+        <element name="createLabelButton" type="button" selector=".order-shipping-address .action-create-label"/>
+        <element name="printLabelButton" type="button" selector="Print Shipping Label"/>
+        <element name="showPackageButton" type="button" selector="Show Packages"/>
+    </section>
+</sections>

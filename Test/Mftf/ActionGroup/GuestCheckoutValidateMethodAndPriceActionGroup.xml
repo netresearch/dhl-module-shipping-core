@@ -42,10 +42,4 @@
             <expectedResult type="float">{{expectedShippingMethodPrice}}</expectedResult>
         </assertGreaterThanOrEqual>
     </actionGroup>
-
-    <actionGroup name="GuestCheckoutFillingShippingSectionWithCountryActionGroup"
-                 extends="GuestCheckoutFillingShippingSectionActionGroup"
-                 insertBefore="selectRegion">
-        <selectOption selector="{{CheckoutShippingSection.country}}" userInput="{{customerAddressVar.country_id}}" stepKey="enterCountry"/>
-    </actionGroup>
 </actionGroups>

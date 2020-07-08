@@ -5,7 +5,7 @@
   */
 -->
 <entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/dataProfileSchema.xsd">
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
     <!-- Flat rate carrier default configuration -->
     <entity name="CarriersFlatRateSettings_Default" type="carrier">
         <data key="carriers_flatrate_active">1</data>

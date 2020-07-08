@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="ShippingCorePaymentMethods" type="shippingCoreData">
+        <data key="cashOnDelivery">Cash On Delivery</data>
+        <data key="checkMoneyOrder">Check / Money order</data>
+    </entity>
+
+    <entity name="ShippingCoreCutOffTime" type="shippingCoreData">
+        <data key="hours">15</data>
+        <data key="minutes">59</data>
+        <data key="seconds">59</data>
+    </entity>
+
+    <entity name="ShippingCoreTermsOfTrade" type="shippingCoreData">
+        <data key="DDU">Customer pays duties and taxes (DDU)</data>
+        <data key="DDP">I will pay duties and taxes (DDP)</data>
+    </entity>
+
+    <!-- name: referenced in test, type: defined in meta data -->
+    <entity name="ShippingCoreConfigDefault" type="shipping_core_config">
+        <!-- type: declared in meta data, value: see entities below -->
+        <requiredEntity type="cod_methods">codMethodsDefault</requiredEntity>
+        <requiredEntity type="cut_off_time">cutOffTimeDefault</requiredEntity>
+        <requiredEntity type="terms_of_trade">termsOfTradeDefault</requiredEntity>
+    </entity>
+    <entity name="codMethodsDefault" type="cod_methods">
+        <data key="value">cashondelivery</data>
+    </entity>
+    <entity name="cutOffTimeDefault" type="cut_off_time">
+        <data key="value">00,00,00</data>
+    </entity>
+    <entity name="termsOfTradeDefault" type="terms_of_trade">
+        <data key="value">DDU</data>
+    </entity>
+</entities>

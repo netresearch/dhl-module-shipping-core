@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="DhlShippingCoreConfigureTermsOfTradeTest">
+        <annotations>
+            <features value="Configuration"/>
+            <stories value="Terms of trade configuration"/>
+            <title value="Terms of trade configuration"/>
+            <description value="Verify that terms of trade can be configured"/>
+            <severity value="CRITICAL"/>
+            <group value="dhlgw-configuration"/>
+        </annotations>
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+            <actionGroup ref="NavigateToShippingCoreSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
+            <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShippingCoreGroup">
+                <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}"/>
+                <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroupExpanded}}"/>
+            </actionGroup>
+        </before>
+        <after>
+            <createData entity="ShippingCoreConfigDefault" stepKey="resetConfiguration"/>
+            <actionGroup ref="logout" stepKey="logout"/>
+        </after>
+
+        <comment userInput="-> Perform actual test" stepKey="runTestComment"/>
+
+        <!-- Scroll to subgroup and expand it -->
+        <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShipmentDefaultsGroup">
+            <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroup}}"/>
+            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroupExpanded}}"/>
+        </actionGroup>
+
+        <!-- Configure a terms of trade and save -->
+        <seeElement selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroup}}" stepKey="seeTermsOfTradeConfigGroup"/>
+        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroup}}" stepKey="scrollToTermsOfTradeConfigGroup" x="0" y="-85"/>
+
+        <see selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDULabel}}"
+             userInput="{{ShippingCoreTermsOfTrade.DDU}}" stepKey="seeTermsOfTradeConfigGroupLabelDDU"/>
+        <see selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDPLabel}}"
+             userInput="{{ShippingCoreTermsOfTrade.DDP}}" stepKey="seeTermsOfTradeConfigGroupLabelDDP"/>
+
+        <seeCheckboxIsChecked selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDU}}"
+                              stepKey="termsOfTradeConfigGroupOptionCheckedDDU"/>
+
+        <click selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDPLabel}}"
+               stepKey="termsOfTradeConfigGroupOptionClickDDP"/>
+
+        <actionGroup ref="SaveAdminSystemConfigSectionActionGroup" stepKey="saveAdminConfigSection"/>
+
+        <!-- Confirm selection is persisted -->
+
+        <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShippingCoreGroupAfterSave">
+            <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}"/>
+            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroupExpanded}}"/>
+        </actionGroup>
+
+        <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShipmentDefaultsGroupAfterSave">
+            <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroup}}"/>
+            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroupExpanded}}"/>
+        </actionGroup>
+
+        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroup}}" stepKey="scrollToTermsOfTradeConfigGroupAfterSave" x="0" y="-85"/>
+        <seeCheckboxIsChecked selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDP}}"
+                              stepKey="termsOfTradeConfigGroupOptionCheckedDDP"/>
+        <dontSeeCheckboxIsChecked selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDU}}"
+                                  stepKey="termsOfTradeConfigGroupOptionNotCheckedDDU"/>
+    </test>
+</tests>
