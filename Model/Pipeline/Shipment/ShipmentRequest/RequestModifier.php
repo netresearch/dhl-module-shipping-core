@@ -209,9 +209,14 @@ class RequestModifier implements RequestModifierInterface
             $customs[Codes::PACKAGING_INPUT_EXPLANATION]
         );
 
+        $productCode = $packagingOptionReader->getPackageOptionValue(
+            Codes::PACKAGING_OPTION_PACKAGE_DETAILS,
+            Codes::PACKAGING_INPUT_PRODUCT_CODE
+        );
+
         $packageItems = [];
         $packageParams = [
-            'shipping_product' => $shipmentRequest->getShippingMethod(),
+            'shipping_product' => $productCode,
             'container' => '',
             'weight' => $packagingOptionReader->getPackageOptionValue(
                 Codes::PACKAGING_OPTION_PACKAGE_DETAILS,
