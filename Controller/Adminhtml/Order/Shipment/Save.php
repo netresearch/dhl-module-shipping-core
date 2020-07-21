@@ -52,10 +52,16 @@ class Save extends Action
     {
         $data = $this->getRequest()->getParam('data');
         $data = $this->jsonSerializer->unserialize($data);
+
+        // email confirmation flag, comment text
+        $shipmentData = $data['shipment'] ?? [];
+        // packaging popup contents
+        $packagesData = $data['packages'] ?? [];
+
         $shipmentItems = [];
         $packages = [];
 
-        foreach ($data as $packageDetails) {
+        foreach ($packagesData as $packageDetails) {
             $packageItems = [];
 
             $itemCustomsKey = Codes::ITEM_OPTION_ITEM_CUSTOMS;
@@ -119,20 +125,21 @@ class Save extends Action
             ];
         }
 
+        $sendEmail = !empty($shipmentData['sendEmail']) ? $shipmentData['sendEmail'] : null;
+        $notifyCustomer = !empty($shipmentData['notifyCustomer']) ? $shipmentData['notifyCustomer'] : null;
         $shipment = [
-            'shipment' => [
-                'comment_text' => '',
-                'create_shipping_label' => '1',
-                'items' => $shipmentItems,
-            ],
-            'packages' => $packages,
+            'comment_text' => $shipmentData['shipmentComment'] ?? '',
+            'send_email' => $sendEmail,
+            'comment_customer_notify' => $notifyCustomer,
+            'create_shipping_label' => '1',
+            'items' => $shipmentItems,
         ];
 
         /** @var Forward $resultForward */
         $resultForward = $this->resultFactory->create(ResultFactory::TYPE_FORWARD);
         $resultForward->setController('order_shipment')
                       ->setModule('admin')
-                      ->setParams($shipment);
+                      ->setParams(['shipment' => $shipment, 'packages' => $packages]);
         if ($this->getRequest()->getParam('shipment_id', false)) {
             $resultForward->forward('createLabel');
         } else {
