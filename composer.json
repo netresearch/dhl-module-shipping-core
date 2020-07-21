@@ -45,8 +45,8 @@
         "magento/module-webapi": "^100.3.0",
         "magento/zendframework1": "^1.14.1",
         "netresearch/config-fields-m2": "^1.2.0",
-        "nyholm/psr7": "^1.3.0",
-        "php-http/curl-client": "^2.0.0"
+        "nyholm/psr7": "^1.2.0",
+        "php-http/curl-client": "^2.1.0"
     },
     "require-dev": {
         "magento/module-checkout": "^100.3.0",
