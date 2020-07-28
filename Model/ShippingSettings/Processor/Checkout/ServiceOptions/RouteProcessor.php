@@ -6,15 +6,15 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShippingSettings\Processor\Checkout\ServiceOptions;
 
+use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Dhl\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsProcessorInterface;
-use Dhl\ShippingCore\Model\Config\Config;
 use Dhl\ShippingCore\Model\ShippingSettings\RouteMatcher;
 
 class RouteProcessor implements ShippingOptionsProcessorInterface
 {
     /**
-     * @var Config
+     * @var ConfigInterface
      */
     private $config;
 
@@ -26,10 +26,10 @@ class RouteProcessor implements ShippingOptionsProcessorInterface
     /**
      * RouteProcessor constructor.
      *
-     * @param Config $config
+     * @param ConfigInterface $config
      * @param RouteMatcher $routeValidator
      */
-    public function __construct(Config $config, RouteMatcher $routeValidator)
+    public function __construct(ConfigInterface $config, RouteMatcher $routeValidator)
     {
         $this->config = $config;
         $this->routeMatcher = $routeValidator;

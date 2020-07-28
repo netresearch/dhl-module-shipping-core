@@ -128,6 +128,7 @@ Tue,Di
 "Unable to load recipient street with ID ""%1"".","Empfängeradresse mit der ID ""%1"" kann nicht geladen werden."
 "Unable to load shipment request properties.","Die Daten für den Versandauftrag konnten nicht geladen werden."
 "Unable to process PDF content.","PDF-Inhalt kann nicht verarbeitet werden."
+"Unable to retrieve year %1 holidays for region %2.","Feiertage in Region %2 für das Jahr %1 konnten nicht ermittelt werden."
 "Unable to save additional attributes for order item %1: %2","Zusatzattribute für Artikel %1 konnten nicht gespeichert werden: %2"
 "Unable to save label status","Label-Status konnte nicht gespeichert werden."
 "Unable to save recipient street.","Empfängeradresse kann nicht gespeichert werden."

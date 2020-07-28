@@ -8,7 +8,6 @@ namespace Dhl\ShippingCore\Api;
 
 use Dhl\ShippingCore\Model\ShippingBox\Package;
 use Dhl\ShippingCore\Model\ShippingBox\PackageCollection;
-use Magento\Shipping\Model\Config;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -110,11 +109,13 @@ interface ConfigInterface
     /**
      * Returns the shipping origin country
      *
+     * @deprecated since 1.1.0
+     * @see ShippingConfigInterface::getOriginCountry
+     *
      * @param mixed $store
      * @param string $scope
      *
      * @return string
-     * @see Config
      */
     public function getOriginCountry($store = null, $scope = ScopeInterface::SCOPE_STORE): string;
 

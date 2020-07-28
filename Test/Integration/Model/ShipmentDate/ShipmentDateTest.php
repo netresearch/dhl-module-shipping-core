@@ -9,12 +9,9 @@ namespace Dhl\ShippingCore\Test\Integration\Model\ShipmentDate;
 use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Model\ShipmentDate\ShipmentDate;
 use Dhl\ShippingCore\Model\ShipmentDate\Validator\NoHoliday;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\Helper\Bootstrap;
-use Magento\TestFramework\ObjectManager;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TddWizard\Fixtures\Sales\OrderBuilder;
 use TddWizard\Fixtures\Sales\OrderFixture;
@@ -28,21 +25,6 @@ class ShipmentDateTest extends TestCase
     private static $order;
 
     /**
-     * @var ObjectManager
-     */
-    private $objectManager;
-
-    /**
-     * @var ConfigInterface|MockObject
-     */
-    private $configMock;
-
-    /**
-     * @var TimezoneInterface|MockObject
-     */
-    private $timezoneMock;
-
-    /**
      * @throws \Exception
      */
     public static function createOrder()
@@ -52,8 +34,6 @@ class ShipmentDateTest extends TestCase
 
     /**
      * Roll back fixture.
-     *
-     * @throws LocalizedException
      */
     public static function createOrderRollback()
     {
@@ -66,21 +46,6 @@ class ShipmentDateTest extends TestCase
                 register_shutdown_function('fwrite', STDERR, $message);
             }
         }
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->objectManager = Bootstrap::getObjectManager();
-
-        $this->configMock = $this->getMockBuilder(ConfigInterface::class)
-                                 ->disableOriginalConstructor()
-                                 ->getMock();
-
-        $this->timezoneMock = $this->getMockBuilder(TimezoneInterface::class)
-                                   ->disableOriginalConstructor()
-                                   ->getMock();
     }
 
     /**
@@ -106,25 +71,21 @@ class ShipmentDateTest extends TestCase
                 'currentTime' => $createBaseDate(),
                 'cutoffTime' => $createBaseDate()->setTime(15, 0),
                 'expectedDate' => $createBaseDate()->setDate(2019, 2, 1),
-                'originCountry' => 'DE',
             ],
             'before cut-off time, all days allowed, but current day is a holiday' => [
                 'currentTime' => $createBaseDate()->setDate(2019, 1, 1),
                 'cutoffTime' => $createBaseDate()->setTime(15, 0),
                 'expectedDate' => $createBaseDate()->setDate(2019, 1, 2),
-                'originCountry' => 'DE',
             ],
             'after cut-off time, all days allowed' => [
                 'currentTime' => $createBaseDate(),
                 'cutoffTime' => $createBaseDate()->setTime(8, 0),
                 'expectedDate' => $createBaseDate()->setDate(2019, 2, 2),
-                'originCountry' => 'DE',
             ],
             'after cut-off time, all days allowed, but following days are holidays' => [
                 'currentTime' => $createBaseDate()->setDate(2019, 12, 24),
                 'cutoffTime' => $createBaseDate()->setTime(8, 0),
                 'expectedDate' => $createBaseDate()->setDate(2019, 12, 27),
-                'originCountry' => 'DE',
             ],
         ];
     }
@@ -138,30 +99,36 @@ class ShipmentDateTest extends TestCase
      * @dataProvider dataProvider
      * @magentoDataFixture createOrder
      *
+     * @magentoConfigFixture default_store shipping/origin/country_id DE
+     * @magentoConfigFixture default_store shipping/origin/region_id 91
+     * @magentoConfigFixture default_store shipping/origin/postcode 04229
+     * @magentoConfigFixture default_store shipping/origin/city Leipzig
+     * @magentoConfigFixture default_store shipping/origin/street_line1 Nonnenstraße 11
+     *
      * @param \DateTime $currentTime
      * @param \DateTime $cutOffTime
      * @param \DateTime $expectedDate
-     * @param string $originCountry
      *
      * @throws \RuntimeException
      */
     public function calculateShipmentDate(
         \DateTime $currentTime,
         \DateTime $cutOffTime,
-        \DateTime $expectedDate,
-        string $originCountry
+        \DateTime $expectedDate
     ) {
-        $this->timezoneMock->method('scopeDate')->willReturn($currentTime);
-        $this->configMock->method('getCutOffTime')->willReturn($cutOffTime);
-        $this->configMock->method('getOriginCountry')->willReturn($originCountry);
+        $timezoneMock = $this->getMockBuilder(TimezoneInterface::class)->disableOriginalConstructor()->getMock();
+        $timezoneMock->method('scopeDate')->willReturn($currentTime);
+        $configMock = $this->getMockBuilder(ConfigInterface::class)->disableOriginalConstructor()->getMock();
+        $configMock->method('getCutOffTime')->willReturn($cutOffTime);
 
-        $dayValidator = $this->objectManager->create(NoHoliday::class, ['config' => $this->configMock]);
+        $dayValidator = Bootstrap::getObjectManager()->create(NoHoliday::class);
+
         /** @var ShipmentDate $subject */
-        $subject = $this->objectManager->create(
+        $subject = Bootstrap::getObjectManager()->create(
             ShipmentDate::class,
             [
-                'timezone' => $this->timezoneMock,
-                'config' => $this->configMock,
+                'timezone' => $timezoneMock,
+                'config' => $configMock,
                 'dayValidators' => [$dayValidator],
             ]
         );
@@ -177,12 +144,19 @@ class ShipmentDateTest extends TestCase
      * Invalid drop-off configuration might lead to no shipment date.
      * Make sure an exception is thrown to indicate an error.
      *
+     * @magentoConfigFixture default_store shipping/origin/country_id DE
+     * @magentoConfigFixture default_store shipping/origin/region_id 91
+     * @magentoConfigFixture default_store shipping/origin/postcode 04229
+     * @magentoConfigFixture default_store shipping/origin/city Leipzig
+     * @magentoConfigFixture default_store shipping/origin/street_line1 Nonnenstraße 11
+     *
      * @test
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage No valid start date.
      */
     public function calculationError()
     {
+        $this->expectExceptionMessage("No valid start date.");
+        $this->expectException(\RuntimeException::class);
+
         /**
          * 2019-02-01 10:00:00 was a Friday.
          *
@@ -196,22 +170,21 @@ class ShipmentDateTest extends TestCase
 
         $cutOffTime = $createBaseDate()->setTime(8, 0);
 
-        $holidayValidatorMock = $this->getMockBuilder(NoHoliday::class)
-                                     ->disableOriginalConstructor()
-                                     ->getMock();
-
-        // All days are holidays
+        // every day is a holiday!
+        $holidayValidatorMock = $this->getMockBuilder(NoHoliday::class)->disableOriginalConstructor()->getMock();
         $holidayValidatorMock->method('validate')->willReturn(false);
 
-        $this->timezoneMock->method('scopeDate')->willReturn($createBaseDate());
-        $this->configMock->method('getCutOffTime')->willReturn($cutOffTime);
+        $timezoneMock = $this->getMockBuilder(TimezoneInterface::class)->disableOriginalConstructor()->getMock();
+        $timezoneMock->method('scopeDate')->willReturn($createBaseDate());
+        $configMock = $this->getMockBuilder(ConfigInterface::class)->disableOriginalConstructor()->getMock();
+        $configMock->method('getCutOffTime')->willReturn($cutOffTime);
 
         /** @var ShipmentDate $subject */
-        $subject = $this->objectManager->create(
+        $subject = Bootstrap::getObjectManager()->create(
             ShipmentDate::class,
             [
-                'timezone' => $this->timezoneMock,
-                'config' => $this->configMock,
+                'timezone' => $timezoneMock,
+                'config' => $configMock,
                 'dayValidators' => [$holidayValidatorMock],
             ]
         );

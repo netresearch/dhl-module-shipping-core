@@ -128,6 +128,7 @@ Tue,Tue
 "Unable to load recipient street with ID ""%1"".","Unable to load recipient street with ID ""%1""."
 "Unable to load shipment request properties.","Unable to load shipment request properties."
 "Unable to process PDF content.","Unable to process PDF content."
+"Unable to retrieve year %1 holidays for region %2.","Unable to retrieve year %1 holidays for region %2."
 "Unable to save additional attributes for order item %1: %2","Unable to save additional attributes for order item %1: %2"
 "Unable to save label status","Unable to save label status"
 "Unable to save recipient street.","Unable to save recipient street."

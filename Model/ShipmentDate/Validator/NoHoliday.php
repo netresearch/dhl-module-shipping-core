@@ -6,62 +6,40 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\ShipmentDate\Validator;
 
-use Dhl\ShippingCore\Api\ConfigInterface;
 use Dhl\ShippingCore\Api\ShipmentDate\DayValidatorInterface;
-use Magento\Framework\Locale\ResolverInterfaceFactory;
-use Yasumi\Provider\AbstractProvider;
-use Yasumi\Yasumi;
+use Dhl\ShippingCore\Api\ShippingConfigInterface;
+use Dhl\ShippingCore\Model\Util\HolidayCalculator;
+use Magento\Framework\Exception\RuntimeException;
+use Psr\Log\LoggerInterface;
 
 /**
  * NoHoliday validator class. This class checks if the given date/time is NOT a holiday.
  */
 class NoHoliday implements DayValidatorInterface
 {
-    const DEFAULT_COUNTRY = 'US';
-
     /**
-     * @var ConfigInterface
+     * @var ShippingConfigInterface
      */
     private $config;
 
     /**
-     * @var ResolverInterfaceFactory
+     * @var HolidayCalculator
      */
-    private $localeResolverFactory;
+    private $holidayCalculator;
 
     /**
-     * NoHoliday constructor.
-     *
-     * @param ConfigInterface $config
-     * @param ResolverInterfaceFactory $localeResolverFactory
+     * @var LoggerInterface
      */
+    private $logger;
+
     public function __construct(
-        ConfigInterface $config,
-        ResolverInterfaceFactory $localeResolverFactory
+        ShippingConfigInterface $config,
+        HolidayCalculator $holidayCalculator,
+        LoggerInterface $logger
     ) {
         $this->config = $config;
-        $this->localeResolverFactory = $localeResolverFactory;
-    }
-
-    /**
-     * Returns the holiday provider instance.
-     *
-     * @param \DateTime $dateTime
-     * @param mixed $store
-     *
-     * @return AbstractProvider|null
-     */
-    private function getHolidayProvider(\DateTime $dateTime, $store = null)
-    {
-        try {
-            $year      = (int) $dateTime->format('Y');
-            $locale    = $this->localeResolverFactory->create()->getLocale();
-            $countryId = $this->config->getOriginCountry($store);
-
-            return Yasumi::createByISO3166_2($countryId, $year, $locale);
-        } catch (\Exception $e) {
-            return null;
-        }
+        $this->holidayCalculator = $holidayCalculator;
+        $this->logger = $logger;
     }
 
     /**
@@ -74,7 +52,17 @@ class NoHoliday implements DayValidatorInterface
      */
     public function validate(\DateTime $dateTime, $store = null): bool
     {
-        $holidayProvider = $this->getHolidayProvider($dateTime, $store);
-        return $holidayProvider === null ? true : !$holidayProvider->isHoliday($dateTime);
+        try {
+            return !$this->holidayCalculator->isHoliday(
+                $dateTime,
+                $this->config->getOriginCountry($store),
+                $this->config->getOriginRegion($store)
+            );
+        } catch (RuntimeException $exception) {
+            $this->logger->error($exception->getLogMessage());
+
+            // failed to retrieve holiday information, must assume the date is not a holiday.
+            return true;
+        }
     }
 }

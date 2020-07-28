@@ -15,7 +15,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Shipping\Helper\Carrier;
-use Magento\Shipping\Model\Config as ShippingConfig;
 use Magento\Store\Model\ScopeInterface;
 
 class Config implements ConfigInterface
@@ -218,13 +217,11 @@ class Config implements ConfigInterface
      * @param string $scope
      *
      * @return string
-     * @see ShippingConfig
-     *
      */
     public function getOriginCountry($store = null, $scope = ScopeInterface::SCOPE_STORE): string
     {
         return (string) $this->scopeConfig->getValue(
-            ShippingConfig::XML_PATH_ORIGIN_COUNTRY_ID,
+            \Magento\Shipping\Model\Config::XML_PATH_ORIGIN_COUNTRY_ID,
             $scope,
             $store
         );
