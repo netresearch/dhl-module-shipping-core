@@ -22,7 +22,7 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      */
     private $methodFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

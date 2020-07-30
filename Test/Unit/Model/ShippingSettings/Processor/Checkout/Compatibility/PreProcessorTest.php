@@ -22,7 +22,7 @@ class PreProcessorTest extends TestCase
      */
     private $mockCompatibilityFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->mockCompatibilityFactory = $this->getMockBuilder(CompatibilityInterfaceFactory::class)

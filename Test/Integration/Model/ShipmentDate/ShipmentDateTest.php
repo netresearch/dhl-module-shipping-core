@@ -47,7 +47,7 @@ class ShipmentDateTest extends TestCase
             }
         }
     }
-
+    
     /**
      * Test data provider.
      *
@@ -154,9 +154,8 @@ class ShipmentDateTest extends TestCase
      */
     public function calculationError()
     {
-        $this->expectExceptionMessage("No valid start date.");
         $this->expectException(\RuntimeException::class);
-
+        $this->expectExceptionMessage('No valid start date.');
         /**
          * 2019-02-01 10:00:00 was a Friday.
          *

@@ -19,7 +19,7 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
         $config = Bootstrap::getObjectManager()->get(ConfigInterface::class);
 
         $paymentMethods = $config->getCodMethods();
-        self::assertInternalType('array', $paymentMethods);
+        self::assertTrue(\is_array($paymentMethods));
         self::assertNotEmpty($paymentMethods);
         self::assertContainsOnly('string', $paymentMethods);
         self::assertCount(3, $paymentMethods);

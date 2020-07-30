@@ -43,7 +43,7 @@ class SplitAddressObserverTest extends \PHPUnit\Framework\TestCase
     /**
      * Init object manager
      */
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -64,7 +64,7 @@ class SplitAddressObserverTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->objectManager->removeSharedInstance(SplitAddress::class);
         $this->objectManager->removeSharedInstance(RecipientStreetResource::class);

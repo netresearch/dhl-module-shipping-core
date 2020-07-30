@@ -21,7 +21,7 @@ class RouteProcessorTest extends TestCase
      */
     private $configMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

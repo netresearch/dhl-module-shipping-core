@@ -22,7 +22,7 @@ class RoundedPricesTest extends \PHPUnit\Framework\TestCase
      */
     private $roundedPrices;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->objectManager = ObjectManager::getInstance();
         $this->roundedPrices = $this->objectManager->create(RoundedPrices::class);

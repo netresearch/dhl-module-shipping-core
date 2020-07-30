@@ -30,7 +30,7 @@ class RouteMatcherTest extends TestCase
      */
     private $routeMatcher;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->objectManger = Bootstrap::getObjectManager();

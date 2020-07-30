@@ -61,7 +61,7 @@ class ConstantResolverTest extends TestCase
 
         foreach ($this->combinedTestLines as $line) {
             $result = $subject->resolve($line);
-            self::assertContains(self::TEST_CONST, $result);
+            self::assertNotFalse(strpos($result, self::TEST_CONST));
             self::assertNotSame($line, $result);
         }
 

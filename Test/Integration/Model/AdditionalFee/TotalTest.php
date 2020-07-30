@@ -38,7 +38,7 @@ class TotalTest extends TestCase
      */
     private $testQuote;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->objectManger = Bootstrap::getObjectManager();

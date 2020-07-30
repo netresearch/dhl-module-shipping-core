@@ -23,7 +23,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase
     /**
      * prepare object manager, add mocks
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
