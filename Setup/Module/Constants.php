@@ -21,6 +21,4 @@ class Constants
     const TABLE_QUOTE_SHIPPING_OPTION_SELECTION = 'dhlgw_quote_address_shipping_option_selection';
 
     const TABLE_RECIPIENT_STREET ='dhlgw_recipient_street';
-
-    const COLUMN_DHLGW_LABEL_STATUS = 'dhlgw_label_status';
 }
