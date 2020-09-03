@@ -16,7 +16,7 @@
             <group value="dhlgw-configuration"/>
         </annotations>
         <before>
-            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+            <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin"/>
             <actionGroup ref="NavigateToShippingCoreSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
             <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShippingCoreGroup">
                 <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}"/>
@@ -25,7 +25,7 @@
         </before>
         <after>
             <createData entity="ShippingCoreConfigDefault" stepKey="resetConfiguration"/>
-            <actionGroup ref="logout" stepKey="logout"/>
+            <actionGroup ref="AdminLogoutActionGroup" stepKey="logout"/>
         </after>
 
         <comment userInput="-> Perform actual test" stepKey="runTestComment"/>
@@ -50,7 +50,7 @@
                       userInput="{{ShippingCoreCutOffTime.seconds}}"
                       stepKey="selectCutOffTimeSecond"/>
 
-        <actionGroup ref="SaveAdminSystemConfigSectionActionGroup" stepKey="saveAdminConfigSection"/>
+        <actionGroup ref="AdminSystemConfigSectionSaveActionGroup" stepKey="saveAdminConfigSection"/>
 
         <!-- Confirm selection is persisted -->
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <section name="AdminSystemConfigShippingOriginSection">
+        <element name="shippingOriginGroup" type="button" selector="#shipping_origin-head"/>
+        <element name="shippingOriginGroupExpanded" type="button" selector="#shipping_origin-head:not(.open)"/>
+
+        <element name="shippingOriginCountryIdInherit" type="checkbox" selector="#shipping_origin_country_id_inherit"/>
+        <element name="shippingOriginRegionIdInherit" type="checkbox" selector="#shipping_origin_region_id_inherit"/>
+        <element name="shippingOriginPostalCodeInherit" type="checkbox" selector="#shipping_origin_postcode_inherit"/>
+
+        <element name="shippingOriginCountryId" type="select" selector="[data-ui-id='select-groups-origin-fields-country-id-value']"/>
+        <!-- The region input is either a select or and input field, depending on the selected country -->
+        <element name="shippingOriginRegionId" type="select" selector="#shipping_origin_region_id"/>
+        <element name="shippingOriginRegionInputId" type="input" selector="#shipping_origin_region_id"/>
+        <element name="shippingOriginPostalCode" type="input" selector="[data-ui-id='text-groups-origin-fields-postcode-value']"/>
+        <element name="shippingOriginCity" type="input" selector="[data-ui-id='text-groups-origin-fields-city-value']"/>
+        <element name="shippingOriginStreet1" type="input" selector="[data-ui-id='text-groups-origin-fields-street-line1-value']"/>
+    </section>
+</sections>

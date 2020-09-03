@@ -25,17 +25,17 @@
     <!-- name: referenced in test, type: defined in meta data -->
     <entity name="ShippingCoreConfigDefault" type="shipping_core_config">
         <!-- type: declared in meta data, value: see entities below -->
-        <requiredEntity type="cod_methods">codMethodsDefault</requiredEntity>
-        <requiredEntity type="cut_off_time">cutOffTimeDefault</requiredEntity>
-        <requiredEntity type="terms_of_trade">termsOfTradeDefault</requiredEntity>
+        <requiredEntity type="cod_methods">CODMethodsDefault</requiredEntity>
+        <requiredEntity type="cut_off_time">CutOffTimeDefault</requiredEntity>
+        <requiredEntity type="terms_of_trade">TermsOfTradeDefault</requiredEntity>
     </entity>
-    <entity name="codMethodsDefault" type="cod_methods">
+    <entity name="CODMethodsDefault" type="cod_methods">
         <data key="value">cashondelivery</data>
     </entity>
-    <entity name="cutOffTimeDefault" type="cut_off_time">
+    <entity name="CutOffTimeDefault" type="cut_off_time">
         <data key="value">00,00,00</data>
     </entity>
-    <entity name="termsOfTradeDefault" type="terms_of_trade">
+    <entity name="TermsOfTradeDefault" type="terms_of_trade">
         <data key="value">DDU</data>
     </entity>
 </entities>

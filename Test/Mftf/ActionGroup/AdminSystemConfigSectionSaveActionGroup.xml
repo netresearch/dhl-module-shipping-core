@@ -7,7 +7,7 @@
 <actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
     <!-- Save configuration -->
-    <actionGroup name="SaveAdminSystemConfigSectionActionGroup">
+    <actionGroup name="AdminSystemConfigSectionSaveActionGroup">
         <click selector="{{AdminConfigSection.saveButton}}" stepKey="clickSaveConfigSettingsButton"/>
         <waitForPageLoad stepKey="waitForSavingConfigSettings"/>
         <seeElement selector="{{AdminSystemConfigSection.saveSuccessMessage}}" stepKey="seeSaveSuccessMessage"/>

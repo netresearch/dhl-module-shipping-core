@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="ConfigureShippingOriginActionGroup">
+        <arguments>
+            <argument name="ShippingOriginData" defaultValue="ShippingOrigin_DE"/>
+        </arguments>
+
+        <!-- Uncheck inherited options -->
+        <uncheckOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginCountryIdInherit}}" stepKey="uncheckInheritedShippingOriginCountryId"/>
+        <uncheckOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginRegionIdInherit}}" stepKey="uncheckInheritedShippingOriginRegionId"/>
+        <uncheckOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginPostalCodeInherit}}" stepKey="uncheckInheritedShippingOriginPostalCode"/>
+
+        <!-- Configure shipping origin address -->
+        <selectOption selector="{{AdminSystemConfigShippingOriginSection.shippingOriginCountryId}}" userInput="{{ShippingOriginData.countryId}}" stepKey="selectShippingOriginCountryId"/>
+        <waitForLoadingMaskToDisappear stepKey="waitForCountrySelectUpdate"/>
+
+        <fillField selector="{{AdminSystemConfigShippingOriginSection.shippingOriginPostalCode}}" userInput="{{ShippingOriginData.postalCode}}" stepKey="fillShippingOriginPostalCode"/>
+        <fillField selector="{{AdminSystemConfigShippingOriginSection.shippingOriginCity}}" userInput="{{ShippingOriginData.city}}" stepKey="fillShippingOriginCity"/>
+        <fillField selector="{{AdminSystemConfigShippingOriginSection.shippingOriginStreet1}}" userInput="{{ShippingOriginData.street1}}" stepKey="fillShippingOriginStreet1"/>
+    </actionGroup>
+</actionGroups>
