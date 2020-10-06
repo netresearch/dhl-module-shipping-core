@@ -12,7 +12,7 @@ use Dhl\ShippingCore\Model\Payment\PaymentData;
 /**
  * Payment methods source model.
  *
- * A core bug prevents payment methods from being loaded in M2.3.1.
+ * A core bug prevents payment methods from being loaded in M2.3.1 and M2.3.2.
  * As a workaround, we manipulate the data source before the option values are processed for display.
  *
  * As soon as the issue is resolved, revert back to original class:

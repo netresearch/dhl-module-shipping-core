@@ -73,7 +73,7 @@ class AdditionalFeeManagement
             $configuration = $this->getConfigurationForCarrierCode($carrierCode);
 
             return $configuration->getLabel();
-        } catch (LocalizedException $e) {
+        } catch (\RuntimeException $e) {
             return __('Additional Fee');
         }
     }

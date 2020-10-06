@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Util;
@@ -51,11 +53,15 @@ class AssetUrl implements AssetUrlInterface
         $params = [];
 
         if (!in_array($this->design->getArea(), [Area::AREA_FRONTEND, Area::AREA_ADMINHTML], true)) {
+            // if resource is requested in webapi scope, then allocate from frontend theme.
+            $params = ['area' => Area::AREA_FRONTEND];
             $themeId = $this->design->getConfigurationDesignTheme(Area::AREA_FRONTEND);
-            $params = [
-                'area' => Area::AREA_FRONTEND,
-                'themeModel' => $this->themeProvider->getThemeById($themeId),
-            ];
+
+            if (is_numeric($themeId)) {
+                $params['themeModel'] = $this->themeProvider->getThemeById($themeId);
+            } else {
+                $params['theme'] = $themeId;
+            }
         }
 
         return $this->assetRepo->getUrlWithParams($assetId, $params);
