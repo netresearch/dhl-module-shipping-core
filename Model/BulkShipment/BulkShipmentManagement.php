@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\BulkShipment;
@@ -11,7 +13,6 @@ use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentResponseInterfac
 use Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface;
 use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Model\LabelStatus\LabelStatusProvider;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\ShipOrderInterface;
 use Magento\Sales\Model\Order;
@@ -115,7 +116,7 @@ class BulkShipmentManagement
         $fnFilter = function (string $carrierCode) {
             try {
                 return $this->bulkConfig->getBulkShipmentService($carrierCode);
-            } catch (LocalizedException $exception) {
+            } catch (\RuntimeException $exception) {
                 return false;
             }
         };
@@ -175,7 +176,7 @@ class BulkShipmentManagement
 
             try {
                 $this->bulkConfig->getRequestModifier($carrierCode)->modify($shipmentRequest);
-            } catch (LocalizedException $exception) {
+            } catch (\RuntimeException $exception) {
                 $shipment->addComment(__('Automatic label creation failed: %1', $exception->getMessage()));
                 continue;
             }
@@ -186,7 +187,7 @@ class BulkShipmentManagement
         foreach ($shipmentRequests as $carrierCode => $carrierShipmentRequests) {
             try {
                 $labelService = $this->bulkConfig->getBulkShipmentService($carrierCode);
-            } catch (LocalizedException $exception) {
+            } catch (\RuntimeException $exception) {
                 $msg = "Bulk label creation is not supported by carrier '$carrierCode'";
                 $this->logger->warning($msg, ['exception' => $exception]);
                 continue;
@@ -234,7 +235,7 @@ class BulkShipmentManagement
 
             try {
                 $labelService = $this->bulkConfig->getBulkCancellationService($carrierCode);
-            } catch (LocalizedException $exception) {
+            } catch (\RuntimeException $exception) {
                 $msg = "Bulk label cancellation is not supported by carrier '$carrierCode'";
                 $this->logger->warning($msg, ['exception' => $exception]);
                 continue;

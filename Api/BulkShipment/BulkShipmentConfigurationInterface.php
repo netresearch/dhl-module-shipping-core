@@ -1,13 +1,14 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Api\BulkShipment;
 
 use Dhl\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface;
-use Magento\Framework\Exception\LocalizedException;
 
 /**
  * @api
@@ -25,7 +26,6 @@ interface BulkShipmentConfigurationInterface
      * Obtain the carrier's modifier to add carrier specific data to the shipment request.
      *
      * @return RequestModifierInterface
-     * @throws LocalizedException
      */
     public function getRequestModifier(): RequestModifierInterface;
 
@@ -33,7 +33,6 @@ interface BulkShipmentConfigurationInterface
      * Obtain the service that connects to the carrier's label api for creating labels.
      *
      * @return BulkLabelCreationInterface
-     * @throws LocalizedException
      */
     public function getLabelService(): BulkLabelCreationInterface;
 
@@ -41,7 +40,6 @@ interface BulkShipmentConfigurationInterface
      * Obtain the service that connects to the carrier's label api for cancelling labels.
      *
      * @return BulkLabelCancellationInterface
-     * @throws LocalizedException
      */
     public function getCancellationService(): BulkLabelCancellationInterface;
 

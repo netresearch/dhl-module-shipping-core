@@ -1,13 +1,14 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Plugin\Adminhtml\Shipping\Block\View;
 
 use Dhl\ShippingCore\Model\BulkShipment\BulkShipmentConfiguration;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\ShipmentTrackInterface;
 use Magento\Shipping\Block\Adminhtml\View;
 
@@ -41,7 +42,7 @@ class AddShipmentCancelButton
 
         try {
             $this->bulkConfigProvider->getBulkCancellationService($carrierCode);
-        } catch (LocalizedException $exception) {
+        } catch (\RuntimeException $exception) {
             // cancellation not supported by given carrier
             return null;
         }

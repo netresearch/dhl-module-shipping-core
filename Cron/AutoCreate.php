@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Cron;
@@ -13,7 +15,6 @@ use Dhl\ShippingCore\Cron\AutoCreate\OrderCollectionLoader;
 use Dhl\ShippingCore\Cron\AutoCreate\OrderCollectionLoader\AutoCreateDisabledException;
 use Dhl\ShippingCore\Model\BulkShipment\BulkShipmentConfiguration;
 use Dhl\ShippingCore\Model\BulkShipment\BulkShipmentManagement;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\OrderInterface;
 use Psr\Log\LoggerInterface;
@@ -71,7 +72,7 @@ class AutoCreate
         $fnFilter = function (string $carrierCode) {
             try {
                 return $this->bulkConfig->getBulkShipmentService($carrierCode);
-            } catch (LocalizedException $exception) {
+            } catch (\RuntimeException $exception) {
                 return false;
             }
         };
