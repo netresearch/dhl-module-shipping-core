@@ -26,7 +26,7 @@ The DHL shipping core package offers the following functionality:
 Requirements
 ------------
 
-* PHP >= 7.0.6
+* PHP >= 7.1.3
 * PHP DOM Extension
 * PHP intl Extension
 * PHP SimpleXML Extension
@@ -34,7 +34,6 @@ Requirements
 Compatibility
 -------------
 
-* Magento >= 2.2.6+
 * Magento >= 2.3.0+
 
 License
