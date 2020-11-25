@@ -84,14 +84,14 @@ class OrderCollectionLoader
         }
 
         $storeFilter = $this->filterBuilder
-            ->setField(OrderInterface::STORE_ID)
+            ->setField('main_table.' . OrderInterface::STORE_ID)
             ->setValue($storeIds)
             ->setConditionType('in')
             ->create();
 
         $orderStatus = $this->cronConfig->getAutoCreateOrderStatus();
         $statusFilter = $this->filterBuilder
-            ->setField(OrderInterface::STATUS)
+            ->setField('main_table.' . OrderInterface::STATUS)
             ->setValue($orderStatus)
             ->setConditionType('in')
             ->create();

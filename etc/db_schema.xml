@@ -41,7 +41,7 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
-        <constraint xsi:type="foreign" referenceId="DHLGW_ORDER_ADDR_SHPP_OPT_SELECTION_PARENT_ID_SALES_ORDER_ADDRESS_ENTT_ID" table="dhlgw_order_address_shipping_option_selection" column="parent_id" referenceTable="sales_order_address" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_7952E5E1F6D32F95ABFBEC0BBB314F50" table="dhlgw_order_address_shipping_option_selection" column="parent_id" referenceTable="sales_order_address" referenceColumn="entity_id" onDelete="CASCADE"/>
     </table>
     <table name="dhlgw_order_item" resource="sales" engine="innodb" comment="dhlgw_order_item">
         <column xsi:type="int" name="item_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Order Item Id"/>

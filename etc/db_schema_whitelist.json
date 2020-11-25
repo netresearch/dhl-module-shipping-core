@@ -49,7 +49,20 @@
         },
         "constraint": {
             "PRIMARY": true,
-            "DHLGW_RECIPIENT_STREET_ORDER_ADDR_ID_SALES_ORDER_ADDR_ENTT_ID": true
+            "FK_7952E5E1F6D32F95ABFBEC0BBB314F50": true
+        }
+    },
+    "dhlgw_order_item": {
+        "column": {
+            "item_id": true,
+            "tariff_number": true,
+            "dangerous_goods_category": true,
+            "export_description": true,
+            "country_of_manufacture": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "DHLGW_ORDER_ITEM_ITEM_ID_SALES_ORDER_ITEM_ITEM_ID": true
         }
     },
     "quote": {
@@ -82,19 +95,6 @@
             "base_dhlgw_additional_fee_incl_tax": true,
             "dhlgw_additional_fee": true,
             "dhlgw_additional_fee_incl_tax": true
-        }
-    },
-    "dhlgw_order_item": {
-        "column": {
-            "item_id": true,
-            "tariff_number": true,
-            "dangerous_goods_category": true,
-            "export_description": true,
-            "country_of_manufacture": true
-        },
-        "constraint": {
-            "PRIMARY": true,
-            "DHLGW_ORDER_ITEM_ITEM_ID_SALES_ORDER_ITEM_ITEM_ID": true
         }
     }
 }
