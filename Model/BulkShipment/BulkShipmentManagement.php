@@ -13,6 +13,7 @@ use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentResponseInterfac
 use Dhl\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface;
 use Dhl\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
 use Dhl\ShippingCore\Model\LabelStatus\LabelStatusProvider;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\ShipOrderInterface;
 use Magento\Sales\Model\Order;
@@ -67,28 +68,21 @@ class BulkShipmentManagement
     private $requestFactory;
 
     /**
-     * BulkShipmentManagement constructor.
-     *
-     * @param ConfigInterface $config
-     * @param BulkShipmentConfiguration $bulkConfig
-     * @param OrderCollectionLoader $orderCollectionLoader
-     * @param ShipmentCollectionLoader $shipmentCollectionLoader
-     * @param ShipOrderInterface $shipOrder
-     * @param CancelRequestBuilder $cancelRequestBuilder
-     * @param LoggerInterface $logger
-     * @param RequestFactory $requestFactory
-     * @param LabelStatusProvider $labelStatusProvider
+     * @var ShipmentNotification
      */
+    private $shipmentNotification;
+
     public function __construct(
         ConfigInterface $config,
         BulkShipmentConfiguration $bulkConfig,
         OrderCollectionLoader $orderCollectionLoader,
         ShipmentCollectionLoader $shipmentCollectionLoader,
+        LabelStatusProvider $labelStatusProvider,
         ShipOrderInterface $shipOrder,
         CancelRequestBuilder $cancelRequestBuilder,
         LoggerInterface $logger,
         RequestFactory $requestFactory,
-        LabelStatusProvider $labelStatusProvider
+        ShipmentNotification $shipmentNotification
     ) {
         $this->config = $config;
         $this->bulkConfig = $bulkConfig;
@@ -99,6 +93,7 @@ class BulkShipmentManagement
         $this->logger = $logger;
         $this->requestFactory = $requestFactory;
         $this->labelStatusProvider = $labelStatusProvider;
+        $this->shipmentNotification = $shipmentNotification;
     }
 
     /**
@@ -127,7 +122,6 @@ class BulkShipmentManagement
 
         /** @var Order $order */
         foreach ($orders as $order) {
-            $notify = $this->config->isBulkNotificationEnabled($order->getStoreId());
             $shipmentsCollection = $order->getShipmentsCollection()
                 ->addFieldToFilter(ShipmentInterface::SHIPPING_LABEL, ['null' => true]);
 
@@ -140,7 +134,7 @@ class BulkShipmentManagement
 
             if ($order->canShip()) {
                 try {
-                    $shipmentId = $this->shipOrder->execute($order->getId(), [], $notify);
+                    $shipmentId = $this->shipOrder->execute($order->getId());
                     $shipmentIds[]= $shipmentId;
                 } catch (\Exception $exception) {
                     $this->logger->error($exception->getMessage(), ['exception' => $exception]);
@@ -176,7 +170,7 @@ class BulkShipmentManagement
 
             try {
                 $this->bulkConfig->getRequestModifier($carrierCode)->modify($shipmentRequest);
-            } catch (\RuntimeException $exception) {
+            } catch (\RuntimeException | LocalizedException $exception) {
                 $shipment->addComment(__('Automatic label creation failed: %1', $exception->getMessage()));
                 continue;
             }
@@ -203,6 +197,9 @@ class BulkShipmentManagement
             // convert results per carrier to flat response
             $carrierResults = array_reduce($carrierResults, 'array_merge', []);
         }
+
+        // notify receivers after tracking details were persisted
+        $this->shipmentNotification->send($carrierResults);
 
         return $carrierResults;
     }
