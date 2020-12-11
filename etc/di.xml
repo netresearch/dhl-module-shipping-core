@@ -266,6 +266,11 @@
     <type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
         <plugin name="addSplitAddressAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddRecipientStreetToAddressCollection"/>
     </type>
+    <!-- # interceptor plugins -->
+    <type name="Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend">
+        <plugin name="validateHsCodeAttribute" type="Dhl\ShippingCore\Plugin\Eav\Attribute\Backend\ValidateHsCodeAttribute"/>
+    </type>
+
 
     <!-- shipping option config xml reader -->
     <type name="Dhl\ShippingCore\Model\ShippingSettings\Config\Reader">

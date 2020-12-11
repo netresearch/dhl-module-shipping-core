@@ -6,9 +6,7 @@ declare(strict_types=1);
 
 namespace Test\Integration\Model;
 
-use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
-use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
+use Dhl\ShippingCore\Setup\Module\Constants;
 use Magento\Catalog\Model\ResourceModel\Product\Attribute\Collection as AttributeCollection;
 use Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory as AttributeCollectionFactory;
 use Magento\TestFramework\Helper\Bootstrap;
@@ -27,7 +25,13 @@ class ProductAttributesTest extends TestCase
 
         $attributeCollection->addFieldToFilter(
             'attribute_code',
-            ['in' => [DGCategory::CODE, TariffNumber::CODE, ExportDescription::CODE]]
+            [
+                'in' => [
+                    Constants::ATTRIBUTE_CODE_DG_CATEGORY,
+                    Constants::ATTRIBUTE_CODE_TARIFF_NUMBER,
+                    Constants::ATTRIBUTE_CODE_EXPORT_DESCRIPTION
+                ]
+            ]
         );
         self::assertEquals(3, $attributeCollection->getSize());
     }

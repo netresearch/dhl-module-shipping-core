@@ -21,4 +21,10 @@ class Constants
     const TABLE_QUOTE_SHIPPING_OPTION_SELECTION = 'dhlgw_quote_address_shipping_option_selection';
 
     const TABLE_RECIPIENT_STREET ='dhlgw_recipient_street';
+
+    const ATTRIBUTE_CODE_TARIFF_NUMBER = 'dhlgw_tariff_number';
+
+    const ATTRIBUTE_CODE_EXPORT_DESCRIPTION = 'dhlgw_export_description';
+
+    const ATTRIBUTE_CODE_DG_CATEGORY = 'dhlgw_dangerous_goods_category';
 }

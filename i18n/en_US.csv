@@ -117,6 +117,7 @@ Sat,Sat
 "The value ""%1"" is not available for item option ""%2"".","The value ""%1"" is not available for item option ""%2""."
 "The value ""%1"" is not available for package option ""%2"".","The value ""%1"" is not available for package option ""%2""."
 "The value ""%1"" is not available for service option ""%2"".","The value ""%1"" is not available for service option ""%2""."
+"The value of attribute ""%1"" must be either 6, 8 or 10 digits long.","The value of attribute ""%1"" must be either 6, 8 or 10 digits long."
 "The value of attribute ""%1"" must be numeric.","The value of attribute ""%1"" must be numeric."
 "The value of attribute ""%1"" must not be longer than %2 characters.","The value of attribute ""%1"" must not be longer than %2 characters."
 "This section configures information about the exported goods relevant for customs for international shipments.","This section configures information about the exported goods relevant for customs for international shipments."

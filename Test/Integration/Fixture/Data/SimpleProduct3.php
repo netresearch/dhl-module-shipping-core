@@ -6,9 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Fixture\Data;
 
-use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
-use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
+use Dhl\ShippingCore\Setup\Module\Constants;
 use Magento\Catalog\Model\Product\Type;
 
 /**
@@ -39,9 +37,9 @@ class SimpleProduct3 implements ProductInterface
     public function getCustomAttributes(): array
     {
         return [
-            DGCategory::CODE => null,
-            ExportDescription::CODE => 'Export description of a third simple product.',
-            TariffNumber::CODE => '876543',
+            Constants::ATTRIBUTE_CODE_DG_CATEGORY => null,
+            Constants::ATTRIBUTE_CODE_EXPORT_DESCRIPTION => 'Export description of a third simple product.',
+            Constants::ATTRIBUTE_CODE_TARIFF_NUMBER => '876543',
         ];
     }
 

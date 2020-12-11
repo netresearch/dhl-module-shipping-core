@@ -117,6 +117,7 @@ Sat,Sa
 "The value ""%1"" is not available for item option ""%2"".","Der Wert ""%1"" für die Artikeloption ""%2"" ist nicht verfügbar."
 "The value ""%1"" is not available for package option ""%2"".","Der Wert ""%1"" für die Paketoption ""%2"" ist nicht verfügbar."
 "The value ""%1"" is not available for service option ""%2"".","Der Wert ""%1"" für die Serviceoption ""%2"" ist nicht verfügbar."
+"The value of attribute ""%1"" must be either 6, 8 or 10 digits long.","Der Wert des Attributs ""%1"" muss entweder 6, 8 oder 10 Stellen lang sein."
 "The value of attribute ""%1"" must be numeric.","Der Wert des Attributes ""%1"" muss numerisch sein."
 "The value of attribute ""%1"" must not be longer than %2 characters.","Der Wert des Attributes ""%1"" darf nicht länger als %2 Zeichen sein."
 "This section configures information about the exported goods relevant for customs for international shipments.","In diesem Abschnitt werden Informationen zu den für internationale Sendungen zollrelevanten Exportgütern konfiguriert."

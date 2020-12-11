@@ -6,9 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Plugin\Quote\Item;
 
-use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
-use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
+use Dhl\ShippingCore\Setup\Module\Constants;
 use Magento\Bundle\Model\Product\Type;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Type\AbstractType;
@@ -117,9 +115,9 @@ class AttributesToOrderItem
         }
 
         $countryOfManufacture = $this->readAttribute($item, 'country_of_manufacture');
-        $dgCategory = $this->readAttribute($item, DGCategory::CODE);
-        $exportDescription = $this->readAttribute($item, ExportDescription::CODE);
-        $hsCode = $this->readAttribute($item, TariffNumber::CODE);
+        $dgCategory = $this->readAttribute($item, Constants::ATTRIBUTE_CODE_EXPORT_DESCRIPTION);
+        $exportDescription = $this->readAttribute($item, Constants::ATTRIBUTE_CODE_EXPORT_DESCRIPTION);
+        $hsCode = $this->readAttribute($item, Constants::ATTRIBUTE_CODE_TARIFF_NUMBER);
         if (!$countryOfManufacture && !$dgCategory && !$exportDescription && !$hsCode) {
             return $orderItem;
         }

@@ -1,21 +1,17 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Attribute\Source;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
 
-/**
- * Class DGCategory
- *
- */
 class DGCategory extends AbstractSource
 {
-    const CODE = 'dhlgw_dangerous_goods_category';
-
     /**
      * @return string[][]
      */

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 - Add shipping and tracking information to shipment confirmation email during bulk action.
+- Set HS code validation to max. 10 digits.
 
 ## 1.1.2
 

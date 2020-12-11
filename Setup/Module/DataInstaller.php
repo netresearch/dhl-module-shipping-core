@@ -7,7 +7,6 @@ declare(strict_types=1);
 namespace Dhl\ShippingCore\Setup\Module;
 
 use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
 use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Type;
@@ -24,7 +23,7 @@ class DataInstaller
     {
         $eavSetup->addAttribute(
             Product::ENTITY,
-            DGCategory::CODE,
+            Constants::ATTRIBUTE_CODE_DG_CATEGORY,
             [
                 'group' => '',
                 'type' => 'varchar',
@@ -47,7 +46,7 @@ class DataInstaller
     {
         $eavSetup->addAttribute(
             Product::ENTITY,
-            TariffNumber::CODE,
+            Constants::ATTRIBUTE_CODE_TARIFF_NUMBER,
             [
                 'group' => '',
                 'type' => 'varchar',
@@ -57,7 +56,6 @@ class DataInstaller
                 'required' => false,
                 'sort_order' => 51,
                 'global' => ScopedAttributeInterface::SCOPE_WEBSITE,
-                'backend' => TariffNumber::class,
                 'visible' => true,
                 'apply_to' => implode(',', [Type::TYPE_SIMPLE, Type::TYPE_BUNDLE, Configurable::TYPE_CODE]),
             ]
@@ -71,7 +69,7 @@ class DataInstaller
     {
         $eavSetup->addAttribute(
             Product::ENTITY,
-            ExportDescription::CODE,
+            Constants::ATTRIBUTE_CODE_EXPORT_DESCRIPTION,
             [
                 'group' => '',
                 'type' => 'varchar',

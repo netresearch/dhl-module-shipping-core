@@ -6,17 +6,13 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Attribute\Backend;
 
+use Dhl\ShippingCore\Setup\Module\Constants;
 use Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException;
 
-/**
- * Class ExportDescription
- *
- */
 class ExportDescription extends AbstractBackend
 {
-    const CODE = 'dhlgw_export_description';
     const MAX_LENGTH = 50;
 
     /**
@@ -28,7 +24,7 @@ class ExportDescription extends AbstractBackend
      */
     public function validate($object): bool
     {
-        $value = $object->getData(self::CODE);
+        $value = $object->getData(Constants::ATTRIBUTE_CODE_EXPORT_DESCRIPTION);
         $frontendLabel = $this->getAttribute()->getData('frontend_label');
 
         if (strlen((string) $value) > static::MAX_LENGTH) {

@@ -6,19 +6,13 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Attribute;
 
-use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
-use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
+use Dhl\ShippingCore\Setup\Module\Constants;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 
-/**
- * Class Migrate
- *
- */
 class Migrate
 {
     const DHL_DG_CATEGORY = 'dhl_dangerous_goods_category';
@@ -38,9 +32,9 @@ class Migrate
     private $productResource;
 
     private $attributes = [
-        DGCategory::CODE => self::DHL_DG_CATEGORY,
-        TariffNumber::CODE => self::DHL_TARIFF_NUMBER,
-        ExportDescription::CODE => self::DHL_EXPORT_DESCRIPTION
+        Constants::ATTRIBUTE_CODE_DG_CATEGORY => self::DHL_DG_CATEGORY,
+        Constants::ATTRIBUTE_CODE_TARIFF_NUMBER => self::DHL_TARIFF_NUMBER,
+        Constants::ATTRIBUTE_CODE_EXPORT_DESCRIPTION => self::DHL_EXPORT_DESCRIPTION
     ];
 
     /**

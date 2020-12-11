@@ -47,6 +47,7 @@
                         <sortOrder>60</sortOrder>
                         <validationRules>
                             <rule name="validate-number"/>
+                            <rule name="validate-greater-than-zero"/>
                         </validationRules>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_HEIGHT">
@@ -55,6 +56,7 @@
                         <sortOrder>70</sortOrder>
                         <validationRules>
                             <rule name="validate-number"/>
+                            <rule name="validate-greater-than-zero"/>
                         </validationRules>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_LENGTH">
@@ -63,6 +65,7 @@
                         <sortOrder>80</sortOrder>
                         <validationRules>
                             <rule name="validate-number"/>
+                            <rule name="validate-greater-than-zero"/>
                         </validationRules>
                     </input>
                     <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGING_INPUT_SIZE_UNIT">
@@ -199,6 +202,12 @@
                                 <sortOrder>20</sortOrder>
                                 <label translate="true">HS Code</label>
                                 <inputType>text</inputType>
+                                <validationRules>
+                                    <rule name="max_text_length">
+                                        <param>10</param>
+                                    </rule>
+                                    <rule name="validate-digits"/>
+                                </validationRules>
                             </input>
                             <input code="Dhl\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_COUNTRY_OF_ORIGIN">
                                 <sortOrder>30</sortOrder>

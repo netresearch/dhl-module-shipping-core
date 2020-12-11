@@ -6,10 +6,6 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Setup\Module;
 
-use Dhl\ShippingCore\Model\AdditionalFee\TotalsManager;
-use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
-use Dhl\ShippingCore\Model\Attribute\Source\DGCategory;
 use Magento\Catalog\Model\Product;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\App\ResourceConnection;
@@ -35,8 +31,8 @@ class Uninstaller
      */
     public static function deleteAttributes(EavSetup $eavSetup)
     {
-        $eavSetup->removeAttribute(Product::ENTITY, DGCategory::CODE);
-        $eavSetup->removeAttribute(Product::ENTITY, TariffNumber::CODE);
-        $eavSetup->removeAttribute(Product::ENTITY, ExportDescription::CODE);
+        $eavSetup->removeAttribute(Product::ENTITY, Constants::ATTRIBUTE_CODE_DG_CATEGORY);
+        $eavSetup->removeAttribute(Product::ENTITY, Constants::ATTRIBUTE_CODE_TARIFF_NUMBER);
+        $eavSetup->removeAttribute(Product::ENTITY, Constants::ATTRIBUTE_CODE_EXPORT_DESCRIPTION);
     }
 }
