@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
+- Prevent database error when adding an item to cart via the _Recently Ordered_ widget.
 - Add shipping and tracking information to shipment confirmation email during bulk action.
 - Set HS code validation to max. 10 digits.
 

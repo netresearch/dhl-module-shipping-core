@@ -233,20 +233,20 @@
     </type>
 
     <!-- # interceptor plugins -->
+    <type name="Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend">
+        <plugin name="dhlgwValidateHsCodeAttribute" type="Dhl\ShippingCore\Plugin\Eav\Attribute\Backend\ValidateHsCodeAttribute"/>
+    </type>
     <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
-        <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
+        <plugin name="dhlgwAddShippingRateAdditionalInfo" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
     </type>
     <type name="Magento\Quote\Model\Quote\Address\Rate">
-        <plugin name="Dhl_ShippingCore_AdditionalMethodData" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
+        <plugin name="dhlgwAddShippingRateAdditionalInfo" type="Dhl\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
     </type>
     <type name="Magento\Quote\Api\CartTotalRepositoryInterface">
-        <plugin name="DhlgwAddFeeAmountsPlugin" type="Dhl\ShippingCore\Plugin\Quote\Cart\AddTotalSegmentExtensionAttributes"/>
-    </type>
-    <type name="Magento\Tax\Helper\Data">
-        <plugin name="DhlgwAddFeeTaxPlugin" type="Dhl\ShippingCore\Plugin\Tax\AddFeeTaxAmounts"/>
+        <plugin name="dhlgwAddFeeAmounts" type="Dhl\ShippingCore\Plugin\Quote\Cart\AddTotalSegmentExtensionAttributes"/>
     </type>
     <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
-        <plugin name="DhlgwAddOrderItemExtensionAttributes" type="Dhl\ShippingCore\Plugin\Quote\Item\AttributesToOrderItem"/>
+        <plugin name="dhlgwAddOrderItemExtensionAttributes" type="Dhl\ShippingCore\Plugin\Quote\Item\AttributesToOrderItem"/>
     </type>
     <type name="Magento\Sales\Api\CreditmemoRepositoryInterface">
         <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Creditmemo\AddTotalsAsExtensionAttributes"/>
@@ -258,7 +258,7 @@
         <plugin name="addSplitAddressAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddRecipientStreetToAddress"/>
     </type>
     <type name="Magento\Sales\Api\OrderItemRepositoryInterface">
-        <plugin name="DhlgwPersistOrderItemAttributes" type="Dhl\ShippingCore\Plugin\Order\PersistOrderItemAttributes"/>
+        <plugin name="dhlgwPersistOrderItemAttributes" type="Dhl\ShippingCore\Plugin\Order\PersistOrderItemAttributes"/>
     </type>
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="addTotalsAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddTotalsAsExtensionAttributes"/>
@@ -266,11 +266,12 @@
     <type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
         <plugin name="addSplitAddressAsExtensionAttributes" type="Dhl\ShippingCore\Plugin\Order\AddRecipientStreetToAddressCollection"/>
     </type>
-    <!-- # interceptor plugins -->
-    <type name="Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend">
-        <plugin name="validateHsCodeAttribute" type="Dhl\ShippingCore\Plugin\Eav\Attribute\Backend\ValidateHsCodeAttribute"/>
+    <type name="Magento\Sales\Model\ResourceModel\Order\Item\Collection">
+        <plugin name="dhlgwFixAmbiguousFilterField" type="Dhl\ShippingCore\Plugin\Order\AddItemIdFilterMapping"/>
     </type>
-
+    <type name="Magento\Tax\Helper\Data">
+        <plugin name="dhlgwAddFeeTax" type="Dhl\ShippingCore\Plugin\Tax\AddFeeTaxAmounts"/>
+    </type>
 
     <!-- shipping option config xml reader -->
     <type name="Dhl\ShippingCore\Model\ShippingSettings\Config\Reader">
