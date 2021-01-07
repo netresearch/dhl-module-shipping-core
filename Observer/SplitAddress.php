@@ -1,16 +1,15 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Observer;
 
-use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
 use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface;
-use Dhl\ShippingCore\Model\SplitAddress\RecipientStreet;
-use Dhl\ShippingCore\Model\Util\StreetSplitter;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -19,11 +18,6 @@ use Psr\Log\LoggerInterface;
 
 class SplitAddress implements ObserverInterface
 {
-    /**
-     * @var RecipientStreetLoaderInterface
-     */
-    private $recipientStreetLoader;
-
     /**
      * @var RecipientStreetRepositoryInterface
      */
@@ -35,36 +29,23 @@ class SplitAddress implements ObserverInterface
     private $logger;
 
     /**
-     * @var string[]
+     * @var RecipientStreetLoaderInterface[]
      */
-    private $carrierCodes;
+    private $streetLoaders;
 
     /**
-     * @var StreetSplitter
-     */
-    private $streetSplitter;
-
-    /**
-     * SplitAddress constructor.
-     *
-     * @param RecipientStreetLoaderInterface $recipientStreetLoader
      * @param RecipientStreetRepositoryInterface $recipientStreetRepository
-     * @param StreetSplitter $streetSplitter
      * @param LoggerInterface $logger
-     * @param string[] $carrierCodes
+     * @param RecipientStreetLoaderInterface[] $streetLoaders
      */
     public function __construct(
-        RecipientStreetLoaderInterface $recipientStreetLoader,
         RecipientStreetRepositoryInterface $recipientStreetRepository,
-        StreetSplitter $streetSplitter,
         LoggerInterface $logger,
-        array $carrierCodes = []
+        array $streetLoaders = []
     ) {
-        $this->recipientStreetLoader = $recipientStreetLoader;
         $this->recipientStreetRepository = $recipientStreetRepository;
-        $this->streetSplitter = $streetSplitter;
         $this->logger = $logger;
-        $this->carrierCodes = $carrierCodes;
+        $this->streetLoaders = $streetLoaders;
     }
 
     /**
@@ -81,24 +62,19 @@ class SplitAddress implements ObserverInterface
         }
 
         $order = $address->getOrder();
-        $shippingMethod = strtok((string)$order->getShippingMethod(), '_');
-        if (!in_array($shippingMethod, $this->carrierCodes, true)) {
+        $carrierCode = strtok((string)$order->getShippingMethod(), '_');
+        if (!isset($this->streetLoaders[$carrierCode])) {
             // carrier does not support split street
             return;
         }
 
-        /** @var RecipientStreet $recipientStreet */
-        $recipientStreet = $this->recipientStreetLoader->load($address);
-        $street = implode(', ', $address->getStreet());
-        $addressParts = $this->streetSplitter->splitStreet($street);
-
-        $recipientStreet->addData([
-            RecipientStreetInterface::NAME => $addressParts['street_name'],
-            RecipientStreetInterface::NUMBER => $addressParts['street_number'],
-            RecipientStreetInterface::SUPPLEMENT => $addressParts['supplement'],
-        ]);
+        $streetLoader = $this->streetLoaders[$carrierCode];
+        if (!$streetLoader instanceof RecipientStreetLoaderInterface) {
+            throw new \RuntimeException("Type error: please register a street loader implementation for $carrierCode");
+        }
 
         try {
+            $recipientStreet = $streetLoader->load($address);
             $this->recipientStreetRepository->save($recipientStreet);
         } catch (CouldNotSaveException $exception) {
             $this->logger->error($exception->getLogMessage(), ['exception' => $exception]);

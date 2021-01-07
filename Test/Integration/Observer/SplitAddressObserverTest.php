@@ -1,11 +1,14 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Observer;
 
+use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 use Dhl\ShippingCore\Model\ResourceModel\RecipientStreet as RecipientStreetResource;
 use Dhl\ShippingCore\Model\SplitAddress\RecipientStreet;
 use Dhl\ShippingCore\Observer\SplitAddress;
@@ -55,8 +58,8 @@ class SplitAddressObserverTest extends \PHPUnit\Framework\TestCase
             [
                 SplitAddress::class => [
                     'arguments' => [
-                        'carrierCodes' => [
-                            self::CARRIER_CODE
+                        'streetLoaders' => [
+                            self::CARRIER_CODE => ['instance' => RecipientStreetLoaderInterface::class],
                         ]
                     ],
                 ],

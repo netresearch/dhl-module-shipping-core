@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Test\Integration\Observer;
 
+use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 use Dhl\ShippingCore\Observer\SplitAddress;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\OrderRepositoryInterface;
@@ -81,7 +82,11 @@ class SaveSplitAddressTest extends TestCase
      */
     private static function updateCarrierCode(string $carrierCode)
     {
-        $observerArgs = ['carrierCodes' => [$carrierCode => $carrierCode]];
+        $observerArgs = [
+            'streetLoaders' => [
+                $carrierCode => ['instance' => RecipientStreetLoaderInterface::class],
+            ]
+        ];
         Bootstrap::getObjectManager()->configure([SplitAddress::class => ['arguments' => $observerArgs]]);
         Bootstrap::getObjectManager()->removeSharedInstance(SplitAddress::class);
     }
