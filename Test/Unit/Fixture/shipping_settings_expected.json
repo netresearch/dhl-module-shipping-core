@@ -2,7 +2,7 @@
   "carriers": {
     "base": {
       "metadata": {
-        "imageUrl": "Dhl_Ui::images\/logo-dhl-wide.svg"
+        "imageUrl": "Dhl_ShippingCore::images\/logo-dhl.svg"
       },
       "code": "base"
     },

@@ -115,7 +115,7 @@ class AttributesToOrderItem
         }
 
         $countryOfManufacture = $this->readAttribute($item, 'country_of_manufacture');
-        $dgCategory = $this->readAttribute($item, Constants::ATTRIBUTE_CODE_EXPORT_DESCRIPTION);
+        $dgCategory = $this->readAttribute($item, Constants::ATTRIBUTE_CODE_DG_CATEGORY);
         $exportDescription = $this->readAttribute($item, Constants::ATTRIBUTE_CODE_EXPORT_DESCRIPTION);
         $hsCode = $this->readAttribute($item, Constants::ATTRIBUTE_CODE_TARIFF_NUMBER);
         if (!$countryOfManufacture && !$dgCategory && !$exportDescription && !$hsCode) {

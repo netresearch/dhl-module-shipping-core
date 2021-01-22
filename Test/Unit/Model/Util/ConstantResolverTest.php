@@ -24,7 +24,7 @@ class ConstantResolverTest extends TestCase
         'CODE_PARCEL_ANNOUNCEMENT',
         'My:test',
         'this\is\a\test',
-        'Dhl_Ui::images/logo-dhl-wide.svg',
+        'Dhl_ShippingCore::images/logo-dhl.svg',
         'Parcel Announcement',
         'checkbox',
     ];

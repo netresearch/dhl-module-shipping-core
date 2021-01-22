@@ -26,8 +26,6 @@ Container,Container
 "Customer pays duties and taxes (DDU)","Kunde zahlt Zölle und Steuern (DDU)"
 "Customs Data",Zolldaten
 "Customs Value",Zollwert
-"DHL & Magento","DHL & Magento"
-"DHL Shipping","Versenden mit DHL"
 "Decimal Value",Dezimalwert
 "Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks.","Das Löschen einer einzelnen Sendungsnummer wird nicht unterstützt. Bitte verwenden Sie den Button ""Versandaufträge stornieren"" auf der Sendungsansichtseite, um Versandaufträge zu stornieren und Sendungsnummern zu löschen."
 "Depends on chosen product. Its only mandatory for international, non EU shipments.","Hängt vom gewählten Produkt ab. Dies ist nur für internationale Sendungen außerhalb der EU vorgeschrieben."
@@ -76,6 +74,8 @@ Other,Sonstiges
 "Package Description",Paketbeschreibung
 "Package Details",Paket-Details
 Percentage,Prozentsatz
+"Post & DHL and Magento","Versenden mit Post & DHL"
+"Post & DHL Shipping","Versenden mit Post & DHL"
 Present,Geschenk
 "Processing of shipments with <em>Label Status: Failed</em> will automatically be retried.","Die Verarbeitung von Sendungen mit <em>Label Status: Fehlgeschlagen</em> wird automatisch erneut ausgeführt."
 Quantity,Menge

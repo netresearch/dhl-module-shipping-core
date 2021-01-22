@@ -7,7 +7,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="dhlshippingsolutions" type="text" sortOrder="500" showInDefault="1" showInStore="1" showInWebsite="1" translate="label">
-            <label>DHL Shipping</label>
+            <label>Post &amp; DHL Shipping</label>
             <tab>sales</tab>
             <resource>Magento_Shipping::config_shipping</resource>
 
@@ -19,7 +19,7 @@
                     <attribute type="body_template">Dhl_ShippingCore::system/config/infoBoxBody.phtml</attribute>
                     <attribute type="header_template">Dhl_ShippingCore::system/config/infoBoxHeader.phtml</attribute>
                     <attribute type="view_model">Dhl\ShippingCore\ViewModel\Adminhtml\System\InfoBox</attribute>
-                    <attribute type="logo">Dhl_Ui::images/logo-dhl-wide.svg</attribute>
+                    <attribute type="logo">Dhl_ShippingCore::images/logo-dhl.svg</attribute>
                     <attribute type="css_class">dhlgw</attribute>
                 </field>
 

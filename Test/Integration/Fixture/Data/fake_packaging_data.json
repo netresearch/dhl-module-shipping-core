@@ -2,7 +2,7 @@
   "carriers": {
     "flatrate": {
       "metadata": {
-        "imageUrl": "Dhl_Ui::images\/logo-dhl-wide.svg",
+        "imageUrl": "Dhl_ShippingCore::images\/logo-dhl.svg",
         "title": "DHL Preferred Delivery. Delivered just the way you want.",
         "commentsBefore": [
           {
