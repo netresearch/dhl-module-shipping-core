@@ -44,4 +44,4 @@ License
 Copyright
 ---------
 
-(c) 2020 Netresearch DTT GmbH
+(c) 2021 Netresearch DTT GmbH
