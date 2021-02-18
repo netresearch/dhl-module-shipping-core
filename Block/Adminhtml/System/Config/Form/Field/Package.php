@@ -101,13 +101,10 @@ class Package extends AbstractFieldArray
      */
     private function getWeightUnit(): string
     {
+        $scope = $this->getElement()->getData('scope');
         $scopeId = $this->getElement()->getData('scope_id') ?: 0;
 
-        return (string) $this->config->getValue(
-            'general/locale/weight_unit',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-            $scopeId
-        );
+        return (string) $this->config->getValue('general/locale/weight_unit', $scope, $scopeId);
     }
 
     /**

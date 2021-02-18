@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
+- Consider selected scope when rendering _My Own Packages_ config field, reported by
+  [okolya](https://github.com/okolya) via issue [#7](https://github.com/netresearch/dhl-module-shipping-core/issues/7).
 - Update split street (name and number) when shipping address gets updated. 
 
 ## 1.1.4
