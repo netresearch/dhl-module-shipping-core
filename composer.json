@@ -58,5 +58,10 @@
     "suggest": {
         "magento/module-scalable-checkout": "^100.2.0",
         "magento/module-scalable-oms": "^100.2.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.1.5.x-dev"
+        }
     }
 }
