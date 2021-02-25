@@ -162,14 +162,11 @@ class PackagingDataCompositeProcessor
         array $optionsData,
         ShipmentInterface $shipment
     ): array {
-        /** @var OrderAddressInterface $shippingAddress */
-        $shippingAddress = $shipment->getShippingAddress();
-
         foreach ($this->checkoutServiceOptionsProcessors as $processor) {
             $optionsData = $processor->process(
                 $optionsData,
-                $shippingAddress->getCountryId(),
-                $shippingAddress->getPostcode(),
+                $shipment->getShippingAddress()->getCountryId(),
+                (string)$shipment->getShippingAddress()->getPostcode(),
                 (int)$shipment->getStoreId()
             );
         }
@@ -198,7 +195,7 @@ class PackagingDataCompositeProcessor
                 $optionsData = $processor->process(
                     $optionsData,
                     $shipment->getShippingAddress()->getCountryId(),
-                    $shipment->getShippingAddress()->getPostcode(),
+                    (string)$shipment->getShippingAddress()->getPostcode(),
                     (int)$shipment->getStoreId()
                 );
             }
@@ -237,7 +234,7 @@ class PackagingDataCompositeProcessor
                         $processor->process(
                             $item->getShippingOptions(),
                             $shippingAddress->getCountryId(),
-                            $shippingAddress->getPostcode(),
+                            (string)$shippingAddress->getPostcode(),
                             (int)$shipment->getStoreId()
                         )
                     );
