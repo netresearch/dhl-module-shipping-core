@@ -1,20 +1,26 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Pipeline\Rate\ResponseProcessor;
 
-use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 use Dhl\ShippingCore\Model\Config\RateConfig;
 use Dhl\ShippingCore\Model\Config\Source\RoundingDirection;
 use Dhl\ShippingCore\Model\Config\Source\RoundingFormat;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
+use Netresearch\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 
 /**
- * A rate processor to round prices.
+ * Round shipping rates.
+ *
+ * Shipping rates coming from a Products & Rates API may not be suitable for the
+ * consumer. Rounding may be applied according to configuration settings defined in
+ * the `500_rates_calculation.xml` config template and accessible via the RateConfig model.
  */
 class RoundedPrices implements RateResponseProcessorInterface
 {
@@ -23,11 +29,6 @@ class RoundedPrices implements RateResponseProcessorInterface
      */
     private $rateConfig;
 
-    /**
-     * RoundedPrices constructor.
-     *
-     * @param RateConfig $rateConfig
-     */
     public function __construct(RateConfig $rateConfig)
     {
         $this->rateConfig = $rateConfig;
@@ -90,7 +91,7 @@ class RoundedPrices implements RateResponseProcessorInterface
                 continue;
             }
 
-            $price = $this->roundPrice($method->getPrice(), $method->getData('carrier'), $store);
+            $price = $this->roundPrice($method->getData('price'), $method->getData('carrier'), $store);
             $method->setData('price', max(0.0, $price));
         }
 

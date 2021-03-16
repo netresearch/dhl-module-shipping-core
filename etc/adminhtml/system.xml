@@ -16,16 +16,14 @@
 
                 <field id="shippingCoreInfoBox" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>Netresearch\ConfigFields\Block\InfoBox</frontend_model>
+                    <attribute type="header_template">Netresearch_ShippingCore::system/config/infoBoxHeader.phtml</attribute>
                     <attribute type="body_template">Dhl_ShippingCore::system/config/infoBoxBody.phtml</attribute>
-                    <attribute type="header_template">Dhl_ShippingCore::system/config/infoBoxHeader.phtml</attribute>
-                    <attribute type="view_model">Dhl\ShippingCore\ViewModel\Adminhtml\System\InfoBox</attribute>
+                    <attribute type="view_model">Dhl\ShippingCore\ViewModel\Adminhtml\System\InfoBox\Virtual</attribute>
                     <attribute type="logo">Dhl_ShippingCore::images/logo-dhl.svg</attribute>
                     <attribute type="css_class">dhlgw</attribute>
                 </field>
 
-                <include path="Dhl_ShippingCore::system/100_general_settings.xml"/>
                 <include path="Dhl_ShippingCore::system/600_shipment_defaults.xml"/>
-                <include path="Dhl_ShippingCore::system/700_bulk_settings.xml"/>
                 <include path="Dhl_ShippingCore::system/800_locationfinder_settings.xml"/>
             </group>
         </section>

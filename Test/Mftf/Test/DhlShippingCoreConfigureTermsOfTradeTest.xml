@@ -17,10 +17,10 @@
         </annotations>
         <before>
             <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin"/>
-            <actionGroup ref="NavigateToShippingCoreSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
-            <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShippingCoreGroup">
-                <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}"/>
-                <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroupExpanded}}"/>
+            <actionGroup ref="NavigateToShippingSolutionsSectionActionGroup" stepKey="navigateToShippingSettingsConfigInTest"/>
+            <actionGroup ref="ScrollToAndExpandConfigActionGroup" stepKey="navigateToShippingCoreGroup">
+                <argument name="groupName" value="{{AdminSystemConfigShippingSolutionsSection.shippingCoreGroup}}"/>
+                <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingSolutionsSection.shippingCoreGroupExpanded}}"/>
             </actionGroup>
         </before>
         <after>
@@ -31,44 +31,44 @@
         <comment userInput="-> Perform actual test" stepKey="runTestComment"/>
 
         <!-- Scroll to subgroup and expand it -->
-        <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShipmentDefaultsGroup">
-            <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroup}}"/>
-            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroupExpanded}}"/>
+        <actionGroup ref="ScrollToAndExpandConfigActionGroup" stepKey="navigateToShipmentDefaultsGroup">
+            <argument name="groupName" value="{{AdminSystemConfigShippingSolutionsSection.shipmentDefaultsGroup}}"/>
+            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingSolutionsSection.shipmentDefaultsGroupExpanded}}"/>
         </actionGroup>
 
         <!-- Configure a terms of trade and save -->
-        <seeElement selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroup}}" stepKey="seeTermsOfTradeConfigGroup"/>
-        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroup}}" stepKey="scrollToTermsOfTradeConfigGroup" x="0" y="-85"/>
+        <seeElement selector="{{AdminSystemConfigShippingSolutionsSection.termsOfTradeConfigGroup}}" stepKey="seeTermsOfTradeConfigGroup"/>
+        <scrollTo selector="{{AdminSystemConfigShippingSolutionsSection.termsOfTradeConfigGroup}}" stepKey="scrollToTermsOfTradeConfigGroup" x="0" y="-85"/>
 
-        <see selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDULabel}}"
+        <see selector="{{AdminSystemConfigShippingSolutionsSection.termsOfTradeConfigGroupOptionDDULabel}}"
              userInput="{{ShippingCoreTermsOfTrade.DDU}}" stepKey="seeTermsOfTradeConfigGroupLabelDDU"/>
-        <see selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDPLabel}}"
+        <see selector="{{AdminSystemConfigShippingSolutionsSection.termsOfTradeConfigGroupOptionDDPLabel}}"
              userInput="{{ShippingCoreTermsOfTrade.DDP}}" stepKey="seeTermsOfTradeConfigGroupLabelDDP"/>
 
-        <seeCheckboxIsChecked selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDU}}"
+        <seeCheckboxIsChecked selector="{{AdminSystemConfigShippingSolutionsSection.termsOfTradeConfigGroupOptionDDU}}"
                               stepKey="termsOfTradeConfigGroupOptionCheckedDDU"/>
 
-        <click selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDPLabel}}"
+        <click selector="{{AdminSystemConfigShippingSolutionsSection.termsOfTradeConfigGroupOptionDDPLabel}}"
                stepKey="termsOfTradeConfigGroupOptionClickDDP"/>
 
         <actionGroup ref="AdminSystemConfigSectionSaveActionGroup" stepKey="saveAdminConfigSection"/>
 
         <!-- Confirm selection is persisted -->
 
-        <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShippingCoreGroupAfterSave">
-            <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroup}}"/>
-            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.shippingCoreGroupExpanded}}"/>
+        <actionGroup ref="ScrollToAndExpandConfigActionGroup" stepKey="navigateToShippingCoreGroupAfterSave">
+            <argument name="groupName" value="{{AdminSystemConfigShippingSolutionsSection.shippingCoreGroup}}"/>
+            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingSolutionsSection.shippingCoreGroupExpanded}}"/>
         </actionGroup>
 
-        <actionGroup ref="ScrollToAndExpandGroupActionGroup" stepKey="navigateToShipmentDefaultsGroupAfterSave">
-            <argument name="groupName" value="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroup}}"/>
-            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingCoreSection.shipmentDefaultsGroupExpanded}}"/>
+        <actionGroup ref="ScrollToAndExpandConfigActionGroup" stepKey="navigateToShipmentDefaultsGroupAfterSave">
+            <argument name="groupName" value="{{AdminSystemConfigShippingSolutionsSection.shipmentDefaultsGroup}}"/>
+            <argument name="groupNameExpanded" value="{{AdminSystemConfigShippingSolutionsSection.shipmentDefaultsGroupExpanded}}"/>
         </actionGroup>
 
-        <scrollTo selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroup}}" stepKey="scrollToTermsOfTradeConfigGroupAfterSave" x="0" y="-85"/>
-        <seeCheckboxIsChecked selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDP}}"
+        <scrollTo selector="{{AdminSystemConfigShippingSolutionsSection.termsOfTradeConfigGroup}}" stepKey="scrollToTermsOfTradeConfigGroupAfterSave" x="0" y="-85"/>
+        <seeCheckboxIsChecked selector="{{AdminSystemConfigShippingSolutionsSection.termsOfTradeConfigGroupOptionDDP}}"
                               stepKey="termsOfTradeConfigGroupOptionCheckedDDP"/>
-        <dontSeeCheckboxIsChecked selector="{{AdminSystemConfigShippingCoreSection.termsOfTradeConfigGroupOptionDDU}}"
+        <dontSeeCheckboxIsChecked selector="{{AdminSystemConfigShippingSolutionsSection.termsOfTradeConfigGroupOptionDDU}}"
                                   stepKey="termsOfTradeConfigGroupOptionNotCheckedDDU"/>
     </test>
 </tests>

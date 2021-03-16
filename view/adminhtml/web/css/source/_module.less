@@ -1,115 +1,22 @@
 #config-edit-form {
-    #shipping_dhlglobalwebservices_package_dimension {
-        th, td {
-            font-size: 1.2rem;
-            padding: 1.3rem 0;
-            vertical-align: middle;
-            position: relative;
+  .section-config {
+    /* Additional Infobox styling */
+    .nr-custom-infobox.dhlgw {
+      border: 1px solid #fc0;
+      background: #fefcee;
 
-            &:first-child {
-                padding: 1.3rem 0 1.3rem 1.3rem;
-            }
-        }
-
-        th {
-            span {
-                position: absolute;
-                bottom: .3rem;
-                left: 0;
-                font-size: 1rem;
-                font-weight: 400;
-            }
-        }
+      header {
+        background: #ffcc01;
+      }
     }
+  }
+}
 
-    #row_dhlshippingsolutions_dhlpaket_account_settings_account_participations {
-        .value {
-            .design_theme_ua_regexp {
-                float: left;
-            }
-        }
+.nrshipping-packaging-popup {
+  .package-action-buttons {
+    img[src*="logo-dpdhl.svg"] {
+      background-color: #fc0;
+      padding: @indent__s;
     }
-
-    /**
-     * Use this to style system config groups in a simpler way:
-     *
-     * <fieldset_css>simple</fieldset_css>
-     * <attribute type="expanded">1</attribute>
-     */
-    .section-config.simple {
-        &:not(.active) {
-            display: none;
-        }
-
-        a.open {
-            pointer-events: none;
-            padding: 0 0 0 33%;
-            font-size: 1.5rem;
-        }
-
-        a.open::before {
-            display: none;
-        }
-
-        border: 1px solid #e3e3e3;
-        background: #fbfbfb;
-        margin: 2em 0;
-        padding: 1em 0;
-    }
-
-    /**
-     * DHLGW-389: CSS classes for config fields
-     */
-    .section-config {
-        .value {
-            .w-25 {
-                width: 25% !important;
-            }
-
-            .w-50 {
-                width: 50% !important;
-            }
-
-            .w-75 {
-                width: 75% !important;
-            }
-
-            .w-100 {
-                width: 100% !important;
-            }
-
-            .w-auto {
-                width: auto !important;
-            }
-
-            .radioset {
-                float: left;
-
-                .admin__field-option {
-                    padding-top: 0;
-                }
-            }
-
-            .checkboxset {
-                .nested {
-                    padding-top: 0;
-                }
-            }
-
-            .note {
-                clear: both;
-                padding-top: 10px;
-            }
-        }
-
-        /* Additional Infobox styling */
-        .nr-custom-infobox.dhlgw {
-            border: 1px solid #ffcc01;
-            background: #fefcee;
-
-            header {
-                background: #ffcc01;
-            }
-        }
-    }
+  }
 }

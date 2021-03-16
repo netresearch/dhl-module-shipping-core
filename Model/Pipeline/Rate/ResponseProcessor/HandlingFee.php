@@ -1,19 +1,26 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\ShippingCore\Model\Pipeline\Rate\ResponseProcessor;
 
-use Dhl\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 use Dhl\ShippingCore\Model\Config\RateConfig;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
+use Netresearch\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 
 /**
- * A rate processor to append the handling fee based on handling type to the shipping price.
+ * Add markup to shipping rates.
+ *
+ * Shipping rates coming from a Products & Rates API may not be suitable for the consumer.
+ * To get from the shipping cost to a shipping price, markup may be applied. The markup
+ * configuration is defined in `500_rates_calculation.xml` config template and can be
+ * accessed via the RateConfig model.
  */
 class HandlingFee implements RateResponseProcessorInterface
 {
@@ -22,11 +29,6 @@ class HandlingFee implements RateResponseProcessorInterface
      */
     private $rateConfig;
 
-    /**
-     * HandlingFee constructor.
-     *
-     * @param RateConfig $rateConfig
-     */
     public function __construct(RateConfig $rateConfig)
     {
         $this->rateConfig = $rateConfig;
@@ -86,10 +88,13 @@ class HandlingFee implements RateResponseProcessorInterface
      */
     public function processMethods(array $methods, RateRequest $request = null): array
     {
-        $store = $request ? $request->getStoreId() : null;
+        if (!$request instanceof RateRequest) {
+            return $methods;
+        }
+
+        $store = $request->getStoreId();
         $isDomestic = $request->getDestCountryId() === $request->getData('country_id');
 
-        /** @var Method $method */
         foreach ($methods as $method) {
             $carrierCode = $method->getData('carrier');
 

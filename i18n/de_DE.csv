@@ -1,92 +1,30 @@
-"A confirmation email will be sent to the customer when the shipment was successfully created.","Nach erfolgreicher Erstellung des Lieferscheins wird dem Kunden eine Versandbestätigung per E-Mail zugesandt."
-"Ad hoc pickup or service point drop-off","Ad-hoc-Abholung oder Abgabe am Servicepunkt"
-"Add Package","Paket hinzufügen"
 "Add markup to shipping price","Aufschlag zum Versandpreis hinzufügen"
-"Additional Fee",Zusatzkosten
-"All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website","Es wird davon ausgegangen, dass alle Bestellungen, die nach dem konfigurierten Zeitpunkt aufgegeben werden, am nächsten Geschäftstag an den jeweiligen Spediteur übergeben werden. Alle Bestellungen, die vor diesem Zeitpunkt aufgegeben werden, werden voraussichtlich am selben Tag an den jeweiligen Spediteur übergeben. Der Wert wird nach der für die aktuelle Website konfigurierten Zeitzone interpretiert."
-"An error occurred while updating the recipient street.","Beim Aktualisieren der Empfängeradresse ist ein Fehler aufgetreten."
 "Apply rounding to shipping price","Versandkosten runden"
-"Automatic label creation failed: %1","Die automatische Sendungserstellung ist fehlgeschlagen: %1"
-"Bulk / Cron Settings","Einstellungen für automatische Sendungserstellung"
 "Calculate Markup","Aufschlag berechnen"
-"Cancel Labels","Versandaufträge stornieren"
-"Cannot initialize packaging data, please provide shipment.","Paketdaten konnten nicht geladen werden. Stellen Sie ein Shipment bereit."
-"Carrier ""%1"" not found.","Carrier ""%1"" konnte nicht gefunden werden."
-"Cash On Delivery Payment Methods",Nachnahmezahlungsmethoden
 "Commercial Sample",Warenmuster
-Container,Container
-"Cost and estimated delivery dates","Kosten und voraussichtliche Liefertermine"
-"Cost only","Nur Kosten"
-"Could not delete service selection.","Die Serviceauswahl konnte nicht gelöscht werden."
-"Could not save service selection.","Die Serviceauswahl konnte nicht gespeichert werden."
-"Country of Origin",Ursprungsland
-"Create a customized country list","Angepasste Länderliste erstellen"
-"Create shipments and retrieve labels via cron job.","Erstellen Sie Lieferscheine und Versandetiketten mittels Cron Job."
 "Cross-border Shipping Price Markup","Versandkostenaufschlag für internationale Lieferungen"
 "Customer pays duties and taxes (DDU)","Kunde zahlt Zölle und Steuern (DDU)"
-"Customs Data",Zolldaten
-"Customs Value",Zollwert
 "Decimal Value",Dezimalwert
-"Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks.","Das Löschen einer einzelnen Sendungsnummer wird nicht unterstützt. Bitte verwenden Sie den Button ""Versandaufträge stornieren"" auf der Sendungsansichtseite, um Versandaufträge zu stornieren und Sendungsnummern zu löschen."
-"Depends on chosen product. Its only mandatory for international, non EU shipments.","Hängt vom gewählten Produkt ab. Dies ist nur für internationale Sendungen außerhalb der EU vorgeschrieben."
-"Display customized message","Benutzerdefinierte Nachricht anzeigen"
 Document,Dokument
 "Domestic Shipping",Inlandsversand
 "Domestic shipping price markup","Preisaufschlag für Inlandsversand"
-"Email Copy of Shipment","Versandbestätigung versenden"
-"Enable Automatic Label Retrieval","Automatische Sendungserstellung aktivieren"
 "Enter the markup amount in the currency of your store. Enter a negative to apply a discount","Geben Sie den Aufschlagsbetrag in der Währung Ihres Geschäfts ein. Geben Sie einen negativen Betrag ein, um einen Rabatt zu gewähren."
 "Enter the value without the decimal separator (ex. 99 for the shipping charges to be rounded to 99 cents)","Geben Sie den Wert ohne Dezimaltrennzeichen ein (z.B. 99 für die auf 99 Cent gerundeten Versandkosten)"
-"Export Content Explanation","Beschreibung des Inhalts"
-"Export Content Type",Inhaltskategorie
-"Export Description",Exportbeschreibung
 "Fixed amount",Festbetrag
 "For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount","Geben Sie z.B. 20 ein, um einen Aufschlag von 20% in der konfigurierten Währung anzuwenden. Geben Sie -20 ein, um einen Rabatt von 20% zu gewähren."
-Fri,Fr
 "General Configuration","Allgemeine Konfiguration"
-"General Settings","Allgemeine Einstellungen"
-"HS Code",HS-Code
 "Having issues configuring the extension? Contact our support desk: ","Haben Sie Probleme beim Konfigurieren der Extension? Wenden Sie sich an unser Support-Team: "
-Height,Höhe
-"Height %1","Höhe %1"
-"Hide this shipping method in checkout","Diese Versandart im Checkout ausblenden"
 "I will pay duties and taxes (DDP)","Ich zahle Zölle und Steuern (DDP)"
-"If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.","Ist die automatische Wiederholung deaktiviert, so müssen alle zuvor fehlgeschlagenen Versandetiketten nach Korrektur der Versanddaten manuell angefordert werden. Ist sie aktiviert, dann wird wiederholt versucht, Versandetiketten vom Webservice abzurufen – auch wenn noch keine Korrektur der Sendungsdaten vorgenommen wurde. Dies mag komfortabel erscheinen, kann die Anzahl der Versandetikettenanfragen und damit die Last der automatischen Verarbeitung aber drastisch erhöhen."
-"Include orders with the given status for automatic label retrieval.","Führen Sie die automatische Sendungserstellung für Bestellungen mit angegebenem Status durch."
 "International Shipping","Internationaler Versand"
-"Item Details",Artikeldetails
-Length,Länge
-"Length %1","Länge %1"
 "Location Finder Settings","Einstellungen für Abholort-Suche"
 "MapBox API Token","MapBox API Token"
-"Module version:",Modulversion:
-Mon,Mo
-"My Own Packages","Meine Pakete"
-"No additional attributes found for order item %1.","Es wurden keine Zusatzattribute für Artikel %1 gefunden."
-"No orders found (automatic label retrieval is not enabled).","Keine Bestellungen gefunden (automatische Sendungserstellung ist nicht aktiviert)."
-"No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3.","Keine Bestellungen für die automatische Sendungserstellung mit Status %1 in den Stores %2 für die Carrier %3 gefunden."
-"Options for order item ""%1"" are not available.","Es sind keine Optionen für Order Item ""%1"" verfügbar."
-"Order %1: %2","Bestellung %1: %2"
-"Order Cut-off Time",Auftragsabschlusszeit
-"Order Status",Bestell-Status
 Other,Sonstiges
-"Package #%1 not found in shipment request.","Paket #%1 konnte nicht gefunden werden."
-"Package Description",Paketbeschreibung
-"Package Details",Paket-Details
 Percentage,Prozentsatz
-"Post & DHL and Magento","Versenden mit Post & DHL"
 "Post & DHL Shipping","Versenden mit Post & DHL"
+"Post & DHL and Magento","Versenden mit Post & DHL"
 Present,Geschenk
-"Processing of shipments with <em>Label Status: Failed</em> will automatically be retried.","Die Verarbeitung von Sendungen mit <em>Label Status: Fehlgeschlagen</em> wird automatisch erneut ausgeführt."
-Quantity,Menge
-"Quantity to Ship",Liefermenge
 "Rates Calculation",Versandkostenberechnung
-"Recipient street was successfully updated.","Empfängeradresse wurde erfolgreich aktualisiert."
-"Recipient street with ID ""%1"" does not exist.","Empfängeradresse mit der ID ""%1"" ist nicht vorhanden."
-"Regularly scheduled pickup","Regelmäßige Abholung"
-"Retry Failed Shipments","Wiederholung fehlgeschlagener Sendungen"
 "Return of Goods",Warenrücksendung
-"Return shipments are not supported.","Retourenaufkleber werden nicht unterstützt."
 "Round Prices","Preise runden"
 "Round down",Abrunden
 "Round to a specific decimal value (ex. 99 cents)","Runden Sie auf einen bestimmten Dezimalwert (z.B. 99 Cent)"
@@ -95,52 +33,11 @@ Quantity,Menge
 "Rounding Direction",Rundungsrichtung
 "Rounding Format",Rundungsformat
 "Rounding Rules",Rundungsregeln
-Sat,Sa
 "Select whether duties and taxes for the shipment are paid by the shipper or not.","Wählen Sie aus, ob Zölle und Steuern für die Sendung vom Versender bezahlt werden oder nicht."
-"Selected payment methods will be treated as CoD methods during shipment order creation.","Die ausgewählten Zahlungsmethoden werden bei der Erstellung des Versandauftrags als Nachnahmemethoden behandelt."
-"Set Default","Als Standard festlegen"
 "Shipment Defaults","Standardeinstellungen für Versandetiketten"
-"Shipment(s) for the order(s) %1 could not be created.","Lieferschein(e) für die Bestellung(en) %1 konnten nicht erstellt werden."
-"Shipping Product",Versandprodukt
-"Shipping label(s) for the order(s) %1 could not be created.","Versandetiketten für die Bestellung(en) %1 konnten nicht erstellt werden."
-"Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Versandetiketten für die Bestellung(en) %1 konnten nicht abgerufen werden. Bitte prüfen Sie die Lieferscheinkommentare."
-"Shipping label(s) for the order(s) %1 were successfully created.","Versandetiketten für die Bestellung(en) %1 wurden erfolgreich erstellt."
-"Tare weight",Leergewicht
 "Terms of Trade",Handelsklauseln
 "The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token.","Die Abholort-Suche im Checkout verwendet den Dienst MapBox, um eine interaktive Karte anzuzeigen. Wenn Sie diese Funktion nutzen möchten, erstellen Sie bitte ein API-Token auf mapbox.com."
-"The content description is mandatory if export content type is <em>OTHER</em>.","Eine Inhaltsbeschreibung ist vorgeschrieben, wenn die Inhaltskategorie <em>SONSTIGES</em> ist."
-"The item option ""%1"" is not available.","Die Artikeloption ""%1"" ist nicht verfügbar."
 "The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials.","Die neue DHL Shipping Extension umfasst alle verfügbaren DHL Optionen für Ihren Magento 2 Store. Sie vereinigt alle DHL Funktionalitäten in einer Lösung, die mit Hilfe Ihrer DHL Kundennummer aktiviert werden können."
-"The package option ""%1"" is not available.","Die Paketoption ""%1"" ist nicht verfügbar."
-"The service option ""%1"" is not available.","Die Service-Option ""%1"" ist nicht verfügbar."
-"The shipment was successfully cancelled.","Die Lieferung wurde erfolgreich storniert."
-"The value ""%1"" is not available for item option ""%2"".","Der Wert ""%1"" für die Artikeloption ""%2"" ist nicht verfügbar."
-"The value ""%1"" is not available for package option ""%2"".","Der Wert ""%1"" für die Paketoption ""%2"" ist nicht verfügbar."
-"The value ""%1"" is not available for service option ""%2"".","Der Wert ""%1"" für die Serviceoption ""%2"" ist nicht verfügbar."
-"The value of attribute ""%1"" must be either 6, 8 or 10 digits long.","Der Wert des Attributs ""%1"" muss entweder 6, 8 oder 10 Stellen lang sein."
-"The value of attribute ""%1"" must be numeric.","Der Wert des Attributes ""%1"" muss numerisch sein."
-"The value of attribute ""%1"" must not be longer than %2 characters.","Der Wert des Attributes ""%1"" darf nicht länger als %2 Zeichen sein."
 "This section configures information about the exported goods relevant for customs for international shipments.","In diesem Abschnitt werden Informationen zu den für internationale Sendungen zollrelevanten Exportgütern konfiguriert."
-Thu,Do
-Title,Titel
-"Total Weight",Gesamtgewicht
-Tue,Di
-"Unable to load additional attributes for order item %1.","Zusatzattribute für Artikel %1 konnten nicht geladen werden."
-"Unable to load recipient street with ID ""%1"".","Empfängeradresse mit der ID ""%1"" kann nicht geladen werden."
-"Unable to load shipment request properties.","Die Daten für den Versandauftrag konnten nicht geladen werden."
-"Unable to process PDF content.","PDF-Inhalt kann nicht verarbeitet werden."
-"Unable to retrieve year %1 holidays for region %2.","Feiertage in Region %2 für das Jahr %1 konnten nicht ermittelt werden."
-"Unable to save additional attributes for order item %1: %2","Zusatzattribute für Artikel %1 konnten nicht gespeichert werden: %2"
-"Unable to save label status","Label-Status konnte nicht gespeichert werden."
-"Unable to save recipient street.","Empfängeradresse kann nicht gespeichert werden."
-"Use countries from <a href=""%1"">Allowed Countries</a> setting.","Erlaubte Länder aus den <a href=""%1"">allgemeinen Einstellungen</a> verwenden."
-"Use this to create your own types of packages with your specific titles, sizes and weights.","Verwenden Sie diese Option, um Ihre eigenen Pakettypen mit Ihren spezifischen Titeln, Größen und Gewichten zu erstellen."
-Wed,Mi
-Weight,Gewicht
-"Weight %1","Gewicht %1"
-Width,Breite
-"Width %1","Breite %1"
 "You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.","Sie können hier alle Einstellungen für die verfügbaren DHL Versandmethoden konfigurieren, wie zum Beispiel Versandoptionen, Checkout-Services und Retourenlösungen."
-"You can configure your preset package sizes in the system configuration","Ihre voreingestellten Paketgrößen können Sie in der Systemkonfiguration konfigurieren"
-"You need to have at least one drop off day.","Sie müssen mindestens einen Tag für die Paketübergabe angeben."
 dhl.support@netresearch.de,dhl.support@netresearch.de
