@@ -50,7 +50,7 @@ class AttributesToOrderItem
     private function readAttribute(AbstractItem $quoteItem, string $attributeCode): string
     {
         // first check child item for the catalog attribute, may be more specific (overwrites the parent)
-        if ($quoteItem->getProductType() === Configurable::TYPE_CODE) {
+        if (($quoteItem->getProductType() === Configurable::TYPE_CODE) && (!empty($quoteItem->getChildren()))) {
             $children = $quoteItem->getChildren();
             $childItem = current($children);
 
