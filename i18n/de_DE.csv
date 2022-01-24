@@ -1,11 +1,9 @@
 "Add markup to shipping price","Aufschlag zum Versandpreis hinzufügen"
 "Apply rounding to shipping price","Versandkosten runden"
 "Calculate Markup","Aufschlag berechnen"
-"Commercial Sample",Warenmuster
 "Cross-border Shipping Price Markup","Versandkostenaufschlag für internationale Lieferungen"
 "Customer pays duties and taxes (DDU)","Kunde zahlt Zölle und Steuern (DDU)"
 "Decimal Value",Dezimalwert
-Document,Dokument
 "Domestic Shipping",Inlandsversand
 "Domestic shipping price markup","Preisaufschlag für Inlandsversand"
 "Enter the markup amount in the currency of your store. Enter a negative to apply a discount","Geben Sie den Aufschlagsbetrag in der Währung Ihres Geschäfts ein. Geben Sie einen negativen Betrag ein, um einen Rabatt zu gewähren."
@@ -18,13 +16,10 @@ Document,Dokument
 "International Shipping","Internationaler Versand"
 "Location Finder Settings","Einstellungen für Abholort-Suche"
 "MapBox API Token","MapBox API Token"
-Other,Sonstiges
 Percentage,Prozentsatz
 "Post & DHL Shipping","Versenden mit Post & DHL"
 "Post & DHL and Magento","Versenden mit Post & DHL"
-Present,Geschenk
 "Rates Calculation",Versandkostenberechnung
-"Return of Goods",Warenrücksendung
 "Round Prices","Preise runden"
 "Round down",Abrunden
 "Round to a specific decimal value (ex. 99 cents)","Runden Sie auf einen bestimmten Dezimalwert (z.B. 99 Cent)"

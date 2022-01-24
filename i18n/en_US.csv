@@ -1,11 +1,9 @@
 "Add markup to shipping price","Add markup to shipping price"
 "Apply rounding to shipping price","Apply rounding to shipping price"
 "Calculate Markup","Calculate Markup"
-"Commercial Sample","Commercial Sample"
 "Cross-border Shipping Price Markup","Cross-border Shipping Price Markup"
 "Customer pays duties and taxes (DDU)","Customer pays duties and taxes (DDU)"
 "Decimal Value","Decimal Value"
-Document,Document
 "Domestic Shipping","Domestic Shipping"
 "Domestic shipping price markup","Domestic shipping price markup"
 "Enter the markup amount in the currency of your store. Enter a negative to apply a discount","Enter the markup amount in the currency of your store. Enter a negative to apply a discount"
@@ -18,13 +16,10 @@ Document,Document
 "International Shipping","International Shipping"
 "Location Finder Settings","Location Finder Settings"
 "MapBox API Token","MapBox API Token"
-Other,Other
 Percentage,Percentage
 "Post & DHL Shipping","Post & DHL Shipping"
 "Post & DHL and Magento","Post & DHL and Magento"
-Present,Present
 "Rates Calculation","Rates Calculation"
-"Return of Goods","Return of Goods"
 "Round Prices","Round Prices"
 "Round down","Round down"
 "Round to a specific decimal value (ex. 99 cents)","Round to a specific decimal value (ex. 99 cents)"
