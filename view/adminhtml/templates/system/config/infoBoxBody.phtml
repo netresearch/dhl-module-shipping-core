@@ -2,7 +2,9 @@
 /**
  * See LICENSE.md for license details.
  */
-/** @var Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Netresearch\ShippingCore\ViewModel\Adminhtml\System\InfoBox $viewModel */
+$viewModel = $block->getData('view_model');
 ?>
 <div class="col content">
     <p>
@@ -10,6 +12,17 @@
     </p>
     <p>
         <?= $block->escapeHtml(__('You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.')) ?>
+    </p>
+    <p>
+        <?= $block->escapeHtml(
+            __(
+                'Further settings related to shipping can be specified in the %1Parcel Processing%3 and %2Batch Processing%3 config groups.',
+                '<a href="' . $block->escapeUrl($viewModel->getParcelProcessingConfigUrl()) . '">',
+                '<a href="' . $block->escapeUrl($viewModel->getBatchProcessingConfigUrl()) . '">',
+                '</a>'
+            ),
+            ['a']
+        ) ?>
     </p>
 </div>
 <div class="col side">

@@ -10,6 +10,7 @@
 "Enter the value without the decimal separator (ex. 99 for the shipping charges to be rounded to 99 cents)","Geben Sie den Wert ohne Dezimaltrennzeichen ein (z.B. 99 für die auf 99 Cent gerundeten Versandkosten)"
 "Fixed amount",Festbetrag
 "For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount","Geben Sie z.B. 20 ein, um einen Aufschlag von 20% in der konfigurierten Währung anzuwenden. Geben Sie -20 ein, um einen Rabatt von 20% zu gewähren."
+"Further settings related to shipping can be specified in the %1Parcel Processing%3 and %2Batch Processing%3 config groups.","Weitere Versandeinstellungen können in den Bereichen %1Sendungsverarbeitung%3 und %2Massenverarbeitung%3 vorgenommen werden."
 "General Configuration","Allgemeine Konfiguration"
 "Having issues configuring the extension? Contact our support desk: ","Haben Sie Probleme beim Konfigurieren der Extension? Wenden Sie sich an unser Support-Team: "
 "I will pay duties and taxes (DDP)","Ich zahle Zölle und Steuern (DDP)"

@@ -10,6 +10,7 @@
 "Enter the value without the decimal separator (ex. 99 for the shipping charges to be rounded to 99 cents)","Enter the value without the decimal separator (ex. 99 for the shipping charges to be rounded to 99 cents)"
 "Fixed amount","Fixed amount"
 "For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount","For example, enter 20 to apply a 20% markup in the currency of your store. Enter -20 to apply a 20% discount"
+"Further settings related to shipping can be specified in the %1Parcel Processing%3 and %2Batch Processing%3 config groups.","Further settings related to shipping can be specified in the %1Parcel Processing%3 and %2Batch Processing%3 config groups."
 "General Configuration","General Configuration"
 "Having issues configuring the extension? Contact our support desk: ","Having issues configuring the extension? Contact our support desk: "
 "I will pay duties and taxes (DDP)","I will pay duties and taxes (DDP)"
