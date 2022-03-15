@@ -35,5 +35,7 @@ Percentage,Prozentsatz
 "The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token.","Die Abholort-Suche im Checkout verwendet den Dienst MapBox, um eine interaktive Karte anzuzeigen. Wenn Sie diese Funktion nutzen möchten, erstellen Sie bitte ein API-Token auf mapbox.com."
 "The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials.","Die neue DHL Shipping Extension umfasst alle verfügbaren DHL Optionen für Ihren Magento 2 Store. Sie vereinigt alle DHL Funktionalitäten in einer Lösung, die mit Hilfe Ihrer DHL Kundennummer aktiviert werden können."
 "This section configures information about the exported goods relevant for customs for international shipments.","In diesem Abschnitt werden Informationen zu den für internationale Sendungen zollrelevanten Exportgütern konfiguriert."
+"Validate Configuration","Konfiguration prüfen"
+"Validation Result","Ergebnis"
 "You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.","Sie können hier alle Einstellungen für die verfügbaren DHL Versandmethoden konfigurieren, wie zum Beispiel Versandoptionen, Checkout-Services und Retourenlösungen."
 dhl.support@netresearch.de,dhl.support@netresearch.de

@@ -8,13 +8,6 @@
     <!-- # service interface preferences -->
     <preference for="Netresearch\ShippingCore\Api\Config\MapBoxConfigInterface" type="Dhl\ShippingCore\Model\Config\MapBoxConfig"/>
 
-    <!-- # virtual types -->
-    <virtualType name="Dhl\ShippingCore\ViewModel\Adminhtml\System\InfoBox\Virtual" type="Netresearch\ShippingCore\ViewModel\Adminhtml\System\InfoBox">
-        <arguments>
-            <argument name="version" xsi:type="object">Dhl\ShippingCore\Model\Config\ModuleConfig</argument>
-        </arguments>
-    </virtualType>
-
     <!-- # argument di overrides -->
     <type name="Netresearch\ShippingCore\Model\Config\MapBoxConfig">
         <arguments>

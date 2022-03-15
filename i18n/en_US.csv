@@ -35,5 +35,7 @@ Percentage,Percentage
 "The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token.","The checkout pickup location finder uses the service MapBox to display an interactive map. If you want to use this feature, please go to mapbox.com to create an API token."
 "The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials.","The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials."
 "This section configures information about the exported goods relevant for customs for international shipments.","This section configures information about the exported goods relevant for customs for international shipments."
+"Validate Configuration","Validate Configuration"
+"Validation Result","Validation Result"
 "You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.","You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions."
 dhl.support@netresearch.de,dhl.support@netresearch.de

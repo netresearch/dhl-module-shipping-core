@@ -3,7 +3,7 @@
  * See LICENSE.md for license details.
  */
 /** @var \Magento\Framework\View\Element\Template $block */
-/** @var \Netresearch\ShippingCore\ViewModel\Adminhtml\System\InfoBox $viewModel */
+/** @var \Dhl\ShippingCore\ViewModel\Adminhtml\System\InfoBox $viewModel */
 $viewModel = $block->getData('view_model');
 ?>
 <div class="col content">
@@ -24,6 +24,9 @@ $viewModel = $block->getData('view_model');
             ['a']
         ) ?>
     </p>
+    <p>
+        <button id="dhl-show-modal-button" class="button secondary" type="button"><?= __('Validate Configuration') ?></button>
+    </p>
 </div>
 <div class="col side">
     <aside>
@@ -31,10 +34,31 @@ $viewModel = $block->getData('view_model');
             <h3><?= $block->escapeHtml(__('Post & DHL and Magento')) ?></h3>
             <p>
                 <?= $block->escapeHtml(__('Having issues configuring the extension? Contact our support desk: ')) ?>
-                <a href="mailto:<?= $block->escapeHtml(__('dhl.support@netresearch.de'))?>">
-                    <?= $block->escapeHtml(__('dhl.support@netresearch.de'))?>
+                <a href="mailto:<?= $block->escapeHtml(__('dhl.support@netresearch.de')) ?>">
+                    <?= $block->escapeHtml(__('dhl.support@netresearch.de')) ?>
                 </a>
             </p>
         </div>
     </aside>
 </div>
+<div hidden>
+    <iframe id="dhl-config-validation-modal" class="modal" height="100%" width="100%" style="border: none; min-height: 20vh"
+            loading="eager"></iframe>
+</div>
+<script type="text/javascript">
+    window.addEventListener("DOMContentLoaded", function () {
+        require(["jquery", "Magento_Ui/js/modal/modal"], function ($) {
+            $("#dhl-config-validation-modal").modal({
+                title: "<?= $block->escapeHtml(__('Validation Result')) ?>",
+                trigger: "#dhl-show-modal-button",
+                clickableOverlay: true,
+                responsive: true,
+                buttons: [],
+                modalClass: 'dhl-validation-popup',
+                opened: function (event) {
+                    this.src = "<?= $block->escapeUrl($viewModel->getConfigValidationUrl()) ?>";
+                }
+            });
+        });
+    });
+</script>
