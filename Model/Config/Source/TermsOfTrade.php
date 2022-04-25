@@ -12,8 +12,8 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class TermsOfTrade implements OptionSourceInterface
 {
-    const DDP = 'DDP';
-    const DDU = 'DDU';
+    public const DDP = 'DDP';
+    public const DDU = 'DDU';
 
     /**
      * Options getter

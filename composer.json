@@ -21,7 +21,7 @@
         ]
     },
     "require": {
-        "php": "^7.1.3",
+        "php": "^7.2.0 || ^8.1.0",
         "magento/framework": "^102.0.0 || ^103.0.0",
         "magento/module-catalog": "^103.0.0 || ^104.0.0",
         "magento/module-config": "^101.1.0",
@@ -31,11 +31,16 @@
         "magento/module-store": "^101.0.0",
         "magento/module-ui": "^101.1.5",
         "magento/zendframework1": "^1.14.1",
-        "netresearch/config-fields-m2": "^1.2.4",
-        "netresearch/module-shipping-core": "^2.7.0"
+        "netresearch/config-fields-m2": "^1.3.0",
+        "netresearch/module-shipping-core": "^2.8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5.0 || ^9.0.0",
         "tddwizard/magento2-fixtures": "^0.12.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "2.2.0.x-dev"
+        }
     }
 }

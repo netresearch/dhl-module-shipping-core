@@ -12,8 +12,8 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class RoundingFormat implements OptionSourceInterface
 {
-    const INTEGER = 'integer';
-    const DECIMAL = 'decimal';
+    public const INTEGER = 'integer';
+    public const DECIMAL = 'decimal';
 
     /**
      * Return array of options as value-label pairs

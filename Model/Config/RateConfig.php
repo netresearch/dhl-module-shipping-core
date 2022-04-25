@@ -16,22 +16,22 @@ use Magento\Store\Model\ScopeInterface;
 class RateConfig
 {
     // rounding
-    const CONFIG_PATH_USE_ROUNDING = 'dhlshippingsolutions/%s/rates_calculation/use_rounding';
-    const CONFIG_PATH_ROUNDING_FORMAT = 'dhlshippingsolutions/%s/rates_calculation/rounding_group/number_format';
-    const CONFIG_PATH_ROUNDING_DIRECTION = 'dhlshippingsolutions/%s/rates_calculation/rounding_group/direction';
-    const CONFIG_PATH_ROUNDING_DECIMAL_VALUE = 'dhlshippingsolutions/%s/rates_calculation/rounding_group/decimal_value';
+    public const CONFIG_PATH_USE_ROUNDING = 'dhlshippingsolutions/%s/rates_calculation/use_rounding';
+    public const CONFIG_PATH_ROUNDING_FORMAT = 'dhlshippingsolutions/%s/rates_calculation/rounding_group/number_format';
+    public const CONFIG_PATH_ROUNDING_DIRECTION = 'dhlshippingsolutions/%s/rates_calculation/rounding_group/direction';
+    public const CONFIG_PATH_ROUNDING_DECIMAL_VALUE = 'dhlshippingsolutions/%s/rates_calculation/rounding_group/decimal_value';
 
     // cross-border markup
-    const CONFIG_PATH_USE_MARKUP_INTL = 'dhlshippingsolutions/%s/rates_calculation/use_markup_intl';
-    const CONFIG_PATH_INTL_MARKUP_TYPE = 'dhlshippingsolutions/%s/rates_calculation/intl_markup_group/type';
-    const CONFIG_PATH_INTL_MARKUP_AMOUNT = 'dhlshippingsolutions/%s/rates_calculation/intl_markup_group/amount';
-    const CONFIG_PATH_INTL_MARKUP_PERCENTAGE = 'dhlshippingsolutions/%s/rates_calculation/intl_markup_group/percentage';
+    public const CONFIG_PATH_USE_MARKUP_INTL = 'dhlshippingsolutions/%s/rates_calculation/use_markup_intl';
+    public const CONFIG_PATH_INTL_MARKUP_TYPE = 'dhlshippingsolutions/%s/rates_calculation/intl_markup_group/type';
+    public const CONFIG_PATH_INTL_MARKUP_AMOUNT = 'dhlshippingsolutions/%s/rates_calculation/intl_markup_group/amount';
+    public const CONFIG_PATH_INTL_MARKUP_PERCENTAGE = 'dhlshippingsolutions/%s/rates_calculation/intl_markup_group/percentage';
 
     // domestic markup
-    const CONFIG_PATH_USE_MARKUP_DOMESTIC = 'dhlshippingsolutions/%s/rates_calculation/use_markup_domestic';
-    const CONFIG_PATH_DOMESTIC_MARKUP_TYPE = 'dhlshippingsolutions/%s/rates_calculation/domestic_markup_group/type';
-    const CONFIG_PATH_DOMESTIC_MARKUP_AMOUNT = 'dhlshippingsolutions/%s/rates_calculation/domestic_markup_group/amount';
-    const CONFIG_PATH_DOMESTIC_MARKUP_PERCENTAGE = 'dhlshippingsolutions/%s/rates_calculation/domestic_markup_group/percentage';
+    public const CONFIG_PATH_USE_MARKUP_DOMESTIC = 'dhlshippingsolutions/%s/rates_calculation/use_markup_domestic';
+    public const CONFIG_PATH_DOMESTIC_MARKUP_TYPE = 'dhlshippingsolutions/%s/rates_calculation/domestic_markup_group/type';
+    public const CONFIG_PATH_DOMESTIC_MARKUP_AMOUNT = 'dhlshippingsolutions/%s/rates_calculation/domestic_markup_group/amount';
+    public const CONFIG_PATH_DOMESTIC_MARKUP_PERCENTAGE = 'dhlshippingsolutions/%s/rates_calculation/domestic_markup_group/percentage';
 
     /**
      * @var ScopeConfigInterface
@@ -157,7 +157,7 @@ class RateConfig
      * @param null $store
      * @return string
      */
-    public function getInternationalMarkupAmount(string $carrierCode, $store = null):string
+    public function getInternationalMarkupAmount(string $carrierCode, $store = null): string
     {
         if (!$this->isInternationalMarkupEnabled($carrierCode, $store)) {
             return '';

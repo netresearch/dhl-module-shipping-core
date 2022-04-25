@@ -12,8 +12,8 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class RoundingDirection implements OptionSourceInterface
 {
-    const UP = 'up';
-    const DOWN = 'down';
+    public const UP = 'up';
+    public const DOWN = 'down';
 
     /**
      * Return array of options as value-label pairs
