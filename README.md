@@ -15,7 +15,7 @@ The DHL shipping core package offers the following functionality:
 Requirements
 ------------
 
-* PHP >= 7.1.3
+* PHP >= 7.2
 
 Compatibility
 -------------
