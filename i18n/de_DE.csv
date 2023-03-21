@@ -1,4 +1,5 @@
 "Add markup to shipping price","Aufschlag zum Versandpreis hinzufügen"
+"Any feedback helps to improve our extension product.","Jedes Feedback hilft, unsere Extension zu verbessern."
 "Apply rounding to shipping price","Versandkosten runden"
 "Calculate Markup","Aufschlag berechnen"
 "Cross-border Shipping Price Markup","Versandkostenaufschlag für internationale Lieferungen"
@@ -36,6 +37,7 @@ Percentage,Prozentsatz
 "The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials.","Die neue DHL Shipping Extension umfasst alle verfügbaren DHL Optionen für Ihren Magento 2 Store. Sie vereinigt alle DHL Funktionalitäten in einer Lösung, die mit Hilfe Ihrer DHL Kundennummer aktiviert werden können."
 "This section configures information about the exported goods relevant for customs for international shipments.","In diesem Abschnitt werden Informationen zu den für internationale Sendungen zollrelevanten Exportgütern konfiguriert."
 "Validate Configuration","Konfiguration prüfen"
-"Validation Result","Ergebnis"
+"Validation Result",Ergebnis
+"We would appreciate it very much to get a review of the extension on the official %1Adobe Magento Marketplace%2 (Adobe login required).","Über einen Review zur Extension auf dem offiziellen %1Adobe Magento Marketplace%2 würden wir uns sehr freuen (Adobe Login zum Marketplace erforderlich)."
 "You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.","Sie können hier alle Einstellungen für die verfügbaren DHL Versandmethoden konfigurieren, wie zum Beispiel Versandoptionen, Checkout-Services und Retourenlösungen."
 dhl.support@netresearch.de,dhl.support@netresearch.de

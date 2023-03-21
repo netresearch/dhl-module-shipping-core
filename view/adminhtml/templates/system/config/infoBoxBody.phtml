@@ -39,6 +39,19 @@ $viewModel = $block->getData('view_model');
                 </a>
             </p>
         </div>
+        <div class="section">
+            <p>
+                <?= $block->escapeHtml(__('Any feedback helps to improve our extension product.')) ?>
+                <?= $block->escapeHtml(
+                    __(
+                        'We would appreciate it very much to get a review of the extension on the official %1Adobe Magento Marketplace%2 (Adobe login required).',
+                        '<a href="https://marketplace.magento.com/dhl-shipping-m2.html">',
+                        '</a>'
+                    ),
+                    ['a']
+                ) ?>
+            </p>
+        </div>
     </aside>
 </div>
 <div hidden>

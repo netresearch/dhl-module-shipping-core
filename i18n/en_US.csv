@@ -1,4 +1,5 @@
 "Add markup to shipping price","Add markup to shipping price"
+"Any feedback helps to improve our extension product.","Any feedback helps to improve our extension product."
 "Apply rounding to shipping price","Apply rounding to shipping price"
 "Calculate Markup","Calculate Markup"
 "Cross-border Shipping Price Markup","Cross-border Shipping Price Markup"
@@ -37,5 +38,6 @@ Percentage,Percentage
 "This section configures information about the exported goods relevant for customs for international shipments.","This section configures information about the exported goods relevant for customs for international shipments."
 "Validate Configuration","Validate Configuration"
 "Validation Result","Validation Result"
+"We would appreciate it very much to get a review of the extension on the official %1Adobe Magento Marketplace%2 (Adobe login required).","We would appreciate it very much to get a review of the extension on the official %1Adobe Magento Marketplace%2 (Adobe login required)."
 "You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.","You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions."
 dhl.support@netresearch.de,dhl.support@netresearch.de
