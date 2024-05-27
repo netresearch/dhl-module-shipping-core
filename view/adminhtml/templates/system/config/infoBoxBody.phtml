@@ -8,17 +8,17 @@ $viewModel = $block->getData('view_model');
 ?>
 <div class="col content">
     <p>
-        <?= $block->escapeHtml(__('The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials.')) ?>
+        <?= $escaper->escapeHtml(__('The new DHL Shipping extension covers all available DHL services for your Magento 2 store. It consolidates all DHL functionalities in one solution ready to activate with your DHL account credentials.')) ?>
     </p>
     <p>
-        <?= $block->escapeHtml(__('You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.')) ?>
+        <?= $escaper->escapeHtml(__('You can configure all settings here that apply to all available DHL shipping methods, such as shipping options, checkout services and return solutions.')) ?>
     </p>
     <p>
-        <?= $block->escapeHtml(
+        <?= $escaper->escapeHtml(
             __(
                 'Further settings related to shipping can be specified in the %1Parcel Processing%3 and %2Batch Processing%3 config groups.',
-                '<a href="' . $block->escapeUrl($viewModel->getParcelProcessingConfigUrl()) . '">',
-                '<a href="' . $block->escapeUrl($viewModel->getBatchProcessingConfigUrl()) . '">',
+                '<a href="' . $escaper->escapeUrl($viewModel->getParcelProcessingConfigUrl()) . '">',
+                '<a href="' . $escaper->escapeUrl($viewModel->getBatchProcessingConfigUrl()) . '">',
                 '</a>'
             ),
             ['a']
@@ -31,18 +31,18 @@ $viewModel = $block->getData('view_model');
 <div class="col side">
     <aside>
         <div class="section">
-            <h3><?= $block->escapeHtml(__('Post & DHL and Magento')) ?></h3>
+            <h3><?= $escaper->escapeHtml(__('Post & DHL and Magento')) ?></h3>
             <p>
-                <?= $block->escapeHtml(__('Having issues configuring the extension? Contact our support desk: ')) ?>
-                <a href="mailto:<?= $block->escapeHtml(__('dhl.support@netresearch.de')) ?>">
-                    <?= $block->escapeHtml(__('dhl.support@netresearch.de')) ?>
+                <?= $escaper->escapeHtml(__('Having issues configuring the extension? Contact our support desk: ')) ?>
+                <a href="mailto:<?= $escaper->escapeHtml(__('dhl.support@netresearch.de')) ?>">
+                    <?= $escaper->escapeHtml(__('dhl.support@netresearch.de')) ?>
                 </a>
             </p>
         </div>
         <div class="section">
             <p>
-                <?= $block->escapeHtml(__('Any feedback helps to improve our extension product.')) ?>
-                <?= $block->escapeHtml(
+                <?= $escaper->escapeHtml(__('Any feedback helps to improve our extension product.')) ?>
+                <?= $escaper->escapeHtml(
                     __(
                         'We would appreciate it very much to get a review of the extension on the official %1Adobe Magento Marketplace%2 (Adobe login required).',
                         '<a href="https://marketplace.magento.com/dhl-shipping-m2.html">',
@@ -62,14 +62,14 @@ $viewModel = $block->getData('view_model');
     window.addEventListener("DOMContentLoaded", function () {
         require(["jquery", "Magento_Ui/js/modal/modal"], function ($) {
             $("#dhl-config-validation-modal").modal({
-                title: "<?= $block->escapeHtml(__('Validation Result')) ?>",
+                title: "<?= $escaper->escapeHtml(__('Validation Result')) ?>",
                 trigger: "#dhl-show-modal-button",
                 clickableOverlay: true,
                 responsive: true,
                 buttons: [],
                 modalClass: 'dhl-validation-popup',
                 opened: function (event) {
-                    this.src = "<?= $block->escapeUrl($viewModel->getConfigValidationUrl()) ?>";
+                    this.src = "<?= $escaper->escapeUrl($viewModel->getConfigValidationUrl()) ?>";
                 }
             });
         });

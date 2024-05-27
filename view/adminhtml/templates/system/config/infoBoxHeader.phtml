@@ -10,8 +10,8 @@ $moduleVersion = $viewModel->getModuleVersion();
 <?php if ($moduleVersion): ?>
     <p class="info">
         <a href="https://marketplace.magento.com/dhl-shipping-m2.html" target="_blank" rel="noreferrer">
-            <?= $block->escapeHtml('Deutsche Post & DHL Shipping') ?>
+            <?= $escaper->escapeHtml('Deutsche Post & DHL Shipping') ?>
         </a>
-        <?= $block->escapeHtml($moduleVersion) ?>
+        <?= $escaper->escapeHtml($moduleVersion) ?>
     </p>
 <?php endif; ?>
