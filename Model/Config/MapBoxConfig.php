@@ -28,6 +28,7 @@ class MapBoxConfig implements MapBoxConfigInterface
         $this->scopeConfig = $scopeConfig;
     }
 
+    #[\Override]
     public function getApiToken($store = null): string
     {
         return (string) $this->scopeConfig->getValue(
@@ -37,6 +38,7 @@ class MapBoxConfig implements MapBoxConfigInterface
         );
     }
 
+    #[\Override]
     public function getMapTileUrl($store = null): string
     {
         return (string) $this->scopeConfig->getValue(
@@ -46,6 +48,7 @@ class MapBoxConfig implements MapBoxConfigInterface
         );
     }
 
+    #[\Override]
     public function getMapAttribution($store = null): string
     {
         return (string) $this->scopeConfig->getValue(

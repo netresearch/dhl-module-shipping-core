@@ -25,16 +25,19 @@ class RemoveConfigDataPatch implements PatchRevertableInterface, DataPatchInterf
         $this->schemaSetup = $schemaSetup;
     }
 
+    #[\Override]
     public static function getDependencies(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
     }
 
+    #[\Override]
     public function apply()
     {
         return;
@@ -43,6 +46,7 @@ class RemoveConfigDataPatch implements PatchRevertableInterface, DataPatchInterf
     /**
      * Remove any configuration that is managed by this extension
      */
+    #[\Override]
     public function revert()
     {
         Uninstaller::deleteConfig($this->schemaSetup);

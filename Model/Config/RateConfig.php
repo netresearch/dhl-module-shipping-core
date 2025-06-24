@@ -47,10 +47,9 @@ class RateConfig
      * Check if rates rounding is enabled for a given carrier.
      *
      * @param string $carrierCode
-     * @param mixed $store
      * @return bool
      */
-    public function isRoundingEnabled(string $carrierCode, $store = null): bool
+    public function isRoundingEnabled(string $carrierCode, mixed $store = null): bool
     {
         $configPath = sprintf(self::CONFIG_PATH_USE_ROUNDING, $carrierCode);
         return $this->scopeConfig->isSetFlag($configPath, ScopeInterface::SCOPE_STORE, $store);
@@ -64,12 +63,10 @@ class RateConfig
      * - round to a static floating point decimal ("static_decimal")
      *
      * @param string $carrierCode
-     * @param mixed $store
      * @return string
-     *
      * @see \Dhl\ShippingCore\Model\Config\Source\RoundingFormat
      */
-    public function getRoundingFormat(string $carrierCode, $store = null): string
+    public function getRoundingFormat(string $carrierCode, mixed $store = null): string
     {
         if (!$this->isRoundingEnabled($carrierCode, $store)) {
             return '';
@@ -83,12 +80,10 @@ class RateConfig
      * Obtain rounding direction for a given carrier.
      *
      * @param string $carrierCode
-     * @param mixed $store
      * @return string
-     *
      * @see \Dhl\ShippingCore\Model\Config\Source\RoundingDirection
      */
-    public function getRoundingDirection(string $carrierCode, $store = null): string
+    public function getRoundingDirection(string $carrierCode, mixed $store = null): string
     {
         if (!$this->isRoundingEnabled($carrierCode, $store)) {
             return '';
@@ -102,10 +97,9 @@ class RateConfig
      * Obtain the static decimal to round to.
      *
      * @param string $carrierCode
-     * @param mixed $store
      * @return string
      */
-    public function getRoundingDecimal(string $carrierCode, $store = null): string
+    public function getRoundingDecimal(string $carrierCode, mixed $store = null): string
     {
         if (!$this->isRoundingEnabled($carrierCode, $store)) {
             return '';
@@ -124,10 +118,9 @@ class RateConfig
      * Check if markup calculation is enabled for cross-border routes.
      *
      * @param string $carrierCode
-     * @param mixed $store
      * @return bool
      */
-    public function isInternationalMarkupEnabled(string $carrierCode, $store = null): bool
+    public function isInternationalMarkupEnabled(string $carrierCode, mixed $store = null): bool
     {
         $configPath = sprintf(self::CONFIG_PATH_USE_MARKUP_INTL, $carrierCode);
         return $this->scopeConfig->isSetFlag($configPath, ScopeInterface::SCOPE_STORE, $store);
@@ -198,10 +191,9 @@ class RateConfig
      * Check if markup calculation is enabled for domestic routes.
      *
      * @param string $carrierCode
-     * @param mixed $store
      * @return bool
      */
-    public function isDomesticMarkupEnabled(string $carrierCode, $store = null): bool
+    public function isDomesticMarkupEnabled(string $carrierCode, mixed $store = null): bool
     {
         $configPath = sprintf(self::CONFIG_PATH_USE_MARKUP_DOMESTIC, $carrierCode);
         return $this->scopeConfig->isSetFlag($configPath, ScopeInterface::SCOPE_STORE, $store);

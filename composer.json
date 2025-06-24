@@ -1,6 +1,6 @@
 {
     "name": "dhl/module-shipping-core",
-    "version": "2.4.0",
+    "version": "2.5.0",
     "type": "magento2-module",
     "description": "DHL component providing utilities and frameworks for advanced shipping features",
     "license": "OSL-3.0",
@@ -21,20 +21,16 @@
         ]
     },
     "require": {
-        "php": "^8.2.0",
-        "magento/framework": "^103.0.6",
-        "magento/module-catalog": "^104.0.6",
-        "magento/module-config": "^101.2.6",
-        "magento/module-eav": "^102.1.6",
-        "magento/module-quote": "^101.2.6",
-        "magento/module-shipping": "^100.4.6",
-        "magento/module-store": "^101.1.6",
-        "magento/module-ui": "^101.2.6",
+        "php": "^8.3.0 || ^8.4.0",
+        "magento/framework": "^103.0.8",
+        "magento/module-catalog": "^104.0.8",
+        "magento/module-config": "^101.2.8",
+        "magento/module-eav": "^102.1.8",
+        "magento/module-quote": "^101.2.8",
+        "magento/module-shipping": "^100.4.8",
+        "magento/module-store": "^101.1.8",
+        "magento/module-ui": "^101.2.8",
         "netresearch/config-fields-m2": "^1.3.0",
-        "netresearch/module-shipping-core": "^3.0.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.5.0",
-        "tddwizard/magento2-fixtures": "^1.1.0"
+        "netresearch/module-shipping-core": "^4.0.0"
     }
 }

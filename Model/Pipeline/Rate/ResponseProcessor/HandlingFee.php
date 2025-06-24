@@ -39,10 +39,9 @@ class HandlingFee implements RateResponseProcessorInterface
      *
      * @param float $price
      * @param string $carrierCode
-     * @param mixed $store
      * @return float
      */
-    private function calculateDomesticMarkup(float $price, string $carrierCode, $store = null): float
+    private function calculateDomesticMarkup(float $price, string $carrierCode, mixed $store = null): float
     {
         $markupType = $this->rateConfig->getDomesticMarkupType($carrierCode, $store);
 
@@ -61,10 +60,9 @@ class HandlingFee implements RateResponseProcessorInterface
      *
      * @param float $price
      * @param string $carrierCode
-     * @param mixed $store
      * @return float
      */
-    private function calculateInternationalMarkup(float $price, string $carrierCode, $store = null): float
+    private function calculateInternationalMarkup(float $price, string $carrierCode, mixed $store = null): float
     {
         $markupType = $this->rateConfig->getInternationalMarkupType($carrierCode, $store);
 
@@ -86,7 +84,8 @@ class HandlingFee implements RateResponseProcessorInterface
      *
      * @return Method[]
      */
-    public function processMethods(array $methods, RateRequest $request = null): array
+    #[\Override]
+    public function processMethods(array $methods, ?RateRequest $request = null): array
     {
         if (!$request instanceof RateRequest) {
             return $methods;

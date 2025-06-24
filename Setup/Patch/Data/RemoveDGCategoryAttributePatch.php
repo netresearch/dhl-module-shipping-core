@@ -24,11 +24,13 @@ class RemoveDGCategoryAttributePatch implements DataPatchInterface
         $this->eavSetup = $eavSetup;
     }
 
+    #[\Override]
     public static function getDependencies(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
@@ -40,6 +42,7 @@ class RemoveDGCategoryAttributePatch implements DataPatchInterface
      * @return void
      * @throws \Exception
      */
+    #[\Override]
     public function apply()
     {
         if (!$this->eavSetup->getAttribute(Product::ENTITY, 'dhlgw_dangerous_goods_category')) {

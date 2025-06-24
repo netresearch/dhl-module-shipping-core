@@ -39,10 +39,9 @@ class RoundedPrices implements RateResponseProcessorInterface
      *
      * @param string $carrierCode
      * @param float $price
-     * @param mixed $store
      * @return float
      */
-    private function roundPrice(float $price, string $carrierCode, $store = null): float
+    private function roundPrice(float $price, string $carrierCode, mixed $store = null): float
     {
         $numberFormat = $this->rateConfig->getRoundingFormat($carrierCode, $store);
         $direction = $this->rateConfig->getRoundingDirection($carrierCode, $store);
@@ -80,7 +79,8 @@ class RoundedPrices implements RateResponseProcessorInterface
      *
      * @return Method[]
      */
-    public function processMethods(array $methods, RateRequest $request = null): array
+    #[\Override]
+    public function processMethods(array $methods, ?RateRequest $request = null): array
     {
         $store = $request ? $request->getStoreId() : null;
 

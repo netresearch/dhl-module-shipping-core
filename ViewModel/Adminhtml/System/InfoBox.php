@@ -65,7 +65,7 @@ class InfoBox implements ArgumentInterface
 
         try {
             return (int) $this->storeManager->getWebsite($websiteId)->getDefaultStore()->getId();
-        } catch (LocalizedException $exception) {
+        } catch (LocalizedException) {
             return Store::DEFAULT_STORE_ID;
         }
     }

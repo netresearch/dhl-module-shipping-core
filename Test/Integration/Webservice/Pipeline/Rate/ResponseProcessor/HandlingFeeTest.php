@@ -22,6 +22,7 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
      */
     private $methodFactory;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -33,12 +34,12 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
     /**
      * Test handling domestic fee calculation with fixed handling fee.
      *
-     * @test
      *
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_markup_domestic 1
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/type F
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/amount 3
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function processMethodsWithFixedDomesticHandlingFee()
     {
         /** @var RateRequest $request */
@@ -69,12 +70,12 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
     /**
      * Test handling international fee calculation with fixed handling fee.
      *
-     * @test
      *
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_markup_intl 1
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/intl_markup_group/type F
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/intl_markup_group/amount 3
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function processMethodsWithFixedInternationalHandlingFee()
     {
         $request = $this->objectManager->create(RateRequest::class);
@@ -104,12 +105,12 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
     /**
      * Test handling fee calculation with percent handling fee.
      *
-     * @test
      *
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_markup_domestic 1
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/type P
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/percentage 50
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function processMethodsWithPercentHandlingFee()
     {
         $request = $this->objectManager->create(RateRequest::class);
@@ -139,12 +140,12 @@ class HandlingFeeTest extends \PHPUnit\Framework\TestCase
     /**
      * Test handling fee calculation with fixed negative handling fee not dropping below 0.
      *
-     * @test
      *
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/use_markup_domestic 1
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/type F
      * @magentoConfigFixture default_store dhlshippingsolutions/foo/rates_calculation/domestic_markup_group/amount -10
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function processMethodsWithFixedNegativeHandlingFee()
     {
         $request = $this->objectManager->create(RateRequest::class);

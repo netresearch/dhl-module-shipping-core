@@ -20,6 +20,7 @@ class TermsOfTrade implements OptionSourceInterface
      *
      * @return mixed[]
      */
+    #[\Override]
     public function toOptionArray(): array
     {
         $optionArray = [];

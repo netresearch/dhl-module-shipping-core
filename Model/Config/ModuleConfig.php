@@ -27,6 +27,7 @@ class ModuleConfig implements VersionInterface
      *
      * @return string
      */
+    #[\Override]
     public function getModuleVersion(): string
     {
         if (!class_exists('\Composer\InstalledVersions')) {
@@ -35,7 +36,7 @@ class ModuleConfig implements VersionInterface
 
         try {
             return \Composer\InstalledVersions::getPrettyVersion(self::METAPACKAGE_NAME);
-        } catch (\OutOfBoundsException $exception) {
+        } catch (\OutOfBoundsException) {
             return '';
         }
     }
