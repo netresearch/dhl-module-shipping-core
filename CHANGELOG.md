@@ -6,9 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 2.7.0
 
-### Changed
-
-- Allow netresearch/module-shipping-core 5.0.0
+Compatibility release for the netresearch shipping framework 5.0.0
+(server-locked shipping option inputs). No functional changes.
 
 ## 2.6.0
 
