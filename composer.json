@@ -31,6 +31,6 @@
         "magento/module-store": "^101.1.8",
         "magento/module-ui": "^101.2.8",
         "netresearch/config-fields-m2": "^1.3.0",
-        "netresearch/module-shipping-core": "^4.0.0"
+        "netresearch/module-shipping-core": "^5.0.0"
     }
 }
